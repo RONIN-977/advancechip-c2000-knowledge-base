@@ -1,0 +1,34 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+
+[Project Settings]
+ProjectDir="C:\ti\myprojects\svpwm111\"
+ProjectType=Executable
+CPUFamily=TMS320C24XX
+Tool="Compiler"
+Tool="Linker"
+Config="Debug"
+Config="Release"
+
+[Source Files]
+Source="phantom.c"
+Source="pnl.c"
+Source="pwm_int2.c"
+Source="qmath.lib"
+Source="rts2xx.lib"
+Source="scope.c"
+Source="svpwm.c"
+Source="z_main.c"
+Source="main.cmd"
+
+["Compiler" Settings: "Debug"]
+Options=-g -q -fr"C:\ti\myprojects\svpwm111\Debug" -d"_DEBUG" -v2xx
+
+["Compiler" Settings: "Release"]
+Options=-q -o3 -fr"C:\ti\myprojects\svpwm111\Release" -v2xx
+
+["Linker" Settings: "Debug"]
+Options=-q -c -m".\Debug\svpwm111.map" -o".\Debug\svpwm111.out" -x -v2
+
+["Linker" Settings: "Release"]
+Options=-q -c -m".\Release\svpwm111.map" -o".\Release\svpwm111.out" -x -v2
+

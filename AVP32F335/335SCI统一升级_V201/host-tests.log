@@ -1,0 +1,43 @@
+PASS CRC32 ISO-HDLC check vector
+PASS frame roundtrip and every single-bit corruption
+PASS SCI noise, corrupt frame, back-to-back recovery
+PASS CAN all payload sizes and lost/reordered fragments
+PASS image boundaries and CPU identity
+PASS BEGIN and DATA retry never repeat flash operations
+PASS out-of-order and foreign-session writes rejected
+PASS abort can skip an uncertain sequence; next session can restart
+PASS enter boot handshake
+PASS full SCI upgrade with lost ACK
+PASS full CAN upgrade with lost ACK
+PASS verification failure cannot commit
+PASS program failure cannot commit
+PASS cancel before begin does not erase
+PASS TI sparse sections merged before ECC padding
+PASS real hex2000 output parsed at relocated entry
+PASS installed TI converter discovered and usable
+PASS OUT conversion equals existing TI export and preserves source
+PASS OUT path with spaces and Chinese characters
+PASS OUT bootloader rejected by application partition validation
+PASS OUT invalid input and missing converter rejected
+PASS OUT cancellation before launch
+PASS 335 original CRC vectors and frame corruption
+PASS 335 SCI parser resynchronizes after noise and CRC errors
+PASS 335 COFF LOAD address, RAM function and FFFF gaps
+PASS 335 COFF rejects overlap, missing entry, legacy flag and reserved ranges
+PASS 335 COFF complete file and target checks
+PASS 335 448 KB minus 4 bytes boundary and metadata excluded
+PASS 335 APP enters BOOT and upgrades with a short final packet and lost ACK
+PASS 335 maximum image including 124-byte final packet
+PASS 335 old 64 KB BOOT rejected before erase
+PASS 335 erase failure prevents commit
+PASS 335 program failure prevents commit
+PASS 335 verify failure prevents commit
+PASS 335 MD5 failure prevents commit
+PASS 335 index failure prevents commit
+PASS 335 ACK identity check 0
+PASS 335 ACK identity check 1
+PASS 335 ACK identity check 2
+PASS 335 cancel midway and upgrade again
+PASS 335 real 30MHz APP OUT and BOOT rejection
+PASS 335 real 33.3MHz APP OUT and BOOT rejection
+All 42 tests passed.

@@ -1,0 +1,57 @@
+# FIXED
+
+Library/driverlib/src/spi.obj: ../Library/driverlib/src/spi.c
+Library/driverlib/src/spi.obj: D:/Mr_Wei/AdvanceChip/02_SoftWare/AVP32F0039_Routine/AVP32F0039_APP_CAN_ADV/Library/driverlib/spi.h
+Library/driverlib/src/spi.obj: D:/ti/ccs1280/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include/stdbool.h
+Library/driverlib/src/spi.obj: D:/ti/ccs1280/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include/_ti_config.h
+Library/driverlib/src/spi.obj: D:/ti/ccs1280/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include/linkage.h
+Library/driverlib/src/spi.obj: D:/ti/ccs1280/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include/stdint.h
+Library/driverlib/src/spi.obj: D:/ti/ccs1280/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include/_stdint40.h
+Library/driverlib/src/spi.obj: D:/ti/ccs1280/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include/sys/stdint.h
+Library/driverlib/src/spi.obj: D:/ti/ccs1280/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include/sys/cdefs.h
+Library/driverlib/src/spi.obj: D:/ti/ccs1280/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include/sys/_types.h
+Library/driverlib/src/spi.obj: D:/ti/ccs1280/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include/machine/_types.h
+Library/driverlib/src/spi.obj: D:/ti/ccs1280/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include/machine/_stdint.h
+Library/driverlib/src/spi.obj: D:/ti/ccs1280/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include/sys/_stdint.h
+Library/driverlib/src/spi.obj: D:/Mr_Wei/AdvanceChip/02_SoftWare/AVP32F0039_Routine/AVP32F0039_APP_CAN_ADV/Library/driverlib/inc/hw_memmap.h
+Library/driverlib/src/spi.obj: D:/Mr_Wei/AdvanceChip/02_SoftWare/AVP32F0039_Routine/AVP32F0039_APP_CAN_ADV/Library/driverlib/inc/hw_types.h
+Library/driverlib/src/spi.obj: D:/Mr_Wei/AdvanceChip/02_SoftWare/AVP32F0039_Routine/AVP32F0039_APP_CAN_ADV/Library/driverlib/inc/hw_spi.h
+Library/driverlib/src/spi.obj: D:/Mr_Wei/AdvanceChip/02_SoftWare/AVP32F0039_Routine/AVP32F0039_APP_CAN_ADV/Library/driverlib/debug.h
+Library/driverlib/src/spi.obj: D:/Mr_Wei/AdvanceChip/02_SoftWare/AVP32F0039_Routine/AVP32F0039_APP_CAN_ADV/Library/driverlib/hw_reg_inclusive_terminology.h
+
+../Library/driverlib/src/spi.c:
+
+D:/Mr_Wei/AdvanceChip/02_SoftWare/AVP32F0039_Routine/AVP32F0039_APP_CAN_ADV/Library/driverlib/spi.h:
+
+D:/ti/ccs1280/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include/stdbool.h:
+
+D:/ti/ccs1280/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include/_ti_config.h:
+
+D:/ti/ccs1280/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include/linkage.h:
+
+D:/ti/ccs1280/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include/stdint.h:
+
+D:/ti/ccs1280/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include/_stdint40.h:
+
+D:/ti/ccs1280/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include/sys/stdint.h:
+
+D:/ti/ccs1280/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include/sys/cdefs.h:
+
+D:/ti/ccs1280/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include/sys/_types.h:
+
+D:/ti/ccs1280/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include/machine/_types.h:
+
+D:/ti/ccs1280/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include/machine/_stdint.h:
+
+D:/ti/ccs1280/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include/sys/_stdint.h:
+
+D:/Mr_Wei/AdvanceChip/02_SoftWare/AVP32F0039_Routine/AVP32F0039_APP_CAN_ADV/Library/driverlib/inc/hw_memmap.h:
+
+D:/Mr_Wei/AdvanceChip/02_SoftWare/AVP32F0039_Routine/AVP32F0039_APP_CAN_ADV/Library/driverlib/inc/hw_types.h:
+
+D:/Mr_Wei/AdvanceChip/02_SoftWare/AVP32F0039_Routine/AVP32F0039_APP_CAN_ADV/Library/driverlib/inc/hw_spi.h:
+
+D:/Mr_Wei/AdvanceChip/02_SoftWare/AVP32F0039_Routine/AVP32F0039_APP_CAN_ADV/Library/driverlib/debug.h:
+
+D:/Mr_Wei/AdvanceChip/02_SoftWare/AVP32F0039_Routine/AVP32F0039_APP_CAN_ADV/Library/driverlib/hw_reg_inclusive_terminology.h:
+

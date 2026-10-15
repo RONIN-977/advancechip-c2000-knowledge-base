@@ -1,0 +1,14 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+SHELL = cmd.exe
+
+# Add inputs and outputs from these tool invocations to the build variables 
+CMD_SRCS += \
+../AVP32F0049_iqmath_ram_lnk.cmd 
+
+LIB_SRCS += \
+../IQmath_fpu32_coff.lib 
+
+

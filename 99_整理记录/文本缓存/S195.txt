@@ -1,0 +1,2594 @@
+来源: 文档/0049和0039区别.pdf
+来源编号: S195
+
+=== PDF页 1 ===
+User’s Guide
+Migration Between TMS320F28004x and TMS320F28003x
+ABSTRACT
+This migration guide describes the hardware and software differences to be aware of when moving between 
+F28004x and F28003x C2000™ MCUs. This document shows the block diagram between the two MCUs as 
+a visual representation on what blocks are similar or different. It also highlights the features that are unique 
+between the two devices for all available packages in a device comparison table. The F28004x and F28003x 
+devices have two packages in common; 100-pin and 64-pin so a PCB hardware section has been added 
+to aid in migration between the two common packages. The digital general-purpose input/output (GPIO) and 
+analog multiplex comparison tables show pin functionality between the two MCUs. This is a good reference for 
+hardware design and signal routing when considering a move between the two devices. Lastly, the F28003x 
+software support is only in EABI format. The EABI migration is discussed in Section 6.
+Table of Contents
+1 Feature Differences Between F28004x and F28003x...........................................................................................................3
+1.1 F28004x and F28003x Feature Comparison..................................................................................................................... 3
+2 PCB Hardware Changes.........................................................................................................................................................5
+2.1 PCB Hardware Changes for the 100-Pin PZ Package.......................................................................................................6
+2.2 PCB Hardware Changes for the 64-Pin PM Package...................................................................................................... 11
+3 Feature Differences for System Consideration................................................................................................................. 14
+3.1 New Features in F28003x................................................................................................................................................14
+3.2 Communication Module Changes.................................................................................................................................... 15
+3.3 Control Module Changes................................................................................................................................................. 17
+3.4 Analog Module Differences.............................................................................................................................................. 18
+3.5 Other Device Changes.....................................................................................................................................................18
+3.6 Power Management.........................................................................................................................................................24
+3.7 Memory Module Changes................................................................................................................................................ 25
+3.8 GPIO Multiplexing Changes.............................................................................................................................................26
+3.9 Analog Multiplexing Changes...........................................................................................................................................29
+4 Application Code Migration From F28004x to F28003x.................................................................................................... 34
+4.1 C2000Ware Header Files.................................................................................................................................................34
+4.2 Linker Command Files..................................................................................................................................................... 34
+4.3 Minimum Compiler Version Requirement for TMU Type 1...............................................................................................34
+4.4 C2000Ware Examples..................................................................................................................................................... 34
+5 Specific Use Cases Related to F28003x New Features.....................................................................................................34
+5.1 HIC...................................................................................................................................................................................34
+5.2 FINTDIV........................................................................................................................................................................... 34
+5.3 TMU Type1.......................................................................................................................................................................34
+5.4 AES..................................................................................................................................................................................34
+5.5 MCAN...............................................................................................................................................................................34
+5.6 EPG..................................................................................................................................................................................34
+6 EABI Support.........................................................................................................................................................................34
+6.1 Flash API..........................................................................................................................................................................36
+6.2 NoINIT Struct Fix (Linker Command)...............................................................................................................................36
+6.3 Pre-Compiled Libraries.................................................................................................................................................... 36
+7 References............................................................................................................................................................................ 37
+List of Figures
+Figure 1-1. F28003x and F28004x Overlaid Functional Block Diagram...................................................................................... 3
+Figure 2-1. 100-Pin PZ, F28003x and F28004x Pin-Overlay ......................................................................................................6
+www.ti.com Table of Contents
+SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Migration Between TMS320F28004x and TMS320F28003x 1
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 2 ===
+Figure 2-2. Dual Routing Technique Illustrated............................................................................................................................9
+Figure 2-3. 64-Pin PM Non-Q Variant, F28003x and F28004x Pin-Overlay.............................................................................. 11
+Figure 2-4. 64-Pin PM Q Variant, F28003x and F28004x Pin-Overlay......................................................................................12
+List of Tables
+Table 1-1. F28004x and F28003x Superset Device Comparison................................................................................................ 4
+Table 2-1. 100-Pin PZ Migration Between F28004x and F28003x For Existing PCB..................................................................7
+Table 2-2. 100-Pin PZ Migration Between F28004x and F28003x For New PCB Design........................................................... 9
+Table 2-3. 64-Pin PM Migration Between F28004x and F28003x For New and Existing PCB..................................................13
+Table 3-1. Communication Module Instances............................................................................................................................15
+Table 3-2. Control Module Differences.......................................................................................................................................17
+Table 3-3. Analog Module Differences.......................................................................................................................................18
+Table 3-4. XTAL Module Differences......................................................................................................................................... 19
+Table 3-5. PLL Features............................................................................................................................................................ 19
+Table 3-6. Pie Channel Legend................................................................................................................................................. 20
+Table 3-7. Pie Table Comparison...............................................................................................................................................20
+Table 3-8. Bootrom Comparison Table...................................................................................................................................... 21
+Table 3-9. Boot options Legend.................................................................................................................................................21
+Table 3-10. Bootloaders and GPIO Assignment Comparison....................................................................................................21
+Table 3-11. Boot Modes Comparison.........................................................................................................................................22
+Table 3-12. CLB and Motor Control Libraries............................................................................................................................ 23
+Table 3-13. ERAD Module Differences...................................................................................................................................... 23
+Table 3-14. Error Status Table................................................................................................................................................... 24
+Table 3-15. RAM and FLASH Memory Changes....................................................................................................................... 25
+Table 3-16. Mux Legend............................................................................................................................................................ 26
+Table 3-17. GPIO Mux Table Comparison................................................................................................................................. 26
+Table 3-18. Mux Legend............................................................................................................................................................ 29
+Table 3-19. F28004x and F28003x 100-Pin PZ Analog Mux Table Differences........................................................................ 29
+Table 3-20. F28004x and F28003x 64-Pin PM Analog Mux Table Differences..........................................................................31
+Table 6-1. Section Names..........................................................................................................................................................35
+Table 6-2. Flash API Differences............................................................................................................................................... 36
+Trademarks
+C2000™ and Code Composer Studio™ are trademarks of Texas Instruments.
+All trademarks are the property of their respective owners.
+Trademarks www.ti.com
+2 Migration Between TMS320F28004x and TMS320F28003x SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 3 ===
+1 Feature Differences Between F28004x and F28003x
+F28003x is both a subset and superset of F28004x. They have two packages in common, 64-pin and 100-pin. It 
+is possible to migrate between F28003x and F28004x with the caveats in this document taken into account.
+Note
+This comparison guide focuses on the superset devices: F280049 and F280039. Other part numbers 
+in this product family have reduced feature support. For details specific to part numbers, see the 
+device-specific data sheet.
+1.1 F28004x and F28003x Feature Comparison
+An overlaid block diagram of F28004x and F28003x is shown in Figure 1-1 while feature comparison of the 
+superset part numbers for the F28003x and F28004x devices is shown in Table 1-1.
+C28x CPU
+(100MHz)(120MHz)
+FPU32
+TMU
+VCU-I
+VCRC
+DIAGNOSTICS
+DCC
+MPOST (PBIST)
+HWBIST
+ERAD
+JTAG/cJTAG
+Boot ROM
+Secure ROM
+Flash Bank0
+16 Sectors, 64Kw(128KB)
+M0-M1 RAM
+2Kw(4KB)
+LS0-LS7 RAM
+16Kw(32KB)
+GS0-GS3 RAM
+32Kw(64KB)
+16Kw(32KB) 
+BGCRC
+HIC
+DMA
+6 Channels
+CLA to CPU MSG RAM
+CPU to CLA MSG RAM
+CLA Data ROM
+CLA Program ROM
+CLA
+(100MHz)(120MHz)
+PF1
+16x ePWM
+(16 8 Hi-Res Capable)
+7x 3x eCAP
+(2 1 HRCAP Capable)
+2x eQEP
+(CW/CCW Support)
+4x 8x SD Filters
+7x 4x CMPSS
+2x Buffered DAC
+7x PGA
+3x 12-Bit ADC
+Result
+PF3
+40x 55x GPIO
+Data
+Input XBAR
+Output XBAR
+ePWM XBAR
+PF4
+1x PMBUS
+2x SPI
+1x FSI RX
+1x FSI TX
+PF2
+2x 1x 
+DCAN/
+CAN
+1x 2x LIN 2x SCI
+1x 2x I2C
+PF7 PF8 PF9
+Text Legend
+Black t Common
+Red t F28004x
+Green t F28003x
+Flash Bank1
+16 Sectors, 64Kw(128KB)
+Flash Bank2
+16 Sectors, 64Kw(128KB)
+1x 
+MCAN/
+CAN-FD
+4x CLB
+CLA to DMA MSG RAM
+DMA to CLA MSG RAM
+PF10
+Buses Legend
+CPU
+CLA
+DMA
+HIC
+BGCRC
+PF11
+1x AES
+SYSTEM CONTROL
+CPU Timers
+XTAL
+INTOSC1, INTOSC2
+PLL
+ePIE
+Windowed WD
+NMI WD
+SECURITY
+DCSM
+JTAG Lock
+Secure Boot
+PF12
+CLB XBAR
+CLB Input XBAR
+CLB Output XBAR
+PF7
+LFU
+OTHERS
+EPG
+Figure 1-1. F28003x and F28004x Overlaid Functional Block Diagram
+www.ti.com Feature Differences Between F28004x and F28003x
+SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Migration Between TMS320F28004x and TMS320F28003x 3
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 4 ===
+Table 1-1. F28004x and F28003x Superset Device Comparison
+Feature
+F28004x F28003x
+100-Pin PZ 64-Pin PM
+56-Pin 
+RSH 100-Pin PZ 80-Pin PN 64-Pin PM 48-Pin PT
+Processor and Accelerators
+C28x Frequency (MHz) 100 120
+FPU Yes Yes (instructions for Fast Integer Division)
+VCU–I Yes –
+VCRC – Yes
+TMU Yes – Type 0 Yes – Type 1 (instructions supporting NLPID)
+CLA – Type 2 Available Yes
+Frequency (MHz) 100 120
+6–Channel DMA – Type 0 Yes
+External interrupts 5
+Memory
+Flash 256KB (128Kw) 384KB (192Kw)
+RAM Dedicated 4KB (2Kw)
+Local Shared 32KB (16Kw)
+Message 0.5KB (0.25Kw) 1KB (0.5Kw)
+Global Shared 64KB (32Kw) 32KB (16Kw)
+Total 100.5KB (50.25Kw) 69KB (34.5Kw)
+Message RAM Types 512B (256w) CPU–CLA 512B (256w) CPU–CLA 512B (256w) CLA–DMA
+ECC FLASH, Mx FLASH, Mx, LSx, GSx, Message RAM
+Parity LSx, GSx, Message RAM, CAN RAM ROM, CAN RAM
+Code security for on–chip flash and RAM Yes
+System
+Configurable Logic Block (CLB) 4 Tiles – Type 2 4 Tiles – Type 3
+Embedded Pattern Generator (EPG) - Yes
+Motor Control Libraries in ROM Yes
+32–bit CPU timers 3
+Advance Encryption Standard (AES) – Yes
+Background CRC (BGCRC) – Yes
+Live Firmware Update (LFU) Support Yes Yes, with enhancements and flash bank erase 
+time improvements
+Secure Boot – Yes
+JTAG Lock – Yes
+HWBIST – Yes
+Nonmaskable Interrupt Watchdog (NMIWD) 
+timers
+1
+Watchdog timers 1
+Crystal oscillator/External clock input 1
+Internal oscillator 2
+Pins and Power Supply
+Internal 3.3v to 1.2v 
+Voltage Regulator
+VREG LDO Yes
+DCDC Yes –
+GPIO pins 35 21 20 51 39 26 14
+Additional GPIO 5 (2 from cJTAG, 1 from X2 and 2 
+from DCDC)
+4 (2 from cJTAG and 2 from X1/X2)
+AIO (analog with digital inputs) 21 14 12 23 16 16 14
+AGPIO (analog with digital inputs and outputs) - 2 2 - -
+Feature Differences Between F28004x and F28003x www.ti.com
+4 Migration Between TMS320F28004x and TMS320F28003x SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 5 ===
+Table 1-1. F28004x and F28003x Superset Device Comparison (continued)
+Feature
+F28004x F28003x
+100-Pin PZ 64-Pin PM
+56-Pin 
+RSH 100-Pin PZ 80-Pin PN 64-Pin PM 48-Pin PT
+Analog Peripherals
+ADC 12–bit Number of ADCs 3
+MSPS 3.45 4
+Conversion Time (ns) 290 250
+ADC channels (single–ended) - includes the two 
+gpdac outputs
+21 14 12 23 18 16 14
+Temperature sensor 1
+Buffered DAC 2
+CMPSS (each CMPSS has two comparators and 
+two internal DACs)
+7 6 5 4
+PGA (Gain Settings: 3, 6, 12, 24) 7 5 4 –
+Control Peripherals
+eCAP/HRCAP modules 7 (2 with HRCAP capability) – Type 1 3 (1 with HRCAP capability) – Type 2
+ePWM/HRPWM channels – Type 4 16 (16 with HRPWM) 16 (8 with HRPWM)
+eQEP modules 2 – Type 1 1 – Type 1 2 – Type 2
+SDFM channels 4 – Type 1 3 – Type 1 8 – Type 2
+Communication Peripherals
+CAN (DCAN) – Type 0 2 1
+CANFD (MCAN) – Type 2 – 1
+FSI 1 (1 RX and 1 TX) – Type 0 1 (1 RX and 1 TX) – Type 2
+I2C – Type 1 1 2
+LIN – Type 1 1 2
+HIC - Type 1 No Yes
+PMBus – Type 0 1
+SCI – Type 0 2
+SPI – Type 2 2
+Package Options, Temperature, and Qualification
+Junction temperature (TJ
+) –40°C to 125°C –40°C to 150°C
+Free-Air temperature (TA) –40°C to 125°C
+Package Options with AEC-Q100 Qualification 
+available
+Yes Yes – Yes – Yes Yes
+2 PCB Hardware Changes
+The F28004x and F28003x devices have two packages in common: 100-Pin PZ and 64-Pin PM. There are two 
+kinds of migration that can happen between the two devices:
+• PCB is already designed for one device but you would like to swap in another device.
+• PCB is yet to be designed but you would like to start with one device and migrate later.
+For the second migration type above, the dual-routing technique maximizes pin utilization. The following sections 
+describe the pin migration in detail.
+Note
+Overall compatibility depends on more than just the pins. Please review all the changes in this 
+document during the migration process.
+www.ti.com PCB Hardware Changes
+SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Migration Between TMS320F28004x and TMS320F28003x 5
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 6 ===
+2.1 PCB Hardware Changes for the 100-Pin PZ Package
+This section describes the F28003x and F28004x differences that exist between the 100-Pin PZ package. The 
+Q and non-Q variant of the 100-Pin PZ package have the same pinout per device. Figure 2-1 outlines the 
+differences.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+66 65 64 63 62 61 60 59 58 57 56 55 54 53 52 51
+100
+99
+98
+97
+96
+95
+94
+93
+92
+91
+90
+89
+88
+87
+86
+85 B0, C11
+A10, B1, C10
+B4, C8
+A9
+A8
+A4, B8
+A5
+VDDA
+VSSA
+B5
+A7, C3
+B11
+C1
+A12, C5
+VREFLOABC
+VREFLOABC
+B0
+A10, B1, C10, PGA7_OF
+B4, C8, PGA4_OF
+A9
+A8, PGA6_OF
+A4, B8, PGA2_OF
+A5
+VDDA
+VSSA
+PGA2_GND, PGA4_GND, 
+PGA6_GND
+C3, PGA4_IN
+PGA2_IN
+C1
+C5, PGA6_IN
+VREFLOA
+VREFLOA, VREFLOC
+GPIO28
+XRSn
+VDDIO
+VDD
+VSS
+A6, PGA5_OF
+B2, C6, PGA3_OF
+B3, VDAC
+A2, B6, PGA1_OF
+A3
+VDDA
+VSSA
+PGA5_GND
+PGA1_GND
+PGA3_GND
+PGA5_IN
+GPIO28
+XRSn
+VDDIO
+VDD
+VSS
+GPIO47
+GPIO48
+GPIO49
+GPIO50
+GPIO51
+GPIO52
+GPIO53
+GPIO54
+A6
+B2, C6
+B3, VDAC
+GPIO40
+VSS
+VDD
+VDDIO
+GPIO5
+GPIO9
+GPIO39
+GPIO59
+GPIO10
+GPIO34
+GPIO15
+GPIO14
+GPIO6
+GPIO30
+GPIO31
+GPIO29
+GPIO44
+VSS
+VDD
+VDDIO
+GPIO5
+GPIO9
+GPIO61
+GPIO59
+GPIO10
+GPIO34
+GPIO15
+GPIO14
+GPIO6
+GPIO30
+GPIO31
+GPIO29
+GPIO57
+GPIO56
+GPIO32
+GPIO35/TDI
+TMS
+GPIO37/TDO
+TCK
+GPIO27
+GPIO26
+GPIO25
+GPIO24
+GPIO17
+GPIO16
+GPIO33
+GPIO11
+GPIO12
+GPIO57
+GPIO56
+GPIO32
+GPIO35/TDI
+TMS
+GPIO37/TDO
+TCK
+GPIO27
+GPIO26
+GPIO25
+GPIO24
+GPIO17
+GPIO16
+GPIO33
+GPIO11
+GPIO12
+F28003x
+F28004x
+F28004x
+F28003x
+F28003x
+F28004x
+F28004x
+F28003x
+100-Pin PZ
+100% Compatible
+Minor Incompatibility - Signals In Common
+Major Incompatibility - Different Signals & Type
+Legend
+17 18 19 20 21 22 23 24 25 C4PGA1_IN C0PGA3_IN C2A1, DACB_OUT A0, B15, C15, DACA_OUT VREFHIB, VREFHIC VREFHIA A2, B6, C9 A3, B9, C7 A14, B14, C4 A11, B10, C0 B12, C2 A1, B7, DACB_OUT A0, B15, C15, DACA_OUT VREFHIABC VREFHIABC
+42
+43
+44
+45
+46
+47
+48
+49
+50 GPIO13
+GPIO21, B11
+GPIO20, B5
+VDDIO
+VDD
+VSS
+GPIO60
+GPIO55
+C14
+GPIO13
+FLT1
+FLT2
+VDDIO
+VDD
+VSS
+C14
+PGA7_IN
+PGA7_GND
+75 74 73 72 71 70 69 68 67 GPIO4 GPIO8 VREGENZ VSS VDD VDDIO GPIO19_X1 GPIO18_X2 GPIO58 GPIO4 GPIO8 VREGENZ VSS VDD VDDIO X1GPIO18_X2 GPIO58
+84
+83
+82
+81
+80
+79
+78
+77
+GPIO3 76
+GPIO2
+GPIO1
+GPIO0
+VDDIO_SW
+GPIO23_VSW
+VSS_SW
+GPIO22_VFBSW
+GPIO7
+GPIO3
+GPIO2
+GPIO1
+GPIO0
+GPIO40
+GPIO23
+GPIO41
+GPIO22
+GPIO7
+Medium Incompatibility - Different Signals, Same Type
+Medium Incompatibility - Dual Routing
+Figure 2-1. 100-Pin PZ, F28003x and F28004x Pin-Overlay 
+PCB Hardware Changes www.ti.com
+6 Migration Between TMS320F28004x and TMS320F28003x SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 7 ===
+2.1.1 100-Pin PZ Migration for Existing PCB
+If the PCB is already designed and you are moving from F28004x/F28003x to F28003x/F28004x respectively, 
+dual routing is not possible and hence those pins become incompatible between the two devices, Table 2-1 
+outlines the migration.
+For the color legend, see Figure 2-1.
+Table 2-1. 100-Pin PZ Migration Between F28004x and F28003x For Existing PCB
+Pin 
+No
+Pin Name
+Transition Type
+Action
+F28004x F28003x F28003x to F28004x F28004x to F28003x
+Minor Incompatibility - Signals in Common (1)
+28 PGA6_IN, C5 C5, A12
+Common Analog 
+Channel
+Use C5
+31 PGA4_IN, C3 C3, A7 Use C3
+36 A4, B8, PGA2_OF A4, B8 Use A4 or B8
+37 A8, PGA6_OF A8 Use A8
+39 B4, C8, PGA4_OF B4, C8 Use B4 or C8
+40 A10, B1, C10, PGA7_OF A10, B1, C10 Use A10, B1 or C10
+21 C2 C2, B12 Use C2
+22 A1, DACB_OUT A1, DACB_OUT, B7 Use A1 or DACB_OUT
+41 B0 B0, C11 Use B0
+69 X1 GPIO19, X1 Common Clock GPIO19 not available for use
+81 GPIO23_VSW GPIO23
+Common GPIO Do not use DCDC. GPIO22 & GPIO23 available for 
+83 GPIO22_VFBSW GPIO22 use
+Medium Incompatibility - Different Signals, Same Type
+17 C4 A2, B6, C9
+Analog Function 
+Compatible
+Update code to C4 Update code to A2, B6 
+or C9
+19 C0 A14, B14, C4 Update code to C0 Update code to A14, B14 
+or C4
+85 GPIO40 GPIO44 GPIO Function 
+Compatible
+Update code to GPIO40 Update code to GPIO44
+91 GPIO39 GPIO61 Update code to GPIO39 Update code to GPIO61
+www.ti.com PCB Hardware Changes
+SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Migration Between TMS320F28004x and TMS320F28003x 7
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 8 ===
+Table 2-1. 100-Pin PZ Migration Between F28004x and F28003x For Existing PCB (continued)
+Pin 
+No
+Pin Name
+Transition Type
+Action
+F28004x F28003x F28003x to F28004x F28004x to F28003x
+Major Incompatibility - Different Signals and Types
+14 PGA1_GND A6
+PGA Ground to ADC 
+Channel
+Do not use, follow the guidelines for unused pins in 
+the datasheet as applicable
+15 PGA3_GND B2, C6
+32 PGA6_GND, PGA2_GND, 
+PGA4_GND
+B5
+42 PGA7_GND C14
+13 PGA5_GND GPIO54 PGA Ground to GPIO
+12 VSSA GPIO53
+Ground to GPIO
+82 VSS_SW GPIO41
+11 VDDA GPIO52
+Power to GPIO
+80 VDDIO_SW GPIO40
+16 PGA5_IN B3, VDAC
+PGA Input to ADC 
+Channel
+18 PGA1_IN C7, B9, A3
+20 PGA3_IN A11, B10, C0
+30 PGA2_IN B11
+43 PGA7_IN GPIO55 PGA Input to GPIO
+6 A6, PGA5_OF GPIO47
+Analog to GPIO
+7 B2, C6, PGA3_OF GPIO48
+8 B3, VDAC GPIO49
+9 A2, B6, PGA1_OF GPIO50
+10 A3 GPIO51
+44 C14 GPIO60
+48 FLT2 GPIO20, B5 Flash Test Pins to GPIO/
+49 FLT1 GPIO21, B11 Analog
+1. Channel to use selected in software.
+PCB Hardware Changes www.ti.com
+8 Migration Between TMS320F28004x and TMS320F28003x SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 9 ===
+2.1.2 100-Pin PZ Migration for New PCB Design
+If the PCB is yet to be designed and you are moving from F28004x/F28003x to F28003x/F28004x, respectively, 
+the dual routing technique illustrated in Figure 2-2 maximizes pin utilization. The complete pin migration is 
+outlined in Table 2-2.
+6
+14
+F28004x
+100-Pin PZ
+0 
+DNP
+A6, PGA5_OF
+PGA1_GND
+Signal Source for A6
+Same Board With F28004x Device
+6
+14
+F28003x
+100-Pin PZ
+DNP
+0 
+GPIO47
+A6
+Signal Source for A6
+Same Board With F28003x Device
+*Pin 14 (PGA1_GND) Not Available for Use
+*Pin 6 (GPIO47) Not Available for Use
+Figure 2-2. Dual Routing Technique Illustrated
+For the color legend, see Figure 2-1.
+Table 2-2. 100-Pin PZ Migration Between F28004x and F28003x For New PCB Design
+Pin 
+No
+Pin Name
+Transition Type
+Action
+F28004x F28003x F28003x to F28004x F28004x to F28003x
+Minor Incompatibility - Signals in Common (1)
+28 PGA6_IN, C5 C5, A12
+Common Analog 
+Channel
+Use C5
+31 PGA4_IN, C3 C3, A7 Use C3
+36 A4, B8, PGA2_OF A4, B8 Use A4 or B8
+37 A8, PGA6_OF A8 Use A8
+39 B4, C8, PGA4_OF B4, C8 Use B4 or C8
+40 A10, B1, C10, PGA7_OF A10, B1, C10 Use A10, B1 or C10
+21 C2 C2, B12 Use C2
+22 A1, DACB_OUT A1, DACB_OUT, B7 Use A1 or DACB_OUT
+41 B0 B0, C11 Use B0
+69 X1 GPIO19, X1 Common Clock GPIO19 not available for use
+81 GPIO23_VSW GPIO23
+Common GPIO Do not use DCDC. GPIO22 & GPIO23 available for 
+83 GPIO22_VFBSW GPIO22 use
+Medium Incompatibility - Different Signals, Same Type
+19 C0 A14, B14, C4 Analog Function 
+Compatible Update code to C0 Update code to A14, B14 
+or C4
+85 GPIO40 GPIO44 GPIO Function 
+Compatible
+Update code to GPIO40 Update code to GPIO44
+91 GPIO39 GPIO61 Update code to GPIO39 Update code to GPIO61
+www.ti.com PCB Hardware Changes
+SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Migration Between TMS320F28004x and TMS320F28003x 9
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 10 ===
+Table 2-2. 100-Pin PZ Migration Between F28004x and F28003x For New PCB Design (continued)
+Pin 
+No
+Pin Name
+Transition Type
+Action
+F28004x F28003x F28003x to F28004x F28004x to F28003x
+Medium Incompatibility - Dual Routing
+6 A6, PGA5_OF GPIO47
+Dual PCB Route, 
+F28004x 0-Ohm 
+Resistor, F28003x DNP
+Dual route to Pin 6 & 14
+7 B2, C6, PGA3_OF GPIO48 Dual route to Pin 7 & 15
+8 B3, VDAC GPIO49 Dual route to Pin 8 & 16
+9 A2, B6, PGA1_OF GPIO50 Dual route to Pin 9 & 17
+10 A3 GPIO51 Dual route to Pin 10 & 18
+14 PGA1_GND A6
+Dual PCB Route, 
+F28004x DNP, F28003x 
+0-Ohm Resistor
+Dual route to Pin 6 & 14
+15 PGA3_GND B2, C6 Dual route to Pin 7 & 15
+16 PGA5_IN B3, VDAC Dual route to Pin 8 & 16
+17 C4 A2, B6, C9 Dual route to Pin 9 & 17
+18 PGA1_IN C7, B9, A3 Dual route to Pin 10 & 18
+Major Incompatibility - Different Signals and Types
+32 PGA6_GND, PGA2_GND, 
+PGA4_GND
+B5
+PGA Ground to ADC 
+Channel Tie to VSS
+42 PGA7_GND C14
+13 PGA5_GND GPIO54 PGA Ground to GPIO Tie to VSS through 0-Ohm resistor. Depopulate 
+resistor when using F28003x and enable internal 
+pull-up for the GPIOs
+12 VSSA GPIO53
+Ground to GPIO
+82 VSS_SW GPIO41
+11 VDDA GPIO52
+Power to GPIO
+Tie to VDDIO through 0-Ohm resistor. Depopulate 
+resistor when using F28003x and enable internal 
+pull-up for the GPIOs 80 VDDIO_SW GPIO40
+20 PGA3_IN A11, B10, C0 PGA Input to ADC 
+Channel
+No connect. Enable internal pull-up for the GPIOs 
+on F28003x
+30 PGA2_IN B11
+43 PGA7_IN GPIO55 PGA Input to GPIO
+44 C14 GPIO60 Analog to GPIO
+48 FLT2 GPIO20, B5
+Flash Test Pins to GPIO
+49 FLT1 GPIO21, B11
+1. Channel to use selected in software.
+PCB Hardware Changes www.ti.com
+10 Migration Between TMS320F28004x and TMS320F28003x SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 11 ===
+2.2 PCB Hardware Changes for the 64-Pin PM Package
+This section describes the F28003x and F28004x differences that exist between the Q and non-Q variants of 
+the 64-Pin PM package. Figure 2-3 shows the differences for the non-Q variant and Figure 2-4 shows the 
+differences for the Q variant.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+48 47 46 45 44 43 42 41 40 39 38 37 36 35 34 33
+64
+63
+62
+61
+60
+59
+58
+57
+56
+55
+54
+53
+52
+51
+50
+49 GPIO33
+GPIO11
+GPIO12
+GPIO13
+VDDIO
+VDD
+VSS
+A10, B1, C10
+A9, B4, C8
+A4, B8, C14
+VDDA
+VSSA
+A8, B0, C11
+C3, A7
+A12, C1
+VREFLOABC
+GPIO33
+GPIO11
+GPIO12
+GPIO13
+VDDIO
+VDD
+VSS
+A10, B1, C10, PGA7_OF
+B4, C8, PGA4_OF
+A4, B8, PGA2_OF
+VDDA
+VSSA
+PGA2_GND, PGA4_GND, 
+PGA6_GND
+C3, PGA4_IN
+C1, PGA2_IN
+VREFLOA, VREFLOB, 
+VREFLOC
+GPIO29
+GPIO28
+XRSn
+VDD
+VSS
+A6, PGA5_OF
+B2, C6, PGA3_OF
+B3, VDAC
+A2, B6, PGA1_OF
+PGA1_GND, PGA3_GND, 
+PGA5_GND
+C4, PGA5_IN
+C0, PGA1_IN
+C2, PGA3_IN
+A1, DACB_OUT
+A0, B15, C15, DACA_OUT
+VREFHIA, VREFHIB, 
+VREFHIC
+GPIO29
+GPIO28
+XRSn
+VDD
+VSS
+A6
+B2, C6
+A3, B3, C5, VDAC
+A2, B6, C9
+A15, B9, C7
+A14, B14, C4
+A11, B10, C0
+A5, B12, C2
+A1, B7, DACB_OUT
+A0, B15, C15, DACA_OUT
+VREFHIABC
+GPIO3
+GPIO2
+GPIO1
+GPIO0
+VDDIO_SW
+GPIO23_VSW
+VSS_SW
+GPIO22_VFBSW
+GPIO7
+VSS
+VDD
+VDDIO
+GPIO5
+GPIO9
+GPIO10
+GPIO6
+GPIO3
+GPIO2
+GPIO1
+GPIO0
+GPIO40
+GPIO23
+GPIO41
+GPIO22
+GPIO7
+VSS
+VDD
+VDDIO
+GPIO5
+GPIO9
+GPIO10
+GPIO6
+GPIO4
+GPIO8
+GPIO39
+VSS
+VDD
+VDDIO
+GPIO19_X1
+GPIO18_X2
+GPIO32
+GPIO35/TDI
+TMS
+GPIO37/TDO
+TCK
+GPIO24
+GPIO17
+GPIO16
+GPIO4
+GPIO8
+VREGENZ
+VSS
+VDD
+VDDIO
+X1
+GPIO18_X2
+GPIO32
+GPIO35/TDI
+TMS
+GPIO37/TDO
+TCK
+GPIO24
+GPIO17
+GPIO16
+F28003x
+F28004x
+F28004x
+F28003x
+F28003x
+F28004x
+F28004x
+F28003x
+64-Pin PM Non-Q
+100% Compatible
+Minor Incompatibility ± Signals In Common
+Major Incompatibility ± Different Signals & Type
+Legend
+Figure 2-3. 64-Pin PM Non-Q Variant, F28003x and F28004x Pin-Overlay
+www.ti.com PCB Hardware Changes
+SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Migration Between TMS320F28004x and TMS320F28003x 11
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 12 ===
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+48 47 46 45 44 43 42 41 40 39 38 37 36 35 34 33
+64
+63
+62
+61
+60
+59
+58
+57
+56
+55
+54
+53
+52
+51
+50
+49 GPIO33
+GPIO11
+GPIO12
+GPIO13
+VDDIO
+VDD
+VSS
+A10, B1, C10
+A9, B4, C8
+A4, B8, C14
+VDDA
+VSSA
+A8, B0, C11
+C3, A7
+A12, C1
+VREFLOABC
+GPIO33
+GPIO11
+FLT1
+FLT2
+VDDIO
+VDD
+VSS
+A10, B1, C10, PGA7_OF
+B4, C8, PGA4_OF
+A4, B8, PGA2_OF
+VDDA
+VSSA
+PGA2_GND, PGA4_GND, 
+PGA6_GND
+C3, PGA4_IN
+C1, PGA2_IN
+VREFLOA, VREFLOB, 
+VREFLOC
+GPIO29
+GPIO28
+XRSn
+VDD
+VSS
+A6, PGA5_OF
+B2, C6, PGA3_OF
+B3, VDAC
+A2, B6, PGA1_OF
+PGA1_GND, PGA3_GND, 
+PGA5_GND
+C4, PGA5_IN
+C0, PGA1_IN
+C2, PGA3_IN
+A1, DACB_OUT
+A0, B15, C15, DACA_OUT
+VREFHIA, VREFHIB, 
+VREFHIC
+GPIO29
+GPIO28
+XRSn
+VDD
+VSS
+A6
+B2, C6
+A3, B3, C5, VDAC
+A2, B6, C9
+A15, B9, C7
+A14, B14, C4
+A11, B10, C0
+A5, B12, C2
+A1, B7, DACB_OUT
+A0, B15, C15, DACA_OUT
+VREFHIABC
+GPIO3
+GPIO2
+GPIO1
+GPIO0
+VDDIO_SW
+GPIO23_VSW
+VSS_SW
+GPIO22_VFBSW
+GPIO7
+VSS
+VDD
+VDDIO
+GPIO5
+GPIO9
+GPIO10
+GPIO6
+GPIO3
+GPIO2
+GPIO1
+GPIO0
+GPIO40
+GPIO23
+GPIO41
+GPIO22
+GPIO7
+VSS
+VDD
+VDDIO
+GPIO5
+GPIO9
+GPIO10
+GPIO6
+GPIO4
+GPIO8
+VREGENZ
+VSS
+VDD
+VDDIO
+GPIO19_X1
+GPIO18_X2
+GPIO32
+GPIO35/TDI
+TMS
+GPIO37/TDO
+TCK
+GPIO24
+GPIO17
+GPIO16
+GPIO4
+GPIO8
+VREGENZ
+VSS
+VDD
+VDDIO
+X1
+GPIO18_X2
+GPIO32
+GPIO35/TDI
+TMS
+GPIO37/TDO
+TCK
+GPIO24
+GPIO17
+GPIO16
+F28003x
+F28004x
+F28004x
+F28003x
+F28003x
+F28004x
+F28004x
+F28003x
+64-Pin PM Q
+100% Compatible
+Minor Incompatibility ± Signals In Common
+Major Incompatibility ± Different Signals & Type
+Legend
+Figure 2-4. 64-Pin PM Q Variant, F28003x and F28004x Pin-Overlay
+PCB Hardware Changes www.ti.com
+12 Migration Between TMS320F28004x and TMS320F28003x SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 13 ===
+2.2.1 64-Pin PM Migration for New and Existing PCB
+Table 2-3 outlines the migration moving from F28004x/F28003x to F28003x/F28004x, respectively.
+For the color legend, see Figure 2-3 and Figure 2-4.
+Table 2-3. 64-Pin PM Migration Between F28004x and F28003x For New and Existing PCB
+Pin No
+Pin Name
+Transition Type
+Action
+F28004x F28003x F28003x to F28004x F28004x to F28003x
+Minor Incompatibility - Signals in Common (1)
+6 A6, PGA5_OF A6
+Common Analog 
+Channel
+Use A6
+7 B2, C6, PGA3_OF B2, C6 Use B2 or C6
+8 B3, VDAC A3, B3, C5 VDAC Use B3 or VDAC
+9 A2, B6, PGA1_OF A2, B6, C9 Use A2 or B6
+11 PGA5_IN, C4 A14, B14, C4 Use C4
+12 PGA1_IN, C0 A11, B10, C0 Use C0
+13 PGA3_IN, C2 A5, B12, C2 Use C2
+14 A1, DACB_OUT A1, B7, DACB_OUT Use A1 or DACB_OUT
+18 C1 A12, C1 Use C1
+19 PGA4_IN, C3 A7, C3 Use C3
+23 C14 A4, B8, C14 Use C14
+24 B4, C8 A9, B4, C8 Use B4 or C8
+42 X1 GPIO19, X1 Common Clock GPIO19 not available for use
+54 GPIO23_VSW GPIO23
+Common GPIO Do not use DCDC. GPIO22 & GPIO23 available 
+56 GPIO22_VFBSW GPIO22 for use
+Major Incompatibility - Different Signals and Types
+10 PGA1_GND, 
+PGA3_GND, 
+PGA5_GND
+A15, B9, C7
+PGA Ground to ADC 
+Channel Tie to VSS
+20 PGA2_GND, 
+PGA4_GND, 
+PGA6_GND
+A8, B0, C11
+55 VSS_SW GPIO41
+Ground to GPIO
+Tie to VSS through 0-Ohm resistor. Depopulate 
+resistor when using F28003x and enable internal 
+pull-up for the GPIO
+53 VDDIO_SW GPIO40
+Power to GPIO
+Tie to VDDIO through 0-Ohm resistor. Depopulate 
+resistor when using F28003x and enable internal 
+pull-up for the GPIO
+(Non-Q Variant) Major Incompatibility - Different Signals and Types
+46 VREGENZ GPIO39 External VREG not supported. Tie to VSS 
+through 0-Ω resistor. Depopulate resistor when 
+using F28003x and enable internal pull-up for the 
+GPIO
+(Q Variant) Major Incompatibility - Different Signals and Types
+29 FLT2 GPIO13
+Flash Test Pins to GPIO No connect. Enable internal pull-up for the GPIOs 
+30 FLT1 GPIO12 on F28003x
+1. Channel to use selected in software.
+www.ti.com PCB Hardware Changes
+SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Migration Between TMS320F28004x and TMS320F28003x 13
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 14 ===
+3 Feature Differences for System Consideration
+The differences and similarities that exist when moving between the F28003x and F28004x devices is explored 
+in this section.
+3.1 New Features in F28003x
+This section outlines features that only exist in the F28003x device. For details on each of these new features, 
+see the TMS320F28003x Real-Time Microcontrollers Technical Reference Manual (SPRUIW9).
+3.1.1 TMU Type1
+Two instructions have been added to the instruction set of the Trigonometrical Math Unit (TMU) on F28003x to 
+support computation of the floating-point power function “powf”. These instructions calculate the inverse binary 
+exponent in base two logarithm and can be combined to compute the power of a floating-point number raised to 
+the power of another floating-point number.
+This calculation would typically take 300 cycles using library emulation, but takes less than ten cycles using the 
+new instructions. An example of the application of the power function is non-linear proportional integral derivative 
+control (NLPID), which is a component of the C2000 Digital Control Library found in C2000Ware.
+3.1.2 Fast Integer Division (FINTDIV)
+The C28x processor Fast Integer Division (FINTDIV) unit provides an open and scalable approach to facilitate 
+different data type sizes (16/16, 32/16, 32/32, 64/32, 64/64), signed and unsigned or mixed data type versions 
+(ui32/ui32, i32/ui32, i32/i32) and for additional performance, the operations return both the integer and remainder 
+portion of the calculation simultaneously.
+The division operations are interruptible so as to enable minimum latency for higher priority tasks, a critical 
+requirement for high performance real-time control applications. Unique to this fast integer division unit is 
+support for Truncated, Modulo and Euclidean division formats without any cycle penalty. Each of these formats 
+represents the integer and remainder result in different forms. Below is a brief summary of the various division 
+formats:
+• Truncated format is the traditional division performed in C language (/ = integer, % = remainder), however, the 
+integer value is non-linear around zero.
+• Modulo division is commonly found when performing division on an Excel worksheet.
+• Euclidean format is another format similar to Modulo, the difference is the sign on the remainder value.
+Both the Euclidean and Modulo formats are more appropriate for precise control applications because the 
+integer value is linear around the zero point and, hence, avoid potential calculation hysteresis. The C28x 
+compiler supports all three division formats for all data types.
+3.1.3 Host Interface Controller (HIC)
+The Host Interface Controller (HIC) is a new module for the F28003x device that allows an external host 
+controller to directly access resources of the F28003x device using the ASRAM protocol. HIC was first 
+introduced in F28002x.
+3.1.4 Background CRC (BGCRC)
+The Background CRC (BGCRC) is a new module for the F28003x device that can compute the CRC-32 value 
+of a configurable block of memory. It is an upgrade on the CLAPROMCRC found in the F28004x device to test 
+more memories than just the CLA ROM. BGCRC was first introduced in F2838x.
+3.1.5 Standby Low Power Mode
+In F28004x, standby low power mode was deprecated. In F28003x, standby low power mode is available for 
+applications requiring this power saving feature.
+3.1.6 X1 GPIO Functionality
+In the F28003x device, the crystal pin X1 can also be used as a GPIO, GPIO19. This is a new feature for 
+the F28003x device. The X1 pin can either be used as the crystal input pin or as GPIO19, but not both 
+simultaneously.
+Feature Differences for System Consideration www.ti.com
+14 Migration Between TMS320F28004x and TMS320F28003x SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 15 ===
+3.1.7 Diagnostic Features (PBIST/HWBIST)
+PBIST is a controller that can execute configurable memory tests routines. PBIST is enabled as part of the boot 
+up sequence in both F28004x and F28003x devices. F28003x and future C2000 device documents will refer to 
+the PBIST module as MPOST (memory power on self-test).
+HWBIST is a self-test controller for the CPU for fault coverage in safety applications. HWBIST can be invoked 
+from user application code. HWBIST is available only in the F28003x device.
+3.1.8 Advance Encryption Standard (AES)
+The AES module on F28003x is a symmetric cipher module that provides hardware-accelerated data encryption 
+and decryption with support for 128-, 192- and 256-bit keys. AES was first introduced in F2838x.
+3.1.9 Secure Boot/JTAG Lock
+The F28003x device supports secure booting and also has the capability to lock the JTAG to avoid debug 
+access thereby enhancing security. Secure Boot and JTAG Lock were first introduced in F2838x.
+3.1.10 Modular Controller Area Network (MCAN)
+The MCAN module on F28003x supports CAN FD (CAN with the flexible data-rate) specification which has a 
+higher throughput compared to Classic CAN. It can also operate in Classic CAN mode if needed. MCAN was 
+first introduced in F2838x.
+3.1.11 Embedded Pattern Generator (EPG)
+The EPG on F28003x is an interface module that can be used to generate waveforms and clocks for other 
+modules on the device. This can be useful for communication module diagnostics and also providing the 
+modulation clock for the SDFM.
+3.1.12 Live Firmware Update (LFU)
+The F28003x device has in-built hardware to facilitate live firmware updates. It supports fast context switching 
+from the old firmware to the new firmware to minimize application downtime when updating the device firmware.
+3.2 Communication Module Changes
+Communication module changes between the F28004x and F28003x devices affect the number of modules, 
+addition of CAN-FD, HIC and some differences on the FSI module in F28003x. Module functionality is 
+maintained for both devices. Table 3-1 shows the module instances and differences which should be considered 
+when migrating applications between F28004x and F28003x.
+Table 3-1. Communication Module Instances
+Module Category F28004x F28003x Notes
+LIN Number 1 - LINA 2 - LINA, LINB
+CAN Number 2 - CANA, CANB 1- CANA
+CAN-FD Number not present 1 - MCANA
+SCI Number 2 - SCIA, SCIB 2 - SCIA, SCIB
+SPI Number 2 - SPIA, SPIB 2 - SPIA, SPIB
+I2C Number 1 - I2CA 2 -I2CA, I2CB
+PMBUS Number 1 - PMBUSA 1 - PMBUSA
+HIC Number not present 1 - HICA
+www.ti.com Feature Differences for System Consideration
+SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Migration Between TMS320F28004x and TMS320F28003x 15
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 16 ===
+Table 3-1. Communication Module Instances (continued)
+Module Category F28004x F28003x Notes
+FSI
+Number 1 - FSIA 1 - FSIA Updates on F28003x due to daisy chain 
+improvements
+Register
+- TX_OPER_CTRL_LO.TDM_ENABLE Input TDM port select bit
+- TX_OPER_CTRL_LO.SEL_TDM_IN Transmit TDM Mode Enable bit
+- TX_OPER_CTRL_HI.EXT_TRIG_SEL External Trigger Select bit
+- TX_DLYLINE_CTRL Transmit delay line control register
+- RX_MASTER_CTRL.INPUT_ISOLATE Isolate FSI RX Inputs
+- RX_MASTER_CTRL.DATA_FILTER_EN Data filter enable bit
+- RX_EVT_STS.PING_TAG_MATCH Ping Tag Match Flag
+- RX_EVT_STS.DATA_TAG_MATCH Data Tag Match Flag
+- RX_EVT_STS.ERROR_TAG_MATCH Error Tag Match Flag
+- RX_EVT_CLR.PING_TAG_MATCH Ping Tag Match Flag clear bit
+- RX_EVT_CLR.DATA_TAG_MATCH Data Tag Match Flag clear bit
+- RX_EVT_CLR.ERROR_TAG_MATCH Error Tag Match Flag clear bit
+- RX_EVT_FRC.PING_TAG_MATCH Ping Tag Match Flag force bit
+- RX_EVT_FRC.DATA_TAG_MATCH Data Tag Match Flag force bit
+- RX_EVT_FRC.ERROR_TAG_MATCH Error Tag Match Flag force bit
+- RX_INT1_CTRL.INT1_EN_PING_TAG_
+MATCH
+Enable Ping Tag Match Interrupt 1
+- RX_INT1_CTRL.INT1_EN_DATA_TAG_
+MATCH
+Enable Data Tag Match Interrupt 1
+- RX_INT1_CTRL.INT1_EN_ERROR_TA
+G_MATCH
+Enable Error Tag Match Interrupt 1
+- RX_INT2_CTRL.INT2_EN_PING_TAG_
+MATCH
+Enable Ping Tag Match Interrupt 2
+- RX_INT2_CTRL.INT2_EN_DATA_TAG_
+MATCH
+Enable Data Tag Match Interrupt 2
+- RX_INT2_CTRL.INT2_EN_ERROR_TA
+G_MATCH
+Enable Error Tag Match Interrupt 2
+- RX_TRIG_CTRL_0 Receive Trigger Control register 0
+- RX_TRIG_WIDTH_0 Receive Trigger Wdith register 0
+- RX_TRIG_CTRL_1 Receive Trigger Control register 1
+- RX_TRIG_CTRL_2 Receive Trigger Control register 2
+- RX_TRIG_CTRL_3 Receive Trigger Control register 3
+- RX_UDATA_FILTER Receive User Data Filter Control register
+Feature Differences for System Consideration www.ti.com
+16 Migration Between TMS320F28004x and TMS320F28003x SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 17 ===
+3.3 Control Module Changes
+There are changes in the control modules between the F28004x and F28003x devices. The biggest changes 
+come from the EPWM on the F28003x device which has a new generic and simple sync scheme that allows 
+any EPWM/ECAP to be the main sync source for another EPWM/ECAP and addition of new SDFM features 
+for F28003x. Table 3-2 shows the module instances differences which should be considered when migrating 
+applications between F28004x and F28003x.
+Table 3-2. Control Module Differences
+Module Category F28004x F28003x Notes
+SDFM Number 4 - SD1_D1C1..D4C4 8 - SD1_D1C1..D4C4, 
+SD2_D1C1..D4C4
+Registers(1) SDCMPHx SDFLTxCMPH1 High-Level Threshold Register for Chx
+SDCMPLx SDFLTxCMPL1 Low-Level Threshold Register for Chx
+SDCMPHZx SDFLTxCMPHZ High-Level (Z) Threshold Register for Chx
+- SDFLTxCMPH2 Second High-Level Threshold Register for Chx
+- SDFLTxCMPL2 Second Low-Level Threshold Register for Chx
+- SDCOMPxCTL SD Comparator event filterx Control Register
+- SDCOMPxEVT2FLTCTL COMPL/CEVT2 Digital filterx Control Register
+- SDCOMPxEVT2FLTCLKCTL COMPL/CEVT2 Digital filterx Clock Control Register
+- SDCOMPxEVT1FLTCTL COMPH/CEVT1 Digital filterx Control Register
+- SDCOMPxEVT1FLTCLKCTL COMPH/CEVT1 Digital filterx Clock Control Register
+- SDCOMPxLOCK SD Comparator event filterx Lock Register
+eQEP Number 2 - EQEP1, EQEP2
+Registers - QEPSRCSEL Select source as either device pins or cmpss/
+epwmxbar
+- QDECCTL.QIDIRE Index direction compatibility mode
+Other Support for SinCos 
+Transducers
+eCAP Number 7 - ECAP1..7 3 - ECAP1..3 Updates on F28003x due to new sync scheme
+Registers - ECAPSYNCINSEL Select sync source for ecap
+HRCAP Number 2 - HRCAP6, HRCAP7 1 - HRCAP3
+www.ti.com Feature Differences for System Consideration
+SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Migration Between TMS320F28004x and TMS320F28003x 17
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 18 ===
+Table 3-2. Control Module Differences (continued)
+Module Category F28004x F28003x Notes
+ePWM Number 8 - EPWM1..8 Updates on F28003x due to new sync scheme and 
+blanking window improvements
+Registers - DCACTL.EVT1LATSEL DCAEVT1 Latched Signal Select
+- DCACTL.EVT1LATCLRSEL DCAEVT1 Latched Clear Source Select
+- DCACTL.EVT1LAT Indicates the status of DCAEVT1LAT signal
+- DCACTL.EVT2LATSEL DCAEVT2 Latched Signal Select
+- DCACTL.EVT2LATCLRSEL DCAEVT2 Latched Clear Source Select
+- DCACTL.EVT2LAT Indicates the status of DCAEVT2LAT signal
+- DCBCTL.EVT1LATSEL DCBEVT1 Latched Signal Select
+- DCBCTL.EVT1LATCLRSEL DCBEVT1 Latched Clear Source Select
+- DCBCTL.EVT1LAT Indicates the status of DCBEVT1LAT signal
+- DCBCTL.EVT2LATSEL DCBEVT2 Latched Signal Select
+- DCBCTL.EVT2LATCLRSEL DCBEVT2 Latched Clear Source Select
+- DCBCTL.EVT2LAT Indicates the status of DCBEVT2LAT signal
+DCFCCTL.PULSESEL DCFCCTL.PULSESEL Blank Pulse Mix added as an option for F28003x
+- TBCTL3.OSSFRCEN F28003x can now generate an EPWMxSYNCO with 
+GLDCTL2[OSHTLD]
+SYNCSEL EPWMSYNCINSEL EPWMxSYNCI to EPWMxSYNCO path removed from 
+F28003x
+TBCTL.SYNCOSEL EPWMSYNCOUTEN DCAEVT1 and DCBEVT1 are new sync output options 
+for F28003x TBCTL2.SYNCOSELX
+HRPWM Number 8 - HRPWM1..8 4 - HRPWM1..4
+Clock 
+Source
+EPWM1CLK Respective EPWM
+1. x = 1 to 4
+3.4 Analog Module Differences
+This section outlines the analog differences between F28003x and F28004x. The PGA is not present on the 
+F28003x and the analog mux table is remapped. Table 3-3 shows the differences.
+Table 3-3. Analog Module Differences
+Module Category F28004x F28003x Notes
+ADC(1) Number 3 - ADCA, ADCB, ADCC
+Max Speed 50 MHz 60 MHz
+GPDAC Number 2 - GPDACA, GPDACB
+CMPSS(1) Number 7 - CMPSS1 to CMPSS7 4 - CMPSS1 to CMPSS4
+Registers CTRIPxFILCLKCTL.CLKP
+RESCALE[9..0]
+CTRIPxFILCLKCTL.CLKP
+RESCALE[15..0]
+CMPSS filter prescaling size increased on F28003x
+Other CMPx_HP has 5 mux 
+input options
+CMPx_HP has 6 mux 
+input options
+PGA Number 7 - PGA1 to PGA7 -
+Temp 
+Sensor
+Number 1 - (in ADCB ch 14) 1 - (in ADCC ch 12)
+1. In porting software from F28004x to F28003x (or the other way around), care must be taken to ensure that 
+the correct ADC channels are used because of a difference in channel assignment, see Section 3.9.
+3.5 Other Device Changes
+This section describes feature differences between F28004x and F28003x that were not covered in the previous 
+sections, as such the changes identified below must be considered when migrating applications between 
+devices.
+Feature Differences for System Consideration www.ti.com
+18 Migration Between TMS320F28004x and TMS320F28003x SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 19 ===
+3.5.1 XTAL Module
+The XTAL module has a few changes between F28003x and F28004x as highlighted in Table 3-4
+Table 3-4. XTAL Module Differences
+Module Category F28004x F28003x Notes
+XTAL
+Registers
+X1CNT.X1CNT[9..0] X1CNT.X1XNT[10..0]
+- XTALCR2 For pre-conditioning the 
+GPIO mode of X1/X2
+Other X1CNT.CLR is 
+synchronous
+X1CNT.CLR is 
+asynchronous
+3.5.2 PLL
+The PLL blocks of F28004x and F28003x devices are different. Table 3-5 lists the PLL features for both devices 
+for comparison. for more information, consult the TMS320F28003x microcontrollers technical reference manual.
+Table 3-5. PLL Features
+Feature F28004x F28003x
+VCO Range 120 - 400 MHz 220 - 600 MHz
+PLL Raw Clock Range 15 - 200 MHz 6 - 240 MHz
+X1 Input Range (PLL enable) 2 - 20 MHz 2 - 25 MHz
+REFCLK Divider No Yes[1..32]
+PLL Slip Detect Yes No (use DCC)
+Fractional PLLMULT Yes No
+www.ti.com Feature Differences for System Consideration
+SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Migration Between TMS320F28004x and TMS320F28003x 19
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 20 ===
+3.5.3 PIE Channel Mapping
+Pie channel mapping between F28004x and F28003x is different due to peripheral module changes between these devices. Table 3-7 summarizes the 
+common and unique pie channel assignments on these two devices.
+Table 3-6. Pie Channel Legend
+Color Description
+Pie channel common for both devices
+Pie channel applicable only for F28004x
+Pie channel applicable only for F28003x
+Table 3-7. Pie Table Comparison
+INTx.1 INTx.2 INTx.3 INTx.4 INTx.5 INTx.6 INTx.7 INTx.8 INTx.9 INTx.10 INTx.11 INTx.12 INTx.13 INTx.14 INTx.15 INTx.16
+INT1.y ADCA1 ADCB1 ADCC1 XINT1 XINT2 - TIMER0 WAKE/
+WDOG
+- SYS_ER
+R
+- - - - - -
+INT2.y EPWM1_
+TZ
+EPWM2_
+TZ
+EPWM3_
+TZ
+EPWM4_
+TZ
+EPWM5_
+TZ
+EPWM6_
+TZ
+EPWM7_
+TZ
+EPWM8_
+TZ
+- - - - - - - -
+INT3.y EPWM1 EPWM2 EPWM3 EPWM4 EPWM5 EPWM6 EPWM7 EPWM8 - - - - - - - -
+INT4.y ECAP1 ECAP2 ECAP3 ECAP4 ECAP5 ECAP6 ECAP7 - - - ECAP3_I
+NT2
+- - - ECAP6_
+HRCAL
+ECAP7_
+HRCAL
+INT5.y EQEP1 EQEP2 - - CLB1 CLB2 CLB3 CLB4 SDFM1 SDFM2 - - SDFM1D
+R1
+SDFM1D
+R2
+SDFM1D
+R3
+SDFM1D
+R4
+INT6.y SPIA_RX SPIA_TX SPIB_RX SPIB_TX - - - - - - - - SDFM2D
+R1
+SDFM2D
+R2
+SDFM2D
+R3
+SDFM2D
+R4
+INT7.y DMA_CH
+1
+DMA_CH
+2
+DMA_CH
+3
+DMA_CH
+4
+DMA_CH
+5
+DMA_CH
+6
+- - - - FSITXA_I
+NT1
+FSITXA_I
+NT2
+FSIRXA_
+INT1
+FSIRXA_
+INT2
+CLAPRO
+MCRC
+DCC0
+INT8.y I2CA I2CA_FIF
+O
+I2CB I2CB_FIF
+O
+- - - - LINA_0 LINA_1 LINB_0 LINB_1 PMBUSA - - DCC1
+INT9.y SCIA_RX SCIA_TX SCIB_RX SCIB_TX CANA_0 CANA_1 CANB_0 CANB_1 MCAN_0 MCAN_1 MCAN_E
+CC
+MCAN_
+WAKE
+BGCRC_
+CPU
+- - HICA
+INT10.y ADCA_E
+VT
+ADCA2 ADCA3 ADCA4 ADCB_E
+VT
+ADCB2 ADCB3 ADCB4 ADCC_E
+VT
+ADCC2 ADCC3 ADCC4 - - - -
+INT11.y CLA1_1 CLA1_2 CLA1_3 CLA1_4 CLA1_5 CLA1_6 CLA1_7 CLA1_8 - - - - - - - -
+INT12.y XINT3 XINT4 XINT5 PBIST(M
+POST) FMC -
+FPU_OV
+ERFLOW
+FPU_UN
+DERFLO
+W
+-
+RAM_CO
+RR_ERR
+FLASH_
+CORR_E
+RR
+RAM_AC
+C_VIOL
+PLLSLIP
+BGCRC_
+CLA1
+CLA_OV
+ERFLOW
+CLA_UN
+DERFLO
+W
+AES_SIN
+TREQ
+Feature Differences for System Consideration www.ti.com
+20 Migration Between TMS320F28004x and TMS320F28003x SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 21 ===
+3.5.4 Bootrom
+For bootrom similarities and differences between F28004x and F28003x see Table 3-8 and Table 3-11.
+Table 3-8. Bootrom Comparison Table
+F28004x F28003x
+System Debug (ERAD) NMI is disabled NMI is enabled. Bootrom exception handler is 
+updated for this NMI
+HWBIST HWBIST is not available HWBIST is available
+CPU Boot Mode GPIO Assignments On the 64-Pin package, F28004x and F28003x have similar options however the BOOTDEFx 
+values are different. For boot mode GPIO assignment on the other packages, see Bootrom section 
+in the device-specific data sheet.
+BMSP Restrictions - Do not use pins GPIO20-33, GPIO36, GPIO38 and GPIO60-233 GPIO36, GPIO38, GPIO62-223
+RAM Initialization RAM initialization occurs on POR and XRS RAM initialization occurs only on POR
+ROM Table ROM tables for F28004x and F28003x are different. For details, see device-specific TRM.
+PBIST(MPOST) Status Flag Flag is reset for every reset type Flag is reset only for POR rest type
+PBIST(MPOST) Execution Speed Will execute either at maximum SYSCLK speed 
+or INTOSC clock
+Will execute at maximum SYSCLK speed, half of 
+maximum SYSCLK speed or INTOSC clock
+Table 3-9. Boot options Legend
+Color Description
+Options common for both devices but BOOTDEFx values may differ
+Options applicable only for F28004x
+Options applicable only for F28003x
+Table 3-10. Bootloaders and GPIO Assignment Comparison
+Bootloader Option BOOTDEFx F28004x F28003x
+Parallel
+0 0x00 D0-D7=0 to 7; DSP=16; Host=11 D0-D7=0 to 7; DSP=16; Host=29
+1 0x20 n/a D0-D7=0 to 7; DSP=16; Host=11
+SCIA
+0 0x01 TX=29; RX=28 TX=29; RX=28
+1 0x21 TX=16; RX=17 TX=16; RX=17
+2 0x41 TX=8; RX=9 TX=8; RX=9
+3 0x61 TX=48; RX=49 TX=2; RX=3
+4 0x81 TX=24; RX=25 TX=16; RX=3
+CAN
+0 0x02 TX=32; RX=33 TX=4; RX=5
+1 0x22 TX=4; RX=5 TX=32; RX=33
+2 0x42 TX=31; RX=30 TX=2; RX=3
+3 0x62 TX=37; RX=35 TX=13; RX=12
+MCAN
+0 0x08 n/a TX=4; RX=5
+1 0x28 n/a TX=1; RX=0
+2 0x48 n/a TX=13; RX=12
+SPI
+0 0x06 n/a SIMO=2 SOMI=1; CLK=3; STE=5
+1 0x26 SIMO=8; SOMI=10; CLK=9; 
+STE=11
+SIMO=16 SOMI=1; CLK=3; 
+STE=0
+2 0x46 SIMO=54; SOMI=55; CLK=56; 
+STE=57
+SIMO=8 SOMI=10; CLK=9; 
+STE=11
+3 0x66 SIMO=16; SOMI=17; CLK=56; 
+STE=57
+SIMO=8 SOMI=17; CLK=9; 
+STE=11
+4 0x86 SIMO=8; SOMI=17; CLK=9; 
+STE=11
+n/a
+www.ti.com Feature Differences for System Consideration
+SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Migration Between TMS320F28004x and TMS320F28003x 21
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 22 ===
+Table 3-10. Bootloaders and GPIO Assignment Comparison (continued)
+Bootloader Option BOOTDEFx F28004x F28003x
+I2C
+0 0x07 SDA=32; SCL=33 SDA=32; SCL=33
+1 0x27 n/a SDA=0; SCL=1
+2 0x47 SDA=26; SCL=27 SDA=10; SCL=8
+3 0x67 SDA=42; SCL=43 n/a
+Table 3-11. Boot Modes Comparison
+Boot Mode Option BOOTDEFx F28004x F28003x
+Flash
+0 0x03 Entry=0x00080000; Bank/
+Sector=0/0 Entry=0x00080000; Bank/Sector=0/0
+1 0x23 Entry=0x0008EFF0; Bank/
+Sector=0/14 Entry=0x00088000; Bank/Sector=0/8
+2 0x43 Entry=0x00090000; Bank/
+Sector=1/0 Entry=0x0008FFF0; Bank/Sector=0/15
+3 0x63 Entry=0x0009EFF0; Bank/
+Sector=1/14 Entry=0x00090000; Bank/Sector=1/0
+4 0x83 - Entry=0x00097FF0; Bank/Sector=1/7
+5 0xA3 - Entry=0x0009FFF0; Bank/Sector=1/15
+6 0xC3 - Entry=0x000A0000; Bank/Sector=2/0
+7 0xE3 - Entry=0x000AFFF0; Bank/Sector=2/15
+LFU Flash
+0 0x0B -
+Entry=0x00080000; Bank=0
+Entry=0x00090000; Bank=1
+Entry=0x000A0000 Bank=2
+1 0x2B -
+Entry=0x00088000; Bank=0
+Entry=0x00098000; Bank=1
+Entry=0x000A8000 Bank=2
+2 0x4B -
+Entry=0x0008FFF0; Bank=0
+Entry=0x0009FFF0; Bank=1
+Entry=0x000AFFF0 Bank=2
+3 0x6B -
+Entry=0x00088000; Bank=0
+Entry=0x00090000; Bank=1
+Entry=0x000A0000 Bank=2
+4 0x8B -
+Entry=0x0008EFF0; Bank=0
+Entry=0x00097FF0; Bank=1
+Entry=0x000A7FF0 Bank=2
+Secure LFU Flash
+0 0x0C -
+Entry=0x00080000; Bank=0
+Entry=0x00090000; Bank=1
+Entry=0x000A0000 Bank=2
+1 0x2C -
+Entry=0x00088000; Bank=0
+Entry=0x00098000; Bank=1
+Entry=0x000A8000 Bank=2
+2 0x4C -
+Entry=0x0008FFF0; Bank=0
+Entry=0x0009FFF0; Bank=1
+Entry=0x000AFFF0 Bank=2
+3 0x6C -
+Entry=0x00088000; Bank=0
+Entry=0x00090000; Bank=1
+Entry=0x000A0000 Bank=2
+4 0x8C -
+Entry=0x0008EFF0; Bank=0
+Entry=0x00097FF0; Bank=1
+Entry=0x000A7FF0 Bank=2
+Wait
+0 0x04 Watchdog enabled Watchdog enabled
+1 0x24 Watchdog disabled Watchdog disabled
+RAM 0 0x05 Entry=0x00000000 Entry=0x00000000
+Feature Differences for System Consideration www.ti.com
+22 Migration Between TMS320F28004x and TMS320F28003x SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 23 ===
+3.5.5 CLB and Motor Control Libraries
+There are no functional changes on the Motor Control Libraries in ROM between F28004x and F28003x. There 
+are feature differences in CLB as outlined in Table 3-12.
+Table 3-12. CLB and Motor Control Libraries
+Module Category F28004x F28003x Note
+CLB
+Features
+- CLB Counter Module contains pipleline mode
+- CLB HLC Module has access to CLB Tile 
+outputs delayed by one cycle
+Registers
+- CLB_LOAD_EN
+Global enable and inderect load 
+enable control. Contains field 
+PIPELINE_EN which can enable 
+input pipelinining.
+-
+CLB_MISC_ACCESS_CTRL Miscellaneous access and enable 
+control
+- CLB_SPI_DATA_CTRL_HI CLB to SPI buffer control high
+Motor Control 
+Libraries in ROM Features same same No feature differences
+3.5.6 ERAD
+The ERAD module has a number of changes between F28004x and F28003x as highlighted in Table 3-13
+Table 3-13. ERAD Module Differences
+Module Category F28004x F28003x Notes
+ERAD
+Features
+- Event Masking and Exporting EBC Unit on F28003x supports event OR/AND, maskingand 
+exporting
+- Cumulative Mode SEC Unit on F28003x supports a cummulative mode over 
+several start/stop events
+- CRC Unit F28003x has CRC units to monitor CPU buses and compute 
+CRC when self-test code is executed
+32 Event 
+Selector 
+Options
+128 Event Selector Options Connections to ADC, CMPSS, EPWM and other sources 
+have been added to F28003x
+Registers
+- GLBL_NMI_CTL Global Debug NMI Control
+- GLBL_EVENT_AND_MASK Global Bus Comparator Event AND Mask Register
+- GLBL_EVENT_OR_MASK Global Bus Comparator Event OR Mask Register
+- GLBL_AND_EVENT_INT_M
+ASK
+Global AND Event Interrupt Mask Register
+- GLBL_OR_EVENT_INT_MA
+SK
+Global OR Event Interrupt Mask Register
+- CTM_INPUT_SEL_2 Counter Input Select Extension Register
+- CTM_INPUT_COND Counter Input Conditioning Register
+- CRC_GLOBAL_CTRL CRC Global Control Register
+- CRC_CURRENT Reads Current CRC Value
+- CRC_SEED CRC Seed Register
+- CRC_QUALIFIER CRC Compute Qualification Register
+www.ti.com Feature Differences for System Consideration
+SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Migration Between TMS320F28004x and TMS320F28003x 23
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 24 ===
+3.5.7 GPIO
+The GPIO module in F28003x has a new register for reading back the value written in GPyDAT. This register is 
+not available in F28004x. The register is GPyDAT_R and description is as follows:
+• GPyDAT_R is a read-only register which return the values written to GPyDAT register instead of pin status. 
+Writes to this register has no effect.
+3.5.8 AGPIO
+F28003x has two AGPIO channels that support both normal GPIO and AGPIO (analog) pin functionality. These 
+channels are available on the 100-pin and 80-pin packages. AGPIO functionality is not available on F28004x. 
+See the F28003x data manual for configuration details.
+3.5.9 ERROR Status
+Error signaling through a pin is a feature that is available on both F28004x and F28003x devices. The GPIO 
+multiplex in Table 3-17 shows the available multiplex positions that support the functionality of ERROR status. 
+Table 3-14 describes the characteristics of the ERROR status pin.
+Table 3-14. Error Status Table
+ERROR Status F28004x F28003x
+Pull requirement Pull-down Pull-down
+Polarity Active low Active low
+Polarity option Fixed Programmable
+3.6 Power Management
+The F28004x and F28003x devices have a few different options for power. Both devices support dual-rail (3.3 
+V and 1.2 V) or single-rail (3.3 V) with the internal LDO VREG however the F28004x also has the option to 
+use it's internal DCDC to provide the 1.2 V rail. This section describes the power management differences and 
+similarities between the two devices.
+3.6.1 LDO/VREG
+Both F28004x and F28003x devices support internal and external VREG selectable using the VREGENZ pin. 
+However, not all packages support the external VREG option. For packages that do not support external VREG, 
+the VREGENZ pin is replaced by GPIO39 on the F28003x device. See the device-specific data manual for 
+details.
+3.6.2 DCDC
+The F28003x device does not have a DCDC while F28004x has an internal DCDC to supply the 1.2 V rail that 
+requires minimal external components (inductor and capacitor).
+3.6.3 POR/BOR
+There are no functional changes for the POR and BOR.
+3.6.4 Power Consumption
+There is not a significant difference in power consumption between F28003x and F28004x if the same number of 
+peripherals are being utilized and internal VREG is being used for both.
+Feature Differences for System Consideration www.ti.com
+24 Migration Between TMS320F28004x and TMS320F28003x SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 25 ===
+3.7 Memory Module Changes
+RAM and FLASH memories in F28004x and F28003x devices have some similarities and differences. Table 3-15 
+summarizes the memory features including error-checking and security assignment.
+Table 3-15. RAM and FLASH Memory Changes
+Memory
+F28004x F28003x
+Size Parity/
+ECC Secured Size Parity/
+ECC Secured
+RAM
+Dedicated(M0,M1) 4KB ECC No 4KB ECC No
+Local Shared(LS0-LS7) 32KB Parity Yes 32KB ECC DCSM￾controlled
+Global Shared(GS0-GS3) 64KB Parity No 32KB ECC No
+Message 512B(CPU-CLA) Parity No 512B(CPU-CLA)
+512B(CLA-DMA) ECC No
+Total RAM 100.5KB 69KB
+FLASH
+Per Bank 128KB(2 banks) ECC DCSM￾controlled 128KB(3 banks) ECC DCSM￾controlled
+Total FLASH 256KB 384KB
+www.ti.com Feature Differences for System Consideration
+SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Migration Between TMS320F28004x and TMS320F28003x 25
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 26 ===
+3.8 GPIO Multiplexing Changes
+Table 3-17 outlines the differences and similarities that exist in the GPIO mux between F28004x and F28003x.
+Table 3-16. Mux Legend
+Color Description
+mux function common for both devices
+mux function applicable only for F28004x
+mux function applicable only for F28003x
+Table 3-17. GPIO Mux Table Comparison
+0, 4, 8, 12 1 2 3 5 6 7 9 10 11 13 14 15 ALT
+GPIO0 EPWM1_A I2CA_SDA SPIA_STE FSIRXA_CLK MCAN_RX CLB_OUTPUTX
+BAR8 EQEP1_INDEX HIC_D7 HIC_BASESEL1
+GPIO1 EPWM1_B I2CA_SCL SPIA_SOMI MCAN_TX CLB_OUTPUTX
+BAR7 HIC_A2 FSITXA_TDM_D
+1
+HIC_D10
+GPIO2 EPWM2_A OUTPUTXBAR1 PMBUSA_SDA SPIA_SIMO SCIA_TX FSIRXA_D1 I2CB_SDA HIC_A1 CANA_TX HIC_D9
+GPIO3 EPWM2_B OUTPUTXBAR2 OUTPUTXBAR2 PMBUSA_SCL SPIA_CLK SCIA_RX FSIRXA_D0 I2CB_SCL HIC_NOE CANA_RX HIC_D4
+GPIO4 EPWM3_A MCAN_TX OUTPUTXBAR3 CANA_TX SPIB_CLK EQEP2_STROB
+E
+FSIRXA_CLK CLB_OUTPUTX
+BAR6 HIC_BASESEL2 HIC_NWE
+GPIO5 EPWM3_B OUTPUTXBAR3 MCAN_RX CANA_RX SPIA_STE FSITXA_D1 CLB_OUTPUTX
+BAR5 HIC_A7 HIC_D4 HIC_D15
+GPIO6 EPWM4_A OUTPUTXBAR4 SYNCOUT EQEP1_A CANB_TX SPIB_SOMI FSITXA_D0 FSITXA_D1 HIC_NBE1 CLB_OUTPUTX
+BAR8 HIC_D14
+GPIO7 EPWM4_B OUTPUTXBAR5 EQEP1_B CANB_RX SPIB_SIMO FSITXA_CLK CLB_OUTPUTX
+BAR2 HIC_A6 HIC_D14
+GPIO8 EPWM5_A CANB_TX ADCSOCAO EQEP1_STROB
+E
+SCIA_TX SPIA_SIMO I2CA_SCL FSITXA_D1 CLB_OUTPUTX
+BAR5 HIC_A0 FSITXA_TDM_C
+LK HIC_D8
+GPIO9 EPWM5_B SCIB_TX OUTPUTXBAR6 EQEP1_INDEX SCIA_RX SPIA_CLK FSITXA_D0 LINB_RX HIC_BASESEL0 I2CB_SCL HIC_NRDY
+GPIO10 EPWM6_A CANB_RX ADCSOCBO EQEP1_A SCIB_TX SPIA_SOMI I2CA_SDA FSITXA_CLK LINB_TX HIC_NWE FSITXA_TDM_D
+0
+CLB_OUTPUTX
+BAR4
+GPIO11 EPWM6_B SCIB_RX OUTPUTXBAR7 EQEP1_B SCIB_RX SPIA_STE FSIRXA_D1 LINB_RX EQEP2_A SPIA_SIMO HIC_D6 HIC_NBE0
+GPIO12 EPWM7_A CANB_TX MCAN_RX EQEP1_STROB
+E
+SCIB_TX PMBUSA_CTL FSIRXA_D0 LINB_TX SPIA_CLK CANA_RX HIC_D13 HIC_INT
+GPIO13 EPWM7_B CANB_RX MCAN_TX EQEP1_INDEX SCIB_RX PMBUSA_ALER
+T
+FSIRXA_CLK LINB_RX SPIA_SOMI CANA_TX HIC_D11 HIC_D5
+GPIO14 EPWM8_A SCIB_TX I2CB_SDA OUTPUTXBAR3 PMBUSA_SDA SPIB_CLK EQEP2_A LINB_TX EPWM3_A CLB_OUTPUTX
+BAR7 HIC_D15
+GPIO15 EPWM8_B SCIB_RX I2CB_SCL OUTPUTXBAR4 PMBUSA_SCL SPIB_STE EQEP2_B LINB_RX EPWM3_B CLB_OUTPUTX
+BAR6 HIC_D12
+GPIO16 SPIA_SIMO CANB_TX OUTPUTXBAR7 EPWM5_A SCIA_TX SD1_D1 EQEP1_STROB
+E
+PMBUSA_SCL XCLKOUT EQEP2_B SPIB_SOMI HIC_D1
+GPIO17 SPIA_SOMI CANB_RX OUTPUTXBAR8 EPWM5_B SCIA_RX SD1_C1 EQEP1_INDEX PMBUSA_SDA CANA_TX HIC_D2
+GPIO18_X2 SPIA_CLK SCIB_TX CANA_RX EPWM6_A I2CA_SCL SD1_D2 EQEP2_A PMBUSA_CTL XCLKOUT LINB_TX FSITXA_TDM_C
+LK HIC_INT X2
+GPIO19_X1 SPIA_STE SCIB_RX CANA_TX EPWM6_B I2CA_SDA SD1_C2 EQEP2_B PMBUSA_ALER
+T
+CLB_OUTPUTX
+BAR1 LINB_RX FSITXA_TDM_D
+0
+HIC_NBE0 X1
+GPIO20 EQEP1_A SPIB_SIMO SD1_D3 MCAN_TX
+GPIO21 EQEP1_B SPIB_SOMI SD1_C3 MCAN_RX
+Feature Differences for System Consideration www.ti.com
+26 Migration Between TMS320F28004x and TMS320F28003x SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 27 ===
+Table 3-17. GPIO Mux Table Comparison (continued)
+0, 4, 8, 12 1 2 3 5 6 7 9 10 11 13 14 15 ALT
+GPIO22 EQEP1_STROB
+E
+SCIB_TX SPIB_CLK SD1_D4 LINA_TX CLB_OUTPUTX
+BAR1 LINB_TX HIC_A5 EPWM4_A HIC_D13 VFBS
+W
+GPIO23 EQEP1_INDEX SCIB_RX SPIB_STE SD1_C4 LINA_RX CLB_OUTPUTX
+BAR3 LINB_RX HIC_A3 EPWM4_B HIC_D11 VSW
+GPIO24 OUTPUTXBAR1 EQEP2_A EPWM8_A SPIB_SIMO
+SD1_D1
+LINB_TX PMBUSA_SCL SCIA_TX ERRORSTS HIC_D3
+SD2_D1
+GPIO25 OUTPUTXBAR2 EQEP2_B EQEP1_A SPIB_SOMI
+SD1_C1
+FSITXA_D1 PMBUSA_SDA SCIA_RX HIC_BASESEL0
+SD2_C1
+GPIO26 OUTPUTXBAR3 EQEP2_INDEX OUTPUTXBAR3 SPIB_CLK
+SD1_D2
+FSITXA_D0 PMBUSA_CTL I2CA_SDA HIC_D0 HIC_A1
+SD2_D2
+GPIO27 OUTPUTXBAR4 EQEP2_STROB
+E
+OUTPUTXBAR4 SPIB_STE
+SD1_C2
+FSITXA_CLK PMBUSA_ALER
+T
+I2CA_SCL HIC_D1 HIC_A4
+SD2_C2
+GPIO28 SCIA_RX EPWM7_A OUTPUTXBAR5 EQEP1_A
+SD1_D3 EQEP2_STROB
+E
+LINA_TX SPIB_CLK ERRORSTS I2CB_SDA HIC_NOE
+SD2_D3
+GPIO29 SCIA_TX EPWM7_B OUTPUTXBAR6 EQEP1_B
+SD1_C3
+EQEP2_INDEX LINA_RX SPIB_STE ERRORSTS I2CB_SCL HIC_NCS
+AUX
+CLKI
+SD2_C3 N
+GPIO30 CANA_RX SPIB_SIMO OUTPUTXBAR7 EQEP1_STROB
+E
+SD1_D4
+FSIRXA_CLK MCAN_RX EPWM1_A HIC_D8
+SD2_D4
+GPIO31 CANA_TX SPIB_SOMI OUTPUTXBAR8 EQEP1_INDEX
+SD1_C4
+FSIRXA_D1 MCAN_TX EPWM1_B HIC_D10
+SD2_C4
+GPIO32 I2CA_SDA SPIB_CLK EPWM8_B LINA_TX
+SD1_D3
+FSIRXA_D0 CANA_TX PMBUSA_SDA ADCSOCBO HIC_INT
+SD1_D2
+GPIO33 I2CA_SCL SPIB_STE OUTPUTXBAR4 LINA_RX
+SD1_C3
+FSIRXA_CLK CANA_RX EQEP2_B ADCSOCAO SD1_C1 HIC_D0
+SD1_C2
+GPIO34 OUTPUTXBAR1 PMBUSA_SDA HIC_NBE1 I2CB_SDA HIC_D9
+GPIO35 SCIA_RX I2CA_SDA CANA_RX PMBUSA_SCL LINA_RX EQEP1_A PMBUSA_CTL EPWM5_B SD2_C1 HIC_NWE TDI
+GPIO37 OUTPUTXBAR2 I2CA_SCL SCIA_TX CANA_TX LINA_TX EQEP1_B PMBUSA_ALER
+T
+HIC_NRDY TDO
+GPIO39
+CANB_RX
+FSIRXA_CLK EQEP2_INDEX CLB_OUTPUTX
+BAR2 SYNCOUT EQEP1_INDEX HIC_D7
+MCAN_RX
+GPIO40 SPIB_SIMO EPWM2_B PMBUSA_SDA FSIRXA_D0 SCIB_TX EQEP1_A LINB_TX HIC_NBE1 HIC_D5
+GPIO41 EPWM2_A PMBUSA_SCL FSIRXA_D1 SCIB_RX EQEP1_B LINB_RX HIC_A4 SPIB_SOMI HIC_D12
+GPIO42 LINA_RX OUTPUTXBAR5 PMBUSA_CTL I2CA_SDA EQEP1_STROB
+E
+CLB_OUTPUTX
+BAR3 HIC_D2 HIC_A6
+GPIO43 OUTPUTXBAR6 PMBUSA_ALER
+T
+I2CA_SCL PMBUSA_ALER
+T
+EQEP1_INDEX CLB_OUTPUTX
+BAR4 SD2_D3 HIC_D3 HIC_A7
+GPIO44 OUTPUTXBAR7 EQEP1_A PMBUSA_SDA FSITXA_CLK PMBUSA_CTL CLB_OUTPUTX
+BAR3 FSIRXA_D0 HIC_D7 LINB_TX HIC_D5
+GPIO45 OUTPUTXBAR8 FSITXA_D0 PMBUSA_ALER
+T
+CLB_OUTPUTX
+BAR4 SD2_C3 HIC_D6
+GPIO46 LINA_TX MCAN_TX FSITXA_D1 PMBUSA_SDA SD2_C4 HIC_NWE
+GPIO47 LINA_RX MCAN_RX CLB_OUTPUTX
+BAR2 PMBUSA_SCL SD2_D4 HIC_A6 FSITXA_TDM_C
+LK
+GPIO48 OUTPUTXBAR3 CANA_TX SCIA_TX SD1_D1 PMBUSA_SDA HIC_A7 FSITXA_D0
+www.ti.com Feature Differences for System Consideration
+SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Migration Between TMS320F28004x and TMS320F28003x 27
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 28 ===
+Table 3-17. GPIO Mux Table Comparison (continued)
+0, 4, 8, 12 1 2 3 5 6 7 9 10 11 13 14 15 ALT
+GPIO49 OUTPUTXBAR4 CANA_RX SCIA_RX SD1_C1 LINA_RX SD2_D1 HIC_D2 FSITXA_D1
+GPIO50 EQEP1_A MCAN_TX SPIB_SIMO SD1_D2 I2CB_SDA SD2_D2 HIC_D3 FSITXA_CLK
+GPIO51 EQEP1_B MCAN_RX SPIB_SOMI SD1_C2 I2CB_SCL SD2_D3 HIC_D6 FSIRXA_D1
+GPIO52 EQEP1_STROB
+E
+CLB_OUTPUTX
+BAR5 SPIB_CLK SD1_D3 SYNCOUT SD2_D4 HIC_NWE FSIRXA_CLK
+GPIO53 EQEP1_INDEX CLB_OUTPUTX
+BAR6 SPIB_STE SD1_C3 ADCSOCAO CANA_RX SD1_C1
+GPIO54 SPIA_SIMO EQEP2_A OUTPUTXBAR2 SD1_D4 ADCSOCBO LINB_TX SD1_C2 FSITXA_TDM_D
+1
+HIC_A0
+GPIO55 SPIA_SOMI EQEP2_B OUTPUTXBAR3 SD1_C4 ERRORSTS LINB_RX SD1_C3 FSIRXA_D0
+GPIO56 SPIA_CLK MCAN_TX EQEP2_STROB
+E
+SCIB_TX
+SD1_D3
+SPIB_SIMO CLB_OUTPUTX
+BAR7 EQEP1_A SD1_C4 FSIRXA_D1 HIC_D6
+SD2_D1
+GPIO57 SPIA_STE MCAN_RX EQEP2_INDEX SCIB_RX
+SD1_C3
+SPIB_SOMI CLB_OUTPUTX
+BAR8 EQEP1_B FSIRXA_CLK HIC_D4
+SD2_C1
+GPIO58 OUTPUTXBAR1 SPIB_CLK
+SD1_D4
+LINA_TX
+CANB_TX EQEP1_STROB
+E
+SD2_C2 FSIRXA_D0 HIC_NRDY
+SD2_D2 CANA_TX
+GPIO59 OUTPUTXBAR2 SPIB_STE
+SD1_C4
+LINA_RX
+CANB_RX
+EQEP1_INDEX SD2_C3 FSITXA_TDM_D
+1 SD2_C2 CANA_RX
+GPIO60 MCAN_TX OUTPUTXBAR3 SPIB_SIMO SD2_D3 SD2_C4 HIC_A0
+GPIO61 FSIRXA_CLK MCAN_RX SD2_C3 CANA_RX
+AIO224 SD2_D3 HIC_A3
+AIO225 SD2_C2 HIC_NWE
+AIO226 SD2_D4 HIC_A1
+AIO227 SD1_C3 HIC_NBE0
+AIO228 SD2_C1 HIC_A0
+AIO229
+AIO230 SD1_C4 HIC_BASESEL2
+AIO231 SD1_C1 HIC_BASESEL1
+AIO232 SD1_D4 HIC_BASESEL0
+AIO233 SD2_D1 HIC_A4
+AIO236
+AIO237 SD1_D2 HIC_A6
+AIO238 SD2_C3 HIC_NCS
+AIO239 SD1_D1 HIC_A5
+AIO240 SD2_C1 HIC_NBE1
+AIO241 SD2_C1 HIC_NBE1
+AIO242 SD2_D2 HIC_A2
+AIO244 SD1_D3 HIC_A7
+AIO245 SD1_C2 HIC_NOE
+AIO247
+AIO248
+AIO249
+Feature Differences for System Consideration www.ti.com
+28 Migration Between TMS320F28004x and TMS320F28003x SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 29 ===
+Table 3-17. GPIO Mux Table Comparison (continued)
+0, 4, 8, 12 1 2 3 5 6 7 9 10 11 13 14 15 ALT
+AIO251
+AIO252 SD2_C4
+AIO253
+3.9 Analog Multiplexing Changes
+Table 3-19 and Table 3-20 outline the differences and similarities that exist in the analog mux between F28003x and F28004x for the 100-Pin PZ and 
+64-Pin PM respectively. The legend for the tables is Table 3-18. The main changes are the absence of the PGA and the reduction of the number of 
+CMPSS modules in F28003x from the seven that exist in F28004x to four.
+Table 3-18. Mux Legend
+Color Description
+mux function common for both devices
+mux function applicable only for F28004x
+mux function applicable only for F28003x
+Table 3-19. F28004x and F28003x 100-Pin PZ Analog Mux Table Differences
+(F28004x Pin Name) F28004x 
+Group Name
+PKG Always Connected (NO MUX) Comparator Subsystem (MUX)
+F28003x Pin Name 100 PZ ADCA ADCB ADCC PGA DAC High Positive High Negative Low Positive Low Negative AIO Input
+( VREFHIA ) VREFHIABC - 25
+( VREFHIB, VREFHIC ) 
+VREFHIABC
+24
+( VREFLOA ) VREFLOABC - 27 A13
+( VREFLOB, VREFLOC ) 
+VREFLOABC
+26 B13
+C13
+F28004x Analog Group 1 F28004x CMP1
+( A3 ) G1_ADCAB 10 A3 HPMXSEL = 3 HNMXSEL = 0 LPMXSEL = 3 LNMXSEL = 0 AIO233
+( A2/B6/PGA1_OF ) PGA1_OF 9 A2 B6 PGA1_OF HPMXSEL = 0 LPMXSEL = 0 AIO224
+( C0 ) G1_ADCC 19 A14 B14 C0 HPMXSEL = 1 HNMXSEL = 1 LPMXSEL = 1 LNMXSEL = 1 AIO237
+A14/B14/C4 C4 CMP3_HPMXSEL = 4 CMP3_LPMXSEL = 4 AIO239
+( PGA1_IN ) PGA1_IN 18 A3 B9 C7 PGA1_IN HPMXSEL = 2 LPMXSEL = 2 AIO229
+A3, B9, C7 CMP3_HPMXSEL = 5 CMP3_LPMXSEL = 5
+( PGA1_GND ) PGA1_GND 14 A6 PGA1_GND HPMXSEL = 2 LPMXSEL = 2 AIO228
+A6
+( - ) PGA1_OUT A11 B7 PGA1_OUT HPMXSEL = 4 LPMXSEL = 4
+F28004x Analog Group 2 F28004x CMP2
+( A5 ) G2_ADCAB 35 A5 HPMXSEL = 3 HNMXSEL = 0 LPMXSEL = 3 LNMXSEL = 0 AIO234
+A5 HPMXSEL = 5 LPMXSEL = 5 AIO249
+( A4/B8/PGA2_OF ) PGA2_OF 36 A4 B8 PGA2_OF HPMXSEL = 0 LPMXSEL = 0 AIO225
+A4/B8
+( C1 ) G2_ADCC 29 C1 HPMXSEL = 1 HNMXSEL = 1 LPMXSEL = 1 LNMXSEL = 1 AIO238
+C1 CMP4_HPMXSEL = 2 CMP4_LPMXSEL = 2 AIO248
+www.ti.com Feature Differences for System Consideration
+SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Migration Between TMS320F28004x and TMS320F28003x 29
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 30 ===
+Table 3-19. F28004x and F28003x 100-Pin PZ Analog Mux Table Differences (continued)
+(F28004x Pin Name) F28004x 
+Group Name
+PKG Always Connected (NO MUX) Comparator Subsystem (MUX)
+F28003x Pin Name 100 PZ ADCA ADCB ADCC PGA DAC High Positive High Negative Low Positive Low Negative AIO Input
+( PGA2_IN ) PGA2_IN 30 PGA2_IN HPMXSEL = 2 LPMXSEL = 2
+B11 B11 CMP4_HPMXSEL = 5 CMP4_LPMXSEL = 5 AIO251
+( PGA2_GND ) PGA2_GND 32 B5 PGA2_GND CMP1_HPMXSEL = 5 CMP1_LPMXSEL = 5 AIO252
+B5
+( - ) PGA2_OUT A12 B9 PGA2_OUT HPMXSEL = 4 LPMXSEL = 4
+F28004x Analog Group 3 F28004x CMP3
+( B3/VDAC ) G3_ADCAB 8 B3 VDAC HPMXSEL = 3 HNMXSEL = 0 LPMXSEL = 3 LNMXSEL = 0 AIO242
+( B2/C6/PGA3_OF ) PGA3_OF 7 B2 C6 PGA3_OF HPMXSEL = 0 LPMXSEL = 0 AIO226
+( C2 ) G3_ADCC 21 B12 C2 HPMXSEL = 1 HNMXSEL = 1 LPMXSEL = 1 LNMXSEL = 1 AIO244
+B12/C2
+( PGA3_IN ) PGA3_IN 20 A11 B10 C0 PGA3_IN HPMXSEL = 2 CMP1_HNMXSEL = 1 LPMXSEL = 2 CMP1_LNMXSEL = 1 AIO237
+A11, B10, C0 CMP1_HPMXSEL = 1 CMP1_LPMXSEL = 1
+( PGA3_GND ) PGA3_GND 15 B2 C6 PGA3_GND HPMXSEL = 0 LPMXSEL = 0 AIO226
+B2, C6
+( - ) PGA3_OUT B10 PGA3_OUT HPMXSEL = 4 LPMXSEL = 4
+F28004x Analog Group 4 F28004x CMP4
+( B5 ) G4_ADCAB B5 HPMXSEL = 3 HNMXSEL = 0 LPMXSEL = 3 LNMXSEL = 0 AIO243
+( B4/C8/PGA4_OF ) PGA4_OF 39 B4 C8 PGA4_OF HPMXSEL = 0 LPMXSEL = 0 AIO227
+B4/C8 AIO236
+( C3 ) G4_ADCC 31 A7 C3 HPMXSEL = 1 HNMXSEL = 1 LPMXSEL = 1 LNMXSEL = 1 AIO245
+A7, C3
+( PGA4_IN ) PGA4_IN PGA4_IN HPMXSEL = 2 LPMXSEL = 2
+( PGA4_GND ) PGA4_GND 32 PGA4_GND
+( - ) PGA4_OUT B11 C9 PGA4_OUT HPMXSEL = 4 LPMXSEL = 4
+F28004x Analog Group 5 F28004x CMP5
+( A7 ) G5_ADCAB A7 HPMXSEL = 3 HNMXSEL = 0 LPMXSEL = 3 LNMXSEL = 0 AIO235
+( A6/PGA5_OF ) PGA5_OF 6 A6 PGA5_OF HPMXSEL = 0 LPMXSEL = 0 AIO228
+( C4 ) G5_ADCC 17 A2 B6 C4 HPMXSEL = 1 HNMXSEL = 1 LPMXSEL = 1 LNMXSEL = 1 AIO239
+A2/B6/C9 C9 CMP1_HPMXSEL = 0 CMP1_LPMXSEL = 0 AIO224
+( PGA5_IN ) PGA5_IN 16 B3 PGA5_IN VDAC HPMXSEL = 2 CMP3_HNMXSEL = 0 LPMXSEL = 2 CMP3_LNMXSEL = 0 AIO242
+B3, VDAC CMP3_HPMXSEL = 0 CMP3_LPMXSEL = 0
+( PGA5_GND ) PGA5_GND 13 PGA5_GND
+( - ) PGA5_OUT A14 PGA5_OUT HPMXSEL = 4 LPMXSEL = 4
+F28004x Analog Group 6 F28004x CMP6
+( A9 ) G6_ADCAB 38 A9 HPMXSEL = 3 HNMXSEL = 0 LPMXSEL = 3 LNMXSEL = 0 AIO236
+A9 CMP2_HPMXSEL = 2 CMP2_LPMXSEL = 2 AIO227
+( A8/PGA6_OF ) PGA6_OF 37 A8 PGA6_OF HPMXSEL = 0 LPMXSEL = 0 AIO229
+A8 CMP4_HPMXSEL = 4 CMP4_LPMXSEL = 4 AIO240
+( C5 ) G6_ADCC 28 A12 C5 HPMXSEL = 1 HNMXSEL = 1 LPMXSEL = 1 LNMXSEL = 1 AIO240
+A12/C5 CMP2_HPMXSEL = 1 CMP2_HNMXSEL = 1 CMP2_LPMXSEL = 1 CMP2_LNMXSEL = 1 AIO238
+( PGA6_IN ) PGA6_IN PGA6_IN HPMXSEL = 2 LPMXSEL = 2
+Feature Differences for System Consideration www.ti.com
+30 Migration Between TMS320F28004x and TMS320F28003x SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 31 ===
+Table 3-19. F28004x and F28003x 100-Pin PZ Analog Mux Table Differences (continued)
+(F28004x Pin Name) F28004x 
+Group Name
+PKG Always Connected (NO MUX) Comparator Subsystem (MUX)
+F28003x Pin Name 100 PZ ADCA ADCB ADCC PGA DAC High Positive High Negative Low Positive Low Negative AIO Input
+( PGA6_GND ) PGA6_GND 32 PGA6_GND
+( - ) PGA6_OUT A15 PGA6_OUT HPMXSEL = 4 LPMXSEL = 4
+F28004x Analog Group 7 F28004x CMP7
+( B0 ) G7_ADCAB 41 B0 C11 HPMXSEL = 3 HNMXSEL = 0 LPMXSEL = 3 LNMXSEL = 0 AIO241
+B0, C11 CMP2_HPMXSEL = 4 CMP2_LPMXSEL = 4 AIO253
+( A10/B1/C10/PGA7_OF ) PGA7_OF 40 A10 B1 C10 PGA7_OF HPMXSEL = 0 CMP2_HNMXSEL = 0 LPMXSEL = 0 CMP2_LNMXSEL = 0 AIO230
+A10/B1/C10 CMP2_HPMXSEL = 3 CMP2_LPMXSEL = 3
+( C14 ) G7_ADCC 44 C14 HPMXSEL = 1 HNMXSEL = 1 LPMXSEL = 1 LNMXSEL = 1 AIO246
+( PGA7_IN ) PGA7_IN 43 PGA7_IN HPMXSEL = 2 LPMXSEL = 2
+( PGA7_GND ) PGA7_GND 42 C14 PGA7_GND CMP4_HPMXSEL = 3 CMP4_HNMXSEL = 0 CMP4_LPMXSEL = 3 CMP4_LNMXSEL = 0 AIO247
+C14
+( - ) PGA7_OUT B12 C11 PGA7_OUT HPMXSEL = 4 LPMXSEL = 4
+Other F28004x Analog
+( A0/B15/C15/DACA_OUT ) 23 A0 B15 C15 DACA_OUT CMP3_HPMXSEL = 2 CMP3_LPMXSEL = 2 AIO231
+A0/B15/C15/DACA_OUT
+( A1/DACB_OUT ) 22 A1 B7 DACB_OUT CMP1_HPMXSEL = 4 CMP1_LPMXSEL = 4 AIO232
+A1/B7/DACB_OUT
+( C12 ) C12 AIO247
+- TempSensor B14 C12
+Table 3-20. F28004x and F28003x 64-Pin PM Analog Mux Table Differences
+(F28004x Pin Name) F28004x 
+Group Name
+PKG Always Connected (NO MUX) Comparator Subsystem (MUX)
+F28003x Pin Name 64 PM ADCA ADCB ADCC PGA DAC High Positive High Negative Low Positive Low Negative AIO Input
+( VREFHIA, VREFHIB, 
+VREFHIC ) VREFHIABC
+- 16
+( VREFLOA, VREFLOB, 
+VREFLOC ) VREFLOABC
+- 17 A13
+B13
+C13
+F28004x Analog Group 1 F28004x CMP1
+( A3 ) G1_ADCAB A3 HPMXSEL = 3 HNMXSEL = 0 LPMXSEL = 3 LNMXSEL = 0 AIO233
+( A2/B6/PGA1_OF ) PGA1_OF 9 A2 B6 C9 PGA1_OF HPMXSEL = 0 LPMXSEL = 0 AIO224
+A2/B6/C9
+( C0 ) G1_ADCC 12 A11 B10 C0 HPMXSEL = 1 HNMXSEL = 1 LPMXSEL = 1 LNMXSEL = 1 AIO237
+A11/B10/C0
+( PGA1_IN ) PGA1_IN PGA1_IN HPMXSEL = 2 LPMXSEL = 2
+( PGA1_GND ) PGA1_GND 10 A15 B9 C7 PGA1_GND HPMXSEL = 3 HNMXSEL = 0 LPMXSEL = 3 LNMXSEL = 0 AIO233
+A15/B9/C7
+( - ) PGA1_OUT A11 B7 PGA1_OUT HPMXSEL = 4 LPMXSEL = 4
+F28004x Analog Group 2 F28004x CMP2
+( A5 ) G2_ADCAB A5 HPMXSEL = 3 HNMXSEL = 0 LPMXSEL = 3 LNMXSEL = 0 AIO234
+www.ti.com Feature Differences for System Consideration
+SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Migration Between TMS320F28004x and TMS320F28003x 31
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 32 ===
+Table 3-20. F28004x and F28003x 64-Pin PM Analog Mux Table Differences (continued)
+(F28004x Pin Name) F28004x 
+Group Name
+PKG Always Connected (NO MUX) Comparator Subsystem (MUX)
+F28003x Pin Name 64 PM ADCA ADCB ADCC PGA DAC High Positive High Negative Low Positive Low Negative AIO Input
+( A4/B8/PGA2_OF ) PGA2_OF 23 A4 B8 C14 PGA2_OF HPMXSEL = 0 CMP4_HNMXSEL = 0 LPMXSEL = 0 CMP4_LNMXSEL = 0 AIO225
+A4/B8/C14 CMP4_HPMXSEL = 3 CMP4_LPMXSEL = 3
+( C1 ) G2_ADCC 18 A12 C1 HPMXSEL = 1 HNMXSEL = 1 LPMXSEL = 1 LNMXSEL = 1 AIO238
+A12/C1 CMP4_HPMXSEL = 2 CMP4_LPMXSEL = 2 AIO248
+( PGA2_IN ) PGA2_IN PGA2_IN HPMXSEL = 2 LPMXSEL = 2
+( PGA2_GND ) PGA2_GND 20 A8 B0 C11 PGA2_GND HPMXSEL = 4 LPMXSEL = 4 AIO241
+A8/B0/C11 CMP4_HPMXSEL = 4 CMP4_LPMXSEL = 4
+( - ) PGA2_OUT A12 B9 PGA2_OUT HPMXSEL = 4 LPMXSEL = 4
+F28004x Analog Group 3 F28004x CMP3
+( B3/VDAC ) G3_ADCAB 8 A3 B3 C5 VDAC HPMXSEL = 3 HNMXSEL = 0 LPMXSEL = 3 LNMXSEL = 0 AIO242
+A3/B3/C5/VDAC HPMXSEL = 5 LPMXSEL = 5
+( B2/C6/PGA3_OF ) PGA3_OF 7 B2 C6 PGA3_OF HPMXSEL = 0 LPMXSEL = 0 AIO226
+B2/C6
+( C2 ) G3_ADCC 13 A5 B12 C2 HPMXSEL = 1 HNMXSEL = 1 LPMXSEL = 1 LNMXSEL = 1 AIO244
+A5/B12/C2 CMP2_HPMXSEL = 5 CMP2_LPMXSEL = 5
+( PGA3_IN ) PGA3_IN PGA3_IN HPMXSEL = 2 LPMXSEL = 2
+( PGA3_GND ) PGA3_GND 10 PGA3_GND
+( - ) PGA3_OUT B10 PGA3_OUT HPMXSEL = 4 LPMXSEL = 4
+F28004x Analog Group 4 F28004x CMP4
+( B5 ) G4_ADCAB B5 HPMXSEL = 3 HNMXSEL = 0 LPMXSEL = 3 LNMXSEL = 0 AIO243
+( B4/C8/PGA4_OF ) PGA4_OF 24 A9 B4 C8 PGA4_OF HPMXSEL = 0 LPMXSEL = 0 AIO227
+A9/B4/C8 CMP2_HPMXSEL = 2 CMP2_LPMXSEL = 2 AIO236
+( C3 ) G4_ADCC 19 A7 C3 HPMXSEL = 1 HNMXSEL = 1 LPMXSEL = 1 LNMXSEL = 1 AIO245
+A7/C3
+( PGA4_IN ) PGA4_IN PGA4_IN HPMXSEL = 2 LPMXSEL = 2
+( PGA4_GND ) PGA4_GND 20 PGA4_GND
+( - ) PGA4_OUT B11 C9 PGA4_OUT HPMXSEL = 4 LPMXSEL = 4
+F28004x Analog Group 5 F28004x CMP5
+( A7 ) G5_ADCAB A7 HPMXSEL = 3 HNMXSEL = 0 LPMXSEL = 3 LNMXSEL = 0 AIO235
+( A6/PGA5_OF ) PGA5_OF 6 A6 PGA5_OF HPMXSEL = 0 LPMXSEL = 0 AIO228
+A6 CMP1_HPMXSEL = 2 CMP1_LPMXSEL = 2
+( C4 ) G5_ADCC 11 A14 B14 C4 HPMXSEL = 1 HNMXSEL = 1 LPMXSEL = 1 LNMXSEL = 1 AIO239
+A14/B14/C4 CMP3_HPMXSEL = 4 CMP3_LPMXSEL = 4
+( PGA5_IN ) PGA5_IN PGA5_IN HPMXSEL = 2 LPMXSEL = 2
+( PGA5_GND ) PGA5_GND 10 PGA5_GND
+( - ) PGA5_OUT A14 PGA5_OUT HPMXSEL = 4 LPMXSEL = 4
+F28004x Analog Group 6 F28004x CMP6
+( A9 ) G6_ADCAB A9 HPMXSEL = 3 HNMXSEL = 0 LPMXSEL = 3 LNMXSEL = 0 AIO236
+( A8/PGA6_OF ) PGA6_OF A8 PGA6_OF HPMXSEL = 0 LPMXSEL = 0 AIO229
+( C5 ) G6_ADCC C5 HPMXSEL = 1 HNMXSEL = 1 LPMXSEL = 1 LNMXSEL = 1 AIO240
+( PGA6_IN ) PGA6_IN PGA6_IN HPMXSEL = 2 LPMXSEL = 2
+Feature Differences for System Consideration www.ti.com
+32 Migration Between TMS320F28004x and TMS320F28003x SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 33 ===
+Table 3-20. F28004x and F28003x 64-Pin PM Analog Mux Table Differences (continued)
+(F28004x Pin Name) F28004x 
+Group Name
+PKG Always Connected (NO MUX) Comparator Subsystem (MUX)
+F28003x Pin Name 64 PM ADCA ADCB ADCC PGA DAC High Positive High Negative Low Positive Low Negative AIO Input
+( PGA6_GND ) PGA6_GND 20 PGA6_GND
+( - ) PGA6_OUT A15 PGA6_OUT HPMXSEL = 4 LPMXSEL = 4
+F28004x Analog Group 7 F28004x CMP7
+( B0 ) G7_ADCAB B0 HPMXSEL = 3 HNMXSEL = 0 LPMXSEL = 3 LNMXSEL = 0 AIO241
+( A10/B1/C10/PGA7_OF ) PGA7_OF 25 A10 B1 C10 PGA7_OF HPMXSEL = 0 CMP2_HNMXSEL = 0 LPMXSEL = 0 CMP2_LNMXSEL = 0 AIO230
+A10/B1/C10 CMP2_HPMXSEL = 3 CMP2_LPMXSEL = 3
+( C14 ) G7_ADCC C14 HPMXSEL = 1 HNMXSEL = 1 LPMXSEL = 1 LNMXSEL = 1 AIO246
+( PGA7_IN ) PGA7_IN PGA7_IN HPMXSEL = 2 LPMXSEL = 2
+( PGA7_GND ) PGA7_GND PGA7_GND
+( - ) PGA7_OUT B12 C11 PGA7_OUT HPMXSEL = 4 LPMXSEL = 4
+Other F28004x Analog
+( A0/B15/C15/DACA_OUT ) 15 A0 B15 C15 DACA_OUT CMP3_HPMXSEL = 2 CMP3_LPMXSEL = 2 AIO231
+A0/B15/C15/DACA_OUT
+( A1/DACB_OUT ) 14 A1 B7 DACB_OUT CMP1_HPMXSEL = 4 CMP1_LPMXSEL = 4 AIO232
+A1/B7/DACB_OUT
+( C12 ) C12 AIO247
+- TempSensor B14 C12
+www.ti.com Feature Differences for System Consideration
+SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Migration Between TMS320F28004x and TMS320F28003x 33
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 34 ===
+4 Application Code Migration From F28004x to F28003x
+The following section describes code changes when migrating from F28004x to F28003x. Software examples for 
+the new features in F28003x are also discussed in this section.
+4.1 C2000Ware Header Files
+Header files for both F28003x and F28004x devices are available in C2000Ware under the device_support sub 
+directory.
+4.2 Linker Command Files
+Linker command files for both F28003x and F28004x devices are available in C2000Ware under the 
+device_support sub directory. Specific to F28003x, which has to be compiled to the Embedded Application 
+Binary Interface (EABI) format, section names would also need to conform to the EABI standard. For more 
+details, see Table 6-1.
+4.3 Minimum Compiler Version Requirement for TMU Type 1
+Code Composer Studio™ (CCS) compiler version 18.12.0.LTS supports the new instruction sets for TMU Type1 
+new instruction sets.
+4.4 C2000Ware Examples
+C2000Ware has examples specific for both F28003x and F28004x devices.
+5 Specific Use Cases Related to F28003x New Features
+This section outlines the new examples in C2000Ware for the F28003x device to support the new features such 
+as HIC and FID/NLPID.
+5.1 HIC
+C2000Ware has example tests, hic_ex1, hic_ex2 and hic_ex3, that demonstrate the functionality of the HIC 
+module in F28003x device.
+5.2 FINTDIV
+C2000Ware has examples that demonstrate the functionality of fast integer division instructions for the F28003x 
+device.
+5.3 TMU Type1
+C2000Ware DCL under control libraries has examples that demonstrate the two new instructions (IEXP2F32 and 
+LOGF32) to support NLPID in the F28003x device.
+5.4 AES
+C2000Ware has examples that demonstrate the encryption and decryption capabilities of the AES module.
+5.5 MCAN
+C2000Ware has loopback, transmit and receive examples that illustrate MCAN operation.
+5.6 EPG
+C2000Ware has examples that demonstrate the functionality of the EPG module.
+6 EABI Support
+In the past, F28004x applications have always supported the Common Object File Format (COFF) binary 
+executable output. COFF has several limitations. One of which is that the symbolic debugging information is not 
+capable of supporting C/C++. There is also a limit on the maximum number of sections and length of section 
+names and source files, among other things. COFF is also not an industry standard. For these reasons, C2000 
+is now migrating to Embedded Application Binary Interface (EABI) format. EABI and COFF are incompatible 
+and conversion between the two formats is not possible. This section provides summary of COFF and EABI 
+differences and useful links that provide more guidelines in migrating applications from COFF to EABI.
+Application Code Migration From F28004x to F28003x www.ti.com
+34 Migration Between TMS320F28004x and TMS320F28003x SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 35 ===
+• EABI key differences with COFF:
+– Direct initialization
+• Uninitialized data is zero by default in EABI.
+• Initialization of RW data is accomplished via linker-generated compressed copy tables in EABI.
+– C++ language support
+• C++ inline function semantics: In COFF, inline functions are treated as static inline and this causes 
+issues for functions that cannot be inlined or have static data. In EABI, inline functions without the 
+‘static’ qualifier have external linkage.
+• Better template instantiation: COFF uses a method called late template instantiation and EABI uses 
+early template instantiation. Late template instantiation can run into issues with library code and can 
+result in long link times. Early instantiation uses ELF COMDAT to guarantee templates are always 
+instantiated properly and at most one version of each instantiation is present in the final executable.
+• Table-Driven Exception Handling (TDEH): Almost zero impact on code performance as opposed to 
+COFF which uses setjmp/longjmp to implement C++ exceptions Features enabled by EABI.
+– Features enabled by EABI
+• Location attribute: Specify the run-time address of a symbol in C-source code.
+• Noinit/persistent attribute: Specify if a symbol should not be initialized during C auto initialization.
+• Weak attribute: Weak symbol definitions are pre-empted by strong definitions. Weak symbol references 
+are not required to be resolved at link time. Unresolved weak symbols resolve to 0.
+• External aliases: In COFF, the compiler will make A an alias to B if all calls to A can be replaced with B. 
+A and B must be defined in the same file. In EABI, the compiler will make A an alias to B even if B is 
+external.
+– Calling convention
+• Scalar calling convention is identical between COFF and EABI
+• Struct calling convention (EABI)
+– Single field structs are passed/returned by value corresponding to the underlying scalar types.
+– For FPU32, homogenous float structs with size less than 128 bits will be passed by value.
+– Passed in R0H-R3H, then by value on the stack.
+– Structs that are passed by value are also candidates for register allocation.
+– For FPU64, the same applies for 64-bit doubles(R0-R3).
+– Double memory size
+• In EABI, double is 64-bit size while in COFF, double is still represented as 32-bit size.
+• C/C++ requires that double be able to represent integer types with at least 10 decimal digits, which 
+effectively requires 64-bit double precision.
+• Sections overview:
+Table 6-1 summarizes the section names for COFF and EABI. These are compiler-generated sections.
+Table 6-1. Section Names
+Description COFF EABI
+Read-Only Sections
+Const data .econst .const
+Const data above 22-bits .farconst .farconst
+Code .text .text
+Pre-main constructors .pinit .init_array
+Exception handling N/A .c28xabi.exidx/.c28xabi.extab
+Read-Write Sections
+Uninitialized data .ebss .bss
+Initialized data N/A .data
+Uninitialized data above 22-bits .farbss .farbss
+Initialized data above 22-bits N/A .fardata
+Heap .esysmem .sysmem
+www.ti.com EABI Support
+SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Migration Between TMS320F28004x and TMS320F28003x 35
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 36 ===
+Table 6-1. Section Names (continued)
+Description COFF EABI
+Stack .stack .stack
+CIO Buffer .cio .bss:cio
+• Resources:
+For more information regarding EABI and the migration process, see the resources on the links below:
+– Wiki: http://processors.wiki.ti.com/index.php/EABI
+– Wiki: http://processors.wiki.ti.com/index.php/C2000_EABI_Migration
+– C28 EABI Specifications: C28x embedded application binary interface (SPRAC71)
+6.1 Flash API
+F28004x has two Flash banks. F28003x has three Flash banks. Hence, the F28003x Flash API library 
+(FlashAPI_F28003x_FPU32.lib) supports erase, program and verify operations for the Flash Bank0, 1 and 2 
+address ranges. Compared to the F28004x Flash API library (F021_API_F28004x_FPU32.lib), the F28003x 
+Flash API is enhanced to return an error when an invalid address is provided for erase, blank-check, program 
+and verify functions. Also, the F28003x Flash API is enhanced to return an error when an invalid programming 
+mode is provided for program operation. Fapi_getLibraryInfo() in FlashAPI_F28003x_FPU32.lib returns the 
+Flash API minor version as 58 (F28004x Flash API returns 56 as the API minor version). The F28003x Flash API 
+library is compiled for EABI format, whereas, the F28004x Flash API library is compiled for legacy COFF. Note 
+that F28004x and F28003x have the same Bank0 and Bank1 memory map and sector sizes. Also, the Flash 
+wait-state configuration requirement is the same between the two devices. These features are summarized in 
+Table 6-2.
+Table 6-2. Flash API Differences
+Feature F28004x F28003x
+Library Name F021_API_F28004x_FPU32.lib FlashAPI_F28003x_FPU32.lib
+Library Executable Output COFF (with future EABI support) EABI
+Erase, Blank-check, Program and Verify Operation on two banks Operation on three banks
+Flash Wait States Same wait states on both devices
+FlashAPI Minor Version 56 58
+6.2 NoINIT Struct Fix (Linker Command)
+With EABI, the SECTIONS area of a linker command file has to be modified as shown in the example below 
+in order for the registers or memory areas to not be initialized to a zero value. This is important as failure to 
+make this modification can result to unintended behavior when register bits are forced to zero during start up. By 
+default, EABI initializes registers or memory areas defined in the SECTIONS part of the linker to zero.
+Linker modification example:
+SECTIONS
+{
+:
+Regs1File :> REG1_ADDR, type=NOINIT
+Regs2File :> REG2_ADDR, type=NOINIT
+:
+}
+6.3 Pre-Compiled Libraries
+All F28003x libraries supplied by TI will be released as EABI. Future F28003x libraries created by customers 
+should be generated and compiled as EABI as well.
+EABI Support www.ti.com
+36 Migration Between TMS320F28004x and TMS320F28003x SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 37 ===
+7 References
+• Texas Instruments: C28 EABI Specifications: C28x Embedded Application Binary Interface
+• EABI wiki
+• C2000 EABI Migration wiki
+• Texas Instruments: TMS320F28003x Microcontrollers Technical Reference Manual (SPRUIW9)
+• Texas Instruments: TMS320F2838x Microcontrollers Technical Reference Manual
+• Texas Instruments: TMS320F28003x Microcontrollers Data Sheet (SPRSP61)
+www.ti.com References
+SPRUIW3 – OCTOBER 2021
+Submit Document Feedback
+Migration Between TMS320F28004x and TMS320F28003x 37
+Copyright © 2021 Texas Instruments Incorporated
+
+=== PDF页 38 ===
+IMPORTANT NOTICE AND DISCLAIMER
+TI PROVIDES TECHNICAL AND RELIABILITY DATA (INCLUDING DATA SHEETS), DESIGN RESOURCES (INCLUDING REFERENCE 
+DESIGNS), APPLICATION OR OTHER DESIGN ADVICE, WEB TOOLS, SAFETY INFORMATION, AND OTHER RESOURCES “AS IS” 
+AND WITH ALL FAULTS, AND DISCLAIMS ALL WARRANTIES, EXPRESS AND IMPLIED, INCLUDING WITHOUT LIMITATION ANY 
+IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT OF THIRD 
+PARTY INTELLECTUAL PROPERTY RIGHTS.
+These resources are intended for skilled developers designing with TI products. You are solely responsible for (1) selecting the appropriate 
+TI products for your application, (2) designing, validating and testing your application, and (3) ensuring your application meets applicable 
+standards, and any other safety, security, regulatory or other requirements.
+These resources are subject to change without notice. TI grants you permission to use these resources only for development of an 
+application that uses the TI products described in the resource. Other reproduction and display of these resources is prohibited. No license 
+is granted to any other TI intellectual property right or to any third party intellectual property right. TI disclaims responsibility for, and you 
+will fully indemnify TI and its representatives against, any claims, damages, costs, losses, and liabilities arising out of your use of these 
+resources.
+TI’s products are provided subject to TI’s Terms of Sale or other applicable terms available either on ti.com or provided in conjunction with 
+such TI products. TI’s provision of these resources does not expand or otherwise alter TI’s applicable warranties or warranty disclaimers for 
+TI products.
+TI objects to and rejects any additional or different terms you may have proposed. IMPORTANT NOTICE
+Mailing Address: Texas Instruments, Post Office Box 655303, Dallas, Texas 75265
+Copyright © 2022, Texas Instruments Incorporated

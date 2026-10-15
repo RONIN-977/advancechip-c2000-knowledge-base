@@ -1,0 +1,331 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://D:\Users\Public\Documents\Altium\AD17\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">2025/7/10</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">14:11:25</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:02</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\dongy\Desktop\Company\%E8%BF%9B%E8%8A%AF\%E8%BF%9B%E8%8A%AF%E5%BC%80%E5%8F%91%E6%9D%BF\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0.PcbDoc" class="file"><acronym title="C:\Users\dongy\Desktop\Company\进芯\进芯开发板\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0.PcbDoc">C:\Users\dongy\Desktop\Company\进芯\进芯开发板\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">9</td></tr>
+</table>
+</td>
+</table><a name="ID4JSUZBYBWNYCKVRCPUPPQ4XCVHKLFLA5JA5UC1KDGNB4TOSD0OIO"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDY2OF2TKMZBV1NABKRV1TBDADHZG4E5WFCNYTNKH0LJL1WIK0LJM">Clearance Constraint (Gap=6mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDNWTKD2ESX4ATHYLRQS3TVHZ1VKHRJGFTQLYPOVB2FA1GGAZXD4XF">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDEOYQKJIWA1GCNA2WLEMC3EJBEJ3VWDGKRJZBYKOOG3YLFAEU4PBO">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDCKFFTQS4CQQUDRHNB2HZ0FNFGDT11J3QHKL0JHCQKPYQD5IIKASL">Width Constraint (Min=5mil) (Max=100mil) (Preferred=10mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDIJXVWMI12GMEFL1KWL3W0MTA0LWNDXPRYCY1JNBMVLUN2UHTQ2JI">Power Plane Connect Rule(Direct Connect )(Expansion=20mil) (Conductor Width=10mil) (Air Gap=10mil) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDUZ1U4Z1LUK3OGXCWPFRPXKTD0CWZLTN2HAINWOLMTDWW4S2VFRQP">Hole Size Constraint (Min=1mil) (Max=100mil) (All)</a></td>
+<td class="column2">9</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDUH3OJB2YAFU5TIHZ4D1QHBUBL3TIWOGVMQWB1DLHTF4HLWEYDLH">Height Constraint (Min=0mil) (Max=1000mil) (Prefered=500mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">9</td>
+</tr>
+</table><br><a name="IDUZ1U4Z1LUK3OGXCWPFRPXKTD0CWZLTN2HAINWOLMTDWW4S2VFRQP"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Hole Size Constraint (Min=1mil) (Max=100mil) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\dongy\Desktop\Company\%E8%BF%9B%E8%8A%AF\%E8%BF%9B%E8%8A%AF%E5%BC%80%E5%8F%91%E6%9D%BF\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3619.789mil|Location2.X=3747.023mil|Location1.Y=6763.785mil|Location2.Y=6891.019mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\dongy\Desktop\Company\进芯\进芯开发板\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3619.789mil|Location2.X=3747.023mil|Location1.Y=6763.785mil|Location2.Y=6891.019mil|Absolute=True">Hole Size Constraint: (125.984mil &gt; 100mil) Pad H3-1(196.851mil,3708.229mil) on Multi-Layer Actual Hole Size = 125.984mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\dongy\Desktop\Company\%E8%BF%9B%E8%8A%AF\%E8%BF%9B%E8%8A%AF%E5%BC%80%E5%8F%91%E6%9D%BF\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8671.764mil|Location2.X=8791.347mil|Location1.Y=4181.472mil|Location2.Y=4301.056mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\dongy\Desktop\Company\进芯\进芯开发板\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8671.764mil|Location2.X=8791.347mil|Location1.Y=4181.472mil|Location2.Y=4301.056mil|Absolute=True">Hole Size Constraint: (118.333mil &gt; 100mil) Pad CN6-0(5245.001mil,1122.091mil) on Multi-Layer Actual Hole Size = 118.333mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\dongy\Desktop\Company\%E8%BF%9B%E8%8A%AF\%E8%BF%9B%E8%8A%AF%E5%BC%80%E5%8F%91%E6%9D%BF\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8671.764mil|Location2.X=8791.347mil|Location1.Y=5165.639mil|Location2.Y=5285.221mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\dongy\Desktop\Company\进芯\进芯开发板\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8671.764mil|Location2.X=8791.347mil|Location1.Y=5165.639mil|Location2.Y=5285.221mil|Absolute=True">Hole Size Constraint: (118.333mil &gt; 100mil) Pad CN6-0(5245.001mil,2106.257mil) on Multi-Layer Actual Hole Size = 118.333mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\dongy\Desktop\Company\%E8%BF%9B%E8%8A%AF\%E8%BF%9B%E8%8A%AF%E5%BC%80%E5%8F%91%E6%9D%BF\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3960.395mil|Location2.X=4071.881mil|Location1.Y=5937.447mil|Location2.Y=6048.933mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\dongy\Desktop\Company\进芯\进芯开发板\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3960.395mil|Location2.X=4071.881mil|Location1.Y=5937.447mil|Location2.Y=6048.933mil|Absolute=True">Hole Size Constraint: (110.236mil &gt; 100mil) Pad J1-1(529.583mil,2874.017mil) on Multi-Layer Actual Slot Hole Width = 110.236mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\dongy\Desktop\Company\%E8%BF%9B%E8%8A%AF\%E8%BF%9B%E8%8A%AF%E5%BC%80%E5%8F%91%E6%9D%BF\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3710.395mil|Location2.X=3821.881mil|Location1.Y=5937.447mil|Location2.Y=6048.933mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\dongy\Desktop\Company\进芯\进芯开发板\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3710.395mil|Location2.X=3821.881mil|Location1.Y=5937.447mil|Location2.Y=6048.933mil|Absolute=True">Hole Size Constraint: (110.236mil &gt; 100mil) Pad J1-3(279.583mil,2874.017mil) on Multi-Layer Actual Slot Hole Width = 110.236mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\dongy\Desktop\Company\%E8%BF%9B%E8%8A%AF\%E8%BF%9B%E8%8A%AF%E5%BC%80%E5%8F%91%E6%9D%BF\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3835.395mil|Location2.X=3946.881mil|Location1.Y=5737.447mil|Location2.Y=5848.933mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\dongy\Desktop\Company\进芯\进芯开发板\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3835.395mil|Location2.X=3946.881mil|Location1.Y=5737.447mil|Location2.Y=5848.933mil|Absolute=True">Hole Size Constraint: (110.236mil &gt; 100mil) Pad J1-2(404.583mil,2674.017mil) on Multi-Layer Actual Slot Hole Width = 110.236mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\dongy\Desktop\Company\%E8%BF%9B%E8%8A%AF\%E8%BF%9B%E8%8A%AF%E5%BC%80%E5%8F%91%E6%9D%BF\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8888.529mil|Location2.X=9015.763mil|Location1.Y=6763.785mil|Location2.Y=6891.019mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\dongy\Desktop\Company\进芯\进芯开发板\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8888.529mil|Location2.X=9015.763mil|Location1.Y=6763.785mil|Location2.Y=6891.019mil|Absolute=True">Hole Size Constraint: (125.984mil &gt; 100mil) Pad H1-1(5465.591mil,3708.229mil) on Multi-Layer Actual Hole Size = 125.984mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\dongy\Desktop\Company\%E8%BF%9B%E8%8A%AF\%E8%BF%9B%E8%8A%AF%E5%BC%80%E5%8F%91%E6%9D%BF\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8895.379mil|Location2.X=9022.613mil|Location1.Y=3252.407mil|Location2.Y=3379.641mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\dongy\Desktop\Company\进芯\进芯开发板\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=8895.379mil|Location2.X=9022.613mil|Location1.Y=3252.407mil|Location2.Y=3379.641mil|Absolute=True">Hole Size Constraint: (125.984mil &gt; 100mil) Pad H5-1(5472.441mil,196.851mil) on Multi-Layer Actual Hole Size = 125.984mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\dongy\Desktop\Company\%E8%BF%9B%E8%8A%AF\%E8%BF%9B%E8%8A%AF%E5%BC%80%E5%8F%91%E6%9D%BF\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3619.789mil|Location2.X=3747.023mil|Location1.Y=3252.407mil|Location2.Y=3379.641mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\dongy\Desktop\Company\进芯\进芯开发板\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0\AVP32F2812_EVM_V1.0.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3619.789mil|Location2.X=3747.023mil|Location1.Y=3252.407mil|Location2.Y=3379.641mil|Absolute=True">Hole Size Constraint: (125.984mil &gt; 100mil) Pad H7-1(196.851mil,196.851mil) on Multi-Layer Actual Hole Size = 125.984mil</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

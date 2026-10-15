@@ -1,0 +1,618 @@
+/******************************* Copyright(C) *********************************************
+*                          AVP32F0043_Example_V1.01
+*                           湖南进芯电子科技有限公司
+*                         http://www.advancechip.com/
+*
+*                         FILE:  clb.c
+*                         TITLE:
+*******************************************************************************************/
+
+#include "driverlib.h"
+#include "device.h"
+#include "clb_config.h"
+#include "clb.h"
+
+
+const uint32_t TILE1_HLC_initFIFOData[4] = {TILE1_HLC_FIFO0_INIT, TILE1_HLC_FIFO1_INIT, TILE1_HLC_FIFO2_INIT, TILE1_HLC_FIFO3_INIT};
+
+uint16_t TILE1HLCInstr[CLB_NUM_HLC_INSTR + 1] =
+{
+    TILE1_HLCINSTR_0,
+    TILE1_HLCINSTR_1,
+    TILE1_HLCINSTR_2,
+    TILE1_HLCINSTR_3,
+    TILE1_HLCINSTR_4,
+    TILE1_HLCINSTR_5,
+    TILE1_HLCINSTR_6,
+    TILE1_HLCINSTR_7,
+    TILE1_HLCINSTR_8,
+    TILE1_HLCINSTR_9,
+    TILE1_HLCINSTR_10,
+    TILE1_HLCINSTR_11,
+    TILE1_HLCINSTR_12,
+    TILE1_HLCINSTR_13,
+    TILE1_HLCINSTR_14,
+    TILE1_HLCINSTR_15,
+    TILE1_HLCINSTR_16,
+    TILE1_HLCINSTR_17,
+    TILE1_HLCINSTR_18,
+    TILE1_HLCINSTR_19,
+    TILE1_HLCINSTR_20,
+    TILE1_HLCINSTR_21,
+    TILE1_HLCINSTR_22,
+    TILE1_HLCINSTR_23,
+    TILE1_HLCINSTR_24,
+    TILE1_HLCINSTR_25,
+    TILE1_HLCINSTR_26,
+    TILE1_HLCINSTR_27,
+    TILE1_HLCINSTR_28,
+    TILE1_HLCINSTR_29,
+    TILE1_HLCINSTR_30,
+    TILE1_HLCINSTR_31
+};
+
+
+const uint32_t TILE2_HLC_initFIFOData[4] = {TILE2_HLC_FIFO0_INIT, TILE2_HLC_FIFO1_INIT, TILE2_HLC_FIFO2_INIT, TILE2_HLC_FIFO3_INIT};
+
+uint16_t TILE2HLCInstr[CLB_NUM_HLC_INSTR + 1] =
+{
+    TILE2_HLCINSTR_0,
+    TILE2_HLCINSTR_1,
+    TILE2_HLCINSTR_2,
+    TILE2_HLCINSTR_3,
+    TILE2_HLCINSTR_4,
+    TILE2_HLCINSTR_5,
+    TILE2_HLCINSTR_6,
+    TILE2_HLCINSTR_7,
+    TILE2_HLCINSTR_8,
+    TILE2_HLCINSTR_9,
+    TILE2_HLCINSTR_10,
+    TILE2_HLCINSTR_11,
+    TILE2_HLCINSTR_12,
+    TILE2_HLCINSTR_13,
+    TILE2_HLCINSTR_14,
+    TILE2_HLCINSTR_15,
+    TILE2_HLCINSTR_16,
+    TILE2_HLCINSTR_17,
+    TILE2_HLCINSTR_18,
+    TILE2_HLCINSTR_19,
+    TILE2_HLCINSTR_20,
+    TILE2_HLCINSTR_21,
+    TILE2_HLCINSTR_22,
+    TILE2_HLCINSTR_23,
+    TILE2_HLCINSTR_24,
+    TILE2_HLCINSTR_25,
+    TILE2_HLCINSTR_26,
+    TILE2_HLCINSTR_27,
+    TILE2_HLCINSTR_28,
+    TILE2_HLCINSTR_29,
+    TILE2_HLCINSTR_30,
+    TILE2_HLCINSTR_31
+};
+
+
+const uint32_t TILE3_HLC_initFIFOData[4] = {TILE3_HLC_FIFO0_INIT, TILE3_HLC_FIFO1_INIT, TILE3_HLC_FIFO2_INIT, TILE3_HLC_FIFO3_INIT};
+
+uint16_t TILE3HLCInstr[CLB_NUM_HLC_INSTR + 1] =
+{
+    TILE3_HLCINSTR_0,
+    TILE3_HLCINSTR_1,
+    TILE3_HLCINSTR_2,
+    TILE3_HLCINSTR_3,
+    TILE3_HLCINSTR_4,
+    TILE3_HLCINSTR_5,
+    TILE3_HLCINSTR_6,
+    TILE3_HLCINSTR_7,
+    TILE3_HLCINSTR_8,
+    TILE3_HLCINSTR_9,
+    TILE3_HLCINSTR_10,
+    TILE3_HLCINSTR_11,
+    TILE3_HLCINSTR_12,
+    TILE3_HLCINSTR_13,
+    TILE3_HLCINSTR_14,
+    TILE3_HLCINSTR_15,
+    TILE3_HLCINSTR_16,
+    TILE3_HLCINSTR_17,
+    TILE3_HLCINSTR_18,
+    TILE3_HLCINSTR_19,
+    TILE3_HLCINSTR_20,
+    TILE3_HLCINSTR_21,
+    TILE3_HLCINSTR_22,
+    TILE3_HLCINSTR_23,
+    TILE3_HLCINSTR_24,
+    TILE3_HLCINSTR_25,
+    TILE3_HLCINSTR_26,
+    TILE3_HLCINSTR_27,
+    TILE3_HLCINSTR_28,
+    TILE3_HLCINSTR_29,
+    TILE3_HLCINSTR_30,
+    TILE3_HLCINSTR_31
+};
+
+
+const uint32_t TILE4_HLC_initFIFOData[4] = {TILE4_HLC_FIFO0_INIT, TILE4_HLC_FIFO1_INIT, TILE4_HLC_FIFO2_INIT, TILE4_HLC_FIFO3_INIT};
+
+uint16_t TILE4HLCInstr[CLB_NUM_HLC_INSTR + 1] =
+{
+    TILE4_HLCINSTR_0,
+    TILE4_HLCINSTR_1,
+    TILE4_HLCINSTR_2,
+    TILE4_HLCINSTR_3,
+    TILE4_HLCINSTR_4,
+    TILE4_HLCINSTR_5,
+    TILE4_HLCINSTR_6,
+    TILE4_HLCINSTR_7,
+    TILE4_HLCINSTR_8,
+    TILE4_HLCINSTR_9,
+    TILE4_HLCINSTR_10,
+    TILE4_HLCINSTR_11,
+    TILE4_HLCINSTR_12,
+    TILE4_HLCINSTR_13,
+    TILE4_HLCINSTR_14,
+    TILE4_HLCINSTR_15,
+    TILE4_HLCINSTR_16,
+    TILE4_HLCINSTR_17,
+    TILE4_HLCINSTR_18,
+    TILE4_HLCINSTR_19,
+    TILE4_HLCINSTR_20,
+    TILE4_HLCINSTR_21,
+    TILE4_HLCINSTR_22,
+    TILE4_HLCINSTR_23,
+    TILE4_HLCINSTR_24,
+    TILE4_HLCINSTR_25,
+    TILE4_HLCINSTR_26,
+    TILE4_HLCINSTR_27,
+    TILE4_HLCINSTR_28,
+    TILE4_HLCINSTR_29,
+    TILE4_HLCINSTR_30,
+    TILE4_HLCINSTR_31
+};
+
+
+
+void initTILE1(uint32_t base)
+{
+    uint16_t i;
+    //
+    //  Pipeline Mode
+    //
+    CLB_disablePipelineMode(base);
+    //
+    //  Output LUT
+    //
+    //
+    //  Equation for Output Look-Up Table Block 0 for TILE1: i0 & (~(i1 & i2)) & i1
+    //
+    CLB_configOutputLUT(base, CLB_OUT0, TILE1_CFG_OUTLUT_0);
+
+    CLB_configOutputLUT(base, CLB_OUT1, TILE1_CFG_OUTLUT_1);
+
+    //
+    //  Equation for Output Look-Up Table Block 2 for TILE1: i0 & (~(i1 & i2)) & i1
+    //
+    CLB_configOutputLUT(base, CLB_OUT2, TILE1_CFG_OUTLUT_2);
+
+    //
+    //  Equation for Output Look-Up Table Block 3 for TILE1: 0
+    //
+    CLB_configOutputLUT(base, CLB_OUT3, TILE1_CFG_OUTLUT_3);
+
+    CLB_configOutputLUT(base, CLB_OUT4, TILE1_CFG_OUTLUT_4);
+
+    CLB_configOutputLUT(base, CLB_OUT5, TILE1_CFG_OUTLUT_5);
+    
+    CLB_configOutputLUT(base, CLB_OUT6, TILE1_CFG_OUTLUT_6);
+
+    CLB_configOutputLUT(base, CLB_OUT7, TILE1_CFG_OUTLUT_7);
+
+    //
+    //  AOC
+    //
+    CLB_configAOC(base, CLB_AOC0, TILE1_OUTPUT_COND_CTR_0);
+    CLB_configAOC(base, CLB_AOC1, TILE1_OUTPUT_COND_CTR_1);
+    CLB_configAOC(base, CLB_AOC2, TILE1_OUTPUT_COND_CTR_2);
+    CLB_configAOC(base, CLB_AOC3, TILE1_OUTPUT_COND_CTR_3);
+    CLB_configAOC(base, CLB_AOC4, TILE1_OUTPUT_COND_CTR_4);
+    CLB_configAOC(base, CLB_AOC5, TILE1_OUTPUT_COND_CTR_5);
+    CLB_configAOC(base, CLB_AOC6, TILE1_OUTPUT_COND_CTR_6);
+    CLB_configAOC(base, CLB_AOC7, TILE1_OUTPUT_COND_CTR_7);
+
+    //
+    // LUT 0 - 2 are configured as macros in clb_config.h; these macros are used in
+    // CLB_selectLUT4Inputs and CLB_configLUT4Function
+    //
+    //
+    //  Equation for Look-Up Table Block 1 for TILE1: ~(i0 | i1)
+    //
+    //  Equation for Look-Up Table Block 2 for TILE1: ~(i0 | i1)
+
+    //
+    //  LUT Configuration
+    //
+    CLB_selectLUT4Inputs(base, TILE1_CFG_LUT4_IN0, TILE1_CFG_LUT4_IN1, TILE1_CFG_LUT4_IN2, TILE1_CFG_LUT4_IN3);
+    CLB_configLUT4Function(base, TILE1_CFG_LUT4_FN10, TILE1_CFG_LUT4_FN2);
+
+    //
+    // FSM 0 - 2 are configured in <file>
+    //
+    //
+    //  Output equation for Finite State Machine 0 for TILE1: ~s0
+    //  State 0 output equation for Finite State Machine 0 for TILE1: (~s0 & e0) | (s0 & (~e1)) 
+    //
+    //  Output equation for Finite State Machine 1 for TILE1: ~s0
+    //  State 0 output equation for Finite State Machine 1 for TILE1: (~s0 & e0) | (s0 & (~e1)) 
+
+    //
+    //  FSM
+    //
+    CLB_selectFSMInputs(base, TILE1_CFG_FSM_EXT_IN0, TILE1_CFG_FSM_EXT_IN1, TILE1_CFG_FSM_EXTRA_IN0, TILE1_CFG_FSM_EXTRA_IN1);
+    CLB_configFSMNextState(base, TILE1_CFG_FSM_NEXT_STATE_0, TILE1_CFG_FSM_NEXT_STATE_1, TILE1_CFG_FSM_NEXT_STATE_2);
+    CLB_configFSMLUTFunction(base, TILE1_CFG_FSM_LUT_FN10, TILE1_CFG_FSM_LUT_FN2);
+
+    //
+    // Counter 0 - 2 are configured in <file>
+    //
+
+    //
+    //  Counters
+    //
+    CLB_selectCounterInputs(base, TILE1_CFG_COUNTER_RESET, TILE1_CFG_COUNTER_EVENT, TILE1_CFG_COUNTER_MODE_0, TILE1_CFG_COUNTER_MODE_1);
+    CLB_configMiscCtrlModes(base, TILE1_CFG_MISC_CONTROL);
+    CLB_configCounterLoadMatch(base, CLB_CTR0, TILE1_COUNTER_0_LOAD_VAL, TILE1_COUNTER_0_MATCH1_VAL, TILE1_COUNTER_0_MATCH2_VAL);
+    CLB_configCounterLoadMatch(base, CLB_CTR1, TILE1_COUNTER_1_LOAD_VAL, TILE1_COUNTER_1_MATCH1_VAL, TILE1_COUNTER_1_MATCH2_VAL);
+    CLB_configCounterLoadMatch(base, CLB_CTR2, TILE1_COUNTER_2_LOAD_VAL, TILE1_COUNTER_2_MATCH1_VAL, TILE1_COUNTER_2_MATCH2_VAL);
+    CLB_configCounterTapSelects(base, TILE1_CFG_TAP_SEL);
+
+    //
+    // HLC is configured in <file>
+    //
+    //  User Description for the High Level Controller for TILE1
+    /*
+        
+    */
+
+    //
+    // HLC
+    //
+    CLB_configHLCEventSelect(base, TILE1_HLC_EVENT_SEL);
+    CLB_setHLCRegisters(base, TILE1_HLC_R0_INIT, TILE1_HLC_R1_INIT, TILE1_HLC_R2_INIT, TILE1_HLC_R3_INIT);
+    CLB_writeFIFOs(base, TILE1_HLC_initFIFOData);
+
+    for(i = 0; i <= CLB_NUM_HLC_INSTR; i++)
+    {
+        CLB_programHLCInstruction(base, i, TILE1HLCInstr[i]);
+    }
+}
+
+void initTILE2(uint32_t base)
+{
+    uint16_t i;
+    //
+    //  Pipeline Mode
+    //
+    CLB_disablePipelineMode(base);
+    //
+    //  Output LUT
+    //
+    //
+    //  Equation for Output Look-Up Table Block 0 for TILE2: i0 & (~(i1 & i2)) & i1
+    //
+    CLB_configOutputLUT(base, CLB_OUT0, TILE2_CFG_OUTLUT_0);
+
+    CLB_configOutputLUT(base, CLB_OUT1, TILE2_CFG_OUTLUT_1);
+
+    //
+    //  Equation for Output Look-Up Table Block 2 for TILE2: i0 & (~(i1 & i2)) & i1
+    //
+    CLB_configOutputLUT(base, CLB_OUT2, TILE2_CFG_OUTLUT_2);
+
+    CLB_configOutputLUT(base, CLB_OUT3, TILE2_CFG_OUTLUT_3);
+
+    CLB_configOutputLUT(base, CLB_OUT4, TILE2_CFG_OUTLUT_4);
+
+    CLB_configOutputLUT(base, CLB_OUT5, TILE2_CFG_OUTLUT_5);
+    
+    CLB_configOutputLUT(base, CLB_OUT6, TILE2_CFG_OUTLUT_6);
+
+    CLB_configOutputLUT(base, CLB_OUT7, TILE2_CFG_OUTLUT_7);
+
+    //
+    //  AOC
+    //
+    CLB_configAOC(base, CLB_AOC0, TILE2_OUTPUT_COND_CTR_0);
+    CLB_configAOC(base, CLB_AOC1, TILE2_OUTPUT_COND_CTR_1);
+    CLB_configAOC(base, CLB_AOC2, TILE2_OUTPUT_COND_CTR_2);
+    CLB_configAOC(base, CLB_AOC3, TILE2_OUTPUT_COND_CTR_3);
+    CLB_configAOC(base, CLB_AOC4, TILE2_OUTPUT_COND_CTR_4);
+    CLB_configAOC(base, CLB_AOC5, TILE2_OUTPUT_COND_CTR_5);
+    CLB_configAOC(base, CLB_AOC6, TILE2_OUTPUT_COND_CTR_6);
+    CLB_configAOC(base, CLB_AOC7, TILE2_OUTPUT_COND_CTR_7);
+
+    //
+    // LUT 0 - 2 are configured as macros in clb_config.h; these macros are used in
+    // CLB_selectLUT4Inputs and CLB_configLUT4Function
+    //
+    //
+    //  Equation for Look-Up Table Block 1 for TILE2: ~(i0 | i1)
+    //
+    //  Equation for Look-Up Table Block 2 for TILE2: ~(i0 | i1)
+
+    //
+    //  LUT Configuration
+    //
+    CLB_selectLUT4Inputs(base, TILE2_CFG_LUT4_IN0, TILE2_CFG_LUT4_IN1, TILE2_CFG_LUT4_IN2, TILE2_CFG_LUT4_IN3);
+    CLB_configLUT4Function(base, TILE2_CFG_LUT4_FN10, TILE2_CFG_LUT4_FN2);
+
+    //
+    // FSM 0 - 2 are configured in <file>
+    //
+    //
+    //  Output equation for Finite State Machine 0 for TILE2: ~s0
+    //  State 0 output equation for Finite State Machine 0 for TILE2: (~s0 & e0) | (s0 & (~e1)) 
+    //
+    //  Output equation for Finite State Machine 1 for TILE2: ~s0
+    //  State 0 output equation for Finite State Machine 1 for TILE2: (~s0 & e0) | (s0 & (~e1)) 
+
+    //
+    //  FSM
+    //
+    CLB_selectFSMInputs(base, TILE2_CFG_FSM_EXT_IN0, TILE2_CFG_FSM_EXT_IN1, TILE2_CFG_FSM_EXTRA_IN0, TILE2_CFG_FSM_EXTRA_IN1);
+    CLB_configFSMNextState(base, TILE2_CFG_FSM_NEXT_STATE_0, TILE2_CFG_FSM_NEXT_STATE_1, TILE2_CFG_FSM_NEXT_STATE_2);
+    CLB_configFSMLUTFunction(base, TILE2_CFG_FSM_LUT_FN10, TILE2_CFG_FSM_LUT_FN2);
+
+    //
+    // Counter 0 - 2 are configured in <file>
+    //
+
+    //
+    //  Counters
+    //
+    CLB_selectCounterInputs(base, TILE2_CFG_COUNTER_RESET, TILE2_CFG_COUNTER_EVENT, TILE2_CFG_COUNTER_MODE_0, TILE2_CFG_COUNTER_MODE_1);
+    CLB_configMiscCtrlModes(base, TILE2_CFG_MISC_CONTROL);
+    CLB_configCounterLoadMatch(base, CLB_CTR0, TILE2_COUNTER_0_LOAD_VAL, TILE2_COUNTER_0_MATCH1_VAL, TILE2_COUNTER_0_MATCH2_VAL);
+    CLB_configCounterLoadMatch(base, CLB_CTR1, TILE2_COUNTER_1_LOAD_VAL, TILE2_COUNTER_1_MATCH1_VAL, TILE2_COUNTER_1_MATCH2_VAL);
+    CLB_configCounterLoadMatch(base, CLB_CTR2, TILE2_COUNTER_2_LOAD_VAL, TILE2_COUNTER_2_MATCH1_VAL, TILE2_COUNTER_2_MATCH2_VAL);
+    CLB_configCounterTapSelects(base, TILE2_CFG_TAP_SEL);
+
+    //
+    // HLC is configured in <file>
+    //
+    //  User Description for the High Level Controller for TILE2
+    /*
+        
+    */
+
+    //
+    // HLC
+    //
+    CLB_configHLCEventSelect(base, TILE2_HLC_EVENT_SEL);
+    CLB_setHLCRegisters(base, TILE2_HLC_R0_INIT, TILE2_HLC_R1_INIT, TILE2_HLC_R2_INIT, TILE2_HLC_R3_INIT);
+    CLB_writeFIFOs(base, TILE2_HLC_initFIFOData);
+
+    for(i = 0; i <= CLB_NUM_HLC_INSTR; i++)
+    {
+        CLB_programHLCInstruction(base, i, TILE2HLCInstr[i]);
+    }
+}
+
+void initTILE3(uint32_t base)
+{
+    uint16_t i;
+    //
+    //  Pipeline Mode
+    //
+    CLB_disablePipelineMode(base);
+    //
+    //  Output LUT
+    //
+    //
+    //  Equation for Output Look-Up Table Block 0 for TILE3: i0 & (~(i1 & i2)) & i1
+    //
+    CLB_configOutputLUT(base, CLB_OUT0, TILE3_CFG_OUTLUT_0);
+
+    CLB_configOutputLUT(base, CLB_OUT1, TILE3_CFG_OUTLUT_1);
+
+    //
+    //  Equation for Output Look-Up Table Block 2 for TILE3: i0 & (~(i1 & i2)) & i1
+    //
+    CLB_configOutputLUT(base, CLB_OUT2, TILE3_CFG_OUTLUT_2);
+
+    CLB_configOutputLUT(base, CLB_OUT3, TILE3_CFG_OUTLUT_3);
+
+    CLB_configOutputLUT(base, CLB_OUT4, TILE3_CFG_OUTLUT_4);
+
+    CLB_configOutputLUT(base, CLB_OUT5, TILE3_CFG_OUTLUT_5);
+    
+    CLB_configOutputLUT(base, CLB_OUT6, TILE3_CFG_OUTLUT_6);
+
+    CLB_configOutputLUT(base, CLB_OUT7, TILE3_CFG_OUTLUT_7);
+
+    //
+    //  AOC
+    //
+    CLB_configAOC(base, CLB_AOC0, TILE3_OUTPUT_COND_CTR_0);
+    CLB_configAOC(base, CLB_AOC1, TILE3_OUTPUT_COND_CTR_1);
+    CLB_configAOC(base, CLB_AOC2, TILE3_OUTPUT_COND_CTR_2);
+    CLB_configAOC(base, CLB_AOC3, TILE3_OUTPUT_COND_CTR_3);
+    CLB_configAOC(base, CLB_AOC4, TILE3_OUTPUT_COND_CTR_4);
+    CLB_configAOC(base, CLB_AOC5, TILE3_OUTPUT_COND_CTR_5);
+    CLB_configAOC(base, CLB_AOC6, TILE3_OUTPUT_COND_CTR_6);
+    CLB_configAOC(base, CLB_AOC7, TILE3_OUTPUT_COND_CTR_7);
+
+    //
+    // LUT 0 - 2 are configured as macros in clb_config.h; these macros are used in
+    // CLB_selectLUT4Inputs and CLB_configLUT4Function
+    //
+    //
+    //  Equation for Look-Up Table Block 1 for TILE3: ~(i0 | i1)
+    //
+    //  Equation for Look-Up Table Block 2 for TILE3: ~(i0 | i1)
+
+    //
+    //  LUT Configuration
+    //
+    CLB_selectLUT4Inputs(base, TILE3_CFG_LUT4_IN0, TILE3_CFG_LUT4_IN1, TILE3_CFG_LUT4_IN2, TILE3_CFG_LUT4_IN3);
+    CLB_configLUT4Function(base, TILE3_CFG_LUT4_FN10, TILE3_CFG_LUT4_FN2);
+
+    //
+    // FSM 0 - 2 are configured in <file>
+    //
+    //
+    //  Output equation for Finite State Machine 0 for TILE3: ~s0
+    //  State 0 output equation for Finite State Machine 0 for TILE3: (~s0 & e0) | (s0 & (~e1)) 
+    //
+    //  Output equation for Finite State Machine 1 for TILE3: ~s0
+    //  State 0 output equation for Finite State Machine 1 for TILE3: (~s0 & e0) | (s0 & (~e1)) 
+
+    //
+    //  FSM
+    //
+    CLB_selectFSMInputs(base, TILE3_CFG_FSM_EXT_IN0, TILE3_CFG_FSM_EXT_IN1, TILE3_CFG_FSM_EXTRA_IN0, TILE3_CFG_FSM_EXTRA_IN1);
+    CLB_configFSMNextState(base, TILE3_CFG_FSM_NEXT_STATE_0, TILE3_CFG_FSM_NEXT_STATE_1, TILE3_CFG_FSM_NEXT_STATE_2);
+    CLB_configFSMLUTFunction(base, TILE3_CFG_FSM_LUT_FN10, TILE3_CFG_FSM_LUT_FN2);
+
+    //
+    // Counter 0 - 2 are configured in <file>
+    //
+
+    //
+    //  Counters
+    //
+    CLB_selectCounterInputs(base, TILE3_CFG_COUNTER_RESET, TILE3_CFG_COUNTER_EVENT, TILE3_CFG_COUNTER_MODE_0, TILE3_CFG_COUNTER_MODE_1);
+    CLB_configMiscCtrlModes(base, TILE3_CFG_MISC_CONTROL);
+    CLB_configCounterLoadMatch(base, CLB_CTR0, TILE3_COUNTER_0_LOAD_VAL, TILE3_COUNTER_0_MATCH1_VAL, TILE3_COUNTER_0_MATCH2_VAL);
+    CLB_configCounterLoadMatch(base, CLB_CTR1, TILE3_COUNTER_1_LOAD_VAL, TILE3_COUNTER_1_MATCH1_VAL, TILE3_COUNTER_1_MATCH2_VAL);
+    CLB_configCounterLoadMatch(base, CLB_CTR2, TILE3_COUNTER_2_LOAD_VAL, TILE3_COUNTER_2_MATCH1_VAL, TILE3_COUNTER_2_MATCH2_VAL);
+    CLB_configCounterTapSelects(base, TILE3_CFG_TAP_SEL);
+
+    //
+    // HLC is configured in <file>
+    //
+    //  User Description for the High Level Controller for TILE3
+    /*
+        
+    */
+
+    //
+    // HLC
+    //
+    CLB_configHLCEventSelect(base, TILE3_HLC_EVENT_SEL);
+    CLB_setHLCRegisters(base, TILE3_HLC_R0_INIT, TILE3_HLC_R1_INIT, TILE3_HLC_R2_INIT, TILE3_HLC_R3_INIT);
+    CLB_writeFIFOs(base, TILE3_HLC_initFIFOData);
+
+    for(i = 0; i <= CLB_NUM_HLC_INSTR; i++)
+    {
+        CLB_programHLCInstruction(base, i, TILE3HLCInstr[i]);
+    }
+}
+
+void initTILE4(uint32_t base)
+{
+    uint16_t i;
+    //
+    //  Pipeline Mode
+    //
+    CLB_disablePipelineMode(base);
+    //
+    //  Output LUT
+    //
+    //
+    //  Equation for Output Look-Up Table Block 0 for TILE4: i0 & (~(i1 & i2)) & i1
+    //
+    CLB_configOutputLUT(base, CLB_OUT0, TILE4_CFG_OUTLUT_0);
+
+    CLB_configOutputLUT(base, CLB_OUT1, TILE4_CFG_OUTLUT_1);
+
+    //
+    //  Equation for Output Look-Up Table Block 2 for TILE4: i0 & (~(i1 & i2)) & i1
+    //
+    CLB_configOutputLUT(base, CLB_OUT2, TILE4_CFG_OUTLUT_2);
+
+    CLB_configOutputLUT(base, CLB_OUT3, TILE4_CFG_OUTLUT_3);
+
+    CLB_configOutputLUT(base, CLB_OUT4, TILE4_CFG_OUTLUT_4);
+
+    CLB_configOutputLUT(base, CLB_OUT5, TILE4_CFG_OUTLUT_5);
+    
+    CLB_configOutputLUT(base, CLB_OUT6, TILE4_CFG_OUTLUT_6);
+
+    CLB_configOutputLUT(base, CLB_OUT7, TILE4_CFG_OUTLUT_7);
+
+    //
+    //  AOC
+    //
+    CLB_configAOC(base, CLB_AOC0, TILE4_OUTPUT_COND_CTR_0);
+    CLB_configAOC(base, CLB_AOC1, TILE4_OUTPUT_COND_CTR_1);
+    CLB_configAOC(base, CLB_AOC2, TILE4_OUTPUT_COND_CTR_2);
+    CLB_configAOC(base, CLB_AOC3, TILE4_OUTPUT_COND_CTR_3);
+    CLB_configAOC(base, CLB_AOC4, TILE4_OUTPUT_COND_CTR_4);
+    CLB_configAOC(base, CLB_AOC5, TILE4_OUTPUT_COND_CTR_5);
+    CLB_configAOC(base, CLB_AOC6, TILE4_OUTPUT_COND_CTR_6);
+    CLB_configAOC(base, CLB_AOC7, TILE4_OUTPUT_COND_CTR_7);
+
+    //
+    // LUT 0 - 2 are configured as macros in clb_config.h; these macros are used in
+    // CLB_selectLUT4Inputs and CLB_configLUT4Function
+    //
+    //
+    //  Equation for Look-Up Table Block 1 for TILE4: ~(i0 | i1)
+    //
+    //  Equation for Look-Up Table Block 2 for TILE4: ~(i0 | i1)
+
+    //
+    //  LUT Configuration
+    //
+    CLB_selectLUT4Inputs(base, TILE4_CFG_LUT4_IN0, TILE4_CFG_LUT4_IN1, TILE4_CFG_LUT4_IN2, TILE4_CFG_LUT4_IN3);
+    CLB_configLUT4Function(base, TILE4_CFG_LUT4_FN10, TILE4_CFG_LUT4_FN2);
+
+    //
+    // FSM 0 - 2 are configured in <file>
+    //
+    //
+    //  Output equation for Finite State Machine 0 for TILE4: ~s0
+    //  State 0 output equation for Finite State Machine 0 for TILE4: (~s0 & e0) | (s0 & (~e1)) 
+    //
+    //  Output equation for Finite State Machine 1 for TILE4: ~s0
+    //  State 0 output equation for Finite State Machine 1 for TILE4: (~s0 & e0) | (s0 & (~e1)) 
+
+    //
+    //  FSM
+    //
+    CLB_selectFSMInputs(base, TILE4_CFG_FSM_EXT_IN0, TILE4_CFG_FSM_EXT_IN1, TILE4_CFG_FSM_EXTRA_IN0, TILE4_CFG_FSM_EXTRA_IN1);
+    CLB_configFSMNextState(base, TILE4_CFG_FSM_NEXT_STATE_0, TILE4_CFG_FSM_NEXT_STATE_1, TILE4_CFG_FSM_NEXT_STATE_2);
+    CLB_configFSMLUTFunction(base, TILE4_CFG_FSM_LUT_FN10, TILE4_CFG_FSM_LUT_FN2);
+
+    //
+    // Counter 0 - 2 are configured in <file>
+    //
+
+    //
+    //  Counters
+    //
+    CLB_selectCounterInputs(base, TILE4_CFG_COUNTER_RESET, TILE4_CFG_COUNTER_EVENT, TILE4_CFG_COUNTER_MODE_0, TILE4_CFG_COUNTER_MODE_1);
+    CLB_configMiscCtrlModes(base, TILE4_CFG_MISC_CONTROL);
+    CLB_configCounterLoadMatch(base, CLB_CTR0, TILE4_COUNTER_0_LOAD_VAL, TILE4_COUNTER_0_MATCH1_VAL, TILE4_COUNTER_0_MATCH2_VAL);
+    CLB_configCounterLoadMatch(base, CLB_CTR1, TILE4_COUNTER_1_LOAD_VAL, TILE4_COUNTER_1_MATCH1_VAL, TILE4_COUNTER_1_MATCH2_VAL);
+    CLB_configCounterLoadMatch(base, CLB_CTR2, TILE4_COUNTER_2_LOAD_VAL, TILE4_COUNTER_2_MATCH1_VAL, TILE4_COUNTER_2_MATCH2_VAL);
+    CLB_configCounterTapSelects(base, TILE4_CFG_TAP_SEL);
+
+    //
+    // HLC is configured in <file>
+    //
+    //  User Description for the High Level Controller for TILE4
+    /*
+        
+    */
+
+    //
+    // HLC
+    //
+    CLB_configHLCEventSelect(base, TILE4_HLC_EVENT_SEL);
+    CLB_setHLCRegisters(base, TILE4_HLC_R0_INIT, TILE4_HLC_R1_INIT, TILE4_HLC_R2_INIT, TILE4_HLC_R3_INIT);
+    CLB_writeFIFOs(base, TILE4_HLC_initFIFOData);
+
+    for(i = 0; i <= CLB_NUM_HLC_INSTR; i++)
+    {
+        CLB_programHLCInstruction(base, i, TILE4HLCInstr[i]);
+    }
+}

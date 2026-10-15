@@ -1,0 +1,86 @@
+来源: ADP32F035/ADP32F03X之前遇到问题总结/ADP32F03XA版本 ADC故障勘误说明V2.0 20220609(1).pdf
+来源编号: S062
+
+=== PDF页 1 ===
+ADP32F03X 数字信号处理器
+ADC 故障勘误说明
+湖南进芯电子科技有限公司
+2022 年 6 月
+V2.0
+Advancechip Electronics
+
+=== PDF页 2 ===
+ADP32F03X 数字信号处理器 ADC 故障勘误说明 V2.0
+3
+湖南进芯电子科技有限公司
+1 问题简介
+条件 1： 
+CPU 时钟为 60MHz 时；
+允许采样和转换交叠模式（AdcRegs.ADCCTL2.bit.ADCNONOVERLAP = 0）；
+ADC 时钟等于 CPU 时钟（AdcRegs.ADCCTL2.bit.CLKDIV2EN = 0）；
+内部基准源模式（AdcRegs.ADCCTL1.bit.ADCREFSEL = 0）；
+顺序采样模式（AdcRegs.ADCSAMPLEMODE.bit.SIMULENx = 0）；
+启停模式（AdcRegs.INTSEL1N2.bit.INTxCONT = 0）；
+当采样窗口宽度设置值（AdcRegs.ADCSOCxCTL.bit.ACQPS）从 6 逐次增大到 63 时，会
+呈现周期性 ADC 抖动变大和变小的现象。
+条件 2： 
+CPU 时钟为 60MHz 时；
+禁止采样和转换交叠模式（AdcRegs.ADCCTL2.bit.ADCNONOVERLAP = 1）；
+ADC 时钟等于 CPU 时钟（AdcRegs.ADCCTL2.bit.CLKDIV2EN = 0）；
+内部基准源模式（AdcRegs.ADCCTL1.bit.ADCREFSEL = 0）；
+顺序采样模式（AdcRegs.ADCSAMPLEMODE.bit.SIMULENx = 0）；
+启停模式（AdcRegs.INTSEL1N2.bit.INTxCONT = 0）；
+当采样窗口宽度设置值（AdcRegs.ADCSOCxCTL.bit.ACQPS）从 6 逐次增大到 63 时，会
+呈现周期性 ADC 抖动变大和变小的现象。
+条件 3： 
+CPU 时钟为 60MHz 时；
+允许采样和转换交叠模式（AdcRegs.ADCCTL2.bit.ADCNONOVERLAP = 0）；
+ADC 时钟等于 CPU 时钟（AdcRegs.ADCCTL2.bit.CLKDIV2EN = 1）；
+内部基准源模式（AdcRegs.ADCCTL1.bit.ADCREFSEL = 0）；
+顺序采样模式（AdcRegs.ADCSAMPLEMODE.bit.SIMULENx = 0）；
+启停模式（AdcRegs.INTSEL1N2.bit.INTxCONT = 0）；
+当采样窗口宽度设置值（AdcRegs.ADCSOCxCTL.bit.ACQPS）从 6 逐次增大到 63 时，会
+呈现周期性 ADC 抖动变大和变小的现象。
+
+=== PDF页 3 ===
+ADP32F03X 数字信号处理器 ADC 故障勘误说明 V2.0
+4
+湖南进芯电子科技有限公司
+条件 4： 
+CPU 时钟为 60MHz 时；
+禁止采样和转换交叠模式（AdcRegs.ADCCTL2.bit.ADCNONOVERLAP = 1）；
+ADC 时钟等于 CPU 时钟（AdcRegs.ADCCTL2.bit.CLKDIV2EN = 1）；
+内部基准源模式（AdcRegs.ADCCTL1.bit.ADCREFSEL = 0）；
+顺序采样模式（AdcRegs.ADCSAMPLEMODE.bit.SIMULENx = 0）；
+启停模式（AdcRegs.INTSEL1N2.bit.INTxCONT = 0）；
+当采样窗口宽度设置值（AdcRegs.ADCSOCxCTL.bit.ACQPS）从 6 逐次增大到 63 时，
+ACQPS=6 时会出现 ADC 抖动比较大的现象。
+2.问题定位
+在条件 1 的情形下，经 ADC 的前整体 tran 仿真发现，当采样窗口宽度设置值
+（AdcRegs.ADCSOCxCTL.bit.ACQPS）从 6 逐次增大到 63 时，也会呈现周期性 ADC 抖动
+变大和变小的现象。通过仿真，定位到 ADC 内的一些时钟信号问题导致 ADC 内部参考电
+压源周期性短路（采样窗口宽度设置值不同，参考电压源短路时间不同）。
+并且，随着 ADC 时钟的频率继续升高（ADC 时钟由 60MHz 继续变高），抖动继续变大；
+开启连续运行模式（AdcRegs.INTSEL1N2.bit.INTxCONT = 1），抖动继续变大。
+3.问题解决方案
+方案 1、采用条件 4 的调试环境，并且 ACQPS 设置值＞6 时。
+方案 2、采用条件 2 的调试环境，并且设置合适的采样窗口宽度设置值
+（AdcRegs.ADCSOCxCTL.bit.ACQPS）——ACQPS={6，9，10，11，12，13，14，15，16，
+17，18，22，23，24，25，27，28，29，30，31，33，34，36，37，38，40，41，42，
+43，44，46，48，49，50，51，53，54，55，56，57，59，61，62，63}；
+方案 3、采用条件 1 的调试环境，并且设置合适的采样窗口宽度设置值
+（AdcRegs.ADCSOCxCTL.bit.ACQPS）——ACQPS={6，8，9，10，21，22，23，34，35，
+36，47，48，49，60，61，62}；
+方案 1 能很好解决 ADC 的抖动问题，但是会降低 ADC 的整体转换速度；
+方案 2 选择合适的值也能很好解决 ADC 的抖动问题，但是会降低 ADC 的整体转换速
+度；
+
+=== PDF页 4 ===
+ADP32F03X 数字信号处理器 ADC 故障勘误说明 V2.0
+5
+湖南进芯电子科技有限公司
+方案 3 选择合适的值也能很好解决 ADC 的抖动问题，并且不会降低 ADC 的整体转换
+速度。
+4.结论
+在条件 1 的情形下，经 ADC 的前整体 tran 仿真发现 ADC 确实存在客户反馈的问题。
+在现版本的 ADC 使用上，我们选择通过软件配置的方式避免此问题。

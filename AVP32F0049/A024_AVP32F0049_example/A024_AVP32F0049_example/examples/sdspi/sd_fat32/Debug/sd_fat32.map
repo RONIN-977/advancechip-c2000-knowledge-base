@@ -1,0 +1,534 @@
+******************************************************************************
+             TMS320C2000 Linker PC v22.6.0                     
+******************************************************************************
+>> Linked Wed Jul 24 14:55:33 2024
+
+OUTPUT FILE NAME:   <sd_fat32.out>
+ENTRY POINT SYMBOL: "_c_int00"  address: 0009320a
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+PAGE 0:
+  RAMM0                 000000f6   0000030a  00000000  0000030a  RWIX
+  RAMLS0                00008000   00000800  00000004  000007fc  RWIX
+  RAMLS1_4              00008800   00002000  00000200  00001e00  RWIX
+  BEGIN                 00080000   00000002  00000002  00000000  RWIX
+  FLASH_BANK0_SEC0_3    00080002   00000ffe  00000000  00000ffe  RWIX
+  FLASH_BANK0_SEC1      00081000   00001000  0000006d  00000f93  RWIX
+  FLASH_BANK0_SEC2      00082000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC3      00083000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC4_12   00084000   00009000  0000022b  00008dd5  RWIX
+  FLASH_BANK0_SEC13     0008d000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC14     0008e000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC15     0008f000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC0_10   00090000   0000b000  00003362  00007c9e  RWIX
+  FLASH_BANK1_SEC11     0009b000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC12     0009c000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC13     0009d000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC14     0009e000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC15     0009f000   00000ff0  00000000  00000ff0  RWIX
+  RESET                 003fffc0   00000002  00000000  00000002  RWIX
+
+PAGE 1:
+  BOOT_RSVD             00000002   000000f1  00000000  000000f1  RWIX
+  RAMM1                 00000400   000003f8  00000000  000003f8  RWIX
+  RAMLS5                0000a800   00000800  0000072a  000000d6  RWIX
+  RAMLS6                0000b000   00000800  00000000  00000800  RWIX
+  RAMLS7                0000b800   00000800  00000000  00000800  RWIX
+  RAMGS0                0000c000   00002000  00000000  00002000  RWIX
+  RAMGS1                0000e000   00002000  00000000  00002000  RWIX
+  RAMGS2                00010000   00002000  00000000  00002000  RWIX
+  RAMGS3                00012000   00001ff8  00000000  00001ff8  RWIX
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+codestart 
+*          0    00080000    00000002     
+                  00080000    00000002     f28004x_codestartbranch.obj (codestart)
+
+.cinit     0    00081000    00000069     
+                  00081000    0000002b     diskio.obj (.cinit:_drive_fxn_table)
+                  0008102b    00000011     sd_fat32.obj (.cinit)
+                  0008103c    0000000e     rts2800_fpu32.lib : exit.c.obj (.cinit)
+                  0008104a    0000000a     device.obj (.cinit)
+                  00081054    00000005     sd_fat32.obj (.cinit:_SDFatFS_config)
+                  00081059    00000005     rts2800_fpu32.lib : _lock.c.obj (.cinit:__lock)
+                  0008105e    00000005                       : _lock.c.obj (.cinit:__unlock)
+                  00081063    00000004     SDFatFS.obj (.cinit)
+                  00081067    00000002     --HOLE-- [fill = 0]
+
+.reset     0    003fffc0    00000002     DSECT
+                  003fffc0    00000002     rts2800_fpu32.lib : boot28.asm.obj (.reset)
+
+.stack     0    00008800    00000200     UNINITIALIZED
+                  00008800    00000200     --HOLE--
+
+.pinit     0    00081000    00000000     UNINITIALIZED
+
+.ebss      1    0000a800    0000072a     UNINITIALIZED
+                  0000a800    000006e0     sd_fat32.obj (.ebss)
+                  0000aee0    00000008     ff.obj (.ebss:_FatFs)
+                  0000aee8    00000008     SDFatFS.obj (.ebss:_sdFatFSHandles)
+                  0000aef0    00000006     rts2800_fpu32.lib : exit.c.obj (.ebss)
+                  0000aef6    00000004     device.obj (.ebss)
+                  0000aefa    00000002     sd_fat32.obj (.ebss:_SDFatFS_config)
+                  0000aefc    00000002     rts2800_fpu32.lib : _lock.c.obj (.ebss:__lock)
+                  0000aefe    00000002                       : _lock.c.obj (.ebss:__unlock)
+                  0000af00    00000028     diskio.obj (.ebss:_drive_fxn_table)
+                  0000af28    00000001     SDFatFS.obj (.ebss)
+                  0000af29    00000001     ff.obj (.ebss)
+
+.econst    0    00084000    0000022b     
+                  00084000    000001aa     SDFatFS.obj (.econst:.string)
+                  000841aa    0000004e     ff.obj (.econst:.string)
+                  000841f8    0000000d     sd_fat32.obj (.econst:.string:_outputfile)
+                  00084205    0000000a     ff.obj (.econst:.string:_DbcTbl)
+                  0008420f    0000000a     sdspi.obj (.econst:_$P$T0$1)
+                  00084219    00000007     ff.obj (.econst:_cst$1)
+                  00084220    00000007     ff.obj (.econst:_cst32$2)
+                  00084227    00000002     sdspi.obj (.econst:_$P$T1$2)
+                  00084229    00000002     sdspi.obj (.econst:_$P$T2$3)
+
+.TI.ramfunc 
+*          0    0008106c    00000004     RUN ADDR = 00008000
+                  0008106c    00000004     sysctl.obj (.TI.ramfunc)
+
+.text      0    00090000    00003362     
+                  00090000    0000190e     ff.obj (.text)
+                  0009190e    00000578     sdspi.obj (.text)
+                  00091e86    00000409     sysctl.obj (.text)
+                  0009228f    00000324     dcc.obj (.text)
+                  000925b3    00000318     spi.obj (.text)
+                  000928cb    000001eb     gpio.obj (.text)
+                  00092ab6    000001e2     SDFatFS.obj (.text)
+                  00092c98    000001df     device.obj (.text)
+                  00092e77    00000173     interrupt.obj (.text)
+                  00092fea    000000e0     diskio.obj (.text)
+                  000930ca    000000b8     board.obj (.text)
+                  00093182    00000088     rts2800_fpu32.lib : fs_div28.asm.obj (.text)
+                  0009320a    00000056                       : boot28.asm.obj (.text)
+                  00093260    00000048     sd_fat32.obj (.text)
+                  000932a8    0000002a     interrupt.obj (.text:retain)
+                  000932d2    00000029     rts2800_fpu32.lib : exit.c.obj (.text)
+                  000932fb    00000024                       : cpy_tbl.c.obj (.text)
+                  0009331f    0000001d                       : memcpy.c.obj (.text)
+                  0009333c    00000012                       : args_main.c.obj (.text)
+                  0009334e    00000009                       : _lock.c.obj (.text)
+                  00093357    00000008     f28004x_codestartbranch.obj (.text)
+                  0009335f    00000002     rts2800_fpu32.lib : pre_init.c.obj (.text)
+                  00093361    00000001                       : startup.c.obj (.text)
+
+MODULE SUMMARY
+
+       Module                        code    initialized data   uninitialized data
+       ------                        ----    ----------------   ------------------
+    .\device\
+       device.obj                    479     10                 4                 
+       f28004x_codestartbranch.obj   10      0                  0                 
+    +--+-----------------------------+-------+------------------+--------------------+
+       Total:                        489     10                 4                 
+                                                                                  
+    .\device\driverlib\
+       sysctl.obj                    1041    0                  0                 
+       dcc.obj                       804     0                  0                 
+       spi.obj                       792     0                  0                 
+       gpio.obj                      491     0                  0                 
+       interrupt.obj                 413     0                  0                 
+    +--+-----------------------------+-------+------------------+--------------------+
+       Total:                        3541    0                  0                 
+                                                                                  
+    .\source\
+       ff.obj                        6414    102                9                 
+       sd_fat32.obj                  72      35                 1762              
+       sdspi.obj                     1400    14                 0                 
+       SDFatFS.obj                   482     430                9                 
+       diskio.obj                    224     43                 40                
+       board.obj                     184     0                  0                 
+    +--+-----------------------------+-------+------------------+--------------------+
+       Total:                        8776    624                1820              
+                                                                                  
+    C:\ti\ccs12.0\ccs\tools\compiler\ti-cgt-c2000_22.6.0.LTS\lib\rts2800_fpu32.lib
+       fs_div28.asm.obj              136     0                  0                 
+       boot28.asm.obj                86      0                  0                 
+       exit.c.obj                    41      14                 6                 
+       cpy_tbl.c.obj                 36      0                  0                 
+       memcpy.c.obj                  29      0                  0                 
+       _lock.c.obj                   9       10                 4                 
+       args_main.c.obj               18      0                  0                 
+       pre_init.c.obj                2       0                  0                 
+       startup.c.obj                 1       0                  0                 
+    +--+-----------------------------+-------+------------------+--------------------+
+       Total:                        358     24                 10                
+                                                                                  
+       Stack:                        0       0                  512               
+    +--+-----------------------------+-------+------------------+--------------------+
+       Grand Total:                  13164   658                2346              
+
+
+GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
+
+address     data page           name
+--------    ----------------    ----
+00008800     220 (00008800)     __stack
+
+0000a800     2a0 (0000a800)     _SDFatFS_config_count
+0000a801     2a0 (0000a800)     _filesize
+0000a802     2a0 (0000a800)     _fresult
+0000a804     2a0 (0000a800)     _sdspiHandle
+0000a806     2a0 (0000a800)     _sdspiObject
+
+0000a840     2a1 (0000a840)     _src
+
+0000aa80     2aa (0000aa80)     _dst
+
+0000acc0     2b3 (0000acc0)     _sdfatfsObject
+
+0000aef0     2bb (0000aec0)     ___TI_enable_exit_profile_output
+0000aef2     2bb (0000aec0)     ___TI_cleanup_ptr
+0000aef4     2bb (0000aec0)     ___TI_dtors_ptr
+0000aef6     2bb (0000aec0)     _Example_PassCount
+0000aef8     2bb (0000aec0)     _Example_Fail
+0000aefa     2bb (0000aec0)     _SDFatFS_config
+0000aefc     2bb (0000aec0)     __lock
+0000aefe     2bb (0000aec0)     __unlock
+
+000841f8    2107 (000841c0)     _outputfile
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+page  address   name                                      
+----  -------   ----                                      
+abs   ffffffff  .text                                     
+0     000932d2  C$$EXIT                                   
+0     00093182  FS$$DIV                                   
+0     00093129  _Board_init                               
+0     0009250a  _DCC_continuousMonitor                    
+0     00092390  _DCC_getRevisionNumber                    
+0     00092466  _DCC_measureClockFrequency                
+0     000923a4  _DCC_verifyClockFrequency                 
+0     00092d4d  _Device_enableAllPeripherals              
+0     00092d20  _Device_init                              
+0     00092e2d  _Device_initGPIO                          
+0     00092e3d  _Device_verifyXTAL                        
+1     0000aef8  _Example_Fail                             
+1     0000aef6  _Example_PassCount                        
+0     000928ff  _GPIO_getDirectionMode                    
+0     00092988  _GPIO_getPadConfig                        
+0     000929e8  _GPIO_getQualificationMode                
+0     00093138  _GPIO_init                                
+0     00092a57  _GPIO_setAnalogMode                       
+0     00092a2b  _GPIO_setControllerCore                   
+0     000928d8  _GPIO_setDirectionMode                    
+0     00092915  _GPIO_setInterruptPin                     
+0     00092940  _GPIO_setPadConfig                        
+0     00092a7f  _GPIO_setPinConfig                        
+0     000929bc  _GPIO_setQualificationMode                
+0     00092a09  _GPIO_setQualificationPeriod              
+0     000932a8  _Interrupt_defaultHandler                 
+0     00092f9c  _Interrupt_disable                        
+0     00092f65  _Interrupt_enable                         
+0     000932be  _Interrupt_illegalOperationHandler        
+0     00092f0a  _Interrupt_initModule                     
+0     00092f47  _Interrupt_initVectorTable                
+0     000932c8  _Interrupt_nmiHandler                     
+0     00093132  _PinMux_init                              
+0     00081070  _RamfuncsLoadEnd                          
+abs   00000004  _RamfuncsLoadSize                         
+0     0008106c  _RamfuncsLoadStart                        
+0     00008004  _RamfuncsRunEnd                           
+abs   00000004  _RamfuncsRunSize                          
+0     00008000  _RamfuncsRunStart                         
+0     00092ac4  _SDFatFS_close                            
+1     0000aefa  _SDFatFS_config                           
+1     0000a800  _SDFatFS_config_count                     
+0     00092b1d  _SDFatFS_diskIOctrl                       
+0     00092aff  _SDFatFS_diskInitialize                   
+0     00092b75  _SDFatFS_diskRead                         
+0     00092ba1  _SDFatFS_diskStatus                       
+0     00092bae  _SDFatFS_diskWrite                        
+0     00092bd7  _SDFatFS_init                             
+0     00092c04  _SDFatFS_open                             
+0     000919c6  _SDSPI_close                              
+0     000919d6  _SDSPI_control                            
+0     000919de  _SDSPI_getNumSectors                      
+0     00091a2b  _SDSPI_getSectorSize                      
+0     00091a32  _SDSPI_init                               
+0     00091a3a  _SDSPI_initialize                         
+0     00091b60  _SDSPI_open                               
+0     00091baa  _SDSPI_read                               
+0     00091c1b  _SDSPI_write                              
+0     000926e6  _SPI_clearInterruptStatus                 
+0     0009269b  _SPI_disableInterrupt                     
+0     00092675  _SPI_enableInterrupt                      
+0     000926c1  _SPI_getInterruptStatus                   
+0     00093154  _SPI_init                                 
+0     0009272a  _SPI_pollingFIFOTransaction               
+0     00091d58  _SPI_pollingFIFOTransactionWithNullSupport
+0     00092713  _SPI_pollingNonFIFOTransaction            
+0     000927dc  _SPI_receive16Bits                        
+0     00092810  _SPI_receive24Bits                        
+0     00092874  _SPI_receive32Bits                        
+0     00092664  _SPI_setBaudRate                          
+0     0009263b  _SPI_setConfig                            
+0     000927b3  _SPI_transmit24Bits                       
+0     0009284f  _SPI_transmit32Bits                       
+0     00008000  _SysCtl_delay                             
+0     00091fbd  _SysCtl_getClock                          
+0     00092177  _SysCtl_getDeviceParametric               
+0     0009215d  _SysCtl_getLowSpeedClock                  
+0     000921d2  _SysCtl_isPLLValid                        
+0     0009212b  _SysCtl_selectOscSource                   
+0     000920d5  _SysCtl_selectXTAL                        
+0     0009210b  _SysCtl_selectXTALSingleEnded             
+0     0009201b  _SysCtl_setClock                          
+0     00008a00  __STACK_END                               
+abs   00000200  __STACK_SIZE                              
+1     0000aef2  ___TI_cleanup_ptr                         
+1     0000aef4  ___TI_dtors_ptr                           
+1     0000aef0  ___TI_enable_exit_profile_output          
+abs   ffffffff  ___TI_pprof_out_hndl                      
+abs   ffffffff  ___TI_prof_data_size                      
+abs   ffffffff  ___TI_prof_data_start                     
+abs   ffffffff  ___binit__                                
+abs   ffffffff  ___c_args__                               
+0     00081000  ___cinit__                                
+0     00092e70  ___error__                                
+abs   ffffffff  ___etext__                                
+abs   ffffffff  ___pinit__                                
+abs   ffffffff  ___text__                                 
+0     0009333c  __args_main                               
+1     0000aefc  __lock                                    
+0     00093356  __nop                                     
+0     00093352  __register_lock                           
+0     0009334e  __register_unlock                         
+0     00008800  __stack                                   
+0     00093361  __system_post_cinit                       
+0     0009335f  __system_pre_init                         
+1     0000aefe  __unlock                                  
+0     000932d2  _abort                                    
+0     0009320a  _c_int00                                  
+0     000932fb  _copy_in                                  
+0     0009305b  _disk_initialize                          
+0     000930ac  _disk_ioctl                               
+0     00093072  _disk_read                                
+0     00092fea  _disk_register                            
+0     00093044  _disk_status                              
+0     0009301a  _disk_unregister                          
+0     0009308f  _disk_write                               
+1     0000aa80  _dst                                      
+0     000932d4  _exit                                     
+0     000914f3  _f_chmod                                  
+0     00090fba  _f_close                                  
+0     0009116d  _f_closedir                               
+0     000911d1  _f_getfree                                
+0     00090fd0  _f_lseek                                  
+0     00091373  _f_mkdir                                  
+0     00091566  _f_mkfs                                   
+0     00090b22  _f_mount                                  
+0     00090b5b  _f_open                                   
+0     00091125  _f_opendir                                
+0     00090ca1  _f_read                                   
+0     0009117d  _f_readdir                                
+0     00091425  _f_rename                                 
+0     000911a9  _f_stat                                   
+0     00090f4e  _f_sync                                   
+0     00091271  _f_truncate                               
+0     00091300  _f_unlink                                 
+0     00091530  _f_utime                                  
+0     00090dd8  _f_write                                  
+0     000932a6  _fatfs_getFatTime                         
+1     0000a801  _filesize                                 
+1     0000a802  _fresult                                  
+0     000930c7  _get_fattime                              
+0     00093260  _main                                     
+0     0009331f  _memcpy                                   
+0     0009313b  _mySDCardCS_init                          
+0     00093157  _mySDCardSPI_init                         
+0     000841f8  _outputfile                               
+1     0000acc0  _sdfatfsObject                            
+1     0000a804  _sdspiHandle                              
+1     0000a806  _sdspiObject                              
+1     0000a840  _src                                      
+0     00092ab6  _uart_log0                                
+0     00092aba  _uart_log1                                
+0     00092abf  _uart_log2                                
+abs   ffffffff  binit                                     
+0     00081000  cinit                                     
+0     00080000  code_start                                
+abs   ffffffff  etext                                     
+abs   ffffffff  pinit                                     
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+page  address   name                                      
+----  -------   ----                                      
+0     00008000  _RamfuncsRunStart                         
+0     00008000  _SysCtl_delay                             
+0     00008004  _RamfuncsRunEnd                           
+0     00008800  __stack                                   
+0     00008a00  __STACK_END                               
+0     00080000  code_start                                
+0     00081000  ___cinit__                                
+0     00081000  cinit                                     
+0     0008106c  _RamfuncsLoadStart                        
+0     00081070  _RamfuncsLoadEnd                          
+0     000841f8  _outputfile                               
+0     00090b22  _f_mount                                  
+0     00090b5b  _f_open                                   
+0     00090ca1  _f_read                                   
+0     00090dd8  _f_write                                  
+0     00090f4e  _f_sync                                   
+0     00090fba  _f_close                                  
+0     00090fd0  _f_lseek                                  
+0     00091125  _f_opendir                                
+0     0009116d  _f_closedir                               
+0     0009117d  _f_readdir                                
+0     000911a9  _f_stat                                   
+0     000911d1  _f_getfree                                
+0     00091271  _f_truncate                               
+0     00091300  _f_unlink                                 
+0     00091373  _f_mkdir                                  
+0     00091425  _f_rename                                 
+0     000914f3  _f_chmod                                  
+0     00091530  _f_utime                                  
+0     00091566  _f_mkfs                                   
+0     000919c6  _SDSPI_close                              
+0     000919d6  _SDSPI_control                            
+0     000919de  _SDSPI_getNumSectors                      
+0     00091a2b  _SDSPI_getSectorSize                      
+0     00091a32  _SDSPI_init                               
+0     00091a3a  _SDSPI_initialize                         
+0     00091b60  _SDSPI_open                               
+0     00091baa  _SDSPI_read                               
+0     00091c1b  _SDSPI_write                              
+0     00091d58  _SPI_pollingFIFOTransactionWithNullSupport
+0     00091fbd  _SysCtl_getClock                          
+0     0009201b  _SysCtl_setClock                          
+0     000920d5  _SysCtl_selectXTAL                        
+0     0009210b  _SysCtl_selectXTALSingleEnded             
+0     0009212b  _SysCtl_selectOscSource                   
+0     0009215d  _SysCtl_getLowSpeedClock                  
+0     00092177  _SysCtl_getDeviceParametric               
+0     000921d2  _SysCtl_isPLLValid                        
+0     00092390  _DCC_getRevisionNumber                    
+0     000923a4  _DCC_verifyClockFrequency                 
+0     00092466  _DCC_measureClockFrequency                
+0     0009250a  _DCC_continuousMonitor                    
+0     0009263b  _SPI_setConfig                            
+0     00092664  _SPI_setBaudRate                          
+0     00092675  _SPI_enableInterrupt                      
+0     0009269b  _SPI_disableInterrupt                     
+0     000926c1  _SPI_getInterruptStatus                   
+0     000926e6  _SPI_clearInterruptStatus                 
+0     00092713  _SPI_pollingNonFIFOTransaction            
+0     0009272a  _SPI_pollingFIFOTransaction               
+0     000927b3  _SPI_transmit24Bits                       
+0     000927dc  _SPI_receive16Bits                        
+0     00092810  _SPI_receive24Bits                        
+0     0009284f  _SPI_transmit32Bits                       
+0     00092874  _SPI_receive32Bits                        
+0     000928d8  _GPIO_setDirectionMode                    
+0     000928ff  _GPIO_getDirectionMode                    
+0     00092915  _GPIO_setInterruptPin                     
+0     00092940  _GPIO_setPadConfig                        
+0     00092988  _GPIO_getPadConfig                        
+0     000929bc  _GPIO_setQualificationMode                
+0     000929e8  _GPIO_getQualificationMode                
+0     00092a09  _GPIO_setQualificationPeriod              
+0     00092a2b  _GPIO_setControllerCore                   
+0     00092a57  _GPIO_setAnalogMode                       
+0     00092a7f  _GPIO_setPinConfig                        
+0     00092ab6  _uart_log0                                
+0     00092aba  _uart_log1                                
+0     00092abf  _uart_log2                                
+0     00092ac4  _SDFatFS_close                            
+0     00092aff  _SDFatFS_diskInitialize                   
+0     00092b1d  _SDFatFS_diskIOctrl                       
+0     00092b75  _SDFatFS_diskRead                         
+0     00092ba1  _SDFatFS_diskStatus                       
+0     00092bae  _SDFatFS_diskWrite                        
+0     00092bd7  _SDFatFS_init                             
+0     00092c04  _SDFatFS_open                             
+0     00092d20  _Device_init                              
+0     00092d4d  _Device_enableAllPeripherals              
+0     00092e2d  _Device_initGPIO                          
+0     00092e3d  _Device_verifyXTAL                        
+0     00092e70  ___error__                                
+0     00092f0a  _Interrupt_initModule                     
+0     00092f47  _Interrupt_initVectorTable                
+0     00092f65  _Interrupt_enable                         
+0     00092f9c  _Interrupt_disable                        
+0     00092fea  _disk_register                            
+0     0009301a  _disk_unregister                          
+0     00093044  _disk_status                              
+0     0009305b  _disk_initialize                          
+0     00093072  _disk_read                                
+0     0009308f  _disk_write                               
+0     000930ac  _disk_ioctl                               
+0     000930c7  _get_fattime                              
+0     00093129  _Board_init                               
+0     00093132  _PinMux_init                              
+0     00093138  _GPIO_init                                
+0     0009313b  _mySDCardCS_init                          
+0     00093154  _SPI_init                                 
+0     00093157  _mySDCardSPI_init                         
+0     00093182  FS$$DIV                                   
+0     0009320a  _c_int00                                  
+0     00093260  _main                                     
+0     000932a6  _fatfs_getFatTime                         
+0     000932a8  _Interrupt_defaultHandler                 
+0     000932be  _Interrupt_illegalOperationHandler        
+0     000932c8  _Interrupt_nmiHandler                     
+0     000932d2  C$$EXIT                                   
+0     000932d2  _abort                                    
+0     000932d4  _exit                                     
+0     000932fb  _copy_in                                  
+0     0009331f  _memcpy                                   
+0     0009333c  __args_main                               
+0     0009334e  __register_unlock                         
+0     00093352  __register_lock                           
+0     00093356  __nop                                     
+0     0009335f  __system_pre_init                         
+0     00093361  __system_post_cinit                       
+1     0000a800  _SDFatFS_config_count                     
+1     0000a801  _filesize                                 
+1     0000a802  _fresult                                  
+1     0000a804  _sdspiHandle                              
+1     0000a806  _sdspiObject                              
+1     0000a840  _src                                      
+1     0000aa80  _dst                                      
+1     0000acc0  _sdfatfsObject                            
+1     0000aef0  ___TI_enable_exit_profile_output          
+1     0000aef2  ___TI_cleanup_ptr                         
+1     0000aef4  ___TI_dtors_ptr                           
+1     0000aef6  _Example_PassCount                        
+1     0000aef8  _Example_Fail                             
+1     0000aefa  _SDFatFS_config                           
+1     0000aefc  __lock                                    
+1     0000aefe  __unlock                                  
+abs   00000004  _RamfuncsLoadSize                         
+abs   00000004  _RamfuncsRunSize                          
+abs   00000200  __STACK_SIZE                              
+abs   ffffffff  .text                                     
+abs   ffffffff  ___TI_pprof_out_hndl                      
+abs   ffffffff  ___TI_prof_data_size                      
+abs   ffffffff  ___TI_prof_data_start                     
+abs   ffffffff  ___binit__                                
+abs   ffffffff  ___c_args__                               
+abs   ffffffff  ___etext__                                
+abs   ffffffff  ___pinit__                                
+abs   ffffffff  ___text__                                 
+abs   ffffffff  binit                                     
+abs   ffffffff  etext                                     
+abs   ffffffff  pinit                                     
+
+[159 symbols]

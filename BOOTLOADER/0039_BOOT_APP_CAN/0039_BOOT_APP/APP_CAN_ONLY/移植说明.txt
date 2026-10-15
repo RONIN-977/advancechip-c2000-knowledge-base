@@ -1,0 +1,8 @@
+当前为客户初步适配版，未编译、未上板。
+请阅读 客户CAN初始化适配改动说明_Timer2版.docx 或同名 .md。
+通过 K01 至 K10 标记定位待修改点。
+旧版编译产物和 PASS 记录已移入验证记录下的客户适配前目录，不能用于证明当前版本。
+原 APP 与客户 kuobo 文件未修改；修改前完整备份在同级 ZIP。
+
+最新改动：upgrade_entry_init 内配置 Timer2 为 1MHz；dispatch 恢复原版直接应答后复位。无需客户毫秒与停机接口。
+旧 Word 因被占用保留，使用 Timer2版 Word 或已更新的 Markdown。

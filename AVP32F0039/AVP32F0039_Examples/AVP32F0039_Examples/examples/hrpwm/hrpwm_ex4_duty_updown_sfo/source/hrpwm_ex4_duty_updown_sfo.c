@@ -1,0 +1,286 @@
+/******************************* Copyright(C) *********************************************
+*
+*                           湖南进芯电子科技有限公司
+*                         http://www.advancechip.com/
+*
+*                         FILE:   hrpwm_ex4_duty_updown_sfo.c
+*                         TITLE:  HRPWM Duty Control with UPDOWN Mode.
+*******************************************************************************************/
+//!
+//! \b External \b Connections \n
+//!  - Monitor ePWM1/2/3/4 A/B pins on an oscilloscope.
+//
+//#############################################################################
+//
+// Included Files
+//
+#include "driverlib.h"
+#include "device.h"
+#include "board.h"
+#include "sfo_v8.h"
+
+#define CHANNEL_B_AS_ZRO_PRD_REF    1
+#define EPWM_TIMER_TBPRD            100UL
+#define MIN_HRPWM_DUTY_PERCENT      4.0/((float32_t)EPWM_TIMER_TBPRD)*100.0
+//
+// Defines
+//
+#define LAST_EPWM_INDEX_FOR_EXAMPLE    5
+
+//
+// Globals
+//
+
+float32_t dutyFine = 50.0;
+uint16_t status;
+
+int MEP_ScaleFactor; // Global variable used by the SFO library
+                     // Result can be used for all HRPWM channels
+                     // This variable is also copied to HRMSTEP
+                     // register by SFO() function.
+
+volatile uint32_t ePWM[] =
+    {0, myEPWM1_BASE, myEPWM2_BASE, myEPWM3_BASE, myEPWM4_BASE};
+//
+// Function Prototypes
+//
+void initHRPWM_ChannelB(uint32_t period);
+void error(void);
+//__interrupt void epwm1ISR(void);
+//__interrupt void epwm2ISR(void);
+//__interrupt void epwm3ISR(void);
+//__interrupt void epwm4ISR(void);
+
+//
+// Main
+//
+void main(void)
+{
+    uint16_t i = 0;
+
+    //
+    // Initialize device clock and peripherals
+    //
+    Device_init();
+
+    //
+    // Disable pin locks and enable internal pull ups.
+    //
+    Device_initGPIO();
+
+    //
+    // Initialize PIE and clear PIE registers. Disables CPU interrupts.
+    //
+    Interrupt_initModule();
+
+    //
+    // Initialize the PIE vector table with pointers to the shell Interrupt
+    // Service Routines (ISR).
+    //
+    Interrupt_initVectorTable();
+
+    //
+    // Assign the interrupt service routines to ePWM interrupts
+    //
+    //Interrupt_register(INT_EPWM1, &epwm1ISR);
+    //Interrupt_register(INT_EPWM2, &epwm2ISR);
+    //Interrupt_register(INT_EPWM3, &epwm3ISR);
+    //Interrupt_register(INT_EPWM4, &epwm4ISR);
+
+    //
+    // Calling SFO() updates the HRMSTEP register with calibrated MEP_ScaleFactor.
+    // HRMSTEP must be populated with a scale factor value prior to enabling
+    // high resolution period control.
+    //
+    while(status == SFO_INCOMPLETE)
+    {
+        status = SFO();
+        if(status == SFO_ERROR)
+        {
+            error();   // SFO function returns 2 if an error occurs & # of MEP
+        }              // steps/coarse step exceeds maximum of 255.
+    }
+
+
+
+    //
+    // Disable sync(Freeze clock to PWM as well)
+    //
+    SysCtl_disablePeripheral(SYSCTL_PERIPH_CLK_TBCLKSYNC);
+
+    //
+    // Initialize the EPWM GPIOs and change XBAR inputs from using GPIO0
+    //
+    Board_init();
+
+    initHRPWM_ChannelB(EPWM_TIMER_TBPRD);
+
+    //
+    // Enable sync and clock to PWM
+    //
+    SysCtl_enablePeripheral(SYSCTL_PERIPH_CLK_TBCLKSYNC);
+
+
+    // Enable ePWM interrupts
+    //
+    //Interrupt_enable(INT_EPWM1);
+    //Interrupt_enable(INT_EPWM2);
+    //Interrupt_enable(INT_EPWM3);
+    //Interrupt_enable(INT_EPWM4);
+
+    //
+    // Enable Global Interrupt (INTM) and realtime interrupt (DBGM)
+    //
+    EINT;
+    ERTM;
+
+
+    for(;;)
+    {
+         //
+         // Sweep DutyFine
+         //
+         for(dutyFine = MIN_HRPWM_DUTY_PERCENT; dutyFine < (100.0-MIN_HRPWM_DUTY_PERCENT); dutyFine += 0.01)
+         {
+             DEVICE_DELAY_US(1000);
+             for(i=1; i<LAST_EPWM_INDEX_FOR_EXAMPLE; i++)
+             {
+                 float32_t count = ((100.0 - dutyFine) * (float32_t)(EPWM_TIMER_TBPRD << 8))/100.0;
+                 uint32_t compCount = (count);
+                 uint32_t hrCompCount = (compCount & (0x000000FF));
+                 if (hrCompCount == 0)
+                 {
+                     //
+                     // Add 1 to not have CMPxHR = 0
+                     //
+                     compCount |= 0x00000001;
+                 }
+                 HRPWM_setCounterCompareValue(ePWM[i], HRPWM_COUNTER_COMPARE_A, compCount);
+#if CHANNEL_B_AS_ZRO_PRD_REF == 0
+                 HRPWM_setCounterCompareValue(ePWM[i], HRPWM_COUNTER_COMPARE_B, compCount);
+#endif
+             }
+
+             //
+             // Call the scale factor optimizer lib function SFO()
+             // periodically to track for any change due to temp/voltage.
+             // This function generates MEP_ScaleFactor by running the
+             // MEP calibration module in the HRPWM logic. This scale
+             // factor can be used for all HRPWM channels. The SFO()
+             // function also updates the HRMSTEP register with the
+             // scale factor value.
+             //
+             status = SFO(); // in background, MEP calibration module
+                             // continuously updates MEP_ScaleFactor
+
+             if (status == SFO_ERROR)
+             {
+                 error();   // SFO function returns 2 if an error occurs & #
+                            // of MEP steps/coarse step
+             }              // exceeds maximum of 255.
+         }
+     }
+}
+
+//
+// epwm1ISR - ePWM 1 ISR
+//
+//__interrupt void epwm1ISR(void)
+//{
+//    EPWM_clearEventTriggerInterruptFlag(EPWM1_BASE);
+//    Interrupt_clearACKGroup(INTERRUPT_ACK_GROUP3);
+//}
+
+//
+// epwm2ISR - ePWM 2 ISR
+//
+//__interrupt void epwm2ISR(void)
+//{
+//    EPWM_clearEventTriggerInterruptFlag(EPWM2_BASE);
+//    Interrupt_clearACKGroup(INTERRUPT_ACK_GROUP3);
+//}
+
+//
+// epwm3ISR - ePWM 3 ISR
+//
+//__interrupt void epwm3ISR(void)
+//{
+//    EPWM_clearEventTriggerInterruptFlag(EPWM3_BASE);
+//    Interrupt_clearACKGroup(INTERRUPT_ACK_GROUP3);
+//}
+
+//
+// epwm4ISR - ePWM 4 ISR
+//
+//__interrupt void epwm4ISR(void)
+//{
+//    EPWM_clearEventTriggerInterruptFlag(EPWM4_BASE);
+//    Interrupt_clearACKGroup(INTERRUPT_ACK_GROUP3);
+//}
+
+
+void initHRPWM_ChannelB(uint32_t period)
+{
+
+    uint16_t j;
+
+    //
+    // ePWM channel register configuration with HRPWM
+    // ePWMxA / ePWMxB toggle low/high with MEP control on Rising and Falling edges
+    //
+    for (j=1;j<LAST_EPWM_INDEX_FOR_EXAMPLE;j++)
+    {
+
+#if CHANNEL_B_AS_ZRO_PRD_REF == 1
+        //
+        // Use B channel as the ZERO and PRD reference
+        //
+        EPWM_setActionQualifierAction(ePWM[j],
+                                      EPWM_AQ_OUTPUT_B,
+                                      EPWM_AQ_OUTPUT_HIGH,
+                                      EPWM_AQ_OUTPUT_ON_TIMEBASE_ZERO);
+        EPWM_setActionQualifierAction(ePWM[j],
+                                      EPWM_AQ_OUTPUT_B,
+                                      EPWM_AQ_OUTPUT_LOW,
+                                      EPWM_AQ_OUTPUT_ON_TIMEBASE_PERIOD);
+#else
+        EPWM_setActionQualifierAction(ePWM[j],
+                                      EPWM_AQ_OUTPUT_B,
+                                      EPWM_AQ_OUTPUT_HIGH,
+                                      EPWM_AQ_OUTPUT_ON_TIMEBASE_UP_CMPB);
+        EPWM_setActionQualifierAction(ePWM[j],
+                                      EPWM_AQ_OUTPUT_B,
+                                      EPWM_AQ_OUTPUT_LOW,
+                                      EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPB);
+#endif
+
+#if CHANNEL_B_AS_ZRO_PRD_REF == 0
+        HRPWM_setMEPEdgeSelect(ePWM[j], HRPWM_CHANNEL_B, HRPWM_MEP_CTRL_RISING_AND_FALLING_EDGE);
+        HRPWM_setMEPControlMode(ePWM[j], HRPWM_CHANNEL_B, HRPWM_MEP_DUTY_PERIOD_CTRL);
+
+        //
+        // Set up shadowing
+        // MUST BE CTR=(ZER & PRD)
+        //
+        HRPWM_setCounterCompareShadowLoadEvent(ePWM[j], HRPWM_CHANNEL_B, HRPWM_LOAD_ON_CNTR_ZERO_PERIOD);
+#endif
+
+        //
+        // Interrupt where we will change the Compare Values
+        // Select INT on Time base counter zero event,
+        // Enable INT, generate INT on 1st event
+        //
+        //EPWM_setInterruptSource(ePWM[j], EPWM_INT_TBCTR_ZERO);
+        //EPWM_enableInterrupt(ePWM[j]);
+        //EPWM_setInterruptEventCount(ePWM[j], 1U);
+    }
+
+}
+
+//
+// error - Halt debugger when called
+//
+void error (void)
+{
+    ESTOP0;         // Stop here and handle error
+}

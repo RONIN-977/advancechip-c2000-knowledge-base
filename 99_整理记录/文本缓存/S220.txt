@@ -1,0 +1,8 @@
+来源: 文档/hex和bin文件脚本生成方法.docx
+来源编号: S220
+
+段落1: HEX和BIN文件脚本生成的方法
+
+段落2: 打开 C盘---ti---ccsv12---tools---compiler---tic2000---bin(需要转换的out文件放到这里)
+
+段落3: 右键选择在终端打开，用脚本代码“hex2000 -romwidth 16 -memwidth 16 -i xxx.out -o xxx.bin”在终端将out文件转换成hex（bin）文件（注意前缀要加 .\   xxx要改成对应的文件名）例如： .\hex2000 -romwidth 16 -memwidth 16 -i Example_AVP32F069AD.out -o Example_AVP32F069AD.hex（需要生成bin文件尾缀改成.bin），然后敲回车这样操作完需要的hex或者bin文件就生成了。

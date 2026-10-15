@@ -1,0 +1,2929 @@
+来源: 文档/0049的图腾柱PFC参考设计.pdf
+来源编号: S196
+
+=== PDF页 1 ===
+0 Driver
+Vdc
+Vdc Sense
+Line 
+Voltage 
+Sense
+Neutral 
+Voltage 
+Sense
+SiC MOSFET
+ (High Frequency)
+Si/SiC (Low 
+Frequency)
+Power Grid
+V_N
+Ineu
+Vdc Sense
+F28004x 
+C2000TM MCU
+V_L UCC28700-Q1
+TLV71333-Q1
+Vdc
+5 V
+3.3 V
+F28004x Control Card F28004x Control Card
+SN6501-Q1
+G8
+Ic
+Ib
+Ia
+Ineu
+Ic
+Ib
+Ia 15 V & -4 V
+15 V & -4 V
+15 V & -4 V
+G1
+G2
+G3
+G4
+G5
+G6
+PFC Vout
+Hall 
+Sensor
+Hall Sensor 
+x 3 La
+Lb
+Lc
+ISO7721-Q
+Fault
+Reset
+5 V
+G7
+15 V & -4 V
+UCC21520-Q1
+4 × TIDA-01605
+G1 G2 G3 G4 G5 G6 G7 G8
+ZHCU459B–March 2018–Revised April 2020 1
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+TI Designs：TIDA-01604
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱
+PFC 参考设计
+说明
+此参考设计介绍了适用于车载充电器的 6.6kW 图腾柱
+(TTPL) 无桥功率因数校正 (PFC) 解决方案。功率级由
+C2000™微控制器 (MCU) 通过 SiC 隔离式栅极驱动器
+实现碳化硅 (SiC) MOSFET 的驱动。此设计采用了三相
+交错技术并在连续导通模式 (CCM) 中运行，在 240V 输
+入电压和 6.6kW 全功率下可实现 98.60% 的效率。
+C2000 控制器可实现切相和自适应死区时间控制，从而
+改善轻载条件下的功率因数。栅极驱动器板（参见
+TIDA-01605）实现了增强型隔离，可承受超过 100V/ns
+的共模瞬态抗扰度 (CMTI)。栅极驱动器板还包含两级关
+断电路，可在短路情况下保护 MOSFET 抵御电压过
+冲。
+资源
+TIDA-01604 设计文件夹
+UCC21520-Q1 产品文件夹
+TMS320F280049 产品文件夹
+UCC28700-Q1 产品文件夹
+TL1963A-Q1 产品文件夹
+ISO7731-Q1 产品文件夹
+C2000WARE￾DIGITALPOWER-SDK
+工具文件夹
+咨询我们的 E2E™ 专家
+特性
+• 高功率密度、高效率 PFC 设计，可为高达 6.6kW
+的系统供电
+• SiC MOSFET 具有 TI 驱动器，能够为客户提供更高
+的集成度
+• 具有增强型隔离和两级关断保护功能的半桥型和紧
+凑型隔离式栅极驱动器
+• 完全数字化控制，通过高性能 C2000™ 控制器实现
+先进的控制方案
+• 峰值效率为 98.86%，功率因素大于 0.99，且总谐波
+失真 (THD) 小于 2%
+• 三相交错运行方式，具有切相控制功能
+• 400V 至 600V 的可编程输出电压
+应用
+• HEV/EV 牵引逆变器
+• HEV/EV 车载充电器
+• 电子控制单元
+• HEV/EV 直流/直流转换器
+
+=== PDF页 2 ===
+!
+System Description www.ti.com.cn
+2 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+该 TI 参考设计末尾的重要声明表述了授权使用、知识产权问题和其他重要的免责声明和信息。
+1 System Description
+WARNING
+Do not leave the device powered when unattended.
+High voltage! There are accessible high voltages present
+on the board. Electric shock is possible. The board operates at
+voltages and currents that may cause shock, fire, or injury if not
+properly handled. Use the equipment with necessary caution and
+appropriate safeguards to avoid injury or damage to property. For
+safety, use of isolated equipment with overvoltage and overcurrent
+is highly recommended. TI considers it the user's responsibility to
+confirm that the voltages and isolation requirements are identified
+and understood before energizing the board or simulation. When
+energized, do not touch the design or components connected to
+the design.
+Hot surface! Contact may cause burns. Do not touch!
+Some components may reach high temperatures > 55°C when the
+board is powered on. The user must not touch the board at any
+point during operation or immediately after operating, as high
+temperatures may be present.
+1.1 Benefits of Totem-Pole Bridgeless PFC
+All plug-in hybrid electric vehicles (PHEVs) require an onboard charger (OBC) between the power grid and
+the high-voltage battery pack located inside the vehicle. Implementing a power factor correction (PFC)
+converter is mandatory to connect directly to the power grid for AC/DC power conversion and maximize
+the real power that flows to the downstream DC/DC converters.
+Conventional PFC converters implement a passive diode bridge for rectification, which is now known as a
+passive PFC technique. The advantages of such a scheme are: simple design, reliability, slow-system
+control loop, and low cost. However, the disadvantages are also very obvious: the passive components
+are heavy with a low-power factor and generate significant power losses, which results in bulky heat sinks
+and a lot of heat dissipation. Further investigation into the matter shows that an input bridge consumes
+
+=== PDF页 3 ===
+Power Grid
+VAC
+Load
+SiC1
+SiC2
+Si1
+Si2
+L
+(b)
++
+-
+Power Grid
+VAC
+Load
+SiC1
+S2
+D1
+D2
+iL
+(a)
++
+-
+www.ti.com.cn System Description
+ZHCU459B–March 2018–Revised April 2020 3
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+approximately 2% of the input power at the low line of a wide mains application. If the designer can
+suppress one of the series diodes, then they can save 1% of the input power, which allows the efficiency
+to rise from 94% to 95% (Turchi; Dalal; Wang; Lenck 2014). Due to previously-mentioned drawbacks, the
+power rating of bridged traditional PFCs is limited under hundreds of watts, especially in a hybrid-electric
+vehicle (HEV) or electric vehicle (EV) where reduced space and weight are the key design parameters.
+As a result, the trend continues to move toward a bridgeless architecture with the elimination of the
+traditional diode bridge. The OBC is based on a silicon power device and has limitations such as low
+efficiency, low power density, and high weight. With the advantages of the SiC MOSFET, the designer can
+greatly improve these limitations by utilizing the superior performance of fast switching, low reverse
+recovery charge, and a low RDS(ON).
+图 1 shows the basic structure of the totem-pole bridgeless PFC boost rectifier. The component consists
+of a boost inductor, two high-frequency boost SiC switches (SiC1 and SiC2
+), and two components for
+conducting current at the line frequency. The line frequency components can be two slow diodes, as 图 1
+shows. Side (A) shows two silicon MOSFETs (Si1 and Si2
+). Side (B) shows that the use of Si1 and Si2
+further increases the efficiency.
+图 1. Totem-Pole Bridgeless PFC Boost Converter Topology:
+(A) Diode for Line Rectification (B) MOSFET for Line Rectification
+The inherent issue in the totem-pole PFC is the operation mode transition at the AC voltage zero-crossing.
+When the AC input changes from the positive half line to the negative half line at the zero-crossing, the
+duty ratio of the low-side high-frequency switch SiC2 changes from 100% to 0%, and the duty cycle of SiC1
+changes from 0% to 100%. Because of the slow reverse recovery of the high-side diode (or body diode of
+the MOSFET), the voltage at the cathode of D2 cannot jump from ground to DC+ voltage instantly (this
+causes a large current spike). Because of this issue, the designer cannot use an Si MOSFET in a
+continuous-conduction mode (CCM) totem-pole PFC. Therefore SiC1 and SiC2 must be either SiC
+MOSFET or gallium nitride (GaN) field-effect transistors (FETs), which have a low reverse recovery.
+The biggest advantage of the totem-pole PFC is the reduced power losses in the conduction path. 表 1
+shows the device comparison between a conventional PFC and a totem-pole PFC.
+
+=== PDF页 4 ===
+System Description www.ti.com.cn
+4 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+表 1. Device Comparison of Conventional Bridged PFC and Totem-Pole Bridgeless PFC
+PARAMETER LOW-FREQUENCY
+DIODES
+HIGH-FREQUENCY
+DIODES
+HIGH-FREQUENCY
+SWITCHES CONDUCTION PATHS
+Conventional bridged
+PFC Four One One
+Two low-speed diodes + one
+switch or (two low-speed diodes +
+one high-speed diode)
+Totem-pole bridgeless
+PFC Two Zero Two One high-speed SiC switch + one
+low-speed Si (or SiC) MOSFET
+The following list summarizes the benefits of the totem-pole PFC:
+• Although the conventional PFC boost converter is the most popular topology, its efficiency suffers from
+the conduction losses of the front-end diode bridge rectifier and it is not bidirectional. A totem-pole PFC
+is inherently capable of bidirectional operation.
+• Bridgeless PFC boost converters greatly reduce the number of diodes, increase the power density, and
+increase the efficiency.
+• This PFC is superior in terms of: high efficiency, small common mode noise, small AC current ripple,
+small reverse recovery current, and fewer components.
+• The low reverse recovery charge of the SiC body diode and the low turnon resistance of the SiC
+MOSFET make the converter an efficient and cost-effective solution for bidirectional onboard chargers.
+1.2 Totem-Pole Bridgeless PFC Operation
+The totem-pole PFC operates in the positive and negative cycles of the AC mains input, respectively, and
+determines the current flow depending on how the high frequency SiC MOSFETs are switched (see 图 2
+and 图 3, respectively).
+The high-frequency SiC MOSFETs together with the inductor create a synchronous mode boost converter.
+During the positive half cycle, S2
+is the boost switch which is driven with duty cycle D and S1
+is driven with
+a complementary pulse-width modulation (PWM) signal (1-D). 图 2 (A) shows the direction in which the
+current flows. Similarly, during the period when S2
+is switched with 1-D, S1
+is switched with D; 图 2 (B)
+shows the direction in which the current flows. Note that, during this cycle, SD2 conducts continuously.
+During the negative half cycle, the operation is similar except that the role of the high-side- and low-side,
+high-frequency switches are swapped. 图 3 shows the direction in which the current flows. Note that,
+during this cycle, SD1 conducts continuously.
+
+=== PDF页 5 ===
+Power Grid
+VAC
+Load
+S1
+S2
+SD1
+SD2
+L
+(b)
++
+-
+Power Grid
+VAC
+Load
+S1
+S2
+SD1
+SD2
+L
+(a)
++
+-
+Power Grid
+VAC
+Load
+S1
+S2
+SD1
+SD2
+L
+(b)
++
+-
+Power Grid
+VAC
+Load
+S1
+S2
+SD1
+SD2
+L
+(a)
++
+-
+www.ti.com.cn System Description
+ZHCU459B–March 2018–Revised April 2020 5
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 2. Totem-Pole Bridgeless PFC Operation During Positive Half Cycle:
+(A) While S2
+is Switched ON (B) While S2
+is Switched OFF
+图 3. Totem-Pole Bridgeless PFC Operation During Negative Half Cycle:
+(A) While S1
+is Switched ON (B) While S1
+is Switched OFF
+This reference design uses an SiC MOSFET (C3M0065100K from Wolfspeed) and TI’s C2000™
+Piccolo™ (TMS320F280049) high-performance MCU. The high-frequency SiC MOSFETs operate at a
+100-kHz switching frequency and the pair of Si MOSFETs operate at the line frequency (approximately
+45 Hz to 60 Hz). Thus the conduction path includes one SiC switch and one low-frequency Si switch with
+significantly-reduced conduction losses. Use three-channel interleaving to reduce conduction loss and
+input current ripple. Test results demonstrate a high efficiency above 98.86% and confirm that the
+advanced features of the controller function, such as phase shedding and adaptive dead-time control.
+
+=== PDF页 6 ===
+System Description www.ti.com.cn
+6 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+1.3 Key System Specifications
+表 2 lists the key system specifications of this design.
+表 2. TIDA-01604 Key System Specifications
+PARAMETER SPECIFICATIONS
+Input
+• Single phase
+• Voltage: ≈ 85-V ACRMS to 265-V ACRMS
+• AC line frequency range: 47 Hz to 63 Hz
+• Input current: 32 ARMS_MAX at 240 V, 32 ARMS_MAX at 120 V
+• Power factor: ≥ 0.99
+• Power line harmonics: < 2% at 240-V AC, full load
+Output
+• PFC output: ≈ 400 V to 600 V (adjustable)
+• Output power: 6.6 kW at ≈ 400 V to 600 V
+• Output capacitance: 900 µF
+• Output ripple: < 65 V
+• Peak efficiency: 98.86%
+Performance
+• PFC stage for high-voltage li-ion battery OBC
+• Switching frequency: 100 kHz
+• Isolation: Reinforced
+• Input AC sensing
+• PFC output voltage sensing
+Protection
+• Overtemperature: > 75℃, stop work, and restores to work when < 75℃
+• Short-circuit protection
+• Overcurrent protection
+• Undervoltage protection at 80-V AC
+• Overvoltage protection at 265-V AC
+Working environment • Ambient temperature: ≈ –40℃ to +85℃
+
+=== PDF页 7 ===
+www.ti.com.cn System Overview
+ZHCU459B–March 2018–Revised April 2020 7
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+2 System Overview
+2.1 Block Diagram
+图 4 shows the system block diagram of the TIDA-01604 reference design, which includes the following
+elements.
+• Power switches G1-G6 are high-frequency SiC MOSFETs, for which there is a 120° phase shift
+between each two half bridge legs. G7 and G8 forms a low-frequency (45- to 60-Hz) synchronous
+rectifier bridge which virtually has no switching loss; a low conduction loss feature is desirable for these
+two devices.
+• TMS320F280049M C2000 Piccolo controller functions as the controller, which has all the voltage and
+current sensor inputs and generates the correct PWM signals for G1-G8. The controller also reads any
+fault signal from the gate driver boards and shuts down the system if a fault occurs. The reset function
+is used during start-up or when a fault clears.
+• TIDA-01605 daughterboards are used to drive SiC switches G1-G8. The driver board is based on
+isolated, dual-channel gate driver devices, features reinforced isolation, and provides more than
+100 V/ns CMTI. The driver board provides the two-level turnoff protection during the short-circuit
+scenario.
+• Hall sensors are used to sense the total input current and current for each channel. Voltage dividers
+are used to sense the input line and neutral voltages as well as output DC bus voltages.
+• The SN6501-Q1-based push-pull isolated converter provides +15 V/–4 V for each gate driver. The
+TLV71333-Q1 low-dropout (LDO) linear regulator provides accurate reference for the sensing circuits
+connected to the controller.
+
+=== PDF页 8 ===
+0
+Driver
+Vdc
+Vdc Sense
+Line 
+Voltage 
+Sense
+Neutral 
+Voltage 
+Sense
+SiC MOSFET
+ (High Frequency)
+Si/SiC (Low 
+Frequency)
+Power Grid
+V_N
+Ineu
+Vdc Sense
+F28004x 
+C2000TM MCU
+V_L UCC28700-Q1
+TLV71333-Q1
+Vdc
+5 V
+3.3 V
+F28004x Control Card F28004x Control Card
+SN6501-Q1
+G8
+Ic
+Ib
+Ia
+Ineu
+Ic
+Ib
+Ia 15 V & -4 V
+15 V & -4 V
+15 V & -4 V
+G1
+G2
+G3
+G4
+G5
+G6
+PFC Vout
+Hall 
+Sensor
+Hall Sensor 
+x 3 La
+Lb
+Lc
+ISO7721-Q
+Fault
+Reset
+5 V
+G7
+15 V & -4 V
+UCC21520-Q1
+4 × TIDA-01605
+G1 G2 G3 G4 G5 G6 G7 G8
+System Overview www.ti.com.cn
+8 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 4. TIDA-01604 Block Diagram
+2.2 Highlighted Products
+2.2.1 UCC21520-Q1
+The UCC221520-Q1 is an automotive-grade, isolated dual-channel gate driver with 4-A source and 6-A
+sink peak current capability. It is designed to drive power MOSFETs, insulated-gate bipolar transistors
+(IGBTs), and SiC MOSFETs. Its input side is isolated from the two output drivers by a 5.7-kVRMS and 8-kV
+peak-reinforced isolated barrier, with a minimum of 100 V/ns CMTI. The internal functional isolation
+between the two secondary side drivers allows a working voltage of up to 1.5-kV DC. The gate driver also
+certified according to VDE, CSA, UL, and CQC various isolation standards. Each driver accepts VDD
+supply voltages up to 25 V and a wide input VCCI range from 3 V to 18 V. The UCC21520-Q1 also has
+programmable dead-time (DT) control. A disable pin shuts down both outputs simultaneously when it is
+set high.
+
+=== PDF页 9 ===
+Disable 
+UVLO 
+and 
+Deadtime
+Reinforced 
+Isolation Functional Isolation
+4
+2
+6
+7
+5
+1
+3, 8
+MOD DEMOD UVLO
+Driver
+14
+15
+16
+12
+13
+MOD DEMOD UVLO
+Driver
+9
+10
+11
+VDDA
+OUTA
+VSSA
+NC
+NC
+VDDB
+OUTB
+VSSB
+www.ti.com.cn System Overview
+ZHCU459B–March 2018–Revised April 2020 9
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 5. Functional Block Diagram of UCC21520-Q1
+2.2.2 UCC28700-Q1
+The UCC28700-Q1 of flyback power supply controllers provides constant-voltage (CV) and constant￾current (CC) output regulation without the use of an optical coupler. The devices process information from
+the primary power switch and an auxiliary flyback winding for precise control of output voltage and current.
+Low start-up current, dynamically controlled operating states, and a tailored modulation profile support
+very low standby power without sacrificing start-up time or output transient response.
+2.2.3 SN6501-Q1
+The SN6501-Q1 is a monolithic push-pull transformer driver specifically designed for small factor, isolated
+power supplies. The device drives a low profile, center-tapped transformer from a 3.3-V or 5-V DC power
+supply. The SN6501-Q1 consists of an oscillator followed by a gate drive circuit that provides the
+complementary output signals with a 50% duty cycle to drive the ground referenced N-channel power
+switches. The device includes two 500-mA peak MOSFET switches at 5-V input voltage to ensure proper
+start-up under heavy loads.
+2.2.4 ISO7731-Q1
+The ISO7731-Q1 is a triple-channel digital isolator with 5kV RMS isolation voltage. The device implements
+reinforced isolation which is certified according to VDE, CSA, UL and CQC standards. The ISO7221-Q1
+has an ON-OFF keying modulation scheme to transmit the digital data across a silicon-dioxide-based
+isolation barrier. The device has a low propagation delay of 11ns typical, and a high CMTI of 100 V/ns.
+The transmitter sends a high frequency carrier across the barrier to represent one digital state and sends
+no signal to represent the other digital state.
+2.2.5 LMV762Q-Q1
+The LMV762Q-Q1 is a precision comparator intended for applications requiring low noise and low input
+offset voltage. The device includes dual comparators in one package and features a CMOS input and
+push-pull output stage. The LMV762Q-Q1 is designed to meet the demands of small-size, low-power, and
+high-performance applications. The input offset voltage has a typical value of 200 µV at room temperature
+and a 1mV limit over temperature.
+
+=== PDF页 10 ===
+System Overview www.ti.com.cn
+10 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+2.2.6 TPS7B6950-Q1
+The TPS7B6950-Q1 is a low dropout linear regulator designed for up to 40-V operations. It has typical 15
+µA quiescent current at light load. The device is suitable for standby micro control-unit systems especially
+in automotive applications. TPS7B6950-Q1 features a thermal shutdown and an integrated short-circuit
+and overcurrent protection. The device has an output current capability of 150 mA and offers fixed output
+voltage options.
+2.2.7 TL431-Q1
+The TL431-Q1 is a three-pin adjustable shunt regulator with specified thermal stability over applicable
+automotive temperature ranges. The TL431-Q1 can be used as a single-voltage reference, error amplifier,
+voltage clamp, or comparator with integrated reference. The TL431-Q1 consists of an internal reference
+and amplifier that outputs a sink current based on the difference between the reference pin and the virtual
+internal pin. The sink current is produced by the internal Darlington pair, which allows this device to sink a
+maximum current of 100 mA.
+2.2.8 TLV71333-Q1
+The TLV71333-Q1 is a low quiescent current LDO with excellent line and load transient performance and
+is designed for power-sensitive applications. The TLV71333-Q1 is designed to be stable without an output
+capacitor, which allows for small solution size. The device also provides inrush current control during
+device power up and enabling. The TLV71333-Q1 limits the input current to the defined current limit to
+avoid large currents flowing from the input power source.
+2.2.9 OPA2376-Q1
+The OPA2376-Q1 is a low noise operational amplifier with e-trim offering outstanding dc precision and ac
+performance. The device has rail-to-rail output, low offset (25µV maximum), low noise, a maximum
+quiescent current of 950 µA and a 5.5MHz bandwidth. OPA2376-Q1 is very attractive for a variety of
+precision and portable applications. All versions are specified for operation from –40°C to +125°C.
+2.2.10 C2000™ MCU F28004x
+C2000 MCUs are part of an optimized MCU family for real-time control application. A fast and high-quality
+analog-to-digital controller (ADC) enables accurate measurement of the current and voltage signals, and
+an integrated comparator subsystem (CMPSS) provides protection for overcurrent and overvoltage without
+use of any external devices. The optimized central processing unit (CPU) core enables fast execution of
+control loop. Trigonometric operations are accelerated using the on-chip trigonometric math unit (TMU).
+This reference design implements TI’s latest TMS320F280049 32-bit Piccolo MCU with 100 MHz of signal
+processing performance.
+2.3 System Design Theory
+2.3.1 PWM
+图 6 shows a simplified diagram of a single phase of the interleaved TTPL PFC topology. To control this
+rectifier, the duty cycle is controlled to regulate the voltage directly. This regulation is possible if the
+software variable Duty, or D, is set so that when it is equal to 1, Q3 is always ON, and the setting makes
+the voltage VxiN equal to the Vbus voltage. When Duty is set to 0, Q3 never turns on, and Q4 is always
+connected to DC bus negative, which makes the voltage go to 0.
+
+=== PDF页 11 ===
+*
+Li
+i
+Gd
+Ki_ fltr
+Ki_ gain AC_MaxSense
+1
+I
+Kv _ gain busMaxSense
+1
+V
+VxiN
+Li
+ D 
+= duty
+ commanded
+ from the 
+control loop
+CAD CAD CLR SET
+D
+Q1
+Q2
+Q3
+Q4
+VxiN
+VBus
+ViN iLi
+www.ti.com.cn System Overview
+ZHCU459B–March 2018–Revised April 2020 11
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 6. Single-Phase Diagram of TTPL PFC
+2.3.2 Current Loop Model
+To understand the current loop model, first look at the inductor current closely. In 图 6, the duty cycle (D)
+is provided to the PWM modulator, which is connected to the switch Q3 and Q4. From here, 公式 1 is
+written as:
+(1)
+注: When D is set to 1, Q3 is on all of the time, and when D is 0, Q3 is off all of the time.
+To modulate the current through the inductor, the voltage is regulated using the duty cycle control of
+Q3 and Q4 switches. It is assumed that the direction of current is positive in the direction from the AC line
+into the rectifier and that the grid is fairly stiff when using the DC bus feedforward and the AC voltage
+feedforward. 图 7 shows the simplified current loop, and the current loop plant model is written as 公式 2.
+where,
+• is the inverse of maximum bus voltage sensed,
+• is the inverse of maximum AC current sensed,
+• is the response of the RC filter connected from the current sensor to the ADC pin
+• is the digital delay associated with the PWM update and digital control is the current command
+• is the current command (2)
+
+=== PDF页 12 ===
+^ ^
+L
+bus DC
+L o
+R
+V i
+1 sR C
+=
++
+^
+Nrms
+DC bus Nrms Nrms Li DC
+bus
+V
+i v V i i i
+V
+= h ® = h
+*
+Li
+p _i i_ gain i_ fltr d
+v _ gain i
+i 1 1 H 3 K K G
+D K Z
+= = ´ ´ ´ ´ ´
+VxiN VxiN
++
+-
+D
+Gi Gd -
+Ri
+-
++
+*
++
++
+Ki_fltr
+Ki_gain
+Ki_gain
+KVac_gain
+Kv_gain
+MCU PLANT
+iLi* [
+ViN KVac_gain
+bus v _ gain
+1
+V K
+i
+1
+sL
+viN
+vxiN
+iLi
+vbus
+Vbus
+Kv_gain
+KVac_gain
+System Overview www.ti.com.cn
+12 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 7. Current Loop Control Model
+注: The negative sign on the reference is used because the current loop is thought to be
+regulating the voltage, . To increase the current, must be reduced—hence, the
+opposite sign for reference and feedback in 图 7.
+This current loop model is then used to design the current compensator. A simple proportional integral
+controller is used for the current loop.
+In the case of three interleaved phases, the current is simply three times more as the same duty cycle is
+provided to each leg. Hence, the plant model is given as 公式 3.
+(3)
+2.3.3 DC Bus Regulation Loop
+The DC bus regulation loop is assumed to provide the power reference. The power reference is then
+divided by the square of the line voltage's RMS to provide the conductance, which is further multiplied by
+the line voltage giving the instantaneous current command.
+Small signal model of the DC bus regulation loop is developed by linearizing 公式 4 around the operating
+point.
+(4)
+For a resistive load, the bus voltage and current are related as shown in 公式 5:
+(5)
+The DC voltage regulation loop control model can be drawn as shown in 图 8. An additional Vbus
+feedforward is applied to make the control loop independent of the bus voltage. Therefore, the plant model
+for the bus control can be written as in 公式 6:
+(6)
+
+=== PDF页 13 ===
+Q3
+Q4
+Q1
+Q2
+Negative Half Positive Half
+Soft Start
+Li
+Q3
+Q4
+Q1
+Q2
+VBus
+ViN
+Copyright © 2017, Texas Instruments Incorporated
++
+-
+[
+Kv_gain Gbus Ki_gain
+Kv_gain Kv_fltr
+u ac vac _ gain v K
+*
+bus v
+u
+2 2
+rms vac _ gain
+1
+V K
+PO*
+iLi*
+Vbus_avg
+Kv_gain
+*
+i p
+i p
+GG
+1 GG 
+rms
+bus
+V
+V
+K
+L
+L o
+R
+1 sR C 
+iDC Vbus
+^
+^
+NotchFilter
+www.ti.com.cn System Overview
+ZHCU459B–March 2018–Revised April 2020 13
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 8. DC Voltage Loop Control Model
+Using 图 8, a proportional integrator (PI) compensator is designed for the voltage loop. The bandwidth of
+this loop is kept low as it is in conflict with the THD under steady state.
+2.3.4 Soft Start Around Zero-Crossing for Eliminating or Reducing Current Spike
+Zero-crossing current spikes present a challenging issue for TTPL PFC topologies. This issue is solved by
+implementing a soft-start scheme with a state machine to turn on and off switches in a particular
+sequence.
+图 9. PWM Sequence With Soft Starting to Reduce Current Spike at Zero-Crossing
+
+=== PDF页 14 ===
+System Overview www.ti.com.cn
+14 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 9 shows the switching sequence when the AC wave goes from negative to positive. During the negative
+half, Q1 is ON, Q3 is the active FET, and Q4 is the sync FET. During this time, the voltage across Q2 is
+the DC bus voltage. When the AC cycle changes, Q2 must be on 100% or close to 100%. If Q2 is turned
+ON immediately, a substantial positive spike results. Therefore, a soft-start sequence is used to turn Q4
+ON as shown in 图 9. The tuning of this soft start depends on the inductance value and other power stage
+parameters such as device Coss.
+Another reason for a negative current spike around zero-crossing is the relatively low AC voltage around
+the zero-crossing. When Q3 is turned ON, though the duty cycle is low, a high-voltage difference is
+applied and can result in a high negative current spike. Therefore, a sufficient delay is applied before Q3
+starts switching back again.
+Similarly, Q2 is turned on after some delay after the soft start has started.
+2.3.5 Current Calculation
+Select the input fuse, filter current ratings based on the max input current, which 公式 7 calculates as:
+(7)
+where,
+• POUT_MAX is the maximum output power 6.6 kW
+• η is the efficiency (assumed as 98.6%)
+• VIN_RMS is the input voltage RMS value (240 V)
+• PF is the power factor (assumed as 0.99)
+2.3.6 Inductor Calculation
+The inductor plays important role in affecting system efficiency, current ripple, and overall size. It is always
+a balance between the efficiency and the power density. The inductance value is calculated based on the
+input voltage, output voltage, and worst case ripple.
+The duty cycle is calculated as:
+(8)
+Calculation of the current ripple into inductor can be distinguished into three periods:
+(9)
+(10)
+(11)
+In the worst cases, the equation becomes:
+(12)
+This design targets at achieving 10% current ripple at maximum input power and maximum AC current:
+
+=== PDF页 15 ===
+www.ti.com.cn System Overview
+ZHCU459B–March 2018–Revised April 2020 15
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+where,
+• Pout_max is the maximum output power
+• η is the efficiency
+• Vin_max is the maximum input voltage (13)
+As a result, the inductance is calculated as 126 µH at 12 A RMS current.
+2.3.7 Output Capacitor Calculation
+Due to the input double-line frequency ripple on the DC link capacitor, its capacitance is mainly
+determined by the output voltage ripple, as calculated in 公式 14:
+(14)
+where,
+• POUT is the output power
+• VOUT is the output voltage
+• fLINE_MIN is the minimum line frequency
+• VRIPPLE is the output ripple
+The actual capacitor used is 900 µF.
+2.3.8 Selection of SiC MOSFET
+The vehicle battery voltage ranges from 250 V to 450 V and the narrow DC gain variance is desired for
+the charger DC-DC stage, which typically uses a CLLC topology. Therefore, the output DC bus voltage
+has been selected as 400 V to 600 V for this PFC stage. The maximum DC voltage is 600 V plus
+approximately 20 V of ripple, which totals to 620 V. A 900-V or 1-kV rated power switch is also required. A
+1-kV, 65-mΩ SiC MOSFET (C3M0065100K) has been selected as the high-frequency switching device to
+account for the reduced switching loss from the TO-247-4 package.
+2.3.9 Three-Phase-Interleaved, High-Frequency Bridge Legs
+Multi-phase interleaving can both reduce the input current ripple and the conduction loss. To determine
+how many phases is an optimum solution, use the PLECS® simulation tool PLECS to simulate the power
+loss of the high-frequency power devices for different options. First, develop a loss model based on the
+characteristics of the C3M0065100K device, which includes both a conduction loss model and switching
+loss model over temperature. The second step is to build a full totem-pole PLECS simulation circuit using
+the previous model, which enables simulating the power device loss. 图 10 shows the loss model of
+C3M0065100K.
+
+=== PDF页 16 ===
+System Overview www.ti.com.cn
+16 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 10. PLECS® Simulation Model for Power Losses
+The simulation is performed for three cases: two-phase interleaving, three-phase interleaving, and four￾phase interleaving separately. The switching frequencies are chosen as 150 kHz, 100 kHz and 75 kHz. 表
+3 summarizes the total C3M0065100K loss for the above three cases with the output DC voltage as 400
+V, 500 V and 600 V.
+表 3. Simulated Total Power Loss Among Devices
+OUTPUT DC VOLTAGE 400 V 500 V 600 V
+Two phases interleaving 55.4 W 66.8 W 78 W
+Three phases interleaving 40.2 W 49.5 W 60 W
+Four phases interleaving 33.6 W 43.2 W 52.8 W
+
+=== PDF页 17 ===
+www.ti.com.cn System Overview
+ZHCU459B–March 2018–Revised April 2020 17
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+The use of more phases reduces the total loss, but the difference between three phases and four phases
+of interleaving is not significant; therefore, a three-phase interleaving design has been selected for as a
+good compromise between system efficiency and cost.
+2.3.10 Auxiliary Power Supply Design
+The auxiliary power supply is designed with UCC28700-Q1. It is a flyback power supply controller that
+provides accurate constant voltage and constant current regulation with primary-side feedback, eliminating
+the need for opto-coupler feedback circuits. The controller operates in DCM with valley switching to
+minimize switching losses. The modulation scheme is a combination of frequency and primary peak
+current modulation to provide high conversation efficiency across the load range.
+2.3.10.1 Design Parameters Summary
+The design parameters for the auxiliary power supply are shown in 表 4.
+表 4. Specifications of the Auxiliary Power Supply
+PARAMETER MIN TYP MAX UNIT
+INPUT
+VIN Input voltage 120 325 625 VDC
+OUTPUT
+VOUT Output voltage(Non￾Isolated)
+4.75 5 5.25 VDC
+POUT Output Power 5 W
+Line Regulation
+(165V-400VDC)
+<2%
+Load Regulation
+(10% - 100% load)
+<2%
+FMAX Maximum desired
+switching frequency
+120 kHz
+η Targeted peak
+efficiency
+86%
+2.3.10.2 Transformer Design
+The turn ratio of the transformer is determined by the targeted maximum switching frequency at full load,
+at the minimum input bulk voltage, and the estimated Quasi Resonant (QR) time which is around 2 µs.
+The resonant switching frequency is estimated as 500 kHz. Hence, the maximum available duty cycle is
+calculated as:
+where,
+• TR is the estimated QR resonant period at the switch node
+• DMAGCC is the conduction duty cycle of the secondary diode (15)
+The turn ratio of the transformer primary winding to the secondary winding is calculated as:
+where,
+• VDC_min is the minimum input DC voltage
+• Vout is the output voltage
+• VF
+is the secondary diode voltage drop (16)
+
+=== PDF页 18 ===
+System Overview www.ti.com.cn
+18 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+NPS is selected as 16, compromising the reflected voltage and transformer size. With this value, the
+voltage reflected from secondary side to the switch node of the MOSFET is calculated as:
+(17)
+Drain to source voltage stress on the MOSFET needs to conclude the maximum input voltage, the
+reflected voltage, and the voltage spike induced from parasitic and leakage inductance (VLK):
+(18)
+The UCC28700-Q1 controller requires a minimum on time of 300 ns (TON(min)) and minimum secondary
+rectifier conduction time of 1.1 µs (TDMAG(min)) in the high line and minimum load condition. The selection of
+FMAX, LP
+, and RCS affects the minimum TON(min) and TDMAG(min).
+The transformer must be designed such that the saturation current of the winding must be higher than the
+peak current. The primary peak current of the transformer is calculated as:
+where,
+• Pout is the output power
+• η is the estimated converter efficiency
+• Vin_min is the minimum input voltage (19)
+Calculate the primary transformer inductance (Lp
+) using the standard energy storage equation for flyback
+transformers. The primary current, maximum switching frequency, output voltage, and transformer power
+losses are included:
+(20)
+The transformer primary RMS current (IPRMS) is calculated as:
+(21)
+2.3.10.3 Other Parameters
+The other parameters of the converter include: rectification diode at the transformer secondary side,
+output capacitor, capacitor on the VDD pin, VS resistor divider and line compensation resistor.
+The selected forward current rating must be larger than the output current. The reverse blocking voltage of
+the rectification diode is calculated as:
+(22)
+For this design, the output capacitor (COUT) was selected to have a 1% ripple of all the outputs with an
+operating frequency of 120 kHz:
+(23)
+The capacitor connected to the VDD pin needs to supply the device operating current until the output of
+the converter reaches the target minimum operating voltage in CC regulation. The startup resistance
+(RSTR) is selected as 4 MΩ. The startup bias supply current is 1.5 µA, and the turn-on voltage threshold
+(VDD(on)) is 21 V according to the UCC28700-Q1 data sheet.
+
+=== PDF页 19 ===
+www.ti.com.cn System Overview
+ZHCU459B–March 2018–Revised April 2020 19
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+where,
+• CDD is the minimum required capacitance on the VDD pin
+• Istart is the startup bias supply current
+• Tss is the desired startup time (24)
+The VS divider resistors determine the output voltage regulation point of the flyback converter. Also, the
+high-side divider resistor (RS1) determines the line voltage at which the controller enables continuous DRV
+operation. RS1 is initially determined based on transformer auxiliary-to-primary turns ratio and desired input
+voltage operating threshold, which is calculated as:
+where,
+• IVSL is the run-threshold for the current pulled out of the VS pin during the MOSFET on-time = 220 µA
+according to UCC28700-Q1 data sheet
+• NPA is the transformer primary-to-auxiliary turns ratio (25)
+The low-side VS pin resistor is selected based on desired VO regulation voltage:
+where,
+• VVSR is the CV regulating level at the VS input = 4.05 according to UCC28700-Q1 data sheet
+• NAS is the transformer auxiliary-to-secondary turns ratio
+• VF
+is the secondary rectifier diode forward voltage drop at near-zero current (26)
+The constant current regulation is achieved by maintaining a maximum DMAG duty cycle of 0.425 at the
+maximum primary current setting. The transformer turns ratio and the regulating voltage determine the
+current sense resistor for a target output current. The current sense resistor is calculated as:
+where,
+• VCCR is the CC regulating level given as 0.319 V in the UCC28700-Q1 data sheet
+• ƞXFMR is the estimated efficiency of the transformer (27)
+
+=== PDF页 20 ===
+System Overview www.ti.com.cn
+20 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 11. Schematic of the Auxiliary Power Supply
+
+=== PDF页 21 ===
++
+±
+Rf
+Re
+Re Iinv
+Current 
+Hall -Effect
+Sensor
+www.ti.com.cn System Overview
+ZHCU459B–March 2018–Revised April 2020 21
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+2.3.11 Current and Voltage Sense
+The Hall-effect sensor ACS716KLATR-25CB-NL-T is used for the total input current sensing, as 图 13
+shows. The OPA237-based amplifier circuit tunes the low output voltage of the sensor to a higher level
+and sends this voltage to the controller ADI pin. The ACS722LLCTR-20AB-T device senses the three
+individual channels for the current which is intended for the balance current control.
+图 12. Hall Effector Sensor Signal Conditioning Circuit
+The output voltage from the signal conditioning circuit is scaled to match the ADC range using the circuit
+as shown in 图 12. The voltage is calculated as:
+(28)
+图 13. Schematic of Current Sensing
+
+=== PDF页 22 ===
+System Overview www.ti.com.cn
+22 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+The input AC voltage is sensed differentially by sensing the line, and the neutral inputs refer to the control
+ground separately with two voltage dividers, as 图 14 shows. The control ground is the DC link negative
+terminal; therefore, a single voltage divider can be used to sense the DC bus voltage. An RC filter filters
+the signals before connecting to the controller. A common RC filter is used for all the sensing signals on
+this design.
+图 14. Schematic of Voltage Dividers for AC Input Voltage Sense
+
+=== PDF页 23 ===
+Comb
+R9
+-4Vb
++15Vb
+G2
+D2
+-4Vb
+-4Vb
+Coma
++15Va -4Va
+Comb S2
+G1
+Coma S1
+GND
+GND
+5Vin
+GND
+Vg1
+Vg2
+RESET
+FLT
+D5
+1N4148X -TP
+D8
+1N4148X-TP
+5.1V
+D9
+D7
+1N4148X-TP
+3
+1
+2
+Q2
+MMB T3904T-7-F
+3
+5,6,8 4,7
+1,2,
+Q1
+C S D 17313Q2
+5Vin
+GND
+Vcc5V
+Vcc5V
+3
+1
+2
+Q3
+MMB T3904T-7-F
+Vcc5V
+-4Vb
+4.7µF
+C18
+4.7µF
+C16
+0.1µF
+C19
+0.1µF
+C17
+4.7µF
+C26
+4.7µF
+C28
+0.1µF
+C27
+0.1µF
+C29
+0.1µF
+C23
+0.1µF
+C24
+0.1µF
+C33
+0.1µF
+C32
+0.1µF
+C22
+0.1µF
+C37
+100pF
+C38
+5.1k
+R23
+1.0k
+R16
+5.1k
+R15
+2.2k
+R22
+1.0k
+R19 1.0k
+R17
+1.0k
+R27
+15k
+R29
+R8 1.0
+R11 1.0
+5.1k
+R20
+D3
+MBRA340T3G
+D4
+MBRA340T3G
+470pF
+C36
+2
+3
+1 A
+V+
+V￾8 4
+U8A
+LMV762QMA
+5
+6
+7 B
+V+
+V￾8 4
+U8B
+LMV762QMA
+0.01 µF
+C20
+0.01 µF
+C21
+0.01 µF
+C30
+0.01 µF
+C31
+100pF
+C35
+5.1k
+R26
+5.1k
+2.00k R25
+R24
+10.0k
+R28
+0.1µF
+C25
+VCC1 1
+INA 7
+OUTB 6
+GND2 5 GND1 4
+INB 3
+OUTA 2
+VCC2 8
+ISO7721QDRQ1
+U7
+10.0k
+R12
+10.0k
+R14
+1000pF
+C39
+1000pF
+C40
+D6
+3
+BYG23T-M3/TR
+1
+2
+Q4
+MMB T3904T-7-F
+5.1k
+R30
+INA 1
+INB 2
+VCCI 3
+GND 4
+EN 5
+DT 6
+NC 7
+VCCI 8
+VSSB 9
+OUTB 10
+VDDB 11
+NC 12
+NC 13
+VSSA 14
+OUTA 15
+VDDA 16
+U6
+UCC21520QDWRQ1
+5.1k
+R32
+0
+R31
+Solder R30&R32 if UCC21521C-Q1
+Solder R31 if UCC21520-Q1
+100pF
+C43
+0
+R33
+0
+R34
+100pF
+C42
+100pF
+C41
+1 3
+2
+U9
+TL 431AQDB Z R Q1
+5.11
+R7
+5.11
+R10
+27
+R13
+10.0k
+R18
+27pF
+C34
+1.00k
+R21
+www.ti.com.cn System Overview
+ZHCU459B–March 2018–Revised April 2020 23
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+2.3.12 Isolated Gate Driver Board
+The TIDA-01605 reference design is connected externally as the isolated-gate driver daughtercard. 图 15
+shows the schematic. The TIDA-01605 reference design is an automotive-qualified, isolated-gate driver
+solution for driving SiC MOSFETs in a half-bridge configuration. The gate driver is capable of delivering a
+4-A source and 6-A sink peak current. The design implements reinforced isolation and can withstand 8-kV
+peak and 5.7-kVRMS isolation voltage and greater than 100 V/ns common-mode transient immunity (CMTI).
+The reference design contains the two-level turnoff circuit, which protects the MOSFET from voltage
+overshoot during the short-circuit scenario. The desaturation detection (DESAT) threshold and the delay
+time for second stage turnoff are configurable. The benefits are summarized as follows:
+• Compact, dual-channel gate driver solution for driving SiC MOSFETs in half-bridge configuration
+• Confirmed 4-A source and 6-V sink peak current-driving capability suitable for driving SiC MOSFET, Si
+MOSFET, or IGBT with a switching frequency up to 500 kHz
+• Built-in, compact, high-efficiency isolated bias supply with +15-V and –4-V outputs
+• Flexible and configurable as dual channel in half bridge, in parallel, dual high side, or dual low side
+• Gate driver dead-time control with shoot-through protection ensures safe operation
+• Low propagation delay ensures easy control and allows for increased switching frequency
+• Discrete two-level turnoff for short-circuit protection with adjustable current limit and delay (blanking)
+time
+• Provides very high CMTI of greater than 100 V/ns and a reinforced isolation of 8-kV peak and
+5.7-kVRMS voltages
+图 15. Schematic of SiC Isolated Gate Driver (TIDA-01605 Design)
+For details such as design theory, components selection, testing and results, see TIDA-01605: Automotive
+Dual-Channel, SiC Gate Driver Reference Design With Two-Level Turn-Off Protection.
+
+=== PDF页 24 ===
+EMI Filter Power Inductors
+TIDA-01605 TIDA-01605 TIDA-01605
+TIDA-01605
+C2000 Controller Card DC Link Capacitors
+Auxiliary Power Supply
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+24 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+3 Hardware, Testing Requirements, and Test Results
+3.1 Hardware
+图 16 and 图 17 show the TIDA-01604 prototype from the top view and front view, respectively. The
+design includes four gate driver daughtercards (see TIDA-01605) and one C2000 controller. The design
+uses three power inductors for three interleaved channels. The DC link capacitor is formed by twenty-four
+350-V, 150-µF capacitors with two in series and twelve groups in parallel. The power devices are under
+the printed-circuit board (PCB) and mounted on the cold plate.
+图 16. TIDA-01604 PCB Board—Top View
+图 17. TIDA-01604 PCB Board—Front View
+
+=== PDF页 25 ===
+Power Analyzer TIDA-01604
+6.6 kW 
+Electronic 
+Load
+Current Probe
+VL
+VN Vbus
+I_input
+Vac
+Differential 
+Voltage Probe
+Programmable 
+AC Source 
+Voltage: 85 V t 265 V AC
+Current: 25 A t 40 A
+Voltage: 400 t 600 V DC 
+Current: 15 A t 20 A
+www.ti.com.cn Hardware, Testing Requirements, and Test Results
+ZHCU459B–March 2018–Revised April 2020 25
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+The measurement setup diagram is shown in 图 20. The C2000 control card is connected to the PC using
+a USB cable. A programmable AC power supply is connected to the board input. The board output is
+connected to an electronic load. The current and voltage probes are connected to observe the input
+current, input voltage, and output voltages:
+图 18. TIDA-01604 Experiment Setup
+3.1.1 Control Card Settings
+The key controller peripherals used for control of the TIDA-01604 power stage is shown in 表 5.
+表 5. Key Controller Peripherals Used for Control of Power Stage on Board
+SIGNAL NAME HSEC PIN NUMBER FUNCTION
+PWM-1A 49 PWM: low-frequency MOSFET leg, high-side switch
+PWM-1B 51 PWM: low-frequency MOSFET leg, low-side switch
+PWM-2A 53 PWM: high frequency MOSFET leg, high side switch, phase one
+PWM-2B 55 PWM: high-frequency MOSFET leg, low-side switch, phase one
+PWM-3A 50 PWM: high-frequency MOSFET leg, high-side switch, phase two
+PWM-3B 52 PWM: high-frequency MOSFET leg, low-side switch, phase two
+PWM-4A 54 PWM: high-frequency MOSFET leg, high-side switch, phase three
+PWM-4B 56 PWM: high-frequency MOSFET leg, low-side switch, phase three
+Iac 18 ADC with CMPSS: AC return current measurement
+IL1 15 ADC with CMPSS : inductor current measurement Ph1
+IL2 21 ADC with CMPSS : inductor current measurement Ph2
+IL3 25 ADC with CMPSS : inductor current measurement Ph3
+VL 20 ADC: AC voltage line
+VN 17 ADC: AC voltage neutral
+Vbus 24 ADC: bus voltage
+In Rush Relay 57 GPIO: used to control the inrush relay
+Fault 1 77 GPIO: fault signal phase one
+Fault 2 79 GPIO: fault signal phase two
+Fault 3 80 GPIO: fault signal phase three
+AC Current Sense Gain
+Change 63 GPIO: controls the gain stage
+
+=== PDF页 26 ===
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+26 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+Certain settings on the device control card are required to communicate over JTAG and use the isolated
+UART port. A correct ADC reference voltage must also be provided. The following are the required
+settings for revision A of the F280049 control card. Refer to the info sheet located inside C2000Ware at
+<install_path>\c2000ware\boards\controlcards\TMDSCNCD280049 or get it from the Piccolo F280049
+controlCARD Information Guide.
+1. S1:A on the control card must be set on both ends to “ON (up) ” position to enable JTAG connection to
+the device and UART connection for SFRA GUI. If this switch is “OFF (down)” the isolated JTAG built
+in on the control card cannot be used, nor can SFRA GUI communicate to the device.
+2. Verify the settings of S5 and S6 on the control card according to the connections listed in 表 5.
+3. J1:A is the connector for the USB cable that is used to communicate to the device from a host PC on
+which Code Composer Studio™ (CCS) runs.
+4. A 3.3-V reference is desired for the control loop tuning on this design. Internal reference of the
+F28004x is used and for this S8 switch must be moved to the left, as in, pointing to VREFHI
+5. A capacitor is connected between the isolated grounds on the control card, C26:A. TI recommends
+removing this capacitor for the best performance of this reference design.
+3.2 Software
+The software of this design is available inside C2000Ware Digital Power SDK and is supported inside the
+powerSUITE framework.
+3.2.1 Opening Project Inside CCS
+Use the following steps to get started:
+1. Install CCS from the Code Composer Studio (CCS) Integrated Development Environment (IDE) tools
+folder. Version 9.3 or above is recommended.
+2. Open CCS.
+3. Install C2000Ware DigitalPower SDK at the C2000Ware Digital Power SDK tools folder.
+• PowerSUITE is installed with the SDK in the default install.
+4. Go to View → Resource Explorer. Under the TI Resource Explorer, go to C2000Ware DigitalPower
+SDK .
+Use the following steps to open the reference design software as it is. That is, it opens firmware as it was
+run on this design and hardware, requires the board to be exactly the same as this reference design.
+1. Under C2000Ware DigitalPower SDK, select Development Kits → CCM Totem Pole PFC TIDA-01604,
+and click on Import <device> Project.
+2. These steps import the project, and the development kit or designs page show up. This page can be
+used to browse all the information on the design including this user guide, test reports, hardware
+design files, and so forth.
+3. Click Import <device_name> Project.
+4. This action imports the project into the workspace environment, and a cfg page with a GUI shows up.
+
+=== PDF页 27 ===
+www.ti.com.cn Hardware, Testing Requirements, and Test Results
+ZHCU459B–March 2018–Revised April 2020 27
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+Open reference design software for adaptation. Power stage parameters can be modified, which are then
+used to create the model of the power stage in Compensation Designer and can also modify scaling
+values for voltages and currents for a custom design.
+1. UnderC2000Ware Digital Power SDKclick on powerSUITE →Solution Adapter Tool ( ).
+2. Select Single Phase CCM Totem Pole PFC from the list of solutions presented.
+3. Select the device this solution must run on the next page.
+4. Once the icon is clicked, a pop-up window shows up asking for a location to create the project. The
+project can be saved inside the workspace itself. Once the location is specified, a project is created,
+and a GUI page appears with modifiable options for the solution.
+5. This GUI can be used to change the parameters for an adapted solution, like power rating, inductance,
+capacitance, sensing circuit parameters, and so forth.
+图 19. powerSUITE Page for CCM TTPL PFC Solution
+
+=== PDF页 28 ===
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+28 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+3.2.2 Project Structure
+Once the project is imported, the project explorer appears inside CCS as shown in 图 20.
+图 20. Project Explorer View of Solution Project
+
+=== PDF页 29 ===
+<solutions>.h
+³<solution>_settings.K¥
+<solutions>.c
+<solution>_board.h
+<solution>_board.c
+Solution specific file Device specific files
+powerSUITE generated file specific to the 
+solution and the device
+www.ti.com.cn Hardware, Testing Requirements, and Test Results
+ZHCU459B–March 2018–Revised April 2020 29
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+The general structure of the project is shown in 图 21.
+图 21. Project Structure Overview
+注: 图 21 shows the project for F28004x. However, if a different device is chosen from the
+powerSUITE page, the structure is similar.
+Solution-specific and device-independent files are <solution>.c/h. This file consists of the main.c file of the
+project and is responsible for the control structure of the solution.
+Board-specific and device-specific files are <solution>_board.c/h. This file consists of device-specific
+drivers to run the solution.
+The powerSUITE page can be opened by clicking on the main.syscfg file, listed under the project explorer.
+The powerSUITE page generates the <solution>_settings.h file. This file is the only file used in the
+compiling of the project that is generated by the powerSUITE page. Do not modify this file , as the
+changes are overwritten by powerSUITE every time the project is saved. For the additional options and
+settings, User can modify user_settings.h.
+The Kit.json and solution.js files are used internally by the powerSUITE and must also not be modified.
+Any changes to these files results in the project not functioning properly.
+The setupdebugenv_build.js are provided to auto-populate the watch window variables for different builds.
+The *.graphProp files are provided to auto-populate settings for the data logger graph.
+The project consists of an interrupt service routine, which is called every PWM cycle, and a current
+controller is run inside this ISR. In addition to this, there is a slower ISR of approximately 10 kHz that is
+called for running the voltage loop and the instrumentation ISR. A few background tasks (A0-A4 and B0-
+B4) are called in a polling fashion and can be used to run slow tasks for which absolute timing accuracy is
+not required, such as SFRA background and so on.
+
+=== PDF页 30 ===
+Setup device
+Setup PWM
+Setup ADC
+Cinit_0
+Global Variables Initialization
+Setup Board Protection
+Setup Interrupts
+BackGround Loop
+State Machine
+SFRA Background Function
+Current Loop ISR
+Voltage Loop plus 
+Instrumentation ISR
+Save context and clear interrupt flags
+C ± ISR
+Read ADC Result
+Run Current Loop Compensator Gi
+Run PWM Modulator
+Restore Context
+Return
+Current Loop ISR (100 Khz)
+Save contexts and clear int flags
+Enable Interrupt EINT
+C ± ISR
+(Boost Control)
+Run notch filter on measured bus 
+voltage
+Run Voltage Loop Compensator Gv
+Run power measurement
+Restore Context
+Return
+Voltage Loop plus Instrumentation Code 
+(10 Khz)
+Main Loop
+Run SPLL and 
+calculate current reference
+Run Adaptive Deadtime Calc.
+Run Data Logger
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+30 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 22 shows the software flow diagram of the firmware.
+图 22. Project Structure Image
+To simplify the system bring up and design, the software of this reference design is organized in four
+incremental builds (INCR_BUILD):
+• INCR_BUILD 1: Open Loop Check, DC
+
+=== PDF页 31 ===
+Single Phase 
+AC
+N L
++
+PWM dutyPU
++
+ac_vol_sensed -
+DCL_DF22 DCL_DF22
+4
+th Order Notch Filter
+Compute 
+Average
+vBus_sensedFilteredNotch2
+10 Khz, Voltage Loop and Instrumentation ISR
+100 Khz,
+Current Loop ISR
+DLOG_4CH
+input_ptr1 output_ptr1
+size
+trig_value
+pre_scalar
+DBUFF1
+output_ptr2 DBUFF2
+output_ptr3 DBUFF3
+output_ptr4 DBUFF4
+input_ptr2
+input_ptr3
+input_ptr4
+vBus_sensed
+ac_L_sensed
+ac_N_sensed
+ac_cur_sensed
+iL1/2/3_sensed
+Read 
+ADC
+&
+Scale 
+to PU
+www.ti.com.cn Hardware, Testing Requirements, and Test Results
+ZHCU459B–March 2018–Revised April 2020 31
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+• INCR_BUILD 2: Closed Current Loop : DC
+• INCR_BUILD 2: Closed Current Loop : AC
+• INCR_BUILD 3: Closed Voltage and Current Loop
+3.2.3 Running the Project
+3.2.3.1 INCR_BUILD 1: Open Loop, DC
+In this build, the board is excited in open loop fashion with a fixed duty cycle. The duty cycle is controlled
+with dutyPU_DC variable. This build verifies the sensing of feedback values from the power stage and
+also operation of the PWM gate driver and ensures that there are no hardware issues. Additionally,
+calibration of input and output voltage sensing can be performed in this build. The software structure for
+this build is shown in 图 23. There are two ISR in the system: fast ISR for the current loop and a slower
+ISR to run the voltage loop and instrumentation functions. Modules that are run in each ISR are shown in
+图 23.
+图 23. Build Level 1 Control Software Diagram: Open Loop Project
+
+=== PDF页 32 ===
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+32 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+3.2.3.1.1 Setting Software Options for BUILD 1
+On the powerSUITE page, under the Project Options section:
+1. Select Open Loop for the build level under INCR_BUILD option.
+2. Select input to be DC under INPUT options.
+3. Disable the other options such as Non Linear Voltage Loop, Adaptive Deadtime and Phase shedding.
+If this is an adapted solution, edit the setting under Voltage and Current Sensing Parameters. Refer to the
+calculations.xlsx file which is available under the C2000Ware DigitalPower SDK Install directory at
+<install_location>\solutions\tida_01604\hardware for details on sensing circuit and how max range is
+computed for the powerSUITE pageUnder Power Stage Parameters specify the switching frequency, the
+dead band, and the power rating. Save the page.
+3.2.3.1.2 Building and Loading Project
+Right-click on the project name, and click Rebuild Project.
+The project builds successfully.
+In the Project Explorer ensure that the correct target configuration file is set as Active under tragetconfigs.
+Click Run → Debug. This action launches a debugging session. In the case of dual CPU devices, a
+window may appear to select the CPU that the debug must be performed. In this case, select CPU1.
+The project then loads on the device, and CCS debug view becomes active. The code halts at the start of
+the main routine.
+3.2.3.1.3 Setup Debug Environment Windows
+To add the variables in the watch and expressions window, click View → Scripting Console to open the
+scripting console dialog box. On the upper-right corner of this console, click on open. Browse to the
+setupdebugenv_build1.js script file located inside the project folder. This script file populates the watch
+window with appropriate variables required to debug the system. Click on the Continuous Refresh button
+on the watch window to enable continuous update of values from the controller. The watch window
+appears as shown in 图 24.
+图 24. Build Level 1 Expressions View
+Run the project by clicking on .
+
+=== PDF页 33 ===
+www.ti.com.cn Hardware, Testing Requirements, and Test Results
+ZHCU459B–March 2018–Revised April 2020 33
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+Halt the processor by using the Halt button on the toolbar ( ).
+3.2.3.1.4 Using Real-Time Emulation
+Real-time emulation is a special emulation feature that allows windows within CCS to be updated while
+the MCU is running. This feature allows graphs and watch views to update but also allows for changing of
+values in watch or memory windows and the ability to see the effect of these changes in the system
+without halting the processor.
+Enable real-time mode by hovering the mouse on the buttons on the horizontal toolbar and clicking the
+button.
+A message box may appear. If so, select YES to enable debug events. This action sets bit 1 (DGBM bit)
+of status register 1 (ST1) to a 0. The DGBM is the debug enable mask bit. When the DGBM bit is set to 0,
+memory and register values can be passed to the host processor for updating the debugger windows.
+3.2.3.1.5 Running Code
+Run the project again by clicking on .
+After a few seconds, the inrush relay clicks. The software is programmed to do so in the build level with
+DC. The trip clears, and a duty cycle of 0.5 is applied.
+In the watch view, check if the guiVin, guiVbus, guiIi, variables are updating periodically. As no power is
+applied, this value is close to zero.
+Slowly increase the input DC voltage from zero to 120 V. The output voltage shows a boosted voltage as
+a steady duty cycle of 0.5 PU is applied as the default setting. If a high current is drawn, verify if the
+voltage terminals are swapped. If true, reduce the voltage to zero first and correct the issue before
+resuming the test.
+Verify the voltage sensing by ensuring that guiVin and guiVbus display the correct values. For 120-V DC
+input, guiVbus is close to 240 V. This verifies the voltage sensing of the board in some manner.
+Observe the guiIIi for the given test condition. This value is close to 1 A.
+图 25. Build Level 1: Watch Expression Showing Measured Voltage and Currents
+
+=== PDF页 34 ===
+( ) ac _ cur _meas ac _ cur _ref _inst Gi ac _ vol_ sensed
+duty1PU
+vBus _ sensed
+- ´ +
+=
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+34 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+The dutyPU_DC variable can be changed to see operation under various boost conditions. This verifies at
+a basic level the PWM driver and connection of hardware
+Once finished, reduce the input voltage to zero and watch for the bus voltages to reduce down to zero.
+This completes the check for this build. The following items are verified on successful completion of this
+build:
+• Sensing of voltages and currents and scaling for accuracy
+• Interrupt generation and execution of the BUILD 1 code in the current loop ISR and Voltage Loop
+Instrumentation ISR
+• PWM driver and switching
+If any issues are observed, a careful inspection of the hardware may be required to eliminate any build
+issues and so forth.
+The controller can now be halted, and the debug connection terminated.
+Fully halting the MCU when in real-time mode is a two-step process. First halt the processor by using the
+Halt button on the toolbar ( ) or by using Target → Halt. Then, take the MCU out of real-time mode by
+clicking on . Finally, reset the MCU by clicking on .
+Close CCS debug session by clicking on Terminate Debug Session (Target → Terminate all).
+3.2.3.2 INCR_BUILD 2: Closed Current Loop DC
+In BUILD 2, the inner current loop is closed, that is, the inductor current is controlled using a current
+compensator Gi. Both DC bus and output voltage feedforward are applied to the output of this current
+compensator to generate the duty cycle of the inverter. This makes the plant for the current compensator
+simple and a proportional (P) controller can be used to tune the loop of the inner current. The model for
+the current loop was derived. Complete software diagram for this build is illustrated in 图 26.
+(29)
+Complete software diagram for this build is illustrated in 图 26.
+
+=== PDF页 35 ===
+Single Phase 
+AC
+N L
++
+PWM dutyPU
++
+ac_vol_sensed -
+DCL_DF22 DCL_DF22
+4
+th Order Notch Filter
+Compute 
+Average
+vBus_sensedFilteredNotch2
+10 Khz, Voltage Loop and Instrumentation ISR
+100 Khz,
+Current Loop ISR
+DLOG_4CH
+input_ptr1 output_ptr1
+size
+trig_value
+pre_scalar
+DBUFF1
+output_ptr2 DBUFF2
+output_ptr3 DBUFF3
+output_ptr4 DBUFF4
+input_ptr2
+input_ptr3
+input_ptr4
+vBus_sensed
+ac_L_sensed
+ac_N_sensed
+ac_cur_sensed
+iL1/2/3_sensed
+Read 
+ADC
+&
+Scale 
+to PU
+ac_cur_ref
+ac_cur_ref_in
+st
+DCL_PI
+Gi
+á%XV9ROWDJH)HHGIRUZDUG
+á$&9ROWDJH)HHGIRUZDUG
+á%RRVW9ROWDJH'URS
+Feedforward
+www.ti.com.cn Hardware, Testing Requirements, and Test Results
+ZHCU459B–March 2018–Revised April 2020 35
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 26. Build Level 2 Control Software Diagram: Closed Current Loop
+3.2.3.2.1 Setting Software Options for BUILD 2
+Ensure that the hardware is set up as outlined in 图 18. Do not supply any high voltage (HV) power to the
+board yet.
+On the powerSUITE page, under Project Options section:
+
+=== PDF页 36 ===
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+36 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+1. Select Closed Current Loop for the build level under INCR_BUILD option.
+2. Select input to be DC under INPUT options.
+3. Disable the other options such as Non Linear Voltage Loop, Adaptive Deadtime and Phase shedding.
+Ensure that all other options are the same as specified earlier in 节 3.2.3.2.
+Under Control Loop Design, options for the current loop tuning will automatically be selected (Tuning →
+Current Loop → COMP1 → DCL_PI_C1). Click on the Compensation Designer icon ( ).
+3.2.3.2.2 Designing Current Loop Compensator
+Compensation Designer launches with the model of the current loop plant with parameters specified on
+the powerSUITE page. PI-based controller can be tuned from a pole zero perspective to ensure stable
+closed loop operation. Stability of the system when using the designed compensator can be verified by
+observing the gain and phase margins on the open loop transfer function plot in the Compensation
+Designer, as shown in 图 27.
+图 27. Current Loop Design Using Compensation Designer
+
+=== PDF页 37 ===
+www.ti.com.cn Hardware, Testing Requirements, and Test Results
+ZHCU459B–March 2018–Revised April 2020 37
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+Once satisfied with the open loop gain, click on Save COMP. This action saves the compensator values
+into the project. If the project was not selected from the solution adapter, changes to the compensator are
+not allowed. Select the solution through the solution adapter.
+Close the Compensation Designer, and return to the powerSUITE page.
+3.2.3.2.3 Building and Loading Project and Setting Up Debug
+Right-click on the project name, and click Rebuild Project. The project builds successfully. Click Run →
+Debug, which launches a debugging session. In the case of dual CPU devices, a window may appear to
+select the CPU the debug must be performed. In this case, select CPU1. The project then loads on the
+device, and CCS debug view becomes active. The code halts at the start of the main routine.
+To add the variables in the watch and expressions window, click View → Scripting Console to open the
+scripting console dialog box. On the upper-right corner of this console, click on Open to browse to the
+setupdebugenv_build2_dc.js script file, which is located inside the project folder. This file populates the
+watch window with appropriate variables required to debug the system. Click on Continuous Refresh
+button ( ) on the watch window to enable continuous update of values from the controller. The watch
+window appears as 图 28.
+图 28. Build Level 2: Closed Current Loop Expressions View
+Enable real-time mode by hovering the mouse on the buttons on the horizontal toolbar and clicking the
+button.
+Run the project by clicking on .
+Halt the processor by using the Halt button on the toolbar .
+
+=== PDF页 38 ===
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+38 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+3.2.3.2.4 Running Code
+The project is programmed to drive the inrush relay and clear the trip after a set amount of time, that is,
+autoStartSlew==100. The software is programmed to do so in the build level with DC. An input voltage
+must be applied after hitting run and before this autoslew counter reaches 100. If the counter reaches 100,
+before voltage is applied at the input, the code must be reset. For which the controller must be brought out
+of real time mode, a reset performed and restarted. Repeat the step from 节 3.2.3.2.3 of enabling real-time
+mode by hovering the mouse on the buttons on the horizontal toolbar and click the button.
+Run the project by clicking .
+Apply an input voltage of approximately 50 V before the autoStartSlew reaches 100. As soon
+autoStartSlew reaches 100, the inrush relay is triggered, and PWM trip is cleared along with closing the
+current loop flag.
+图 29. Watch Expression, Build Level 2, DC After Closed Current Loop Operation Begins
+The input current regulates approximately 1.5 A, and the output voltage boosts to approximately 193 V.
+Slowly increase ac_cur_ref to 0.045, that is, 2.4-A input.
+Slowly increase Vin = 120 V, and the output voltage will be greater than 370 V.
+
+=== PDF页 39 ===
+www.ti.com.cn Hardware, Testing Requirements, and Test Results
+ZHCU459B–March 2018–Revised April 2020 39
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 30. Watch Expression, Build Level 2, DC After Closed Current Loop Operation Begins at Full Voltage
+SFRA is integrated in the software of this build to verify that the designed compensator provides enough
+gain and phase margin by measuring on hardware. To run the SFRA, keep the project running. From the
+cfg page, click on the SFRA icon. SFRA GUI appears.
+Select the options for the device on the SFRA GUI. For example, for F28004x, select floating point. Click
+on Setup Connection. On the pop-up window, uncheck the boot on connect option, and select an
+appropriate COM port. Ensure Boot on Connect is deselected. Click OK. Return to the SFRA GUI, and
+click Connect.
+
+=== PDF页 40 ===
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+40 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+The SFRA GUI connects to the device. An SFRA sweep can now be started by clicking Start Sweep. The
+complete SFRA sweep takes a few minutes to finish. Activity can be monitored by seeing the progress bar
+on the SFRA GUI and also checking the flashing of blue LED on the back on the control card that
+indicates UART activity. Once complete, a graph with the open loop plot appears. The frequency response
+data is also saved in the project folder under an SFRA data folder and is time stamped with the time of the
+SFRA run.
+Additionally, the measured frequency response of the plant can be used to design the current
+compensator by clicking on the Compensation Designer again from the CFG page. Choose SFRA Data
+for plant option on the GUI. This uses the measured plant information to design the compensator. This
+option can be used to fine tune the compensation. By default, the compensation designer points to the
+latest SFRA run. If a previous SFRA run plant information must be used, select the SFRAData.csv file by
+browsing to it by clicking on Browse SFRA Data. This action verifies the current compensator design.
+Bring the system to a safe stop by bringing the input DC voltage down to zero. Ensure that the guiVbus
+comes down to zero as well.
+Fully halting the MCU when in real-time mode is a two-step process. First halt the processor by using the
+Halt button on the toolbar ( ) or by using Target → Halt. Then take the MCU out of real-time mode by
+clicking on . Finally, reset the MCU ( ) .
+Close the CCS debug session by clicking on Terminate Debug Session (Target → Terminate all).
+3.2.3.3 INCR_BUILD 2: Closed Current Loop, AC
+In BUILD 2, the inner current loop is closed, that is, the inductor current is controlled using a current
+compensator Gi. Both DC bus and output voltage feedforward are applied to the output of this current
+compensator to generate the duty cycle of the inverter along with soft start for PWM around the zero￾crossing.
+Complete software diagram for this build as illustrated in 图 31.
+
+=== PDF页 41 ===
+Single Phase 
+AC
+N L
++
+PWM dutyPU
++
+ac_vol_sensed -
+DCL_DF22 DCL_DF22
+4
+th Order Notch Filter
+Compute 
+Average
+vBus_sensedFilteredNotch2
+10 Khz, Voltage Loop and Instrumentation ISR
+100 Khz,
+Current Loop ISR
+DLOG_4CH
+input_ptr1 output_ptr1
+size
+trig_value
+pre_scalar
+DBUFF1
+output_ptr2 DBUFF2
+output_ptr3 DBUFF3
+output_ptr4 DBUFF4
+input_ptr2
+input_ptr3
+input_ptr4
+vBus_sensed
+ac_L_sensed
+ac_N_sensed
+ac_cur_sensed
+iL1/2/3_sensed
+Read 
+ADC
+&
+Scale 
+to PU
+.cos()
+.Vin
+SPLL_1ph_SOGI
+wn
+.sin()
+.Vrms
+.Vin
+POWER_MEAS_
+SINE_ANALYZER
+SampleFreq
+Threshold
+.Sigfreq
+T=1/f
+.Iin
+.Pwr
+.Irms
+ac_cur_ref
+ac_cur_ref_in
+st
+DCL_PI
+Gi
+á%XV9ROWDJH)HHGIRUZDUG
+á$&9ROWDJH)HHGIRUZDUG
+á%RRVW9ROWDJH'URS
+Feedforward
+á6RIW6WDUW$URXQG=HUR&URVVLQJ
+á3:0PRGXODWLRQFKDQJHIRU$&
+half cycle
+www.ti.com.cn Hardware, Testing Requirements, and Test Results
+ZHCU459B–March 2018–Revised April 2020 41
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 31. Build Level 2 Control Software Diagram: Closed Current Loop AC
+
+=== PDF页 42 ===
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+42 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+3.2.3.3.1 Setting Software Options for BUILD 2
+On the powerSUITE page, assuming that options were selected under Project Options section, select
+Closed Current Loop and AC input for the build level. Save the page.
+Current compensator from the previous build is re-used in this build so no additional steps are required for
+tuning the current loop in the build level.
+3.2.3.3.2 Building and Loading Project and Setting Up Debug
+Right-click on the project name, and click Rebuild Project. The project builds successfully. Click Run →
+Debug, which launches a debugging session. In the case of dual CPU devices, a window may appear to
+select the CPU the debug must be performed. In this case, select CPU1. The project then loads on the
+device, and CCS debug view becomes active. The code halts at the start of the main routine.
+To add the variables in the watch and expressions window click View → Scripting Console to open the
+scripting console dialog box. On the upper-right corner of this console, click on Open to browse to the
+setupdebugenv_build2_ac.js script file, which is located inside the project folder. This file populates the
+watch window with appropriate variables required to debug the system. Click on Continuous Refresh
+button ( ) on the watch window to enable continuous update of values from the controller. The watch
+window appears as 图 32.
+图 32. Build Level 2 AC: Closed Current Loop Expressions View
+Enable real-time mode by hovering the mouse on the buttons on the horizontal toolbar, and clicking the
+button.
+3.2.3.3.3 Running Code
+The project is programmed to wait for input voltage to exceed approximately 70 Vrms to drive the in rush
+relay and clear the trip.
+Run the project by clicking .
+
+=== PDF页 43 ===
+www.ti.com.cn Hardware, Testing Requirements, and Test Results
+ZHCU459B–March 2018–Revised April 2020 43
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+Apply an input voltage of approximately 120 V. The board comes out of the undervoltage condition and
+inrush relay is driven. The trip clears, and a small amount of current of approximately 1.3-A RMS is drawn.
+The watch window looks similar to 图 33. The bus voltage is close to 270 V.
+图 33. Watch Expression, Build Level 2, AC After Closed Current Loop Operation Begins
+Slowly increase ac_cur_ref to 0.078, that is, 2.4-A input, and the bus voltage rises to 400 V. The voltage
+and current waveform are shown in 图 34.
+图 34. Input AC Current and Output DC Voltage Waveform
+
+=== PDF页 44 ===
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+44 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+SFRA is integrated in the software of this build to verify the designed compensator provides enough gain
+and phase margin by measuring on hardware. To run the SFRA, keep the project running, and from the
+cfg page, click on the SFRA icon. SFRA GUI appears.
+Select the options for the device on the SFRA GUI. For example, for F28377D, select floating point. Click
+on Setup Connection. On the pop-up window, uncheck the boot on connect option, and select an
+appropriate COM port. Click OK. Return to the SFRA GUI, and click Connect.
+The SFRA GUI connects to the device. A SFRA sweep can now be started by clicking Start Sweep. The
+complete SFRA sweep takes a few minutes to finish. Activity can be monitored by seeing the progress bar
+on the SFRA GUI and also by checking the flashing of blue LED on the back on the control card that
+indicates UART activity. Once complete, a graph with the open loop plot appears. This is similar to the plot
+seen under DC conditions; however, some additional noise is visible due to AC harmonic frequencies
+close to the measured frequencies. The BW, PM, and GM numbers are very similar to the DC case.
+To bring the system to a safe stop, switch off the output from the AC power supply, thus bringing the input
+AC voltage down to zero. Ensure that the guiVbus comes down to zero, as well.
+Fully halting the MCU when in real-time mode is a two-step process. First, halt the processor by using the
+Halt button on the toolbar ( ) or by using Target → Halt. Then take the MCU out of real-time mode by
+clicking on . Finally, reset the MCU ( ) .
+Close the CCS debug session by clicking on Terminate Debug Session (Target → Terminate all).
+3.2.3.4 INCR_BUILD 3: Closed Voltage and Current Loop
+In this build, the outer voltage loop is closed with the inner current loop closed. The model of the outer
+voltage loop is derived in 图 35. A PI-based compensator is used and tuned through the compensation
+designer for the outer voltage loop.
+图 35 shows the software diagram for this build.
+
+=== PDF页 45 ===
+Single Phase 
+AC
+N L
++
+PWM dutyPU
++
+ac_vol_sensed -
+DCL_DF22 DCL_DF22
+4
+th Order Notch Filter
+Compute 
+Average
+10 Khz, Voltage Loop and Instrumentation ISR
+100 Khz,
+Current Loop ISR
+vBus_sensed
+ac_L_sensed
+ac_N_sensed
+ac_cur_sensed
+iL1/2/3_sensed
+Read 
+ADC
+&
+Scale 
+to PU
+.cos()
+.Vin
+SPLL_1ph_SOGI
+wn
+.sin()
+.Vrms
+.Vin
+POWER_MEAS_
+SINE_ANALYZER
+SampleFreq
+Threshold
+.Sigfreq
+T=1/f
+.Iin
+.Pwr
+.Irms
+ac_cur_ref_in
+st
+DCL_PI
+Gi
+á%XV9ROWDJH)HHGIRUZDUG
+á$&9ROWDJH)HHGIRUZDUG
+á%RRVW9ROWDJH'URS
+Feedforward
+á6RIW6WDUW$URXQG=HUR&URVVLQJ
+á3:0PRGXODWLRQFKDQJHIRU$&
+half cycle
+vBus_sensedFilteredNotch2
+ac_cur_ref
+DCL_PI
+Gv
+vBusAvg/
+vRmsAvg
+vBusRef vBusRefSlewed
+DLOG_4CH
+input_ptr1 output_ptr1
+size
+trig_value
+pre_scalar
+DBUFF1
+output_ptr2 DBUFF2
+output_ptr3 DBUFF3
+output_ptr4 DBUFF4
+input_ptr2
+input_ptr3
+input_ptr4
+www.ti.com.cn Hardware, Testing Requirements, and Test Results
+ZHCU459B–March 2018–Revised April 2020 45
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 35. Build Level 3 Control Diagram: Output Voltage Control With Inner Current Loop
+3.2.3.4.1 Setting Software Options for BUILD 3
+Ensure that the hardware is setup as outlined in 图 18. Do not supply any HV power yet to the board.
+On the powerSUITE page, under the Project Options section:
+1. Select Closed Voltage & Current Loop for the build level under INCR_BUILD option.
+
+=== PDF页 46 ===
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+46 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+2. Select input to be AC under INPUT options.
+3. Disable the other options such as Non Linear Voltage Loop, Adaptive Deadtime and Phase shedding.
+Ensure that all other options are same as specified earlier in 节 3.2.3.1.1.
+Under Control Loop Design, select Tuning as Voltage Loop. Style presets to DCL PI. Save the page by
+Ctrl + S, and click on the Compensation Designer button ( ).
+Ensure that the load connected at the output of the board is correctly entered on the powerSUITE cfg
+page because this load value is used in the design of the voltage compensator.
+3.2.3.4.2 Designing Voltage Loop Compensator
+Compensation designer launches with the model of the voltage loop plant. The PI compensator can be
+edited to get the desired gain and phase margin, keeping in mind that the bandwidth of the voltage loop
+has an inverse relationship with the THD achieved. Typically in a PFC application, this bandwidth is kept
+at approximately 10 Hz, as shown in 图 36.
+图 36. Voltage Loop Design Using Compensation Designer
+
+=== PDF页 47 ===
+www.ti.com.cn Hardware, Testing Requirements, and Test Results
+ZHCU459B–March 2018–Revised April 2020 47
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+Once satisfied with the compensator design, click on Save COMP. This action saves the compensator
+values into the project. If the project was not selected from the solution adapter, changes to the
+compensator are not allowed. For alternative usess, select the solution through the solution adapter.
+Close the Compensation Designer, and return to the powerSUITE page. Save using Ctrl + S.
+3.2.3.4.3 Building and Loading Project and Setting up Debug
+Right-click on the project name, and click Rebuild Project. The project builds successfully. Click Run →
+Debug, which launches a debugging session. In the case of dual CPU devices, a window may appear to
+select the CPU the debug must be performed. In this case, select CPU1. The project then loads on the
+device, and CCS debug view becomes active. The code halts at the start of the main routine.
+To add the variables in the watch and expressions window, click View → Scripting Console to open the
+scripting console dialog box. On the upper-right corner of this console, click on Open to browse to the
+setupdebugenv_build3.js script file located inside the project folder. This file populates the watch window
+with appropriate variables required to debug the system. Click on the Continuous Refresh button ( ) on
+the watch window to enable continuous update of values from the controller.
+The watch window appears as shown in 图 37.
+图 37. Build Level 3: Expressions View
+Enable real-time mode by hovering the mouse on the buttons on the horizontal toolbar and clicking the
+button.
+Run the project by clicking on .
+Halt the processor by using the Halt button on the toolbar ( ) .
+
+=== PDF页 48 ===
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+48 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+3.2.3.4.4 Running Code
+The project is programmed to wait for input voltage to excel at approximately 70 Vrms to drive the in rush
+relay and clear the trip.
+Run the project by clicking .
+Apply an input voltage of approximately 120 V. The board comes out of the undervoltage condition and
+inrush relay is driven. The trip clears, and the output rises to 380-V DC. A sinusoidal current is drawn from
+the AC input. 图 38 shows the watch window when the program is running at this stage.
+图 38. Build Level 3: Expressions View After AC Voltage is Applied
+SFRA is integrated in the software of this build to verify the designed compensator provides enough gain
+and phase margin by measuring on hardware. To run the SFRA, keep the project running, and from the
+cfg page, click on the SFRA icon. SFRA GUI appears.
+Select the options for the device on the SFRA GUI. For example, for F28004x, select floating point. Click
+on Setup Connection, and on the pop-up window, uncheck the boot on connect option and select an
+appropriate COM port. Click OK. Return to the SFRA GUI, and click Connect.
+The SFRA GUI connects to the device. An SFRA sweep can now be started by clicking Start Sweep. The
+complete SFRA sweep takes a few minutes to finish. Activity can be monitored by seeing the progress bar
+on the SFRA GUI and checking the flashing of blue LED on the back on the control card that indicates
+UART activity. Once complete, a graph with the open loop plot appears, as seen in 图 39. This action
+verifies that the designed compensator is indeed stable.
+
+=== PDF页 49 ===
+www.ti.com.cn Hardware, Testing Requirements, and Test Results
+ZHCU459B–March 2018–Revised April 2020 49
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 39. SFRA Run on Closed Voltage Loop
+Alternately, click on the Compensation Designer again from the CFG page, and choose SFRA Data for
+plant option on the GUI. This option uses the measured plant information to design the compensator, and
+can be used to fine tune the compensation. By default, the Compensation Designer points to the latest
+SFRA run. If a previous SFRA run plant information must be used, select the SFRAData.csv file by
+browsing to it by clicking on Browse SFRA Data. Close the Compensation Designer to return to the cfg
+page once complete. This verifies the voltage compensator design.
+To bring the system to a safe stop, bring the input AC voltage down to zero. Ensure that the guiVBus
+comes down to zero, as well.
+Fully halting the MCU when in real-time mode is a two-step process. First, halt the processor by using the
+Halt button on the toolbar ( ) or by using Target → Halt. Then take the MCU out of real-time mode by
+clicking on . Finally, reset the MCU ( ).
+Close CCS debug session by clicking on Terminate Debug Session (Target → Terminate all).
+
+=== PDF页 50 ===
+Q1_C
+Q2_C
+Q1_B Q1_C
+1Phase Operation
+(For light load)
+3 Phase Interleaving Operation
+(for heavy load)
+2 Phase Interleaving Operation
+(For mid load)
+Vout
++
+-
++
+±
+Vin
+Lboost_A
+Lboost_B
+Lboost_C
+Q2_A Q2_B
+Q1_A
+Vout
++
+-
++
+±
+Vin
+Lboost_A
+Lboost_B
+Lboost_C
+Q2_A Q2_B Q2_C
+Q1_A Q1_B
+Vout
++
+-
++
+±
+Vin
+Lboost_A
+Lboost_B
+Lboost_C
+Q2_A Q2_B Q2_C
+Q1_A Q1_B Q1_C
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+50 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+3.2.4 Running Code on CLA
+This solution is supported with an option to run the code on the CLA. This option is selected using a drop￾down box under project option on the powerSUITE main.cfg page. Running on CLA can be selected for
+any build level option.
+注: SFRA library does not support CLA, hence the SFRA cannot be run when using CLA.
+DLOG is also not used when using CLA, hence the datalogging graphs will not work when
+using CLA.
+Once the option is changed, the CFG file must be saved and the project re-compiled. Once recompiled,
+follow the steps as outlined in the specific incremental build level documentation.
+Depending on the device, such as with F28004x, CLA supports CLA tasks and a background task, thus
+both 100-kHz ISR and 10-kHz IST can be offloaded to the CLA. By default, if the selection from the
+powerSUITE page is made, the faster ISR is moved to the CLA task and the slower ISR is moved to the
+background task by default. The option to not run the 10-kHz ISR on the CLA is available under the
+"USER SECTION" in the solutions-settings.h file.
+#if CONTROL_RUNNING_ON == CLA_CORE
+#define INSTRUMENTATION_ISR_RUNNING_ON CLA_CORE
+#else
+#define INSTRUMENTATION_ISR_RUNNING_ON C28x_CORE
+#endif
+3.2.5 Advanced Options
+3.2.5.1 Phase Shedding for Efficiency Improvements
+Phase shedding can be an effective technique to improve efficiency in interleaved application by
+optimizing for the conduction and the switching losses. In this design there are three phases, so three
+different configurations are possible as shown in 图 40.
+图 40. Phase Shedding Options on TTPL PFC
+In each of these modes, the phase shift between each of them must be adjusted. When in two-phase
+mode, a 180° phase shift is desired between the PWMs. When in three-phase mode, a 120° of phase shift
+is desired.
+
+=== PDF页 51 ===
+Voltage Loop 
+Current 
+Reference 
+iac-cur-ref
+State Machine Phase ON/OFF TBPHS Setting
+S1 : iac_cur_ref < I1
+S2 : I1 < iac_cur_ref < I2
+S3 : iac_cur_ref>I2
+Set GPIO4 = ePWM4 (ON) 
+Set GPIO5 = GPIO (OFF)
+Set GPIO6 = GPIO (OFF)
+Set GPIO4 = ePWM4 (ON) 
+Set GPIO5 = ePWM5 (ON)
+Set GPIO6 = GPIO (OFF) 
+Set GPIO4 = ePWM4 (ON) 
+Set GPIO5 = ePWM5 (ON)
+Set GPIO6 = ePWM6 (ON) 
+ePWM4 TBPHS = 0
+ 
+ePWM4 TBPHS = 0 
+ePWM5 TBPHS = 180
+ePWM4 TBPHS = 0 
+ePWM5 TBPHS = 120
+ePWM5 TBPHS = 240
+Iac-ref < I2 - ˚i
+Iac-ref > I2 + ˚i
+Iac-ref < I1 - ˚i
+Iac-ref > I1 + ˚i
+I2
+I1
+Hysteresis
+Band 
+Interleaving State = S1
+(1Ph)
+Interleaving State = S2 
+(2Ph)
+Interleaving State = S3 
+(3Ph)
+Iac-ref (A)
+2˚i
+Hysteresis
+Band 2˚i
+S1 S2 S3
+www.ti.com.cn Hardware, Testing Requirements, and Test Results
+ZHCU459B–March 2018–Revised April 2020 51
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+The decision to do phase shedding can be made on different parameters, such as the RMS current,
+power, the peak inductor current, and so on. When using RMS current, the change of phases can be
+significantly delayed. Code takes multiple AC cycles before the phases are added.
+This delay may not be acceptable for many applications. Thus, the voltage controller output is chosen as
+the decision point to drop or add phases. A state machine is constructed as shown in 图 41, with some
+hysteresis built around the phase shedding points.
+图 41. State Machine for Phase Shedding Control
+Bringing a phase in and out can cause inadvertent pulses to be generated. Therefore, the implementation
+to drop and add phase is done through the GPIO and PWM peripheral switch using the GPIO pin Mux
+registers. All PWM-capable pins are configured and GPIO outputs are driven low. Based on how many
+phases must be applied, the GPIO pin mux is changed accordingly. It is safe to enable and disable the
+phases using the GPIO pin mux switch at any point in the AC cycle as the registers in the PWM are
+shadowed. 图 42 shows details of the implementation of phase shedding on the C2000 MCU.
+图 42. Implementation of Phase Shedding on TTPL PFC Using C2000™ MCU
+To enable phase shedding, settings can be set in the user section of the code in <solution>-settings.h file
+and modifying PHASE_SHEDDING_ENABLED define. The points at which phases are brought in and out
+are set by changing the PHASE_SHEDDING_1PH_2PH_TRANSITION_CURRENT and
+PHASE_SHEDDING_2PH_3PH_TRANSITION_CURRENT define, which correspond to I1 and I2 as
+shown in 图 42. Recompile the code, load the code, and repeat the process as outlined in 3.2 节 to test
+this feature. With this feature implemented, under transients the phases are dropped and added quickly.
+The detailed results while transitioning from single phase to multiple phases are shown in 3.3 节.
+
+=== PDF页 52 ===
+DC Bus Voltage
+Input Current
+Input Voltage
+Kp
+E2 E1
+Abs Voltage Error
+Abs(Vref-Vfdbk)
+K2
+K1
+Note the value is slewed to 
+the new Kp gain to avoid any 
+sudden changes abs(Vref - Vfdbk)<E2
+abs(Vref - Vfdbk)>E1
+K1 K2
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+52 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+3.2.5.2 Non-Linear Voltage Loop for Transient Reduction
+The PFC stage control is composed of an inner current loop, which tries to follow the input voltage and an
+outer voltage loop that tries to maintain a constant DC bus voltage at the output. The voltage loop is thus
+in conflict with the current loop and hence must be designed to be very low bandwidth (approximately 10
+Hz) to achieve good power factor. The slow voltage loop results in significant overshoot and undershoot
+under transients (see 图 43).
+图 43. Non-Linear Voltage Loop With Hysteresis
+To improve voltage overshoot and undershoot while maintaining good power factor, a non-linear voltage
+control loop is implemented as shown in 图 44. A hysteresis band is added in the non-linear voltage loop
+to avoid oscillation between high-gain and low-gain mode. Furthermore, the gain change is slewed to
+avoid any sudden changes. 图 45 shows the result with non-linear voltage loop.
+图 44. Voltage Transient Without Non-Linear Voltage Loop, Vin 120 Vrms, 1-kW to 100-W Transient,
+Overshoot 26 V
+
+=== PDF页 53 ===
+DC Bus Voltage
+Input Current
+Input Voltage
+www.ti.com.cn Hardware, Testing Requirements, and Test Results
+ZHCU459B–March 2018–Revised April 2020 53
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 45. Voltage Transient With Non-Linear Voltage Loop, Vin 120 Vrms, 1-kW to 100-W Transient, Overshoot
+10 V
+To enable non-linear voltage loop, select the drop-down box under Project Options on the
+CFG/powerSUITE page of the solution. A default value of five times the gain is applied for the proportional
+term under transient condition. This value can be adjusted under the user section of the <solution>-
+settings.h file by modifying the NON_LINEAR_V_LOOP_KP_MULTIPLIER define. The project must be
+saved, re-compiled, and loaded on the controller when this option is changed. Hardware setup and
+software instructions for the Build Level 3 can be followed to see the behavior of the board under
+transients.
+
+=== PDF页 54 ===
+DC Bus Voltage
+Input Current
+Input Voltage
+DC Bus Voltage
+Input Current
+Input Voltage
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+54 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+3.3 Testing and Results
+3.3.1 Test Results at 120 Vrms Input
+3.3.1.1 Startup
+The startup waveform with single AC phase input of 120-V AC, 400-V DC Bus output is shown in 图 46.
+The PFC is loaded with 1.6 kW.
+图 46. Startup at 120-V AC Input, 400-V DC Output and 1.6-kW Load
+The startup waveform with single AC phase input of 120-V AC, 400-V DC Bus output is shown in 图 47.
+The PFC is loaded with 3.3 kW.
+图 47. Startup at 120-V AC Input, 400-V DC Output and 3.3-kW Load
+The startup waveform with 120-V AC, 400-V DC output, and with no load is shown in 图 48.
+
+=== PDF页 55 ===
+DC Bus Voltage
+Input Current
+Input Voltage
+DC Bus Voltage
+Input Current
+Input Voltage
+www.ti.com.cn Hardware, Testing Requirements, and Test Results
+ZHCU459B–March 2018–Revised April 2020 55
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 48. Startup at 120-V AC Input, 400-V DC Output and No Load
+3.3.1.2 Steady State Condition
+The stead state waveforms of TIDA-01604 at 120-V input with 330-W load, 1.65-kW load, 2.2-kW load,
+and 3.3-kW load are shown in 图 49, 图 50, 图 51, and 图 52 respectively.
+图 49. Steady State Waveforms at 120-V AC Input, 400-V DC Output and 330-W Load
+
+=== PDF页 56 ===
+DC Bus Voltage
+Input Current
+Input Voltage
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+56 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 50. Steady State Waveforms at 120-V AC Input, 400-V DC Output and 1.65-kW Load
+图 51. Steady State Waveforms at 120-V AC Input, 400-V DC Output and 2.2-kW Load
+
+=== PDF页 57 ===
+DC Bus Voltage
+Input Current
+Input Voltage
+www.ti.com.cn Hardware, Testing Requirements, and Test Results
+ZHCU459B–March 2018–Revised April 2020 57
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 52. Steady State Waveforms at 120-V AC Input, 400-V DC Output and 3.3-kW Load
+3.3.1.3 Detailed Results
+表 6 lists the detailed test results under varying load conditions with 120-Vac input and 400-Vdc output.
+Phase shedding is disabled. The efficiency is 97.30% at a 3.3-kW full load. The peak efficiency (97.77%)
+is achieved at approximately 50% load.
+表 6. Detailed Test Results With 120-V AC Vin, 400 Vout, and Different Power Levels
+Vin (RMS) Vout (RMS) Pin (W) Iout (A) Pout (W) Efficiency (%) THD (%) PF % of Load
+120.016 399.939 344.03 0.83395 333.45 96.33% 5.56% 0.99409 10%
+119.973 399.929 474.52 1.14664 458.51 96.63% 4.58% 0.99585 14%
+119.921 399.945 637.46 1.54467 617.74 96.91% 4.14% 0.99673 19%
+119.875 399.94 786.26 1.191124 786.26 97.21% 3.75% 0.99741 24%
+119.834 399.949 926.69 2.25745 902.83 97.43% 3.37% 0.99788 27%
+119.803 399.92 1029.77 2.5113 1004.29 97.53% 3.15% 0.99811 30%
+119.741 399.954 1230.32 3.00455 1201.65 97.67% 2.81% 0.99844 36%
+119.71 399.959 1329.84 3.24868 1299.31 97.70% 2.67% 0.99854 39%
+119.697 399.945 1542.24 3.76969 1507.65 97.76% 2.44% 0.99874 46%
+119.651 400 1685.99 4.1212 1648.46 97.77% 2.31% 0.99882 50%
+119.597 399.996 1858.37 4.54231 1816.88 97.77% 2.18% 0.99892 55%
+119.587 400.04 2044.41 4.9952 1998.26 97.74% 2.06% 0.99898 61%
+119.502 400.115 2274.05 5.5522 2221.51 97.69% 1.95% 0.99905 67%
+119.487 400.124 2482.69 6.058 2423.94 97.63% 1.85% 0.99911 73%
+119.426 400.143 2687.83 6.5536 2622.33 97.56% 1.77% 0.99915 79%
+119.421 400.205 2879.44 7.0157 2807.69 97.51% 1.70% 0.99917 85%
+119.362 400.224 3098.64 7.5424 3018.63 97.42% 1.63% 0.99921 91%
+119.28 400.303 3392.64 8.2461 3300.87 97.30% 1.56% 0.99924 100%
+
+=== PDF页 58 ===
+DC Bus Voltage
+Input Current
+Input Voltage
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+58 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+3.3.1.4 Load Transient Test
+图 53 shows the transient response when input is 120 Vrms and a load step change from 100 W to 1.6 kW.
+图 53. Load Transient Response From 100-W to 1.6-kW Step With 120-V AC Input
+图 54 shows the transient response when input is 120 Vrms and a load step change from 1.6 kW to 2.2 kW.
+图 54. Load Transient Response From 1.6-kW to 2.2-kW Step With 120-V AC Input
+图 55 shows the transient response when input is 120 Vrms and a load step change from 1.6 kW to 3.3 kW.
+
+=== PDF页 59 ===
+DC Bus Voltage
+Total Input Current
+Phase 2 Current
+Phase 3 Current
+DC Bus Voltage
+Input Current
+Input Voltage
+www.ti.com.cn Hardware, Testing Requirements, and Test Results
+ZHCU459B–March 2018–Revised April 2020 59
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 55. Load Transient Response From 1.6-kW to 3.3-kW Step With 120-V AC Input
+3.3.1.5 Phase Shedding Test
+The input RMS current is detected for transitioning from three-phase to dual-phase and single-phase
+operations. 图 56 shows when PFC runs from 1 phase to dual phases. The load step changes from 320 W
+to 1 kW.
+图 56. Phase Added Transition From Single Phase to Dual Phases, Load Step From 320 W to 1 kW
+图 57 shows when the PFC runs from 1 phase to 3 phases. The load step changes from 320 W to 1.8 kW.
+
+=== PDF页 60 ===
+DC Bus Voltage
+Total Input Current
+Phase 2 Current
+Phase 3 Current
+DC Bus Voltage
+Total Input Current
+Phase 2 Current
+Phase 3 Current
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+60 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 57. Phase Added Transition From Single Phase to Three Phases, Load Step From 320 W to 1.8 kW
+图 58 shows when PFC runs from dual phases to 3 phases. The load step changes from 720 W to 1.8
+kW.
+图 58. Phase Added Transition From Dual Phases to Three Phases, Load Step From 720 W to 1.8 kW
+Comparison of the efficiency curves with and without phase shedding is shown in 图 59. 1% efficiency
+improvement has been achieved.
+
+=== PDF页 61 ===
+DC Bus Voltage
+Input Current
+Input Voltage
+Output Power (W)
+Efficiency ()
+300 900 1500 2100 2700 3300
+0.962
+0.964
+0.966
+0.968
+0.97
+0.972
+0.974
+0.976
+0.978
+0.98
+tida
+Without Phase shedding
+With Phase Shedding
+www.ti.com.cn Hardware, Testing Requirements, and Test Results
+ZHCU459B–March 2018–Revised April 2020 61
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 59. Efficiency Comparison at 120-V Input With and Without Phase Shedding
+3.3.2 Test Results at 240 Vrms Input
+3.3.2.1 Startup
+The startup waveform with single AC phase input of 240-V AC, 400-V DC Bus output is shown in 图 60.
+The PFC is loaded with 1.6 kW.
+图 60. Startup at 240-V AC Input, 400-V DC Output and 1.6-kW Load
+The startup waveform with 240-V AC, 400-V DC output, and with no load is shown in 图 61.
+
+=== PDF页 62 ===
+DC Bus Voltage
+Input Current
+Input Voltage
+DC Bus Voltage
+Input Current
+Input Voltage
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+62 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 61. Startup at 240-V AC Input, 400-V DC Output and No Load
+3.3.2.2 Steady State Condition
+The steady state waveforms of TIDA-01604 at 240-V input with 2.6 kW load, 3.3 kW load, 4.8 kW load
+and 6.6 kW load are shown in 图 62, 图 63, 图 64, and 图 65 respectively.
+图 62. Steady State Waveforms at 240-V AC Input, 400-V DC Output and 2.6-kW Load
+
+=== PDF页 63 ===
+DC Bus Voltage
+Input Current
+Input Voltage
+DC Bus Voltage
+Input Current
+Input Voltage
+www.ti.com.cn Hardware, Testing Requirements, and Test Results
+ZHCU459B–March 2018–Revised April 2020 63
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 63. Steady State Waveforms at 240-V AC Input, 400-V DC Output and 3.3-kW Load
+图 64. Steady State Waveforms at 240-V AC Input, 400-V DC Output and 4.8-kW Load
+
+=== PDF页 64 ===
+DC Bus Voltage
+Input Current
+Input Voltage
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+64 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 65. Steady State Waveforms at 240-V AC Input, 400-V DC Output and 6.6-kW Load
+3.3.2.3 Detailed Results
+表 7 lists the detailed test results under varying load conditions with 240-V AC input and 400-V DC output.
+Phase shedding is disabled. The efficiency is 98.6% at a 6.6-kW full load. The peak efficiency (98.86%) is
+achieved at approximately 50% load.
+表 7. Detailed Test Results With 240-V AC Vin, 400 Vout, and Different Power Levels
+Vin (RMS) Vout (RMS) Pin (W) Iout (A) Pout (W) Efficiency (%) THD (%) PF % of Load
+240.135 399.883 678.4 1.667 666.53 98.25% 12.39% 0.98027 10%
+240.1 399.891 911.72 2.24469 897.6 98.45% 7.30% 0.99166 14%
+240.054 399.893 1218.2 3 1201.26 98.61% 4.06% 0.99654 18%
+240.009 399.889 1527.16 3.769 1507.27 98.70% 3.28% 0.99802 23%
+239.963 399.891 1838.54 4.54 1815.77 98.76% 3.12% 0.99859 28%
+239.931 399.888 2046.12 5.05517 2021.48 98.80% 3.06% 0.99879 31%
+239.87 399.938 2450.23 6.0549 2421.54 98.83% 2.91% 0.99904 37%
+238.8 400.14 2653 6.55 2622 98.81% 2.79% 0.999 40%
+239.783 399.984 3050.23 7.5389 3015.39 98.86% 2.62% 0.99922 46%
+239.742 400.023 3334.45 8.2406 3296.7 98.86% 2.51% 0.99925 50%
+239.695 400.042 3650.99 9.022 3609.11 98.85% 2.41% 0.9993 55%
+239.64 400.113 4045.92 9.994 3998.65 98.83% 2.21% 0.99933 61%
+239.581 400.142 4459.01 11.0116 4406.1 98.81% 2.10% 0.99936 67%
+239.575 400.228 4850.39 11.9711 4791 98.78% 1.99% 0.99939 73%
+239.514 400.309 5279.9 13.02 5213.2 98.74% 1.89% 0.99942 79%
+239.8 400 5675 14 5602 98.71% 1.73% 0.999 85%
+239.986 400.04 6087.7 15.01 6005.1 98.68% 1.70% 0.99966 91%
+240.081 399.929 6694.9 16.5059 6601 98.60% 1.59% 0.99967 100%
+
+=== PDF页 65 ===
+www.ti.com.cn Hardware, Testing Requirements, and Test Results
+ZHCU459B–March 2018–Revised April 2020 65
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+3.3.2.4 Load Transient Test
+图 66 shows the transient response when input is 240 Vrms and a load step change from 1.6 kW to 3.3 kW.
+图 66. Load Transient Response From 1.6-kW to 3.3-kW Step With 240-V AC Input
+图 67 shows the transient response when input is 240 Vrms and a load step change from 300 W to 3.3 kW.
+图 67. Load Transient Response From 300-W to 3.3-kW Step With 240-V AC Input
+图 68 shows the transient response when input is 240 Vrms and a load step change from 3.3 kW to 5.5 kW.
+
+=== PDF页 66 ===
+Output Power (W)
+Efficiency ()
+500 1500 2500 3500 4500 5500 6500
+0.982
+0.983
+0.984
+0.985
+0.986
+0.987
+0.988
+0.989
+0.99
+tida
+Without Phase shedding
+With Phase Shedding
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+66 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 68. Load Transient Response From 3.3-kW to 5.5-kW Step With 240-V AC Input
+3.3.2.5 Phase Shedding Test
+Comparison of the efficiency curves with and without phase shedding at 240-V AC input is shown in 图 69.
+图 69. Efficiency Comparison at 240-V Input With and Without Phase Shedding
+3.3.3 Result Comparison in Graphs
+图 70 shows the efficiency comparison at varying load conditions with 120-V and 240-V AC inputs.
+
+=== PDF页 67 ===
+Output Power
+Power Factor
+0 1000 2000 3000 4000 5000 6000 7000
+0.98
+0.982
+0.984
+0.986
+0.988
+0.99
+0.992
+0.994
+0.996
+0.998
+1
+tida
+120 V Input
+240 V Input
+Output Power (W)
+Efficiency ()
+0 1000 2000 3000 4000 5000 6000 7000
+0.96
+0.965
+0.97
+0.975
+0.98
+0.985
+0.99
+tida
+120 V Input
+240 V Input
+www.ti.com.cn Hardware, Testing Requirements, and Test Results
+ZHCU459B–March 2018–Revised April 2020 67
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 70. Efficiency Comparison at 120-V and 240-V Input With Varying Load Conditions
+图 71 shows the power factor comparison at various load conditions with 120-V and 240-V AC inputs.
+图 71. PF Comparison at 120-V and 240-V Input With Varying Load Conditions
+
+=== PDF页 68 ===
+Output Power (W)
+THD ()
+0 1000 2000 3000 4000 5000 6000 7000
+0.015
+0.025
+0.035
+0.045
+0.055
+0.065
+0.075
+0.085
+0.095
+0.105
+0.115
+0.125
+tida
+120 V Input
+240 V Input
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+68 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 72. THD Comparison at 120-V and 240-V Input With Varying Load Conditions
+
+=== PDF页 69 ===
+Hall Sensor U101
+Inductor L101
+www.ti.com.cn Hardware, Testing Requirements, and Test Results
+ZHCU459B–March 2018–Revised April 2020 69
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+3.3.4 Thermal Image
+图 73 and 图 74 show the thermal image of the design board running at 120-V input and under 3.3 kW
+load. The images are taken after the circuit is running at room temperature for 30 minutes.
+图 73. Thermal Image of the TIDA-01604 at 120-V AC Input With 3.3-kW Load (Focus on the Inductor)
+图 74. Thermal Image of the TIDA-01604 at 120-V AC Input With 3.3-kW Load (Focus on the Hall Sensor)
+图 75 shows the thermal image of the design board running at 240-V input and with 3.3 kW load. The
+image is taken after the circuit is running at room temperature for 30 minutes.
+
+=== PDF页 70 ===
+Hardware, Testing Requirements, and Test Results www.ti.com.cn
+70 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+图 75. Thermal Image of the TIDA-01604 at 240-V AC Input With 3.3-kW Load
+图 76 shows the thermal image of the design board running at 240-V input and with 6.6 kW load. The
+image is taken after the circuit is running at room temperature for 30 minutes.
+图 76. Thermal Image of the TIDA-01604 at 240-V AC Input With 6.6-kW Load
+
+=== PDF页 71 ===
+www.ti.com.cn Design Files
+ZHCU459B–March 2018–Revised April 2020 71
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+4 Design Files
+4.1 Schematics
+To download the schematics, see the design files at TIDA-01604.
+4.2 Bill of Materials
+To download the bill of materials (BOM), see the design files at TIDA-01604.
+4.3 PCB Layout Recommendations
+4.3.1 Layout Prints
+To download the layer plots, see the design files at TIDA-01604.
+TIDA-01604 implements a six-layer PCB. 图 77 shows the board material, copper thickness, and the
+dielectric distance between the layers.
+图 77. Layer Stack of TIDA-01604
+4.4 Altium Project
+To download the Altium project files, see the design files at TIDA-01604.
+4.5 Gerber Files
+To download the Gerber files, see the design files at TIDA-01604.
+4.6 Assembly Drawings
+To download the assembly drawings, see the design files at TIDA-01604.
+5 Related Documentation
+1. Joel Turchi, J.T., Dhaval Dalal, D.D., Patrick Wang, P.T., and Laurent Lenck, L.L. (2014). Power Factor
+Correction (PFC) Handbook: Choosing the Right Power Factor Controller Solution. Revision 5,
+http://www.onsemi.com/pub/Collateral/HBD853-D.PDF
+2. Texas Instruments, Automotive, Dual-Channel SiC MOSFET Gate Driver Reference Design With Two￾Level Turnoff Protection
+
+=== PDF页 72 ===
+Terminology www.ti.com.cn
+72 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+效率为 98.6% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计
+3. Texas Instruments, Control challenges in a totem-pole PFC Technical Brief
+5.1 商标
+C2000, E2E, Piccolo, Code Composer Studio are trademarks of Texas Instruments.
+PLECS is a registered trademark of Plexim GmbH.
+All other trademarks are the property of their respective owners.
+6 Terminology
+ADC— Analog-to-digital converter
+AEC— Automotive Electronics Council
+AFE— Analog front end
+BOM— Bill of materials
+CCM— Continuous conduction mode
+CM— Common mode
+CMTI— Common-mode transient immunity
+CPU— Central processing unit
+DCM— Discontinuous conduction mode
+DM— Differential mode
+EMC— Electromagnetic compatibility
+EMI— Electromagnetic interference
+ESR— Equivalent series resistance
+EV— Electric vehicle
+HEV— Hybrid-electric vehicle
+IGBT— Insulated-gate bipolar transistor
+MOSFET— Metal-oxide-semiconductor-field-effect transistor
+OBC— Onboard charger
+PCB— Printed-circuit board
+PFC— Power factor correction
+PHEV— Plug-in hybrid-electric vehicle
+PSR— Primary side regulation
+RMS— Root mean square
+UVLO— Undervoltage lockout
+
+=== PDF页 73 ===
+www.ti.com.cn About the Author
+ZHCU459B–March 2018–Revised April 2020 73
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+Revision History
+7 About the Author
+XUN GONG is an Automotive Systems Engineer at Texas Instruments, where he is responsible for
+developing reference design solutions in Automotive HEV/EV Power Train. Xun brings to this role
+expertise in the field of IGBT and SiC (Silicon Carbide) isolated gate drivers, traction inverters, high
+voltage and high power DC-DC converters. Xun achieved his Ph.D. in Electrical Engineering from Delft
+University of Technology in Delft, Netherlands. Xun Gong won the 1st prize Award of the Academic
+Journal IEEE Transactions on Power Electronics in 2014.
+GANGYAO WANG is a SiC System Architect with High Voltage Power Solutions Group at Texas
+Instruments, where he is responsible for defining high power gate drivers and developing references
+design solutions for all kinds of applications using SiC MOSFET. Before join TI in 2017, Gangyao has
+been worked on SiC power device characterization and application. Gangyao has received has Ph.D. in
+Electrical Engineering from North Carolina State University in 2013 and he has published more than 40
+technical papers in international journals and conference proceedings.
+修订历史记录
+注：之前版本的页码可能与当前版本有所不同。
+Changes from A Revision (August 2018) to B Revision ................................................................................................ Page
+• Made additions and deletions to the Opening Project Inside CCS section including the Code Composer Studio
+version..................................................................................................................................... 26
+• 已更改 instructions for opening the reference design software. ................................................................... 26
+• 已更改 step 5 of the Solution Adapter Tool changes................................................................................ 27
+• 已更改 图 19 to accommodate the PowerSuite update. ............................................................................ 27
+• 已更改 图 20 to accommodate the PowerSuite update. ............................................................................ 28
+• Made updates to the section following 图 21, Project Structure Overview. ...................................................... 29
+• 已添加 NOTE: to the Running Code on CLA section. .............................................................................. 50
+Changes from Original (March 2018) to A Revision ....................................................................................................... Page
+• 已更改 将设计标题从效率为 98.5% 且适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计 更改为效率为 98.6% 且
+适用于 HEV/EV 车载充电器的 6.6kW 图腾柱 PFC 参考设计........................................................................ 1
+• 已更改 说明 ................................................................................................................................ 1
+• 已更改 将特性中的峰值效率从 98.46% 更改为 98.60% .............................................................................. 1
+• 已添加 添加了 UCC21520-Q1、TMS320F280049 和 C2000WARE-DIGITALPOWER-SDK 产品文件夹的资源链接 ....... 1
+• 已删除 删除了 SN74LVC1G3157、TLV71333-Q1 和 OPA2376-Q1 产品文件夹的资源链接 ................................... 1
+• 已添加 Warnings to 1 节, System Description......................................................................................... 2
+• 已更改 Input specifications for power line harmonics in 表 2, TIDA-01604 Key System Specifications ....................... 6
+• 已更改 Output specifications for peak efficiency in 表 2, TIDA-01604 Key System Specifications............................. 6
+• 已更改 device name from ASN6501-Q1 to SN6501-Q1 in 2.1 节, Block Diagram ............................................... 7
+• 已添加 图 5, Functional Block Diagram of UCC21520-Q1........................................................................... 8
+• 已添加 节 2.2.3, SN6501-Q1............................................................................................................. 9
+• 已添加 节 2.2.4, ISO7731-Q1............................................................................................................ 9
+• 已添加 节 2.2.5, LMV762Q-Q1 .......................................................................................................... 9
+• 已添加 节 2.2.6, TPS7B6950-Q1 ...................................................................................................... 10
+• 已添加 节 2.2.7, TL431-Q1 ............................................................................................................. 10
+• 已添加 节 2.2.8, TLV71333-Q1 ........................................................................................................ 10
+• 已添加 节 2.2.9, OPA2376-Q1 ......................................................................................................... 10
+• 已更改 device name from TMS320F280049M to TMS320F280049 in 节 2.2.10, C2000™ MCU F28004x ................. 10
+• 已添加 节 2.3.1, PWM................................................................................................................... 10
+• 已添加 节 2.3.2, Current Loop Model ................................................................................................. 11
+
+=== PDF页 74 ===
+修订历史记录 www.ti.com.cn
+74 ZHCU459B–March 2018–Revised April 2020
+TIDUE54 — http://www-s.ti.com/sc/techlit/TIDUE54
+版权 © 2018–2020, Texas Instruments Incorporated
+Revision History
+• 已更改 图 7, Current Loop Control Model ............................................................................................ 12
+• 已添加 节 2.3.3, DC Bus Regulation Loop ........................................................................................... 12
+• 已更改 图 8, DC Voltage Loop Control Model ....................................................................................... 13
+• 已添加 节 2.3.4, Soft Start Around Zero-Crossing for Eliminate or Reduce Current Spike .................................... 13
+• 已添加 节 2.3.6, Inductor Calculation ................................................................................................. 14
+• 已删除 PLECS® Simulation Circuit image from 节 2.3.9, Three-Phase-Interleaved, High-Frequency Bridge Legs........ 15
+• 已添加 节 2.3.10, Auxiliary Power Supply Design................................................................................... 17
+• 已添加 图 12 to 节 2.3.11, Current and Voltage Sense............................................................................. 21
+• 已添加 公式 28 to 节 2.3.11, Current and Voltage Sense .......................................................................... 21
+• 已添加 information regarding output voltage to 节 2.3.11, Current and Voltage Sense........................................ 21
+• 已更改 图 13 caption from Schematic of AC Hall Effect Sensor to Schematic of Current Sensing........................... 22
+• 已添加 information regarding RC filters to 节 2.3.11, Current and Voltage Sense.............................................. 22
+• 已添加 information regarding the measurement setup diagram to 3.1 节, Hardware........................................... 25
+• 已添加 节 3.1.1, Control Card Settings ............................................................................................... 25
+• 已添加 3.2 节, Software................................................................................................................. 26
+• 已添加 节 3.3.1, Test Results at 120 Vrms Input .................................................................................... 54
+• 已添加 节 3.3.2, Test Results at 240 Vrms Input .................................................................................... 61
+• 已添加 节 3.3.3, Result Comparison in Graphs...................................................................................... 66
+• 已添加 节 3.3.4, Thermal Image ....................................................................................................... 69
+• 已更改 7 节, About the Author ......................................................................................................... 73
+
+=== PDF页 75 ===
+重要声明和免责声明
+TI 均以“原样”提供技术性及可靠性数据（包括数据表）、设计资源（包括参考设计）、应用或其他设计建议、网络工具、安全信息和其他资
+源，不保证其中不含任何瑕疵，且不做任何明示或暗示的担保，包括但不限于对适销性、适合某特定用途或不侵犯任何第三方知识产权的暗示
+担保。
+所述资源可供专业开发人员应用TI 产品进行设计使用。您将对以下行为独自承担全部责任：(1) 针对您的应用选择合适的TI 产品；(2) 设计、
+验证并测试您的应用；(3) 确保您的应用满足相应标准以及任何其他安全、安保或其他要求。所述资源如有变更，恕不另行通知。TI 对您使用
+所述资源的授权仅限于开发资源所涉及TI 产品的相关应用。除此之外不得复制或展示所述资源，也不提供其它TI或任何第三方的知识产权授权
+许可。如因使用所述资源而产生任何索赔、赔偿、成本、损失及债务等，TI对此概不负责，并且您须赔偿由此对TI 及其代表造成的损害。
+TI 所提供产品均受TI 的销售条款 (http://www.ti.com.cn/zh-cn/legal/termsofsale.html) 以及ti.com.cn上或随附TI产品提供的其他可适用条款的约
+束。TI提供所述资源并不扩展或以其他方式更改TI 针对TI 产品所发布的可适用的担保范围或担保免责声明。IMPORTANT NOTICE
+邮寄地址：上海市浦东新区世纪大道 1568 号中建大厦 32 楼，邮政编码：200122
+Copyright © 2020 德州仪器半导体技术（上海）有限公司
+
+=== PDF页 76 ===
+重要声明和免责声明
+TI 均以“原样”提供技术性及可靠性数据（包括数据表）、设计资源（包括参考设计）、应用或其他设计建议、网络工具、安全信息和其他资
+源，不保证其中不含任何瑕疵，且不做任何明示或暗示的担保，包括但不限于对适销性、适合某特定用途或不侵犯任何第三方知识产权的暗示
+担保。
+所述资源可供专业开发人员应用TI 产品进行设计使用。您将对以下行为独自承担全部责任：(1) 针对您的应用选择合适的TI 产品；(2) 设计、
+验证并测试您的应用；(3) 确保您的应用满足相应标准以及任何其他安全、安保或其他要求。所述资源如有变更，恕不另行通知。TI 对您使用
+所述资源的授权仅限于开发资源所涉及TI 产品的相关应用。除此之外不得复制或展示所述资源，也不提供其它TI或任何第三方的知识产权授权
+许可。如因使用所述资源而产生任何索赔、赔偿、成本、损失及债务等，TI对此概不负责，并且您须赔偿由此对TI 及其代表造成的损害。
+TI 所提供产品均受TI 的销售条款 (http://www.ti.com.cn/zh-cn/legal/termsofsale.html) 以及ti.com.cn上或随附TI产品提供的其他可适用条款的约
+束。TI提供所述资源并不扩展或以其他方式更改TI 针对TI 产品所发布的可适用的担保范围或担保免责声明。IMPORTANT NOTICE
+邮寄地址：上海市浦东新区世纪大道 1568 号中建大厦 32 楼，邮政编码：200122
+Copyright © 2020 德州仪器半导体技术（上海）有限公司

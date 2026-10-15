@@ -1,0 +1,390 @@
+******************************************************************************
+             TMS320C2000 Linker PC v22.6.0                     
+******************************************************************************
+>> Linked Wed Jul 24 11:44:06 2024
+
+OUTPUT FILE NAME:   <erad_ex3_stack_overflow_detect.out>
+ENTRY POINT SYMBOL: "_c_int00"  address: 000087d1
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+PAGE 0:
+  BEGIN                 00000000   00000002  00000002  00000000  RWIX
+  RAMM0                 000000f6   0000030a  00000018  000002f2  RWIX
+  RAMLS0                00008000   00000800  00000800  00000000  RWIX
+  RAMLS1                00008800   00000800  0000022a  000005d6  RWIX
+  RAMLS2                00009000   00000800  00000000  00000800  RWIX
+  RAMLS3                00009800   00000800  00000000  00000800  RWIX
+  RAMLS4                0000a000   00000800  00000000  00000800  RWIX
+  FLASH_BANK0_SEC0      00080000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC1      00081000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC2      00082000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC3      00083000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC4      00084000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC5      00085000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC6      00086000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC7      00087000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC8      00088000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC9      00089000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC10     0008a000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC11     0008b000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC12     0008c000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC13     0008d000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC14     0008e000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC15     0008f000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC0      00090000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC1      00091000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC2      00092000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC3      00093000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC4      00094000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC5      00095000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC6      00096000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC7      00097000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC8      00098000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC9      00099000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC10     0009a000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC11     0009b000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC12     0009c000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC13     0009d000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC14     0009e000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC15     0009f000   00001000  00000000  00001000  RWIX
+  RESET                 003fffc0   00000002  00000000  00000002  RWIX
+
+PAGE 1:
+  BOOT_RSVD             00000002   000000f1  00000000  000000f1  RWIX
+  RAMM1                 00000400   000003f8  000003f8  00000000  RWIX
+  RAMLS5                0000a800   00000800  00000203  000005fd  RWIX
+  RAMLS6                0000b000   00000800  00000000  00000800  RWIX
+  RAMLS7                0000b800   00000800  00000000  00000800  RWIX
+  RAMGS0                0000c000   00002000  00000000  00002000  RWIX
+  RAMGS1                0000e000   00002000  00000000  00002000  RWIX
+  RAMGS2                00010000   00002000  00000000  00002000  RWIX
+  RAMGS3                00012000   00001ff8  00000000  00001ff8  RWIX
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+codestart 
+*          0    00000000    00000002     
+                  00000000    00000002     f28004x_codestartbranch.obj (codestart)
+
+.TI.ramfunc 
+*          0    000000f6    00000004     
+                  000000f6    00000004     sysctl.obj (.TI.ramfunc)
+
+.cinit     0    000000fc    00000014     
+                  000000fc    0000000a     (.cinit..data.load) [load image, compression = lzss]
+                  00000106    00000004     (__TI_handler_table)
+                  0000010a    00000002     --HOLE-- [fill = 0]
+                  0000010c    00000004     (__TI_cinit_table)
+
+.reset     0    003fffc0    00000000     DSECT
+
+.stack     1    00000400    000003f8     UNINITIALIZED
+                  00000400    000003f8     --HOLE--
+
+.init_array 
+*          0    000000f6    00000000     UNINITIALIZED
+
+.const     1    0000a800    000001f3     
+                  0000a800    0000008a     sysctl.obj (.const:.string)
+                  0000a88a    00000088     erad.obj (.const:.string)
+                  0000a912    00000088     gpio.obj (.const:.string)
+                  0000a99a    00000059     device.obj (.const:.string)
+
+.data      1    0000a9f4    00000010     UNINITIALIZED
+                  0000a9f4    00000006     erad_ex3_stack_overflow_detect.obj (.data)
+                  0000a9fa    00000006     rts2800_fpu32_eabi.lib : exit.c.obj (.data)
+                  0000aa00    00000002                            : _lock.c.obj (.data:_lock)
+                  0000aa02    00000002                            : _lock.c.obj (.data:_unlock)
+
+.text.1    0    00008000    00000800     
+                  00008000    000000e0     device.obj (.text:Device_enableAllPeripherals)
+                  000080e0    000000c5     sysctl.obj (.text:SysCtl_setClock)
+                  000081a5    000000bd     sysctl.obj (.text:SysCtl_isPLLValid)
+                  00008262    00000073     sysctl.obj (.text:DCC_setCounterSeeds)
+                  000082d5    0000005e     sysctl.obj (.text:SysCtl_getClock)
+                  00008333    00000052     gpio.obj (.text:GPIO_setPadConfig)
+                  00008385    00000051     device.obj (.text:Device_init)
+                  000083d6    00000049     sysctl.obj (.text:SysCtl_selectOscSource)
+                  0000841f    00000045     erad.obj (.text:ERAD_configBusComp)
+                  00008464    00000045     sysctl.obj (.text:SysCtl_pollX1Counter)
+                  000084a9    0000003d     interrupt.obj (.text:Interrupt_initModule)
+                  000084e6    0000003a     gpio.obj (.text:GPIO_setAnalogMode)
+                  00008520    00000037     interrupt.obj (.text:Interrupt_enable)
+                  00008557    00000036     sysctl.obj (.text:SysCtl_selectXTAL)
+                  0000858d    00000036     erad_ex3_stack_overflow_detect.obj (.text:main)
+                  000085c3    00000033     erad.obj (.text:ERAD_isValidBusCompBase)
+                  000085f6    00000031     gpio.obj (.text:GPIO_setDirectionMode)
+                  00008627    0000002e     rts2800_fpu32_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss)
+                  00008655    0000002b                            : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit)
+                  00008680    00000029                            : exit.c.obj (.text)
+                  000086a9    00000027     erad.obj (.text:ERAD_enableInterruptOnAddressHit)
+                  000086d0    00000024     sysctl.obj (.text:DCC_enableSingleShotMode)
+                  000086f4    00000020     sysctl.obj (.text:SysCtl_selectXTALSingleEnded)
+                  00008714    0000001e     sysctl.obj (.text:DCC_setCounter1ClkSource)
+                  00008732    0000001e     interrupt.obj (.text:Interrupt_initVectorTable)
+                  00008750    0000001d     rts2800_fpu32_eabi.lib : memcpy.c.obj (.text)
+                  0000876d    0000001c     sysctl.obj (.text:DCC_setCounter0ClkSource)
+                  00008789    0000001a     sysctl.obj (.text:SysCtl_getLowSpeedClock)
+                  000087a3    00000017     device.obj (.text:SysCtl_enablePeripheral)
+                  000087ba    00000017     sysctl.obj (.text:SysCtl_enablePeripheral)
+                  000087d1    00000017     rts2800_fpu32_eabi.lib : boot28.asm.obj (.text)
+                  000087e8    00000016     sysctl.obj (.text:DCC_disableDoneSignal)
+                  000087fe    00000002     rts2800_fpu32_eabi.lib : pre_init.c.obj (.text)
+
+.text.2    0    00008800    0000022a     
+                  00008800    00000016     sysctl.obj (.text:DCC_enableDoneSignal)
+                  00008816    00000016     interrupt.obj (.text:Interrupt_defaultHandler)
+                  0000882c    00000015     sysctl.obj (.text:DCC_clearDoneFlag)
+                  00008841    00000015     sysctl.obj (.text:DCC_clearErrorFlag)
+                  00008856    00000015     sysctl.obj (.text:DCC_disableErrorSignal)
+                  0000886b    00000015     device.obj (.text:GPIO_unlockPortConfig)
+                  00008880    00000014     sysctl.obj (.text:DCC_disableModule)
+                  00008894    00000014     sysctl.obj (.text:DCC_enableErrorSignal)
+                  000088a8    00000014     sysctl.obj (.text:DCC_enableModule)
+                  000088bc    00000014     gpio.obj (.text:GPIO_isPinValid)
+                  000088d0    00000014     erad_ex3_stack_overflow_detect.obj (.text:RTOSISR)
+                  000088e4    00000014     device.obj (.text:SysCtl_deviceCal)
+                  000088f8    00000013     erad.obj (.text:ERAD_clearBusCompEvent)
+                  0000890b    00000012     erad.obj (.text:ERAD_getBusCompStatus)
+                  0000891d    00000010     sysctl.obj (.text:DCC_isBaseValid)
+                  0000892d    00000010     device.obj (.text:Device_initGPIO)
+                  0000893d    0000000f     device.obj (.text:ASysCtl_disableDCDC)
+                  0000894c    0000000f     erad_ex3_stack_overflow_detect.obj (.text:Interrupt_register)
+                  0000895b    0000000e     erad_ex3_stack_overflow_detect.obj (.text:ERAD_initModule)
+                  00008969    0000000d     interrupt.obj (.text:Interrupt_disableGlobal)
+                  00008976    0000000d     interrupt.obj (.text:Interrupt_enableGlobal)
+                  00008983    0000000d     device.obj (.text:SysCtl_setLowSpeedClock)
+                  00008990    0000000c     erad_ex3_stack_overflow_detect.obj (.text:recursiveFunction)
+                  0000899c    0000000c     rts2800_fpu32_eabi.lib : args_main.c.obj (.text)
+                  000089a8    0000000b     sysctl.obj (.text:SysCtl_isMCDClockFailureDetected)
+                  000089b3    0000000a     erad_ex3_stack_overflow_detect.obj (.text:ERAD_disableModules)
+                  000089bd    0000000a     erad_ex3_stack_overflow_detect.obj (.text:ERAD_resetCounter)
+                  000089c7    0000000a     erad_ex3_stack_overflow_detect.obj (.text:ERAD_setOwnership)
+                  000089d1    0000000a     interrupt.obj (.text:Interrupt_illegalOperationHandler)
+                  000089db    0000000a     interrupt.obj (.text:Interrupt_nmiHandler)
+                  000089e5    00000009     erad.obj (.text:ERAD_enableModules)
+                  000089ee    00000009     rts2800_fpu32_eabi.lib : _lock.c.obj (.text)
+                  000089f7    00000008     device.obj (.text:SysCtl_disableWatchdog)
+                  000089ff    00000008     rts2800_fpu32_eabi.lib : copy_decompress_none.c.obj (.text:decompress:none)
+                  00008a07    00000008     f28004x_codestartbranch.obj (.text)
+                  00008a0f    00000007     erad_ex3_stack_overflow_detect.obj (.text:Interrupt_enableInCPU)
+                  00008a16    00000007     sysctl.obj (.text:SysCtl_resetMCD)
+                  00008a1d    00000007     device.obj (.text:__error__)
+                  00008a24    00000005     erad.obj (.text:ERAD_getOwnership)
+                  00008a29    00000001     rts2800_fpu32_eabi.lib : startup.c.obj (.text)
+
+MODULE SUMMARY
+
+       Module                               code   ro data   rw data
+       ------                               ----   -------   -------
+    .\device\
+       device.obj                           428    89        0      
+       f28004x_codestartbranch.obj          10     0         0      
+    +--+------------------------------------+------+---------+---------+
+       Total:                               438    89        0      
+                                                                    
+    .\device\driverlib\
+       sysctl.obj                           1171   138       0      
+       erad.obj                             210    136       0      
+       gpio.obj                             209    136       0      
+       interrupt.obj                        214    0         0      
+    +--+------------------------------------+------+---------+---------+
+       Total:                               1804   410       0      
+                                                                    
+    .\source\
+       erad_ex3_stack_overflow_detect.obj   152    0         6      
+    +--+------------------------------------+------+---------+---------+
+       Total:                               152    0         6      
+                                                                    
+    C:\ti\ccs12.0\ccs\tools\compiler\ti-cgt-c2000_22.6.0.LTS\lib\rts2800_fpu32_eabi.lib
+       exit.c.obj                           41     0         6      
+       copy_decompress_lzss.c.obj           46     0         0      
+       autoinit.c.obj                       43     0         0      
+       memcpy.c.obj                         29     0         0      
+       boot28.asm.obj                       23     0         0      
+       _lock.c.obj                          9      0         4      
+       args_main.c.obj                      12     0         0      
+       copy_decompress_none.c.obj           8      0         0      
+       pre_init.c.obj                       2      0         0      
+       startup.c.obj                        1      0         0      
+    +--+------------------------------------+------+---------+---------+
+       Total:                               214    0         10     
+                                                                    
+       Stack:                               0      0         1016   
+       Linker Generated:                    0      18        0      
+    +--+------------------------------------+------+---------+---------+
+       Grand Total:                         2608   517       1032   
+
+
+LINKER GENERATED COPY TABLES
+
+__TI_cinit_table @ 0000010c records: 1, size/record: 4, table size: 4
+	.data: load addr=000000fc, load size=0000000a bytes, run addr=0000a9f4, run size=00000010 bytes, compression=lzss
+
+
+LINKER GENERATED HANDLER TABLE
+
+__TI_handler_table @ 00000106 records: 2, size/record: 2, table size: 4
+	index: 0, handler: __TI_decompress_lzss
+	index: 1, handler: __TI_decompress_none
+
+
+GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
+
+address     data page           name
+--------    ----------------    ----
+00000400      10 (00000400)     __stack
+
+0000a9f4     2a7 (0000a9c0)     threshold
+0000a9f6     2a7 (0000a9c0)     functionCallCount
+0000a9f8     2a7 (0000a9c0)     x
+0000a9fa     2a7 (0000a9c0)     __TI_enable_exit_profile_output
+0000a9fc     2a7 (0000a9c0)     __TI_cleanup_ptr
+0000a9fe     2a7 (0000a9c0)     __TI_dtors_ptr
+
+0000aa00     2a8 (0000aa00)     _lock
+0000aa02     2a8 (0000aa00)     _unlock
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+page  address   name                             
+----  -------   ----                             
+0     00008680  C$$EXIT                          
+0     00008000  Device_enableAllPeripherals      
+0     00008385  Device_init                      
+0     0000892d  Device_initGPIO                  
+0     0000841f  ERAD_configBusComp               
+0     000086a9  ERAD_enableInterruptOnAddressHit 
+0     000084e6  GPIO_setAnalogMode               
+0     000085f6  GPIO_setDirectionMode            
+0     00008333  GPIO_setPadConfig                
+0     00008816  Interrupt_defaultHandler         
+0     00008520  Interrupt_enable                 
+0     000089d1  Interrupt_illegalOperationHandler
+0     000084a9  Interrupt_initModule             
+0     00008732  Interrupt_initVectorTable        
+0     000089db  Interrupt_nmiHandler             
+0     000088d0  RTOSISR                          
+0     000000f6  SysCtl_delay                     
+0     000082d5  SysCtl_getClock                  
+0     00008789  SysCtl_getLowSpeedClock          
+0     000081a5  SysCtl_isPLLValid                
+0     000083d6  SysCtl_selectOscSource           
+0     00008557  SysCtl_selectXTAL                
+0     000086f4  SysCtl_selectXTALSingleEnded     
+0     000080e0  SysCtl_setClock                  
+0     0000010c  __TI_CINIT_Base                  
+0     00000110  __TI_CINIT_Limit                 
+0     00000110  __TI_CINIT_Warm                  
+0     00000106  __TI_Handler_Table_Base          
+0     0000010a  __TI_Handler_Table_Limit         
+1     000007f8  __TI_STACK_END                   
+abs   000003f8  __TI_STACK_SIZE                  
+0     00008655  __TI_auto_init_nobinit_nopinit   
+1     0000a9fc  __TI_cleanup_ptr                 
+0     00008627  __TI_decompress_lzss             
+0     000089ff  __TI_decompress_none             
+1     0000a9fe  __TI_dtors_ptr                   
+1     0000a9fa  __TI_enable_exit_profile_output  
+abs   ffffffff  __TI_pprof_out_hndl              
+abs   ffffffff  __TI_prof_data_size              
+abs   ffffffff  __TI_prof_data_start             
+n/a   UNDEFED   __c_args__                       
+0     00008a1d  __error__                        
+1     00000400  __stack                          
+0     0000899c  _args_main                       
+0     000087d1  _c_int00                         
+1     0000aa00  _lock                            
+0     000089f6  _nop                             
+0     000089f2  _register_lock                   
+0     000089ee  _register_unlock                 
+0     00008a29  _system_post_cinit               
+0     000087fe  _system_pre_init                 
+1     0000aa02  _unlock                          
+0     00008680  abort                            
+0     00000000  code_start                       
+0     00008682  exit                             
+1     0000a9f6  functionCallCount                
+0     0000858d  main                             
+0     00008750  memcpy                           
+0     00008990  recursiveFunction                
+1     0000a9f4  threshold                        
+1     0000a9f8  x                                
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+page  address   name                             
+----  -------   ----                             
+0     00000000  code_start                       
+0     000000f6  SysCtl_delay                     
+0     00000106  __TI_Handler_Table_Base          
+0     0000010a  __TI_Handler_Table_Limit         
+0     0000010c  __TI_CINIT_Base                  
+0     00000110  __TI_CINIT_Limit                 
+0     00000110  __TI_CINIT_Warm                  
+0     00008000  Device_enableAllPeripherals      
+0     000080e0  SysCtl_setClock                  
+0     000081a5  SysCtl_isPLLValid                
+0     000082d5  SysCtl_getClock                  
+0     00008333  GPIO_setPadConfig                
+0     00008385  Device_init                      
+0     000083d6  SysCtl_selectOscSource           
+0     0000841f  ERAD_configBusComp               
+0     000084a9  Interrupt_initModule             
+0     000084e6  GPIO_setAnalogMode               
+0     00008520  Interrupt_enable                 
+0     00008557  SysCtl_selectXTAL                
+0     0000858d  main                             
+0     000085f6  GPIO_setDirectionMode            
+0     00008627  __TI_decompress_lzss             
+0     00008655  __TI_auto_init_nobinit_nopinit   
+0     00008680  C$$EXIT                          
+0     00008680  abort                            
+0     00008682  exit                             
+0     000086a9  ERAD_enableInterruptOnAddressHit 
+0     000086f4  SysCtl_selectXTALSingleEnded     
+0     00008732  Interrupt_initVectorTable        
+0     00008750  memcpy                           
+0     00008789  SysCtl_getLowSpeedClock          
+0     000087d1  _c_int00                         
+0     000087fe  _system_pre_init                 
+0     00008816  Interrupt_defaultHandler         
+0     000088d0  RTOSISR                          
+0     0000892d  Device_initGPIO                  
+0     00008990  recursiveFunction                
+0     0000899c  _args_main                       
+0     000089d1  Interrupt_illegalOperationHandler
+0     000089db  Interrupt_nmiHandler             
+0     000089ee  _register_unlock                 
+0     000089f2  _register_lock                   
+0     000089f6  _nop                             
+0     000089ff  __TI_decompress_none             
+0     00008a1d  __error__                        
+0     00008a29  _system_post_cinit               
+1     00000400  __stack                          
+1     000007f8  __TI_STACK_END                   
+1     0000a9f4  threshold                        
+1     0000a9f6  functionCallCount                
+1     0000a9f8  x                                
+1     0000a9fa  __TI_enable_exit_profile_output  
+1     0000a9fc  __TI_cleanup_ptr                 
+1     0000a9fe  __TI_dtors_ptr                   
+1     0000aa00  _lock                            
+1     0000aa02  _unlock                          
+abs   000003f8  __TI_STACK_SIZE                  
+abs   ffffffff  __TI_pprof_out_hndl              
+abs   ffffffff  __TI_prof_data_size              
+abs   ffffffff  __TI_prof_data_start             
+n/a   UNDEFED   __c_args__                       
+
+[61 symbols]

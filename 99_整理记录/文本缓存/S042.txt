@@ -1,0 +1,14 @@
+来源: 036/CANUpgrade_Demo/CANUpgrade_Demo/CAN升级操作指南.docx
+来源编号: S042
+
+段落1: CAN升级流程说明
+
+段落2: 将Boot，App工程导入CCS，烧录Boot工程
+
+段落3: 编译APP工程，提取编译后的.out文件
+
+段落4: 将.out文件放入“out转bin”文件夹，双击“Out2Bin_0.exe”，生成.bin文件
+
+段落5: 关闭zcanpro，打开升级上位机，打开设备，选择烧录程序（.bin文件），点击升级按钮，等待升级完成
+
+段落6: 完成后关闭上位机，打开zcanpro，验证通讯正常即升级成功

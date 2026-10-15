@@ -1,0 +1,44 @@
+/*
+// TI File $Revision: /main/3 $
+// Checkin $Date: July 2, 2007   11:29:57 $
+//###########################################################################
+//
+// This .gel file can be used to help load and build the example project.
+// It should be unloaded from Code Composer Studio before loading another 
+// project since it uses the OnReset() function. 
+//
+//###########################################################################
+// $TI Release: DSP281x C/C++ Header Files V1.20 $
+// $Release Date: July 27, 2009 $
+//###########################################################################
+*/
+
+menuitem "DSP281x McBSP Int"
+
+hotmenu Load_and_Build_Project()
+{
+   GEL_ProjectLoad("Example_281xMcBSP_FFDLB_int.pjt");
+   GEL_ProjectBuild("Example_281xMcBSP_FFDLB_int.pjt");
+}
+
+hotmenu Run_Code()
+{
+   GEL_Reset();
+}
+
+OnReset()
+{   
+   GEL_Load(".\\debug\\Example_281xMcBSP_FFDLB_int.out");
+}
+
+OnFileLoaded()
+{
+   GEL_Go(main);
+   GEL_WatchReset();
+   GEL_WatchAdd("sdata,x");
+   GEL_WatchAdd("rdata,x");
+   GEL_WatchAdd("rdata_point,x");      
+}
+
+
+

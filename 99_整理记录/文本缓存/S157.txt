@@ -1,0 +1,404 @@
+来源: AVP32F08/从F2808(9)移植到AVP32F08工程概要说明.docx
+来源编号: S157
+
+段落1: 从F2808(9)移植到AVP32F08工程概要
+
+段落2: 版本 V1.0
+
+段落3: 应用指导
+
+段落4: 湖南进芯电子科技有限公司
+
+段落5: 2022年7月5日
+
+段落6: 一、概述
+
+段落7: 本文档将重点阐述F2808(9)与AVP32F08的差异性，以支持客户快速移植。行文将重点介绍两款芯片系列在应用或测试中关键注意点，如用户对具体功能模块有进一步了解需要，可查阅相应产品规格书。
+
+段落8: 二、移植工程范围
+
+段落9: 器件资源差异性对比
+
+表10:
+
+行1: 项点 | F2808 | F2809 | AVP32F08
+
+行2: 芯片主频（MAX） | 100Mhz @ CORE1.8V | 100Mhz@CORE 1.8V | 150Mhz @ CORE1.65V
+
+行3: 芯片功耗 | 550mW @ 100Mhz | 550mW@100Mhz | 380mW @ 150Mhz
+
+行4: 片内Flash | 64KW | 128KW | 256KW
+
+行5: 片内SARAM | 18KW | 18KW | 34KW
+
+行6: HRPWM输出 | ePWM1A/2A/3A/4A | ePWM1A/2A/3A/4A/5A/6A | ePWM1A/2A/3A/4A/5A/6A
+
+行7: eCAP捕捉输入 / 或辅助PWM输出 | eCAP1/2/3/4 | eCAP1/2/3/4 | eCAP1/2/3/4/5/6
+
+行8: ADC转换时间 | 160ns | 80ns | 80ns
+
+行9: SPI | SPI-A/B/C/D | SPI-A/B/C/D | SPI-A
+
+行10: McBSP/SPI |  |  | McBSP-A/B
+
+行11: 外部中断 | 3 | 3 | 8
+
+行12: TEST1[pin97] / TEST2[pin98] | 芯片测试引脚 / 建议悬空 |  | TEST1为芯片内核1.65V供电的输出引脚； / TEST2为内核供电地；
+
+段落11: 三、CPU
+
+段落12: AVP32F08集成DSP+FPU主CPU结构，除了可兼容定点指令外，还可以拓展支持单精度浮点指令。
+
+段落13: 为更好的体现FPU在数学运算上的浮点性能，可参照FPU Fast RTS库。Fast RTS库是一个优化浮点数学函数集合，在DSP+FPU基础上运用C语言编程实现。
+
+段落14: 四、封装及引脚定义
+
+段落15: 与F2808(9)LQFP100相比，AVP32F08采用相同的封装尺寸，引脚定义在大部分功能上可以保持兼容，SPI外设相关的应用存在一定差异，AVP32F08可以通过将McBSP-A/B两个模块模拟SPI使用。
+
+段落16: 五、运行频率及供电条件
+
+段落17: F2808(9)在VDD供电1.8V时可运行最高频率100Mhz，F335在VDD供电1.8V时可运行最高频率100Mhz；两款系列的VDDIO均采用3.3V供电。
+
+段落18: 六、上电时序
+
+段落19: AVP32F08可以采用与F2808(9)相同电源上电时序。
+
+段落20: 器件上所有模块应在上电后确保恰当的复位状态，为达到此目的用户不必针对各供电引脚的上电、下电时序进行特殊设计。然而，当I/O引脚上电平移位输出缓冲器的3.3V晶体管在1.8V晶体管之前通电，此时可能会打开输出缓冲器，导致引脚在上电过程产生毛刺脉冲。为避免此现象，VDD应不晚于VDDIO引脚通电，确保VDD引脚的电平先于VDDIO引脚到达0.7V。
+
+段落21: 关于复位引脚的时序建议：
+
+段落22: 在上电期间，复位引脚应在输入时钟稳定后维持超过32个OSCCLK时钟的低电平；且在VDD到达1.5V后维持不低于1ms的低电平。
+
+段落23: 在下电过程，复位引脚应在VDD降低到1.5V前至少提前8us拉低。
+
+段落24: 在器件上电前，应避免下述两种启动条件：1.在数字引脚上施加超过VDDIO+0.7V电压（一个二极管的压降），2.在模拟引脚上施加超过VDDA+0.7V电压；VDDIO与VDDA之间压差应保持在0.3V。器件未上电前，其引脚上施加电压可能在无意中偏置PN结，并产生不可预期的结果。
+
+段落25: 七、存储器映射
+
+段落26: AVP32F08与F2808(9)的SARAM对比情况，总结如下：
+
+段落27: 7.1 SARAM内存块增大
+
+段落28: AVP32F08的片上SARAM增加到34K*16，F2808(9)的片上SARAM为18K*16;
+
+段落29: 7.2 内存块最大空间4K*16
+
+段落30: 起始于0x3F A000的SARAM-H0分解成为两个更小的内存块L2和L3。一个SARAM内存块的最大空间为4K*16。小的内存块有利于分配代码和数据。例如代码使用到MAC乘加操作，用户需要将操作码和两个操作数分配到3个不同的内存块。这样有利于最大化代码效率。
+
+段落31: 7.3 SARAM内存块双内存映射
+
+段落32: 内存块L0，L1，L2，L3同时映射到高地址段和低地址段。对于F2808(9)仅L0和L1被镜像。内存块的双映射可灵活根据应用需要分配代码空间。堆栈指针SP仅支持访问低64K范围。无特殊情况下，任意内存地址可用作存放数据或者代码。
+
+段落33: 7.4 等待数waitstate
+
+段落34: 器件F2808(9)上所有SARAM内存块对于程序总线或数总线访问均为0等待。而器件AVP32F08内存块L4，L5，L6，L7，针对DMA或者数据总线访问为0等待，程序总线访问为1等待。以下情形会启动程序总线访问，例如提取指令操作码、程序空间间接寻址、程序空间直接寻址。使用程序空间寻址访问操作数的指令包括MAC，DMAC，QMACL，IMACL，PREAD，和PWRITE。例如，MAC指令通过XAR7寄存器使用程序空间寻址。如果XAR7指向的操作数位于L4-L7中，则此指令的性能会降低。L4-L7在被分配用作程序代码或通过程序空间寻址访问的数据之前，应优先用作数据空间。
+
+段落35: 7.5 DMA可访问的SARAM
+
+段落36: L4-L7内存块可用作6个DMA通道的源地址或目标地址。DMA访问L4-L7为0等待。F2808(9)器件不支持DMA模块。
+
+表37:
+
+行1: 内存地址段 | F2808(9) | AVP32F08
+
+行2: 0x00 8000-0x00 8FFF | L0 | L0
+
+行3: 0x00 9000-0x00 9FFF | L1 | L1
+
+行4: 0x00 A000-0x00 AFFF | H0 | L2
+
+行5: 0x00 B000-0x00 BFFF | H0 | L3
+
+行6: 0x00 C000-0x00 CFFF |  | L4
+
+行7: 0x00 D000-0x00 DFFF | N/A | L5
+
+行8: 0x00 E000-0x00 EFFF | N/A | L6
+
+行9: 0x00 F000-0x00 FFFF | N/A | L7
+
+行10: 0x3F 8000-0x3F 8FFF | L0 Mirror | L0 Mirror
+
+行11: 0x3F 9000-0x3F 9FFF | L1 Mirror | L1 Mirror
+
+行12: 0x3F A000-0x3F AFFF | H0 Mirror | L2 Mirror
+
+行13: 0x3F B000-0x3F BFFF | H0 Mirror | L3 Mirror
+
+段落38: AVP32F08与F2808(9)的FLASH大小及地址分配，差异情况参考如下：
+
+表39:
+
+行1:  | F2806 | F2808 | F2809 | AVP32F08
+
+行2: 扇区H |  |  | 0x3D 8000 / 0x3D BFFF | 0x30 0000 / 0x30 7FFF
+
+行3: 扇区G |  |  | 0x3D C000 / 0x3D FFFF | 0x30 8000 / 0x30 FFFF
+
+行4: 扇区F |  |  | 0x3E 0000 / 0x3E 3FFF | 0x31 0000 / 0x31 7FFF
+
+行5: 扇区E |  |  | 0x3E 4000 / 0x3E 7FFF | 0x31 8000 / 0x31 FFFF
+
+行6: 扇区D | 0x3F 0000 / 0x3F 1FFF | 0x3E 8000 / 0x3E BFFF | 0x3E 8000 / 0x3E BFFF | 0x32 0000 / 0x32 7FFF
+
+行7: 扇区C | 0x3F 2000 / 0x3F 3FFF | 0x3E C000 / 0x3E FFFF | 0x3E C000 / 0x3E FFFF | 0x32 8000 / 0x32 FFFF
+
+行8: 扇区B | 0x3F 4000 / 0x3F 5FFF | 0x3F 0000 / 0x3F 3FFF | 0x3F 0000 / 0x3F 3FFF | 0x33 0000 / 0x33 7FFF
+
+行9: 扇区A / 加密时写入0x0000 / FLASH引导入口 / 128位密码位 / 禁止写入全0 | 0x3F 6000 / 0x3F 7F7F | 0x3F 4000 / 0x3F 7F7F | 0x3F 4000 / 0x3F 7F7F | 0x33 8000 / 0x33 FF7F
+
+行10: 扇区A / 加密时写入0x0000 / FLASH引导入口 / 128位密码位 / 禁止写入全0 | 0x3F 7F80 / 0x3F 7FF5 | 0x3F 7F80 / 0x3F 7FF5 | 0x3F 7F80 / 0x3F 7FF5 | 0x3F FF80 / 0x33 FFF5
+
+行11: 扇区A / 加密时写入0x0000 / FLASH引导入口 / 128位密码位 / 禁止写入全0 | 0x3F 7FF6 / 0x3F 7FF7 | 0x3F 7FF6 / 0x3F 7FF7 | 0x3F 7FF6 / 0x3F 7FF7 | 0x33 FFF6 / 0x33 FFF7
+
+行12: 扇区A / 加密时写入0x0000 / FLASH引导入口 / 128位密码位 / 禁止写入全0 | 0x3F 7FF8 / 0x3F 7FFF | 0x3F 7FF8 / 0x3F 7FFF | 0x3F 7FF8 / 0x3F 7FFF | 0x33 FFF8 / 0x33 FFFF
+
+段落40: 7.6 Flash 访问等待数
+
+表41:
+
+行1: SYSCLKOUT(Mhz) | SYSCLKOUT(ns) | PageWaitstate | RandomWaitState | OTPWAITSTATE
+
+行2: 150 | 6.67 | 5 | 5 | 8
+
+行3: 120 | 8.33 | 4 | 4 | 7
+
+行4: 100 | 10 | 3 | 3 | 5
+
+行5: 75 | 13.33 | 2 | 2 | 4
+
+行6: 50 | 20 | 1 | 1 | 2
+
+行7: 30 | 33.33 | 1 | 1 | 1
+
+段落42: 7.7 Flash编程
+
+段落43: AVP32F08与F2808(9)采用相同的FLASH编程方法。在启用编程操作时，器件调用各自的FLASH API作为编程方案的底层。F2808(9)应用的FLASH API不支持在AVP32F08上使用，但两个API文件中包含的FLASHAPI功能函数是基本兼容的。
+
+段落44: 因AVP32F08的SARAM内存块L4-L7作为程序空间时是1个等待数，此区间不适合用作运行FLASHAPI函数。
+
+段落45: 7.8 Boot ROM
+
+段落46: AVP32F08在ROM中增加了针对ADC的修调值；
+
+段落47: AVP32F08兼容ADP32F08(9)的引导模式。
+
+表48:
+
+行1: BOOT MODE | 描述 | GPIO18 / SPICLKA / SCITXDB | GPIO29 / SCITXDA | GPIO34
+
+行2: Boot to FLASH | 跳转到FLASH入口0x3F FFF6 | 1 | 1 | 1
+
+行3: SCI-A Boot | 通过SCI-A加载数据流 | 1 | 1 | 0
+
+行4: SPI-A Boot | 通过SPI-A从外部SPI存储加载数据 | 1 | 0 | 1
+
+行5: I2C Boot | 通过I2C总线从外部存储加载数据到0x50 | 1 | 0 | 0
+
+行6: eCAN-A Boot | 通过调用CAN_Boot从eCAN-A邮箱1加载 | 0 | 1 | 1
+
+行7: Boot To M0 | 跳转到M0地址0x00 0000 | 0 | 1 | 0
+
+行8: Boot to OTP | 跳转到OTP地址 0x3D 7800 | 0 | 0 | 1
+
+行9: 并行I/O Boot | 通过GPIO0-GPIO15加载数据 | 0 | 0 | 0
+
+段落49: Boot入口地址对比
+
+表50:
+
+行1:  | F2808(9) | AVP32F08 | 描述
+
+行2: 跳转到FLASH | 0x3F 7FF6 | 0x33 FFF6 | 密码区前两个字
+
+行3: 跳转到SARAM | 0x00 0000 | 0x00 0000 | M0首地址
+
+行4: 跳转到OTP | 0x3D 7800 | 0x38 0400 | OTP首地址
+
+段落51: 八、时钟及系统控制
+
+段落52: 关于器件时钟和系统控制，两类器件存在差异性，包括寄存器、引脚功能、逻辑功能及其它内容。
+
+段落53: 8.1寄存器差异
+
+表54:
+
+行1: 寄存器 | ADP32F08(9) | AVP32F08 | 描述
+
+行2: XCLK | √ | N/A | 对于AVP32F08，XCLKOUT通过XINTFCNF2寄存器配置
+
+行3: PLLSTS | CLKINDIV | DIVSEL | CLKINDIV单位控制，DIVSEL两位控制
+
+行4: PCLKCR0 | √ | √ | 新增SCI，MCbsp使能
+
+行5: PCLKCR1 | √ | √ | 新增eCAP时钟使能
+
+行6: PCLKCR3 | N/A | √ | 新增对CPU定时器、DMA、输入限定时钟使能
+
+行7: MAPCNF | N/A | √ | 新增对ePWM、HRPWM映射外设帧控制，映射外设帧3则可支持DMA访问
+
+段落55: 8.2输入时钟分频
+
+段落56: F2808(9)器件，馈送到CPU的时钟频率或者等于PLL输出时钟频率、或者等于PLL输出时钟频率的1/2。分频通过PLLSTS寄存器的CLKINDIV位控制。默认状态，PLLSTS[CLKINDIV]配置除以2工作。
+
+段落57: AVP32F08器件，分频通过PLLSTS寄存器的DIVSEL控制。PLLSTS分频可以设置为等于PLL输出时钟频率、或PLL输出时钟的1/2、或PLL输出时钟的1/4。默认情况下，器件上电后分频设置为1/4。
+
+段落58: AVP32F08器件BOOT过程修改PLLSTS[DIVSEL]使得加载器运行在输入时钟的1/2频率，此模式与F2808(9)器件加载器运行情况兼容。
+
+段落59: 8.3外设时钟使能寄存器
+
+段落60: 和F2808(9)相比，AVP32F08新增一个PCLKCR3寄存器，使能或禁用CPU定时器、DMA、和GPIO输入逻辑的时钟输入。
+
+段落61: 8.3 XCLKOUT控制
+
+段落62: F2808(9)器件，XCLKOUT和系统时钟SYSCLKOUT比例关系由XCLK寄存器控制。AVP32F08器件，XCLKOUT则基于XTIMCLK时钟。XTIMCLK时钟和XCLKOUT通过XINTFCNF2寄存器控制。默认情况下，XCLKOUT时钟频率为SYSCLKOUT系统时钟频率的1/4。
+
+段落63: 8.4 其它
+
+段落64: AVP32F08器件，可通过PCLKCR3寄存器禁用CPU定时器时钟。对于F2808(9)器件，CPU定时器默认使能。
+
+段落65: 另外一点差异是在PCLKCR3寄存器的GPIOINENCLK位。当此位清零时，引脚配置为输出状态时GPIO的输入路径将被禁用。此模式可在一定程度上降低器件运行功耗。清除GPIOINENCLK位将复位同步和限定逻辑。默认情况下GPIOIENCLK位使能，此模式下AVP32F08与F2808(9)兼容。
+
+段落66: 当GPIOINECLK禁用时，所有配置成输出引脚的GPIO输入逻辑将关闭，即DAT寄存器的相关位显示为未定义的值，不能用作读取引脚的当前状态。
+
+段落67: 九、外设
+
+段落68: AVP32F08与F2808(9)在器件外设资源上存在一定差异性，主要包括DMA、McBSP、ADC、外部中断选择XINT、SCI、SPI、I2C、eCAN、ePWM/HRPWM。
+
+段落69: 9.1 直接内存访问DMA
+
+段落70: AVP32F08片内集成一个6通道DMA模块，每个通道配置独立的中断向量。
+
+段落71: 触发事件源包括：
+
+段落72: ADC排序器1和2
+
+段落73: McBSP发送和接收
+
+段落74: 外部中断1-7和13
+
+段落75: CPU定时器
+
+段落76: ePWM1-6启动ADC转换（SOCA，SOCB）
+
+段落77: 软件触发
+
+段落78: 数据源和目标地址：L4-L7 SARAM，ADC结果寄存器，McBSP发送和接收寄存器，ePWM寄存器。
+
+段落79: DMA详细功能介绍可参考AVP32F08手册。
+
+段落80: 9.2 多通道缓存串行端口McBSP
+
+段落81: AVP32F08集成两个多通道缓存串行端口，McBSP-A/B。
+
+段落82: McBSP可模拟用作SPI。
+
+段落83: McBSP详细功能介绍可参考AVP32F08手册。
+
+段落84: 9.3 模数转换器ADC
+
+段落85: AVP32F08增加了ADC修调值，器件初始化阶段，系统会自动调用ADC_cal()函数，对ADC参考选择寄存器ADCREFSEL和ADC偏差校准寄存器ADCOFFTRIM赋值器件修调数据。
+
+段落86: AVP32F08增加了ADC镜像结果寄存器，支持CPU和DMA两种访问类型。CPU访问时是1个等待数，DMA访问时是0等待数。
+
+段落87: 9.4 通讯类外设
+
+段落88: 两类器件的通讯外设对比，如下表所示。
+
+表89:
+
+行1: 器件 | McBSP | I2C | SCI | SPI | eCAN
+
+行2: AVP32F08 | McBSP-A/B | I2C-A | SCI-A/B/C | SPI-A | eCAN-A/B
+
+行3: F2808(9) |  | I2C-A | SCI-A/B | SPI-A/B/C/D | eCAN-A/B
+
+段落90: 针对F2808(9) 器件I2C，SCI，SPI开发的代码可直接应用到AVP32F08器件上。
+
+段落91: F2808(9)器件的eCAN模块直接由系统时钟SYSCLKOUT供源，AVP32F08片上eCAN模块由1/2系统时钟供源，对于各自eCAN开发代码时需要考虑时钟源差异。
+
+段落92: 9.5 控制类外设
+
+段落93: 两类器件的eCAP、ePWM、HRPWM、eQEP模块功能保持一致，寄存器集合及寄存器地址也是相同的。另外PIE中断向量表中的中断向量地址也是相同的。另外存在两项差异点：
+
+段落94: ePWM和eCAP的同步机制两个系列的器件存在一定差异性，具体差异情况可参考数据手册。
+
+段落95: AVP32F08器件上，ePWM/HRPWM模块寄存器可重新映射到外设帧3支持DMA访问。重映射可通过MAPCNF[MAPEPWM]寄存器位控制。
+
+表96:
+
+行1: 器件 | ePWM | HRPWM | eCAP | eQEP
+
+行2: AVP32F08 | ePWM1-6 | ePWM1A-6A | eCAP1-6 | eQEP1-2
+
+行3: F2808(9) | ePWM1-6 | ePWM1A-6A | eCAP1-4 | eQEP1-2
+
+段落97: 十、中断
+
+段落98: 10.1 PIE级中断
+
+段落99: AVP32F08因新增外设及功能，在PIE级增加部分外设中断向量（下表中灰色标注）；F2808(9)片上带有四个SPI模块SPI-A/B/C/D，SPI-B/C对照AVP32F08的MCBSP-B/A。
+
+表100:
+
+行1: CPU INT | PIE INT | PIE INT | PIE INT | PIE INT | PIE INT | PIE INT | PIE INT | PIE INT
+
+行2: CPU INT | INTx.8 | INTx.7 | INTx.6 | INTx.5 | INTx.4 | INTx.3 | INTx.2 | INTx.1
+
+行3: INT1 | WAKEINT / LPM/WD | TINT0 / TIMER 0 | ADCINT / ADC | XINT2 | XINT1 | Reserved | SEQ2INT / ADC | SEQ1INT / ADC
+
+行4: INT2 | Reserved | Reserved | ePWM_TZINT6 / ePWM6 | ePWM_TZINT5 / ePWM5 | ePWM_TZINT4 / ePWM4 | ePWM_TZINT3 / ePWM3 | ePWM_TZINT2 / ePWM2 | ePWM_TZINT1 / ePWM1
+
+行5: INT3 | Reserved | Reserved | ePWM6_INT / ePWM6 | ePWM5_INT / ePWM5 | ePWM4_INT / ePWM4 | ePWM3_INT / ePWM3 | ePWM2_INT / ePWM2 | ePWM1_INT / ePWM1
+
+行6: INT4 | Reserved | Reserved | eCAP6_INT / eCAP6 | eCAP5_INT / eCAP5 | eCAP4_INT / eCAP4 | eCAP3_INT / eCAP3 | eCAP2_INT / eCAP2 | eCAP1_INT / eCAP1
+
+行7: INT5 | Reserved | Reserved | Reserved | Reserved | Reserved | Reserved | eQEP2_INT / eQEP2 | eQEP1_INT / eQEP1
+
+行8: INT6 | Reserved | Reserved | MXINTA / McBSP-A | MRINTA / McBSP-A | MXINTB / McBSP-B | MRINTB / McBSP-B | SPITXINTA / SPI-A | SPIRXINTA / SPI-A
+
+行9: INT7 | Reserved | Reserved | DINTCH6 / DMA | DINTCH5 / DMA | DINTCH4 / DMA | DINTCH3 / DMA | DINTCH2 / DMA | DINTCH1 / DMA
+
+行10: INT8 | Reserved | Reserved | SCITXINTC / SCI-C | SCIRXINTC / SCI-C | Reserved | Reserved | I2CINT2A / I2C-A | I2CINT1A / I2C-A
+
+行11: INT9 | ECAN1_INTB / CAN-B | ECAN0_INTB / CAN-B | ECAN1_INTA / CAN-A | ECAN1_INTA / CAN-A | SCITXINTB / SCI-B | SCIRXINTB / SCI-B | SCITXINTA / SCI-A | SCIRXINTA / SCI-A
+
+行12: INT10 | Reserved | Reserved | Reserved | Reserved | Reserved | Reserved | Reserved | Reserved
+
+行13: INT11 | Reserved | Reserved | Reserved | Reserved | Reserved | Reserved | Reserved | Reserved
+
+行14: INT12 | LUF / FPU | LVF / FPU | Reserved | XINT7 | XINT6 | XINT5 | XINT4 | XINT3
+
+段落101: 10.2 外部中断源
+
+表102:
+
+行1: 寄存器 | F2808(9) | AVP32F08 | 描述
+
+行2: XINT3CR | N/A | √ | 外部中断3控制
+
+行3: XINT4CR | N/A | √ | 外部中断4控制
+
+行4: XINT5CR | N/A | √ | 外部中断5控制
+
+行5: XINT6CR | N/A | √ | 外部中断6控制
+
+行6: XINT7CR | N/A | √ | 外部中断7控制
+
+行7: GPIOXINT3SEL | N/A | √ | 外部中断3引脚选择（GPIO32-GPIO35）
+
+行8: GPIOXINT4SEL | N/A | √ | 外部中断4引脚选择（GPIO32-GPIO35）
+
+行9: GPIOXINT5SEL | N/A | √ | 外部中断5引脚选择（GPIO32-GPIO35）
+
+行10: GPIOXINT6SEL | N/A | √ | 外部中断6引脚选择（GPIO32-GPIO35）
+
+行11: GPIOXINT7SEL | N/A | √ | 外部中断7引脚选择（GPIO32-GPIO35）
+
+段落103: 十一、器件开发
+
+段落104: AVP32F08开发支持CCS仿真代码工程环境，工程创建、调试可参照F28335配置方式。
+
+段落105: 十二、总结
+
+段落106: 以上是针对目前大部分用户在从F2808(9)向AVP32F08移植过程中可能涉及的差异、产生调试问题的总结。用户在进入产品测试前，应在软件及硬件上重点关注芯片晶振型号输入、ADC基准、Flash烧写程序及在线程序部分代码与FLASH API关联性、FLASH 存储地址分配差异性，以便快速实现工程移植。

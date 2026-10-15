@@ -1,0 +1,27 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+
+[Project Settings]
+ProjectDir="c:\ti\myprojects\SVPWM\"
+ProjectType=Executable
+CPUFamily=TMS320C24XX
+Tool="Compiler"
+Tool="Linker"
+Config="Debug"
+Config="Release"
+
+[Source Files]
+Source="SVPWM.ASM"
+Source="LF2407.CMD"
+
+["Compiler" Settings: "Debug"]
+Options=-g -q -fr"c:\ti\myprojects\SVPWM\Debug" -d"_DEBUG" -v2xx
+
+["Compiler" Settings: "Release"]
+Options=-q -o3 -fr"c:\ti\myprojects\SVPWM\Release" -v2xx
+
+["Linker" Settings: "Debug"]
+Options=-q -c -m".\Debug\SVPWM.map" -o".\Debug\SVPWM.out" -x -v2
+
+["Linker" Settings: "Release"]
+Options=-q -c -m".\Release\SVPWM.map" -o".\Release\SVPWM.out" -x -v2
+

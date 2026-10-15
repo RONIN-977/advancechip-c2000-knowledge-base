@@ -1,0 +1,468 @@
+《三相交流异步电动机SVPWM开环调速控制程序（软件法）》
+.include "240x.h"      ; 寄存器地址
+.global  _c_int0          ;全局化标号
+;--------------------------------------以下定义变量-------------------------------------------------------------
+ST0 .set 0                                ;状态寄存器ST0
+ST1 .set 1                                ;状态寄存器ST1
+.bss TEMP,1                  ;临时变量
+.bss SET_F,1                 ;频率调节比,Q16格式(值为0-1,对应0-50Hz)
+.bss F_OMEGA,1             ;频率调节比-角频率转换率,Q5格式
+.bss OMEGA,1               ;调制波角频率,Q5格式
+.bss SET_V,1                 ;参考电压,Q14格式
+.bss MAX_V,1               ;最大参考电压幅值1/  ,Q14格式
+.bss T_SAMPLE,1             ;采样周期,Q24格式
+.bss THETA_H,1              ;参考电压相位角高字,Q12格式
+.bss THETA_L,1              ;参考电压相位角低字,Q12格式
+.bss THETA_R,1              ;相位角的圆整值,Q12格式
+.bss THETA_M,1             ;相位查表值(0-90度),Q12格式
+.bss THETA_I,1              ;相角查表索引,Q9格式
+.bss SS,1                    ;SIN符号,Q0格式
+.bss SC,1                    ;COS符号,Q0格式
+.bss SIN_INDX,1             ;SIN表索引,Q0格式
+.bss SIN_ENTRY,1            ;SIN表入口地址
+.bss SIN_END,1              ;SIN表结束地址
+.bss SIN_THETA,1            ;SINθ值,Q14格式
+.bss COS_THETA,1            ;COSθ值,Q14格式
+.bss UA,1                    ;参考电压D轴分量UA,Q12格式
+.bss UB,1                    ;参考电压Q轴分量UB,Q12格式
+.bss THETA_S,1               ;θ-扇区数转换系数,Q15格式
+.bss SECTOR,1                ;参考电压所在的扇区数,Q0格式
+.bss THETA_90,1               ;90度,Q12格式
+.bss THETA_180,1              ;180度,Q12格式
+.bss THETA_270,1              ;270度,Q12格式
+.bss THETA_360,1              ;360度,Q12格式
+.bss DEC_MS,24               ;6个逆阵,Q14格式
+.bss T1_PERIODS,1            ;定时器1周期值,Q5格式
+.bss CMP_1,1                 ;第1基本矢量,Q0格式
+.bss CMP_2,1                 ;第2基本矢量,Q0格式
+.bss CMP_0,1                 ;0基本矢量/2,Q0格式
+.bss FIRST_TOG,1             ;存放第一次比较匹配的比较器地址
+.bss SEC_TOG,1               ;存放第二次比较匹配的比较器地址
+            .bss  ACCH,1                  ;ACC高字保存单元
+            .bss  ACCL,1                   ;ACC低字保存单元
+            .bss  AR0_SAVE,1              ;AR0保存单元
+            .bss  P_HI,1                   ;P寄存器高字保存单元
+            .bss  P_LO,1                   ;P寄存器低字保存单元
+;-------------------------------------- CONTEXT段,定义保护现场数据区--------------------------
+ST0_SAVE  .usect ".context",1   ;状态寄存器ST0保存单元
+ST1_SAVE  .usect ".context",1   ;状态寄存器ST1保存单元
+;-------------------------------------- 定义主向量段--------------------------------------------------
+.sect  ".vectors"              ;定义主向量段
+RESET  B  _c_int0           ;地址0000H，复位，优先级1
+INT1   B  PHANTOM        ;地址0002H，INT1，优先级4
+INT2   B  _C_INT2           ;地址0004H，INT2，优先级5
+INT3   B  PHANTOM        ;地址0006H，INT3，优先级6
+INT4   B  PHANTOM        ;地址0008H，INT4，优先级7
+INT5   B  PHANTOM        ;地址000AH，INT5，优先级8
+INT6   B  PHANTOM        ;地址000CH，INT6，优先级9 
+RESERVED  B  PHANTOM		;地址000EH，测试，优先级10
+SW_INT8   B  PHANTOM		;地址0010H，自定义软中断
+SW_INT9   B  PHANTOM		;地址0012H，自定义软中断
+SW_INT10  B  PHANTOM		;地址0014H，自定义软中断
+SW_INT11  B  PHANTOM		;地址0016H，自定义软中断
+SW_INT12  B  PHANTOM		;地址0018H，自定义软中断
+SW_INT13  B  PHANTOM		;地址001AH，自定义软中断
+SW_INT14  B  PHANTOM		;地址001CH，自定义软中断
+SW_INT15  B  PHANTOM		;地址001EH，自定义软中断
+SW_INT16  B  PHANTOM		;地址0020H，自定义软中断
+TRAP	   B  PHANTOM			;地址0022H，TRAP矢量
+NMI	  	   B  PHANTOM			;地址0024H，NMI，优先级3
+EMU_TRAP B  PHANTOM			;地址0026H，仿真Trap，优先级2
+SW_INT20  B  PHANTOM		;地址0028H，自定义软中断
+SW_INT21  B  PHANTOM		;地址002AH，自定义软中断
+SW_INT22  B  PHANTOM		;地址002CH，自定义软中断
+SW_INT23  B  PHANTOM		;地址002EH，自定义软中断
+SW_INT24  B  PHANTOM		;地址0030H，自定义软中断
+SW_INT25  B  PHANTOM		;地址0032H，自定义软中断
+SW_INT26  B  PHANTOM		;地址0034H，自定义软中断
+SW_INT27  B  PHANTOM		;地址0036H，自定义软中断
+SW_INT28  B  PHANTOM		;地址0038H，自定义软中断
+SW_INT29  B  PHANTOM		;地址003AH，自定义软中断
+SW_INT30  B  PHANTOM		;地址003CH，自定义软中断
+SW_INT31  B  PHANTOM		;地址003EH，自定义软中断
+;-------------------------------------- 定义子向量段------------------------------------------------------
+.sect  ".pvecs"                ;定义子向量段
+PVECTORS	B	PHANTOM			;偏移地址0000H 
+			B	PHANTOM  			;偏移地址0001H
+			B	PHANTOM			;偏移地址0002H
+			B	PHANTOM			;偏移地址0003H
+			B	PHANTOM			;偏移地址0004H
+			B	PHANTOM			;偏移地址0005H
+			B	PHANTOM			;偏移地址0006H
+			B	PHANTOM			;偏移地址0007H
+			B	PHANTOM			;偏移地址0008H
+			B	PHANTOM			;偏移地址0009H
+			B	PHANTOM			;偏移地址000AH
+			B	PHANTOM			;偏移地址000BH
+			B	PHANTOM			;偏移地址000CH
+			B	PHANTOM			;偏移地址000DH
+			B	PHANTOM			;偏移地址000EH
+			B	PHANTOM			;偏移地址000FH  
+			B	PHANTOM			;偏移地址0010H
+			B	PHANTOM			;偏移地址0011H
+			B	PHANTOM			;偏移地址0012H
+			B	PHANTOM			;偏移地址0013H
+			B	PHANTOM			;偏移地址0014H
+			B	PHANTOM			;偏移地址0015H
+			B	PHANTOM			;偏移地址0016H
+			B	PHANTOM			;偏移地址0017H 
+			B	PHANTOM			;偏移地址0018H
+			B	PHANTOM			;偏移地址0019H 
+			B	PHANTOM			;偏移地址001AH
+			B	PHANTOM			;偏移地址001BH
+			B	PHANTOM			;偏移地址001CH
+			B	PHANTOM			;偏移地址001DH
+			B	PHANTOM			;偏移地址001EH
+			B	PHANTOM			;偏移地址001FH
+			B	PHANTOM			;偏移地址0020H
+			B	PHANTOM			;偏移地址0021H 
+			B	PHANTOM			;偏移地址0022H
+			B	PHANTOM			;偏移地址0023H
+			B	PHANTOM			;偏移地址0024H
+			B	PHANTOM			;偏移地址0025H
+			B	PHANTOM			;偏移地址0026H 
+			B	PHANTOM			;偏移地址0027H 
+			B	PHANTOM			;偏移地址0028H
+			B	T1UF_ISR			;偏移地址0029H
+			B	PHANTOM			;偏移地址002AH
+			B	PHANTOM			;偏移地址002BH
+			B	PHANTOM			;偏移地址002CH
+			B	PHANTOM			;偏移地址002DH
+			B	PHANTOM			;偏移地址002EH
+			B	PHANTOM			;偏移地址002FH 
+			B	PHANTOM			;偏移地址0030H
+			B	PHANTOM			;偏移地址0031H
+			B	PHANTOM			;偏移地址0032H
+			B	PHANTOM			;偏移地址0033H
+			B	PHANTOM			;偏移地址0034H
+			B	PHANTOM			;偏移地址0035H
+			B	PHANTOM			;偏移地址0036H
+			B	PHANTOM			;偏移地址0037H
+			B	PHANTOM			;偏移地址0038H
+			B	PHANTOM			;偏移地址0039H
+			B	PHANTOM			;偏移地址003AH
+			B	PHANTOM			;偏移地址003BH
+			B	PHANTOM			;偏移地址003CH
+			B	PHANTOM			;偏移地址003DH
+			B	PHANTOM			;偏移地址003EH
+			B	PHANTOM			;偏移地址003FH
+			B	PHANTOM			;偏移地址0040H
+			B	PHANTOM			;偏移地址0041H
+;--------------------------------------以下是主程序--------------------------------------------------------
+.text
+;--------------------------------------系统初始化程序----------------------------------------------------
+_c_int0    
+            SETC   INTM               ; 禁止中断
+CLRC  CNF                 ;B0为数据存储区
+LDP    #224
+SPLK   #0000001000000100B,SCSR1 ;CLKIN 10M,CLKOUT 20M
+SPLK   #68H,WDCR            ;不用看门狗
+LDP    #225
+LACC  MCRA
+OR     #0FC0H             ;设置PWM1-6引脚
+SACL   MCRA
+;--------------------------------------中断初始化程序----------------------------------------------------
+LDP    #0  
+SPLK   #0FFH,IFR            ; 清所有系统中断标志
+SPLK   #00000010B,IMR      ; 开INT2中断
+LDP    #232         
+SPLK   #0FFFH,EVAIFRA     ; 清事件管理器A所有中断标志
+SPLK   #0FH,EVAIFRB 
+SPLK   #0FH,EVAIFRC 
+SPLK   #0200H,EVAIMRA     ; 开T1下溢中断
+SPLK   #0,EVAIMRB          ; 屏蔽所有中断
+SPLK   #0,EVAIMRC          ; 屏蔽所有中断
+;--------------------------------------初始化事件管理器A程序-----------------------------------------
+SPLK   #500,T1PR           ; T1周期值=50 us/50ns/2=500
+SPLK   #500,CMPR1         ; 占空比初值 0%
+SPLK   #500,CMPR2
+SPLK   #500,CMPR3
+SPLK   #0000011001100110B,ACTRA  ; 引脚PWM1,3,5高有效,2,4,6低有效
+SPLK   #01F4H,DBTCONA     ; 死区时间1*32*50ns=1.6us
+SPLK   #1000001000000000B,COMCONA  ;允许比较,不用硬件空间矢量
+SPLK   #1000100000000010B,T1CON ;连续增减计数方式,预分频=1
+;--------------------------------------变量初始化程序-----------------------------------------------------
+            LDP    #6                       ; 指向B1
+SPLK   #0347H,T_SAMPLE     ;采样周期=50us *224=839秒=347H, Q24格式
+SPLK   #16000,T1_PERIODS       ;T1周期值的Q5格式,500*32
+SPLK   #11585,MAX_V           ; 最大参考电压幅值1/ ,Q14格式
+SPLK   #0,SET_F         ; SET F=0
+SPLK   #10053,F_OMEGA        ;频率调节比-角频率转换率,Q5格式
+                       ;当SET_F=1时,对应最大角频率2π50Hz*25=10053
+SPLK   #0,THETA_L             ;θ低字,Q12格式
+SPLK   #0,THETA_H             ; θ高字,Q12格式
+LAR   AR0,#THETA_90          ; 传送常用角度和逆阵数据
+LAR   AR1,#(28-1)              ; 28个
+LACC  #ANGLES_              ; 指向源
+LAR   AR0 
+INIT_TBL   
+            TBLR  *+,AR1                     ; 下一个
+ADD   #1                       ; 下一个地址
+BANZ  INIT_TBL,AR0              ;AR1=0结束 
+SPLK   #29335,THETA_I           ; 相角查表索引,180/π,Q9格式
+SPLK   #31291,THETA_S          ; θ-扇区数转换系数,6/(2π),Q15格式
+SPLK  #SIN_ENTRY_,SIN_ENTRY    ;SIN表起始地址
+SPLK  #(SIN_ENTRY_+90),SIN_END  ;SIN表结束地址
+LDP   #232
+SPLK   #0000100001000010B,T1CON  ;使能T1
+CLRC  INTM                     ; 开总中断
+;--------------------------------------主循环程序(SET_F由外部输入)-----------------------------------
+MAIN_LOOP   
+            LDP  #6
+LT    SET_F                  ; 将频率调节比(Q16格式)转换成角频率
+MPYU  F_OMEGA               ; Q21
+PAC                          ; 积送ACC, Q5格式
+SACH  OMEGA               ; 保存角频率,Q5格式
+            LT    SET_F                   ;将频率调节比(Q16格式)转换成参考电压
+MPYU  MAX_V                 ; Q16*Q14=Q30
+PAC 
+SACH  SET_V                ; 保存参考电压幅值,Q14格式
+B     MAIN_LOOP              ; 循环
+;--------------------------------------假中断处理----------------------------------------------------------
+PHANTOM   
+            CLRC     INTM
+            RET
+;--------------------------------------T1下溢中断处理子程序----------------------------------------------
+_C_INT2    
+            SST   #ST0,ST0_SAVE          ; 保存现场ST0
+SST   #ST1,ST1_SAVE          ; 保存ST1
+LDP   #6 
+SACH  ACCH 
+SACL  ACCL                 ; 保存ACC
+SPH    P_HI 
+SPL   P_LO                    ; 保存 P
+MPY   #1                      ; P<=T
+SPL   T_SAVE                 ; 保存 T 
+SAR   AR0,AR0_SAVE          ; 保存AR0
+CLRC  SXM
+LDP   #224  
+LACC  PIVR                  ;读偏移地址
+SUB   #029H                  ; T1 下溢中断?
+BCND    T1UF_ISR,EQ           ;是下溢中断跳T1UF_ISR
+REST       
+            LDP   #6                     ;否则恢复现场
+LAR   AR0, AR0_SAVE          ; 恢复AR0
+LT    P_LO                     ;恢复P
+MPY   #1  
+LPH   P_HI  
+LT    T_SAVE                  ;恢复T
+LACC  ACCH,16 
+ADDS  ACCL                  ;恢复ACC
+LDP   #0                      ;指向B2
+LST   #ST1,ST1_SAVE           ; 恢复ST1
+LST   #ST0,ST0_SAVE           ; 恢复ST0
+CLRC  INTM                   ; 开中断
+RET                            ; 返回
+T1UF_ISR   
+            LDP   #232
+SPLK   #0FFFH,EVAIFRA         ; 清中断标志
+LDP    #6                      ; 计算转角增量
+LT     OMEGA                  ; Q5
+MPY    T_SAMPLE               ; Q5*Q24
+PAC                            ;积存ACC, Q13
+SFR                            ; 右移一位成Q12格式
+ADD     THETA_H,16            ; Q12
+ADDS    THETA_L               ;计算绝对位置
+SACH    THETA_H               ;保存
+SACL    THETA_L 
+BCND   CHK_UPLIM,GEQ         ;如果大于0检查上限
+ADD     THETA_360,16           ;否则与2π比较,Q12 
+SACH     THETA_H               ; 保存
+B        RND_THETA     
+CHK_UPLIM  
+            SUB     THETA_360,16           ;与2π比较,Q12 
+BCND   REST_THETA,LEQ        ; 如果在范围内恢复THETA_H
+SACH    THETA_H     
+B        RND_THETA 
+REST_THETA 
+            ADD    THETA_360,16         ; 恢复THETA_H
+RND_THETA  
+            ADD     #1,15                  ; 圆整并保留高字
+SACH     THETA_R               ;保存
+LACC     #1                      ;假设THETA_H在第一象限
+SACL     SS                     ; SIN符号=1
+SACL     SC                     ; COS符号=1
+LACC     THETA_R 
+SACL     THETA_M               ; 存入THETA_M
+SUB      THETA_90 ;
+BCND    E_Q,LEQ              ;在第一象限则跳转
+SPLK     #-1,SC                ; COS符号=—1
+LACC     THETA_180 
+SUB      THETA_R              ; 180-θ
+SACL    THETA_M              ;存入THETA_M
+BCND    E_Q,GEQ             ;在第二象限则跳转
+SPLK     #-1,SS                ;SIN符号=-1
+LACC    THETA_R 
+SUB      THETA_180           ;THETA-180
+SACL    THETA_M             ;存入THETA_M
+LACC    THETA_270 
+SUB      THETA_R 
+BCND    E_Q,GEQ             ;在第三象限则跳转
+SPLK    #1,SC                 ; COS符号=1
+LACC    THETA_360
+SUB      THETA_R 
+SACL    THETA_M             ; 在第四象限
+E_Q        
+            LT       THETA_M             ; Q12.计算查表索引
+MPYU     THETA_I              ; Q12*Q9
+PAC  
+SACH    SIN_INDX            ; Q5
+LACC    SIN_INDX,11          ;左移11位
+SACH    SIN_INDX            ;相当于右移5位变成Q0格式,即整数
+LACC    SIN_ENTRY           ;查SIN表
+ADD     SIN_INDX
+TBLR    SIN_THETA 
+LACC    SIN_END 
+SUB      SIN_INDX ;
+TBLR    COS_THETA ;
+LT       SS                    ;查COS表
+MPY     SIN_THETA            ;修改符号,Q14
+PAC 
+SACL    SIN_THETA            ; 左移16位保存,Q14
+LT       SC 
+MPY     COS_THETA           ; 修改符号, Q14
+PAC 
+SACL    COS_THETA           ;左移16位保存,Q14
+LT       SET_V                ;开始计算UA , UB 
+MPY     COS_THETA            ; Q14*Q14
+PAC  
+SACH    UA                  ; UA ,Q12格式
+MPY     SIN_THETA           ; Q14*Q14
+PAC  
+SACH    UB                  ; UB, Q12格式
+LT      THETA_R               ; Q12格式.确定扇区
+MPY     THETA_S              ; Q12*Q15
+PAC
+SACH    SECTOR 
+LACC    SECTOR,5 
+SACH    SECTOR              ; 相当于右移11位变成Q0格式(整数)
+LACC    #DEC_MS            ;逆阵数据首地址
+ADD     SECTOR,2 
+SACL    TEMP               ;产生地址指针
+LAR     AR0,TEMP           ; 指向逆阵表
+LT       UA                  ; Q12格式.计算UA*M(1,1)+UB*M(1,2)
+MPY     *+                   ; M(1,1) UA, Q12*Q14
+PAC                          ; Q10格式
+LT       UB                 ; Q12
+MPY      *+                 ; M(1,2) UB, Q12*Q14
+APAC                         ; 0.5*C1, Q10
+BCND    CMP1BIG0,GEQ      ; 如果大于0继续
+LACC     #0                  ; 否则0
+CMP1BIG0  
+            SACH    TEMP                ; 0.5*C1,Q10格式
+LT       TEMP                ; Q10格式
+MPY     T1_PERIODS          ; Q10*Q5
+PAC                          ; Q15格式
+SACH     CMP_1,1              ; 0.5*C1*TP,Q0格式
+LT       UA                  ;计算UA*M(2,1)+UB*M(2,2)
+MPY      *+                  ; M(2,1) UA,Q12*Q14
+PAC                           ; Q10格式
+LT       UB                   ; Q12格式
+MPY     *+                   ; M(2,2) UB: Q12*Q14
+APAC                          ; 0.5*C2,Q10
+BCND   CMP2BIG0,GEQ        ; 如果大于0继续
+LACC   #0                     ;否则0
+CMP2BIG0  
+            SACH   TEMP                  ; 0.5*C2,Q10格式
+LT       TEMP                 ; Q10格式
+MPY     T1_PERIODS          ; Q10*Q5 
+PAC                           ; Q15格式
+SACH    CMP_2,1                ; 0.5*C2*TP,Q0格式
+LACC    #500                  ; T1周期值
+SUB     CMP_1 
+SUB     CMP_2                ; Q0格式
+BCND   CMP0BIG0,GEQ        ;如果大于0继续
+LACC    #0                    ;否则0
+CMP0BIG0  
+            SACL    CMP_0 
+LACC    CMP_0,15             ; 相当于右移1位,除2
+SACH    CMP_0               ; 0.25*C0*TP
+LACC     #FIRST_     ;指向第一次比较匹配的比较寄存器地址表入口地址
+ADD      SECTOR  
+TBLR     FIRST_TOG          ;查到第一次比较匹配的比较器地址
+LAR      AR0,FIRST_TOG      ;指向该地址
+LACC     CMP_0 
+SACL     *                   ; CMP_0送入该比较器
+LACC     #SECOND_    ;指向第二次比较匹配的比较寄存器地址表入口地址
+ADD      SECTOR 
+TBLR     SEC_TOG            ;查到第二次比较匹配的比较器地址
+LAR      AR0,SEC_TOG        ;指向该地址
+LACC     CMP_0 
+ADD      CMP_1             ; CMP_0+CMP_1
+SACL      *                  ;送入该比较器
+LACC     #CMPR3
+SUB       FIRST_TOG 
+ADD      #CMPR2 
+SUB      SEC_TOG 
+ADD      #CMPR1
+SACL     TEMP              ;计算第三次比较匹配的比较器地址
+LAR      AR0,TEMP          ;指向该地址
+LACC     CMP_0 
+ADD      CMP_1 
+ADD      CMP_2             ; CMP_0+CMP_1+CMP_2
+SACL     *                  ; 送入该比较器
+B         REST              ; 返回
+.data                      
+;--------------------------------------数据段---------------------------------------------------------------------
+ANGLES_   .word 01922H                ; π/2, Q12格式
+.word 03244H                ; π, Q12格式
+.word 04B66H                ; 3π/2, Q12格式
+.word 06488H                ; 2π, Q12格式
+.word 20066          ; 矩阵A的逆阵数据,每一个逆阵有4个数据,Q14格式
+.word –11585               ; 按参考电压所在的扇区索引
+.word 0
+.word 23170
+.word -20066
+.word 11585
+.word 20066
+.word 11585
+.word 0
+.word 23170
+.word -20066
+.word -11585
+.word 0
+.word -23170
+.word -20066
+.word 11585
+.word -20066
+.word -11585
+.word 20066
+.word -11585
+.word 20066
+.word 11585
+.word 0
+.word -23170
+FIRST_     .word CMPR1                 ; 用于第1次比较匹配的比较寄存器地址,
+            .word CMPR2                    ; 按参考电压所在的扇区索引
+.word CMPR2 
+.word CMPR3 
+.word CMPR3 
+.word CMPR1 
+SECOND_   .word CMPR2                  ;用于第2次比较匹配的比较寄存器地址,
+            .word CMPR1                    ; 按参考电压所在的扇区索引
+            .word CMPR3 
+            .word CMPR2 
+            .word CMPR1 
+            .word CMPR3 
+SIN_ENTRY_  
+             .word 0                       ; 0-90度SIN值表,Q14格式
+             .word 286,572,857,1143,1428
+             .word 1713,1997,2280,2563,2845
+           .word 3126,3406,3686,3964,4240
+           .word 4516,4790,5063,5334,5604
+           .word 5872,6138,6402,6664,6924
+           .word 7182,7438,7692,7943,8192
+           .word 8438,8682,8923,9162,9397
+           .word 9630,9860,10087,10311,10531
+           .word 10749,10963,11174,11381,11585
+           .word 11786,11982,12176,12365,12551
+           .word 12733,12911,13085,13255,13421
+           .word 13583,13741,13894,14044,14189
+           .word 14330,14466,14598,14726,14849
+           .word 14968,15082,15191,15296,15396
+           .word 15491,15582,15668,15749,15826
+           .word 15897,15964,16026,16083,16135
+           .word 16182,16225,16262,16294,16322
+           .word 16344,16362,16374,16382,16384
+ .end
+

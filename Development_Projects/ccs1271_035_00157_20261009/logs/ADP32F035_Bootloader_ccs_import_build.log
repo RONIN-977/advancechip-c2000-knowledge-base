@@ -1,0 +1,104 @@
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+
+--------------------------------------------------------------------------------
+Importing project from 'C:/Users/17879/Documents/ChatGPT/��о���TI C2000ϵ��оƬ��Ϣ/Development_Projects/ccs1271_035_00157_20261009/staging/ADP32F035Boot+APP_20261009/ADP32F035/Bootloader'...
+
+
+Done!
+
+**** Clean-only build of configuration Debug for project ADP32F035_Bootloader ****
+
+"C:\\ti\\ccs1271\\ccs\\utils\\bin\\gmake" -k clean 
+ 
+DEL /F  "ADP32F035_Bootloader.out" 
+DEL /F "flash_port.obj" "main.obj" "Common\boot_core.obj" "Common\boot_io.obj" "Common\sci_port.obj" "Common\update_service.obj" "Device\source\DSP2803x_CodeStartBranch.obj" "Device\source\DSP2803x_DefaultIsr.obj" "Device\source\DSP2803x_GlobalVariableDefs.obj" "Device\source\DSP2803x_PieCtrl.obj" "Device\source\DSP2803x_PieVect.obj" "Device\source\DSP2803x_SysCtrl.obj" "Device\source\DSP2803x_usDelay.obj" 
+DEL /F "flash_port.d" "main.d" "Common\boot_core.d" "Common\boot_io.d" "Common\sci_port.d" "Common\update_service.d" "Device\source\DSP2803x_DefaultIsr.d" "Device\source\DSP2803x_GlobalVariableDefs.d" "Device\source\DSP2803x_PieCtrl.d" "Device\source\DSP2803x_PieVect.d" "Device\source\DSP2803x_SysCtrl.d" 
+DEL /F "Device\source\DSP2803x_CodeStartBranch.d" "Device\source\DSP2803x_usDelay.d" 
+�Ҳ��� C:\Users\17879\Documents\ChatGPT\��о���TI C2000ϵ��оƬ��Ϣ\Development_Projects\ccs1271_035_00157_20261009\staging\ADP32F035Boot+APP_20261009\ADP32F035\Bootloader\Debug\ADP32F035_Bootloader.out
+�Ҳ��� C:\Users\17879\Documents\ChatGPT\��о���TI C2000ϵ��оƬ��Ϣ\Development_Projects\ccs1271_035_00157_20261009\staging\ADP32F035Boot+APP_20261009\ADP32F035\Bootloader\Debug\flash_port.obj
+�Ҳ��� C:\Users\17879\Documents\ChatGPT\��о���TI C2000ϵ��оƬ��Ϣ\Development_Projects\ccs1271_035_00157_20261009\staging\ADP32F035Boot+APP_20261009\ADP32F035\Bootloader\Debug\Common\boot_core.obj
+�Ҳ��� C:\Users\17879\Documents\ChatGPT\��о���TI C2000ϵ��оƬ��Ϣ\Development_Projects\ccs1271_035_00157_20261009\staging\ADP32F035Boot+APP_20261009\ADP32F035\Bootloader\Debug\Device\source\DSP2803x_CodeStartBranch.d
+Finished clean
+ 
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project ADP32F035_Bootloader ****
+
+"C:\\ti\\ccs1271\\ccs\\utils\\bin\\gmake" -k all 
+ 
+Building file: "../flash_port.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -O0 --include_path=".." --include_path="../Common" --include_path="../../Common" --include_path="../Device/include" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" -g --c99 --diag_warning=225 --emit_warnings_as_errors --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="flash_port.d_raw"  "../flash_port.c"
+Finished building: "../flash_port.c"
+ 
+Building file: "../main.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -O0 --include_path=".." --include_path="../Common" --include_path="../../Common" --include_path="../Device/include" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" -g --c99 --diag_warning=225 --emit_warnings_as_errors --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+Finished building: "../main.c"
+ 
+Building file: "../Common/boot_core.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -O0 --include_path=".." --include_path="../Common" --include_path="../../Common" --include_path="../Device/include" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" -g --c99 --diag_warning=225 --emit_warnings_as_errors --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="Common/boot_core.d_raw" --obj_directory="Common"  "../Common/boot_core.c"
+Finished building: "../Common/boot_core.c"
+ 
+Building file: "../Common/boot_io.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -O0 --include_path=".." --include_path="../Common" --include_path="../../Common" --include_path="../Device/include" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" -g --c99 --diag_warning=225 --emit_warnings_as_errors --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="Common/boot_io.d_raw" --obj_directory="Common"  "../Common/boot_io.c"
+Finished building: "../Common/boot_io.c"
+ 
+Building file: "../Common/sci_port.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -O0 --include_path=".." --include_path="../Common" --include_path="../../Common" --include_path="../Device/include" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" -g --c99 --diag_warning=225 --emit_warnings_as_errors --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="Common/sci_port.d_raw" --obj_directory="Common"  "../Common/sci_port.c"
+Finished building: "../Common/sci_port.c"
+ 
+Building file: "../Common/update_service.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -O0 --include_path=".." --include_path="../Common" --include_path="../../Common" --include_path="../Device/include" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" -g --c99 --diag_warning=225 --emit_warnings_as_errors --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="Common/update_service.d_raw" --obj_directory="Common"  "../Common/update_service.c"
+Finished building: "../Common/update_service.c"
+ 
+Building file: "../Device/source/DSP2803x_CodeStartBranch.asm"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -O0 --include_path=".." --include_path="../Common" --include_path="../../Common" --include_path="../Device/include" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" -g --c99 --diag_warning=225 --emit_warnings_as_errors --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="Device/source/DSP2803x_CodeStartBranch.d_raw" --obj_directory="Device/source"  "../Device/source/DSP2803x_CodeStartBranch.asm"
+Finished building: "../Device/source/DSP2803x_CodeStartBranch.asm"
+ 
+Building file: "../Device/source/DSP2803x_DefaultIsr.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -O0 --include_path=".." --include_path="../Common" --include_path="../../Common" --include_path="../Device/include" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" -g --c99 --diag_warning=225 --emit_warnings_as_errors --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="Device/source/DSP2803x_DefaultIsr.d_raw" --obj_directory="Device/source"  "../Device/source/DSP2803x_DefaultIsr.c"
+Finished building: "../Device/source/DSP2803x_DefaultIsr.c"
+ 
+Building file: "../Device/source/DSP2803x_GlobalVariableDefs.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -O0 --include_path=".." --include_path="../Common" --include_path="../../Common" --include_path="../Device/include" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" -g --c99 --diag_warning=225 --emit_warnings_as_errors --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="Device/source/DSP2803x_GlobalVariableDefs.d_raw" --obj_directory="Device/source"  "../Device/source/DSP2803x_GlobalVariableDefs.c"
+Finished building: "../Device/source/DSP2803x_GlobalVariableDefs.c"
+ 
+Building file: "../Device/source/DSP2803x_PieCtrl.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -O0 --include_path=".." --include_path="../Common" --include_path="../../Common" --include_path="../Device/include" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" -g --c99 --diag_warning=225 --emit_warnings_as_errors --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="Device/source/DSP2803x_PieCtrl.d_raw" --obj_directory="Device/source"  "../Device/source/DSP2803x_PieCtrl.c"
+Finished building: "../Device/source/DSP2803x_PieCtrl.c"
+ 
+Building file: "../Device/source/DSP2803x_PieVect.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -O0 --include_path=".." --include_path="../Common" --include_path="../../Common" --include_path="../Device/include" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" -g --c99 --diag_warning=225 --emit_warnings_as_errors --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="Device/source/DSP2803x_PieVect.d_raw" --obj_directory="Device/source"  "../Device/source/DSP2803x_PieVect.c"
+Finished building: "../Device/source/DSP2803x_PieVect.c"
+ 
+Building file: "../Device/source/DSP2803x_SysCtrl.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -O0 --include_path=".." --include_path="../Common" --include_path="../../Common" --include_path="../Device/include" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" -g --c99 --diag_warning=225 --emit_warnings_as_errors --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="Device/source/DSP2803x_SysCtrl.d_raw" --obj_directory="Device/source"  "../Device/source/DSP2803x_SysCtrl.c"
+Finished building: "../Device/source/DSP2803x_SysCtrl.c"
+ 
+Building file: "../Device/source/DSP2803x_usDelay.asm"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -O0 --include_path=".." --include_path="../Common" --include_path="../../Common" --include_path="../Device/include" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" -g --c99 --diag_warning=225 --emit_warnings_as_errors --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="Device/source/DSP2803x_usDelay.d_raw" --obj_directory="Device/source"  "../Device/source/DSP2803x_usDelay.asm"
+Finished building: "../Device/source/DSP2803x_usDelay.asm"
+ 
+Building target: "ADP32F035_Bootloader.out"
+Invoking: C2000 Linker
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 -O0 -g --c99 --diag_warning=225 --emit_warnings_as_errors --gen_func_subsections=on --abi=coffabi -z -m"ADP32F035_Bootloader.map" --stack_size=0x300 --warn_sections -i"../Device/lib" -i"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/lib" -i"../Common" -i"../../Common" --reread_libs --diag_suppress=10063 --xml_link_info="ADP32F035_Bootloader_linkInfo.xml" --entry_point=code_start --rom_model -o "ADP32F035_Bootloader.out" "./flash_port.obj" "./main.obj" "./Common/boot_core.obj" "./Common/boot_io.obj" "./Common/sci_port.obj" "./Common/update_service.obj" "./Device/source/DSP2803x_CodeStartBranch.obj" "./Device/source/DSP2803x_DefaultIsr.obj" "./Device/source/DSP2803x_GlobalVariableDefs.obj" "./Device/source/DSP2803x_PieCtrl.obj" "./Device/source/DSP2803x_PieVect.obj" "./Device/source/DSP2803x_SysCtrl.obj" "./Device/source/DSP2803x_usDelay.obj" "../bootloader.cmd" "../Device/DSP2803x_Headers_nonBIOS.cmd"  -llibc.a -l2803x_FlashAPI_BootROMSymbols.lib 
+<Linking>
+Finished building target: "ADP32F035_Bootloader.out"
+ 
+
+**** Build Finished ****

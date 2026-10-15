@@ -1,0 +1,6 @@
+linen拉低3us以内gpio14拉低
+预驱默认389a报过流，写预驱轮询检查写。
+sleep函数
+linen拉低后，delay1ms+看门狗复位+linen拉高
+测量linen拉低休眠后vddio跌落到2.8v的时间和跌落到0v的时间，跌落到2.8v是否小于1ms
+内核电压偏低，改flashinit，改为445。

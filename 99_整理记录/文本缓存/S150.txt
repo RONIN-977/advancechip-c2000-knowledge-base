@@ -1,0 +1,230 @@
+来源: AVP32F08/AVP32F035QP80 移植.pptx
+来源编号: S150
+
+=== 幻灯片 1 ===
+ADP32F035 
+移植到 
+AVP32F035
+提升主频以提升运算性能
+提升
+Flash
+以加大程序容量
+进芯电子：唐佳
+2026.2.6
+
+=== 幻灯片 2 ===
+封装定义
+LINA -> SCIB
+TZ1(p75) -> TZ1(p5)
+HRCAP1 -> ECAP3 (p37&p39)
+
+=== 幻灯片 3 ===
+Flash Sector
+CMD
+文件对应
+FLASH
+地址和长度要替换 
+(
+直接替换
+CMD
+文件
+)
+Flash API
+文件要替换 
+(Flash2803x_API_V100.lib 
+和 
+2803x_FlashAPI_BootROMSymbols.lib)
+Flash API
+的头文件，有
+API
+的函数接口，需要更改或替换 
+(Flash2803x_API_Library.h)
+API
+执行采用
+DELAY
+延时，主频升高后 
+CPU_RATE 
+要更改。
+InitFlash
+() 
+函数内，
+Flash
+访问等待周期要适配。
+
+=== 幻灯片 4 ===
+主频移植
+(From 60M to 120M)
+ADP32F035
+AVP32
+
+=== 幻灯片 5 ===
+主频移植
+SYSCLKOUT 
+从 
+60MHz 
+倍频到 
+120MHz
+。
+(
+采用
+20M
+晶振替换
+10M
+晶振
+)
+降半
+LSPCLK
+，维持
+SCI
+、
+SPI
+波特率。
+(
+SysCtrlRegs.LOSPCP.all
+ = 4;) 
+，缺省值
+2
+，表示
+Low Speed Clock = SYSCLKOUT/4 (default)
+ADC
+时钟维持
+60M
+以下。
+(AdcRegs.ADCCTL2.bit.CLKDIV2EN = 1;) ADCCLK=SYSCLKOUT/2
+。
+/* ADP32F035
+中可能是设置
+0 (30M ADCCLK)*/
+ePWM
+维持
+TBCLK
+。
+(EPwm1Regs.TBCTL.bit.HSPCLKDIV = TB_DIV2;)
+注意：每个
+PWM
+模块都需要更改，建议改高速时钟分频。
+
+=== 幻灯片 6 ===
+主频移植
+I2C
+时钟分频：
+(I2caRegs.I2CPSC.all = 6; // 
+Prescaler
+ - need 7-12 
+Mhz
+ on module 
+clk
+)
+维持
+eCAN
+波特率。
+eCAP
+的时钟翻番，计数要根据实际情况而定。
+(
+注意：不是通过修改 
+Event 
+Prescale
+：
+ECap1Regs.ECCTL1.bit. PRESCALE
+)
+eQEP
+不用修改
+
+=== 幻灯片 7 ===
+HRCAP
+：由
+PLLCLK
+切换到了
+PLL2CLK
+，需配置
+PLL2
+。
+a. 
+初始化需调用 
+InitPLL2(PLL2SRC_INTOSC1, 12, PLL2_SYSCLK2DIV2DIS);
+主频移植
+
+=== 幻灯片 8 ===
+主频移植
+COMP
+比较器
+a. Ramp Generator 
+以 
+SysClkOut
+ 斜坡计算基数，需要考虑。
+b. Qualification 
+有分频器，可以设置。以适配原系统指标。
+c. DAC
+ 有建立时间差异，在软件设计原理上需要考虑。
+
+=== 幻灯片 9 ===
+寄存器地址
+——
+是否需要修改
+CMD
+文件？
+有
+DMA
+功能
+
+=== 幻灯片 10 ===
+寄存器地址
+——
+是否需要修改
+CMD
+文件？
+无
+LIN
+模块，所以文件 
+DSP2803x_GlobalVariableDefs.c 
+需将此部分替换成 
+SCIB .
+
+=== 幻灯片 11 ===
+寄存器地址
+
+=== 幻灯片 12 ===
+推荐使用
+20M
+外部晶体，在
+X1
+、
+X2
+并
+100k
+Ω的电阻
+(
+预留
+)
+。
+PLL
+建议配置：
+12
+倍频、
+2
+分频；
+主频及时钟配置推荐
+推荐使用
+20M
+外部
+有源时钟
+。
+PLL
+建议配置：
+12
+倍频、
+2
+分频；
+
+=== 幻灯片 13 ===
+DAC
+建立时间注意事项
+COMP
+禁止使能时间段 
+(1ms)
+。
+
+=== 幻灯片 14 ===
+谢
+  
+谢！

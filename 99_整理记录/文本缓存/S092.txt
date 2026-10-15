@@ -1,0 +1,2115 @@
+来源: AVP32F0013X 0015X/280025-00157-00137迁移.pdf
+来源编号: S092
+
+=== PDF页 1 ===
+User’s Guide
+TMS320F28002x、TMS320F280015x 和 TMS320F280013x 
+之间的迁移指南
+摘要
+本迁移指南介绍了在 F28002x、F280015x 和 F280013x C2000™ MCU 之间迁移时需要注意的硬件和软件差异。
+本文档提供了上述三个 MCU 的方框图，直观地显示了三者之间的异同点，还着重介绍了器件比较表中采用所有可
+用封装的三种器件之间的独特功能。添加了 PCB 硬件部分，来帮助在器件通用封装之间进行迁移。这三款器件均
+采用 64 引脚 PM 和 48 引脚 PT/PHP 封装。F28002x 和 F280015x 均采用一个额外的 80 引脚 PN 封装，
+F280013x 和 F280015x 均采用一个额外的 32 引脚 RHB 封装。数字通用输入/输出 (GPIO) 和模拟多路复用比较
+表显示了三种 MCU 的引脚功能，这为在三种器件之间的迁移提供了有关硬件设计和信号路由的良好参考。最后，
+与 F28002x 器件一样，F280015x 和 F280013x 软件仅支持 EABI 格式。
+内容
+1 F28002x、F280015x 和 F280013x 的特性差异....................................................................................................................... 3
+1.1 F28002x、F280015x 和 F280013x 特性比较.....................................................................................................................3
+2 PCB 硬件更改...........................................................................................................................................................................7
+2.1 80 引脚 PN、64 引脚 PM 和 48 引脚 PT 或 PHP 封装的 PCB 硬件更改...........................................................................7
+2.2 新 PCB 和现有 PCB 迁移.................................................................................................................................................12
+3 系统特性差异注意事项............................................................................................................................................................14
+3.1 F280013x 和 F280015x 的新特性.................................................................................................................................... 14
+3.2 通信模块更改....................................................................................................................................................................14
+3.3 控制模块更改”中重点介绍了这一新特性。.....................................................................................................................15
+3.4 模拟模块差异....................................................................................................................................................................16
+3.5 其他器件更改....................................................................................................................................................................17
+3.6 电源管理...........................................................................................................................................................................21
+3.7 内存模块更改....................................................................................................................................................................21
+3.8 GPIO 多路复用更改..........................................................................................................................................................23
+3.9 模拟多路复用更改.............................................................................................................................................................26
+4 从 F28002x 到 F280015x 或 F280013x 的应用程序代码迁移................................................................................................ 28
+4.1 C2000Ware 头文件.......................................................................................................................................................... 28
+4.2 链接器命令文件................................................................................................................................................................ 28
+4.3 C2000Ware 示例..............................................................................................................................................................28
+5 与 F280015x 和 F280013x 新特性相关的特定用例................................................................................................................ 28
+5.1 EPG..................................................................................................................................................................................28
+6 EABI 支持...............................................................................................................................................................................28
+6.1 闪存 API........................................................................................................................................................................... 28
+7 参考文献..................................................................................................................................................................................29
+插图清单
+图 1-1. F28002x、F280015x 和 F280013x 的重叠功能方框图.................................................................................................... 3
+图 2-1. 80 引脚 PN F280015x 和 F28002x 引脚重叠...................................................................................................................8
+图 2-2. 64 引脚 PM F280013x、F280015x 和 F28002x 引脚重叠...............................................................................................9
+图 2-3. 48 引脚 PT 或 PHP F280013x (PT)、F280015x（具有 PowerPADTM 的 PHP）和 F28002x (PT) 引脚重叠................ 10
+图 2-4. 32 引脚 RHB F280013x 和 F280015x 重叠....................................................................................................................11
+www.ti.com.cn 目录
+ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 1
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 2 ===
+表格清单
+表 1-1. F28002x、F280013x 和 F280015x 超集器件比较........................................................................................................... 4
+表 2-1. 按器件提供的封装............................................................................................................................................................ 7
+表 2-2. PCB 迁移不兼容问题......................................................................................................................................................12
+表 3-1. 通信模块实例..................................................................................................................................................................14
+表 3-2. 控制模块差异..................................................................................................................................................................15
+表 3-3. 模拟模块差异..................................................................................................................................................................16
+表 3-4. CMPSS 和 CMPSS_LITE 特性比较...............................................................................................................................17
+表 3-5. Pie 通道图例...................................................................................................................................................................18
+表 3-6. Pie 通道映射比较........................................................................................................................................................... 18
+表 3-7. 引导加载程序和 GPIO 分配比较.....................................................................................................................................19
+表 3-8. 引导模式比较..................................................................................................................................................................20
+表 3-9. AGPIO 配置....................................................................................................................................................................21
+表 3-10. RAM 和闪存存储器更改............................................................................................................................................... 22
+表 3-11. Pie 通道图例.................................................................................................................................................................23
+表 3-12. GPIO 多路复用引脚......................................................................................................................................................23
+表 3-13. 多路复用器图例............................................................................................................................................................26
+表 3-14. F28002x、F280015x 和 F280013x 64 引脚 PM 和 48 引脚 PT/PHP 模拟多路复用器差异表..................................... 26
+表 6-1. 闪存 API 差异.................................................................................................................................................................28
+商标
+C2000™ is a trademark of Texas Instruments.
+所有商标均为其各自所有者的财产。
+商标 www.ti.com.cn
+2 TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 3 ===
+1 F28002x、F280015x 和 F280013x 的特性差异
+F280015x 和 F280013x 是 F28002x 的子集。这三个器件有两个共同的封装：48 引脚和 64 引脚。F28002x 和 
+F280015x 还有一个 80 引脚的共同封装。F280015x 和 F280013x 还有一个 32 引脚的共同封装。充分考虑本文档
+中的注意事项后，可以在 F280013x、F280015x 和 F28002x 之间进行迁移。
+备注
+本比较指南重点介绍超集器件：F280025、F2800157 和 F2800137。这些产品系列中的其他器件型号
+具有较少的功能支持。如需特定器件型号的详细信息，请参阅特定器件数据表。
+1.1 F28002x、F280015x 和 F280013x 特性比较
+图 1-1 显示了 F28002x、F280015x 和 F280013x 的重叠方框图，而表 1-1 显示了 F28002x、F280015x 和 
+F280013x 器件超集器件型号的特性比较。
+C28x CPU + Lockstep CPU
+(100MHz 120MHz 120MHz)
+FPU32
+TMU
+VCRC VCRC
+DIAGNOSTICS
+DCC
+MPOST
+HWBIST
+ERAD
+JTAG/cJTAG
+Flash Bank0
+16 Sectors, 64Kw(128KB)
+128 Sectors, 128Kw(256KB)
+128 Sectors, 128Kw(256KB)
+M0-M1 RAM
+2Kw(4KB)
+LS4-LS7 LS0-LS1 LS0-LS1 RAM
+8Kw(16KB) 16Kw(32KB) 16Kw(32KB) .
+GS0 RAM
+2Kw(4KB) 
+Secure ROM
+BGCRC
+HIC
+DMA
+6 Channels
+`
+PF1
+14x ePWM
+(8 4 2 Hi-Res Capable)
+3x 3x 2x eCAP
+(1 HRCAP Capable)
+2x 2x 1x eQEP
+(CW/CCW Support)
+4x 1x CMPSS
+1x CMPSS with dual 
+ramp generator 2x 12-Bit ADC
+Result
+PF3
+43x 52x 38x GPIO
+Data
+Input XBAR
+Output XBAR
+ePWM XBAR
+PF4
+1x 1x PMBUS
+2x 1x 1x SPI
+1x FSI RX
+1x FSI TX
+PF2
+1x
+DCAN/
+CAN
+2x 1x LIN 1x 3x 3x SCI
+2x I2C
+PF7 PF8 PF9
+Text Legend
+Black – Common
+Red – F28002x
+Blue – F280015x
+Green – F280013x
+2x CLB
+PF10
+SYSTEM CONTROL
+CPU Timers
+XTAL
+INTOSC1, INTOSC2
+PLL
+ePIE
+Windowed WD
+NMI WD
+SECURITY
+DCSM
+JTAG Lock JTAG Lock
+Secure Boot Secure Boot
+CLB XBAR
+CLB Input XBAR
+CLB Output XBAR
+OTHERS
+EPG EPG
+Boot ROM
+3x 3x CMPSS_LITE
+CPU
+DMA
+HIC
+BGCRC
+Buses Legend
+1x 
+MCAN/
+CAN FD
+图 1-1. F28002x、F280015x 和 F280013x 的重叠功能方框图
+www.ti.com.cn F28002x、F280015x 和 F280013x 的特性差异
+ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 3
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 4 ===
+1.1.1 F28002x、F280013x 和 F280015x 超集器件比较
+表 1-1. F28002x、F280013x 和 F280015x 超集器件比较
+特性
+F28002x F280015x F280013x
+全部
+F2800157、F2800155、
+F2800153
+F2800156、F2800154、
+F2800152
+F2800137、F2800135、F2800133 F2800132
+80 
+PN 64 PM 48 PT 80 
+PN 64 PM 48 
+PHP
+32 
+RHB
+80 
+PN
+64 PM
+48 
+PHP
+32 RHB 64 VPM 64 PM 48 PT 48 
+RGZ
+32 
+RHB 48 PT 48 RGZ 32 RHB
+处理器和加速器
+C28x
+频率 (MHz) 100 120
+FPU 是
+快速整数除法 是 -
+VCRC 是 -
+TMU 是
+NLPID 是 -
+锁步比较模块 
+(LCM) - 是 -
+6 通道 DMA – 0 类 是 -
+外部中断 5
+存储器
+闪存 128KB (64KW)
+256KB (128KW) - 157、156
+128KB (64KW) - 155、154
+64KB (32KW) - 153、152
+256KB (128KW) - 137
+128KB (64KW) - 135、135V
+64KB (32KW) - 133、132
+RAM 24KB (12KW) 36KB (18KW)
+ECC 闪存、Mx、LSx 闪存、Mx
+奇偶校验 GSx、ROM LSx、ROM
+片上闪存和 RAM 的代码安全性 是
+系统
+可配置逻辑块 (CLB) 2 个逻辑块 -
+嵌入式图形发生器 (EPG) - 是
+ROM 中的电机控制库 是 -
+32 位 CPU 计时器 3
+背景 CRC (BGCRC) 是 -
+安全启动 - 是
+JTAG 锁定 - 支持
+HWBIST 是 -
+非可屏蔽中断看门狗 (NMIWD) 计时器 1
+看门狗计时器 1
+晶体振荡器/外部时钟输入 1
+F28002x、F280015x 和 F280013x 的特性差异 www.ti.com.cn
+4 TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 5 ===
+表 1-1. F28002x、F280013x 和 F280015x 超集器件比较 (continued)
+特性
+F28002x F280015x F280013x
+全部
+F2800157、F2800155、
+F2800153
+F2800156、F2800154、
+F2800152
+F2800137、F2800135、F2800133 F2800132
+80 
+PN 64 PM 48 PT 80 
+PN 64 PM 48 
+PHP
+32 
+RHB
+80 
+PN
+64 PM
+48 
+PHP
+32 RHB 64 VPM 64 PM 48 PT 48 
+RGZ
+32 
+RHB 48 PT 48 RGZ 32 RHB
+0 引脚内部振荡器 2
+支持 ExtR 的 INTOSC - 是
+引脚和电源
+内部 3.3V 至 1.2V 稳压器 VREG LDO 是
+GPIO 引脚
+通用输入/输出 
+(GPIO) 39 26 14 37 22 15 9 37 22 15 9 22 23 13 16 10 13 16 10
+AGPIO（具有数
+字输入和输出的
+模拟）
+- 11 11 8 5 11 11 8 5 11 11 8 8 5 8 8 5
+JTAG 和振荡器 
+GPIO 4（2 个来自 cJTAG，2 个来自 X1/X2）
+总 GPIO 43 30 18 52 37 27 18 52 37 27 18 37 38 25 28 19 25 28 19
+AIO（具有数字输
+入的模拟）
+16 16 14 10 10 9 6 10 10 9 6 10 10 9 9 6 9 9 6
+总 GPIO 和 AIO 59 46 32 62 47 36 24 62 47 36 24 47 48 34 37 25 34 37 25
+模拟外设
+ADC 12 位
+ADC 数量 2
+转换时间 (ns)/
+MSPS（AIO 引
+脚）
+290ns/3.45MSPS 250ns/4.00MSPS 290ns/3.45MSPS 250ns/4.00MSPS 290ns/3.45MSPS
+转换时间 (ns)/
+MSPS（AGPIO 
+引脚）
+- 266ns/3.75MSPS 300ns/3.33MSPS 266ns/3.75MSPS 300ns/3.33MSPS
+ADC 通道（单端） 16 16 14 21 17 11 21 17 11 21 21 17 17 11 17 17 11
+温度传感器 1
+CMPSS（每个 CMPSS 有两个比较器）
+4（具有两个内部动态 
+DAC 和单斜坡发生
+器）
+1（具有两个内部动态 DAC 和双
+斜坡发生器）
+- 1（具有两个内部动态 DAC 和单斜坡发生器）
+CMPSS DAC 缓冲输出 (CMPx_DACL) -
+1（与使用 CMPSS 进行比较互
+斥）
+- 1（与使用 CMPSS 进行比较互斥）
+CMPSS_LITE（每个 CMPSS_LITE 有两个
+比较器）
+- 3（具有两个内部静态 DAC）
+控制外设
+eCAP/HRCAP 模块 - 2 类
+3（1 个具有 HRCAP 
+功能）
+3（0 个具有 HRCAP 功能） 2（0 个具有 HRCAP 功能）
+www.ti.com.cn F28002x、F280015x 和 F280013x 的特性差异
+ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 5
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 6 ===
+表 1-1. F28002x、F280013x 和 F280015x 超集器件比较 (continued)
+特性
+F28002x F280015x F280013x
+全部
+F2800157、F2800155、
+F2800153
+F2800156、F2800154、
+F2800152
+F2800137、F2800135、F2800133 F2800132
+80 
+PN 64 PM 48 PT 80 
+PN 64 PM 48 
+PHP
+32 
+RHB
+80 
+PN
+64 PM
+48 
+PHP
+32 RHB 64 VPM 64 PM 48 PT 48 
+RGZ
+32 
+RHB 48 PT 48 RGZ 32 RHB
+ePWM/HRPWM 通道 – 4 类
+14（8 个具有 
+HRPWM）
+14（4 个具有 HRPWM） 14（0 个具有 HRPWM） 14（2 个具有 HRPWM） 6（2 个具有 HRPWM）
+eQEP 模块 - 2 类 2 1
+通信外设
+CAN (DCAN) – 0 类 1 -
+MCAN (CAN FD) – 2 类 - 1 -
+FSI 1（1 个 RX 和 1 个 
+TX）– 1 类
+-
+I2C – 1 类 2
+LIN – 1 类 2 1 -
+HIC – 1 类 1 -
+PMBus – 0 类 1 -
+SCI – 0 类 1 3
+SPI – 2 类 2 1
+封装选项、温度和符合标准
+S：-40°C 至 125°C (TJ) 是 否 是 否 是
+Q：–40°C 至 125°C (TA)（符合 AEC Q100 
+标准）
+是 否
+F28002x、F280015x 和 F280013x 的特性差异 www.ti.com.cn
+6 TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 7 ===
+2 PCB 硬件更改
+F28002x、F280015x 和 F280013x 器件有两种共同的封装：64 引脚 PM 和 48 引脚 PT。F28002x 和 F280015x 
+器件还有一种共同的 80 引脚 PN 封装。下面章节将详细介绍引脚迁移。
+备注
+总体兼容性不仅仅取决于引脚。执行迁移时，请查看本文档中的所有更改。
+2.1 80 引脚 PN、64 引脚 PM 和 48 引脚 PT 或 PHP 封装的 PCB 硬件更改
+这部分介绍了 80 引脚 PN、64 引脚 PM 和 48 引脚 PT 或 PHP 封装之间存在的 F280013x、F280015x 和 
+F28002x 特性差异。
+表 2-1. 按器件提供的封装
+封装 F28002x F280015x F280013x
+80 PN (QFP) 是 是 -
+64 PM/VPM (QFP) 是 是 是
+48 PT (QFP) 是 - 是
+48 PHP（具有 PowerPADTM 的 QFP） - 是 -
+48 RGZ (QFN) - - 是
+32 RHB (QFN) - 是 是
+80 引脚 PN：对于 F28002x 和 F280015x 器件，Q 和非 Q 型号具有相同的引脚排列。图 2-1 概述了这些差异。
+64 引脚 PM/VPM：对于所有三种器件，Q 型和非 Q 型器件都具有相同的引脚排列。图 2-2 概述了这些差异。
+48 引脚 PT 或 PHP：对于所有三种器件，Q 型和非 Q 型器件都具有相同的引脚排列。但是，F280015x 上的 48 
+引脚 PHP 封装增加了 PowerPADTM。由于这个 PowerPADTM，考虑这三个器件之间的电路板布局布线时务必多
+加注意。图 2-3 概述了这些差异。
+48 引脚 RGZ：该封装仅适用于 F280013x，因此与其他器件不具有交叉兼容性。
+32 引脚 RHB：F280015x 和 F280013x 器件均采用这种封装，并且这两个器件的引脚排列相同。图 2-4 概述了这
+些差异。
+www.ti.com.cn PCB 硬件更改
+ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 7
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 8 ===
+F28002x
+GPIO3
+GPIO4
+GPIO8
+GPIO42
+GPIO39
+VSS
+GPIO43
+VDD
+VDDIO
+GPIO19,X1
+GPIO18,X2
+GPIO32
+GPIO35,TDI
+TMS
+GPIO37,TDO
+TCK
+GPIO27
+GPIO26
+GPIO25
+GPIO24
+F28002x
+F280015x
+GPIO3
+GPIO4
+GPIO8
+GPIO42
+VREGENZ
+VSS
+GPIO43
+VDD
+VDDIO
+GPIO19,X1
+GPIO18,X2
+GPIO32
+GPIO35,TDI
+TMS
+GPIO37,TDO
+TCK
+GPIO27
+GPIO26
+GPIO25
+GPIO24
+F280015x
+60 59 58 57 56 55 54 53 52 51 50 49 48 47 46 45 44 43 42 41
+GPIO2 GPIO2 61 40 GPIO17 GPIO17
+GPIO1 GPIO1 62 39 GPIO16 GPIO16
+GPIO0 GPIO0 63 38 GPIO33 GPIO33
+GPIO40 GPIO40 64 37 GPIO11 GPIO11
+GPIO23 GPIO23 65 36 A20,C20,GPIO12 GPIO12
+GPIO41 GPIO41 66 35 A19,C19,GPIO13 GPIO13
+GPIO22 GPIO22 67 34 A18,C18,GPIO21 FLT1
+GPIO7 GPIO7 68 33 A17,C17,GPIO20 FLT2
+GPIO44 GPIO44 69 32 GPIO49 VDDIO
+VSS VSS 70 31 GPIO48 VDD
+VDD VDD 71 30 VSS VSS
+VDDIO VDDIO 72 29 A10,C10,GPIO230 A10,C10
+GPIO45 GPIO45 73 28 A9,C8,GPIO227 A9,C8
+GPIO5 GPIO5 74 27 A4,C14 A4,C14
+GPIO9 GPIO9 75 26 VDDA VDDA
+GPIO10 GPIO10 76 25 VSSA VSSA
+GPIO34 GPIO34 77 24 A8,C11 A8,C11
+GPIO15 GPIO15 78 23 A7,C3 A7,C3
+GPIO14 GPIO14 79 22 A12,C1 A12,C1
+GPIO6 GPIO6 80 21 VREFLO VREFLO
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+80-Pin PN
+Legend
+100% Compatible
+Minor Incompatibility - Signals in Common
+Major Incompatibility - Different Signals & Type
+F280015x
+GPIO30
+GPIO31
+GPIO29
+A16,C16,GPIO28
+XRSn
+GPIO46
+VDDIO
+VDD
+VSS
+A6,GPIO228
+C6,GPIO226
+A3,C5,GPIO242
+A2,C9,GPIO224
+A15,C7
+A14,C4
+A11,C0
+A5,C2
+A1
+A0,C15,CMP1_DACL
+VREFHI
+F280015x
+F28002x
+GPIO30
+GPIO31
+GPIO29
+GPIO28
+XRSn
+GPIO46
+VDDIO
+VDD
+VSS
+A6
+C6
+A3,C5,VDAC
+A2,C9
+A15,C7
+A14,C4
+A11,C0
+A5,C2
+A1
+A0,C15
+VREFHI
+F28002x
+图 2-1. 80 引脚 PN F280015x 和 F28002x 引脚重叠
+PCB 硬件更改 www.ti.com.cn
+8 TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 9 ===
+F28002x
+GPIO4
+GPIO8
+GPIO39
+VSS
+VDD
+VDDIO
+GPIO19,X1
+GPIO18,X2
+GPIO32
+GPIO35,TDI
+TMS
+GPIO37,TDO
+TCK
+GPIO24
+GPIO17
+GPIO16
+F28002x
+F280015x
+GPIO4
+GPIO8
+VREGENZ
+VSS
+VDD
+VDDIO
+GPIO19,X1
+GPIO18,X2
+GPIO32
+GPIO35,TDI
+TMS
+GPIO37,TDO
+TCK
+GPIO24
+GPIO17
+GPIO16
+F280015x
+F280013x
+(VPM)
+GPIO4
+GPIO8
+VREGENZ
+VSS
+VDD
+VDDIO
+GPIO19,X1
+GPIO18,X2
+GPIO32
+GPIO35,TDI
+TMS
+GPIO37,TDO
+TCK
+GPIO24
+GPIO17
+GPIO16
+F280013x
+(VPM)
+F280013x
+(PM)
+GPIO4
+GPIO8
+GPIO39
+VSS
+VDD
+VDDIO
+GPIO19,X1
+GPIO18,X2
+GPIO32
+GPIO35,TDI
+TMS
+GPIO37,TDO
+TCK
+GPIO24
+GPIO17
+GPIO16
+F280013x
+(PM)
+48 47 46 45 44 43 42 41 40 39 38 37 36 35 34 33
+GPIO3 GPIO3 GPIO3 GPIO3 49 32 GPIO33 GPIO33 GPIO33 GPIO33
+GPIO2 GPIO2 GPIO2 GPIO2 50 31 GPIO11 GPIO11 GPIO11 GPIO11
+GPIO1 GPIO1 GPIO1 GPIO1 51 30 A20,C20,GPIO12 A20,C20,GPIO12 A20,C20,GPIO12 GPIO12
+GPIO0 GPIO0 GPIO0 GPIO0 52 29 A19,C19,GPIO13 A19,C19,GPIO13 A19,C19,GPIO13 GPIO13
+GPIO40 GPIO40 GPIO40 GPIO40 53 28 A18,C18,GPIO21 A18,C18,GPIO21 A18,C18,GPIO21 VDDIO
+GPIO23 GPIO23 GPIO23 GPIO23 54 27 A17,C17,GPIO20 A17,C17,GPIO20 A17,C17,GPIO20 VDD
+GPIO41 GPIO41 GPIO41 GPIO41 55 26 VSS VSS VSS VSS
+GPIO22 GPIO22 GPIO22 GPIO22 56 25 A10,C10,GPIO230 A10,C10,GPIO230 A10,C10,GPIO230 A10,C10
+GPIO7 GPIO7 GPIO7 GPIO7 57 24 A9,C8,GPIO227 A9,C8,GPIO227 A9,C8,GPIO227 A9,C8
+VSS VSS VSS VSS 58 23 A4,C14 A4,C14 A4,C14 A4,C14
+VDD VDD VDD VDD 59 22 VDDA VDDA VDDA VDDA
+VDDIO VDDIO VDDIO VDDIO 60 21 VSSA VSSA VSSA VSSA
+GPIO5 GPIO5 GPIO5 GPIO5 61 20 A8,C11 A8,C11 A8,C11 A8,C11
+GPIO9 GPIO9 GPIO9 GPIO9 62 19 A7,C3 A7,C3 A7,C3 A7,C3
+GPIO10 GPIO10 GPIO10 GPIO10 63 18 A12,C1 A12,C1 A12,C1 A12,C1
+GPIO6 GPIO6 GPIO6 GPIO6 64 17 VREFLO VREFLO VREFLO VREFLO
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+64-Pin PM
+Legend
+100% Compatible
+Minor Incompatibility - Signals in Common
+Major Incompatibility - Different Signals & Type
+F280013x
+(PM)
+GPIO29
+A16,C16,GPIO28
+XRSn
+VDD
+VSS
+A6,GPIO228
+C6,GPIO226
+A3,C5,GPIO242
+A2,C9,GPIO224
+A15,C7
+A14,C4
+A11,C0
+A5,C2
+A1
+A0,C15,CMP1_DACL
+VREFHI
+F280013x
+(PM)
+F280013x
+(VPM)
+GPIO29
+A16,C16,GPIO28
+XRSn
+VDD
+VSS
+A6,GPIO228
+C6,GPIO226
+A3,C5,GPIO242
+A2,C9,GPIO224
+A15,C7
+A14,C4
+A11,C0
+A5,C2
+A1
+A0,C15,CMP1_DACL
+VREFHI
+F280013x
+(VPM)
+F280015x
+GPIO29
+A16,C16,GPIO28
+XRSn
+VDD
+VSS
+A6,GPIO228
+C6,GPIO226
+A3,C5,GPIO242
+A2,C9,GPIO224
+A15,C7
+A14,C4
+A11,C0
+A5,C2
+A1
+A0,C15,CMP1_DACL
+VREFHI
+F280015x
+F28002x
+GPIO29
+GPIO28
+XRSn
+VDD
+VSS
+A6
+C6
+A3,C5,VDAC
+A2,C9
+A15,C7
+A14,C4
+A11,C0
+A5,C2
+A1
+A0,C15
+VREFHI
+F28002x
+图 2-2. 64 引脚 PM F280013x、F280015x 和 F28002x 引脚重叠
+www.ti.com.cn PCB 硬件更改
+ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 9
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 10 ===
+F28002x
+(PT)
+VDD
+VDDIO
+GPIO19,X1
+GPIO18,X2
+GPIO32
+GPIO35,TDI
+TMS
+GPIO37,TDO
+TCK
+GPIO24
+GPIO16
+GPIO33
+F28002x
+(PT)
+F280015x
+(PHP)
+VDD
+VDDIO
+GPIO19,X1
+GPIO18,X2
+GPIO32
+GPIO35,TDI
+TMS
+GPIO37,TDO
+TCK
+GPIO24
+GPIO16
+GPIO33
+F280015x
+(PHP)
+F280013x
+(PT)
+VDD
+VDDIO
+GPIO19,X1
+GPIO18,X2
+GPIO32
+GPIO35,TDI
+TMS
+GPIO37,TDO
+TCK
+GPIO24
+GPIO16
+GPIO33
+F280013x
+(PT)
+36 35 34 33 32 31 30 29 28 27 26 25
+VSS VREGENZ VSS 37 24 A20,C20,GPIO12 A20,C20,GPIO12 GPIO12
+GPIO4 GPIO4 GPIO4 38 23 A19,C19,GPIO13 A19,C19,GPIO13 GPIO13
+GPIO3 GPIO3 GPIO3 39 22 VSS A17,C17,GPIO20 VSS
+GPIO2 GPIO2 GPIO2 40 21 A10,C10,GPIO230 A10,C10,GPIO230 A10,C10
+GPIO1 GPIO1 GPIO1 41 20 A9,C8,GPIO227 A9,C8,GPIO227 A9,C8
+GPIO0 GPIO0 GPIO0 42 19 A4,C14 A4,C14 A4,C14
+GPIO7 GPIO7 GPIO7 43 18 VDDA VDDA VDDA
+VSS GPIO44 VSS 44 17 VSSA VSSA VSSA
+VDD VDD VDD 45 16 A8,C11 A8,C11 A8,C11
+VDDIO VDDIO VDDIO 46 15 A7,C3 A7,C3 A7,C3
+GPIO5 GPIO5 GPIO5 47 14 A12,C1 A12,C1 A12,C1
+GPIO6 GPIO6 GPIO6 48 13 VREFLO VREFLO VREFLO
+1 2 3 4 5 6 7 8 9 10 11 12
+Major Incompatibility - 
+Different Signals & Type
+PowerPADTM 
+(F280015x ONLY)
+48 Pin PT and PHP
+Legend
+100% Compatible
+Minor Incompatibility - 
+Signals in Common
+F280013x
+(PT)
+GPIO29
+A16,C16,GPIO28
+XRSn
+A6,C6,GPIO226,GPIO228
+A3,C5,GPIO242
+A2,C9,GPIO224
+A14,A15,C4,C7
+A11,C0
+A5,C2
+A1
+A0,C15,CMP1_DACL
+VREFHI
+F280013x
+(PT)
+F280015x
+(PHP)
+GPIO29
+A16,C16,GPIO28
+XRSn
+A6,C6,GPIO226,GPIO228
+A3,C5,GPIO242
+A2,C9,GPIO224
+A14,A15,C4,C7
+A11,C0
+A5,C2
+A1
+A0,C15,CMP1_DACL
+VREFHI
+F280015x
+(PHP)
+F28002x
+(PT)
+GPIO29
+GPIO28
+XRSn
+A6,C6
+A3,C5,VDAC
+A2,C9
+A15,C7
+A11,C0
+A5,C2
+A1
+A0,C15
+VREFHI
+F28002x
+(PT)
+备注
+F280015x 48 引脚 PHP 封装集成了 PowerPADTM 以提高散热性能。在三个 48 引脚器件之间迁移时，
+务必在设计中考虑到这一点。
+图 2-3. 48 引脚 PT 或 PHP F280013x (PT)、F280015x（具有 PowerPADTM 的 PHP）和 F28002x (PT) 引脚重
+叠
+PCB 硬件更改 www.ti.com.cn
+10 TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 11 ===
+F280015x
+VDD
+VDDIO
+GPIO19,X1
+GPIO18,X2
+GPIO32
+GPIO35,TDI
+TMS
+GPIO37,TDO
+F280015x
+F280013x
+VDD
+VDDIO
+GPIO19,X1
+GPIO18,X2
+GPIO32
+GPIO35,TDI
+TMS
+GPIO37,TDO
+F280013x
+24 23 22 21 20 19 18 17
+VREGENZ GPIO4 25 16 TCK TCK
+GPIO3 GPIO3 26 15 GPIO24 GPIO24
+GPIO1 GPIO1 27 14 GPIO11 GPIO11
+GPIO0 GPIO0 28 13 A9,A10,C8,C10,GPIO227,GPIO230 A9,A10,C8,C10,GPIO227,GPIO230
+GPIO7 GPIO7 29 12 A4,C14 A4,C14
+GPIO5 GPIO5 30 11 VDDA VDDA
+GPIO29 GPIO29 31 10 VSSA VSSA
+A16,C16,GPIO28 A16,C16,GPIO28 32 9 A8,C11 A8,C11
+1 2 3 4 5 6 7 8
+32 RHB
+Legend
+100% Compatible
+Major Incompatibility - 
+Different Signals & Type
+F280013x
+XRSn
+A6,C6,GPIO226,GPIO228
+A3,C5,GPIO242
+A2,C9,GPIO224
+A14,A15,C4,C7
+A5,A11,C0,C2
+A0,A1,C15,CMP1_DACL
+A7,A12,C1,C3
+F280013x
+F280015x
+XRSn
+A6,C6,GPIO226,GPIO228
+A3,C5,GPIO242
+A2,C9,GPIO224
+A14,A15,C4,C7
+A5,A11,C0,C2
+A0,A1,C15,CMP1_DACL
+A7,A12,C1,C3
+F280015x
+图 2-4. 32 引脚 RHB F280013x 和 F280015x 重叠
+www.ti.com.cn PCB 硬件更改
+ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 11
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 12 ===
+2.2 新 PCB 和现有 PCB 迁移
+本节介绍采用 80 引脚 PN、64 引脚 PM 和 48 引脚 PT 或 PHP 封装的新 PCB 和现有 PCB 在 F28002x、
+F280013x 和 F280015x 之间的迁移。
+表 2-2. PCB 迁移不兼容问题
+引脚编号 引脚名称 操作
+80
+PN
+64
+PM/
+VPM
+48
+PT/
+PHP
+32
+RHB F28002x F280015x
+F280013x
+(64 VPM) F280013x 为确保兼容性
+次要不兼容性问题 - 通用信号 (1)
+4 2 2 - GPIO28 A16、C16、GPIO28 使用 GPIO28
+10 6
+4
+- A6 A6、GPIO228 使用 A6
+11 7 - C6 C6、GPIO226 使用 C6
+12 8 5 -
+A3、C5、
+VDAC A3、C5、GPIO242 使用 A3 或 C5
+13 9 6 - A2、C9 A2、C9、GPIO224 使用 A2 或 C9
+- - 7 - A15、C7 A14、A15、C4、C7 使用 A15 或 C7
+19 15 11 - A0、C15 A0、C15、CMP1_DACL 使用 A0 或 C15
+28 24 20 - A9、C8 A9、C8、GPIO227 使用 A9 或 C8
+29 25 21 - A10、C10 A10、C10、GPIO230 使用 A10 或 C10
+35 29 23 - GPIO13 A19、C19、GPIO13 使用 GPIO13
+36 30 24 - GPIO12 A20、C20、GPIO12 使用 GPIO12
+主要不兼容性问题 - 不同的信号和类型
+- - PAD - - PAD -
+48 引脚 F280015x 有 PowerPADTM，而 48 引脚 
+F28002x 和 F280013x 没有。考虑在器件之间迁移
+时，必须在电路板布局布线中考虑 PowerPADTM。
+- 27 22 - VDD A17、C17、GPIO20
+如果在 F28002x 电路板中使用 F280013x/15x 器
+件，可以将 VDD 引脚用作 GPIO，也可以按照器
+件特定数据表中 GPIO 的未使用引脚实践来操作。
+如果在 F280013x/15x 电路板中使用 F28002x，则 
+GPIO 引脚现在是 VDD 引脚，必须连接到 VDD。
+31 - - - VDD GPIO48 -
+如果在 F28002x 电路板中使用 F280015x 器件，
+可以将 VDD 引脚用作 GPIO，也可以按照器件特
+定数据表中 GPIO 的未使用引脚实践来操作。
+如果在 F280015x 电路板中使用 F28002x，则 
+GPIO 引脚现在是 VDD 引脚，必须连接到 VDD。
+- 28 - - VDDIO A18、C18、GPIO21
+如果在 F28002x 电路板中使用 F280013x/15x 器
+件，可以将 VDDIO 引脚用作 GPIO，也可以按照
+器件特定数据表中 GPIO 的未使用引脚实践来操
+作。
+如果在 F280013x/15x 电路板中使用 F28002x，则 
+GPIO 引脚现在是 VDDIO 引脚，必须连接到 
+VDDIO。
+32 - - - VDDIO GPIO49 -
+如果在 F28002x 电路板中使用 F280015x 器件，
+可以将 VDDIO 引脚用作 GPIO，也可以按照器件
+特定数据表中 GPIO 的未使用引脚实践来操作。
+如果在 F280015x 电路板中使用 F28002x，则 
+GPIO 引脚现在是 VDDIO 引脚，必须连接到 
+VDDIO。
+PCB 硬件更改 www.ti.com.cn
+12 TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 13 ===
+表 2-2. PCB 迁移不兼容问题 (continued)
+引脚编号 引脚名称 操作
+80
+PN
+64
+PM/
+VPM
+48
+PT/
+PHP
+32
+RHB F28002x F280015x
+F280013x
+(64 VPM) F280013x 为确保兼容性
+33 - - - FLT2 A17、C17、GPIO20 如果在 F28002x 电路板中使用 F280013x/15x 器
+件，可以将 FLT 引脚用作 GPIO，也可以按照器件
+特定数据表中 GPIO 的未使用引脚实践来操作。
+如果在 F280013x/15x 电路板中使用 F28002x，则 
+GPIO 引脚现在是 FLT 引脚，必须保持未连接状
+态。
+34 - - - FLT1 A18、C18、GPIO21
+56 46 - - GPIO39
+VREGENZ
+VREGENZ GPIO39 F28002x 和 F280013x（64 VPM 封装除外）没有 
+VREGENZ 引脚，因为内部 VREG 始终处于使能
+状态。
+如果在 F28002x/13x 电路板中使用 VREGENZ 器
+件，请将 GPIO 连接到 VDDIO 以使用外部电源，
+或将 GPIO 连接到 VSS 以使用内部 VREG。
+如果在具有 VREGENZ 的器件的电路板中使用 
+F28002x/13x 器件，可以将 VREGENZ 引脚用作 
+GPIO，也可以按照器件特定数据表中 GPIO 的未
+使用引脚实践来操作。
+更多有关外部和内部电源的信息，请参阅器件特定
+数据表。
+- - - 25 - GPIO4
+- - 37 - VSS VREGENZ VSS
+F28002x 和 F280013x（64 VPM 封装除外）没有 
+VREGENZ 引脚，因为内部 VREG 始终处于使能
+状态。
+如果在 F28002x/13x 电路板中使用 VREGENZ 器
+件，请将 VSS 引脚布线（现在为 VREGENZ）连
+接到 VDDIO 以使用外部电源，或将 VSS 引脚连
+接到 VSS（无变化）以使用内部 VREG。
+如果在具有 VREGENZ 的器件的电路板中使用 
+F28002x/13x 器件，则 VREGENZ 引脚布线（现
+在为 VSS）应连接到 VSS。
+有关外部和内部电源的其他信息，请参阅器件特定
+数据表。
+- - 44 - VSS GPIO44 VSS
+F280015x 有 PowerPADTM，而 F28002x 和 
+F280013x 没有。VSS 引脚会被 F280015x 的其他
+功能取代。考虑在 48 引脚器件之间迁移时，必须
+在电路板布局布线中考虑 PowerPADTM。
+如果在 F28002x/13x 电路板中使用 F280015x，可
+以将 VSS 引脚用作 GPIO，也可以按照器件特定
+数据表中的 GPIO 未使用引脚实践来操作。
+如果在 F280015x 电路板中使用 F28002x/13x，则 
+GPIO 引脚已被 VSS 取代，因此该引脚应连接到 
+VSS。
+(1) 软件中已选定要使用的通道
+www.ti.com.cn PCB 硬件更改
+ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 13
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 14 ===
+3 系统特性差异注意事项
+本部分探讨了在 F280013x、F280015x 和 F28002x 器件之间迁移时的异同点。
+3.1 F280013x 和 F280015x 的新特性
+这部分简要介绍了仅在 F280013x 和 F280015x 器件中提供的功能。有关每个新特性的详细信息，请参阅 
+TMS320F280013x 微控制器技术参考手册 和 TMS320F280015x 微控制器技术参考手册。
+3.1.1 安全启动/JTAG 锁定
+F280013x 和 F280015x 器件支持安全启动，还能够锁定 JTAG 以避免调试访问，从而增强安全性。安全启动和 
+JTAG 锁定在 F2838x 中首次引入。
+3.1.2 嵌入式图形发生器 (EPG)
+F280013x 和 F280015x 上的 EPG 是一个接口模块，可用于为器件上的其他模块生成波形和时钟。这对于通信模
+块诊断很有用。
+3.1.3 锁步比较模块 (LCM)
+该特性仅适用于 F280015x。锁步比较模块 (LCM) 使器件能够检测 CPU 和 PIE 中的永久和瞬态故障。有关 LCM 
+实现的更多详细信息，请参阅 TMS320F280015x 微控制器技术参考手册 (SPRUIY4)。
+3.1.4 INTOSC 外部精密电阻器 (ExtR)
+要提高 INTOSC2 的精度，可以使用外部电阻器 (ExtR) 模式。该模式允许将高精度外部电阻器添加到电路板并连
+接到支持 ExtR 的引脚。
+3.2 通信模块更改
+F28002x、F280015x 和 F280013x 器件之间的通信模块更改会影响模块数量。F280013x 或 F280015x 器件中移
+除了一些通信模块，F280015x 器件中添加了一些模块。详情如表 3-1 所示。
+表 3-1. 通信模块实例
+模块 类别 F28002x F280015x F280013x
+CAN 编号 1 - CANA
+MCAN 编号 不存在 1 - MCANA 不存在
+SCI 编号 1 - SCIA 3 - SCIA、SCIB、SCIC
+LIN 编号 2 - LINA、LINB 1 - LINA 不存在
+SPI 编号 2 - SPIA、SPIB 1 - SPIA
+I2C 编号 2 - I2CA、I2CB
+PMBUS 编号 1 - PMBUSA 不存在
+FSI 编号 1 - FSIA 不存在
+HIC 编号 1 - HICA 不存在
+系统特性差异注意事项 www.ti.com.cn
+14 TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 15 ===
+3.3 控制模块更改”中重点介绍了这一新特性。
+F28002x、F280015x 和 F280013x 器件之间的控制模块变化极小。表 3-2 显示了在 F28002x、F280015x 和 
+F280013x 之间迁移应用时应考虑的模块实例差异。
+表 3-2. 控制模块差异
+模块 类别 F28002x F280015x F280013x 说明
+eQEP 数字 2 - EQEP1、EQEP2 1 - EQEP1
+eCAP 编号 3 - ECAP1..3 2 - ECAP1..2
+HRCAP 编号 1 - HRCAP3 不存在
+ePWM 编号 7 - EPWM1..7 F280013x/15x 的消隐窗口改进
+寄存器 - DCACTL.EVT1LATSEL DCAEVT1 锁存信号选择
+- DCACTL.EVT1LATCLRSEL DCAEVT1 锁存清除源选择
+- DCACTL.EVT1LAT 指示 DCAEVT1LAT 信号的状态
+- DCACTL.EVT2LATSEL DCAEVT2 锁存信号选择
+- DCACTL.EVT2LATCLRSEL DCAEVT2 锁存清除源选择
+- DCACTL.EVT2LAT 指示 DCAEVT2LAT 信号的状态
+- DCBCTL.EVT1LATSEL DCBEVT1 锁存信号选择
+- DCBCTL.EVT1LATCLRSEL DCBEVT1 锁存清除源选择
+- DCBCTL.EVT1LAT 指示 DCBEVT1LAT 信号的状态
+- DCBCTL.EVT2LATSEL DCBEVT2 锁存信号选择
+- DCBCTL.EVT2LATCLRSEL DCBEVT2 锁存清除源选择
+- DCBCTL.EVT2LAT 指示 DCBEVT2LAT 信号的状态
+DCFCCTL.PULSESE
+L
+DCFCCTL.PULSESEL 为 F280013x/15x 添加了消隐脉冲混合
+选项
+HRPWM 编号 4 - HRPWM1..4 2 - HRPWM1..2
+www.ti.com.cn 系统特性差异注意事项
+ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 15
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 16 ===
+3.4 模拟模块差异
+这部分简要介绍了 F280013x、F280015x 和 F28002x 之间的模拟特性差异。F28002x 上不存在 GPDAC，并且
+模拟多路复用器表已重新映射。
+表 3-3. 模拟模块差异
+类别 F28002x
+F2800157、
+F2800155、
+F2800153
+F2800156、
+F2800154、
+F2800152
+F2800137、
+F2800135、
+F2800135V、
+F2800133 F2800132 说明
+ADC (1)
+编号 2（ADCA、ADCC）
+AIO（具有数字输入
+的模拟）
+最小采样窗口持续时
+间（具有 50Ω 或更
+小的 Rs）
+75ns 75ns 80ns 75ns 80ns
+AGPIO（具有数字输
+入和输出的模拟）
+最小采样窗口持续时
+间（具有 50Ω 或更
+小的 Rs）
+- 91.6ns 90ns 91.6ns 90ns
+典型 ADCCLK 频率 50MHz 60MHz 50MHz 60MHz 50MHz
+典型 SYSCLK 频率 100MHz 120MHz 100MHz 120MHz 100MHz
+ADCSOCxCTL.CHSEL 4 位（选择通道 0 至 15） 5 位（选择通道 0 至 19）
+CMPSS (1)
+数量
+（每个 CMPSS 都有两个比较器）
+4（CMPSS1 至 CMPSS4）
+（具有两个内部动态 DAC 和
+单个斜坡发生器）
+1 (CMPSS1)
+（具有两个内
+部动态 DAC 
+和双斜坡发生
+器）
+-
+1 (CMPSS1)
+（具有两个内部动态 DAC 和
+单个斜坡发生器）
+CMPSS DAC 缓冲输出 -
+1（与使用 
+CMPSS 进行
+比较互斥）
+-
+1（与使用 CMPSS 进行比较
+互斥）
+寄存器
+CTRIPxFILCLKCTL.CLKPRE
+SCALE[9..0] CTRIPxFILCLKCTL.CLKPRESCALE[15..0] F280013x 上的 CMPSS 滤波器预分频大小增
+加
+COMPDACCTL COMPDACHCTL 寄存器名称更改
+- COMPDACHCTL2 - 添加了寄存器以支持斜坡发生器交叉触发器配
+置。
+COMPDACCTL.Reserved[13
+]
+COMPDACHCTL.RAMPDIR[
+13]
+COMPDACHCTL.Reserved[1
+3]
+添加了位以支持 F280015x 中斜坡发生器的方
+向选择。
+RAMPMAXREFA RAMPHREFA 寄存器名称更改
+RAMMAXREFS RAMPHREFS 寄存器名称更改
+REMPDECVALA RAMPHSTEPVALA 寄存器名称更改
+REMPDECVALS RAMPHSTEPVALS 寄存器名称更改
+RAMPSTS RAMPHSTS 寄存器名称更改
+RAMPDLYA RAMPHDLYA 寄存器名称更改
+RAMPDLYS RAMPHDLYS 寄存器名称更改
+CTRIPLFILCTL CTRIPLFILCTL - 字段更改 CTRIPLFILCTL - 字段更改
+所有三个器件都对该寄存器中的字段进行了添
+加和更改。有关更多详细信息，请参阅器件特
+定 TRM。
+CTRIPLFILCLKCTL CTRIPLFILCLKCTL - 字段更改 F280015x 和 F280013x 增大了预分频器范围
+CTRIPHFILCTL CTRIPHFILCTL - 字段更改 CTRIPHFILCTL - 字段更改
+所有三个器件都对该寄存器中的字段进行了添
+加和更改。有关更多详细信息，请参阅器件特
+定 TRM。
+CTRIPHFILCLKCTL CTRIPHFILCLKCTL - 字段更改 F280015x 和 F280013x 增大了预分频器范围
+- COMPDACLCTL - 添加了寄存器和功能以支持双斜坡发生器
+- RAMPLREFA - 添加了寄存器和功能以支持双斜坡发生器
+- RAMPLREFS - 添加了寄存器和功能以支持双斜坡发生器
+- RAMPLSTEPVALA - 添加了寄存器和功能以支持双斜坡发生器
+- RAMPLSTEPVALS - 添加了寄存器和功能以支持双斜坡发生器
+- RAMPLSTS - 添加了寄存器和功能以支持双斜坡发生器
+- RAMPLDLYA - 添加了寄存器和功能以支持双斜坡发生器
+- RAMPLDLYS - 添加了寄存器和功能以支持双斜坡发生器
+- CTRIPLFILCLKCTL2 -
+添加了寄存器和功能以支持数字滤波。有关更
+多详细信息，请参阅器件特定 TRM。
+- CTRIPHFILCLKCTL2 -
+添加了寄存器和功能以支持数字滤波。有关更
+多详细信息，请参阅器件特定 TRM。
+其他 CMPx_HP 有 5 个多路复用器
+输入选项 CMPx_HP 有 6 个多路复用器输入选项
+系统特性差异注意事项 www.ti.com.cn
+16 TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 17 ===
+表 3-3. 模拟模块差异 (continued)
+类别 F28002x
+F2800157、
+F2800155、
+F2800153
+F2800156、
+F2800154、
+F2800152
+F2800137、
+F2800135、
+F2800135V、
+F2800133 F2800132 说明
+CMPSS_LITE (1)
+数量
+（每个 CMPSS_LITE 都有两个比较器）
+-
+3（CMPSS_LITE2、CMPSS_LITE3、CMPSS_LITE4）
+（具有两个内部静态 DAC）
+寄存器
+-
+COMPDACHCTL.RAMPDIR[
+13]
+COMPDACHCTL.Reserved[1
+3]
+添加了位以支持 F280015x 中斜坡发生器的方
+向选择。
+- CTRIPLFILCTL - 字段更改 CTRIPLFILCTL - 字段更改
+F280013x 和 F280015x 器件对该寄存器中的
+字段进行了添加和更改。有关更多详细信息，
+请参阅器件特定 TRM。
+- CTRIPHFILCTL - 字段更改 CTRIPHFILCTL - 字段更改
+F280013x 和 F280015x 器件对该寄存器中的
+字段进行了添加和更改。有关更多详细信息，
+请参阅器件特定 TRM。
+- COMPDACLCTL - 添加了寄存器和功能以支持双斜坡发生器
+- CTRIPLFILCLKCTL2 -
+添加了寄存器和功能以支持数字滤波。有关更
+多详细信息，请参阅器件特定 TRM。
+- CTRIPHFILCLKCTL2 -
+添加了寄存器和功能以支持数字滤波。有关更
+多详细信息，请参阅器件特定 TRM。
+温度传感器
+编号 1 -（在 ADCC 通道 12 中）
+(1) 在从 F28002x 向 F280013x 或 F280015x 移植（或反向移植）软件的过程中，必须十分小心，以确保使用正确的 ADC 通道，因为通道
+分配有所不同，请参阅“模拟多路复用更改”
+3.4.1 CMPSS 模块型号
+F280013x 和 F280015x 器件包含两种不同型号的 CMPSS 模块：CMPSS（完整模块）和 CMPSS_LITE（功能
+简化且性能降低）。表 3-4 中总结了这两种型号在特性上的差异
+表 3-4. CMPSS 和 CMPSS_LITE 特性比较
+特性 CMPSS CMPSS_LITE
+高电平和低电平比较器 是 是
+双 12 位基准 DAC 是 是
+DAC 斜坡生成 是 否
+外部引脚上提供低 DAC 输出 是（某些情况） 否
+数字滤波器 是 是
+性能 完整性能（请参阅数据手册中的 CMPSS 电气
+特性）
+性能有所降低（请参阅数据手册中的 CMPSS 
+电气特性）
+3.5 其他器件更改
+这部分介绍了前几部分中未涉及到的 F28002x、F280015x 和 F280013x 的特性差异，因此在两种器件之间迁移
+应用时，必须考虑下面标识的更改。
+www.ti.com.cn 系统特性差异注意事项
+ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 17
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 18 ===
+3.5.1 Pie 通道映射
+F28002x 和 F280015x 或 F280013x 的 Pie 通道映射由于这些器件的外设模块变更而有所不同。表 3-6 对这三种器件上的共同和独有 Pie 通道分配进行了
+总结。
+表 3-5. Pie 通道图例
+颜色 说明
+适用于所有三种器件的 Pie 通道
+仅适用于 F280013x 和 F280015x 的 Pie 通道
+仅适用于 F280015x 的 Pie 通道
+仅适用于 F280015x 和 F28002x 的 Pie 通道
+仅适用于 F28002x 的 Pie 通道
+表 3-6. Pie 通道映射比较
+INTx.1 INTx.2 INTx.3 INTx.4 INTx.5 INTx.6 INTx.7 INTx.8 INTx.9 INTx.10 INTx.11 INTx.12 INTx.13 INTx.14 INTx.15 INTx.16
+INT1.y ADCA1 ADCC1 ADCC1 XINT1 XINT2 SYS_
+ERR TIMER0 WAKE /
+WDOG - - - - - - - -
+INT2.y EPWM1_ 
+TZ
+EPWM2_ 
+TZ
+EPWM3_ 
+TZ
+EPWM4_ 
+TZ
+EPWM5_ 
+TZ
+EPWM6_ 
+TZ
+EPWM7_ 
+TZ - - - - - - - - -
+INT3.y EPWM1 EPWM2 EPWM3 EPWM4 EPWM5 EPWM6 EPWM7 - - - - - - - - -
+INT4.y ECAP1 ECAP2 ECAP3 - - - - - - -
+ECAP3
+INT2 - - - - -
+INT5.y EQEP1 EQEP2 - - CLB1 CLB2 - - - - - - - - - -
+INT6.y SPIA_RX SPIA_TX SPIB_RX SPIB_TX LINA_0 LINA_1 DCC0 - - - - - - - - -
+INT7.y DMA_ 
+CH1
+DMA_ 
+CH2
+DMA_ 
+CH3
+DMA_ 
+CH4
+DMA_ 
+CH5
+DMA_ 
+CH6 PMBUSA - - -
+FSITX_ 
+INT1
+FSITX_ 
+INT2
+FSIRX_ 
+INT1
+FSIRX_ 
+INT2 - DCC0
+INT8.y I2CA I2CA_ 
+FIFO I2CB I2CB_ 
+FIFO SCIC_RX SCIC_TX - - LINA_0 LINA_1 LINB_0 LINB_1 PMBUSA - - DCC1
+INT9.y SCIA_RX SCIA_TX SCIB_RX SCIB_TX CANA_0 CANA_1 MCANSS
+0
+MCANSS
+1
+- - - - BGCRC - - HICA
+INT10.y ADCA_ 
+EVT ADCA2 ADCA3 ADCA4 ADCC_ 
+EVT ADCC2 ADCC3 ADCC4 ADCC_ 
+EVT ADCC2 ADCC3 ADCC4 - - - -
+INT11.y - - - - - - - - - - - - - - - -
+INT12.y XINT3 XINT4 XINT5 MPOST
+FMC/
+FLSS_
+INT
+VCRC
+MCANSS
+_WAKE_
+AND_TS
+_PLS
+MCANSS
+_ECC_
+CORR_
+PLS -
+RAM_
+CORREC
+TABLE_
+ERROR
+FLASH_
+CORREC
+TABLE_
+ERROR
+RAM_
+ACCESS
+_
+VIOLATI
+ON
+- - - -
+FPU_OV
+ER 
+FLOW
+FPU_ 
+UNDER 
+FLOW
+系统特性差异注意事项 www.ti.com.cn
+18 TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 19 ===
+3.5.2 Bootrom
+有关 F28002x、F280015x 和 F280013x 的 Bootrom 异同点，请参阅表 3-7 和表 3-8。
+表 3-7. 引导加载程序和 GPIO 分配比较
+引导加载程序 选项 BOOTDEFx F28002x F280015x F280013x
+并行
+0 0x00
+D0-D7=GPIO0 至 GPIO7；
+DSP=GPIO16；
+Host=GPIO29
+D0-D7=GPIO(0,1,3,4,5,7,28,29)；
+DSP=GPIO224；
+Host=GPIO242
+1 0x20
+D0-D7=GPIO0 至 GPIO7；
+DSP=GPIO16；
+Host=GPIO11
+D0-D7=GPIO0 至 GPIO7；
+DSP=GPIO12；
+Host=GPIO13
+2 0x40 不适用
+D0-D7=GPIO0 至 GPIO7；
+DSP=GPIO16；
+Host=GPIO29
+SCIA
+0 0x01 TX=GPIO29；
+RX=GPIO28
+1 0x21 TX=GPIO16；
+RX=GPIO17
+TX=GPIO1；
+RX=GPIO0
+2 0x41 TX=GPIO8；
+RX=GPIO9
+3 0x61 TX=GPIO2；
+RX=GPIO3
+TX=GPIO7；
+RX=GPIO3
+4 0x81 TX=GPIO16；
+RX=GPIO3
+CAN
+0 0x02 TX=GPIO4；
+RX=GPIO5
+TX=GPIO7；
+RX=GPIO5
+TX=GPIO4；
+RX=GPIO5
+1 0x22 TX=GPIO32；
+RX=GPIO33
+2 0x42 TX=GPIO2；
+RX=GPIO3
+3 0x62 不适用 TX=GPIO13；
+RX=GPIO12
+SPI
+0 0x06
+SIMO=GPIO2；
+SOMI=GPIO1；
+CLK=GPIO3；
+STE=GPIO5
+SIMO=GPIO7；
+SOMI=GPIO1；
+CLK=GPIO3；
+STE=GPIO5
+1 0x26
+SIMO=GPIO16；
+SOMI=GPIO1；
+CLK=GPIO3；
+STE=GPIO0
+2 0x46
+SIMO=GPIO8；
+SOMI=GPIO10；
+CLK=GPIO9；
+STE=GPIO11
+3 0x66
+SIMO=GPIO8；
+SOMI=GPIO17；
+CLK=GPIO9；
+STE=GPIO11
+SIMO=GPIO16；
+SOMI=GPIO13；
+CLK=GPIO12；
+STE=GPIO29
+I2C
+0 0x07 SDA=GPIO32；
+SCL=GPIO33
+SDA=GPIO0；
+SCL=GPIO1
+1 0x27 SDA=GPIO0；
+SCL=GPIO1
+SDA=GPIO32；
+SCL=GPIO33
+2 0x47 SDA=GPIO10；
+SCL=GPIO8
+SDA=GPIO5；
+SCL=GPIO4
+www.ti.com.cn 系统特性差异注意事项
+ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 19
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 20 ===
+表 3-7. 引导加载程序和 GPIO 分配比较 (continued)
+引导加载程序 选项 BOOTDEFx F28002x F280015x F280013x
+MCAN
+0 0x08 不适用 TX=GPIO4；
+RX=GPIO5 不適用
+1 0x28 不适用 TX=GPIO1；
+RX=GPIO0 不可用
+2 0x48 不适用 TX=GPIO13；
+RX=GPIO12 不适用
+3
+（DEBUG
+-发送测试）
+0x88 不适用 TX=GPIO4；
+RX=GPIO5 不适用
+4
+（DEBUG
+-发送测试）
+0xA8 不适用 TX=GPIO1；
+RX=GPIO0 不适用
+5
+（DEBUG
+-发送测试）
+0x68 不适用 TX=GPIO13；
+RX=GPIO12 不适用
+表 3-8. 引导模式比较
+引导模式 选项 BOOTDEFx F28002x F280015x F280013x
+闪存
+0 0x03 条目=0x00080000；
+组/扇区=0/0
+条目=0x00080000；
+组/扇区=0/0
+1 0x23 条目=0x00084000；
+组/扇区=0/4
+条目=0x00088000；
+组/扇区=0/32
+2 0x43 条目=0x00088000；
+组/扇区=0/8
+条目=0x0008FFF0；
+组/扇区=0/63
+3 0x63 条目=0x0008EFF0；
+组/扇区=0/14
+条目=0x00090000；
+组/扇区=0/64
+4 0x83 -
+条目=0x00098000；
+组/扇区=0/96
+5 0xA3 -
+条目=0x0009FFF0；
+组/扇区=0/127
+安全闪存
+0 0x0A -
+条目=0x00080000；
+组/扇区=0/0
+1 0x2A -
+条目=0x00088000；
+组/扇区=0/32
+2 0x4A -
+条目=0x0008FFF0；
+组/扇区=0/63
+3 0x6A -
+条目=0x00090000；
+组/扇区=0/64
+4 0x8A -
+条目=0x00098000；
+组/扇区=0/96
+等待
+0 0x04 看门狗已启用
+1 0x24 看门狗已禁用
+RAM 0 0x05 条目 = 0x00000000
+3.5.3 CLB 和电机控制库
+F280013x 器件没有 CLB 块，因此用户无法在该器件上使用任何 CLB 相关功能。
+3.5.4 AGPIO
+F280013x 和 F280015x 器件有 11 个 AGPIO 通道，可在单个引脚上同时支持 GPIO 和模拟功能。F28002x 上不
+提供 AGPIO 功能。与 GPIO 共用一个引脚会对 ADC 通道的性能产生影响，如表 3-3 所述。
+系统特性差异注意事项 www.ti.com.cn
+20 TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 21 ===
+3.5.4.1 AGPIO 滤波器
+提供了一个可配置滤波器，以帮助降低 AGPIO 引脚模拟部分的噪声。可在两个组中启用和配置该滤波器。有关两
+组 AGPIO 滤波器和可用配置选项的更多详细信息，请参阅每个器件特定 TRM 的 AGPIO 和 
+ANALOG_SUBSYS_REGS 部分。
+3.5.4.2 ADC 引脚上的数字输入和输出 (AGPIO)
+该器件上的某些 GPIO 与模拟引脚进行多路复用。这些也称为 AGPIO。与 AIO 不同，AGPIO 具有完整的输入和
+输出能力。
+默认情况下，AGPIO 未连接，必须进行配置。表 3-9 显示了如何配置 AGPIO。
+表 3-9. AGPIO 配置
+AGPIOCTRLA.GPIOy
+（默认值 = 0）
+GPAxMSEL.GPIOy
+（默认值 = 1）
+引脚连接到：
+ADC GPIOy
+0 0 - 是
+0 1 -
+(1)
+-
+(1)
+1 0 - 是
+1 1 是 -
+(1) 默认情况下，没有信号连接到 AGPIO 引脚。必须选择表中的其他行之一来实现引脚功能。
+备注
+如果将具有尖锐边缘（高 dv/dt）的数字信号连接到 AGPIO，则相邻的模拟信号可能会发生串扰。因
+此，如果相邻通道用于模拟功能，用户应限制连接到 AGPIO 的信号的边沿速率。
+3.6 电源管理
+F28002x 和 F280013x 器件具有类似的电源选项，F280015x 和 F280013x-64VPM 具有额外的电源选项。
+F28002x 和 F280013x 器件仅支持单轨 (3.3V)，内部 LDO VREG 提供 1.2V 电源轨。F280015x 和 
+F280013x-64VPM 有一个从外部为 1.2V 电源轨供电的附加选项，但仍可像在其他两种器件中那样从内部供电。
+这部分介绍了三种器件在电源管理方面的异同点。
+3.6.1 LDO/VREG
+F28002x 和 F280013x（对于非 64VPM 封装）仅支持内部 VREG，没有 VREGENZ 引脚。VREGENZ 引脚被替
+换为不同的功能。
+F280015x 和 64VPM F280013x 有一个 VREGENZ 引脚，可支持内部 VREG 和外部源。
+3.6.2 POR/BOR
+POR 和 BOR 没有功能变化。
+3.6.3 功耗
+F280013x、F280015x 和 F28002x 之间的功耗没有显著差异，如果选择了相似的系统工作频率，则所有三种器件
+都将使用相同数量的外设，并使用内部 VREG。但是，由于 F280015x 和 F280013x（仅限 F280013x-64VPM 封
+装）器件可选择从外部为 VREG 供电，因此它们能够实现更高能效。
+另一个考虑因素是 F280015x 和 F280013x 的最大频率为 120MHz。与最高频率为 100MHz 的 F28002x 相比，这
+增加了电源要求。
+3.7 内存模块更改
+F28002x 器件中的 RAM 和闪存存储器与 F280015x 和 F280013x 器件中的 RAM 和闪存存储器具有异同点。表 
+3-10 总结了包括错误检查和安全分配在内的存储器特性。
+www.ti.com.cn 系统特性差异注意事项
+ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 21
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 22 ===
+表 3-10. RAM 和闪存存储器更改
+存储器
+F28002x F280015x 和 F280013x
+大小
+奇偶校验/
+ECC
+受安全保
+护 大小
+奇偶校验/
+ECC
+受安全保
+护
+RAM
+专用（M0、M1） 4KB ECC 否 4KB ECC 否
+本地共享 (LS0-LS7) 16KB DCSM
+受控 是 32KB 奇偶校验 DCSM
+受控
+全局共享 (GS0-GS3) 4KB
+(GS0)
+奇偶校验 否 - - -
+消息 - - - - - -
+总 RAM 24KB 36KB
+闪存
+每组 128KB（1 组） ECC DCSM
+受控 256KB（1 组） ECC DCSM
+受控
+总闪存 128KB 256KB
+系统特性差异注意事项 www.ti.com.cn
+22 TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 23 ===
+3.8 GPIO 多路复用更改
+表 3-12 简要介绍了 F28002x、F280015x 和 F280013x 中 GPIO 多路复用器的异同点。
+表 3-11. Pie 通道图例
+颜色 说明
+适用于所有四个器件的多路复用器功能
+仅适用于 F280013x 和 F280015x 的多路复用器功能
+仅适用于 F280015x 的多路复用器功能
+仅适用于 F280015x 和 F28002x 的多路复用器功能
+仅适用于 F28002x 的多路复用器功能
+表 3-12. GPIO 多路复用引脚
+0，4，8，12 1 2 3 5 6 7 9 10 11 13 14 15 ALT
+GPIO0 EPWM1_A CANA_RX
+OUTPUTXB
+AR7
+SCIA_RX I2CA_SDA SPIA_STE FSIRXA_CLK MCAN_RX CLB_OUTPUTX
+BAR8 EQEP1_INDEX
+EPWM3_A
+HIC_BASESEL1
+GPIO1 EPWM1_B SCIA_TX I2CA_SCL SPIA_SOMI EQEP1_STROB
+E
+MCAN_TX CLB_OUTPUTX
+BAR7 HIC_A2 FSITXA_TDM_
+D1
+EPWM3_B
+HIC_D10
+GPIO2 EPWM2_A OUTPUTXBAR1 PMBUSA_SDA SPIA_SIMO SCIA_TX FSIRXA_D1 I2CB_SDA HIC_A1 CANA_TX
+EPWM4_A
+HIC_D9
+GPIO3 EPWM2_B OUTPUTXBAR2 OUTPUTXBAR2 PMBUSA_SCL SPIA_CLK SCIA_RX FSIRXA_D0 I2CB_SCL HIC_NOE CANA_RX
+EPWM4_B
+HIC_D4
+GPIO4 EPWM3_A I2CA_SCL MCAN_TX OUTPUTXBAR3 CANA_TX SPIB_CLK EQEP2_STROB
+E
+FSIRXA_CLK CLB_OUTPUTX
+BAR6 HIC_BASESEL2 SPIA_SOMI
+EPWM1_A
+HIC_NWE
+GPIO5 EPWM3_B I2CA_SDA OUTPUTXBAR3 MCAN_RX CANA_RX SPIA_STE FSITXA_D1 CLB_OUTPUTX
+BAR5 SCIA_RX HIC_A7 HIC_D4
+EPWM1_B
+HIC_D15
+GPIO6 EPWM4_A OUTPUTXBAR4 SYNCOUT EQEP1_A SPIB_SOMI FSITXA_D0 FSITXA_D1 HIC_NBE1 CLB_OUTPUTX
+BAR8
+EPWM2_A
+HIC_D14
+GPIO7 EPWM4_B EPWM2_A OUTPUTXBAR5 EQEP1_B
+SPIA_SIMO
+FSITXA_CLK CLB_OUTPUTX
+BAR2 SCIA_TX HIC_A6 CANA_TX
+EPWM2_B
+SPIB_SIMO HIC_D14
+GPIO8 EPWM5_A ADCSOCAO EQEP1_STROB
+E
+SCIA_TX SPIA_SIMO I2CA_SCL FSITXA_D1 CLB_OUTPUTX
+BAR5 HIC_A0 FSITXA_TDM_
+CLK HIC_D8
+GPIO9 EPWM5_B SCIB_TX OUTPUTXBAR6 EQEP1_INDEX SCIA_RX SPIA_CLK FSITXA_D0 LINB_RX HIC_BASESEL0 I2CB_SCL HIC_NRDY
+GPIO10 EPWM6_A ADCSOCBO EQEP1_A SCIB_TX SPIA_SOMI I2CA_SDA FSITXA_CLK LINB_TX HIC_NWE FSITXA_TDM_
+D0
+GPIO11 EPWM6_B CANA_RX OUTPUTXBAR7 EQEP1_B SCIB_RX SPIA_STE FSIRXA_D1 LINB_RX EQEP2_A SPIA_SIMO HIC_D6 HIC_NBE0
+GPIO12 EPWM7_A MCAN_RX EQEP1_STROB
+E
+SCIB_TX PMBUSA_CTL FSIRXA_D0 LINB_TX SPIA_CLK CANA_RX HIC_D13 HIC_INT
+GPIO13 EPWM7_B MCAN_TX EQEP1_INDEX SCIB_RX PMBUSA_ALER
+T
+FSIRXA_CLK LINB_RX SPIA_SOMI CANA_TX HIC_D11 HIC_D5
+GPIO14 SCIB_TX I2CB_SDA OUTPUTXBAR3 PMBUSA_SDA SPIB_CLK EQEP2_A LINB_TX EPWM3_A CLB_OUTPUTX
+BAR7 HIC_D15
+GPIO15 SCIB_RX I2CB_SCL OUTPUTXBAR4 PMBUSA_SCL SPIB_STE EQEP2_B LINB_RX EPWM3_B CLB_OUTPUTX
+BAR6 HIC_D12
+www.ti.com.cn 系统特性差异注意事项
+ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 23
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 24 ===
+表 3-12. GPIO 多路复用引脚 (continued)
+0，4，8，12 1 2 3 5 6 7 9 10 11 13 14 15 ALT
+GPIO16 SPIA_SIMO OUTPUTXBAR7 EPWM5_A SCIA_TX EQEP1_STROB
+E
+PMBUSA_SCL XCLKOUT EQEP2_B SPIB_SOMI HIC_D1
+GPIO17 SPIA_SOMI OUTPUTXBAR8 EPWM5_B SCIA_RX EQEP1_INDEX PMBUSA_SDA CANA_TX EPWM6_A HIC_D2
+GPIO18_X2 SPIA_CLK SCIB_TX CANA_RX EPWM6_A I2CA_SCL EQEP2_A PMBUSA_CTL XCLKOUT LINB_TX FSITXA_TDM_
+CLK HIC_INT X2
+GPIO19_X1 SPIA_STE SCIB_RX CANA_TX EPWM6_B I2CA_SDA EQEP2_B PMBUSA_ALER
+T
+CLB_OUTPUTX
+BAR1 LINB_RX FSITXA_TDM_
+D0 HIC_NBE0 X1
+GPIO20 EQEP1_A SPIA_SIMO MCAN_TX I2CA_SCL SCIC_TX
+GPIO21 EQEP1_B CANA_RX SPIA_SOMI MCAN_RX I2CA_SDA SCIC_RX
+GPIO22 EQEP1_STROB
+E
+SCIB_TX SPIB_CLK
+SCIC_TX CLB_OUTPUTX
+BAR1 LINB_TX HIC_A5 EPWM4_A HIC_D13
+LINA_TX
+GPIO23 EQEP1_INDEX SCIB_RX SPIB_STE
+SCIC_RX
+LINB_RX HIC_A3 EPWM4_B HIC_D11
+LINA_RX
+GPIO24 OUTPUTXBAR1 EQEP2_A SPIA_STE EPWM8_A SPIB_SIMO LINB_TX PMBUSA_SCL SCIA_TX ERRORSTS HIC_D3
+GPIO25 OUTPUTXBAR2 EQEP2_B EQEP1_A SPIB_SOMI FSITXA_D1 PMBUSA_SDA SCIA_RX HIC_BASESEL0
+GPIO26 OUTPUTXBAR3 EQEP2_INDEX OUTPUTXBAR3 SPIB_CLK FSITXA_D0 PMBUSA_CTL I2CA_SDA HIC_D0 HIC_A1
+GPIO27 OUTPUTXBAR4 EQEP2_STROB
+E
+OUTPUTXBAR4 SPIB_STE FSITXA_CLK PMBUSA_ALER
+T
+I2CA_SCL HIC_D1 HIC_A4
+GPIO28 SCIA_RX EPWM7_A OUTPUTXBAR5 EQEP1_A EQEP2_STROB
+E
+SCIC_TX
+SPIB_CLK ERRORSTS I2CB_SDA HIC_NOE
+LINA_TX
+GPIO29 SCIA_TX EPWM7_B OUTPUTXBAR6 EQEP1_B EQEP2_INDEX
+SCIC_RX
+SPIB_STE ERRORSTS I2CB_SCL HIC_NCS AUXCLK
+LINA_RX IN
+GPIO30 CANA_RX SPIB_SIMO OUTPUTXBAR7 EQEP1_STROB
+E
+FSIRXA_CLK MCAN_RX EPWM1_A HIC_D8
+GPIO31 CANA_TX SPIB_SOMI OUTPUTXBAR8 EQEP1_INDEX FSIRXA_D1 MCAN_TX EPWM1_B HIC_D10
+GPIO32 I2CA_SDA EQEP1_INDEX
+SPIA_CLK
+EPWM4_B
+SCIC_TX
+FSIRXA_D0 CANA_TX PMBUSA_SDA ADCSOCBO HIC_INT
+SPIB_CLK LINA_TX
+GPIO33 I2CA_SCL SPIB_STE OUTPUTXBAR4
+SCIC_RX
+FSIRXA_CLK CANA_RX EQEP2_B ADCSOCAO HIC_D0
+LINA_RX
+GPIO34 OUTPUTXBAR1 PMBUSA_SDA HIC_NBE1 I2CB_SDA HIC_D9
+GPIO35 SCIA_RX SPIA_SOMI I2CA_SDA CANA_RX PMBUSA_SCL
+SCIC_RX
+EQEP1_A PMBUSA_CTL EPWM5_B HIC_NWE TDI
+LINA_RX
+GPIO37 OUTPUTXBAR2 SPIA_STE I2CA_SCL SCIA_TX CANA_TX
+SCIC_TX
+EQEP1_B PMBUSA_ALER
+T
+EPWM5_A HIC_NRDY TDO
+LINA_TX
+GPIO39 MCAN_RX FSIRXA_CLK EQEP2_INDEX CLB_OUTPUTX
+BAR2 SYNCOUT EQEP1_INDEX HIC_D7
+GPIO40 SPIB_SIMO EPWM2_B PMBUSA_SDA FSIRXA_D0 SCIB_TX EQEP1_A LINB_TX HIC_NBE1 HIC_D5
+GPIO41 EPWM7_A EPWM2_A PMBUSA_SCL FSIRXA_D1 SCIB_RX EQEP1_B LINB_RX HIC_A4 SPIB_SOMI HIC_D12
+GPIO42 LINA_RX OUTPUTXBAR5 PMBUSA_CTL I2CA_SDA SCIC_RX EQEP1_STROB
+E
+CLB_OUTPUTX
+BAR3 HIC_D2 HIC_A6
+GPIO43 OUTPUTXBAR6 PMBUSA_ALER
+T
+I2CA_SCL SCIC_TX PMBUSA_ALER
+T
+EQEP1_INDEX CLB_OUTPUTX
+BAR4 HIC_D3 HIC_A7
+GPIO44 OUTPUTXBAR7 EQEP1_A PMBUSA_SDA FSITXA_CLK PMBUSA_CTL CLB_OUTPUTX
+BAR3 HIC_D7 HIC_D5
+系统特性差异注意事项 www.ti.com.cn
+24 TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 25 ===
+表 3-12. GPIO 多路复用引脚 (continued)
+0，4，8，12 1 2 3 5 6 7 9 10 11 13 14 15 ALT
+GPIO45 OUTPUTXBAR8 FSITXA_D0 PMBUSA_ALER
+T
+CLB_OUTPUTX
+BAR4 HIC_D6
+GPIO46 LINA_TX MCAN_TX FSITXA_D1 PMBUSA_SDA HIC_NWE
+GPIO48 CANA_TX MCAN_TX SCIA_TX PMBUSA_SDA
+GPIO49 CANA_RX MCAN_RX SCIA_RX LINA_RX
+GPIO224 AIO224 OUTPUTXBAR3 SPIA_SIMO EPWM1_A CANA_TX EQEP1_A SCIC_TX HIC_A3
+AIO225 HIC_NWE
+GPIO226 AIO226 LINA_RX EPWM6_A SPIA_CLK EPWM1_B EQEP1_STROB
+E
+SCIC_RX HIC_A1
+GPIO227 AIO227 I2CB_SCL EPWM3_A OUTPUTXBAR1 EPWM2_B HIC_NBE0
+GPIO228 AIO228 ADCSOCAO CANA_TX SPIA_SOMI EPWM2_B EQEP1_B HIC_A0
+GPIO230 AIO230 I2CB_SDA EPWM3_B CANA_RX EPWM2_A I2CA_SDA PMBUSA_SCL HIC_BASESEL2
+AIO231 HIC_BASESEL1
+AIO232 HIC_BASESEL0
+AIO233 HIC_A4
+AIO237 HIC_A6
+AIO238 HIC_NCS
+AIO239 HIC_A5
+AIO241 HIC_NBE1
+GPIO242 AIO242 OUTPUTXBAR2 SPIA_STE EPWM4_A CANA_RX EQEP1_INDEX HIC_A2
+AIO244 HIC_A7
+AIO245 HIC_NOE
+www.ti.com.cn 系统特性差异注意事项
+ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 25
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 26 ===
+3.9 模拟多路复用更改
+表 3-14 简要介绍了针对 80 引脚 PN、64 引脚 PM 和 48 引脚 PT/PHP 封装的 F280013x、F280015x 和 F28002x 之间模拟多路复用器的异同点。表 3-13 
+是此表的图例。
+表 3-13. 多路复用器图例
+颜色 说明
+所有三种器件共有的多路复用器功能
+仅适用于 F28002x 的多路复用器功能
+仅适用于 F280013x 和 F280015x 的多路复用器功能
+表 3-14. F28002x、F280015x 和 F280013x 64 引脚 PM 和 48 引脚 PT/PHP 模拟多路复用器差异表
+（F28002x 引脚名
+称） 封装引脚 ADC 比较器子系统（多路复用器）
+AIO 输入
+F280015x 和 
+F280013x
+引脚名称 80 PN 64 PM 48 PT 48 PHP A C
+高
+正
+高
+负
+低
+正
+低
+负
+VREFHI 20 16 12 12
+VREFLO 21 17 13 13 A13 C13
+模拟组 1 CMP1
+(A6)
+10 6 4 4 A6 - CMP1 (HPMXSEL=2) CMP1 (LPMXSEL=2)
+AIO228
+A6/GPIO228 GPIO228
+(A2/C9)
+13 9 6 6 A2 C9 CMP1 (HPMXSEL=0) CMP1 (LPMXSEL=0)
+AIO224
+A2/C9/GPIO224 GPIO224
+(A15/C7)
+14 10 7 7 A15 C7 CMP1 (HPMXSEL=3) CMP1 (HNMXSEL=0) CMP1 (LPMXSEL=3) CMP1 (LNMXSEL=0) AIO233
+A15/C7
+(A11/C0)
+16 12 8 8 A11 C0 CMP1 (HPMXSEL=1) CMP1 (HNMXSEL=1) CMP1 (LPMXSEL=1) CMP1 (LNMXSEL=1) AIO237
+A11/C0
+(A1)
+18 14 10 10 A1 - CMP1 (HPMXSEL=4) CMP1 (LPMXSEL=4) AIO232
+A1
+模拟组 2 CMP2
+(A10/C10)
+29 25 21 21 A10 C10 CMP2 (HPMXSEL=3) CMP2 (HNMXSEL=0) CMP2 (LPMXSEL=3) CMP2 (LNMXSEL=0)
+AIO230
+A10/C10/GPIO230 GPIO230
+模拟组 3 CMP3
+(C6)
+11 7 4 4 - C6 CMP3 (HPMXSEL=0) CMP3 (LPMXSEL=0)
+AIO226
+C6/GPIO226 GPIO226
+系统特性差异注意事项 www.ti.com.cn
+26 TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 27 ===
+表 3-14. F28002x、F280015x 和 F280013x 64 引脚 PM 和 48 引脚 PT/PHP 模拟多路复用器差异表 (continued)
+（F28002x 引脚名
+称） 封装引脚 ADC 比较器子系统（多路复用器）
+AIO 输入
+F280015x 和 
+F280013x
+引脚名称 80 PN 64 PM 48 PT 48 PHP A C
+高
+正
+高
+负
+低
+正
+低
+负
+(A3/C5/VDAC)
+12 8 5 5 A3 C5
+CMP3 (HPMXSEL=3)
+CMP3 (HNMXSEL=0)
+CMP3 (LPMXSEL=3)
+CMP3 (LNMXSEL=0)
+AIO242
+A3/C5/GPIO242 CMP3 (HPMXSEL=5) CMP3 (LPMXSEL=5) GPIO242
+(A14/C4)
+15 11 7 - A14 C4 CMP3 (HPMXSEL=4) CMP3 (LPMXSEL=4) AIO239
+A14/C4
+(A5/C2)
+17 13 9 9 A5 C2
+CMP3 (HPMXSEL=1)
+CMP3 (HNMXSEL=1)
+CMP3 (LPMXSEL=1)
+CMP3 (LNMXSEL=1) AIO244
+A5/C2 CMP2 (HPMXSEL=5) CMP2 (LPMXSEL=5)
+(A0/C15)
+19 15 11 11 A0 C15 CMP3 (HPMXSEL=2) CMP3 (LPMXSEL=2) AIO231
+A0/C15
+模拟组 4 CMP4
+(A7/C3)
+23 19 15 15 A7 C3 CMP4 (HPMXSEL=1) CMP4 (HNMXSEL=1) CMP4 (LPMXSEL=1) CMP4 (LNMXSEL=1) AIO245
+A7/C3
+组合模拟组 2/4 CMP2/4
+(A12/C1)
+22 18 14 14 A12 C1 CMP2 (HPMXSEL=1) 
+CMP4 (HPMXSEL=2) CMP2 (HNMXSEL=1) CMP2 (LPMXSEL=1) 
+CMP4 (LPMXSEL=2) CMP2 (LNMXSEL=1) AIO238
+A12/C1
+(A8/C11)
+24 20 16 16 A8 C11 CMP2 (HPMXSEL=4) 
+CMP4 (HPMXSEL=4)
+CMP2 (LPMXSEL=4) 
+CMP4 (LPMXSEL=4) AIO241
+A8/C11
+(A4/C14)
+27 23 19 19 A4 C14 CMP2 (HPMXSEL=0) 
+CMP4 (HPMXSEL=3) CMP4 (HNMXSEL=0) CMP2 (LPMXSEL=0) 
+CMP4 (LPMXSEL=3) CMP4 (LNMXSEL=0) AIO225
+A4/C14
+(A9/C8)
+28 24 20 20 A9 C8 CMP2 (HPMXSEL=2) 
+CMP4 (HPMXSEL=0)
+CMP2 (LPMXSEL=2) 
+CMP4 (LPMXSEL=0)
+AIO227
+A9/C8/GPIO227 GPIO227
+其他模拟
+A16/C16/GPIO28 4 2 2 2 A16 C16 GPIO28
+A17/C17/GPIO20 33 27 - 22 A17 C17 GPIO20
+A18/C18/GPIO21 34 28 - - A18 C18 GPIO21
+A19/C19/GPIO13 35 29 23 23 A19 C19 GPIO13
+A20/C20/GPIO12 36 30 24 24 A20 C20 GPIO12
+温度传感器 - - - - - C12 -
+www.ti.com.cn 系统特性差异注意事项
+ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 27
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 28 ===
+4 从 F28002x 到 F280015x 或 F280013x 的应用程序代码迁移
+以下部分将介绍从 F28002x 迁移到 F280015x 或 F280013x 时发生的代码变化。本部分还讨论了 F280015x 和 
+F280103x 中新增功能的软件示例。
+4.1 C2000Ware 头文件
+器件支持子目录下的 C2000Ware 中提供了 F280013x、F280015x 和 F28002x 器件的头文件。
+4.2 链接器命令文件
+C2000Ware 的 device_support 子目录下提供了 F280013x、F280015x 和 F28002x 器件的链接器命令文件。
+F28002x、F280015x 和 F280013x 必须编译为嵌入式应用程序二进制接口 (EABI) 格式。段名也需要符合 EABI 
+标准。
+4.3 C2000Ware 示例
+C2000Ware 中具有特定于 F280013x、F280015x 和 F28002x 器件的示例。
+5 与 F280015x 和 F280013x 新特性相关的特定用例
+这部分简要介绍了 C2000Ware 中关于 F280015x 和 F280013x 器件的新示例，以支持 F280015x 和 F280013x 
+上存在但 F28002x/F28004x 上不存在的新特性。
+5.1 EPG
+C2000Ware 中的示例演示了 EPG 模块的功能。
+6 EABI 支持
+F28002x、F280015x 和 F280013x 器件使用嵌入式应用程序二进制接口 (EABI) 格式来输出二进制可执行文件。
+TI 提供的所有 F28002x、F280015x 和 F280013x 库都作为 EABI 发布。将来由客户创建的 F280015x 和 
+F280013x 库也应该生成并编译为 EABI 格式。
+6.1 闪存 API
+F28002x、F280015x 和 F280013x 都有一个闪存组。与 F28002x 闪存 API 库 (Flash_API_F28002x_FPU32.lib) 
+相比，F280013x 和 F280015x 闪存 API 得到了增强，当为擦除、空白检查、编程和验证功能提供无效的地址
+时，会返回错误。F280013x 和 F280015x 闪存 API 的另一项增强在于，当为程序运行提供的编程模式无效时，
+会返回错误。FlashAPI_F280013x_FPU32.lib 和 FlashAPI_F280015x_FPU32.lib 中的 Fapi_getLibraryInfo() 会返
+回“待定”的闪存 API 次要版本（F28002x 闪存 API 返回 57 作为 API 次要版本）。F28002x、F280015x 和 
+F280013x 闪存 API 库是针对 EABI 格式编译的。请注意，F28002x、F280015x 和 F280013x 具有相同的 0 组存
+储器映射，但扇区大小不同。F280013x 和 F280015x 具有较小的扇区大小，可提供更高的粒度。表 6-1 对这些特
+性进行了汇总。
+表 6-1. 闪存 API 差异
+特性 F28002x F280015x F280013x
+库名称 FlashAPI_F28002x_FPU32.lib FlashAPI_F280015x_FPU32.lib FlashAPI_F280013x_FPU32.lib
+库可执行文件输出 EABI
+擦除、空白检查、编程和验证 在一个组上运行
+闪存等待状态 4 (100MHz) 2 (120MHz)
+闪存 API 主要版本 1 2
+闪存 API 次要版本 57 0
+从 F28002x 到 F280015x 或 F280013x 的应用程序代码迁移 www.ti.com.cn
+28 TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 29 ===
+7 参考文献
+• 德州仪器 (TI)：TMS320F28002x 微控制器技术参考手册
+• 德州仪器 (TI)：TMS320F28002x 微控制器数据表
+• 德州仪器 (TI)：TMS320F280013x 微控制器技术参考手册
+• 德州仪器 (TI)：TMS320F280013x 微控制器数据表
+• 德州仪器 (TI)：TMS320F280015x 微控制器技术参考手册
+• 德州仪器 (TI)：TMS320F280015x 微控制器数据表
+• 德州仪器 (TI)：TMS320F2838x 微控制器技术参考手册
+www.ti.com.cn 参考文献
+ZHCUAR0 – FEBRUARY 2023
+Submit Document Feedback
+TMS320F28002x、TMS320F280015x 和 TMS320F280013x 之间的迁移指南 29
+English Document: SPRUIY3
+Copyright © 2023 Texas Instruments Incorporated
+
+=== PDF页 30 ===
+重要声明和免责声明
+TI“按原样”提供技术和可靠性数据（包括数据表）、设计资源（包括参考设计）、应用或其他设计建议、网络工具、安全信息和其他资源，
+不保证没有瑕疵且不做出任何明示或暗示的担保，包括但不限于对适销性、某特定用途方面的适用性或不侵犯任何第三方知识产权的暗示担
+保。
+这些资源可供使用 TI 产品进行设计的熟练开发人员使用。您将自行承担以下全部责任：(1) 针对您的应用选择合适的 TI 产品，(2) 设计、验
+证并测试您的应用，(3) 确保您的应用满足相应标准以及任何其他功能安全、信息安全、监管或其他要求。
+这些资源如有变更，恕不另行通知。TI 授权您仅可将这些资源用于研发本资源所述的 TI 产品的应用。严禁对这些资源进行其他复制或展示。
+您无权使用任何其他 TI 知识产权或任何第三方知识产权。您应全额赔偿因在这些资源的使用中对 TI 及其代表造成的任何索赔、损害、成
+本、损失和债务，TI 对此概不负责。
+TI 提供的产品受 TI 的销售条款或 ti.com 上其他适用条款/TI 产品随附的其他适用条款的约束。TI 提供这些资源并不会扩展或以其他方式更改 
+TI 针对 TI 产品发布的适用的担保或担保免责声明。
+TI 反对并拒绝您可能提出的任何其他或不同的条款。IMPORTANT NOTICE
+邮寄地址：Texas Instruments, Post Office Box 655303, Dallas, Texas 75265
+Copyright © 2023，德州仪器 (TI) 公司

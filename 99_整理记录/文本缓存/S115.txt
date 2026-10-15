@@ -1,0 +1,80 @@
+来源: AVP32F0039/AVP32F0039FlashAPI操作文档.docx
+来源编号: S115
+
+段落1: AVP32F0039FlashAPI操作文档
+
+段落2: 前言：本文档基于Ti的280039实现在线操作Flash，包括Flash擦除，编程，校验操作，以及FAPI_F28003x.lib的函数说明。
+
+段落3: 头文件以及API库介绍
+
+段落4: 操作Flash需要用到两个文件，一个是FAPI_F28003x.lib里面封装了操作函数本体，另外是调用函数的头文件F021_F28003x_C28x.h以及F021.h如下所示：其中需要注意，函数lib库名称里的EABI字样表示该lib支持EABI编译格式的工程，如果客户工程是COFF的需要选择COFF字样的lib，见附件。（不兼容280033和280034的flashlib）
+
+段落5: 空间分配
+
+段落6: 在引用API的lib和头文件之后，需要把lib里的函数分配到DSP中，在程序运行的时候去调用，lib不分配的话是不会编译到DSP里的，工程的内存分配文件CMD添加以下代码。
+
+段落7: 图中代码操作是将TI.ramfunc字段和工程里的lib库内容编译分配到FLASH_BANK0_SEC1中，并且运行时copy到RAML03运行。
+
+段落8: 操作流程
+
+段落9: 在调用API函数前，建议在Main初始化的时候调用Flash_initModule()函数初始化Flash空间。
+
+段落10: 改函数其实类似于原来035和335中的Flash_inital()函数配置等待时间，120M位例，建议配置5。
+
+段落11: Flash初始化完成后可以开始正式调用FLASHAPI函数。
+
+段落12: 首先需要调用Fapi_initalizeAPI()函数去初始化API函数参数，传参分别为操作地址和时钟；
+
+段落13: （建议这里跟示例一样定义i和状态参数status读取函数返回值）
+
+段落14: 每次调用完API函数，切记要用if去判断状态再进行下去，这里读取API初始化函数返回值是否成功。
+
+段落15: 完成API初始化后记得要激活后续需要操作的扇区，比如我这里接下来要对BANK0操作，那么首先关闭flash访问，调用Flash_DisablePrefech函数，再去调用SetActiv函数激活BANK。
+
+段落16: 同样的操作完成后需要读取反馈状态是否成功，成功后再调用EnablePrefetch（）函数打开Flash访问，至此FLash配置激活完成，后续可以对BANK进行擦除烧写。
+
+段落17: 注意，以下任何操作flash动作的函数都需要调用CODE_SECTION函数将你定义的擦除函数搬运到ram里运行，下面的Example_EraseSector函数客户自己编写的擦除函数，其中会调用api里的系统函数。
+
+段落18: 下面是这个擦除函数的内容，首先调用issueAsyncCommand函数响应命令，等待FSM（flash state Machine）flash状态机反馈没问题。
+
+段落19: 随后可以调用flashErase函数，这里叫Fapi_issueAsyncCommandWithAddress()函数对所选扇区进行擦除操作，同样的在函数执行完毕后需要调用while和if去等待FSM完成，这一步不可省略。
+
+段落20: 擦除完成仍然需要确认FSM的状态，调用Fapi_getFsmStatus函数获取状态判断是否正常。
+
+段落21: 若FSM状态正常后，进入擦除最后的校验操作。调用Fapi_doBlankCheck函数对操作的sector地址，长度进行校验并获取返回状态，若成功则擦除成功。
+
+段落22: 待所需空间擦除完成后，可以进行program操作。同样，针对用户自己编写的Program函数，这里以Example_proram函数为例，也需要通过CODE_SECTION函数将你定义的函数搬运到ram里运行。
+
+段落23: 这里需要介绍下几种program函数：
+
+段落24: 1.Example_ProgramBankUsingAutoECC：该函数会将写入FlashSector的数据配置AutoEccGeneration，自动对写入数据配置ECC校验码。不需要用户自己再写入自己的ECC。
+
+段落25: 先调用for语句规定烧写范围，从Sector起始地址开始，如果地址小于总烧录地址（起始地址+buff长度）则进行烧写，每次烧写完成后地址+一个字节；
+
+段落26: 每次调用Fapi_issueprogrammingCommand烧写完成后，同样需要调用while来等待FSM状态，如果反馈成功则往下走。
+
+段落27: 获取FSM当前状态，如果状态正常则调用Fapi_doVerify函数调用，校验完成后烧录成功。
+
+段落28: 2.Example_ProgramBankUsingDataOnlyECCOnly：该函数不会将写入FlashSector的数据配置AutoEccGeneration，需要用户自己写入ECC。
+
+段落29: 相比于前面自动配置ECC校验，这里需要用户调用Fapi_calculateECC函数自己对计算好ECC。
+
+段落30: Program函数传参记得选择Fapi_Dataonly表面此次烧写只烧录Data，同样需要等待返回状态。
+
+段落31: Data烧录完后，再次调用program函数选择Fpai_ECCONLY模式只烧录ecc校验码，同样需要等待返回状态；
+
+段落32: 最后再调用Flash_getLowErrorStatus和Flash_getHighErrorStatus函数分别校验高低位数据
+
+段落33: 最后做总校验Fapi_doVerify，烧录结束。
+
+段落34: 结果预览
+
+段落35: 断点运行到擦除函数执行阶段擦除扇区：
+
+段落36: 填充烧录的Databuff，并执行烧录函数：
+
+段落37: 再次执行擦除测试，运行正常：
+
+段落38: 保险起见，建议各位技术在实际操作程序的时候，直接调用官方的Demo函数，只需要更改需要操作的扇区大小以及填充的buff，不会导致DSP锁死，开发过程也比较省心，但要严格按照操作顺序执行函数。
+
+段落39: 附件：

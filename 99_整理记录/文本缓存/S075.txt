@@ -1,0 +1,36 @@
+来源: ADP32F08/ADP32F08与TMS320F2808的移植文档.docx
+来源编号: S075
+
+段落1: ADP32F08与TMS320F2808芯片差异对比
+
+段落2: 概述
+
+段落3: 本文档将说明 ADP32F08与 TMS32F2808的差异性。行文将重点介绍两款芯片在应用或测试中关键注意点，如用户对具体功能模块有进一步了解需要，可查阅相应产品规格书。
+
+段落4: ADP32F08与F2808具体差异点
+
+段落5: FLASH API替换 （需要替换的文件附加在总结位置）
+
+段落6: ADP32F08在进行 FLASH 擦除、编程时，需将 CCS 中 TI 提供的 API 文件替换为我司提供的 API 文件。
+
+段落7: .out 文件替换方法： 
+
+段落8: CCS8.3 版本替换路径：将路径 C:\ti\ccsv8\ccs_base\c2000\flashAlgorithms(根据实际安装路径选择)中的文件“FlashAPIInterface2808V3_02”备份后，再将我司提供的.out 文件移入该路径 下并命名为“FlashAPIInterface2808V3_02”，即可进行 FLASH 擦除、编程。 
+
+段落9: CCS3.3 版 本 替 换 路 径 ： 将 路 径 C:\CCStudio_v3.3PLA\plugins\
+
+段落10: Flash28xx\Algorithms\2808 (根据实际安装路径选择)中的文件 
+
+段落11: “FlashAPIInterface2808V3_02”备份后，再将我司提供的.out 文件移入该路径下并命名为 “FlashAPIInterface2808V3_02”，即可进行 FLASH 擦除、编程。 其他版本的 CCS 做类似修改。
+
+段落12: 如使用C2prog烧写FLASH，API替换参照上述过程，替换文件夹地址示例：
+
+段落13: C:\Program Files\C2prog\targets\Flasher2808_302_XMHz_emu.hex和flasher2808_302_XMHz_emu_API.hex。
+
+段落14: .lib 文件替换方法： 
+
+段落15: 在用户的应用程序中，如果有在线操作FLASH，客户需替换我司提供的.lib 文件，并且保持文件名与 TI 的一致。
+
+段落16: 二 总结
+
+段落17:    以上是ADP32F08和F2808的差异点，如果客户是PIN2PIN替换，只需更换对应的烧录out文件即可，如果有在线操作FLASH，客户需替换我司提供的.lib 文件，并且保持文件名与 TI 的一致。

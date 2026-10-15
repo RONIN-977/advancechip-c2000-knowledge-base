@@ -1,0 +1,71 @@
+来源: ADP32F035/28035CLA使用文档.docx
+来源编号: S051
+
+段落1: 28035CLA使用
+
+段落2: 一、 CLA简介
+
+段落3: 控制率加速器(CLA)是一个独立、完全可编程的32位浮点数学处理器，其低中断延迟可以即时读取ADC采样，降低了ADC采样输出延时，且不占用主CPU的处理时间，有利于提高系统响应和控制频率。
+
+段落4: CLA程序代码可包含多大8个任务或中断服务程序，每个任务有两种触发机制：主CPU触发和外设中断信号触发：
+
+段落5: 1.主CPU触发：
+
+段落6: C28x CPU通过IACK指令来触发任务执行，可以通过主CPU软件控制。
+
+段落7: 2.外设中断触发：
+
+段落8: Task1-7可以通过ADC或者ePWM来触发，如：
+
+段落9: Task1：ADCINT1或EPWM1_INT；
+
+段落10: Task2：ADCINT2或EPWM2_INT；
+
+段落11: Task3：ADCINT3或EPWM3_INT；
+
+段落12: Task4：ADCINT4或EPWM4_INT；
+
+段落13: Task5：ADCINT5或EPWM5_INT；
+
+段落14: Task6：ADCINT6或EPWM6_INT；
+
+段落15: Task7：ADCINT7或EPWM7_INT；
+
+段落16: Task8：ADCINT8或CPU Timer0；
+
+段落17: 为了使用CLA，需要配置两块RAM区域，用于CLA与主CPU通讯使用，分别为CPUtoCLARAM以及CLAtoCPURAM，其中CPUtoCLARAM区域数据CPU可读可写，CLA只能读不能写，CLAtoCPURAM区域数据CLA可读可写，CPU只能读不能写。
+
+段落18: CLA可以直接访问ePWM、HRPWM、比较器和ADC结果寄存器。
+
+段落19: 二、CLA配置过程
+
+段落20: 1.cmd的配置
+
+段落21: 与没有CLA的工程相比，带有CLA的工程需要为CLA配置一个RAM区域存放代码和数据：
+
+段落22: SECTION块为CLA部分相关的块分配地址，对应空间为PAGE中分配的CLA空间：
+
+段落23: CLA中进行操作的数据在声明时，需要注明这部分数据存放在CLA映射的RAM区域中：
+
+段落24: 2.主程序的配置
+
+段落25: 在主程序中，需要对CLA进行初始化工作。
+首先设备初始化函数 InitSysCtrl()中使能CLA的时钟：
+
+段落26: 接着对CLA进行初始化，配置CLA每个任务的向量地址，将程序代码搬移到CLA的RAM中运行：
+
+段落27: 三、CLA调试
+
+段落28: 1.CLA的程序不能通过仿真器打断点的形式进行调试，必须通过在程序中插入debug语句才能调试。如下图所示，插入了__mdebugstop()，则程序会停在此处。CLA可支持单步运行。
+
+段落29: 添加完debug语句后，在开发环境中进行设置。右键点击工程选择Properties->Built->C2000 Compiler->Processor Options，Specify CLA support必须设置为cla0。
+
+段落30: 开发环境设置
+
+段落31: 编译整个程序，生成out文件，连接开发板。
+首先右键C28xx建立连接，Run->load->load Program，下载.out文件。
+
+段落32: 接着右键CLA_0建立连接，Run->load->load Symbols，下载.out文件。
+点击C28XX，点击全速运行程序，则程序自动停在__mdebugstop()处，这个时候就可以单步运行CLaTask里面的程序。
+
+段落33: 如需程序整体全速运行，需再点击28xx在主CPU里面运行。

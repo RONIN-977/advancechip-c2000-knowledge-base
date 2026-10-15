@@ -1,0 +1,70 @@
+来源: ADP32F1X/11_ADP32F12与TI TMS320F2812程序编写差异说明.pdf
+来源编号: S078
+
+=== PDF页 1 ===
+ADP32F12 与 TMS320F2812 差异说明
+ADP32F12 与 TMS320F2812 差异说明
+
+=== PDF页 2 ===
+ADP32F12 与 TMS320F2812 差异说明
+2
+一、ADP32F12 与 TMS320F2812 性能参数对比
+表 1 参数对比
+序号 功能 TMS320F2812 ADP32F12
+1 指令周期 6.67ns 6.67ns
+2 RAM(word 16 bits) 18k 18k
+3 Flash(word 16 bits) 128k 128k
+4 引导 rom 支持 4K
+5 OTP rom(1k*16bits) 支持 支持
+6 事件管理器 EVA/EVB EM1/EM2
+7 通用定时器个数 4 4
+8 比较器/PWM 16 16
+9 捕获 CAP/正交编码
+通道 QEP 6/2 6/2
+10 ADC 通道数（12bits） 16 16
+11 32 位 CPU 定时器 3 3
+12 SPI 串行外设接口 支持 支持
+13 SCI 串行通讯接口 SCIA/SCIB SCIA/SCIB
+14 I/O 引脚数 56 56
+15 电源电压
+1.8V @135MHz
+1.9V@150MHz
+3.3V I/O
+1.8V @150MHz，
+3.3V I/O
+16 封装规格 QFP 176PIN QFP 176PIN
+ADP32F12 相比 TMS320F2812 主要差异在供电的电源电压上，其他性能参数完全一致。
+ADP32F12 DSP 芯片兼容 TMS320F2812 芯片，该芯片的外设以及寄存器地址都与 TMS320F2812
+芯片是一样的，该芯片在兼容 TMS320F2812 芯片的同时还进行了升级，集成了片内 CAN 收发
+器，片内集成 LDO，ADP32F12 的主频可以到 180MHz。
+二、ADP32F12 相比 TMS320F2812 硬件电路参考设计、软件编程差异
+1、硬件电路参考设计差异
+1 ADC 外部电流偏置管脚 PIN16 ADCRESEXT 外接电阻 R1 推荐配置，
+TMS320F2812 对应不同采样频率段下 R1 建议配置阻值如下：
+1-18Mhz(adc_clk), R1=20KΩ；
+18-25Mhz(adc_clk), R1=18KΩ；
+芯片 ADP32F12 使用时建议将 R1 阻值设定在 20KΩ。
+2、软件编程差异
+1 当配置 ADP32F12 存储器 CMD 文件时，L0 存储单元建议仅用于存储程序或者数据，
+不应混合存储程序和数据。
+
+=== PDF页 3 ===
+ADP32F12 与 TMS320F2812 差异说明
+3
+2 当配置 ADP32F12 的 ADC 加电控制时序位时，采用下表 2 中的 ADC 加电延迟时间
+表 2 ADC 加电延迟
+最小值 典型值 最大值 单位
+带隙基准稳定所需要的延迟时间。ADCTRL3 寄存器的位
+7和6(ADCBGRFDN1/0)在ADCPWDN位被启用前被设定
+为 1。
+23 25 28 ms 断电控制稳定所需的延迟时间。ADCTRL3 寄存器的位 5
+（ADCPWDN）在任何 ADC 转换启动前被设定为 1
+20 50 us 1 ms #define ADC_usDELAY 28000
+#define ADC_usDELAY2 1000 ………………
+………………
+AdcRegs.ADCTRL3.bit.ADCBGRFDN = 0x3;
+DELAY_US(ADC_usDELAY); //建议延时 28ms
+AdcRegs.ADCTRL3.bit.ADCPWDN = 1;
+DELAY_US(ADC_usDELAY2); //建议延时 1ms
+3 使用芯片 ADP32F12 进行工程配置时，应采用 TMS320F2812 进行程序烧写，建议采
+用进芯电子的仿真器进行程序烧写。

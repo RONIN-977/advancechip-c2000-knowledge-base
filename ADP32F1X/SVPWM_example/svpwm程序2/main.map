@@ -1,0 +1,338 @@
+******************************************************************************
+TMS320C24xx COFF Linker           Version 7.02                   
+******************************************************************************
+>> Linked Mon Aug 04 10:32:12 2008
+
+OUTPUT FILE NAME:   <./Debug/svpwm111.out>
+ENTRY POINT SYMBOL: "_c_int0"  address: 000003fd
+
+
+MEMORY CONFIGURATION
+
+           name     origin    length      used    attributes    fill
+         --------  --------  ---------  --------  ----------  --------
+PAGE 0: VECTS     00000000  000000040  0000000e     RWIX      
+         PVECS     00000040  000000080  00000000     RWIX      
+         PROG      000000c0  000007f40  0000083f     RWIX      
+         SARAM     00008000  000008000  00000000     RWIX      
+
+PAGE 1: B2        00000060  000000020  00000000     RWIX      
+         BAREA     00000200  000000200  00000000     RWIX      
+         SARAM     00000800  000000800  000004fb     RWIX      
+         EXT       00008000  000008000  00000000     RWIX      
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+.vectors   0    00000000    00000000     UNINITIALIZED
+
+.pvecs     0    00000040    00000000     UNINITIALIZED
+
+.text      0    000000c0    000004e7     
+                  000000c0    00000008     phantom.obj (.text)
+                  000000c8    00000000     qmath.lib : sintb360.obj (.text)
+                  000000c8    00000075     pnl.obj (.text)
+                  0000013d    00000137     pwm_int2.obj (.text)
+                  00000274    00000055     scope.obj (.text)
+                  000002c9    000000e1     svpwm.obj (.text)
+                  000003aa    00000030     z_main.obj (.text)
+                  000003da    00000023     qmath.lib : qsinlt.obj (.text)
+                  000003fd    00000027     rts2xx.lib : boot.obj (.text)
+                  00000424    000000ea                : ldiv.obj (.text)
+                  0000050e    0000000c                : lmpy.obj (.text)
+                  0000051a    0000000f                : lsl.obj (.text)
+                  00000529    0000002e                : saverest.obj (.text)
+                  00000557    00000050                : exit.obj (.text)
+
+.cinit     0    000005a7    00000257     
+                  000005a7    00000249     pwm_int2.obj (.cinit)
+                  000007f0    00000007     z_main.obj (.cinit)
+                  000007f7    00000006     rts2xx.lib : exit.obj (.cinit)
+                  000007fd    00000001     --HOLE-- [fill = 0000]
+
+.switch    0    000000c0    00000000     UNINITIALIZED
+
+.const     1    00000200    00000000     UNINITIALIZED
+
+.bss       1    00000800    000000fb     UNINITIALIZED
+                  00000800    000000d0     pwm_int2.obj (.bss)
+                  000008d0    00000000     qmath.lib : qsinlt.obj (.bss)
+                  000008d0    00000000               : sintb360.obj (.bss)
+                  000008d0    00000000     svpwm.obj (.bss)
+                  000008d0    00000000     phantom.obj (.bss)
+                  000008d0    00000000     pnl.obj (.bss)
+                  000008d0    00000000     rts2xx.lib : boot.obj (.bss)
+                  000008d0    00000000                : saverest.obj (.bss)
+                  000008d0    00000000                : lsl.obj (.bss)
+                  000008d0    00000000                : ldiv.obj (.bss)
+                  000008d0    00000000                : lmpy.obj (.bss)
+                  000008d0    00000022                : exit.obj (.bss)
+                  000008f2    00000008     z_main.obj (.bss)
+                  000008fa    00000001     scope.obj (.bss)
+
+.data      1    00000000    00000000     UNINITIALIZED
+                  00000000    00000000     phantom.obj (.data)
+                  00000000    00000000     rts2xx.lib : exit.obj (.data)
+                  00000000    00000000                : saverest.obj (.data)
+                  00000000    00000000                : lsl.obj (.data)
+                  00000000    00000000                : lmpy.obj (.data)
+                  00000000    00000000                : ldiv.obj (.data)
+                  00000000    00000000                : boot.obj (.data)
+                  00000000    00000000     qmath.lib : sintb360.obj (.data)
+                  00000000    00000000               : qsinlt.obj (.data)
+                  00000000    00000000     z_main.obj (.data)
+                  00000000    00000000     svpwm.obj (.data)
+                  00000000    00000000     scope.obj (.data)
+                  00000000    00000000     pwm_int2.obj (.data)
+                  00000000    00000000     pnl.obj (.data)
+
+vectors    0    00000000    0000000e     
+                  00000000    0000000e     z_main.obj (vectors)
+
+SINTBL     0    000007fe    00000101     
+                  000007fe    00000101     qmath.lib : sintb360.obj (SINTBL)
+
+.stack     1    000008fb    00000400     UNINITIALIZED
+                  000008fb    00000000     rts2xx.lib : boot.obj (.stack)
+
+
+GLOBAL SYMBOLS
+
+address  name                             address  name
+-------- ----                             -------- ----
+00000800 .bss                             00000000 .data
+00000000 .data                            00000000 edata
+000000c0 .text                            000000c0 .text
+000005a4 C$$EXIT                          000000c0 _phantom
+00000541 I$$REST                          000000c8 _pnl_calc
+00000529 I$$SAVE                          0000013d _init_reg
+00000424 L$$DIVS                          00000179 _pwm_int2
+00000496 L$$DIVU                          000001ac _ev_init
+0000045f L$$MODS                          00000220 _ev_pwm
+000004b6 L$$MODU                          0000025a _ev_open
+0000050e L$$MPY                           00000267 _ev_close
+0000051a L$$SL                            00000274 _scope
+000007fe SINTAB_360                       000002c9 _svpwm_calc
+000008ba _ABRPT                           000003aa _main
+00000827 _ACTRA                           000003da _qsinlt
+00000828 _ACTRB                           000003fd _c_int0
+0000088a _ADCTRL1                         00000400 __STACK_SIZE
+00000889 _ADCTRL2                         00000424 L$$DIVS
+00000861 _AUTO_SEQ_SR                     0000045f L$$MODS
+0000084a _CALIBRATION                     00000496 L$$DIVU
+00000850 _CANBCR1                         000004b6 L$$MODU
+0000084f _CANBCR2                         0000050e L$$MPY
+00000853 _CANCEC                          0000051a L$$SL
+00000851 _CANESR                          00000529 I$$SAVE
+00000852 _CANGSR                          00000541 I$$REST
+00000854 _CANIFR                          00000557 _exit
+00000855 _CANIMR                          00000585 _atexit
+00000856 _CANLAM0H                        000005a4 _abort
+00000857 _CANLAM0L                        000005a4 C$$EXIT
+00000858 _CANLAM1H                        000005a7 etext
+00000859 _CANLAM1L                        000005a7 cinit
+0000085d _CANMBX0A                        000007fe SINTAB_360
+000008bc _CANMBX0B                        00000800 _WSGR
+000008bd _CANMBX0C                        00000800 .bss
+000008be _CANMBX0D                        00000801 _IMR
+00000864 _CANMBX1A                        00000802 _IFR
+00000865 _CANMBX1B                        00000803 _SCSR1
+00000866 _CANMBX1C                        00000804 _XINT1CR
+00000867 _CANMBX1D                        00000805 _XINT2CR
+0000086b _CANMBX2A                        00000806 _WDCR
+0000086c _CANMBX2B                        00000807 _WDKEY
+0000086d _CANMBX2C                        00000808 _MCRA
+0000086e _CANMBX2D                        00000809 _MCRB
+00000872 _CANMBX3A                        0000080a _MCRC
+00000873 _CANMBX3B                        0000080b _PADATDIR
+00000874 _CANMBX3C                        0000080c _PBDATDIR
+00000875 _CANMBX3D                        0000080d _PCDATDIR
+00000879 _CANMBX4A                        0000080e _PDDATDIR
+0000087a _CANMBX4B                        0000080f _PEDATDIR
+0000087b _CANMBX4C                        00000810 _PFDATDIR
+0000083c _CANMBX4D                        00000811 _PIVR
+00000880 _CANMBX5A                        00000812 _EVAIFRA
+00000881 _CANMBX5B                        00000813 _GPTCONA
+00000882 _CANMBX5C                        00000814 _GPTCONB
+00000883 _CANMBX5D                        00000815 _T1CON
+0000084e _CANMCR                          00000816 _T2CON
+0000084b _CANMDER                         00000817 _T3CON
+0000085c _CANMSGCTRL0                     00000818 _T4CON
+00000863 _CANMSGCTRL1                     00000819 _T1PR
+0000086a _CANMSGCTRL2                     0000081a _T2PR
+00000871 _CANMSGCTRL3                     0000081b _T3PR
+00000878 _CANMSGCTRL4                     0000081c _T4PR
+0000087f _CANMSGCTRL5                     0000081d _T1CNT
+0000085b _CANMSGID0H                      0000081e _T2CNT
+0000085a _CANMSGID0L                      0000081f _T3CNT
+00000862 _CANMSGID1H                      00000820 _T4CNT
+00000860 _CANMSGID1L                      00000821 _T1CMPR
+00000869 _CANMSGID2H                      00000822 _T2CMPR
+00000868 _CANMSGID2L                      00000823 _T3CMPR
+00000870 _CANMSGID3H                      00000824 _T4CMPR
+0000086f _CANMSGID3L                      00000825 _COMCONA
+00000877 _CANMSGID4H                      00000826 _COMCONB
+00000876 _CANMSGID4L                      00000827 _ACTRA
+0000087e _CANMSGID5H                      00000828 _ACTRB
+0000087d _CANMSGID5L                      00000829 _DBTCONA
+0000084d _CANRCR                          0000082a _DBTCONB
+0000084c _CANTCR                          0000082b _CMPR1
+00000898 _CAP1FBOT                        0000082c _CMPR2
+00000895 _CAP1FIFO                        0000082d _CMPR3
+00000899 _CAP2FBOT                        0000082e _CMPR4
+00000896 _CAP2FIFO                        0000082f _CMPR5
+0000089a _CAP3FBOT                        00000830 _CMPR6
+00000897 _CAP3FIFO                        00000831 _EVAIMRA
+000008b5 _CAP4FBOT                        00000832 _EVAIMRB
+000008b2 _CAP4FIFO                        00000833 _EVAIMRC
+000008b6 _CAP5FBOT                        00000834 _EVBIMRA
+000008b3 _CAP5FIFO                        00000835 _EVBIMRB
+000008b7 _CAP6FBOT                        00000836 _EVBIMRC
+000008b4 _CAP6FIFO                        00000837 _EVAIFRB
+00000893 _CAPCONA                         00000838 _EVAIFRC
+000008b0 _CAPCONB                         00000839 _EVBIFRA
+00000894 _CAPFIFOA                        0000083a _EVBIFRB
+000008b1 _CAPFIFOB                        0000083b _EVBIFRC
+00000887 _CHSELSEQ1                       0000083c _CANMBX4D
+00000886 _CHSELSEQ2                       0000083d _RESULT3
+00000885 _CHSELSEQ3                       0000083e _RESULT4
+00000884 _CHSELSEQ4                       0000083f _RESULT5
+0000082b _CMPR1                           00000840 _RESULT6
+0000082c _CMPR2                           00000841 _RESULT7
+0000082d _CMPR3                           00000842 _RESULT8
+0000082e _CMPR4                           00000843 _RESULT9
+0000082f _CMPR5                           00000844 _RESULT10
+00000830 _CMPR6                           00000845 _RESULT11
+00000825 _COMCONA                         00000846 _RESULT12
+00000826 _COMCONB                         00000847 _RESULT13
+00000829 _DBTCONA                         00000848 _RESULT14
+0000082a _DBTCONB                         00000849 _RESULT15
+000008aa _DIN                             0000084a _CALIBRATION
+00000812 _EVAIFRA                         0000084b _CANMDER
+00000837 _EVAIFRB                         0000084c _CANTCR
+00000838 _EVAIFRC                         0000084d _CANRCR
+00000831 _EVAIMRA                         0000084e _CANMCR
+00000832 _EVAIMRB                         0000084f _CANBCR2
+00000833 _EVAIMRC                         00000850 _CANBCR1
+00000839 _EVBIFRA                         00000851 _CANESR
+0000083a _EVBIFRB                         00000852 _CANGSR
+0000083b _EVBIFRC                         00000853 _CANCEC
+00000834 _EVBIMRA                         00000854 _CANIFR
+00000835 _EVBIMRB                         00000855 _CANIMR
+00000836 _EVBIMRC                         00000856 _CANLAM0H
+00000813 _GPTCONA                         00000857 _CANLAM0L
+00000814 _GPTCONB                         00000858 _CANLAM1H
+000008bb _GREG                            00000859 _CANLAM1L
+00000802 _IFR                             0000085a _CANMSGID0L
+00000801 _IMR                             0000085b _CANMSGID0H
+00000888 _MAXCONV                         0000085c _CANMSGCTRL0
+00000808 _MCRA                            0000085d _CANMBX0A
+00000809 _MCRB                            0000085e _RESULT1
+0000080a _MCRC                            0000085f _RESULT0
+0000080b _PADATDIR                        00000860 _CANMSGID1L
+0000080c _PBDATDIR                        00000861 _AUTO_SEQ_SR
+0000080d _PCDATDIR                        00000862 _CANMSGID1H
+0000080e _PDDATDIR                        00000863 _CANMSGCTRL1
+0000080f _PEDATDIR                        00000864 _CANMBX1A
+00000810 _PFDATDIR                        00000865 _CANMBX1B
+000008ae _PIACKR0                         00000866 _CANMBX1C
+000008ad _PIACKR1                         00000867 _CANMBX1D
+000008ac _PIACKR2                         00000868 _CANMSGID2L
+000008b9 _PIRQR0                          00000869 _CANMSGID2H
+000008b8 _PIRQR1                          0000086a _CANMSGCTRL2
+000008af _PIRQR2                          0000086b _CANMBX2A
+00000811 _PIVR                            0000086c _CANMBX2B
+0000085f _RESULT0                         0000086d _CANMBX2C
+00000844 _RESULT10                        0000086e _CANMBX2D
+00000845 _RESULT11                        0000086f _CANMSGID3L
+00000846 _RESULT12                        00000870 _CANMSGID3H
+00000847 _RESULT13                        00000871 _CANMSGCTRL3
+0000085e _RESULT1                         00000872 _CANMBX3A
+00000848 _RESULT14                        00000873 _CANMBX3B
+00000849 _RESULT15                        00000874 _CANMBX3C
+0000087c _RESULT2                         00000875 _CANMBX3D
+0000083d _RESULT3                         00000876 _CANMSGID4L
+0000083e _RESULT4                         00000877 _CANMSGID4H
+0000083f _RESULT5                         00000878 _CANMSGCTRL4
+00000840 _RESULT6                         00000879 _CANMBX4A
+00000841 _RESULT7                         0000087a _CANMBX4B
+00000842 _RESULT8                         0000087b _CANMBX4C
+00000843 _RESULT9                         0000087c _RESULT2
+0000089d _SCICCR                          0000087d _CANMSGID5L
+0000089c _SCICTL1                         0000087e _CANMSGID5H
+00000891 _SCICTL2                         0000087f _CANMSGCTRL5
+0000089b _SCIHBAUD                        00000880 _CANMBX5A
+00000892 _SCILBAUD                        00000881 _CANMBX5B
+0000088c _SCIPC2                          00000882 _CANMBX5C
+0000088b _SCIPRI                          00000883 _CANMBX5D
+0000088e _SCIRXBUF                        00000884 _CHSELSEQ4
+0000088f _SCIRXEMU                        00000885 _CHSELSEQ3
+00000890 _SCIRXST                         00000886 _CHSELSEQ2
+0000088d _SCITXBUF                        00000887 _CHSELSEQ1
+00000803 _SCSR1                           00000888 _MAXCONV
+000008ab _SCSR2                           00000889 _ADCTRL2
+000008a5 _SPIBRR                          0000088a _ADCTRL1
+000008a8 _SPICCR                          0000088b _SCIPRI
+000008a7 _SPICTL                          0000088c _SCIPC2
+000008a1 _SPIDAT                          0000088d _SCITXBUF
+000008a0 _SPIPC1                          0000088e _SCIRXBUF
+0000089f _SPIPC2                          0000088f _SCIRXEMU
+0000089e _SPIPRI                          00000890 _SCIRXST
+000008a3 _SPIRXBUF                        00000891 _SCICTL2
+000008a4 _SPIRXEMU                        00000892 _SCILBAUD
+000008a6 _SPISTS                          00000893 _CAPCONA
+000008a2 _SPITXBUF                        00000894 _CAPFIFOA
+00000821 _T1CMPR                          00000895 _CAP1FIFO
+0000081d _T1CNT                           00000896 _CAP2FIFO
+00000815 _T1CON                           00000897 _CAP3FIFO
+00000819 _T1PR                            00000898 _CAP1FBOT
+00000822 _T2CMPR                          00000899 _CAP2FBOT
+0000081e _T2CNT                           0000089a _CAP3FBOT
+00000816 _T2CON                           0000089b _SCIHBAUD
+0000081a _T2PR                            0000089c _SCICTL1
+00000823 _T3CMPR                          0000089d _SCICCR
+0000081f _T3CNT                           0000089e _SPIPRI
+00000817 _T3CON                           0000089f _SPIPC2
+0000081b _T3PR                            000008a0 _SPIPC1
+00000824 _T4CMPR                          000008a1 _SPIDAT
+00000820 _T4CNT                           000008a2 _SPITXBUF
+00000818 _T4CON                           000008a3 _SPIRXBUF
+0000081c _T4PR                            000008a4 _SPIRXEMU
+000008a9 _WDCNTR                          000008a5 _SPIBRR
+00000806 _WDCR                            000008a6 _SPISTS
+00000807 _WDKEY                           000008a7 _SPICTL
+00000800 _WSGR                            000008a8 _SPICCR
+00000804 _XINT1CR                         000008a9 _WDCNTR
+00000805 _XINT2CR                         000008aa _DIN
+00000400 __STACK_SIZE                     000008ab _SCSR2
+000008d1 __cleanup_ptr                    000008ac _PIACKR2
+000005a4 _abort                           000008ad _PIACKR1
+00000585 _atexit                          000008ae _PIACKR0
+000003fd _c_int0                          000008af _PIRQR2
+00000267 _ev_close                        000008b0 _CAPCONB
+000001ac _ev_init                         000008b1 _CAPFIFOB
+0000025a _ev_open                         000008b2 _CAP4FIFO
+00000220 _ev_pwm                          000008b3 _CAP5FIFO
+000008bf _ev                              000008b4 _CAP6FIFO
+00000557 _exit                            000008b5 _CAP4FBOT
+0000013d _init_reg                        000008b6 _CAP5FBOT
+000003aa _main                            000008b7 _CAP6FBOT
+000000c0 _phantom                         000008b8 _PIRQR1
+000000c8 _pnl_calc                        000008b9 _PIRQR0
+000008f2 _pnl                             000008ba _ABRPT
+00000179 _pwm_int2                        000008bb _GREG
+000003da _qsinlt                          000008bc _CANMBX0B
+00000274 _scope                           000008bd _CANMBX0C
+000008c6 _svpwm                           000008be _CANMBX0D
+000002c9 _svpwm_calc                      000008bf _ev
+000008fa _ua                              000008c6 _svpwm
+000005a7 cinit                            000008d1 __cleanup_ptr
+00000000 edata                            000008f2 _pnl
+000008fb end                              000008fa _ua
+000005a7 etext                            000008fb end
+ffffffff pinit                            ffffffff pinit
+
+[231 symbols]

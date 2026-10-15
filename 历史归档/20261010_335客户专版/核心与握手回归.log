@@ -1,0 +1,60 @@
+PASS CRC32 ISO-HDLC check vector
+PASS frame roundtrip and every single-bit corruption
+PASS SCI noise, corrupt frame, back-to-back recovery
+PASS CAN all payload sizes and lost/reordered fragments
+PASS image boundaries and CPU identity
+PASS BEGIN and DATA retry never repeat flash operations
+PASS out-of-order and foreign-session writes rejected
+PASS abort can skip an uncertain sequence; next session can restart
+PASS enter boot handshake
+PASS full SCI upgrade with lost ACK
+PASS full CAN upgrade with lost ACK
+PASS verification failure cannot commit
+PASS program failure cannot commit
+PASS cancel before begin does not erase
+PASS TI sparse sections merged before ECC padding
+PASS 335 original CRC vectors and frame corruption
+PASS 335 SCI parser resynchronizes after noise and CRC errors
+PASS 335 COFF LOAD address, RAM function and FFFF gaps
+PASS 335 COFF rejects overlap, missing entry, legacy flag and reserved ranges
+PASS 335 COFF complete file and target checks
+PASS 335 448 KB minus 4 bytes boundary and metadata excluded
+PASS 335 APP enters BOOT and upgrades with a short final packet and lost ACK
+PASS 335 maximum image including 124-byte final packet
+PASS 335 old 64 KB BOOT rejected before erase
+PASS 335 custom APP start is queried and matched before BEGIN
+PASS 335 start mismatch stops before BEGIN, custom host=False
+PASS 335 start mismatch stops before BEGIN, custom host=True
+PASS 335 end mismatch stops before BEGIN
+PASS 335 partition unsupported stops before BEGIN
+PASS 335 partition length stops before BEGIN
+PASS 335 partition app-reply stops before BEGIN
+PASS 335 partition identity stops before BEGIN
+PASS 335 partition timeout stops before BEGIN
+PASS 335 erase failure prevents commit
+PASS 335 program failure prevents commit
+PASS 335 verify failure prevents commit
+PASS 335 MD5 failure prevents commit
+PASS 335 index failure prevents commit
+PASS 335 ACK identity check 0
+PASS 335 ACK identity check 1
+PASS 335 ACK identity check 2
+PASS 335 cancel midway and upgrade again
+  sends=1; interval-ms=
+PASS 335 handshake captures 0.5s BOOT window after power-on at 0ms
+  sends=2; interval-ms=52.4
+PASS 335 handshake captures 0.5s BOOT window after power-on at 23ms
+  sends=4; interval-ms=60.0,46.9,47.8
+PASS 335 handshake captures 0.5s BOOT window after power-on at 117ms
+  sends=11; interval-ms=63.7,46.0,46.9,48.0,46.2,62.2,47.9,46.3,46.4,46.7
+PASS 335 handshake captures 0.5s BOOT window after power-on at 485ms
+  sends=25; interval-ms=62.1,47.2,47.0,46.2,63.2,46.2,46.2,47.3,47.1,63.5,46.8,47.5,47.3,46.7,47.0,63.2,47.4,47.9,46.4,46.6,62.7,47.1,45.6,46.6
+PASS 335 handshake captures 0.5s BOOT window after power-on at 1200ms
+PASS 335 handshake APP replies do not trigger APP-to-BOOT command
+PASS 335 handshake wrong sequence, CRC and payload ignored
+PASS 335 handshake partial reply survives 50ms retransmission
+PASS 335 handshake cancellation stops polls and restores normal read timeout
+  timeout-ms=9004.8; sends=180
+PASS 335 handshake no response expires at 9 seconds without flash commands
+PASS 335 handshake successful handshake resumes normal update, ACK retry and APP startup
+All 53 tests passed.

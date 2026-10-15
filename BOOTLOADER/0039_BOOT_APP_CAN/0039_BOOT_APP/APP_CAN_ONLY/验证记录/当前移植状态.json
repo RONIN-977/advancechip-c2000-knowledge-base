@@ -1,0 +1,43 @@
+{
+  "stage": "客户初步移植 Timer2函数单独编译通过 完整工程未编译 未上板",
+  "backup": "C:\\Users\\17879\\Desktop\\CHIP\\BOOTLOADER\\0039_BOOT_APP_CAN\\0039_BOOT_APP\\APP_CAN_ONLY_客户适配前备份_20261008_133830.zip",
+  "original_APP_unchanged": true,
+  "kuobo_unchanged": true,
+  "modified_files": [
+    "include\\board_config.h",
+    "include\\boot_io.h",
+    "include\\upgrade_entry.h",
+    "src\\boot_io.c",
+    "src\\main.c",
+    "src\\upgrade_entry.c",
+    "application.cmd"
+  ],
+  "added_files": [
+    "include/customer_upgrade_port.h"
+  ],
+  "pending": [
+    "K02 消息对象号",
+    "K03 实际CPU/CAN时钟与Timer2空闲确认",
+    "K04 客户main接口",
+    "K09 客户接收调度",
+    "K10 BOOT配套和链接分区"
+  ],
+  "protocol_core_unchanged": true,
+  "current_changed_files": [
+    "application.cmd",
+    "移植说明.txt",
+    ".settings/org.eclipse.core.resources.prefs",
+    "include/board_config.h",
+    "include/boot_io.h",
+    "include/upgrade_entry.h",
+    "src/boot_io.c",
+    "src/main.c",
+    "src/upgrade_entry.c"
+  ],
+  "latest_change": "Timer2独立1MHz计时，恢复原版dispatch",
+  "latest_backup": "C:\\Users\\17879\\Desktop\\CHIP\\BOOTLOADER\\0039_BOOT_APP_CAN\\0039_BOOT_APP\\APP_CAN_ONLY_Timer2修改前备份_20261008_140042.zip",
+  "timer": "CPU Timer2 SYSCLK / 1MHz; no interrupt",
+  "customer_millis_required": false,
+  "customer_prepare_required": false,
+  "timer2_functions_compile_only": "PASS TI C2000 22.6.1.LTS"
+}

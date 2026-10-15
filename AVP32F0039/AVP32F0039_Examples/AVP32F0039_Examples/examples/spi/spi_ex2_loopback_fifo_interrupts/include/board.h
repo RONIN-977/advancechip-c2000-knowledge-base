@@ -1,0 +1,99 @@
+/******************************* Copyright(C) *********************************************
+*
+*                           湖南进芯电子科技有限公司
+*                         http://www.advancechip.com/
+*
+*                         FILE:   board.h
+*******************************************************************************************/
+
+#ifndef BOARD_H
+#define BOARD_H
+
+//*****************************************************************************
+//
+// If building with a C++ compiler, make all of the definitions in this header
+// have a C binding.
+//
+//*****************************************************************************
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+//
+// Included Files
+//
+
+#include "driverlib.h"
+#include "device.h"
+
+//*****************************************************************************
+//
+// PinMux Configurations
+//
+//*****************************************************************************
+
+//
+// SPIA -> mySPI0 Pinmux
+//
+//
+// SPIA_PICO - GPIO Settings
+//
+#define GPIO_PIN_SPIA_PICO 11
+#define mySPI0_SPIPICO_GPIO 11
+#define mySPI0_SPIPICO_PIN_CONFIG GPIO_11_SPIA_SIMO
+//
+// SPIA_POCI - GPIO Settings
+//
+#define GPIO_PIN_SPIA_POCI 1
+#define mySPI0_SPIPOCI_GPIO 1
+#define mySPI0_SPIPOCI_PIN_CONFIG GPIO_1_SPIA_SOMI
+//
+// SPIA_CLK - GPIO Settings
+//
+#define GPIO_PIN_SPIA_CLK 12
+#define mySPI0_SPICLK_GPIO 12
+#define mySPI0_SPICLK_PIN_CONFIG GPIO_12_SPIA_CLK
+//
+// SPIA_PTE - GPIO Settings
+//
+#define GPIO_PIN_SPIA_PTE 0
+#define mySPI0_SPIPTE_GPIO 0
+#define mySPI0_SPIPTE_PIN_CONFIG GPIO_0_SPIA_STE
+
+//*****************************************************************************
+//
+// SPI Configurations
+//
+//*****************************************************************************
+#define mySPI0_BASE SPIA_BASE
+#define mySPI0_BITRATE 1000000
+#define mySPI0_DATAWIDTH 16
+void mySPI0_init();
+
+//*****************************************************************************
+//
+// SYSCTL Configurations
+//
+//*****************************************************************************
+
+//*****************************************************************************
+//
+// Board Configurations
+//
+//*****************************************************************************
+void	Board_init();
+void	SPI_init();
+void	SYSCTL_init();
+void	PinMux_init();
+
+//*****************************************************************************
+//
+// Mark the end of the C bindings section for C++ compilers.
+//
+//*****************************************************************************
+#ifdef __cplusplus
+}
+#endif
+
+#endif  // end of BOARD_H definition

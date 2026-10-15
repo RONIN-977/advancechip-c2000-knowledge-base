@@ -1,0 +1,113 @@
+来源: AVP32F379D/AVP32F379 应用说明_竞品差异版.pdf
+来源编号: S185
+
+=== PDF页 1 ===
+进芯科技（湖南）股份有限公司
+1
+AVP32F379 应用说明
+1. AVP32F379 Flash 读等待配置
+Flash 读控制寄存器（FRDCNTL）地址为 0x5F800 ，受 EALLOW 保护; Flash
+读等待辅助寄存器（FRWA）地址:0x5DA10，受 EALLOW 保护。寄存器描述如
+下表
+表 1 FRDCNTL 寄存器描述
+BIT Field Type Reset Description
+31-16 保留 R 0; 保留
+15-12 保留 R 0; 保留
+11-8 RWAIT R/W 0xF;
+随机读等待，当读 Flash 数据和从 Flash 取指时，
+Flash 需要等待的系统时钟周期数。
+当 FRWA 寄存中自增使能打开时，
+Flash 的等待周期数等于 RWAIT+N+1；
+当 FRWA 寄存中自增使能关闭时，
+Flash 的等待周期数等于 RWAIT+1；
+7-0 保留 R 0; 保留
+表 2 FRWA 寄存器描述（1）
+BIT Field Type Reset Description
+15-8 保留 R 0;(自动加载为 0x5A) 保留,此位禁止更改
+7-6 保留 R/W 0; 保留,此位禁止更改
+5-4 自增值 N R/W 0;(自动加载为 0x3) Flash RWAIT 自增值 N
+3-2 保留 R/W 0; 保留,此位禁止更改
+1-0 Flash 等 待 时间
+计算方式
+R/W 0; (自动加载为 0x2) Flash 读等待周期计算方式:
+0x2:自增使能打开，等待周期等于
+RWAIT+N+1
+其它:自增使能关闭，等待周期等
+于 RWAIT+1
+说明：（1）竞品无此寄存器
+
+=== PDF页 2 ===
+进芯科技（湖南）股份有限公司
+2
+表 3 Flash 读等待配置表
+CPUCLK
+RWAIT
+写入值
+RWAIT
+读出值
+Flash 等待
+周期数
+配置方式
+188M<CPUCLK≤200M 4 7 8
+0x5DA10 配置为 0x5A32（默认值）;
+FRDCNTL[RWAIT]配置为 4
+162M<CPUCLK≤188M 3 6 7
+0x5DA10 配置为 0x5A32（默认值）;
+FRDCNTL[RWAIT]配置为 3
+135M<CPUCLK≤162M 2 5 6
+0x5DA10 配置为 0x5A32（默认值）;
+FRDCNTL[RWAIT]配置为 2
+105M<CPUCLK≤135M 1 4 5
+0x5DA10 配置为 0x5A32（默认值）;
+FRDCNTL[RWAIT]配置为 1
+80M<CPUCLK≤105M 0 3 4
+0x5DA10 配置为 0x5A32（默认值）;
+FRDCNTL[RWAIT]配置为 0
+50M<CPUCLK≤ 80M 2 2 3
+0x5DA10 配置为 0x5A30;
+FRDCNTL[RWAIT]配置为 2
+25M<CPUCLK≤50M 1 1 2
+0x5DA10 配置为 0x5A30;
+FRDCNTL[RWAIT]配置为 1
+CPUCLK ≤ 25M 0 0 1
+0x5DA10 配置为 0x5A30;
+FRDCNTL[RWAIT]配置为 0
+Flash RWAIT 的配置影响程序的执行效率。对于线性代码 Flash 运行速度与
+竞品一致，对于非线性代码（执行分支、BANZ、调用或循环等指令导致 PC 中
+断时指令），执行效率慢于竞品。代码的整体执行效率与非线性代码占比有关。
+竞品 Flash 读等待配置如下
+表 4 竞品 Flash 读等待配置表
+CPUCLK
+RWAIT
+写入值
+RWAIT
+读出值
+Flash 等待周
+期数
+配置方式
+150M<CPUCLK≤200M 3 3 4 FRDCNTL[RWAIT]配置为 3
+100M<CPUCLK≤150M 2 2 3 FRDCNTL[RWAIT]配置为 2
+50M<CPUCLK≤100M 1 1 2 FRDCNTL[RWAIT]配置为 1
+CPUCLK ≤ 50M 0 0 1 FRDCNTL[RWAIT]配置为 0
+
+=== PDF页 3 ===
+进芯科技（湖南）股份有限公司
+3
+2. 供电要求
+表 5 AVP32F379 供电要求
+最小值 标准值 最大值 单位
+器件电源电压，I/O，VDDIO 3.14 3.3 3.47 V
+器件电源电压，VDD 1.04 1.1 1.21 V
+电源接地，VSS - 0 - V
+模拟电源电压，VDDA 3.14 3.3 3.47 V
+模拟接地，VSSA - 0 - V
+表 6 竞品供电要求
+最小值 标准值 最大值 单位
+器件电源电压，I/O，VDDIO 3.14 3.3 3.47 V
+器件电源电压，VDD 1.14 1.2 1.26 V
+电源接地，VSS - 0 - V
+模拟电源电压，VDDA 3.14 3.3 3.47 V
+模拟接地，VSSA - 0 - V
+3. CANFD
+AVP32F379 中包含 CANFD 模块（竞品无此模块），默认状态关闭，需要配
+置相关寄存器才能启用。详见《AVP32F379 CANFD 技术参考手册》。

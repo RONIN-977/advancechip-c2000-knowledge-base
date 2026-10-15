@@ -1,0 +1,22 @@
+来源: 文档/高版本CCS生成BIN文件方法.docx
+来源编号: S238
+
+段落1: 高版本CCS生成BIN文件方法
+
+段落2: 一、需在CCS安装的指定路径下替添加换文件，否则可能无法生成BIN文件或者格式错误
+
+段落3: 在CCS12中添加生成BIN文件的脚本代码
+
+段落4: 脚本指令如下：
+
+段落5: "${CCE_INSTALL_ROOT}/utils/tiobj2bin/tiobj2bin" "${BuildArtifactFileName}" 
+
+段落6: "${BuildArtifactFileBaseName}.bin" 
+
+段落7: "${CG_TOOL_ROOT}/bin/ofd2000" 
+
+段落8: "${CG_TOOL_ROOT}/bin/hex2000" "${CCE_INSTALL_ROOT}/utils/tiobj2bin/mkhex4bin"
+
+段落9: 注意：脚本指令添加进去不能一行一行的，只能一连串； " 和 " 之间需要空格隔开
+
+段落10: 上次操作完成后重新编译即可生成bin文件

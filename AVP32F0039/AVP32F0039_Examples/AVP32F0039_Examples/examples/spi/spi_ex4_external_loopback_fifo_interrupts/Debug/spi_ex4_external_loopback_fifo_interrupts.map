@@ -1,0 +1,435 @@
+******************************************************************************
+             TMS320C2000 Linker PC v22.6.0                     
+******************************************************************************
+>> Linked Thu Apr 24 12:49:51 2025
+
+OUTPUT FILE NAME:   <spi_ex4_external_loopback_fifo_interrupts.out>
+ENTRY POINT SYMBOL: "_c_int00"  address: 000088d1
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+  BEGIN                 00000000   00000002  00000002  00000000  RWIX
+  BOOT_RSVD             00000002   00000126  00000000  00000126  RWIX
+  RAMM0                 00000128   000002d8  00000022  000002b6  RWIX
+  RAMM1                 00000400   000003f8  00000200  000001f8  RWIX
+  RAMLS0                00008000   00000800  00000800  00000000  RWIX
+  RAMLS1                00008800   00000800  00000800  00000000  RWIX
+  RAMLS2                00009000   00000800  0000013d  000006c3  RWIX
+  RAMLS3                00009800   00000800  00000000  00000800  RWIX
+  RAMLS4                0000a000   00000800  00000000  00000800  RWIX
+  RAMLS5                0000a800   00000800  0000000f  000007f1  RWIX
+  RAMLS6_7              0000b000   00001000  00000000  00001000  RWIX
+  RAMGS0                0000c000   00001000  00000000  00001000  RWIX
+  RAMGS1                0000d000   00001000  00000000  00001000  RWIX
+  RAMGS2                0000e000   00001000  00000000  00001000  RWIX
+  RAMGS3                0000f000   00000ff8  00000000  00000ff8  RWIX
+  FLASH_BANK0_SEC0      00080002   00000ffe  00000000  00000ffe  RWIX
+  FLASH_BANK0_SEC1      00081000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC2      00082000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC3      00083000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC4      00084000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC5      00085000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC6      00086000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC7      00087000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC8      00088000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC9      00089000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC10     0008a000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC11     0008b000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC12     0008c000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC13     0008d000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC14     0008e000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC15     0008f000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC0      00090000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC1      00091000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC2      00092000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC3      00093000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC4      00094000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC5      00095000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC6      00096000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC7      00097000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC8      00098000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC9      00099000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC10     0009a000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC11     0009b000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC12     0009c000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC13     0009d000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC14     0009e000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC15     0009f000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC0      000a0000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC1      000a1000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC2      000a2000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC3      000a3000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC4      000a4000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC5      000a5000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC6      000a6000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC7      000a7000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC8      000a8000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC9      000a9000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC10     000aa000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC11     000ab000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC12     000ac000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC13     000ad000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC14     000ae000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC15     000af000   00000ff0  00000000  00000ff0  RWIX
+  SECURE_ROM            003f2000   00006000  00000000  00006000  RWIX
+  BOOTROM               003f8000   00007fc0  00000000  00007fc0  RWIX
+  RESET                 003fffc0   00000002  00000000  00000002  RWIX
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+codestart 
+*          0    00000000    00000002     
+                  00000000    00000002     f28003x_codestartbranch.obj (codestart)
+
+.cinit     0    00000128    0000001e     
+                  00000128    0000000e     rts2800_fpu32.lib : exit.c.obj (.cinit)
+                  00000136    00000005                       : _lock.c.obj (.cinit:__lock)
+                  0000013b    00000005                       : _lock.c.obj (.cinit:__unlock)
+                  00000140    00000004     spi_ex4_external_loopback_fifo_interrupts.obj (.cinit)
+                  00000144    00000002     --HOLE-- [fill = 0]
+
+.TI.ramfunc 
+*          0    00000146    00000004     
+                  00000146    00000004     sysctl.obj (.TI.ramfunc)
+
+.reset     0    003fffc0    00000002     DSECT
+                  003fffc0    00000002     rts2800_fpu32.lib : boot28.asm.obj (.reset)
+
+.stack     0    00000400    00000200     UNINITIALIZED
+                  00000400    00000200     --HOLE--
+
+.pinit     0    00000128    00000000     UNINITIALIZED
+
+.ebss      0    0000a800    0000000f     UNINITIALIZED
+                  0000a800    00000006     rts2800_fpu32.lib : exit.c.obj (.ebss)
+                  0000a806    00000002                       : _lock.c.obj (.ebss:__lock)
+                  0000a808    00000002                       : _lock.c.obj (.ebss:__unlock)
+                  0000a80a    00000002     spi_ex4_external_loopback_fifo_interrupts.obj (.ebss:_rData)
+                  0000a80c    00000002     spi_ex4_external_loopback_fifo_interrupts.obj (.ebss:_sData)
+                  0000a80e    00000001     spi_ex4_external_loopback_fifo_interrupts.obj (.ebss)
+
+.text.1    0    00008000    00000800     
+                  00008000    0000042e     board.obj (.text:_SYSCTL_init)
+                  0000842e    000000fc     sysctl.obj (.text:_SysCtl_setClock)
+                  0000852a    000000f2     sysctl.obj (.text:_SysCtl_isPLLValid)
+                  0000861c    000000ce     device.obj (.text:_Device_enableAllPeripherals)
+                  000086ea    00000088     rts2800_fpu32.lib : fs_div28.asm.obj (.text)
+                  00008772    00000079     interrupt.obj (.text:_Interrupt_clearIFR)
+                  000087eb    00000015     device.obj (.text:_GPIO_unlockPortConfig)
+
+.text.2    0    00008800    00000800     
+                  00008800    00000073     board.obj (.text:_PinMux_init)
+                  00008873    0000005e     spi_ex4_external_loopback_fifo_interrupts.obj (.text:_spiaRxFIFOISR)
+                  000088d1    00000056     rts2800_fpu32.lib : boot28.asm.obj (.text)
+                  00008927    00000055     spi_ex4_external_loopback_fifo_interrupts.obj (.text:_spibTxFIFOISR)
+                  0000897c    0000004e     interrupt.obj (.text:_Interrupt_disable)
+                  000089ca    00000049     gpio.obj (.text:_GPIO_setAnalogMode)
+                  00008a13    00000048     gpio.obj (.text:_GPIO_setPadConfig)
+                  00008a5b    00000046     sysctl.obj (.text:_SysCtl_selectXTAL)
+                  00008aa1    00000045     sysctl.obj (.text:_SysCtl_pollX1Counter)
+                  00008ae6    0000003d     interrupt.obj (.text:_Interrupt_initModule)
+                  00008b23    0000003d     board.obj (.text:_SPIA_peripheral_init)
+                  00008b60    0000003d     board.obj (.text:_SPIB_controller_init)
+                  00008b9d    00000037     gpio.obj (.text:_GPIO_setPinConfig)
+                  00008bd4    00000037     interrupt.obj (.text:_Interrupt_enable)
+                  00008c0b    00000032     sysctl.obj (.text:_SysCtl_selectOscSource)
+                  00008c3d    00000031     board.obj (.text:_INTERRUPT_init)
+                  00008c6e    0000002f     sysctl.obj (.text:_DCC_setCounterSeeds)
+                  00008c9d    0000002e     spi_ex4_external_loopback_fifo_interrupts.obj (.text:_INT_SPIA_peripheral_TX_ISR)
+                  00008ccb    0000002e     spi_ex4_external_loopback_fifo_interrupts.obj (.text:_INT_SPIB_controller_RX_ISR)
+                  00008cf9    0000002d     spi.obj (.text:_SPI_clearInterruptStatus)
+                  00008d26    0000002c     gpio.obj (.text:_GPIO_setQualificationMode)
+                  00008d52    00000029     spi.obj (.text:_SPI_setConfig)
+                  00008d7b    00000029     rts2800_fpu32.lib : exit.c.obj (.text)
+                  00008da4    00000026     spi.obj (.text:_SPI_enableInterrupt)
+                  00008dca    00000025     sysctl.obj (.text:_SysCtl_selectXTALSingleEnded)
+                  00008def    00000024     rts2800_fpu32.lib : cpy_tbl.c.obj (.text)
+                  00008e13    0000001e     interrupt.obj (.text:_Interrupt_initVectorTable)
+                  00008e31    0000001e     spi_ex4_external_loopback_fifo_interrupts.obj (.text:_main)
+                  00008e4f    0000001e     rts2800_fpu32.lib : ll_cmp28.asm.obj (.text)
+                  00008e6d    0000001d                       : memcpy.c.obj (.text)
+                  00008e8a    0000001c     board.obj (.text:_SPI_setFIFOInterruptLevel)
+                  00008ea6    0000001b     sysctl.obj (.text:_SysCtl_configureType)
+                  00008ec1    0000001a     sysctl.obj (.text:_DCC_enableSingleShotMode)
+                  00008edb    0000001a     device.obj (.text:_Device_init)
+                  00008ef5    00000019     sysctl.obj (.text:_SysCtl_setPLLSysClk)
+                  00008f0e    00000018     board.obj (.text:_SysCtl_disablePeripheral)
+                  00008f26    00000017     board.obj (.text:_SysCtl_enablePeripheral)
+                  00008f3d    00000017     device.obj (.text:_SysCtl_enablePeripheral)
+                  00008f54    00000017     sysctl.obj (.text:_SysCtl_enablePeripheral)
+                  00008f6b    00000016     interrupt.obj (.text:_Interrupt_defaultHandler)
+                  00008f81    00000014     sysctl.obj (.text:_DCC_setCounter0ClkSource)
+                  00008f95    00000014     sysctl.obj (.text:_DCC_setCounter1ClkSource)
+                  00008fa9    00000014     board.obj (.text:_SysCtl_selectErrPinPolarity)
+                  00008fbd    00000014     board.obj (.text:_SysCtl_setPeripheralAccessControl)
+                  00008fd1    00000012     rts2800_fpu32.lib : args_main.c.obj (.text)
+                  00008fe3    00000011     board.obj (.text:_SysCtl_setStandbyQualificationPeriod)
+                  00008ff4    0000000c     sysctl.obj (.text:_DCC_disableDoneSignal)
+
+.text.3    0    00009000    0000013d     
+                  00009000    00000010     device.obj (.text:_Device_initGPIO)
+                  00009010    00000010     board.obj (.text:_SPI_setEmulationMode)
+                  00009020    00000010     board.obj (.text:_SPI_setPTESignalPolarity)
+                  00009030    0000000f     board.obj (.text:_Interrupt_register)
+                  0000903f    0000000e     board.obj (.text:_SPI_enableFIFO)
+                  0000904d    0000000d     interrupt.obj (.text:_Interrupt_disableGlobal)
+                  0000905a    0000000d     interrupt.obj (.text:_Interrupt_enableGlobal)
+                  00009067    0000000d     device.obj (.text:_SysCtl_setLowSpeedClock)
+                  00009074    0000000b     board.obj (.text:_Board_init)
+                  0000907f    0000000b     sysctl.obj (.text:_DCC_clearDoneFlag)
+                  0000908a    0000000b     sysctl.obj (.text:_DCC_clearErrorFlag)
+                  00009095    0000000b     sysctl.obj (.text:_DCC_disableErrorSignal)
+                  000090a0    0000000b     sysctl.obj (.text:_DCC_disableModule)
+                  000090ab    0000000b     sysctl.obj (.text:_DCC_enableModule)
+                  000090b6    0000000b     device.obj (.text:_SysCtl_disableWatchdog)
+                  000090c1    0000000b     sysctl.obj (.text:_SysCtl_isMCDClockFailureDetected)
+                  000090cc    0000000a     interrupt.obj (.text:_Interrupt_illegalOperationHandler)
+                  000090d6    0000000a     interrupt.obj (.text:_Interrupt_nmiHandler)
+                  000090e0    0000000a     spi_ex4_external_loopback_fifo_interrupts.obj (.text:_SPI_writeDataNonBlocking)
+                  000090ea    00000009     rts2800_fpu32.lib : _lock.c.obj (.text)
+                  000090f3    00000008     f28003x_codestartbranch.obj (.text)
+                  000090fb    00000007     device.obj (.text:_ASysCtl_lockVREG)
+                  00009102    00000007     board.obj (.text:_SPI_disableLoopback)
+                  00009109    00000007     board.obj (.text:_SPI_disableModule)
+                  00009110    00000007     board.obj (.text:_SPI_enableModule)
+                  00009117    00000007     board.obj (.text:_SysCtl_disableMCD)
+                  0000911e    00000007     sysctl.obj (.text:_SysCtl_resetMCD)
+                  00009125    00000006     spi_ex4_external_loopback_fifo_interrupts.obj (.text:_Interrupt_clearACKGroup)
+                  0000912b    00000006     spi_ex4_external_loopback_fifo_interrupts.obj (.text:_SPI_readDataNonBlocking)
+                  00009131    00000005     board.obj (.text:_SPI_init)
+                  00009136    00000004     device.obj (.text:_SysCtl_deviceCal)
+                  0000913a    00000002     rts2800_fpu32.lib : pre_init.c.obj (.text)
+                  0000913c    00000001                       : startup.c.obj (.text)
+
+MODULE SUMMARY
+
+       Module                                          code   initialized data   uninitialized data
+       ------                                          ----   ----------------   ------------------
+    .\device\
+       device.obj                                      327    0                  0                 
+       f28003x_codestartbranch.obj                     10     0                  0                 
+    +--+-----------------------------------------------+------+------------------+--------------------+
+       Total:                                          337    0                  0                 
+                                                                                                   
+    .\device\driverlib\
+       sysctl.obj                                      997    0                  0                 
+       interrupt.obj                                   413    0                  0                 
+       gpio.obj                                        244    0                  0                 
+       spi.obj                                         124    0                  0                 
+    +--+-----------------------------------------------+------+------------------+--------------------+
+       Total:                                          1778   0                  0                 
+                                                                                                   
+    .\source\
+       board.obj                                       1593   0                  0                 
+       spi_ex4_external_loopback_fifo_interrupts.obj   323    4                  5                 
+    +--+-----------------------------------------------+------+------------------+--------------------+
+       Total:                                          1916   4                  5                 
+                                                                                                   
+    C:\TI\ccs12.0\ccs\tools\compiler\ti-cgt-c2000_22.6.0.LTS\lib\rts2800_fpu32.lib
+       fs_div28.asm.obj                                136    0                  0                 
+       boot28.asm.obj                                  86     0                  0                 
+       exit.c.obj                                      41     14                 6                 
+       cpy_tbl.c.obj                                   36     0                  0                 
+       ll_cmp28.asm.obj                                30     0                  0                 
+       memcpy.c.obj                                    29     0                  0                 
+       _lock.c.obj                                     9      10                 4                 
+       args_main.c.obj                                 18     0                  0                 
+       pre_init.c.obj                                  2      0                  0                 
+       startup.c.obj                                   1      0                  0                 
+    +--+-----------------------------------------------+------+------------------+--------------------+
+       Total:                                          388    24                 10                
+                                                                                                   
+       Stack:                                          0      0                  512               
+    +--+-----------------------------------------------+------+------------------+--------------------+
+       Grand Total:                                    4419   28                 527               
+
+
+GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
+
+address     data page           name
+--------    ----------------    ----
+00000400      10 (00000400)     __stack
+
+0000a800     2a0 (0000a800)     ___TI_enable_exit_profile_output
+0000a802     2a0 (0000a800)     ___TI_cleanup_ptr
+0000a804     2a0 (0000a800)     ___TI_dtors_ptr
+0000a806     2a0 (0000a800)     __lock
+0000a808     2a0 (0000a800)     __unlock
+0000a80a     2a0 (0000a800)     _rData
+0000a80c     2a0 (0000a800)     _sData
+0000a80e     2a0 (0000a800)     _rDataPoint
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+page  address   name                              
+----  -------   ----                              
+abs   ffffffff  .text                             
+0     00008d7b  C$$EXIT                           
+0     000086ea  FS$$DIV                           
+0     00008e4f  LL$$CMP                           
+0     00008e61  ULL$$CMP                          
+0     00009074  _Board_init                       
+0     0000861c  _Device_enableAllPeripherals      
+0     00008edb  _Device_init                      
+0     00009000  _Device_initGPIO                  
+0     000089ca  _GPIO_setAnalogMode               
+0     00008a13  _GPIO_setPadConfig                
+0     00008b9d  _GPIO_setPinConfig                
+0     00008d26  _GPIO_setQualificationMode        
+0     00008c3d  _INTERRUPT_init                   
+0     00008c9d  _INT_SPIA_peripheral_TX_ISR       
+0     00008ccb  _INT_SPIB_controller_RX_ISR       
+0     00008f6b  _Interrupt_defaultHandler         
+0     0000897c  _Interrupt_disable                
+0     00008bd4  _Interrupt_enable                 
+0     000090cc  _Interrupt_illegalOperationHandler
+0     00008ae6  _Interrupt_initModule             
+0     00008e13  _Interrupt_initVectorTable        
+0     000090d6  _Interrupt_nmiHandler             
+0     00008800  _PinMux_init                      
+0     00008b23  _SPIA_peripheral_init             
+0     00008b60  _SPIB_controller_init             
+0     00008cf9  _SPI_clearInterruptStatus         
+0     00008da4  _SPI_enableInterrupt              
+0     00009131  _SPI_init                         
+0     00008d52  _SPI_setConfig                    
+0     00008000  _SYSCTL_init                      
+0     00008ea6  _SysCtl_configureType             
+0     00000146  _SysCtl_delay                     
+0     0000852a  _SysCtl_isPLLValid                
+0     00008c0b  _SysCtl_selectOscSource           
+0     00008a5b  _SysCtl_selectXTAL                
+0     00008dca  _SysCtl_selectXTALSingleEnded     
+0     0000842e  _SysCtl_setClock                  
+0     00000600  __STACK_END                       
+abs   00000200  __STACK_SIZE                      
+0     0000a802  ___TI_cleanup_ptr                 
+0     0000a804  ___TI_dtors_ptr                   
+0     0000a800  ___TI_enable_exit_profile_output  
+abs   ffffffff  ___TI_pprof_out_hndl              
+abs   ffffffff  ___TI_prof_data_size              
+abs   ffffffff  ___TI_prof_data_start             
+abs   ffffffff  ___binit__                        
+abs   ffffffff  ___c_args__                       
+0     00000128  ___cinit__                        
+abs   ffffffff  ___etext__                        
+abs   ffffffff  ___pinit__                        
+abs   ffffffff  ___text__                         
+0     00008fd1  __args_main                       
+0     0000a806  __lock                            
+0     000090f2  __nop                             
+0     000090ee  __register_lock                   
+0     000090ea  __register_unlock                 
+0     00000400  __stack                           
+0     0000913c  __system_post_cinit               
+0     0000913a  __system_pre_init                 
+0     0000a808  __unlock                          
+0     00008d7b  _abort                            
+0     000088d1  _c_int00                          
+0     00008def  _copy_in                          
+0     00008d7d  _exit                             
+0     00008e31  _main                             
+0     00008e6d  _memcpy                           
+0     0000a80a  _rData                            
+0     0000a80e  _rDataPoint                       
+0     0000a80c  _sData                            
+0     00008873  _spiaRxFIFOISR                    
+0     00008927  _spibTxFIFOISR                    
+abs   ffffffff  binit                             
+0     00000128  cinit                             
+0     00000000  code_start                        
+abs   ffffffff  etext                             
+abs   ffffffff  pinit                             
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+page  address   name                              
+----  -------   ----                              
+0     00000000  code_start                        
+0     00000128  ___cinit__                        
+0     00000128  cinit                             
+0     00000146  _SysCtl_delay                     
+0     00000400  __stack                           
+0     00000600  __STACK_END                       
+0     00008000  _SYSCTL_init                      
+0     0000842e  _SysCtl_setClock                  
+0     0000852a  _SysCtl_isPLLValid                
+0     0000861c  _Device_enableAllPeripherals      
+0     000086ea  FS$$DIV                           
+0     00008800  _PinMux_init                      
+0     00008873  _spiaRxFIFOISR                    
+0     000088d1  _c_int00                          
+0     00008927  _spibTxFIFOISR                    
+0     0000897c  _Interrupt_disable                
+0     000089ca  _GPIO_setAnalogMode               
+0     00008a13  _GPIO_setPadConfig                
+0     00008a5b  _SysCtl_selectXTAL                
+0     00008ae6  _Interrupt_initModule             
+0     00008b23  _SPIA_peripheral_init             
+0     00008b60  _SPIB_controller_init             
+0     00008b9d  _GPIO_setPinConfig                
+0     00008bd4  _Interrupt_enable                 
+0     00008c0b  _SysCtl_selectOscSource           
+0     00008c3d  _INTERRUPT_init                   
+0     00008c9d  _INT_SPIA_peripheral_TX_ISR       
+0     00008ccb  _INT_SPIB_controller_RX_ISR       
+0     00008cf9  _SPI_clearInterruptStatus         
+0     00008d26  _GPIO_setQualificationMode        
+0     00008d52  _SPI_setConfig                    
+0     00008d7b  C$$EXIT                           
+0     00008d7b  _abort                            
+0     00008d7d  _exit                             
+0     00008da4  _SPI_enableInterrupt              
+0     00008dca  _SysCtl_selectXTALSingleEnded     
+0     00008def  _copy_in                          
+0     00008e13  _Interrupt_initVectorTable        
+0     00008e31  _main                             
+0     00008e4f  LL$$CMP                           
+0     00008e61  ULL$$CMP                          
+0     00008e6d  _memcpy                           
+0     00008ea6  _SysCtl_configureType             
+0     00008edb  _Device_init                      
+0     00008f6b  _Interrupt_defaultHandler         
+0     00008fd1  __args_main                       
+0     00009000  _Device_initGPIO                  
+0     00009074  _Board_init                       
+0     000090cc  _Interrupt_illegalOperationHandler
+0     000090d6  _Interrupt_nmiHandler             
+0     000090ea  __register_unlock                 
+0     000090ee  __register_lock                   
+0     000090f2  __nop                             
+0     00009131  _SPI_init                         
+0     0000913a  __system_pre_init                 
+0     0000913c  __system_post_cinit               
+0     0000a800  ___TI_enable_exit_profile_output  
+0     0000a802  ___TI_cleanup_ptr                 
+0     0000a804  ___TI_dtors_ptr                   
+0     0000a806  __lock                            
+0     0000a808  __unlock                          
+0     0000a80a  _rData                            
+0     0000a80c  _sData                            
+0     0000a80e  _rDataPoint                       
+abs   00000200  __STACK_SIZE                      
+abs   ffffffff  .text                             
+abs   ffffffff  ___TI_pprof_out_hndl              
+abs   ffffffff  ___TI_prof_data_size              
+abs   ffffffff  ___TI_prof_data_start             
+abs   ffffffff  ___binit__                        
+abs   ffffffff  ___c_args__                       
+abs   ffffffff  ___etext__                        
+abs   ffffffff  ___pinit__                        
+abs   ffffffff  ___text__                         
+abs   ffffffff  binit                             
+abs   ffffffff  etext                             
+abs   ffffffff  pinit                             
+
+[77 symbols]

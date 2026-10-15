@@ -1,0 +1,8 @@
+{
+  "issue": "CsmUnlock success=1 was compared with Flash API STATUS_SUCCESS=0",
+  "reproduced": "Actual InitFlashAPI compiled in ARM test failed readiness assertion before fix",
+  "fixed": "Unlocked allows 0x70 erase; locked refuses before erase; all 8 firmware C groups pass",
+  "compiler": "C2000 20.2.0.LTS; native and CCS 12.7.1 builds passed",
+  "nativeCheck": "Both delivered and both CCS BOOT OUTs compare CsmUnlock return with 1",
+  "hardware": "User confirms prior SCI fix and version 201; CSM fix and full upgrade await retest"
+}

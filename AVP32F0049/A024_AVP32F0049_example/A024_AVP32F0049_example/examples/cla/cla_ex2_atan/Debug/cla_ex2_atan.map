@@ -1,0 +1,515 @@
+******************************************************************************
+             TMS320C2000 Linker PC v22.6.0                     
+******************************************************************************
+>> Linked Thu Jul 18 10:44:51 2024
+
+OUTPUT FILE NAME:   <cla_ex2_atan.out>
+ENTRY POINT SYMBOL: "_c_int00"  address: 00083332
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+PAGE 0:
+  RAMM0                 000000f6   0000030a  00000000  0000030a  RWIX
+  RAMLS0                00008000   00000800  00000100  00000700  RWIX
+  RAMLS3                00009800   00000800  00000000  00000800  RWIX
+  RAMLS4                0000a000   00000800  000000d5  0000072b  RWIX
+  BEGIN                 00080000   00000002  00000002  00000000  RWIX
+  FLASH_BANK0_SEC0      00080002   00000ffe  00000000  00000ffe  RWIX
+  FLASH_BANK0_SEC1      00081000   00001000  00000312  00000cee  RWIX
+  FLASH_BANK0_SEC2      00082000   00001000  00001000  00000000  RWIX
+  FLASH_BANK0_SEC3      00083000   00001000  00000444  00000bbc  RWIX
+  FLASH_BANK0_SEC4      00084000   00001000  00000100  00000f00  RWIX
+  FLASH_BANK0_SEC5      00085000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC6      00086000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC7      00087000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC8      00088000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC9      00089000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC10     0008a000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC11     0008b000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC12     0008c000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC13     0008d000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC14     0008e000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC15     0008f000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC0      00090000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC1      00091000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC2      00092000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC3      00093000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC4      00094000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC5      00095000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC6      00096000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC7      00097000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC8      00098000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC9      00099000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC10     0009a000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC11     0009b000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC12     0009c000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC13     0009d000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC14     0009e000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC15     0009f000   00000ff0  00000000  00000ff0  RWIX
+  RESET                 003fffc0   00000002  00000000  00000002  RWIX
+
+PAGE 1:
+  BOOT_RSVD             00000002   000000f1  00000000  000000f1  RWIX
+  RAMM1                 00000400   000003f8  00000200  000001f8  RWIX
+  CLA1_MSGRAMLOW        00001480   00000080  00000002  0000007e  RWIX
+  CLA1_MSGRAMHIGH       00001500   00000080  00000004  0000007c  RWIX
+  RAMLS1                00008800   00000800  00000198  00000668  RWIX
+  RAMLS2                00009000   00000800  00000000  00000800  RWIX
+  RAMLS5                0000a800   00000800  00000110  000006f0  RWIX
+  RAMLS6                0000b000   00000800  00000000  00000800  RWIX
+  RAMLS7                0000b800   00000800  00000000  00000800  RWIX
+  RAMGS0                0000c000   00002000  00000000  00002000  RWIX
+  RAMGS1                0000e000   00002000  00000000  00002000  RWIX
+  RAMGS2                00010000   00002000  00000000  00002000  RWIX
+  RAMGS3                00012000   00001ff8  00000000  00001ff8  RWIX
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+codestart 
+*          0    00080000    00000002     
+                  00080000    00000002     f28004x_codestartbranch.obj (codestart)
+
+.cinit     0    00081000    0000023d     
+                  00081000    00000196     cla_ex2_atan.obj (.cinit)
+                  00081196    00000083     cla_ex2_atan.obj (.cinit:_atan_expected)
+                  00081219    0000000e     rts2800_fpu32.lib : exit.c.obj (.cinit)
+                  00081227    0000000a     device.obj (.cinit)
+                  00081231    00000005     rts2800_fpu32.lib : _lock.c.obj (.cinit:__lock)
+                  00081236    00000005                       : _lock.c.obj (.cinit:__unlock)
+                  0008123b    00000002     --HOLE-- [fill = 0]
+
+.stack     1    00000400    00000200     UNINITIALIZED
+                  00000400    00000200     --HOLE--
+
+.pinit     0    00081000    00000000     UNINITIALIZED
+
+.reset     0    003fffc0    00000002     DSECT
+                  003fffc0    00000002     rts2800_fpu32.lib : boot28.asm.obj (.reset)
+
+.const_cla 
+*          0    00009800    00000000     UNINITIALIZED
+
+.TI.ramfunc 
+*          0    00081240    000000d5     RUN ADDR = 0000a000
+                  00081240    000000d1     flash.obj (.TI.ramfunc)
+                  00081311    00000004     sysctl.obj (.TI.ramfunc)
+
+Cla1Prog   0    00084000    00000100     RUN ADDR = 00008000
+                  00084000    000000c8     atan.obj (Cla1Prog:_Cla1Task1)
+                  000840c8    00000008     atan.obj (Cla1Prog:_Cla1Task2)
+                  000840d0    00000008     atan.obj (Cla1Prog:_Cla1Task3)
+                  000840d8    00000008     atan.obj (Cla1Prog:_Cla1Task4)
+                  000840e0    00000008     atan.obj (Cla1Prog:_Cla1Task5)
+                  000840e8    00000008     atan.obj (Cla1Prog:_Cla1Task6)
+                  000840f0    00000008     atan.obj (Cla1Prog:_Cla1Task7)
+                  000840f8    00000008     atan.obj (Cla1Prog:_Cla1Task8)
+
+Cla1ToCpuMsgRAM 
+*          1    00001480    00000002     UNINITIALIZED
+                  00001480    00000002     cla_ex2_atan.obj (Cla1ToCpuMsgRAM)
+
+CpuToCla1MsgRAM 
+*          1    00001500    00000004     UNINITIALIZED
+                  00001500    00000004     cla_ex2_atan.obj (CpuToCla1MsgRAM)
+
+.scratchpad 
+*          1    00008986    00000012     UNINITIALIZED
+                  00008986    00000012     atan.obj (.scratchpad:Cla1Prog:_Cla1Task1)
+
+CLADataLS1 
+*          1    00008800    00000186     UNINITIALIZED
+                  00008800    00000186     cla_ex2_atan.obj (CLADataLS1)
+
+.text.1    0    00082000    00001000     
+                  00082000    00000409     sysctl.obj (.text)
+                  00082409    00000324     dcc.obj (.text)
+                  0008272d    000002da     memcfg.obj (.text)
+                  00082a07    0000020e     board.obj (.text)
+                  00082c15    000001eb     gpio.obj (.text)
+                  00082e00    000001dc     device.obj (.text)
+                  00082fdc    00000024     rts2800_fpu32.lib : cpy_tbl.c.obj (.text)
+
+.text.2    0    00083000    00000444     
+                  00083000    00000173     interrupt.obj (.text)
+                  00083173    000000b8     cla_ex2_atan.obj (.text:retain)
+                  0008322b    00000088     rts2800_fpu32.lib : fs_div28.asm.obj (.text)
+                  000832b3    0000007f     cla_ex2_atan.obj (.text)
+                  00083332    00000056     rts2800_fpu32.lib : boot28.asm.obj (.text)
+                  00083388    0000002a     interrupt.obj (.text:retain)
+                  000833b2    00000029     rts2800_fpu32.lib : exit.c.obj (.text)
+                  000833db    00000026     cla.obj (.text)
+                  00083401    0000001d     rts2800_fpu32.lib : memcpy.c.obj (.text)
+                  0008341e    00000012                       : args_main.c.obj (.text)
+                  00083430    00000009                       : _lock.c.obj (.text)
+                  00083439    00000008     f28004x_codestartbranch.obj (.text)
+                  00083441    00000002     rts2800_fpu32.lib : pre_init.c.obj (.text)
+                  00083443    00000001                       : startup.c.obj (.text)
+
+.ebss      1    0000a800    00000110     UNINITIALIZED
+                  0000a800    00000080     cla_ex2_atan.obj (.ebss:_atan_expected)
+                  0000a880    00000080     cla_ex2_atan.obj (.ebss:_y)
+                  0000a900    00000006     rts2800_fpu32.lib : exit.c.obj (.ebss)
+                  0000a906    00000004     device.obj (.ebss)
+                  0000a90a    00000002     rts2800_fpu32.lib : _lock.c.obj (.ebss:__lock)
+                  0000a90c    00000002                       : _lock.c.obj (.ebss:__unlock)
+                  0000a90e    00000002     cla_ex2_atan.obj (.ebss)
+
+MODULE SUMMARY
+
+       Module                        code   initialized data   uninitialized data
+       ------                        ----   ----------------   ------------------
+    .\device\
+       device.obj                    476    10                 4                 
+       f28004x_codestartbranch.obj   10     0                  0                 
+    +--+-----------------------------+------+------------------+--------------------+
+       Total:                        486    10                 4                 
+                                                                                 
+    .\device\driverlib\
+       sysctl.obj                    1041   0                  0                 
+       dcc.obj                       804    0                  0                 
+       memcfg.obj                    730    0                  0                 
+       gpio.obj                      491    0                  0                 
+       flash.obj                     418    0                  0                 
+       interrupt.obj                 413    0                  0                 
+       cla.obj                       38     0                  0                 
+    +--+-----------------------------+------+------------------+--------------------+
+       Total:                        3935   0                  0                 
+                                                                                 
+    .\source\
+       cla_ex2_atan.obj              311    537                654               
+       atan.obj                      512    0                  18                
+       board.obj                     526    0                  0                 
+    +--+-----------------------------+------+------------------+--------------------+
+       Total:                        1349   537                672               
+                                                                                 
+    C:\ti\ccs1220\ccs\tools\compiler\ti-cgt-c2000_22.6.0.LTS\lib\rts2800_fpu32.lib
+       fs_div28.asm.obj              136    0                  0                 
+       boot28.asm.obj                86     0                  0                 
+       exit.c.obj                    41     14                 6                 
+       cpy_tbl.c.obj                 36     0                  0                 
+       memcpy.c.obj                  29     0                  0                 
+       _lock.c.obj                   9      10                 4                 
+       args_main.c.obj               18     0                  0                 
+       pre_init.c.obj                2      0                  0                 
+       startup.c.obj                 1      0                  0                 
+    +--+-----------------------------+------+------------------+--------------------+
+       Total:                        358    24                 10                
+                                                                                 
+       Stack:                        0      0                  512               
+    +--+-----------------------------+------+------------------+--------------------+
+       Grand Total:                  6128   571                1198              
+
+
+GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
+
+address     data page           name
+--------    ----------------    ----
+00000400      10 (00000400)     __stack
+
+00001480      52 (00001480)     _fResult
+
+00001500      54 (00001500)     _fVal
+00001502      54 (00001500)     _PIBYTWO
+
+00008800     220 (00008800)     _CLAatan2Table
+
+0000a800     2a0 (0000a800)     _atan_expected
+
+0000a880     2a2 (0000a880)     _y
+
+0000a900     2a4 (0000a900)     ___TI_enable_exit_profile_output
+0000a902     2a4 (0000a900)     ___TI_cleanup_ptr
+0000a904     2a4 (0000a900)     ___TI_dtors_ptr
+0000a906     2a4 (0000a900)     _Example_PassCount
+0000a908     2a4 (0000a900)     _Example_Fail
+0000a90a     2a4 (0000a900)     __lock
+0000a90c     2a4 (0000a900)     __unlock
+0000a90e     2a4 (0000a900)     _pass
+0000a90f     2a4 (0000a900)     _fail
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+page  address   name                              
+----  -------   ----                              
+abs   ffffffff  .text                             
+0     000833b2  C$$EXIT                           
+0     0008322b  FS$$DIV                           
+0     00082a6e  _Board_init                       
+0     00082ae0  _CLA_init                         
+0     000832d3  _CLA_runTest                      
+0     000833db  _CLA_setTriggerSource             
+1     00008800  _CLAatan2Table                    
+abs   00000000  _Cla1ConstLoadSize                
+0     00009800  _Cla1ConstLoadStart               
+0     00009800  _Cla1ConstRunStart                
+abs   00000100  _Cla1ProgLoadSize                 
+0     00084000  _Cla1ProgLoadStart                
+0     00008000  _Cla1ProgRunStart                 
+0     00008000  _Cla1Task1                        
+0     000080c8  _Cla1Task2                        
+0     000080d0  _Cla1Task3                        
+0     000080d8  _Cla1Task4                        
+0     000080e0  _Cla1Task5                        
+0     000080e8  _Cla1Task6                        
+0     000080f0  _Cla1Task7                        
+0     000080f8  _Cla1Task8                        
+0     00082684  _DCC_continuousMonitor            
+0     0008250a  _DCC_getRevisionNumber            
+0     000825e0  _DCC_measureClockFrequency        
+0     0008251e  _DCC_verifyClockFrequency         
+0     00082eb2  _Device_enableAllPeripherals      
+0     00082e74  _Device_init                      
+0     00082f92  _Device_initGPIO                  
+0     00082fa2  _Device_verifyXTAL                
+1     0000a908  _Example_Fail                     
+1     0000a906  _Example_PassCount                
+0     0000a088  _Flash_initModule                 
+0     0000a0b0  _Flash_powerDown                  
+0     0000a0c0  _Flash_wakeFromLPM                
+0     00082c49  _GPIO_getDirectionMode            
+0     00082cd2  _GPIO_getPadConfig                
+0     00082d32  _GPIO_getQualificationMode        
+0     00082da1  _GPIO_setAnalogMode               
+0     00082d75  _GPIO_setControllerCore           
+0     00082c22  _GPIO_setDirectionMode            
+0     00082c5f  _GPIO_setInterruptPin             
+0     00082c8a  _GPIO_setPadConfig                
+0     00082dc9  _GPIO_setPinConfig                
+0     00082d06  _GPIO_setQualificationMode        
+0     00082d53  _GPIO_setQualificationPeriod      
+0     00082af7  _INTERRUPT_init                   
+0     00083388  _Interrupt_defaultHandler         
+0     00083125  _Interrupt_disable                
+0     000830ee  _Interrupt_enable                 
+0     0008339e  _Interrupt_illegalOperationHandler
+0     00083093  _Interrupt_initModule             
+0     000830d0  _Interrupt_initVectorTable        
+0     000833a8  _Interrupt_nmiHandler             
+0     00082b58  _MEMCFG_init                      
+0     000827d9  _MemCfg_commitConfig              
+0     000829e9  _MemCfg_getCorrErrorAddress       
+0     0008295f  _MemCfg_getInitStatus             
+0     000829f0  _MemCfg_getUncorrErrorAddress     
+0     000829c6  _MemCfg_getViolationAddress       
+0     0008290d  _MemCfg_initSections              
+0     0008272d  _MemCfg_lockConfig                
+0     00082886  _MemCfg_setLSRAMControllerSel     
+0     0008282b  _MemCfg_setProtection             
+0     000828b1  _MemCfg_setTestMode               
+0     0008277f  _MemCfg_unlockConfig              
+1     00001502  _PIBYTWO                          
+0     00082a79  _PinMux_init                      
+0     00081315  _RamfuncsLoadEnd                  
+abs   000000d5  _RamfuncsLoadSize                 
+0     00081240  _RamfuncsLoadStart                
+0     0000a0d5  _RamfuncsRunEnd                   
+abs   000000d5  _RamfuncsRunSize                  
+0     0000a000  _RamfuncsRunStart                 
+0     0000a0d1  _SysCtl_delay                     
+0     00082137  _SysCtl_getClock                  
+0     000822f1  _SysCtl_getDeviceParametric       
+0     000822d7  _SysCtl_getLowSpeedClock          
+0     0008234c  _SysCtl_isPLLValid                
+0     000822a5  _SysCtl_selectOscSource           
+0     0008224f  _SysCtl_selectXTAL                
+0     00082285  _SysCtl_selectXTALSingleEnded     
+0     00082195  _SysCtl_setClock                  
+1     00000600  __STACK_END                       
+abs   00000200  __STACK_SIZE                      
+1     0000a902  ___TI_cleanup_ptr                 
+1     0000a904  ___TI_dtors_ptr                   
+1     0000a900  ___TI_enable_exit_profile_output  
+abs   ffffffff  ___TI_pprof_out_hndl              
+abs   ffffffff  ___TI_prof_data_size              
+abs   ffffffff  ___TI_prof_data_start             
+abs   ffffffff  ___binit__                        
+abs   ffffffff  ___c_args__                       
+0     00081000  ___cinit__                        
+0     00082fd5  ___error__                        
+abs   ffffffff  ___etext__                        
+abs   ffffffff  ___pinit__                        
+abs   ffffffff  ___text__                         
+0     0008341e  __args_main                       
+1     0000a90a  __lock                            
+0     00083438  __nop                             
+0     00083434  __register_lock                   
+0     00083430  __register_unlock                 
+1     00000400  __stack                           
+0     00083443  __system_post_cinit               
+0     00083441  __system_pre_init                 
+1     0000a90c  __unlock                          
+0     000833b2  _abort                            
+1     0000a800  _atan_expected                    
+0     00083332  _c_int00                          
+0     00083173  _cla1Isr1                         
+0     000831a2  _cla1Isr2                         
+0     000831b1  _cla1Isr3                         
+0     000831c0  _cla1Isr4                         
+0     000831cf  _cla1Isr5                         
+0     000831de  _cla1Isr6                         
+0     000831ed  _cla1Isr7                         
+0     000831fc  _cla1Isr8                         
+0     00082fdc  _copy_in                          
+0     000833b4  _exit                             
+1     00001480  _fResult                          
+1     00001500  _fVal                             
+1     0000a90f  _fail                             
+0     000832c5  _main                             
+0     00083401  _memcpy                           
+0     00082a7a  _myCLA0_init                      
+1     0000a90e  _pass                             
+1     0000a880  _y                                
+abs   ffffffff  binit                             
+0     00081000  cinit                             
+0     00080000  code_start                        
+abs   ffffffff  etext                             
+abs   ffffffff  pinit                             
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+page  address   name                              
+----  -------   ----                              
+0     00008000  _Cla1ProgRunStart                 
+0     00008000  _Cla1Task1                        
+0     000080c8  _Cla1Task2                        
+0     000080d0  _Cla1Task3                        
+0     000080d8  _Cla1Task4                        
+0     000080e0  _Cla1Task5                        
+0     000080e8  _Cla1Task6                        
+0     000080f0  _Cla1Task7                        
+0     000080f8  _Cla1Task8                        
+0     00009800  _Cla1ConstLoadStart               
+0     00009800  _Cla1ConstRunStart                
+0     0000a000  _RamfuncsRunStart                 
+0     0000a088  _Flash_initModule                 
+0     0000a0b0  _Flash_powerDown                  
+0     0000a0c0  _Flash_wakeFromLPM                
+0     0000a0d1  _SysCtl_delay                     
+0     0000a0d5  _RamfuncsRunEnd                   
+0     00080000  code_start                        
+0     00081000  ___cinit__                        
+0     00081000  cinit                             
+0     00081240  _RamfuncsLoadStart                
+0     00081315  _RamfuncsLoadEnd                  
+0     00082137  _SysCtl_getClock                  
+0     00082195  _SysCtl_setClock                  
+0     0008224f  _SysCtl_selectXTAL                
+0     00082285  _SysCtl_selectXTALSingleEnded     
+0     000822a5  _SysCtl_selectOscSource           
+0     000822d7  _SysCtl_getLowSpeedClock          
+0     000822f1  _SysCtl_getDeviceParametric       
+0     0008234c  _SysCtl_isPLLValid                
+0     0008250a  _DCC_getRevisionNumber            
+0     0008251e  _DCC_verifyClockFrequency         
+0     000825e0  _DCC_measureClockFrequency        
+0     00082684  _DCC_continuousMonitor            
+0     0008272d  _MemCfg_lockConfig                
+0     0008277f  _MemCfg_unlockConfig              
+0     000827d9  _MemCfg_commitConfig              
+0     0008282b  _MemCfg_setProtection             
+0     00082886  _MemCfg_setLSRAMControllerSel     
+0     000828b1  _MemCfg_setTestMode               
+0     0008290d  _MemCfg_initSections              
+0     0008295f  _MemCfg_getInitStatus             
+0     000829c6  _MemCfg_getViolationAddress       
+0     000829e9  _MemCfg_getCorrErrorAddress       
+0     000829f0  _MemCfg_getUncorrErrorAddress     
+0     00082a6e  _Board_init                       
+0     00082a79  _PinMux_init                      
+0     00082a7a  _myCLA0_init                      
+0     00082ae0  _CLA_init                         
+0     00082af7  _INTERRUPT_init                   
+0     00082b58  _MEMCFG_init                      
+0     00082c22  _GPIO_setDirectionMode            
+0     00082c49  _GPIO_getDirectionMode            
+0     00082c5f  _GPIO_setInterruptPin             
+0     00082c8a  _GPIO_setPadConfig                
+0     00082cd2  _GPIO_getPadConfig                
+0     00082d06  _GPIO_setQualificationMode        
+0     00082d32  _GPIO_getQualificationMode        
+0     00082d53  _GPIO_setQualificationPeriod      
+0     00082d75  _GPIO_setControllerCore           
+0     00082da1  _GPIO_setAnalogMode               
+0     00082dc9  _GPIO_setPinConfig                
+0     00082e74  _Device_init                      
+0     00082eb2  _Device_enableAllPeripherals      
+0     00082f92  _Device_initGPIO                  
+0     00082fa2  _Device_verifyXTAL                
+0     00082fd5  ___error__                        
+0     00082fdc  _copy_in                          
+0     00083093  _Interrupt_initModule             
+0     000830d0  _Interrupt_initVectorTable        
+0     000830ee  _Interrupt_enable                 
+0     00083125  _Interrupt_disable                
+0     00083173  _cla1Isr1                         
+0     000831a2  _cla1Isr2                         
+0     000831b1  _cla1Isr3                         
+0     000831c0  _cla1Isr4                         
+0     000831cf  _cla1Isr5                         
+0     000831de  _cla1Isr6                         
+0     000831ed  _cla1Isr7                         
+0     000831fc  _cla1Isr8                         
+0     0008322b  FS$$DIV                           
+0     000832c5  _main                             
+0     000832d3  _CLA_runTest                      
+0     00083332  _c_int00                          
+0     00083388  _Interrupt_defaultHandler         
+0     0008339e  _Interrupt_illegalOperationHandler
+0     000833a8  _Interrupt_nmiHandler             
+0     000833b2  C$$EXIT                           
+0     000833b2  _abort                            
+0     000833b4  _exit                             
+0     000833db  _CLA_setTriggerSource             
+0     00083401  _memcpy                           
+0     0008341e  __args_main                       
+0     00083430  __register_unlock                 
+0     00083434  __register_lock                   
+0     00083438  __nop                             
+0     00083441  __system_pre_init                 
+0     00083443  __system_post_cinit               
+0     00084000  _Cla1ProgLoadStart                
+1     00000400  __stack                           
+1     00000600  __STACK_END                       
+1     00001480  _fResult                          
+1     00001500  _fVal                             
+1     00001502  _PIBYTWO                          
+1     00008800  _CLAatan2Table                    
+1     0000a800  _atan_expected                    
+1     0000a880  _y                                
+1     0000a900  ___TI_enable_exit_profile_output  
+1     0000a902  ___TI_cleanup_ptr                 
+1     0000a904  ___TI_dtors_ptr                   
+1     0000a906  _Example_PassCount                
+1     0000a908  _Example_Fail                     
+1     0000a90a  __lock                            
+1     0000a90c  __unlock                          
+1     0000a90e  _pass                             
+1     0000a90f  _fail                             
+abs   00000000  _Cla1ConstLoadSize                
+abs   000000d5  _RamfuncsLoadSize                 
+abs   000000d5  _RamfuncsRunSize                  
+abs   00000100  _Cla1ProgLoadSize                 
+abs   00000200  __STACK_SIZE                      
+abs   ffffffff  .text                             
+abs   ffffffff  ___TI_pprof_out_hndl              
+abs   ffffffff  ___TI_prof_data_size              
+abs   ffffffff  ___TI_prof_data_start             
+abs   ffffffff  ___binit__                        
+abs   ffffffff  ___c_args__                       
+abs   ffffffff  ___etext__                        
+abs   ffffffff  ___pinit__                        
+abs   ffffffff  ___text__                         
+abs   ffffffff  binit                             
+abs   ffffffff  etext                             
+abs   ffffffff  pinit                             
+
+[133 symbols]

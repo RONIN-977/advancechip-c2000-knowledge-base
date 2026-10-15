@@ -1,0 +1,88 @@
+来源: 文档/CLA配置指南.pdf
+来源编号: S216
+
+=== PDF页 1 ===
+1. CLA 可通过外设中断触发：
+Task1-7 可以通过 ADC 或者 ePWM 来触发，如：
+Task1：ADCINT1 或 EPWM1_INT；
+Task2：ADCINT2 或 EPWM2_INT；
+Task3：ADCINT3 或 EPWM3_INT；
+Task4：ADCINT4 或 EPWM4_INT；
+Task5：ADCINT5 或 EPWM5_INT；
+Task6：ADCINT6 或 EPWM6_INT；
+Task7：ADCINT7 或 EPWM7_INT；
+Task8：ADCINT8 或 CPU Timer0；
+为了使用 CLA，需要配置两块 RAM 区域，用于 CLA 与主 CPU 通讯使用，分别为 CPUtoCLARAM
+以及 CLAtoCPURAM，其中 CPUtoCLARAM 区域数据 CPU 可读可写，CLA 只能读不能写，
+CLAtoCPURAM 区域数据 CLA 可读可写，CPU 只能读不能写。
+CLA 可以直接访问 ePWM、HRPWM、比较器和 ADC 结果寄存器。
+2. CMD 文件配置 CLARAM
+与没有 CLA 的工程相比，带有 CLA 的工程需要为 CLA 配置一个 RAM 区域存放代码和数据。
+以工程为例：
+CMD 开头定义了 CLA 暂存器大小用来暂存本地符号，不定义会警告，并且在 CMD 最后声明
+字 段 。 并 划 分 了 一 块 CLARAM1 给 CLA 存 储 数 据 ， 另 外 划 分 CLA1_MSGRAMLOW 和
+CLA1_MSGRAMHIGH 分别用于 CLA 与 CPU 的数据交互，这里 CLA 的程序是写在 flash 中，芯
+片上电后从 flash 搬运到 ram 中运行：
+
+=== PDF页 2 ===
+3. 主程序的配置
+在主程序中，需要对 CLA 进行初始化工作。
+首先设备初始化函数 SystemInit()中使能 CLA 的时钟：
+对 CLA 进行初始化：CLAInit()
+首先分配每个任务的向量地址，并且从 flash 中把程序搬运到 RAM 中运行。
+
+=== PDF页 3 ===
+配置 CLA 程序和数据空间为 PROGE 和 RAM1E
+有些 CLA 的函数需要在程序启动后主动运行一次，比如数据的初始化工作，因此在配置 CLA
+时，使能 CLA 应答 IACK，并且强行执行一次 CLA 任务。这里将 Task8 指定响应 M_INT2 中断，
+并使用 CLA1ForceTask2()函数执行一次 Task 任务并等待，完成 CLA 数据的初始化。
+配置 CLA 任务触发函数，同样可以写在 CLA.c 文件中，该函数配置 TASK1 通过 ADCINT1 触发，
+当 ADC1 完成采样后，执行 Task1 程序进行数据处理，所以设置 Task1 的中断源为 ADCINT1，
+并使能中断响应，如需 PWM1INT 同理。
+
+=== PDF页 4 ===
+4. CLA 主体程序
+在工程中添加.cla 文件，claloop 程序在这里编辑，可直接赋值以下模板进行填充
+#include "DSP28x_Project.h"
+// Include the test header file whose name is based on the test name
+// which is defined by the macro TEST on the command line
+__interrupt void Cla1Task1 ( void )
+{
+}
+__interrupt void Cla1Task2 ( void )
+{
+}
+__interrupt void Cla1Task3 ( void )
+{
+}
+__interrupt void Cla1Task4 ( void )
+{
+}
+__interrupt void Cla1Task5 ( void )
+{
+}
+__interrupt void Cla1Task6 ( void )
+{
+}
+__interrupt void Cla1Task7 ( void )
+{
+}
+
+=== PDF页 5 ===
+__interrupt void Cla1Task8 ( void )
+{
+}
+形式参考以下程序
+在.cla 文件开头要声明用到参数的分区，比如 rslvrin 是存在 CPUtoMsg 中的，即 CPU 可读可
+写，CLA 只读；rslvout 是存在 CLAtoMSGRAM，即 cla 可读写，CPU 只读。
+.cla 文件中用到的参数和函数需要在响应的 h 文件中声明：
+
+=== PDF页 6 ===
+共享参数需要在 CLA_share.h 中声明：
+附件为该工程 CLA 文件整合，仅供参考
+CLA.zip
+Ti 的 CLA 程序 demo 如下：
+Example_2803xC
+laAdc.zip
+
+=== PDF页 7 ===

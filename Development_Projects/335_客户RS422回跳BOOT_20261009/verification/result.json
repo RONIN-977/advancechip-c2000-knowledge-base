@@ -1,0 +1,19 @@
+{
+  "target_compile": "passed (customer dependencies replaced by declaration stubs)",
+  "checks": [
+    "scib_init: unchanged",
+    "RS422_Init: unchanged",
+    "scia_xmit: unchanged",
+    "scib_xmit: unchanged",
+    "serial_RXB_isr: unchanged",
+    "SCI-A baud, 8E1, FIFO, GPIO and vectors: unchanged",
+    "SCI-A original business RX body preserved; hardware read once"
+  ],
+  "request_hex": "CC 58 00 E9 00 72 00 00 00 0C 1E",
+  "sha256": {
+    "rs422.c": "6cd924ab99ccdde040ba7fba283f587ed32d861cf9eb3adc0984d3ab29115ad8",
+    "rs422.h": "206e5fa3a470d52397d0ac320bac8a4f0810856c553d24d5e46c0584589f79f1"
+  },
+  "hardware": "not tested",
+  "full_customer_project": "not provided"
+}

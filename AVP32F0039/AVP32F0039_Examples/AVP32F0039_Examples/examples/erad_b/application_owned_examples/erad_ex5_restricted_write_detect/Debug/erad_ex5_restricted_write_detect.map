@@ -1,0 +1,443 @@
+******************************************************************************
+             TMS320C2000 Linker PC v22.6.0                     
+******************************************************************************
+>> Linked Thu Apr 24 11:04:45 2025
+
+OUTPUT FILE NAME:   <erad_ex5_restricted_write_detect.out>
+ENTRY POINT SYMBOL: "_c_int00"  address: 0000844a
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+  BEGIN                 00000000   00000002  00000002  00000000  RWIX
+  BOOT_RSVD             00000002   00000126  00000000  00000126  RWIX
+  RAMM0                 00000128   000002d8  00000028  000002b0  RWIX
+  RAMM1                 00000400   000003f8  00000200  000001f8  RWIX
+  RAMLS0                00008000   00000800  00000800  00000000  RWIX
+  RAMLS1                00008800   00000800  00000449  000003b7  RWIX
+  RAMLS2                00009000   00000800  00000000  00000800  RWIX
+  RAMLS3                00009800   00000800  00000000  00000800  RWIX
+  RAMLS4                0000a000   00000800  00000013  000007ed  RWIX
+  RAMLS5                0000a800   00000800  00000133  000006cd  RWIX
+  RAMLS6_7              0000b000   00001000  00000000  00001000  RWIX
+  RAMGS0                0000c000   00001000  00000000  00001000  RWIX
+  RAMGS1                0000d000   00001000  00000000  00001000  RWIX
+  RAMGS2                0000e000   00001000  00000000  00001000  RWIX
+  RAMGS3                0000f000   00000ff8  00000000  00000ff8  RWIX
+  FLASH_BANK0_SEC0      00080002   00000ffe  00000000  00000ffe  RWIX
+  FLASH_BANK0_SEC1      00081000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC2      00082000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC3      00083000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC4      00084000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC5      00085000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC6      00086000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC7      00087000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC8      00088000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC9      00089000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC10     0008a000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC11     0008b000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC12     0008c000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC13     0008d000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC14     0008e000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC15     0008f000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC0      00090000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC1      00091000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC2      00092000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC3      00093000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC4      00094000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC5      00095000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC6      00096000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC7      00097000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC8      00098000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC9      00099000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC10     0009a000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC11     0009b000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC12     0009c000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC13     0009d000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC14     0009e000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC15     0009f000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC0      000a0000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC1      000a1000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC2      000a2000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC3      000a3000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC4      000a4000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC5      000a5000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC6      000a6000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC7      000a7000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC8      000a8000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC9      000a9000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC10     000aa000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC11     000ab000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC12     000ac000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC13     000ad000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC14     000ae000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC15     000af000   00000ff0  00000000  00000ff0  RWIX
+  SECURE_ROM            003f2000   00006000  00000000  00006000  RWIX
+  BOOTROM               003f8000   00007fc0  00000000  00007fc0  RWIX
+  RESET                 003fffc0   00000002  00000000  00000002  RWIX
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+codestart 
+*          0    00000000    00000002     
+                  00000000    00000002     f28003x_codestartbranch.obj (codestart)
+
+.cinit     0    00000128    00000024     
+                  00000128    0000000e     rts2800_fpu32.lib : exit.c.obj (.cinit)
+                  00000136    0000000a     erad_ex5_restricted_write_detect.obj (.cinit)
+                  00000140    00000005     rts2800_fpu32.lib : _lock.c.obj (.cinit:__lock)
+                  00000145    00000005                       : _lock.c.obj (.cinit:__unlock)
+                  0000014a    00000002     --HOLE-- [fill = 0]
+
+.TI.ramfunc 
+*          0    0000014c    00000004     
+                  0000014c    00000004     sysctl.obj (.TI.ramfunc)
+
+.reset     0    003fffc0    00000002     DSECT
+                  003fffc0    00000002     rts2800_fpu32.lib : boot28.asm.obj (.reset)
+
+.stack     0    00000400    00000200     UNINITIALIZED
+                  00000400    00000200     --HOLE--
+
+.pinit     0    00000128    00000000     UNINITIALIZED
+
+.econst    0    0000a800    00000125     
+                  0000a800    00000100     erad_ex5_restricted_write_detect.obj (.econst:.string)
+                  0000a900    00000025     rts2800_fpu32.lib : ltoa.c.obj (.econst:.string)
+
+.ebss      0    0000a926    0000000e     UNINITIALIZED
+                  0000a926    00000006     rts2800_fpu32.lib : exit.c.obj (.ebss)
+                  0000a92c    00000004     erad_ex5_restricted_write_detect.obj (.ebss)
+                  0000a930    00000002     rts2800_fpu32.lib : _lock.c.obj (.ebss:__lock)
+                  0000a932    00000002                       : _lock.c.obj (.ebss:__unlock)
+
+.try_sect 
+*          0    0000a000    00000013     
+                  0000a000    00000013     erad_ex5_restricted_write_detect.obj (.try_sect:_try_func)
+
+.text.1    0    00008000    00000800     
+                  00008000    000000fc     sysctl.obj (.text:_SysCtl_setClock)
+                  000080fc    000000f2     sysctl.obj (.text:_SysCtl_isPLLValid)
+                  000081ee    000000ce     device.obj (.text:_Device_enableAllPeripherals)
+                  000082bc    000000a7     erad_ex5_restricted_write_detect.obj (.text:_main)
+                  00008363    00000088     rts2800_fpu32.lib : fs_div28.asm.obj (.text)
+                  000083eb    0000005f     erad_ex5_restricted_write_detect.obj (.text:_initSCI)
+                  0000844a    00000056     rts2800_fpu32.lib : boot28.asm.obj (.text)
+                  000084a0    00000049     gpio.obj (.text:_GPIO_setAnalogMode)
+                  000084e9    00000048     gpio.obj (.text:_GPIO_setPadConfig)
+                  00008531    00000046     sysctl.obj (.text:_SysCtl_selectXTAL)
+                  00008577    00000045     sysctl.obj (.text:_SysCtl_pollX1Counter)
+                  000085bc    0000003e     erad_ex5_restricted_write_detect.obj (.text:_RTOSISR)
+                  000085fa    0000003d     interrupt.obj (.text:_Interrupt_initModule)
+                  00008637    0000003b     sci.obj (.text:_SCI_clearInterruptStatus)
+                  00008672    00000037     gpio.obj (.text:_GPIO_setPinConfig)
+                  000086a9    00000037     interrupt.obj (.text:_Interrupt_enable)
+                  000086e0    00000037     sci.obj (.text:_SCI_writeCharArray)
+                  00008717    00000032     sysctl.obj (.text:_SysCtl_selectOscSource)
+                  00008749    0000002f     sysctl.obj (.text:_DCC_setCounterSeeds)
+                  00008778    0000002c     gpio.obj (.text:_GPIO_setControllerCore)
+                  000087a4    0000002c     gpio.obj (.text:_GPIO_setQualificationMode)
+                  000087d0    0000002a     rts2800_fpu32.lib : l_div28.asm.obj (.text)
+                  000087fa    00000006     erad_ex5_restricted_write_detect.obj (.text:_SCI_getRxStatus)
+
+.text.2    0    00008800    00000449     
+                  00008800    0000002a     rts2800_fpu32.lib : ltoa.c.obj (.text)
+                  0000882a    00000029                       : exit.c.obj (.text)
+                  00008853    00000027     gpio.obj (.text:_GPIO_setDirectionMode)
+                  0000887a    00000025     sysctl.obj (.text:_SysCtl_selectXTALSingleEnded)
+                  0000889f    00000024     erad.obj (.text:_ERAD_configBusComp)
+                  000088c3    00000024     sci.obj (.text:_SCI_setConfig)
+                  000088e7    00000024     rts2800_fpu32.lib : cpy_tbl.c.obj (.text)
+                  0000890b    0000001e     interrupt.obj (.text:_Interrupt_initVectorTable)
+                  00008929    0000001e     rts2800_fpu32.lib : ll_cmp28.asm.obj (.text)
+                  00008947    0000001d                       : memcpy.c.obj (.text)
+                  00008964    0000001c     erad_ex5_restricted_write_detect.obj (.text:_configERAD)
+                  00008980    0000001a     sysctl.obj (.text:_DCC_enableSingleShotMode)
+                  0000899a    0000001a     device.obj (.text:_Device_init)
+                  000089b4    00000019     sysctl.obj (.text:_SysCtl_setPLLSysClk)
+                  000089cd    00000017     device.obj (.text:_SysCtl_enablePeripheral)
+                  000089e4    00000017     sysctl.obj (.text:_SysCtl_enablePeripheral)
+                  000089fb    00000016     interrupt.obj (.text:_Interrupt_defaultHandler)
+                  00008a11    00000016     sci.obj (.text:_SCI_isFIFOEnabled)
+                  00008a27    00000015     device.obj (.text:_GPIO_unlockPortConfig)
+                  00008a3c    00000014     sysctl.obj (.text:_DCC_setCounter0ClkSource)
+                  00008a50    00000014     sysctl.obj (.text:_DCC_setCounter1ClkSource)
+                  00008a64    00000014     erad_ex5_restricted_write_detect.obj (.text:_SCI_readCharBlockingFIFO)
+                  00008a78    00000013     erad_ex5_restricted_write_detect.obj (.text:_SCI_enableFIFO)
+                  00008a8b    00000012     rts2800_fpu32.lib : args_main.c.obj (.text)
+                  00008a9d    00000010     device.obj (.text:_Device_initGPIO)
+                  00008aad    00000010     sci.obj (.text:_SCI_isSpaceAvailableNonFIFO)
+                  00008abd    0000000f     erad_ex5_restricted_write_detect.obj (.text:_Interrupt_register)
+                  00008acc    0000000e     erad_ex5_restricted_write_detect.obj (.text:_ERAD_initModule)
+                  00008ada    0000000e     sci.obj (.text:_SCI_disableModule)
+                  00008ae8    0000000e     erad_ex5_restricted_write_detect.obj (.text:_SCI_performSoftwareReset)
+                  00008af6    0000000e     sci.obj (.text:_SCI_performSoftwareReset)
+                  00008b04    0000000e     erad_ex5_restricted_write_detect.obj (.text:_SCI_resetChannels)
+                  00008b12    0000000e     erad_ex5_restricted_write_detect.obj (.text:_SCI_resetRxFIFO)
+                  00008b20    0000000e     erad_ex5_restricted_write_detect.obj (.text:_SCI_resetTxFIFO)
+                  00008b2e    0000000d     interrupt.obj (.text:_Interrupt_disableGlobal)
+                  00008b3b    0000000d     interrupt.obj (.text:_Interrupt_enableGlobal)
+                  00008b48    0000000d     device.obj (.text:_SysCtl_setLowSpeedClock)
+                  00008b55    0000000c     sysctl.obj (.text:_DCC_disableDoneSignal)
+                  00008b61    0000000b     sysctl.obj (.text:_DCC_clearDoneFlag)
+                  00008b6c    0000000b     sysctl.obj (.text:_DCC_clearErrorFlag)
+                  00008b77    0000000b     sysctl.obj (.text:_DCC_disableErrorSignal)
+                  00008b82    0000000b     sysctl.obj (.text:_DCC_disableModule)
+                  00008b8d    0000000b     sysctl.obj (.text:_DCC_enableModule)
+                  00008b98    0000000b     device.obj (.text:_SysCtl_disableWatchdog)
+                  00008ba3    0000000b     sysctl.obj (.text:_SysCtl_isMCDClockFailureDetected)
+                  00008bae    0000000a     erad_ex5_restricted_write_detect.obj (.text:_ERAD_disableModules)
+                  00008bb8    0000000a     erad_ex5_restricted_write_detect.obj (.text:_ERAD_resetCounter)
+                  00008bc2    0000000a     erad_ex5_restricted_write_detect.obj (.text:_ERAD_setOwnership)
+                  00008bcc    0000000a     interrupt.obj (.text:_Interrupt_illegalOperationHandler)
+                  00008bd6    0000000a     interrupt.obj (.text:_Interrupt_nmiHandler)
+                  00008be0    0000000a     erad_ex5_restricted_write_detect.obj (.text:_SCI_getRxFIFOStatus)
+                  00008bea    0000000a     sci.obj (.text:_SCI_getTxFIFOStatus)
+                  00008bf4    00000009     erad_ex5_restricted_write_detect.obj (.text:_ERAD_enableModules)
+                  00008bfd    00000009     erad_ex5_restricted_write_detect.obj (.text:_SCI_enableModule)
+                  00008c06    00000009     sci.obj (.text:_SCI_enableModule)
+                  00008c0f    00000009     rts2800_fpu32.lib : _lock.c.obj (.text)
+                  00008c18    00000008     f28003x_codestartbranch.obj (.text)
+                  00008c20    00000008     rts2800_fpu32.lib : strlen.c.obj (.text)
+                  00008c28    00000007     device.obj (.text:_ASysCtl_lockVREG)
+                  00008c2f    00000007     erad_ex5_restricted_write_detect.obj (.text:_Interrupt_enableInCPU)
+                  00008c36    00000007     sysctl.obj (.text:_SysCtl_resetMCD)
+                  00008c3d    00000005     rts2800_fpu32.lib : strcpy.c.obj (.text)
+                  00008c42    00000004     device.obj (.text:_SysCtl_deviceCal)
+                  00008c46    00000002     rts2800_fpu32.lib : pre_init.c.obj (.text)
+                  00008c48    00000001                       : startup.c.obj (.text)
+
+MODULE SUMMARY
+
+       Module                                 code   initialized data   uninitialized data
+       ------                                 ----   ----------------   ------------------
+    .\device\
+       device.obj                             327    0                  0                 
+       f28003x_codestartbranch.obj            10     0                  0                 
+    +--+--------------------------------------+------+------------------+--------------------+
+       Total:                                 337    0                  0                 
+                                                                                          
+    .\device\driverlib\
+       sysctl.obj                             970    0                  0                 
+       gpio.obj                               327    0                  0                 
+       sci.obj                                235    0                  0                 
+       interrupt.obj                          214    0                  0                 
+       erad.obj                               36     0                  0                 
+    +--+--------------------------------------+------+------------------+--------------------+
+       Total:                                 1782   0                  0                 
+                                                                                          
+    .\source\
+       erad_ex5_restricted_write_detect.obj   566    266                4                 
+    +--+--------------------------------------+------+------------------+--------------------+
+       Total:                                 566    266                4                 
+                                                                                          
+    C:\TI\ccs12.0\ccs\tools\compiler\ti-cgt-c2000_22.6.0.LTS\lib\rts2800_fpu32.lib
+       fs_div28.asm.obj                       136    0                  0                 
+       boot28.asm.obj                         86     0                  0                 
+       ltoa.c.obj                             42     37                 0                 
+       exit.c.obj                             41     14                 6                 
+       l_div28.asm.obj                        42     0                  0                 
+       cpy_tbl.c.obj                          36     0                  0                 
+       ll_cmp28.asm.obj                       30     0                  0                 
+       memcpy.c.obj                           29     0                  0                 
+       _lock.c.obj                            9      10                 4                 
+       args_main.c.obj                        18     0                  0                 
+       strlen.c.obj                           8      0                  0                 
+       strcpy.c.obj                           5      0                  0                 
+       pre_init.c.obj                         2      0                  0                 
+       startup.c.obj                          1      0                  0                 
+    +--+--------------------------------------+------+------------------+--------------------+
+       Total:                                 485    61                 10                
+                                                                                          
+       Stack:                                 0      0                  512               
+    +--+--------------------------------------+------+------------------+--------------------+
+       Grand Total:                           3170   327                526               
+
+
+GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
+
+address     data page           name
+--------    ----------------    ----
+00000400      10 (00000400)     __stack
+
+0000a926     2a4 (0000a900)     ___TI_enable_exit_profile_output
+0000a928     2a4 (0000a900)     ___TI_cleanup_ptr
+0000a92a     2a4 (0000a900)     ___TI_dtors_ptr
+0000a92c     2a4 (0000a900)     _x
+0000a92e     2a4 (0000a900)     _y
+0000a930     2a4 (0000a900)     __lock
+0000a932     2a4 (0000a900)     __unlock
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+page  address   name                              
+----  -------   ----                              
+abs   ffffffff  .text                             
+0     0000882a  C$$EXIT                           
+0     00008363  FS$$DIV                           
+0     000087d0  L$$DIV                            
+0     000087df  L$$MOD                            
+0     00008929  LL$$CMP                           
+0     000087ed  UL$$DIV                           
+0     000087f4  UL$$MOD                           
+0     0000893b  ULL$$CMP                          
+0     000081ee  _Device_enableAllPeripherals      
+0     0000899a  _Device_init                      
+0     00008a9d  _Device_initGPIO                  
+0     0000889f  _ERAD_configBusComp               
+0     000084a0  _GPIO_setAnalogMode               
+0     00008778  _GPIO_setControllerCore           
+0     00008853  _GPIO_setDirectionMode            
+0     000084e9  _GPIO_setPadConfig                
+0     00008672  _GPIO_setPinConfig                
+0     000087a4  _GPIO_setQualificationMode        
+0     000089fb  _Interrupt_defaultHandler         
+0     000086a9  _Interrupt_enable                 
+0     00008bcc  _Interrupt_illegalOperationHandler
+0     000085fa  _Interrupt_initModule             
+0     0000890b  _Interrupt_initVectorTable        
+0     00008bd6  _Interrupt_nmiHandler             
+0     000085bc  _RTOSISR                          
+0     00008637  _SCI_clearInterruptStatus         
+0     000088c3  _SCI_setConfig                    
+0     000086e0  _SCI_writeCharArray               
+0     0000014c  _SysCtl_delay                     
+0     000080fc  _SysCtl_isPLLValid                
+0     00008717  _SysCtl_selectOscSource           
+0     00008531  _SysCtl_selectXTAL                
+0     0000887a  _SysCtl_selectXTALSingleEnded     
+0     00008000  _SysCtl_setClock                  
+0     00000600  __STACK_END                       
+abs   00000200  __STACK_SIZE                      
+0     0000a928  ___TI_cleanup_ptr                 
+0     0000a92a  ___TI_dtors_ptr                   
+0     0000a926  ___TI_enable_exit_profile_output  
+abs   ffffffff  ___TI_pprof_out_hndl              
+abs   ffffffff  ___TI_prof_data_size              
+abs   ffffffff  ___TI_prof_data_start             
+abs   ffffffff  ___binit__                        
+abs   ffffffff  ___c_args__                       
+0     00000128  ___cinit__                        
+abs   ffffffff  ___etext__                        
+abs   ffffffff  ___pinit__                        
+abs   ffffffff  ___text__                         
+0     00008a8b  __args_main                       
+0     0000a930  __lock                            
+0     00008c17  __nop                             
+0     00008c13  __register_lock                   
+0     00008c0f  __register_unlock                 
+0     00000400  __stack                           
+0     00008c48  __system_post_cinit               
+0     00008c46  __system_pre_init                 
+0     0000a932  __unlock                          
+0     0000882a  _abort                            
+0     0000844a  _c_int00                          
+0     00008964  _configERAD                       
+0     000088e7  _copy_in                          
+0     0000882c  _exit                             
+0     000083eb  _initSCI                          
+0     00008800  _ltoa                             
+0     000082bc  _main                             
+0     00008947  _memcpy                           
+0     00008c3d  _strcpy                           
+0     00008c20  _strlen                           
+0     0000a000  _try_func                         
+0     0000a92c  _x                                
+0     0000a92e  _y                                
+abs   ffffffff  binit                             
+0     00000128  cinit                             
+0     00000000  code_start                        
+abs   ffffffff  etext                             
+abs   ffffffff  pinit                             
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+page  address   name                              
+----  -------   ----                              
+0     00000000  code_start                        
+0     00000128  ___cinit__                        
+0     00000128  cinit                             
+0     0000014c  _SysCtl_delay                     
+0     00000400  __stack                           
+0     00000600  __STACK_END                       
+0     00008000  _SysCtl_setClock                  
+0     000080fc  _SysCtl_isPLLValid                
+0     000081ee  _Device_enableAllPeripherals      
+0     000082bc  _main                             
+0     00008363  FS$$DIV                           
+0     000083eb  _initSCI                          
+0     0000844a  _c_int00                          
+0     000084a0  _GPIO_setAnalogMode               
+0     000084e9  _GPIO_setPadConfig                
+0     00008531  _SysCtl_selectXTAL                
+0     000085bc  _RTOSISR                          
+0     000085fa  _Interrupt_initModule             
+0     00008637  _SCI_clearInterruptStatus         
+0     00008672  _GPIO_setPinConfig                
+0     000086a9  _Interrupt_enable                 
+0     000086e0  _SCI_writeCharArray               
+0     00008717  _SysCtl_selectOscSource           
+0     00008778  _GPIO_setControllerCore           
+0     000087a4  _GPIO_setQualificationMode        
+0     000087d0  L$$DIV                            
+0     000087df  L$$MOD                            
+0     000087ed  UL$$DIV                           
+0     000087f4  UL$$MOD                           
+0     00008800  _ltoa                             
+0     0000882a  C$$EXIT                           
+0     0000882a  _abort                            
+0     0000882c  _exit                             
+0     00008853  _GPIO_setDirectionMode            
+0     0000887a  _SysCtl_selectXTALSingleEnded     
+0     0000889f  _ERAD_configBusComp               
+0     000088c3  _SCI_setConfig                    
+0     000088e7  _copy_in                          
+0     0000890b  _Interrupt_initVectorTable        
+0     00008929  LL$$CMP                           
+0     0000893b  ULL$$CMP                          
+0     00008947  _memcpy                           
+0     00008964  _configERAD                       
+0     0000899a  _Device_init                      
+0     000089fb  _Interrupt_defaultHandler         
+0     00008a8b  __args_main                       
+0     00008a9d  _Device_initGPIO                  
+0     00008bcc  _Interrupt_illegalOperationHandler
+0     00008bd6  _Interrupt_nmiHandler             
+0     00008c0f  __register_unlock                 
+0     00008c13  __register_lock                   
+0     00008c17  __nop                             
+0     00008c20  _strlen                           
+0     00008c3d  _strcpy                           
+0     00008c46  __system_pre_init                 
+0     00008c48  __system_post_cinit               
+0     0000a000  _try_func                         
+0     0000a926  ___TI_enable_exit_profile_output  
+0     0000a928  ___TI_cleanup_ptr                 
+0     0000a92a  ___TI_dtors_ptr                   
+0     0000a92c  _x                                
+0     0000a92e  _y                                
+0     0000a930  __lock                            
+0     0000a932  __unlock                          
+abs   00000200  __STACK_SIZE                      
+abs   ffffffff  .text                             
+abs   ffffffff  ___TI_pprof_out_hndl              
+abs   ffffffff  ___TI_prof_data_size              
+abs   ffffffff  ___TI_prof_data_start             
+abs   ffffffff  ___binit__                        
+abs   ffffffff  ___c_args__                       
+abs   ffffffff  ___etext__                        
+abs   ffffffff  ___pinit__                        
+abs   ffffffff  ___text__                         
+abs   ffffffff  binit                             
+abs   ffffffff  etext                             
+abs   ffffffff  pinit                             
+
+[77 symbols]

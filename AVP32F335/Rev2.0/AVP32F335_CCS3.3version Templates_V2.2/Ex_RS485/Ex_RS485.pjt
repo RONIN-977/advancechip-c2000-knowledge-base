@@ -1,0 +1,73 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+
+[Project Settings]
+ProjectDir="C:\Users\lifeng\Desktop\Ex_RS485\"
+ProjectType=Executable
+CPUFamily=TMS320C28XX
+Tool="Compiler"
+Tool="CustomBuilder"
+Tool="DspBiosBuilder"
+Tool="Linker"
+Config="Debug"
+Config="Release"
+
+[Source Files]
+Source="lib\SFO_TI_Build.lib"
+Source="lib\SFO_TI_Build_fpu.lib"
+Source="lib\SFO_TI_Build_V5.lib"
+Source="lib\SFO_TI_Build_V5_fpu.lib"
+Source="lib\SFO_TI_Build_V5B.lib"
+Source="lib\SFO_TI_Build_V5B_fpu.lib"
+Source="src\AVP33x_Adc.c"
+Source="src\AVP33x_ADC_cal.asm"
+Source="src\AVP33x_CodeStartBranch.asm"
+Source="src\AVP33x_CpuTimers.c"
+Source="src\AVP33x_CSMPasswords.asm"
+Source="src\AVP33x_DBGIER.asm"
+Source="src\AVP33x_DefaultIsr.c"
+Source="src\AVP33x_DisInt.asm"
+Source="src\AVP33x_DMA.c"
+Source="src\AVP33x_ECan.c"
+Source="src\AVP33x_ECap.c"
+Source="src\AVP33x_EPwm.c"
+Source="src\AVP33x_EQep.c"
+Source="src\AVP33x_GlobalVariableDefs.c"
+Source="src\AVP33x_Gpio.c"
+Source="src\AVP33x_I2C.c"
+Source="src\AVP33x_Mcbsp.c"
+Source="src\AVP33x_MemCopy.c"
+Source="src\AVP33x_PieCtrl.c"
+Source="src\AVP33x_PieVect.c"
+Source="src\AVP33x_Sci.c"
+Source="src\AVP33x_Spi.c"
+Source="src\AVP33x_SysCtrl.c"
+Source="src\AVP33x_usDelay.asm"
+Source="src\AVP33x_Xintf.c"
+Source="src\Ex_RS485.c"
+Source="cmd\AVP335.cmd"
+Source="cmd\AVP33x_Headers_nonBIOS.cmd"
+
+["Compiler" Settings: "Debug"]
+Options=-g -pdsw225 -fr"$(Proj_dir)\Debug" -i"..\include" -d"_DEBUG" -d"LARGE_MODEL" -ml -v28
+
+["Compiler" Settings: "Release"]
+Options=-pdsw225 -o3 -fr"$(Proj_dir)\Release" -d"LARGE_MODEL" -ml -v28
+
+["Linker" Settings: "Debug"]
+Options=-c -m".\Debug\Ex_RS485.map" -o".\Debug\Ex_RS485.out" -stack800 -w -x
+
+["Linker" Settings: "Release"]
+Options=-c -m".\Release\Ex_RS485.map" -o".\Release\Ex_RS485.out" -w -x
+
+["cmd\AVP335.cmd" Settings: "Debug"]
+LinkOrder=1
+
+["cmd\AVP335.cmd" Settings: "Release"]
+LinkOrder=1
+
+["cmd\AVP33x_Headers_nonBIOS.cmd" Settings: "Debug"]
+LinkOrder=1
+
+["cmd\AVP33x_Headers_nonBIOS.cmd" Settings: "Release"]
+LinkOrder=1
+

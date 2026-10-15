@@ -1,0 +1,224 @@
+
+//###########################################################################
+//
+// FILE:   Example_281xEvSVPWM.c
+//
+// TITLE:  DSP281x Event Manager SVPWM Generation.
+//
+//###########################################################################
+
+
+#include "DSP281x_Device.h"     // DSP281x Headerfile Include File
+#include "DSP281x_Examples.h"   // DSP281x Examples Include 
+#include <stdio.h>
+#include <math.h>
+float Ualfa,Ubeta;
+int sector;
+#define PI2 3.1415926*2
+#define Tsvpwm 0.0001          //Selected the Tsvpwm:100us
+#define INIA  PI2/360
+int TP; 
+float KP;
+extern  Frequence;//5,10,15,20,25,30,35,40,45,50Hz:
+extern  Voltage;  //30,49,66,88,110,154,176,180,220v:
+extern float theta=INIA;
+// Prototype statements for functions found within this file.
+void init_eva(void);
+void SECTOR(void);
+interrupt void SVPWM_isr(void);
+interrupt void  adc_isr(void);
+// Global counts used in this example
+
+
+void main(void)
+{
+   
+   float T;
+   int i=0,k=0;
+// Step 1. Initialize System Control:
+// PLL, WatchDog, enable Peripheral Clocks ?
+// This example function is found in the DSP281x_SysCtrl.c file.
+   InitSysCtrl();
+
+// Step 2. Initalize GPIO: 
+// This example function is found in the DSP281x_Gpio.c file and
+// illustrates how to set the GPIO to it's default state.
+// InitGpio();  // Skipped for this example  
+
+// Initialize only GPAMUX and GPBMUX for this test
+   EALLOW;
+   // Enable PWM pins
+   GpioMuxRegs.GPAMUX.all = 0x00FF; // EVA PWM 1-6  pins
+  
+   EDIS;
+    
+// Step 3. Clear all interrupts and initialize PIE vector table:
+// Disable CPU interrupts 
+   DINT;
+
+// Initialize PIE control registers to their default state.
+// The default state is all PIE interrupts disabled and flags
+// are cleared.  
+// This function is found in the DSP281x_PieCtrl.c file.
+   InitPieCtrl();
+
+// Disable CPU interrupts and clear all CPU interrupt flags:
+   IER = 0x0000;
+   IFR = 0x0000;//not 0xFFFF?
+
+// Initialize the PIE vector table with pointers to the shell Interrupt 
+// Service Routines (ISR).  
+// This will populate the entire table, even if the interrupt
+// is not used in this example.  This is useful for debug purposes.
+// The shell ISR routines are found in DSP281x_DefaultIsr.c.
+// This function is found in DSP281x_PieVect.c.
+   InitPieVectTable();
+   EALLOW;
+   PieVectTable.ADCINT = &adc_isr;
+   //ADC InterruptVector entery
+   PieVectTable.T1UFINT =&SVPWM_isr;  
+   //SVPWM Interrupt  下溢中断处理
+   EDIS;
+// Step 4. Initialize all the Device Peripherals:
+// This function is found in DSP281x_InitPeripherals.c
+// InitPeripherals(); // Not required for this example
+   init_eva();
+   
+
+// Step 5. User specific code, enable interrupts:
+
+   DSP281x_ADCIO();
+   
+  // Just sit and loop forever:
+  // PWM pins can be observed with a scope.	
+  for(;;)
+  {  
+    if((i+k)==0) EvaRegs.T1CON.all=EvaRegs.T1CON.all&0x0200;//start Timer1,only one
+	while(1)
+	{ k=EvaRegs.EVAIFRA.all&0x0200;
+	  if(k==0x0200) break; //if Timer1 build InterrupFlag,stop waiting
+	}
+      T=(float)(Tsvpwm*(EvaRegs.T1CNT)/65536);//实时计算时间
+	  theta+=PI2*Frequence*T;//加上角度增量
+      if (theta>=PI2) theta-=PI2;
+}
+}
+void init_eva(void)
+{
+// EVA Configure T1PWM, T2PWM, PWM1-PWM6 
+// Initalize the timers
+   // Initalize EVA Timer1 
+   EvaRegs.T1PR = 0x1D4C;   // Timer1 period:7500
+   EvaRegs.T1CMPR = 0x0000; // Timer1 compare:0
+   EvaRegs.T1CNT = 0x0000;  // Timer1 counter:0
+   // TMODE = continuous up/down仿真挂起立即停止
+   // Timer enable，输入时钟不分频，使用内部时钟6.67ns/150MHz
+   // Timer compare enable定时器计数器为0比较寄存器重装载
+   EvaRegs.T1CON.all = 0x1042;   
+
+
+  
+
+
+  // Setup T1PWM and T2PWM
+  // Drive T1/T2 PWM by compare logic
+  EvaRegs.GPTCONA.bit.TCMPOE = 1;
+  // Polarity of GP Timer 1 Compare = Active low
+  EvaRegs.GPTCONA.bit.T1PIN = 1;
+  // Polarity of GP Timer 2 Compare = Active high
+  EvaRegs.GPTCONA.bit.T2PIN = 2;
+
+  // Enable compare for PWM1-PWM6:给出初始角度时的对应值
+  EvaRegs.CMPR1 = 0x0C00;//3072
+  EvaRegs.CMPR2 = 0x3C00;//15360
+  EvaRegs.CMPR3 = 0xFC00;//64512
+    
+  // Compare action control.  Action that takes place
+  // on a cmpare event
+  // output pin 1 CMPR1 - active high
+  // output pin 2 CMPR1 - active low
+  // output pin 3 CMPR2 - active high
+  // output pin 4 CMPR2 - active low
+  // output pin 5 CMPR3 - active high
+  // output pin 6 CMPR3 - active low
+  EvaRegs.ACTRA.all = 0x0666;
+  EvaRegs.DBTCONA.all = 0x0000; // Disable deadband
+  EvaRegs.COMCONA.all = 0xA600; // Disable SVPWM mode,enable PWM output,下益/比较中断
+ 
+
+} 
+// function SVPWM(Uint16 Frequnce[i],Uint16 Voltage[i],int i)
+
+interrupt void SVPWM_isr(void) //实时计算各扇区矢量作用时间
+{ int cmp1,cmp2,cmp3;
+   
+  int t1,t2,t0;
+  SECTOR();
+  KP=(float)(Voltage/220);//Normalize the Voltage
+  Ualfa=KP*cos(theta);
+  Ubeta=KP*sin(theta);
+
+ 
+  
+     switch(sector)
+         {case 1:t1=sqrt(3)*Ualfa*TP/2;
+                 t2=(-sqrt(0.5)*Ualfa+sqrt(2)*Ubeta)*TP;
+                 t0=(TP-t1-t2)/2;
+                 cmp1=(int)t0;
+				 cmp2=(int)(t0+t1);
+				 cmp3=(int)(t0+t1+t2);
+                 break;
+         case 2:t1=(-sqrt(6)*Ualfa+sqrt(6)*Ubeta)*TP/2;
+                t2=(sqrt(0.5)*Ualfa+sqrt(0.5)*Ubeta)*TP;
+				t0=(TP-t1-t2)/2;
+                cmp1=(int)(t0+t2);
+				cmp2=(int)(t0);
+				cmp3=(int)(t0+t1+t2);
+                break;
+        case 3:t1=-sqrt(1.5)*Ubeta*TP;
+			   t2=(sqrt(2)*Ualfa-sqrt(0.5)*Ubeta)*TP;
+               t0=(TP-t1-t2)/2;
+               cmp1=(int)(t0+t1+t2);
+			   cmp2=(int)(t0);
+			   cmp3=(int)(t0+t1);
+               break;
+        case 4:t1=(-sqrt(1.5)*Ubeta)*TP;
+			   t2=(-sqrt(2)*Ualfa+sqrt(0.5)*Ubeta)*TP;
+               t0=(TP-t1-t2)/2;
+               cmp1=(int)(t0+t1+t2);
+			   cmp2=(int)(t0+t2);
+			   cmp3=(int)(t0);
+               break;
+       case 5:t1=(-sqrt(1.5)*Ualfa+sqrt(1.5)*Ubeta)*TP;
+              t2=(-sqrt(0.5)*Ualfa-sqrt(0.5)*Ubeta)*TP;
+		      t0=(TP-t1-t2)/2;
+              cmp1=(int)(t0+t1);
+			  cmp2=(int)(t1+t2+t0);
+			  cmp3=(int)(t0);
+              break;
+       case 6:t1=sqrt(0.75)*Ualfa*TP;
+		      t2=(sqrt(0.5)*Ualfa-sqrt(2)*Ubeta)*TP;
+              t0=(TP-t1-t2)/2;
+              cmp1=(int)(t0);
+			  cmp2=(int)(t0+t1+t2);
+			  cmp3=(int)(t0+t2);
+              break;
+  }
+  
+    EvaRegs.CMPR1=cmp1;//Reload CMPR1/2/3
+	EvaRegs.CMPR2=cmp2;
+	EvaRegs.CMPR3=cmp3;
+    
+}
+void SECTOR(void)  //实时确定Uout扇区
+{  float theta2;
+   theta2=(float)(theta*360/(PI2));  //Use angle degree
+
+		if(theta2>=0&&theta2<60) sector=1;
+		else if(theta2>=60&&theta2<120) sector=2;
+		else if (theta2>=120&&theta2<180) sector=3;
+		else if(theta2>=180&&theta2>240) sector=4;
+		else if (theta2>=240&&theta2>300) sector=5;
+		else if (theta2>=300&&theta2<360) sector=6;
+        else ;
+}

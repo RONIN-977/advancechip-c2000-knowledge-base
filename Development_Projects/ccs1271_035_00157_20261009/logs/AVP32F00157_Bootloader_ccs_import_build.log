@@ -1,0 +1,62 @@
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+
+--------------------------------------------------------------------------------
+Importing project from 'C:/Users/17879/Documents/ChatGPT/��о���TI C2000ϵ��оƬ��Ϣ/Development_Projects/ccs1271_035_00157_20261009/staging/AVP32F00157Boot+APP_20261009/AVP32F00157/Bootloader'...
+
+
+Done!
+
+**** Build of configuration Debug for project AVP32F00157_Bootloader ****
+
+"C:\\ti\\ccs1271\\ccs\\utils\\bin\\gmake" -k all 
+ 
+Building file: "../flash_port.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 --float_support=fpu32 --tmu_support=tmu0 -O0 --include_path=".." --include_path="../Common" --include_path="../../Common" --include_path="../Device/include" --include_path="../Device/driverlib" --include_path="../Device/FlashAPI" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --define=CPU1 --define=_FLASH -g --c99 --diag_warning=225 --emit_warnings_as_errors --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="flash_port.d_raw"  "../flash_port.c"
+Finished building: "../flash_port.c"
+ 
+Building file: "../main.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 --float_support=fpu32 --tmu_support=tmu0 -O0 --include_path=".." --include_path="../Common" --include_path="../../Common" --include_path="../Device/include" --include_path="../Device/driverlib" --include_path="../Device/FlashAPI" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --define=CPU1 --define=_FLASH -g --c99 --diag_warning=225 --emit_warnings_as_errors --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+Finished building: "../main.c"
+ 
+Building file: "../Common/boot_core.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 --float_support=fpu32 --tmu_support=tmu0 -O0 --include_path=".." --include_path="../Common" --include_path="../../Common" --include_path="../Device/include" --include_path="../Device/driverlib" --include_path="../Device/FlashAPI" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --define=CPU1 --define=_FLASH -g --c99 --diag_warning=225 --emit_warnings_as_errors --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="Common/boot_core.d_raw" --obj_directory="Common"  "../Common/boot_core.c"
+Finished building: "../Common/boot_core.c"
+ 
+Building file: "../Common/boot_io.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 --float_support=fpu32 --tmu_support=tmu0 -O0 --include_path=".." --include_path="../Common" --include_path="../../Common" --include_path="../Device/include" --include_path="../Device/driverlib" --include_path="../Device/FlashAPI" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --define=CPU1 --define=_FLASH -g --c99 --diag_warning=225 --emit_warnings_as_errors --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="Common/boot_io.d_raw" --obj_directory="Common"  "../Common/boot_io.c"
+Finished building: "../Common/boot_io.c"
+ 
+Building file: "../Common/sci_port.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 --float_support=fpu32 --tmu_support=tmu0 -O0 --include_path=".." --include_path="../Common" --include_path="../../Common" --include_path="../Device/include" --include_path="../Device/driverlib" --include_path="../Device/FlashAPI" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --define=CPU1 --define=_FLASH -g --c99 --diag_warning=225 --emit_warnings_as_errors --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="Common/sci_port.d_raw" --obj_directory="Common"  "../Common/sci_port.c"
+Finished building: "../Common/sci_port.c"
+ 
+Building file: "../Common/update_service.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 --float_support=fpu32 --tmu_support=tmu0 -O0 --include_path=".." --include_path="../Common" --include_path="../../Common" --include_path="../Device/include" --include_path="../Device/driverlib" --include_path="../Device/FlashAPI" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --define=CPU1 --define=_FLASH -g --c99 --diag_warning=225 --emit_warnings_as_errors --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="Common/update_service.d_raw" --obj_directory="Common"  "../Common/update_service.c"
+Finished building: "../Common/update_service.c"
+ 
+Building file: "../Device/source/device.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 --float_support=fpu32 --tmu_support=tmu0 -O0 --include_path=".." --include_path="../Common" --include_path="../../Common" --include_path="../Device/include" --include_path="../Device/driverlib" --include_path="../Device/FlashAPI" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --define=CPU1 --define=_FLASH -g --c99 --diag_warning=225 --emit_warnings_as_errors --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="Device/source/device.d_raw" --obj_directory="Device/source"  "../Device/source/device.c"
+Finished building: "../Device/source/device.c"
+ 
+Building file: "../Device/source/f280015x_codestartbranch.asm"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 --float_support=fpu32 --tmu_support=tmu0 -O0 --include_path=".." --include_path="../Common" --include_path="../../Common" --include_path="../Device/include" --include_path="../Device/driverlib" --include_path="../Device/FlashAPI" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --define=CPU1 --define=_FLASH -g --c99 --diag_warning=225 --emit_warnings_as_errors --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="Device/source/f280015x_codestartbranch.d_raw" --obj_directory="Device/source"  "../Device/source/f280015x_codestartbranch.asm"
+Finished building: "../Device/source/f280015x_codestartbranch.asm"
+ 
+Building target: "AVP32F00157_Bootloader.out"
+Invoking: C2000 Linker
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla0 --float_support=fpu32 --tmu_support=tmu0 -O0 --define=CPU1 --define=_FLASH -g --c99 --diag_warning=225 --emit_warnings_as_errors --gen_func_subsections=on --abi=eabi -z -m"AVP32F00157_Bootloader.map" --stack_size=0x300 --warn_sections -i"../Device/lib" -i"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/lib" -i"../Common" -i"../../Common" --reread_libs --diag_suppress=10063 --xml_link_info="AVP32F00157_Bootloader_linkInfo.xml" --entry_point=code_start --rom_model -o "AVP32F00157_Bootloader.out" "./flash_port.obj" "./main.obj" "./Common/boot_core.obj" "./Common/boot_io.obj" "./Common/sci_port.obj" "./Common/update_service.obj" "./Device/source/device.obj" "./Device/source/f280015x_codestartbranch.obj" "../bootloader.cmd"  -llibc.a -ldriverlib.lib -lFAPI_F280015x_EABI_v2.00.10.lib 
+<Linking>
+Finished building target: "AVP32F00157_Bootloader.out"
+ 
+
+**** Build Finished ****

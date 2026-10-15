@@ -1,0 +1,126 @@
+来源: ADP32F035/从F2803X移植到ADP32F035B工程概要说明.pdf
+来源编号: S069
+
+=== PDF页 1 ===
+从 F2803x 移植到 ADP32F035B 工程概要
+版本 V1.0
+应用指导
+湖南进芯电子科技有限公司
+
+=== PDF页 2 ===
+一、 概述
+本文档将重点阐述 F2803x 与 ADP32F035B 的差异性，以支持客户快速移植。
+行文将重点介绍两款芯片在应用或测试中关键注意点，如用户对具体功能模块有
+进一步了解需要，可查阅相应产品规格书。 二、 移植工程范围
+1. 器件资源差异性对比
+项点 F28035 ADP32F035A ADP32F035B
+芯片主频（MAX）
+60Mhz @
+CORE1.8V
+60Mhz @
+CORE1.5V
+100Mhz @
+CORE1.2V
+芯片功耗 460mW @ 60Mhz 280mW @ 60Mhz 200mW @ 100Mhz
+片内 LDO 3.3/1.8 VREG
+3.3/1.8 VREG
+1.8/1.5 LDO
+3.3/1.8 VREG
+1.8/1.2LDO
+TEST2
+VSS
+芯片内部测试引脚
+建议悬空
+TEST2 为芯片内核
+1.5V 供电的输出引
+脚
+建议外部接 2.2uF
+芯片内部测试引脚
+必须悬空
+2. Flash 及 Flash API
+ADP32F035B 基于国内流片厂商主流的制程工艺设计，FLASH IP 与 F2803x
+完全不同，但 FLASH 分区及寻址与 F28035 保持一致，地址段分配如下：
+地址范围 程序与数据空间
+0x3E 8000 to 0x3E 9FFF Sector H (8K × 16)
+0x3E A000 to 0x3E BFFF Sector G (8K × 16)
+0x3E C000 to 0x3E DFFF Sector F (8K × 16)
+0x3E E000 to 0x3E FFFF Sector E (8K × 16)
+0x3F 0000 to 0x3F 1FFF Sector D (8K × 16)
+0x3F 2000 to 0x3F 3FFF Sector C (8K × 16)
+0x3F 4000 to 0x3F 5FFF Sector B (8K × 16)
+0x3F 6000 to 0x3F 7F7F Sector A (8K × 16)
+0x3F 7F80 to 0x3F 7FF5 Program to 0x0000 when using the
+Code Security Module
+0x3F 7FF6 to 0x3F 7FF7 Boot-to-Flash Entry Point (program
+branch instruction here)
+0x3F 7FF8 to 0x3F 7FFF Security Password (128-Bit) (Do not
+program to all zeros)
+与 F2803x 类似，在对片上 FLASH 区域进行擦除、编程及校验操作时，工程
+中需要调用 FLASH API 接口文件。
+一般情况下，用户采用的是芯片内部 BOOT-ROM 区域的 FLASH API，即工程
+含有 2803x_FlashAPI_BootROMSymbols.lib 编译，ADP32F035B 在 BOOT-ROM 相同
+的地址集成了对其片上 FLASH 进行操作的 FLASH API，用户不需要替换。
+
+=== PDF页 3 ===
+如 果 采 用 的 非 BOOT-ROM 区 域 的 FLASH API ， 即 工 程 中 含 有
+Flash2803x_API_V100.lib 编译，在移植工程时需要将此文件替换。
+如果用户采用的 F28031、F28032、F28033 等型号，这些型号 FLASH 一个扇
+区空间大小为 4K*16bit，而工程移植到 ADP32F035B 上，需要按照 ADP32F035B
+扇区重新调整 CMD 文件及对 FLASH 操作的扇区地址范围。
+Uint16 Flash_Erase(Uint16 SectorMask, FLASH_ST *FEraseStat);
+3. 芯片供电及上、下电时序
+与 F28035 类似，ADP32F035B 同样支持板级 3.3V 单电源供电方式。设计上
+为了做到供电方式兼容，ADP32F035B 增加一级 1.8V 转 1.2V 的线性 LDO，该 LDO
+系统内部默认配置输出电压，用户不需要对 LDO 进行程序配置。
+器件的上、下电时序由芯片内部匹配，与原 F2803x 产品设计保持兼容，用
+户不需要做其它调整。
+4. 晶振及运行主频
+ADP32F035B 内部集成片上 OSC，分别为 OSC1、OSC2，逻辑上与 F2803x 一致；
+ADP32F035B 与 ADP32F035A 不同，内部 OSC 已经修调可以正常使用。
+注意：目前送样批次还未进行三温修调，只在常温使用，后续量产批次批
+次会进行三温修调。
+5. Flash 配置参数
+ADP32F035B 器件的最大工作频率为 100Mhz,不同频率下所需最小的闪存/一
+次性可编程（OTP）等待状态，可参考如下：
+SYSCLKOUT (MHz) SYSCLKOUT (ns) 页等待状态
+（1） 随机等待状态
+（1） OTP
+100 10 3 3 5
+80 12.5 3 3 4
+60 16.67 2 2 3
+55 18.18 2 2 3
+50 20 1 1 2
+45 22.22 1 1 2
+40 25 1 1 2
+35 28.57 1 1 2
+30 33.33 1 1 1
+25 40 0 1 1
+6. ADC 模数转换器
+ADP32F035B 器件 ADC 最大时钟频率为 60Mhz，当芯片的工作频率大于 60Mhz
+的场景请对 ADC 时钟进行 2 分频。
+
+=== PDF页 4 ===
+ADP32F035B 器件通过对寄存器 ADCCTL2.CLKDIV2EN 位置 1 进行 ADC 时钟 2
+分频。注意此寄存器受 EALLOW 保护。
+7. 随机存取存储器（RAM）
+ADP32F035B 器件相较于 F2803x 新增 8K x 16 字的 L4 RAM 区，地址范围为
+0x00 A000 - 0x00BFFF。
+新增 RAM 需要替换我司的 f28035.gel 文件 CCS 调试 memory 才可见，或者用
+户直接在 F2803x 的 f28035.gel 中新增 GEL_MapAdd(0xA000,1,0x2000,1,1)。新
+增代码如下：
+8. 通用输入/输出（GPIO）
+ADP32F035B 器件无法将 GPIO0/GPIO1 配置成输入模式使用，且输入读取
+GpioDataRegs 寄存器的值恒为 0。
+
+=== PDF页 5 ===
+9. 器件 ID 编码
+名称 地址范围 大小（x16） 赋值关系 受 EALLOW 保护
+部件 ID 寄存器 0x3D 7C04 1
+ADP32F035BQP80S 0x00BF
+ADP32F035BQP64S 0x00BF
+ADP32F035BQN56S 0x00BF
+否
+类别 ID 寄存器 0x0882 1 ADP32F035B 0x00BF 否
+10. 器件开发
+ADP32F035B 器件开发支持 CCS 仿真代码工程环境，工程创建、调试可参照
+F28035 配置方式。

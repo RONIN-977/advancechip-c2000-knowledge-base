@@ -1,0 +1,88 @@
+来源: AVP32F069/AVP32F069 产品应用注意事项 20231123.pdf
+来源编号: S143
+
+=== PDF页 1 ===
+AVP32F069 数字信号处理器
+产品应用注意事项
+编号：JXDZ3.590.018 ZYSX
+湖南进芯电子科技有限公司
+2023 年 12 月
+V1.0
+
+=== PDF页 2 ===
+AVP32F069 Digital Signal Processor V1.0
+2
+湖南进芯电子科技有限公司
+目 次
+1.软件问题一：比较器 2 和比较器 3 的使能内部连接错...............................................3
+2.注意事项二：Flash API 库文件的修改...........................................................................4
+3.注意事项三：内部振荡器（INTOSC）的精度及修调.................................................4
+附件 A：................................................................................................................................... 5
+附件 B：....................................................................................................................................5
+
+=== PDF页 3 ===
+AVP32F069 Digital Signal Processor V1.0
+3
+湖南进芯电子科技有限公司
+1. 软件问题一：比较器 2 和比较器 3 的使能内部连接错
+问题描述：下图是一个比较器的框图，其中比较器 2 的 CMPDACEN 控制位被连接
+到比较器 3，来控制比较器 3 的使能；相反，比较器 3 的 CMPDACEN 控制比较器 2
+的使能。
+解决方案：
+初始化比较器时，没有以上 BUG 的情况下，应如下代码所示：
+Comp1Regs.COMPCTL.bit.COMPDACEN = 1; // Power up Comparator 1 locally
+Comp2Regs.COMPCTL.bit.COMPDACEN = 1; // Power up Comparator 2 locally
+Comp3Regs.COMPCTL.bit.COMPDACEN = 1; // Power up Comparator 3 locally
+实际情况如下解释：
+Comp1Regs.COMPCTL.bit.COMPDACEN = 1; // Power up Comparator 1 locally
+Comp2Regs.COMPCTL.bit.COMPDACEN = 1; // Power up Comparator 3 locally
+Comp3Regs.COMPCTL.bit.COMPDACEN = 1; // Power up Comparator 2 locally
+Note：应特别注意比较器 2 和比较器 3 不同时使用的情况。
+
+=== PDF页 4 ===
+AVP32F069 Digital Signal Processor V1.0
+4
+湖南进芯电子科技有限公司
+2. 注意事项二：Flash API 库文件的修改
+描述：AVP32F069 采用了国内先进 eFlash 工艺，提升了 Flash 的访问和操作性能。
+对 Flash 进行 Erase 和 Program 操作，具有更短的操作时间。AVP32F069 为在调试、
+生产过程中的擦除烧录，或在产品运行过程中的在线烧录功能，提供了两种库文件。
+一种是符号库文件（2806x_BootROM_API_TABLE_Symbols.lib、
+2806x_BootROM_API_TABLE_Symbols_fpu32.lib），库仅提供 flash API 函数的重定
+位，函数体在芯片的 Boot ROM 区域。进芯 AVP32F069 出厂已对函数体做了修改。
+另一种是包含函数体的库文件（Flash2806x_API_V100.lib、
+Flash2806x_API_wFPU_Library.lib），此库文件在应用程序工程中引用，并需要从
+Flash 存储中复制到 RAM 中才能有效执行。附件提供此库文件链接。
+Flash API 的应用有以下三种情况，只有第 3 中情况下，才需要对文件进行替
+换。
+情况 1：利用编辑环境（CCS）和通用烧录工具（C2Prog、Uniflash 等）对
+AVP32F069 进行擦除、烧录等操作。
+情况 2：应用程序中引用符号库文件，通过程序代码对 Flash 操作。
+情况 3：应用程序中引用含函数体库文件，通过程序代码对 Flash 操作。
+3. 注意事项三：内部振荡器（INTOSC）的精度及修调
+系统使用内部振荡器时运行，不要调用 Osc1Comp 和 Osc2Comp 的振荡器补偿函数。
+未调用补偿时，振荡器高温下有±3%左右的误差；调用补偿，误差加剧。
+
+=== PDF页 5 ===
+AVP32F069 Digital Signal Processor V1.0
+5
+湖南进芯电子科技有限公司
+附件 A：
+Flash2806x_API_V100_FLASH.lib
+附件 B：
+
+=== PDF页 6 ===
+AVP32F069 Digital Signal Processor V1.0
+6
+湖南进芯电子科技有限公司
+
+=== PDF页 7 ===
+AVP32F069 Digital Signal Processor V1.0
+7
+湖南进芯电子科技有限公司
+联系方式
+公司网址： www.advancechip.com
+联系邮箱： sales@advancechip.com
+销售联系电话： 0731-88731027（长沙）
+公司总部地址： 长沙市湘江新区东方红街道北斗产业园·黄金园 A5 栋
+南京销售中心： 南京市秦淮区卡子门大街 19 号紫云智慧广场 6 号楼 15 层

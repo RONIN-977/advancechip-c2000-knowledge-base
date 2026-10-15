@@ -1,0 +1,384 @@
+来源: 文档/AVP32F075移植注意事项(1).pptx
+来源编号: S208
+
+=== 幻灯片 1 ===
+2026
+年
+05
+月
+AVP32F075
+移植注意事项
+与时俱进
+  
+持续创芯
+
+=== 幻灯片 2 ===
+产品规划图
+/ ADVCHIP
+DSP
+SOC
+AVP32F08
+150MHz,256K*16bit Flash
+34K*16bit SARAM
+AVP32F335 
+150MHz,256K*16bit Flash
+34K*16bit SARAM
+AEC-Q100
+AEC-Q100
+AVP32F035
+90MHz,128K*16bit Flash
+50K*16bit SARAM
+AVP32F069
+90MHz,128K*16bit Flash
+50K*16bit SARAM
+AVP32F0049
+ 
+100MHz,128K*16bit Flash
+50K*16bit SARAM
+AEC-Q100
+AVP32F0025
+120MHz,64K*16bit Flash
+12K*16bit SARAM
+AVP32F0039
+120MHz,192K*16bit Flash
+34.5K*16bit SARAM
+AEC-Q100
+AEC-Q100
+AVP32F00157
+120MHz,128K*16bit Flash
+18K*16bit SARAM
+AVP32F379D
+200MHz,512K*16bit Flash
+102K*16bit SARAM
+AVP32F00137
+120MHz,128K*16bit Flash
+18K*16bit SARAM
+AEC-Q100
+AEC-Q100
+AVP32F28P65
+200MHz; lockstep 
+Flash:1.28MB RAM:248KB
+AEC-Q100
+ADP32F1X
+ 
+150MHz,128K*16bit Flash
+18K*16bit SARAM
+ADP32F08
+100MHz,64K*16bit Flash
+18K*16bit SARAM
+ADP32F03X
+ 
+60MHz,64K*16bit Flash
+10K*16bit SARAM
+ADP32F03XB
+100MHz,64K*16bit Flash
+18K*16bit SARAM
+ADP32F036
+ 
+100MHz,64K*16bit Flash
+18K*16bit SARAM
+AEC-Q100
+AEC-Q100
+ADP16F03
+ 
+150MHz,32K*16bit Flash
+2K*16bit SARAM
+AEC-Q100
+ADM16F03A
+LDO40V/12V,LD012V/5V
+3
+个半桥驱动
+/LIN
+收发器
+ADM16F03A1Q
+LDO40V/12V,LD012V/5V
+3
+个半桥驱动
+/LIN
+收发器
+ADM16F03A2Q
+LDO40V/12V,LD012V/5V
+3
+个半桥驱动
+/LIN
+收发器
+ADM32F036Q
+LDO60V/12V,LD012V/5V
+3
+个半桥驱动
+LIN_PHY/CAN_FD
+ADM32F036A2Q
+LDO40V/12V,LD012V/5V
+3
+个半桥驱动
+LIN_PHY/CAN_FD
+ADM32F036A3Q
+LDO60V/12V,LD012V/5V
+3
+个半桥驱动
+LIN_PHY/CAN_FD
+ADM735DQ
+2*AVP32F335
+2*AVP32F035
+ADM735EQ
+2*AVP32F335
+3*AVP32F035
+AEC-Q100
+AEC-Q100
+AEC-Q100
+AEC-Q100
+AEC-Q100
+AEC-Q100
+AEC-Q100
+32
+位浮点
+DSP
+32
+位定点
+DSP
+16
+位定点
+DSP
+单核
+SoC
+多核
+SoC
+AVP32F28P55
+150MHz; 
+lockstep
+Flash:1.0MB RAM:133KB
+AEC-Q100
+
+=== 幻灯片 3 ===
+AVP32F379x/07x - 
+资源差异对比
+项点
+F28075
+AVP32F075
+芯片主频
+（MAX）
+120
+Mhz @ CORE1.2V
+120
+Mhz @ CORE1.1V
+芯片功耗
+（
+VREG)
+550
+mW @ 
+12
+0
+Mhz
+470mW
+ @ 
+12
+0
+Mhz
+片内L
+DO
+3.3/1.2 VREG
+3.3/1.1 VREG
+FLASH
+随机等待配置
+N=2
+N+3
+
+=== 幻灯片 4 ===
+型号
+AVP32F379D/377D
+AVP32F379S/377S
+AVP32F374S
+AVP32F076/F075
+CPU(Mhz
+）
+200+200
+200
+200
+120
+FPU32
+YES
+YES
+YES
+YES
+TMU32/DMA
+Type0/Type0
+Type0/Type0
+Type0/Type0
+Type0/
+Type0
+CLA
+Type2-
+Type2
+Type2
+Type2
+Type2
+CLB
+4-Type2/-
+4-Type2/-
+-
+4-
+Type2/-
+RAM/Flash (8 bit)
+204Kb/1.0Mb
+164Kb/1.0Mb
+132Kb/512Kb
+100Kb/512kb
+PWM/HRPWM
+24/16(Type4)
+24/16(Type4)
+24/16(Type4)
+24/16
+(Type4)
+12-ADC MSPS/
+C
+hannels
+3.5MSPS/24
+3.5MSPS/24
+3.5MSPS/24
+3.1MSPS/17
+16-ADC MSPS/
+C
+hannels
+1.1MSPS/24
+1.1MSPS/24
+-/-
+-/-
+ECAP/HRCAP/EQEP
+6/0/3
+6/0/3
+6/0/3
+6/0/3
+PGA/CMPSS/DAC/EMIF
+0/8/3/1
+0/8/3/1
+0/8/3/1
+0/8/3/1
+Spi
+/Sci/CAN/I2C/LIN/USB
+3/4/
+2
+/2/0/1
+3/4/
+2
+/2/0/1
+3/4/
+2
+/2/0/1
+3/4/
+2
+/2/0/1
+MCBSP/CANFD/PMBUS/SDFM
+2/
+0
+/0/6
+2/
+0
+/0/8
+2/0/0/8
+2/0/0/8
+uPP/LFU/AES/JTAG Lock
+1/0/0/1
+1/0/0/1
+1/0/0/1
+0/0/0/1
+GPIO/AIO
+169/0
+169/0
+169/0
+97/0
+供电
+3.3V/1.1V
+3.3V/1.1V
+3.3V/1.1V
+3.3V
+封装
+BGA337/LQFP176/100
+BGA337/LQFP176/100
+BGA337/LQFP176/100
+LQFP176/100
+产品参数
+/ ADVCHIP
+
+=== 幻灯片 5 ===
+AVP32F075 - 
+内核电压差异
+F075
+集成了内部
+LDO
+，支持单电源供电，所以此差异可以忽略
+      
+
+=== 幻灯片 6 ===
+AVP32F075 - flash
+配置
+使能预取缓冲和数据缓冲提升代码效率
+单核系列的FLASH执行速度比双核快，我司在
+FRDCNTL[RWAIT]上面默认+3
+标准读取模式和复位后的默认读取模式，每次对闪存的读取访问将在
+RWAIT+1
+个时钟周期后返回
+Prefetch mode:
+  
+提升线性代码的执行效率
+  
+Data cache:
+ 
+提升数据空间读取性能
+当
+RWAIT
+为零时，预取和数据缓存均被绕过
+      
+FLASH
+预取
+模式
+
+=== 幻灯片 7 ===
+描述：
+GS12RAM-GS15RAM
+为
+379
+、
+379
+、
+377
+、
+375
+独有
+F076
+和
+F075
+的
+RAM
+没有
+GS8RAM~GS15RAM
+AVP32F37x/07x - RAM
+分配
+F28076
+和
+F28075
+F28379
+
+=== 幻灯片 8 ===
+电邮
+/
+网址
+ 
+Email
+：
+sales@advancechip.com
+WEB
+：
+www.advancechip.com
+公司地址
+长沙市
+湘江新
+区东方红街道
+北斗产业园·黄金园A5栋  
+联系电话
+0731-88731027
+（长沙总部）
+025-66051670
+（南京销售中心）
+联系我们
+COMPANY PROFILE
+感谢观看

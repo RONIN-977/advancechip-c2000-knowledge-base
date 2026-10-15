@@ -1,0 +1,3821 @@
+来源: ADP32F1X/ADP32F2812A_150BG J型数字信号处理器详细规范.pdf
+来源编号: S082
+
+=== PDF页 1 ===
+
+
+=== PDF页 2 ===
+Q/J04JX 02-2022
+II
+目 次
+1 范围......................................................................................................................... 1
+2 引用文件................................................................................................................. 1
+3 要求......................................................................................................................... 1
+3.1 总则................................................................................................................. 1
+3.2 设计、结构和外形....................................................................................... 1
+3.3 电特性..........................................................................................................11
+3.4 电试验要求................................................................................................. 59
+3.5 静电放电敏感度等级（ESDS）................................................................59
+3.6 器件标志..................................................................................................... 59
+4 质量保证规定....................................................................................................... 60
+4.1 抽样和检验................................................................................................. 60
+4.2 筛选............................................................................................................. 60
+4.3 鉴定............................................................................................................. 61
+4.4 质量一致性检验......................................................................................... 61
+4.5 检验方法..................................................................................................... 65
+4.6 用户监制..................................................................................................... 65
+4.7 用户验收..................................................................................................... 65
+4.8 用户破坏性物理分析（DPA）..................................................................65
+4.9 用户质量控制要求..................................................................................... 65
+4.10 应用验证..................................................................................................... 65
+4.11 晶圆批验收..................................................................................................65
+4.12 应用指南..................................................................................................... 65
+5 交货准备............................................................................................................... 65
+6 说明事项............................................................................................................... 65
+6.1 预定用途..................................................................................................... 66
+6.2 订购文件应明确的内容............................................................................. 66
+6.3 替代性......................................................................................................... 66
+6.4 操作............................................................................................................. 66
+6.5 失效处理..................................................................................................... 66
+
+=== PDF页 3 ===
+Q/J04JX 02-2022
+III
+6.6 储存............................................................................................................. 67
+6.7 检查水平..................................................................................................... 67
+附录 A......................................................................................................................... 68
+附录 B......................................................................................................................... 69
+附录 C......................................................................................................................... 70
+附录 D......................................................................................................................... 71
+附录 E..........................................................................................................................72
+附录 F.......................................................................................................................... 73
+附录 G......................................................................................................................... 74
+附录 H......................................................................................................................... 75
+
+=== PDF页 4 ===
+Q/J04JX 02-2022
+IV
+前 言
+本规范是 ADP32F2812A_150BG J 数字信号处理器产品的详细规范。
+本规范与 Q/J04JX 02-2016 相比主要变化如下：
+a) 按 GJB 7400-2011 标准纠正筛选 PDA 指标；
+b) 按 GJB 7400-2011 标准纠正高温贮存、高压蒸煮试验样本量要求；
+本规范附录 A、B、C、D、E、F 为规范性附录，附录 G、H 为资料性附录。
+本规范起草单位：湖南进芯电子科技有限公司。
+本规范主要起草人：刘律辑。
+Q/J04JX 02 于 2016 年 11 月首次发布，于 2022 年 12 月第一次修订。
+
+=== PDF页 5 ===
+Q/J04JX 02-2022
+1
+半导体集成电路
+ADP32F2812A_150BG J 型数字信号处理器
+详 细 规 范
+1 范围
+本规范规定了半导体集成电路 ADP32F2812A_150BG J 型数字信号处理器（以下简称器
+件）的详细要求。
+2 引用文件
+下列文件中的有关条款通过引用而成为本规范的条款，凡注日期或版次的引用文件，其
+后的任何修改单（不包括勘误的内容）或修订版都不适用于本规范，但提倡使用本规范的各
+方探讨使用其最新版本的可能性。凡不注日期的引用文件，其最新版本适用于本规范。
+GB/T 1804-1992 一般公差线性尺寸的未注公差
+GB/T 17574-1998 半导体器件集成电路第 2 部分：数字电路
+GJB 548B-2005 微电子器件试验方法和程序
+GJB 597B-2012 半导体集成电路通用规范
+GJB 7400-2011 合格制造厂认证用半导体集成电路通用规范
+GJB 4027A-2006 军用电子元器件破坏性物理分析方法
+GJB 360B-2009 电子及电气元件试验方法
+GJB 841-1990 故障报告、分析和纠正措施系统
+GJB 3014-1997 电子元器件统计过程控制体系
+3 要求
+3.1 总则
+本规范规定的器件应符合本规范的所有要求。本规范的要求与GJB 7400-2011不一致时，
+应以本规范为准。
+3.2 设计、结构和外形
+3.2.1 工艺结构
+器件基于 0.18μm 双多晶六铝嵌入式 Flash 工艺设计生产，规模约 400 万门；芯片面积
+14.5mm2，厚度 350μm±20μm；BGA179（宽温树脂封装），采用激光打标。
+3.2.2 绝对最大额定值
+数字 IO 电压（VDDIO）（相对于 VSS）：-0.3V～4.6V；
+FLASH 电压（VDD）（相对于 VSSF） ：-0.3V～2.5V；
+ADC IO 电压（VDDAIO）（相对于 VSSA）：-0.3V～4.6V；
+ADC 内核电压（VDD1）（相对于 VSSA）：-0.3V～2.5V；
+数字内核电压（VDD）（相对于 VSS）：-0.3V～2.5V；
+ADC 电压（VSS1，VSSAIO，AVSSREF， VSSA1，VSSA2）（相对于 VSS）：-0.3V～0.3V；
+输入电压（VIN）：-0.3V～4.6V；
+输出电压（VO）：-0.3V～4.6V；
+
+=== PDF页 6 ===
+Q/J04JX 02-2022
+2
+输入钳位电流 a（IIK，VIN<0 或 VIN>VDDIO）：±20mA；
+输出钳位电流（IOK，VO<0 或 VO>VDDIO）：±20mA；
+最大功耗（PD）：500mW；
+贮存温度范围（TSTG）：-65℃～150℃；
+最高引线耐焊接温度（Th）：300℃（10s）。
+3.2.3 推荐工作条件
+数字 IO 电压（VDDIO）：3.135V～3.465V；
+FLASH 电压（VDD）：1.805V～1.995V；；
+ADC IO 电压（VDDAIO）：3.135V～3.465V；
+ADC 内核电压（VDDA2）：3.135V～3.465V；
+数字内核电压（VDD）：1.805V～1.995V；
+ADC 数内核电压（VDD1）：1.805V～1.995V；
+地电压（VSS，VSS1，VSSAIO，AVSSREF， VSSA1，VSSA2）：0V；
+系统时钟频率（fSYSCLKOUT）：2MHz～150MHz；
+输入高电平电压（VIH）：2V～VDDIO；
+输入低电平电压（VIL）：0V～0.4V；
+输出高电平电流（IOH）：0mA～-4mA（VOH=2.4V，除 GROUP2
+b外所有的 I/O）；
+0mA～-8mA（VOH =2.4V，GROUP2
+b)）；
+输出低电平电流（IOL）：0mA～4mA（VOL = VOLMAX，除 GROUP2
+b)外所有的 I/O）；
+0mA～8mA（VOL = VOLMAX，GROUP2
+b)）；
+FLASH 时序 c Flash 最小编程次数（Nf ）：写入/擦除次数 30000 次（0℃～85℃）；
+OTP 最小编程次数（NOTP）：1 次写入（0℃～85℃）；
+工作环境温度（TA）：-55℃～125℃。
+a 每个引脚上的持续钳制电流为±20mA。这包括模拟输入，此模拟输入有一个内部钳制电路，此电
+路能够将电压固定在一个高于 VDDA2 或者低于 VSSA2 的二极管管压降上。
+b 组 2 引脚如下：XINTF 引脚， TDO，CLKOUT，F14/PLLDIS，MU0，和 MU1。
+c Flash 最小编程次数是指在编程温度 0℃～85℃时写入/擦除的最小次数。Flash 中程序运行或程序/
+数据读出则在-55℃～125℃温度范围。
+3.2.4 器件外形
+器件采用 179 引线球栅阵列（BGA179），外形尺寸见图 1。
+
+=== PDF页 7 ===
+Q/J04JX 02-2022
+3
+注释：单位毫米（mm）
+图 1 外形尺寸图
+
+=== PDF页 8 ===
+Q/J04JX 02-2022
+4
+3.2.5 引出端排列
+引出端排列按图 2 规定。引出端符号别名及功能说明见 3.2.6。
+图 2 引脚分配图（底视图）
+
+=== PDF页 9 ===
+Q/J04JX 02-2022
+5
+3.2.6 引脚说明
+名称
+引脚
+编号
+I/O/Z PU/PD 说明 名称
+引脚
+编号
+I/O/Z PU/PD 说明
+VDDAIO B2 3.3V 模拟 I/O 电源引脚 F11 J2 I/O PU GPIO 或者 McBSP 接收帧同步
+INB0 C2 I - 针对采样和保持 B 的 8 通道模
+拟输入。在 VDDA1，VDDA2，和
+VDDAIO 引脚被完全加电之前，
+不应驱动 ADC 引脚
+VDDIO J4 3.3V I/O 数字电源引脚
+INB1 C3 I - VSS K1 内核与数字 I/O 接地脚
+INB2 B1 I - F2 K2 I/O/Z - GPIO 或者 SPI 时钟
+INB3 C1 I - F3 K4 I/O/Z - GPIO 或者 SPI 从器件发送使能
+INB4 D3 I - VDD L1
+1.8V 或者 1.9V 内核数字电源
+引脚
+INB5 D2 I - VSSF L2 内核与数字 I/O 接地脚。
+INB6 D1 I - F0 M1 I/O/Z -
+GPIO 或者 SPI 从器件输入，主
+器件输出
+INB7 F5 I - F1 N1 I/O/Z -
+GPIO 或者 SPI 从器件输出，主
+器件输入
+VREFM E4 I/O ADC 电压基准输出 (1V) W7 N2 I/O PU GPIO 或者 PWM 输出引脚 #7
+VREFP E2 I/O - ADC 电压基准输出 (2V) W8 P2 I/O PU GPIO 或者 PWM 输出引脚#8
+AVSSREF E3 ADC 模拟 GND W9 N3 I/O PU GPIO 或者 PWM 输出引脚 #9
+AVDDREF E1 - ADC 模拟电源 (3.3V) W10 P3 I/O PU GPIO 或者 PWM 输出引脚 #10
+VDDA1 F4 ADC 模拟 3.3V 电源 W11 L4 I/O PU GPIO 或者 PWM 输出引脚#11
+VSSA1 F3 ADC 模拟 GND W12 M4 I/O PU GPIO 或者 PWM 输出引脚 #12
+RESEXT F2 O ADC 外部电流偏置电阻器 VSS P4 内核与数字 I/O 接地脚
+VSS G4 内核与数字 I/O 接地脚 IOB6 K5 I/O PU GPIO 或者定时器 3 输出
+F13 G2 I/O PU
+GPIO 或者 McBSP 接收到的串行
+数据
+IOB7 N5 I/O PU GPIO 或者定时器 4 输出
+F12 G1 I/O -
+GPIO 或者 McBSP 被发送的串行
+数据
+VDD P5
+1.8V 或者 1.9V 内核数字电源
+引脚
+VDD H1
+1.8V 或者 1.9V 内核数字电
+源引脚
+IOB8 M5 I/O PU GPIO 或者捕捉输入 #4
+F9 H2 I/O PU GPIO 或者 McBSP 接收时钟 IOB9 M6 I/O PU GPIO 或者捕捉输入#5
+F10 H4 I/O PU GPIO 或者 McBSP 发送帧同步 IOB10 P6 I/O PU GPIO 或者捕捉输入 #6
+F8 J1 I/O PU GPIO 或者 McBSP 发送时钟 IOB13 N6 I/O PU GPIO 或者比较 4 输出触发
+IOB14 L6 I/O PU GPIO 或者比较 5 输出触发 W6 K14 I/O PU GPIO 或者 PWM 输出引脚 #6
+IOB15 K7 I/O PU GPIO 或者比较 6 输出触发 IOA6 J11 I/O PU GPIO 或者定时器 1 输出
+VDDIO L7 3.3V I/O 数字电源引脚 IOA7 J13 I/O PU GPIO 或者定时器 2 输出
+VPP1_EN N7 I/O/Z -
+VPP1 测试端/片内 ECAN 收发器
+EN 端
+IOA8 H10 I/O PU GPIO 或者捕捉输入 #1
+
+=== PDF页 10 ===
+Q/J04JX 02-2022
+6
+名称
+引脚
+编号
+I/O/Z PU/PD 说明 名称
+引脚
+编号
+I/O/Z PU/PD 说明
+VPP0_EP M7 I/O/Z - VPP0 测试端/片内 ECAN 收发器 EP 端 IOA9 H11 I/O PU GPIO 或者捕捉输入#2
+VDDIO/
+CANX_E
+N8
+该引脚默认接 VDDIO，用户需要启动片内
+CAN_Driver 时，将该引脚接地
+IOA10 H12 I/O PU GPIO 或者捕捉输入 #3
+VSS P8 内核与数字 I/O 接地脚 IOD0 H14 I/O PU
+GPIO 或者定时器 1 比较输
+出触发
+IOB11 L8 I/O PU GPIO 或者定时器方向 VDD G12
+1.8V ，1.9V 内核数字电源引
+脚
+IOB12 K8 I/O PU GPIO 或者定时器时钟输入 VDDIO G11 3.3V I/O 数字电源引脚
+VDD P9 1.8V 或者 1.9V 内核数字电源引脚 IOD1 G10 I/O PU
+GPIO 或者定时器 2 比较输
+出触发或者外部 ADC 转换开
+始 EM1
+X0 M9 O - 振荡器输出 IOA11 F14 I/O PU GPIO 或者定时器方向
+OSC K9 I - 振荡器输入，输入到内部振荡器,这个引
+脚也被用于提供一外部时钟
+IOA12 F13 I/O PU GPIO 或者定时器时钟输入
+VSS_alg M10 内核与数字 I/O 接地脚 CLKOUT F11 O - 取自 SYSCLKOUT 的输出时钟
+被用于外部等待状态生成并
+作为一个通用时钟源
+IOD5 P10 I/O PU GPIO 或者定时器 3 比较输出触发 VSS E14 内核与数字 I/O 接地脚
+IOD6 P11 I/O PU
+GPIO 或者定时器 4 比较输出触发或者
+外部 ADC 转换开始 EM2
+IOA13 E13 I/O PU GPIO 或者比较 1 输出触发
+VSS L11 内核与数字 I/O 接地脚 IOA14 E11 I/O PU GPIO 或者比较 2 输出触发
+VDD P12 1.8V 或者 1.9V 内核数字电源引脚 IOA15 F10 I/O PU GPIO 或者比较 3 输出触发
+F6 N12 I/O PU GPIO 或者 eCAN 发送数据 TE D13 I PU 内部上拉，JTAG 测试模式
+F7 N13 I/O PU GPIO 或者 eCAN 接收数据 TDO D12 O/Z -
+JTAG 扫描输出，测试数据输
+出(TDO)
+F4 P14 I/O/Z - GPIO 或者 SCI 异步串行端口发送数据 VDD C14
+1.8V 、 1.9V 内核数字电源
+引脚
+F5 M13 I/O/Z - GPIO 或者 SCI 异步串行端口接收数据 VSS B14 内核与数字 I/O 接地脚
+W1 M12 I/O PU GPIO 或者 PWM 输出引脚 #1 TDI C13 I PU
+带有内部上拉电阻的 JTAG 测
+试数据输入(TDI)
+W2 M14 I/O PU GPIO 或者 PWM 输出引脚#2 TSEL A13 I PD 测试引脚.必须接地
+W3 L12 I/O PU GPIO 或者 PWM 输出引脚 #3 TRS B12 I PD 内部下拉，JTAG 测试复位
+W4 L13 I/O PU GPIO 或者 PWM 输出引脚 #4 TCK A12 I PU 内部上拉，JTAG 测试时钟
+W5 K11 I/O PU GPIO 或者 PWM 输出引脚#5 MU0 D11 I/O/Z PU 仿真器引脚 0
+VSS K13 内核与数字 I/O 接地脚 F14/
+PLLDIS
+A11 I/O PU GPIO 或者 PLL 使能
+VDD K12 1.8V 或者 1.9V 内核数字电源引脚
+
+=== PDF页 11 ===
+Q/J04JX 02-2022
+7
+名称
+引 脚
+编号
+I/O/Z PU/PD 说明 名称
+引 脚
+编号
+I/O/Z PU/PD 说明
+VDD B10
+1.8V 或者 1.9V 内核数字电源引
+脚
+BGIN E6
+测试引脚,必须被保
+持未连接
+VSS C10 内核与数字 I/O 接地脚 VSSA2 C5 ADC 模拟 GND
+VDDIO E9 3.3V I/O 数字电源引脚 VDDA2 A5 ADC 模拟 3.3V 电源
+MU1 C9 I/O/Z PU 仿真器引脚 1 INA7 B5 I - 针对采样和保持 A 的
+8 通道模拟输入。在
+VDDA1 ， VDDA2 ， 和
+VDDAIO引脚被完全加
+电之前，不应驱动ADC
+引脚
+INT1 D9 I/O/Z - GPIO 或者 XINT1 或者 XBIO 输入 INA6 D5 I -
+NMI E8 I/O PU GPIO 或者 XNMI 或者 XINT13 INA5 E5 I -
+INT2 D8 I/O/Z -
+GPIO 或者 XINT2 或者 ADC 转换开
+始
+INA4 A4 I -
+VSS B8 内核与数字 I/O 接地脚 INA3 B4 I -
+VDD C8
+1.8V 或者 1.9V 内核数字电源引
+脚
+INA2 C4 I -
+TXDA C7 I/O PU
+GPIO 或者 SCI 异步串行端口 TX
+数据
+INA1 D4 I -
+RXDA A7 I/O PU
+GPIO 或者 SCI 异步串行端口 RX
+数据
+INA0 A3 I -
+RESET D6 I/O PU
+器件复位（输入）和安全装置复位
+（输出）
+LO B3 I
+常用低侧模拟输入
+连接到模拟地
+VDD1 A6 ADC 数字 1.8V（或 1.9V）电源 VSSAIO A2 模拟 I/O 接地引脚
+VSS1 C6 ADC 数字 GND A[18] D7 O/Z
+19 位地址总线
+A[17] B7 O/Z
+19 位地址总线
+A[16] A8 O/Z
+A[15] B9 O/Z A[14] A10 O/Z
+A[13] E10 O/Z A[12] C11 O/Z
+A[11] A14 O/Z A[10] C12 O/Z
+A[9] D14 O/Z A[8] E12 O/Z
+A[7] F12 O/Z A[6] G14 O/Z
+A[5] H13 O/Z A[4] J12 O/Z
+A[4] J12 O/Z A[3] M11 O/Z
+A[2] N10 O/Z A[1] M2 O/Z
+A[0] G5 O/Z D[15] A9 I/O/Z PU
+16 位数据总线
+D[14] B11 I/O/Z PU
+16 位数据总线
+D[13] J10 I/O/Z PU
+D[12] L14 I/O/Z PU D[11] N9 I/O/Z PU
+D[10] L9 I/O/Z PU D[9] M8 I/O/Z PU
+D[8] P7 I/O/Z PU D[7] L5 I/O/Z PU
+D[6] L3 I/O/Z PU D[5] J5 I/O/Z PU
+D[4] K3 I/O/Z PU D[3] J3 I/O/Z PU
+
+=== PDF页 12 ===
+Q/J04JX 02-2022
+8
+名称 引脚编号 I/O/Z PU/PU 说明
+D[2] H5 I/O/Z PU 16 位数据总线
+D[0] G3 I/O/Z PU 16 位数据总线
+D[1] H3 I/O/Z PU 16 位数据总线
+HOLD E7 I PU 外部保持请求
+ZCS P1 O/Z XINTF 区域 0 和区域 1 片选
+ZCS6 B13 O/Z XINTF 区域 7 和区域 6 片选
+RD M3 O/Z 读取，低电平有效读取选通脉冲
+READY B6 I PU 就绪信号。当被置为 1 时，表明外设已经为完成访问做好准备
+VSS J14 - 内核与数字 I/O 接地脚
+MC F1 I PD 微处理器/微计算机模式选择
+HOLDA K10 O/Z PU 外部保持应答
+ZCS2 P13 O/Z XINTF 区域 2 片选
+WE N11 O/Z 写入，低电平有效写入选通脉冲
+R/W N4 O/Z 只读不写选通脉冲
+VSS K6 - 内核与数字 I/O 接地脚
+LDOCT_V
+SS
+G13 - 内核与数字 I/O 接地脚。注释：LDOCT_VSS 引脚默认接地，用户需要启动片内 LDO 功能时，需将该引脚
+作为控制引脚单独引出
+VSS D10 - 内核与数字 I/O 接地脚
+VDDIO L10 3.3V I/O 数字电源引脚
+VDDIO N14 - - 3.3V I/O 数字电源引脚
+
+=== PDF页 13 ===
+Q/J04JX 02-2022
+9
+3.2.7 功能框图
+功能框图见图 3。
+图 3 功能框图
+
+=== PDF页 14 ===
+Q/J04JX 02-2022
+10
+3.2.8 功能描述
+ADP32F2812是一款高性能32位数字信号处理器，采用的指令集为兼容TI公司的C28x，
+具有精简指令集计算功能、微型控制器结构、固件及工具装置等，是一款高效的支持 C/C++
+的器件，不仅可以利用高级语言完成控制程序的设计，而且可以实现复杂的数学算法。
+器件的片内存储器总线包括程序读总线、数据读总线和数据写总线。程序读总线由 22
+位地址线和 32 位数据线构成。数据读和写总线由 32 位地址线和 32 位数据线构成，32 位的
+数据总线使 32 位的单周期操作成为可能，哈佛结构总线式的多总线结构使得器件在单周期
+实现取指令、读写数据。
+代码安全模块（CSM）是和 C28x 电路融为一体的一种安全特性。它禁止未授权的用户
+访问片内存储器，禁止私有代码的复制/逆向操作，用户知识产权得到有效的保护。
+器件片内集成可选址的存储器有 128k×16bit Flash、18k×16bit SRAM、1k×16bit OTP 和
+4k×16bit ROM 等；集成 19bit 地址位宽、16 位数据位宽的外部接口 XINTF；16bit 总线位宽
+片内低速外设 I/O；寄存器数量约 600 多个；器件同时支持可屏蔽中断和不可屏蔽中断；集
+成 1 个 CAN 总线、2 个 SCI、1 个 McBSP、1 个 SPI，1 个 ADC, 2 个 EV 外设模块。
+器件功能测试的主要向量如下表所示：
+序号 向量名称 向量描述
+1. CPU_TEST CPU 指令集及逻辑运算测试
+2. CPU_TIME_TEST CPU 定时器测试
+3. Memory_TEST SRAM,Flash,OTP 测试
+4. SCI_TEST SCIA/B 模块测试
+5. SPI_TEST SPI 模块测试
+6. McBSP_TEST McBSP 模块测试
+7. eCAN_TEST eCAN 模块测试
+8. EV_TEST EV 模块测试
+9. ADC_TEST ADC 模块测试
+10. DOG_TEST DOG 看门狗测试
+11. IDE_TEST IDE 低功耗模式测试
+12. STANDBY_TEST STANDBY 低功耗模式测试
+13. HALT_TEST HALT 低功耗模式测试
+14. GPIO_TEST GPIO 模块测试
+15. ScanChain_TEST 逻辑电路与时序电路的扫描链测试
+
+=== PDF页 15 ===
+Q/J04JX 02-2022
+11
+3.3 电特性
+除另有规定外，电特性应按表 1-1 的规定，并适用于全温度范围。除另有规定外，表
+1-2～表 1-34 所列参数通过功能向量进行验证，表 1-27 及表 1-28 中 ADC 模块静态及开关参
+数仅在初始鉴定时进行测试，至少抽取 5 只器件进行。
+表 1-1 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDIO，VDDA1，VDDA2，VDDAIO， AVDDREF=3.3V
+VDD1，VDD =1.9V
+极限值
+单位
+A 组
+分组 最小 最大
+输出低电平电压 VOL IOL= 4mA — 0.4 V
+A1
+A2
+A3
+输出高电平电压 VOH VDDIO=3.135V，IOH= - 4mA 2.4 —
+V
+VDDIO=3.135V，IOH=50µA
+VDDIO- 0.2 —
+输入低电平漏电流 a
+IIL 上拉，VDDIO=3.3V，VIN=0V，所有 IOs（含 RESET） -190.0 -190.0
+μA
+下拉，VDDIO=3.3V，VIN=0V -2 2
+输入高电平漏电流 a
+IIH 上拉，VDDIO=3.3V，VIN= VDDIO -5 5
+μA
+下拉，VDDIO=3.3V，VIN= VDDIO -80.0 80.0
+输出高阻时引脚电流 a
+IOZ VDDIO=3.465V，VO=VDDIO 或 0V -2 2 µA
+输入电容 b CI TA=25℃ — 25.0 pF A4
+静态电源电流 cde
+IDD VDDA1，VDDA2，VDDAIO，AVDDREF，
+VDDIO=3.3V;
+VDD1,VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，AVSSREF，
+VSS =0V，
+工 作 模 式 和 IDLE 模 式 时
+fSYSCLKOUT=150MHz，STANDBY 模式
+和 HALT 模式时 fSYSCLKOUT = 0Hz
+工作模式 — 200 mA
+A1
+A2
+A3
+IDLE 模式 — 130 mA
+STANDBY 模
+式
+— 12 mA
+HALT 模式 — 1 mA
+IDDIO 工作模式 — 30 mA
+IDLE 模式 — 10 mA
+STANDBY 模
+式
+— 100 µA
+HALT 模式 — 80 µA
+IDDAIO 工作模式 — 40 mA
+IDLE 模式 — 10 µA
+STANDBY 模
+式
+— 10 µA
+HALT 模式 — 10 µA
+功能测试
+VDDA1，VDDA2，VDDIO，VDDAIO，AVDDREF =3.135V～
+3.465V；
+VDD1，VDD=1.71V～2V；
+VSSA1，VSSA2，VSSAIO，VSS1，AVSSREF，VSS =0V
+按 3.2.8
+A7
+A8A
+A8B
+注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+
+=== PDF页 16 ===
+Q/J04JX 02-2022
+12
+a 仅包含数字 IO 端口
+b A4 分组样品大小（接收数）指器件引线数，至少 3 只器件，仅在初始鉴定、设计或工艺更改时进行。
+c 测试条件：（1）工作模式：PWM1~6、CAP1~3、QEP1~2、PWM7~12、CAP4~6、QEP3~4、eCAN、SCI-A（FIFO模式）、
+SCI-B（FIFO模式）、SPI（FIFO模式）、McBSP（FIFO模式）、ADC、CPU-Timer1/2/3等外设时钟使能；所有PWM引脚翻
+转频率为150kHz；所有I/O引脚悬空；（2）IDLE模式：Flash掉电；XCLKOUT关闭；eCAN、SCI-A/B、SPI、等外设时钟
+使能；（3）STANDBY模式：Flash掉电；所有外设时钟关闭；（4）HALT模式：Flash掉电；所有外设时钟关闭；禁止输入
+时钟输入。
+d IDDIO 电流依赖于 I/O 引脚的负载；IDD包含 VDD1，VDD；IDDA包含 VDDA1，VDDA2，VDDAIO，AVDDREF引脚的电流。
+e 如果一个石英晶振或者陶瓷谐振器被用作时钟源，HALT 模式将关闭内部振荡器。 表 1-2 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，AVSSREF VSS =0V；
+极限值
+单位
+A 组
+最小 最大 分组
+时钟
+片载振荡器时钟 tC(OSC)
+时钟周期 28.6 50 ns A4
+A5
+A6
+时钟频率 20 35 MHz 输入时钟 XCLKIN tC(CI)
+时钟周期 25 250 ns 时钟频率 4 40 MHz 系统时钟 SYSCLKOUT tC(SCO)
+时钟周期 6.67 500 ns 时钟频率 2 150 MHz 输出时钟 XCLKOUT tC(XCO)
+时钟周期 6.67 250 ns 时钟频率 4 150 MHz 高速外设时钟 HSPCLK tC(HCO)
+时钟周期 13.3 — ns 时钟频率 — 75 MHz 低速外设时钟LSPCLK
+a
+tC(LCO)
+时钟周期 13.3 — ns 时钟频率 — 75 MHz 模数转换模块 ADC 时
+钟
+tC(ADCCLK)
+时钟周期 40 — ns 时钟频率 — 25 MHz 注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a 尽管 LSPCLK 能够达到 100MHz，但由于对于 150MHz 器件，最小有效“低速外设时钟预分频寄存器”的值是“2”，所以
+它的额定值为 75MHz。
+b 初始鉴定或重新设计时进行, 样品大小（接收数）为 5（0）。
+
+=== PDF页 17 ===
+Q/J04JX 02-2022
+13
+表 1-3 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，AVSSREF VSS =0V；
+极限值
+单位
+A 组
+最小 最大 分组
+输入时钟频率
+输入时钟频率 fX 外部振荡器/时钟源（XCLKIN） 4 40 MHz A4
+A5
+A6
+XCLKIN 时序 – PLL 启用
+XCLKIN 时钟周期 tC(CI) 见图 4-1 的 C8 33.3 200 ns A9
+A10
+A11
+XCLKIN 下降沿时间 tf(CI) 见图 4-1 的 C9 — 6 ns XCLKIN 上升沿时间 tr(CI) 见图 4-1 的 C10 — 6 ns XCLKIN 低电平占空比 a
+tw(CIL) 45 55 %
+XCLKIN 高电平占空比 a
+tw(CIH) 45 55 %
+XCLKIN 时序 – PLL 禁用
+XCLKIN 时钟周期 tC(CI) 见图 4-1 的 C8 20 250 ns A9
+A10
+A11
+XCLKIN 下降沿时间 tf(CI) 见图 4-1 的 C9 小于等于 30MHz — 6 ns XCLKIN 上升沿时间 tr(CI) 见图 4-1 的 C10 小于等于 30MHz — 6 ns XCLKIN 低电平占空比 a
+tw(CIL) 45 55 %
+XCLKIN 高电平占空比 a
+tw(CIH) 45 55 %
+XCLKOUT 开关特性（PLL 旁通或者启用）b XCLKOUT 时钟周期 tC(XCO) 见图 4-1 的 C1 20 — ns A9
+A10
+A11
+XCLKOUT 下降沿时间 tf(XCO) 见图 4-1 的 C3 — 6 ns XCLKOUT 上升沿时间 tr(XCO) 见图 4-1 的 C4 — 6 ns XCLKOUT 低电平占空比 c
+tw(XCOL) 见图 4-1 的 C5 H-2 H+2 ns XCLKOUT 高电平占空比 c
+tw(XCOH) 见图 4-1 的 C6 H-2 H+2 ns 注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a 占空比也适用于 X1 引脚。
+b 假定该部分参数的负载为 40pF。
+c H = 0.5 tC(XCO) 。
+
+=== PDF页 18 ===
+Q/J04JX 02-2022
+14
+a XCLKIN到XCLKOUT的关系取决于所选择的分频因子。所显示的波形只用于说明时序参数并且根据实
+际配置会有所不同。
+b XCLKOUT被配置成反映SYSCLKOUT。图 4-1 时钟时序
+表 1-4 电特性
+特性 符号
+条 件
+除另有规定，
+-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，
+AVSSREF VSS =0V；
+极限值
+单位
+A 组
+最小 最大 分组
+复位（RESET）时序
+脉冲宽度，稳定输入时钟
+到 RESET 为高 a
+tw(RSL1) 见图 4-2 8tC(OSCCLK) — 周期
+A9
+A10
+A11
+RESET 低电平脉冲宽度 tw(RSL2) 热复位，见图 4-3 8tC(OSCCLK) — 周期
+脉冲宽度，
+看门狗产生的复位脉冲
+tw(WDRS) 512tC(OSCCLK) 周期
+延时时间，
+RESET 为高后地址/数据有效
+td(EX) 见图 4-2、图 4-3 32 tC(OSCCLK) 周期
+振荡器启动时间 tOSCST 见图 4-2 1 — ms XPLLDIS 引脚的建立时间 tsu(XPLLDIS) 见图 4-3，图 4-3 200tC(OSCCLK) — 周期
+XPLLDIS 引脚的保持时间 th(XPLLDIS) 见图 4-2，图 4-3 16tc(CI) 周期
+MC 引脚的保持时间 th(MC) 见图 4-2，图 4-3 16tc(CI) 周期
+引导模式端口保持时间 th(boot-mode) 见图 4-2、图 4-3 2520tC(OSCCLK)— 周期
+注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a 另外，tW(RSL1)要求 RESET 必须在 VDD达到 1.5V 后的 1ms 内为低电平。
+
+=== PDF页 19 ===
+Q/J04JX 02-2022
+15
+a. VDDA1,VDDA2,VDDAIO,AVDDREF,VDDIO b. 加电时，如果PLL 被启用，SYSCLKOUT 为OSC/2。由于XINTCNF2 寄存器内的XTIMCLK 和
+CLKMODE 位出
+现时的状态为复位状态1，SYSCLKOUT 在它出现在CLKOUT 上之前被进一步4分频。这就解释了在这
+个阶段CLKOUT=OSC/8 的原因。
+c.复位后，引导ROM 代码执行用于1260SYSCLKOUT 周期(SYSCLKOUT=OSC/2) 的指令，然后采样BOOT
+模式
+引脚。基于引导模式引脚的状态，引导代码向目的内存或者引导代码函数下达分支指令。为了适当的选
+择引导模式，BOOT 模式引脚应该从引导ROM 执行时间开始后至少2520 OSC周期内保持高电平/低电
+平。如果引导ROM 代码在加电条件后（在调试器环境中）执行代码，引导代码执行时间由当前的
+SYSCLKOUT 的速度而定。SYSCLKOUT 将基于用户环境并可在PLL 启用或者不启用时使用。
+d. 在1.8V（或者1.9V）电源至少达到1V 并且3.3V 电源达到2.5V 之前，GPIO 引脚的状态未定义（也就是
+说，它们应该为输入或者输出 ）。 图 4-2 上电复位
+
+=== PDF页 20 ===
+Q/J04JX 02-2022
+16
+复位后，引导ROM 代码执行用于1260 SYSCLKOUT 周期(SYSCLKOUT=OSC/2) 的指令，然后采样
+BOOT 模式引脚。基于引导模式引脚的状态，引导代码向目的内存或者引导代码函数下达分支指令。
+为了适当的选择引导模式，BOOT 模式引脚应该从引导ROM执行时间开始后至少2520 OSC周期内保
+持高电平/低电平。如果引导ROM 代码在加电条件后（在调试器环境中）执行代码，引导代码执行
+时间由当前的SYSCLKOUT的速度而定。SYSCLKOUT 将基于用户环境并可在PLL 启用或者不启用
+时使用。 图 4-3 热复位
+
+=== PDF页 21 ===
+Q/J04JX 02-2022
+17
+表 1-5 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，AVSSREF VSS =0V；
+备注：测试向量 GPIO_TEST;
+极限值
+单位
+A 组
+最小 最大 分组
+GPIO 输出时序
+上升时间，GPIO 从低电平
+切换至高电平的时间
+tr(GPO) 所有 GPIO，见图 4-4 — 10 ns A9
+A10
+A11
+下降时间，GPIO 从高电平
+切换至低电平的时间
+tf(GPO) 所有 GPIO，见图 4-4 — 10 ns GPIO 引脚切换频率 tfGPO — 20 MHz GPIO 输入时序
+GPIO 高/低电平脉冲时间 a
+tw(GPI)
+无输入限定器，见图 4-6 2tc(SCO) — 周期
+A9
+A10
+A11
+带有输入限定器，见图 4-6 1tc(SCO)+IQT
+b — 周期
+采样周期 tw(SP)
+QUALPRD = 0，见图 4-5 1 tc(SCO) — 周期
+QUALPRD ≠ 0，见图 4-5 2 tc(SCO)×QUALPRD — 周期
+输入限定器采样窗口 a
+tw(IQSW) 见图 4-5 tw(SP)×（n-1） — 周期
+注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a 对于 tw(GPI)，对于一个低电平有效信号，脉宽在 VIL 至 VIL 之间进行测量，而对于一个高电平有效信号脉宽在 VIH至 VIH 之间进行测量。
+b 输入限定时间(IQT)=[tc(SCO) × 2 × QUALPRD] × 5 + [tc(SCO) × 2 × QUALPRD]. 图 4-4 GPIO 输出时序
+
+=== PDF页 22 ===
+Q/J04JX 02-2022
+18
+a. 这个毛刺脉冲将被输入限定器所忽略。QUALPRD 位字段指定了限定采样周期。它可在00 至0xFF 间变化。当
+QUALPRD=00 时，输入限定不使用。对于任何其它的"n" 值，限定采样周期为2n SYSCLKOUT 周期（也就是
+说，在每一个SYSCLKOUT 周期上，GPIO 引脚将被采样）。为了识别一个给定的输入，六个连续的样本必须
+为同样的值。
+b. 为了使限定符检测到变化，输入必须在10 个SYSCLKOUT 周期或者更长的时间内保持稳定。换句话说，输入应
+该在(5 x QUALPRD x 2) SYSCLKOUT 周期内保持稳定。这将为检测发生启用所需的5 个采样周期。由于外部时
+钟被异步驱动，一个13 SYSCLKOUT 宽的脉冲将确保可靠识别。 图 4-5 GPIO 采样模式
+图 4-6 GPIO 输入时序
+
+=== PDF页 23 ===
+Q/J04JX 02-2022
+19
+表 1-6 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，AVSSREF VSS =0V；
+备注：测试向量 IDE_TEST;
+极限值
+单位
+A 组
+最小 最大 分组
+IDLE 模式时序
+脉冲宽度，外部唤醒
+信号的时间
+tw(WAKE-INT)
+无输入限定器，见图 4-7 2tc(SCO) — 周期
+A9
+A10
+A11
+带有输入限定器，见图 4-7 1tc(SCO)+IQT
+b — 周期
+延迟时间，外部唤醒
+信号到程序执行重新
+开始的时间 a
+td(WAKE-IDL
+E)
+从闪存唤醒，激活状态中的闪存模式，
+无输入限定器，见图 4-7 — 8 tc(SCO) 周期
+从闪存唤醒，激活状态中的闪存模式，
+带有输入限定器，见图 4-7 —
+8 tc(SCO)
++ IQT
+b 周期
+从闪存唤醒，睡眠状态中的闪存模式，
+无输入限定器，见图 4-7 — 1050tc(SCO) 周期
+从闪存唤醒，睡眠状态中的闪存模式，
+带有输入限定器，见图 4-7 —
+1050 tc(SCO)
++ IQT
+b 周期
+从 SRAM 中唤醒，
+无输入限定器，见图 4-7 — 8tc(SCO) 周期
+从 SRAM 中唤醒，
+带有输入限定器，见图 4-7 —
+8 tc(SCO)
++ IQT
+b 周期
+注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a 这个时间是在 IDLE 指令之后立即开始指令执行的时间。一个 ISR（由唤醒触发）信号的执行会涉及额外的延迟。
+b 输入限定时间(IQT)=[tc(SCO) × 2 × QUALPRD] × 5 + [tc(SCO) × 2 × QUALPRD].
+a WAKEINT 可以是任一被启用中断，WDINTn， XNMI，RESET。
+b 从将器件置于低功耗模式的 IDLE 指令被执行开始，在至少 4 个时钟周期之前，唤醒不应被启动。 图 4-7 IDLE 模式进入与退出时序
+
+=== PDF页 24 ===
+Q/J04JX 02-2022
+20
+表 1-7 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，AVSSREF VSS =0V
+备注：测试向量 STANDBY_TEST
+极限值
+单位
+A 组
+最小 最大 分组
+STANDBY 模式时序
+脉冲宽度，外部
+唤醒信号的时间 a
+tw(WAKE-INT)
+无输入限定器，见图 4-8 3 tc(OSCCLK) — 周期
+A9
+A10
+A11
+带有输入限定器，见图 4-8 （2+QUALSTDBY）
+×tc(OSCCLK) — 周期
+延迟时间，IDLE
+指令被执行到
+XCLKOUT 变为低
+电平的时间
+td(IDLE-XCOL) 见图 4-8 32tc(SCO) 45tc(SCO) 周期
+延迟时间，外部唤
+醒信号到程序执行
+重新开始的时间 b
+td(WAKE-STBY)
+从闪存唤醒，激活状态中的闪存模式，
+无输入限定器，见图 4-8 — 12tc(SCO) 周期
+从闪存唤醒，激活状态中的闪存模式，
+带有输入限定器，见图 4-8 —
+12tc(SCO)
++ tw(WAKE-INT)
+周期
+从闪存唤醒，睡眠状态中的闪存模式，
+无输入限定器，见图 4-8 — 1125tc(SCO) 周期
+从闪存唤醒，睡眠状态中的闪存模式，
+带有输入限定器，见图 4-8 —
+1125tc(SCO)
++tw(WAKE-INT)
+周期
+从 SRAM 中唤醒，
+无输入限定器，见图 4-8 — 12tc(SCO) 周期
+从 SRAM 中唤醒，
+带有输入限定器，见图 4-8 —
+12tc(SCO)
++ tw(WAKE-INT)
+周期
+注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a QUALSTDBY 是一个 LPMCR0 寄存器内的 6 位字段。
+b 这个时间是在 IDLE 指令之后立即开始指令执行的时间。一个 ISR（由唤醒触发）信号的执行会涉及额外的延迟。
+
+=== PDF页 25 ===
+Q/J04JX 02-2022
+21
+a 执行IDLE指令让器件进入待机模式（STANDBY Mode）。
+b PLL信号响应待机信号。在被关闭之前，系统时钟在下面标明的一定数量的周期内被保持：
+ 当DIVSEL等于00或者01时，16个周期
+ 当DIVSEL等于10时，32个周期
+ 当DIVSEL等于11时，64个周期
+这个延迟 使得CPU流水线和其他等待的操作被适当清空 。如果访问XINTF的操作正在执行访问时
+间大于这个时间，那么访问操作会失效。建议在没有一个XINTF访问进行时从SARAM进入待机模式。
+c 外围设备的时钟关闭。然而，锁相环和看门狗不会被关掉，器件处于待机模式。
+d 外部唤醒信号被驱动有效。
+e 在一个延迟周期内，待机模式退出。
+f 正常执行重新开始。器件将会响应中断（如果中断使能允许）。
+g 从将器件置于低功耗模式的 IDLE 指令被执行开始，在至少 4 个时钟周期之前，唤醒不应被启动。 图 4-8 STANDBY 模式进入与退出时序
+
+=== PDF页 26 ===
+Q/J04JX 02-2022
+22
+表 1-8 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，AVSSREF VSS =0V;
+备注：测试向量 HALT_TEST;
+极限值
+单位
+A 组分
+最小 最大 组
+HALT 模式时序
+脉冲宽度，NMI
+唤醒信号的时间
+tw(WAKE-GPIO) 见图 4-9 2tc(OSCCLK) — 周期
+A9
+A10
+A11
+脉冲宽度，RESET
+唤醒信号的时间
+tw(WAKE-XRS) 8tc(OSCCLK) — 周期
+延迟时间，IDLE 指令
+被执行到 XCLKOUT
+变为高电平的时间
+td(IDLE-XCOL) 见图 4-9 32tc(SCO) 45 tc(SCO) 周期
+PLL 锁定时间 tp 见图 4-9 — 131072tc(OSCCLK) 周期
+延迟时间，PLL 锁
+存到程序执行重新
+开始的时间
+td(WAKE-HALT)
+从闪存唤醒，睡眠状态中的闪存模式，
+见图 4-9 — 1125tc(SCO) 周期
+从 SRAM 中唤醒，见图 4-9 — 35tc(SCO)
+注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a. IDLE 指令被执行以将器件置于HALT 模式。
+b. PLL 块响应HALT 信号。在振荡器被关闭并且到内核的CLKIN 被停止前，SYSCLKOUT 被保持另外32
+个周期。这个32 周期延迟使得CPU 管线和其它等待的操作被适当清空。
+c. 到外设的时钟被关闭并且内部振荡器和PLL 被关断。器件现在处于HALT 模式，消耗绝对最小功率。
+d. 当NMI 被驱动有效，振荡器被关闭；但是PLL 未被激活。当一个外部振荡器被使用时，2tc(CI)的脉冲
+持续时间适用。如果内部振荡器被使用，振荡器唤醒时间应该被添加到这个参数。
+e.当NMI 被置为无效时，它启动PLL 锁序列，这将花费131,072 OSC周期。
+f.当到内核的CLKIN 被启用时，在一个延迟后，此器件响应此中断（如果被启用）。现在退出HALT 模式。
+g.正常运行重新开始。 图 4-9 HALT 模式使用 NMI 唤醒时序
+
+=== PDF页 27 ===
+Q/J04JX 02-2022
+23
+表 1-9 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，AVSSREF VSS =0V;
+备注：测试向量 EV_TEST;
+极限值
+单位
+A 组
+最小 最大 分组
+PWM 时序(a) (b)
+脉冲宽度，PWMx 输
+出高电平/低电平的时
+tw(PWM)
+(c) 见图 4-10 25 — ns A9
+A10
+A11
+延迟时间，CLKOUT 高电
+平
+到 PWMx 输出开关，
+CLKOUT=SYSCLKOUT/4
+td(PWM)XCO 见图 4-10 — 10 ns 捕捉(CAP) 时序
+捕获输入脉冲宽度 tw(CAP)
+无输入限定器 2 tc(SCO) — 周期 A9
+A10
+A11 带输入限定器 1tc(SCO)+IQT
+(d) — 周期
+(a) 请见针对 PWM 引脚的下降/上升时间的 GPIO 输出时序。
+(b) PWM 引脚切换频率由 GPIO 输出缓冲器开关频(20MHz) 限制。
+(c) 相对于 PWM 周期，PWM 输出可以为 100%，0%，或者 tc(HCO)的增量。
+(d) 输入限定时间(IQT)=[tc(SCO) × 2 × QUALPRD] × 5 + [tc(SCO) × 2 × QUALPRD]。 图 4-10 PWM 时序
+
+=== PDF页 28 ===
+Q/J04JX 02-2022
+24
+表 1-10 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，
+VDDAIO，
+AVDDREF =3.3V；VDD1，
+VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，
+AVSSREF,VSS =0V;
+备注：测试向量 EV_TEST
+极限值
+单位
+A 组
+最小 最大 分组
+中断开关特性
+延迟时间，PDPINTx 低
+电平至 PWM 高阻抗状
+态的时间
+td(PDP-PWM) HZ 无输入限定器,见图 4-11 - 12
+ns A9
+A10
+A11
+带输入限定器 - 1tc(SCO) + IQT +
+12
+(a)
+CxTRIP/TxCTRIP 信号
+低电平到 PWM 高阻抗
+状态的时间
+td(TRIP-PWM
+)HZ 无输入限定器,见图 4-11 - 3 * tc(SCO) ns 带输入限定器 - 2tc(SCO) + IQT
+(a)
+延迟时间,INT 低电平/
+高电平到中断矢量提取
+的实际那
+td(INT) 见图 4-11
+IQT + 12tc(SCO)
+(a) ns 中断时序要求
+脉冲持续时间，INT 输入
+低电平/高电平
+tw(INT)
+无输入限定器,见图 4-11 2tc(SCO) —
+周期
+A9
+A10
+A11
+带有输入限定器 1tc(SCO)+IQT
+(a) —
+脉冲持续时间，PDPINTx 输入低电平的时间
+tw(PDP)
+无输入限定器,见图 4-11 2tc(SCO) —
+周期
+带有输入限定器 1tc(SCO)+IQT
+(a) —
+脉冲持续时间，CxTRIP
+输入低电平的时间
+tw(CxTRIP)
+无输入限定器,见图 4-11 2tc(SCO) —
+周期
+带有输入限定器 1tc(SCO)+IQT
+(a) —
+脉冲持续时间，TxCTRIP
+低电平的输入时间
+tw(TxCTRIP)
+无输入限定器,见图 4-11 2tc(SCO) 周期
+带有输入限定器 1tc(SCO)+IQT
+(a) a 输入限定时间(IQT)=[tc(SCO) × 2 × QUALPRD] × 5 + [tc(SCO) × 2 × QUALPRD].
+
+=== PDF页 29 ===
+Q/J04JX 02-2022
+25
+图 4-11 外部中断时序
+表 1-11 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，
+AVSSREF
+VSS =0V；
+备注：测试向量 EV_TEST；
+极限值
+单位
+A 组
+最小 最大 分组
+外部 ADC 转换开始开关特性
+延迟时间，SYSCLKOUT
+高电平到 IOD1 低电平
+的时间
+td(XCOH-EMxSOCL) 见图 4-12 1tc(SCO) 周期 A9
+A10
+脉冲持续时间， A11 IOD1 低电平
+的时间 tw(EMxSOCL) 见图 4-12
+32tc(HC O) ns 图 4-12 IODx 时序
+
+=== PDF页 30 ===
+Q/J04JX 02-2022
+26
+表 1-13 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，AVSSREF VSS =0V；
+备注：测试向量 SPI_TEST；
+极限值
+单
+位
+A 组
+最小 最大 分组
+SPI 主控模式外部时序（时钟相位= 0）abcde 周期时间，SPICLK tc(SPC)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-13 中 1
+4tc(LCO) 128tc(LCO) ns
+A9
+A10
+A11
+当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-13 中 1
+5tc(LCO) 127tc(LCO)
+脉冲宽度，SPICLK 高电平
+的时间（时钟极性= 0）
+tw(SPCH)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-13 中 2
+0.5tc(SPC)M -10 0.5tc(SPC)M
+ns 当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-13 中 2
+0.5tc(SPC)M
+-0.5tc(LCO)-10
+0.5tc(SPC)M
+-0.5tc(LCO)
+脉冲宽度，SPICLK 低电平
+的时间（时钟极性= 1）
+tw(SPCL)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-13 中 2
+0.5tc(SPC)M -10 0.5tc(SPC)M
+ns 当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-13 中 2
+0.5tc(SPC)M
+-0.5tc(LCO)-10
+0.5tc(SPC)M
+-0.5tc(LCO)
+脉冲宽度，SPICLK 低电平
+的时间（时钟极性= 0）
+tw(SPCL)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-13 中 3
+0.5tc(SPC)M -10 0.5tc(SPC)M
+ns 当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-13 中 3
+0.5tc(SPC)M
++0.5tc(LCO)-10
+0.5tc(SPC)M
++0.5tc(LCO)
+脉冲宽度，SPICLK 高电平
+的时间（时钟极性= 1）
+tw(SPCH)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-13 中 3
+0.5tc(SPC)M -10 0.5tc(SPC)M
+ns 当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-13 中 3
+0.5tc(SPC)M
++0.5tc(LCO)-10
+0.5tc(SPC)M
++0.5tc(LCO)
+延迟时间，SPICLK 高电平
+至 SPISIMO 有效的时间
+（时钟极性=0）
+td(SPCH-SIM
+O)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-13 中 4
+-10 10
+ns 当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-13 中 4
+-10 10
+延迟时间，SPICLK 低电平
+至 SPISIMO 有效的时间
+（时钟极性=1）
+td(SPCL-SIM
+O)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-13 中 4
+-10 10
+ns 当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-13 中 4
+-10 10
+注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a 主控/受控位(SPICTL.2) 被设定，而时钟相位的位(SPICTL.3) 被清除。
+b
+tc(SPC)=SPI 时钟周期时间= LSPCLK/4 或者 LSPCLK/(SPIBRR +1)。
+c
+tc(LCO)=LSPCLK 周期时间。
+d 内部时钟预分频器必须被调整，这样的话，SPI 时钟速度被限制在下列 SPI 时钟速率上：
+ 主控模式发射最大值 25MHz，主控模式接收最大值 12.5MHz；
+ 受控模式 12.5MHz 最大发送速率，受控模式最大接收频率 12.5MHz。
+e 作为基准的 SPICLK 信号的有效边沿由时钟极性位(SPICCR.6) 控制。
+
+=== PDF页 31 ===
+Q/J04JX 02-2022
+27
+表 1-14 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，AVSSREF VSS =0V； 备注：测试向量 SPI_TEST；
+极限值
+单位
+A 组
+最小 最大 分组
+SPI 主控模式外部时序（时钟相位= 0）abcde 有效时间，SPICLK 低电平
+后，SPISIMO 数据有效的
+时间（时钟极性=0）
+tv(SPCL-SIMO)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-13 中 5
+0.5tc(SPC)M -10 —
+ns
+A9
+A10
+A11
+当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-13 中 5
+0.5tc(SPC)M
++0.5tc(LCO)-10 —
+有效时间，SPICLK 高电平
+后，SPISIMO 数据有效的
+时间（时钟极性=1）
+tv(SPCH-SIMO)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-13 中 5
+0.5tc(SPC)M -10 —
+ns 当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-13 中 5
+0.5tc(SPC)M
++0.5tc(LCO)-10 —
+建立时间，SPISOMI 在
+SPICLK 低电平之前的时间
+（时钟极性=0）
+tsu(SOMI-SPCL)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-13 中 8
+0 —
+ns 当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-13 中 8
+0 —
+建立时间，SPISOMI 在
+SPICLK 高电平之前的时间
+（时钟极性=1）
+tsu(SOMI-SPCH)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-13 中 8
+0 —
+ns 当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-13 中 8
+0 —
+有效时间，SPICLK 低电平
+后，SPISOMI 数据有效的
+时间（时钟极性=0）
+tv(SPCL-SOMI)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-13 中 9
+0.25tc(SPC)M
+-10 —
+ns 当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-13 中 9
+0.5tc(SPC)M
+-0.5tc(LCO)-10 —
+有效时间，SPICLK 高电平
+后，SPISOMI 数据有效的
+时间（时钟极性=1）
+tv(SPCH-SOMI)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-13 中 9
+0.25tc(SPC)M
+-10 —
+ns 当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-13 中 9
+0.5tc(SPC)M
+-0.5tc(LCO)-10 —
+注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a 主控/受控位(SPICTL.2) 被设定，而时钟相位的位(SPICTL.3) 被清除。
+b
+tc(SPC)=SPI 时钟周期时间= LSPCLK/4 或者 LSPCLK/(SPIBRR +1)。
+c
+tc(LCO)=LSPCLK 周期时间。
+d 内部时钟预分频器必须被调整，这样的话，SPI 时钟速度被限制在下列 SPI 时钟速率上：
+ 主控模式发射最大值 25MHz，主控模式接收最大值 12.5MHz；
+ 受控模式 12.5MHz 最大发送速率，受控模式最大接收频率 12.5MHz。
+e 作为基准的 SPICLK 信号的有效边沿由时钟极性位(SPICCR.6) 控制。
+
+=== PDF页 32 ===
+Q/J04JX 02-2022
+28
+a 在主控模式中，在有效 SPI 时钟边沿之前 0.5tc(SPC)，SPISTEn 开始激活。在字的末端，在最后一个
+数据位接收边沿（SPICLK）之后 0.5tc(SPC)，SPISTEn 转为无效，除了 SPISTEn 在 FIFO 和非 FIFO 模
+式中，连续传输数据之间保持有效。 图 4-13 SPI 主控模式外部时序（时钟相位= 0）
+a 在主控模式中，在有效 SPI 时钟边沿之前 0.5tc(SPC)（最小），SPISTEn 开始激活。在字的末端，在最
+后一个数据位接收边沿（SPICLK）之后 0.5tc(SPC)，SPISTEn 转为无效，除了 SPISTEn 在 FIFO 和非 FIFO
+模式中，连续传输数据之间保持有效。 图 4-14 SPI 主控模式外部时序（时钟相位= 1）
+
+=== PDF页 33 ===
+Q/J04JX 02-2022
+29
+表 1-15 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，AVSSREF VSS =0V； 备注：测试向量 SPI_TEST；
+极限值
+单
+位
+A 组
+最小 最大 分组
+SPI 主控模式外部时序（时钟相位= 1）abcde 周期时间，SPICLK tc(SPC)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-14 中 1
+4tc(LCO) 128tc(LCO) ns
+A9
+A10
+A11
+当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-14 中 1
+5tc(LCO) 127tc(LCO)
+脉冲宽度，SPICLK 高电平
+的时间（时钟极性= 0）
+tw(SPCH)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-14 中 2
+0.5tc(SPC)M -10 0.5tc(SPC)M
+ns 当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-14 中 2
+0.5tc(SPC)M
+-0.5tc(LCO)-10
+0.5tc(SPC)M
+-0.5tc(LCO)
+脉冲宽度，SPICLK 低电平
+的时间（时钟极性= 1）
+tw(SPCL)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-14 中 2
+0.5tc(SPC)M -10 0.5tc(SPC)M
+ns 当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-14 中 2
+0.5tc(SPC)M
+-0.5tc(LCO)-10
+0.5tc(SPC)M
+-0.5tc(LCO)
+脉冲宽度，SPICLK 低电平
+的时间（时钟极性= 0）
+tw(SPCL)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-14 中 3
+0.5tc(SPC)M -10 0.5tc(SPC)M
+ns 当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-14 中 3
+0.5tc(SPC)M
++0.5tc(LCO)-10
+0.5tc(SPC)M
++0.5tc(LCO)
+脉冲宽度，SPICLK 高电平
+的时间（时钟极性= 1）
+tw(SPCH)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-14 中 3
+0.5tc(SPC)M -10 0.5tc(SPC)M
+ns 当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-14 中 3
+0.5tc(SPC)M
++0.5tc(LCO)-10
+0.5tc(SPC)M
++0.5tc(LCO)
+建立时间，SPISIMO 在
+SPICLK 高电平之前的时间
+（时钟极性=0）
+tsu(SIMO-SPCH)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-14 中 6
+0.5tc(SPC)M -10 —
+ns 当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-14 中 6
+0.5tc(SPC)M -10 —
+建立时间，SPISIMO 在
+SPICLK 低电平之前的时间
+（时钟极性=1）
+tsu(SIMO-SPCL)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-14 中 6
+0.5tc(SPC)M -10 —
+ns 当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-14 中 6
+0.5tc(SPC)M -10 —
+注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a 主控/受控位(SPICTL.2) 被设定，而时钟相位的位(SPICTL.3) 被设定。
+b
+tc(SPC)=SPI 时钟周期时间= LSPCLK/4 或者 LSPCLK/(SPIBRR +1)。
+c
+tc(LCO)=LSPCLK 周期时间。
+d 内部时钟预分频器必须被调整，这样的话，SPI 时钟速度被限制在下列 SPI 时钟速率上：
+ 主控模式发射最大值 25MHz，主控模式接收最大值 12.5MHz；
+ 受控模式 12.5MHz 最大发送速率，受控模式最大接收频率 12.5MHz。
+e 作为基准的 SPICLK 信号的有效边沿由时钟极性位(SPICCR.6) 控制。
+
+=== PDF页 34 ===
+Q/J04JX 02-2022
+30
+表 1-16 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，AVSSREF VSS =0V； 备注：测试向量 SPI_TEST；
+极限值
+单位
+A 组
+最小 最大 分组
+SPI 主控模式外部时序（时钟相位= 1）abcde 有效时间，SPICLK 高电平
+后，SPISIMO 数据有效的
+时间（时钟极性=0）
+tv(SPCH-SIMO)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-14 中 7
+0.5tc(SPC)M -10 —
+ns
+A9
+A10
+A11
+当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-14 中 7
+0.5tc(SPC)M -10 —
+有效时间，SPICLK 低电平
+后，SPISIMO 数据有效的
+时间（时钟极性=1）
+tv(SPCL-SIMO)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-14 中 7
+0.5tc(SPC)M -10 —
+ns 当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-14 中 7
+0.5tc(SPC)M -10 —
+建立时间，SPISOMI 在
+SPICLK 高电平之前的时间
+（时钟极性=0）
+tsu(SOMI-SPCH)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-14 中 10
+0 —
+ns 当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-14 中 10
+0 —
+建立时间，SPISOMI 在
+SPICLK 低电平之前的时间
+（时钟极性=1）
+tsu(SOMI-SPCL)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-14 中 10
+0 —
+ns 当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-14 中 10
+0 —
+有效时间，SPICLK 高电平
+后，SPISOMI 数据有效的
+时间（时钟极性=0）
+tv(SPCH-SOMI)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-14 中 11
+0.25tc(SPC)M
+-10 —
+ns 当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-14 中 11
+0.5tc(SPC)M
+-10 —
+有效时间，SPICLK 低电平
+后，SPISOMI 数据有效的
+时间（时钟极性=1）
+tv(SPCL-SOMI)M 当(SPIBRR+1)为偶数或 SPIBRR=0 或 2，
+见图 4-14 中 11
+0.25tc(SPC)M
+-10 —
+ns 当(SPIBRR+1)为奇数并且 SPIBRR > 3，
+见图 4-14 中 11
+0.5tc(SPC)M
+-10 —
+注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a 主控/受控位(SPICTL.2) 被设定，而时钟相位的位(SPICTL.3) 被设定。
+b
+tc(SPC)=SPI 时钟周期时间= LSPCLK/4 或者 LSPCLK/(SPIBRR +1)。
+c
+tc(LCO)=LSPCLK 周期时间。
+d 内部时钟预分频器必须被调整，这样的话，SPI 时钟速度被限制在下列 SPI 时钟速率上：
+ 主控模式发射最大值 25MHz，主控模式接收最大值 12.5MHz；
+ 受控模式 12.5MHz 最大发送速率，受控模式最大接收频率 12.5MHz。
+e 作为基准的 SPICLK 信号的有效边沿由时钟极性位(SPICCR.6) 控制。
+
+=== PDF页 35 ===
+Q/J04JX 02-2022
+31
+表 1-17 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，
+AVSSREF，VSS =0V； 备注：测试向量 SPI_TEST；
+极限值
+单位
+A 组
+最小 最大 分组
+SPI 受控模式外部时序（时钟相位= 0）abcde 周期时间，SPICLK tc(SPC)S 见图 4-15 中 12 4tc(LCO) — ns
+A9
+A10
+A11
+脉冲宽度，SPICLK 高电平
+的时间（时钟极性= 0）
+tw(SPCH)S 见图 4-15 中 13 0.5tc(SPC)S -10 0.5tc(SPC)S ns 脉冲宽度，SPICLK 低电平
+的时间（时钟极性= 1）
+tw(SPCL)S 见图 4-15 中 13 0.5tc(SPC)S -10 0.5tc(SPC)S ns 脉冲宽度，SPICLK 低电平
+的时间（时钟极性= 0）
+tw(SPCL)S 见图 4-15 中 14 0.5tc(SPC)S -10 0.5tc(SPC)S ns 脉冲宽度，SPICLK 高电平
+的时间（时钟极性= 1）
+tw(SPCH)S 见图 4-15 中 14 0.5tc(SPC)S -10 0.5tc(SPC)S ns 延迟时间，SPICLK 高电平
+至 SPISOMI 有效的时间
+（时钟极性=0）
+td(SPCH-SOMI)S 见图 4-15 中 15 0.375tc(SPC)S -10 — ns 延迟时间，SPICLK 低电平
+至 SPISOMI 有效的时间
+（时钟极性=1）
+td(SPCL-SOMI)S 见图 4-15 中 15 0.375tc(SPC)S -10 — ns 有效时间，SPICLK 低电平
+之后，SPISOMI 数据有效
+的时间（时钟极性=0）
+tv(SPCL-SOMI)S 见图 4-15 中 16 0.75tc(SPC)S — ns 有效时间，SPICLK 高电平
+之后，SPISOMI 数据有效
+的时间（时钟极性=1）
+tv(SPCH-SOMI)S 见图 4-15 中 16 0.75tc(SPC)S — ns 建立时间，SPISIMO 在
+SPICLK 低电平之前
+的时间（时钟极性=0）
+tsu(SIMO-SPCL)S 见图 4-15 中 19 0 — ns 建立时间，SPISIMO 在
+SPICLK 高电平之前
+的时间（时钟极性=1）
+tsu(SIMO-SPCH)S 见图 4-15 中 19 0 — ns 有效时间，SPICLK 低电平
+之后，SPISIMO 数据有效
+的时间（时钟极性=0）
+tv(SPCL-SIMO)S 见图 4-15 中 20 0.5tc(SPC)S — ns 有效时间，SPICLK 高电平
+之后，SPISIMO 数据有效
+的时间（时钟极性=1）
+tv(SPCH-SIMO)S 见图 4-15 中 20 0.5tc(SPC)S — ns 注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+
+=== PDF页 36 ===
+Q/J04JX 02-2022
+32
+a 主控/受控位(SPICTL.2) 被清除，而时钟相位的位(SPICTL.3) 被清除。
+b
+tc(SPC)=SPI 时钟周期时间= LSPCLK/4 或者 LSPCLK/(SPIBRR +1)。
+c
+tc(LCO)=LSPCLK 周期时间。
+d 内部时钟预分频器必须被调整，这样的话，SPI 时钟速度被限制在下列 SPI 时钟速率上：
+ 主控模式发射最大值 25MHz，主控模式接收最大值 12.5MHz；
+ 受控模式 12.5MHz 最大发送速率，受控模式最大接收频率 12.5MHz。
+e 作为基准的 SPICLK 信号的有效边沿由时钟极性位(SPICCR.6) 控制。
+a 在受控模式下，SPISTEn 信号至少应该在有效 SPI 时钟边沿前 0.5tc(SPC)（最小值）被置为低电平有
+效并且在最后一个数据位的接收边沿（SPICLK）之后至少 0.5tc(SPC)保持低电平。 图 4-15 SPI 受控模式外部时序（时钟相位=0）
+
+=== PDF页 37 ===
+Q/J04JX 02-2022
+33
+a 在受控模式下，SPISTEn 信号至少应该在有效 SPI 时钟边沿前 0.5tc(SPC)（最小值）被置为低电平有效
+并且在最后一个数据位的接收边沿（SPICLK）之后至少 0.5tc(SPC)保持低电平。 图 4-16 SPI 受控模式外部时序（时钟相位=1）
+
+=== PDF页 38 ===
+Q/J04JX 02-2022
+34
+表 1-18 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，
+AVSSREF，VSS =0V；
+备注：测试向量 SPI_TEST;
+极限值
+单位
+A 组
+最小 最大 分组
+SPI 受控模式外部时序（时钟相位= 1）abcd 周期时间，SPICLK tc(SPC)S 见图 4-16 中 12 8tc(LCO) — ns
+A9
+A10
+A11
+脉冲宽度，SPICLK 高电平
+的时间（时钟极性= 0）
+tw(SPCH)S 见图 4-16 中 13 0.5tc(SPC)S -10 0.5tc(SPC)S ns 脉冲宽度，SPICLK 低电平
+的时间（时钟极性= 1）
+tw(SPCL)S 见图 4-16 中 13 0.5tc(SPC)S -10 0.5tc(SPC)S ns 脉冲宽度，SPICLK 低电平
+的时间（时钟极性= 0）
+tw(SPCL)S 见图 4-16 中 14 0.5tc(SPC)S -10 0.5tc(SPC)S ns 脉冲宽度，SPICLK 高电平
+的时间（时钟极性= 1）
+tw(SPCH)S 见图 4-16 中 14 0.5tc(SPC)S -10 0.5tc(SPC)S ns 建立时间，SPISOMI 在
+SPICLK 高电平之前
+的时间（时钟极性=0）
+tsu(SOMI-SPCH)S 见图 4-16 中 17 0.125tc(SPC)S — ns 建立时间，SPISOMI 在
+SPICLK 低电平之前
+的时间（时钟极性=1）
+tsu(SOMI-SPCL)S 见图 4-16 中 17 0.125tc(SPC)S — ns 有效时间，SPICLK 低电平
+之后，SPISOMI 数据有效
+的时间（时钟极性=1）
+tv(SPCL-SOMI)S 见图 4-16 中 18 0.75tc(SPC)S — ns 有效时间，SPICLK 高电平
+之后，SPISOMI 数据有效
+的时间（时钟极性=0）
+tv(SPCH-SOMI)S 见图 4-16 中 18 0.75tc(SPC)S — ns 建立时间，SPISIMO 在
+SPICLK 高电平之前
+的时间（时钟极性=0）
+tsu(SIMO-SPCH)S 见图 4-16 中 21 0 — ns 建立时间，SPISIMO 在
+SPICLK 低电平之前
+的时间（时钟极性=1）
+tsu(SIMO-SPCL)S 见图 4-16 中 21 0 — ns 有效时间，SPICLK 高电平
+之后，SPISIMO 数据有效
+的时间（时钟极性=0）
+tv(SPCH-SIMO)S 见图 4-16 中 22 0.5tc(SPC)S — ns 有效时间，SPICLK 低电平
+之后，SPISIMO 数据有效
+的时间（时钟极性=1）
+tv(SPCL-SIMO)S 见图 4-16 中 22 0.5tc(SPC)S — ns 注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a 主控/受控位(SPICTL.2) 被清除，而时钟相位的位(SPICTL.3)被设定。
+b
+tc(SPC)=SPI 时钟周期时间= LSPCLK/4 或者 LSPCLK/(SPIBRR +1)。
+c 内部时钟预分频器必须被调整，这样的话，SPI 时钟速度被限制在下列 SPI 时钟速率上：
+ 主控模式发射最大值 25MHz，主控模式接收最大值 12.5MHz；
+ 受控模式 12.5MHz 最大发送速率，受控模式最大接收频率 12.5MHz。
+d 作为基准的 SPICLK 信号的有效边沿由时钟极性位(SPICCR.6) 控制。
+
+=== PDF页 39 ===
+Q/J04JX 02-2022
+35
+表 1-19 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，
+AVSSREF，VSS =0V；
+备注：测试向量XINTF_BUS_TEST;
+极限值
+单
+位
+A 组
+最小 最大 分组
+外部存储器接口读取时序 a 访问时间，，从有效地址
+读取数据的时间
+ta(A) 见图 4-17 — （LR+AR）-14 ns
+A9
+A10
+A11
+访问时间，从 XRD 低电平
+有效至读取数据有效的时间
+ta(XRD) 见图 4-17 — AR-12 ns 建立时间，XRD 选通无效
+高电平之前的读取有效数据
+的时间
+tsu(XD)XRD 见图 4-17 12 — ns 保持时间，XRD 高电平无
+效之后的读取数据的有效
+时间
+th(XD)XRD 见图 4-17 0 — ns 延迟时间，XCLKOUT 高
+电平到区域芯片选择低电
+平有效的时间
+td(XCOH-XZCSL) 见图 4-17 — 1 ns 延迟时间，XCLKOUT 高
+电平/低电平到芯片选择高
+电平无效的时间
+td(XCOHL-XZCSH) 见图 4-17 -2 3 ns 延迟时间，XCLKOUT 高
+电平到地址有效的时间
+td(XCOH-XA) 见图 4-17 — 2 ns 延迟时间，XCLKOUT 高
+电平/低电平到 XRD 低电
+平有效的时间
+td(XCOHL-XRDL) 见图 4-17 — 1 ns 延迟时间，XCLKOUT 高
+电平/低电平到 XRD 高电
+平无效的时间
+td(XCOHL-XRDH) 见图 4-17 -2 1 ns 注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a LR = 建立周期，读取访问。 AR = 有效周期，读取访问。
+
+=== PDF页 40 ===
+Q/J04JX 02-2022
+36
+a 所有的XINTF访问(建立周期)从XCLKOUT的上升沿开始。必要时，在进行访问并满足这个需求之
+前，器件将会插入一个对准周期。
+b 在对准周期期间，所有的信号都转换为未激活状态。
+c XA[0:18] 保持关闭总线时的最后地址（除了XA0保持为高）, 包括定位周期。
+d 因为 USEREADY = 0，外部输入信号 XREADY 会被忽略。 图 4-17 外部读取访问时序
+a 所有的 XINTF 访问(建立周期)从 XCLKOUT 的上升沿开始。必要时，在进行访问并满足这个需求之前，
+器件将会插入一个对准周期。
+b 在对准周期期间，所有的信号都转换为未激活状态。
+c XINTF地址总线保持关闭总线时的最后地址（除了XA0保持为高）。
+d 因为 USEREADY = 0, 外部输入信号 XREADY 会被忽略。 图 4-18 外部写入时序
+
+=== PDF页 41 ===
+Q/J04JX 02-2022
+37
+表 1-20 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，
+AVSSREF，VSS =0V；
+备注：测试向量 XINTF_BUS_TEST;
+极限值
+单
+位
+A 组
+最小 最大 分组
+外部存储器接口写入时序
+延迟时间，XCLKOUT 高
+电平到区域芯片选择低电
+平有效的时间
+td(XCOH-XZCSL) 见图 4-18 — 1 ns
+A9
+A10
+A11
+延迟时间，XCLKOUT 高
+电平/低电平到芯片选择高
+电平无效的时间
+td(XCOHL-XZCSH) 见图 4-18 -2 3 ns 延迟时间，XCLKOUT 高
+电平到地址有效的时间
+td(XCOH-XA) 见图 4-18 — 2 ns 延迟时间，XCLKOUT 高
+电平/低电平到 XWE
+低电平的时间 a
+td(XCOHL-XWEL) 见图 4-18 — 2 ns 延迟时间，XCLKOUT 高
+电平/低电平到 XWE
+高电平的时间 a
+td(XCOHL-XWEH) 见图 4-18 — 2 ns 延迟时间，XCLKOUT 高
+电平到 XRW 低电平的时间
+td(XCOH-XRNWL) 见图 4-18 — 1 ns 延迟时间，XCLKOUT 高
+电平/低电平到 XRW 高电
+平的时间
+td(XCOHL-XRNWH) 见图 4-18 -2 1 ns 使能时间，从 XWE 低电平到驱
+动数据总线的时间
+ten(XD)XWEL 见图 4-18 0 — ns 延迟时间，XWE 低电平有效到
+数据总线数据有效的时间
+td(XWEL-XD) 见图 4-18 — 4 ns 保持时间，XWE 高电平无
+效之后的写入数据的有效
+时间 b
+th(XD)XWE 见图 4-18 TW-2 — ns XRW 高电平无效之后 DSP 释
+放数据总线的最长时间
+tdis(XD)XRNW 见图 4-18 — 4 ns 注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a TW =跟踪周期，写入访问。
+
+=== PDF页 42 ===
+Q/J04JX 02-2022
+38
+表 1-21 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，
+AVSSREF，VSS =0V；
+备注：测试向量 XINTF_BUS_TEST;
+极限值
+单
+位
+A 组
+分
+最小 最大 组
+外部存储器接口读取时序（读取准备就绪，1 个等待状态）
+延迟时间，XCLKOUT 高电平到
+区域芯片选择低电平有效时间
+td(XCOH-XZCSL) 见图 4-19、图 4-20 — 1 ns A9
+A10
+A11
+延迟时间，XCLKOUT 高电平/低
+电平到芯片选择高电平无效时间
+td(XCOHL-XZCSH) 见图 4-19、图 4-20 -2 3 ns 延迟时间，XCLKOUT 高电平到
+地址有效的时间
+td(XCOH-XA) 见图 4-19、图 4-20 — 2 ns 延迟时间，XCLKOUT 高电平/低
+电平到 XRD 低电平的时间
+td(XCOHL-XRDL) 见图 4-19、图 4-20 — 1 ns 延迟时间，XCLKOUT 高电平/低
+电平到 XRD 高电平的时间
+td(XCOHL-XRDH) 见图 4-19、图 4-20 -2 1 ns 访问时间，，从有效地址读取数
+据的时间 a
+ta(A) 见图 4-19、图 4-20 —
+（LR+AR）
+-14
+ns 访问时间，从 XRD 低电平
+有效至读取数据有效的时间 a
+ta(XRD) 见图 4-19、图 4-20 — — ns 建立时间，XRD 选通无效高
+电平之前的读取有效数据时间
+tsu(XD)XRD 见图 4-19、图 4-20 12 — ns 保持时间，XRD 高电平无
+效之后的读取数据的有效时间
+th(XD)XRD 见图 4-19、图 4-20 0 — ns 使用同步 XREADY 访问方式的外部读取时序（读取准备就绪，1 个等待状态）b 建立时间，XCLKOUT 高电
+平/低电平之前 XREADY（同
+步）低电平的时间
+tsu(XRDYsynchL)XCOHL 见图 4-19 15 — ns A9
+A10
+A11
+保持时间，XREADY（同步）
+低电平的时间
+th(XRDYsynchL) 见图 4-19 12 — ns 采样 XCLKOUT 边沿之前
+XREADY（同步）能够变为
+高电平的最早时间
+te(XRDYsynchH) 见图 4-19 — 3 ns 建立时间，XCLKOUT 高电
+平/低电平之前 XREADY（同
+步）高电平的时间
+tsu(XRDYsynchH)XCOHL 见图 4-19 15 — ns 保持时间，区域芯片选择高
+电平之后 XREADY（同步）
+保持高电平的时间
+th(XRDYsynchH)XZCSH 见图 4-19 0 — ns 注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a LR = 建立周期，读取访问。 AR = 有效周期，读取访问。
+b 第一个 XREADY（同步）样本相对于图 4-19 中的 E 发生：E = (XRDLEAD + XRDACTIVE) tc(XTIM)，当首次采样时，如果
+XREADY （同步）被发现为高电平，那么访问将完成。如果发现 XREADY（同步）为低电平，它将在每个 tc(XTIM)内被重新
+采样直到它为高电平。对于每个样本，相对于访问开始的建立时间(F) 可计算为：F=(XRDLEAD+XRDACTIVE+n-1)
+tc(XTIM)-tsu(XRDYsynchL)XCOHL，在这里，n 为样本数量：n = 1，2，3，以此类推。
+
+=== PDF页 43 ===
+Q/J04JX 02-2022
+39
+表 1-22 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，
+AVSSREF，VSS =0V；
+备注：测试向量 XINTF_BUS_TEST；
+极限值
+单
+位
+A 组
+分
+最小 最大 组
+使用异步 XREADY 访问方式的外部读取时序（读取准备就绪，1 个等待状态）c 建立时间，XCLKOUT 高电
+平/低电平之前 XREADY（异
+步）低电平的时间
+tsu(XRDYasynchL)XCOHL 见图 4-20 11 — ns A9
+A10
+A11
+保持时间，XREADY（异步）
+低电平的时间
+th(XRDYasynchL) 见图 4-20 8 — ns 采样 XCLKOUT 边沿之前
+XREADY（异步）能够变为
+高电平的最早时间
+te(XRDYasynchH) 见图 4-20 — 3 ns 建立时间，XCLKOUT 高电
+平/低电平之前 XREADY（异
+步）高电平的时间
+tsu(XRDYasynchH)XCOHL 见图 4-20 11 — ns 保持时间，区域芯片选择高
+电平之后 XREADY（异步）
+保持高电平的时
+th(XRDYasynchH)XZCSH 见图 4-20 0 — ns 注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+c 第一个 XREADY（异步）样本相对于图 4-20 中的 E 发生：E = (XRDLEAD + XRDACTIVE-2) tc(XTIM)，当首次采样时，如
+果 XREADY（异步）被发现为高电平，那么访问将完成。如果发现 XREADY（异步）为低电平，它将在每个 tc(XTIM)内被重
+新采样直到它为高电平。对于每个样本，相对于访问开始的建立时间(F) 可计算为：F=(XRDLEAD+XRDACTIVE+n-3)
+tc(XTIM)-tsu(XRDYsynchL)XCOHL，在这里，n 为样本数量：n = 1，2，3，以此类推。
+
+=== PDF页 44 ===
+Q/J04JX 02-2022
+40
+a 所有的XINTF访问(建立周期)从XCLKOUT的上升沿开始。当需要时，在进行访问并满足这个需求
+之前，器件将会插入一个对准周期。
+b 在对准周期期间，所有的信号都转换为未激活状态。
+c XINTF地址总线保持关闭总线时的最后地址（除了XA0保持为高）, 包括定位周期。
+d 对于每一个样本，从访问F开始的建立时间可计算如下：
+F=(XRDLEAD+XRDACTIVE+n-1)tc(XTIM) – tsu(XRDYsynchL)XCOHL，这里n的为样本数量，取值为: n=1, 2, 3，以此类推
+e 基于上式，关于相对于这个点的第一个样本： E = (XRDLEAD + XRDACTIVE) tc(XTIM) 。 图 4-19 使用同步 XREADY 访问方式的外部读取时序
+
+=== PDF页 45 ===
+Q/J04JX 02-2022
+41
+a 所有的XINTF访问(建立周期)从XCLKOUT的上升沿开始。必要时，在进行访问并满足这个需求之
+前，器件将会插入一个对准周期。
+b 在对准周期期间，所有的信号都转换为未激活状态。
+c XINTF地址总线保持关闭总线时的最后地址（除了XA0保持为高）, 包括定位周期。
+d 对于每一个样本，从访问开始的建立时间可计算如下：
+F=(XRDLEAD+XRDACTIVE–3+ n)tc(XTIM)–tsu(XRDYasynchL)XCOHL，这里n的为样本数量，取值为: n = 1, 2, 3，以此类推
+e 基于上式，关于相对于这个点的第一个样本： E = (XRDLEAD + XRDACTIVE - 2) tc(XTIM) 。 图 4-20 使用异步 XREADY 访问方式的外部读取时序
+
+=== PDF页 46 ===
+Q/J04JX 02-2022
+42
+表 1-23 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，
+AVSSREF，VSS =0V；
+备注：测试向量 XINTF_BUS_TEST；
+极限值
+单
+位
+A 组
+最小 最大 分组
+外部存储器接口写入时序（写入准备就绪，1 个等待状态）
+延迟时间，XCLKOUT 高
+电平到区域芯片选择低电
+平有效的时间
+td(XCOH-XZCSL) 见图 4-21、图 4-22 — 1 ns
+A9
+A10
+A11
+延迟时间，XCLKOUT 高
+电平/低电平到芯片选择高
+电平无效的时间
+td(XCOHL-XZCSH) 见图 4-21、图 4-22 -2 3 ns 延迟时间，XCLKOUT 高
+电平到地址有效的时间
+td(XCOH-XA) 见图 4-21、图 4-22 — 2 ns 延迟时间，XCLKOUT 高
+电平/低电平到 XWE
+低电平的时间
+td(XCOHL-XWEL) 见图 4-21、图 4-22 — 2 ns 延迟时间，XCLKOUT 高
+电平/低电平到 XWE
+高电平的时间
+td(XCOHL-XWEH) 见图 4-21、图 4-22 — 2 ns 延迟时间，XCLKOUT 高电
+平到 XRW 低电平的时间
+td(XCOH-XRNWL) 见图 4-21、图 4-22 — 1 ns 延迟时间，XCLKOUT 高
+电平/低电平到 XRW 高电
+平的时间
+td(XCOHL-XRNWH) 见图 4-21、图 4-22 -2 1 ns 使能时间，从 XWE 低电平
+到驱动数据总线的时间
+ten(XD)XWEL 见图 4-21、图 4-22 0 — ns 延迟时间，从 XWE 低电平
+有效到数据总线数据有效
+的时间
+td(XWEL-XD) 见图 4-21、图 4-22 — 4 ns 保持时间，XWE 高电平无
+效之后的写入数据的有效
+时间 b
+th(XD)XWE 见图 4-21、图 4-22 TW-2
+a — ns XRW 高电平无效之后
+DSP 释放数据总线的最
+长时
+tdis(XD)XRNW 见图 4-21、图 4-22 — 4 ns 注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a TW = 跟踪周期，写入访问。
+
+=== PDF页 47 ===
+Q/J04JX 02-2022
+43
+表 1-24 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，
+AVSSREF，VSS =0V；
+备注：测试向量 XINTF_BUS_TEST；
+极限值
+单
+位
+A 组
+最 分组
+小
+最大
+使用同步 XREADY 访问方式的外部写入时序（写入准备就绪，1 个等待状态）a 建立时间，XCLKOUT 高电
+平/低电平之前 XREADY（同
+步）低电平的时间
+tsu(XRDYsynchL)XCOHL 见图 4-21 15 — ns A9
+A10
+A11
+保持时间，XREADY（同步）
+低电平的时间
+th(XRDYsynchL) 见图 4-21 12 — ns 采样 XCLKOUT 边沿之前
+XREADY（同步）能够变为
+高电平的最早时间
+te(XRDYsynchH) 见图 4-21 — 3 ns 建立时间，XCLKOUT 高电
+平/低电平之前 XREADY（同
+步）高电平的时间
+tsu(XRDYsynchH)XCOHL 见图 4-21 15 — ns 保持时间，区域芯片选择高
+电平之后 XREADY（同步）
+保持高电平的时
+th(XRDYsynchH)XZCSH 见图 4-21 0 — ns 使用异步 XREADY 访问方式的外部写入时序（写入准备就绪，1 个等待状态）
+建立时间，XCLKOUT 高电
+平/低电平之前 XREADY（异
+步）低电平的时间
+tsu(XRDYasynchL)XCOHL 见图 4-22 11 — ns A9
+A10
+A11
+保持时间，XREADY（异步）
+低电平的时间
+th(XRDYasynchL) 见图 4-22 8 — ns 采样 XCLKOUT 边沿之前
+XREADY（异步）能够变为
+高电平的最早时间
+te(XRDYasynchH) 见图 4-22 — 3 ns 建立时间，XCLKOUT 高电
+平/低电平之前 XREADY（异
+步）高电平的时间
+tsu(XRDYasynchH)XCOHL 见图 4-22 11 — ns 保持时间，区域芯片选择高
+电平之后 XREADY（异步）
+保持高电平的时
+th(XRDYasynchH)XZCSH 见图 4-22 0 — ns 注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a 第一个 XREADY（同步）采样相对于图 4-21 中的 D 发生：D = (XWRLEAD + XWRACTIVE) tc(XTIM)当首次采样时，如
+果 XREADY （同步）为高电平，那么访问将完成。如果 XREADY（异步）是低电平，它在每个 tc(XTIM)内再次采样，直到
+它是高电平。对于每个样本，从访问开始的建立时间可计算为：E=(XWRLEAD+XWRACTIVE+n-1) tc(XTIM)-tsu(XRDYsynchL)XCOHL 在这里，n 为样本数量：n=1，2，3，以此类推。
+
+=== PDF页 48 ===
+Q/J04JX 02-2022
+44
+a 所有的XINTF访问(建立周期)从XCLKOUT的上升沿开始。当需要时，器件将在一个满足这个要求
+的访问之前插入一个对准周期。
+b 在对准周期期间，所有的信号都转换为未激活状态。
+c 在未激活周期期间，XINTF地址总线将一直保持总线上产生的最后一个地址, 包括对准周期。
+d 对于每一个样本，从访问开始的建立时间可计算如下：
+D=(XRDLEAD+XRDACTIVE+n-1)tc(XTIM) – tsu(XRDYsynchL)XCOHL
+e 关于相对于这个点的第一个样本：E = (XRDLEAD + XRDACTIVE) tc(XTIM)
+在这里，n 为样本数量（n = 1，2，3，以此类推）。 图 4-21 使用同步 XREADY 访问方式的外部写入时序
+
+=== PDF页 49 ===
+Q/J04JX 02-2022
+45
+a 所有的 XINTF 访问(建立周期)从 XCLKOUT 的上升沿开始。当需要时，器件将在一个满足这个要求
+的访问之前插入一个对准周期。
+b 在对准周期期间，所有的信号都转换为未激活状态。
+c 在未激活周期期间，XINTF地址总线将一直保持总线上产生的最后一个地址, 包括对准周期。
+d 对于每一个样本，从访问开始的建立时间可计算如下：
+D=(XRDLEAD + XRDACTIVE–3+ n)tc(XTIM) – tsu(XRDYasynchL)XCOHL，
+这里n的为样本数量，取值为: n = 1, 2, 3，以此类推
+e 基于上式，关于相对于这个点的第一个样本：E = (XRDLEAD + XRDACTIVE - 2) tc(XTIM) 。 图 4-22 使用异步 XREADY 访问方式的外部写入时序
+
+=== PDF页 50 ===
+Q/J04JX 02-2022
+46
+表 1-25 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，
+AVSSREF，VSS =0V；
+备注：测试向量 XINTF_BUS_TEST；
+极限值
+单
+位
+A 组
+最小 最大 分组
+XHOLD/XHOLDA 时序要求(XCLKOUT = XTIMCLK)
+ab 延迟时间，XHOLD 低电
+平到所有地址、数据和控
+制为高阻抗的时间
+td(HL-HiZ) 见图 4-23 — 4tc(XTIM) ns A9
+A10
+A11
+延迟时间，XHOLD 低电
+电平到 XHOLDAn 低电平
+的时间
+td(HL-HAL) 见图 4-23 — 5tc(XTIM) ns 延迟时间，XHOLD 高电
+电平到 XHOLDAn 高电平
+的时间
+td(HH-HAH) 见图 4-23 — 3tc(XTIM) ns 延迟时间，XHOLD 高电
+电平到总线有效的时间
+td(HH-BV) 见图 4-23 — 4tc(XTIM) ns 注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a 当在 XHOLD 上检测到一个低电平信号时，所有等待的 XINTF 访问将在总线被置为一个高阻抗状态前完成。
+b XHOLD 的状态被锁存在 XTIMCLK 的上升边沿上。
+a 所有待处理的 XINTF 的访问完成。
+b 正常的 XINTF 操作重新开始。 图 4-23 外部接口保持时序
+
+=== PDF页 51 ===
+Q/J04JX 02-2022
+47
+表 1-26 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，
+AVSSREF，VSS =0V；
+备注：测试向量 XINTF_BUS_TEST；
+极限值
+单
+位
+A 组
+最小 最大 分组
+XHOLD/XHOLDA 时序要求(XCLKOUT = 1/2XTIMCLK)
+abc 延迟时间，XHOLD 低电
+平到所有地址、数据和控
+制上低阻抗到高阻抗的时间
+td(HL-HiZ) 见图 4-24 —
+4tc(XTIM)
++ tc(XCO) ns A9
+A10
+A11
+延迟时间，XHOLD 低电
+电平到 XHOLDA 低电平
+的时间
+td(HL-HAL) 见图 4-24 —
+4tc(XTIM)
++2tc(XCO) ns 延迟时间，XHOLD 高电
+电平到 XHOLDA 高电平
+的时间
+td(HH-HAH) 见图 4-24 — 4tc(XTIM) ns 延迟时间，XHOLD 高电
+电平到总线有效的时间
+td(HH-BV) 见图 4-24 — 6tc(XTIM) ns 注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a 当在 XHOLD 上检测到一个低电平信号时，所有等待的 XINTF 访问将在总线被置为一个高阻抗状态前完成。
+b XHOLD 的状态被锁存在 XTIMCLK 的上升边沿上。
+c 在 XHOLD 被检测为高电平或者低电平后，所有总线转换和 XHOLDA 转换将相对于 XCLKOUT 的上升边沿发生。因
+此，对于这个 XCLKOUT=1/2XTIMCLK 的模式，转换最多可以早于最大额定值 1 个 XTIMCLK 周期发生。
+a 所有待处理的 XINTF 的访问完成。
+b 正常的 XINTF 操作重新开始。 图 4-24 XHOLDn/XHOLDAn 时序要求(XCLKOUT = 1/2XTIMCLK)
+
+=== PDF页 52 ===
+Q/J04JX 02-2022
+48
+表 1-27 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，
+AVSSREF，VSS =0V；
+备注：测试向量 ADC_TEST；
+极限值
+单位
+A 组分
+最小 组
+典型
+值
+最大
+ADC 时序
+分辨率 ADCRES 12 — bits ADC 时钟 tC(ADCCLK) 0.001 25 MHz 精度 a b INL(积分非线性） EI 18.75MHz ADC 时钟频率 — ±10 — LSB
+A4
+A5
+A6
+DNL(微分非线性） ED 18.75MHz ADC 时钟频率 — ±3 — LSB
+偏移误差 EIO -80 80 LSB
+带有内部基准的总增益误差 EOG -200 200 LSB
+通道到通道偏移变化 ECCV — ±15 — LSB
+通道到通道增益变化 ECCG — ±15 — LSB
+模拟输入 a b 模拟输入电压（ADCINx 至
+ADCLO）
+VADCINx-ADCLO 0 3 V
+A1
+A2
+A3
+ADCLO VADCLO -5 0 5 mV
+输入电容 10 pF
+输入漏电流 IADCINx — 3 ±5 µA
+内部电压基准 a b 引脚 ADCREFP 输出电压 VADCREFP 1.9 2 2.1 V
+A1
+A2
+A3
+引脚 ADCREFP 输出电压 VADCREFM 0.95 1 1.05 V
+ADCREFP-ADCREFM
+输入电压差异
+VDIFF 1 V
+温度系数 55 PPM
+基准噪声 100 µV
+外部电压基准 a b 引脚 ADCREFP 输出电压 VADCREFP 1.9 2 2.1 V
+引脚 ADCREFP 输出电压 VADCREFM 0.95 1 1.05 V
+ADCREFP-ADCREFM
+输入电压差异
+0.99 1 1.01 V
+AC 技术规范 a b SINAD 信噪比+失真 b SINAD 100kHz 62 dB
+A4
+A5
+A6
+SNR 信噪比 SNR 100kHz 62 dB
+THD 总谐波失真 THD 100kHz -68 dB
+ENOB 有效位数 ENOB 100kHz 8 10.1 12 bits SFDR 无杂散动态动态范围 SFDR 100kHz 69 dB
+注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a 初始鉴定或重新设计时进行, 样品大小（接收数）为 5（0），测试方法见附表 1-27B。
+b 该参数不作为判定要求，测试数据仅供参考。
+
+=== PDF页 53 ===
+Q/J04JX 02-2022
+49
+表 1-28 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，
+AVSSREF，VSS =0V；
+极限值
+A 组
+分组
+最小 典型值 最大
+ADC 加电延迟 a d 带隙基准稳定所需的延迟时间 td(BGR)
+ADCTRL3 寄存器的位 7 和 6
+(ADCBGRFDN1/0)在 PWDNADC 位
+被启用前被设定为 1，见图 4-25
+28ms A9
+A10
+断电控制稳定所需的延迟时间 A11
+td(PWD)
+ADCTRL3 寄存器的位 5 (PWDNADC) 在
+任何 ADC 转换启动前被设定为 1。
+见图 4-25
+20µs 50µs —
+— — 1ms 不同 ADC 配置电流在(25MHz ADCCLK 上)
+ab IDDA
+c IDDAIO IDD1 典型
+值
+模式 A（运行模式） IMODEA ADC 时钟启用
+BG 和 REF 启用
+PWD 禁止
+VDDA3.3 40mA 1µA 0.5mA
+A1
+A2
+A3
+模式 B IMODEB ADC 时钟启用
+BG 和 REF 启用
+PWD 启用
+VDDA3.3 7mA 0 5µA
+模式 C IMODEC ADC 时钟启用
+BG 和 REF 禁止
+PWD 启用
+VDDA3.3 1µA 0 5µA
+模式 D IMODED ADC 时钟禁止
+BG 和 REF 禁止
+PWD 启用
+VDDA3.3 1µA 0 0
+注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a 初始鉴定或重新设计时进行, 样品大小（接收数）为 5（0）。
+b 测试条件：SYSCLKOUT= 150MHz，ADC 模块时钟= 25MHz，ADC 在模式 A 中执行一个所有 16 通道的连续转换。
+c IDDA – 包括进入 VDDA1 /VDDA2 和 AVDDREFBG 的电流。
+d 这些延时是必须的并且建议在转换启动之前使 ADC 模拟基准电路稳定。如果转换在没有这些延时的情况下启动，那么
+ADC 的结果将显示出一个更改的增益。断电时，所有三个位被同时清零。
+图 4-25 ADC 加电控制位时序
+
+=== PDF页 54 ===
+Q/J04JX 02-2022
+50
+表 1-27B ADC 模块的电特性测试的方法
+测试项 测试方法
+INL INL 就是对 4096 个数字码对应的 DNL 求积分
+DNL ADC 主频 12.5MHz ，采样窗口设置 2，等效采样频率 12.5/4MHz，输入一个频率为
+254.313151Hz，高电平为 3V，低电平为 0V 的锯齿波（采用斜坡法计算 DNL）采样 9000 个
+点（包含 8192 个有效数据，还有一些用来同步计算的数据），12 位 ADC 对应 4096 个数字码，
+将每一个数字码对应的 2 个转换数据取平均值作为其实际转化值 VDn，第 n 个数字码对应的
+DNL 为： 1
+0.732
+1 
+
+
+ mV
+V V DNL
+Dn Dn
+n 偏移误差 输入两个直流电压，得到两组 ADC 转换结果，分别取两组数据的平均值为真正的 ADC 转换
+值。将直流误差和增益误差设为两个未知数，解一个二元一次方程组就行，假如输入 1V 得到
+转换值为 a，输入 2V 的得到转换值为 b，直流误差设为 x，增益设为 y，则有
+x+y=a；x+2y=b
+则 y=b-a；x=2a-b;
+增益误差等于所求增益值减去理想增益值（1）再乘以 3V，最后再除以 0.732mV 转为为 LSB；
+同理，直流误差值再除以 0.732mV 转为为 LSB。
+带内部基准的总增益误差
+带隙基准稳定所需的延迟
+时间
+通过测试代码控制 ADC 的上电，并且在上电的同时翻转 GPIO 的状态，再通过示波器同时捕
+捉 ADC 的基准电压变化和 GPIO 的状态，可以直观的看出 ADC 基准稳定的延迟时间。该延
+迟时间还与基准电压引脚外接的两个电容的充电和放电时间有关。
+断电控制稳定所需的延迟
+时间
+与测试带隙基准稳定所需的延迟时间的方法一样
+ADC 运行模式 A
+ADC 正常运行模式，ADC 时钟启用，ADC 的间隙和参考电压上电，ADCTRL3 寄存器的位 7 和
+6 置为 1，ADC 模拟电源上电，ADCTRL3 寄存器的位 5 (ADC 模拟电源掉电控制位) 置为 1。用
+高精度电流测量表测试 VDDA1, VDDA2,AVDDREFBG 三个 ADC 电源引脚的电流总和 IDDA。
+ADC 运行模式 B ADC 正常运行模式，ADC 时钟启用，ADC 的间隙和参考电压上电，ADCTRL3 寄存器的位 7 和
+6 置为 1，ADC 模拟电源掉电，ADCTRL3 寄存器的位 5 (ADC 模拟电源掉电控制位) 置为 0。用
+高精度电流测量表测试 VDDA1, VDDA2,AVDDREFBG 三个 ADC 电源引脚的电流总和 IDDA。
+ADC 运行模式 C ADC 正常运行模式，ADC 时钟启用，ADC 的间隙和参考电压掉电，ADCTRL3 寄存器的位 7 和
+6 置为 0，ADC 模拟电源掉电，ADCTRL3 寄存器的位 5 (ADC 模拟电源掉电控制位) 置为 0。用
+高精度电流测量表测试 VDDA1, VDDA2,AVDDREFBG 三个 ADC 电源引脚的电流总和 IDDA。
+ADC 运行模式 D
+ADC 正常运行模式，ADC 时钟禁止，ADC 的间隙和参考电压掉电，ADCTRL3 寄存器的位 7 和
+6 置为 0，ADC 模拟电源掉电，ADCTRL3 寄存器的位 5 (ADC 模拟电源掉电控制位) 置为 0。用
+高精度电流测量表测试 VDDA1, VDDA2,AVDDREFBG 三个 ADC 电源引脚的电流总和 IDDA。
+
+=== PDF页 55 ===
+Q/J04JX 02-2022
+51
+表 1-27B（续） ADC 模块的电特性测试的方法
+测试项 测试方法
+通道到通道偏移变化 对每个通道进行测量偏移误差和增益误差同样的操作，即可算出每个通道对应的直流偏移和
+增益误差，然后对 16 各通道的直流偏移和增益误差进行比较得出通道到通道的偏移/增益变
+化。
+通道到通道增益变化
+模拟输入电压（ADCINx 至
+ADCLO）
+输入一个 0~3V 的正弦波，测量 ADC 的输出
+ADCLO 设计要求这个端口接模拟地，不用测量。
+基准电压稳定时间 利用万用表电容档连接通道（ADCINx）对地测电容值
+输入漏电流 利用万用表电流档连接通道（ADCINx）对地测电流值
+精度，ADCVREFP
+利用高精度万用表或示波器测量，取平均值作为结果。
+精度，ADCVREFM
+电 压 差 异 ADCVREFP- ADCVREFM 利用高精度万用表或示波器测量，取两个电压平均值的差作为结果。
+温度系数
+在-50~120 条件下用示波器测量 ADCVREFP、ADCVREFM 在多个温度下的平均值，利用公
+式
+V
+VMAX VMIN
+6 10
+120 ( 50) 
+ 
+ （V 等于 ADCVREFP 或 ADCVREFM）求温度系数，单位就是 PPM/℃
+基准噪声 利用示波器测量基准电压的最大值、最小值、平均值，取最大值/最小值与平均值的差值作为
+结果。
+SNR ADC 频率 12.5MHz，输入正弦波频率 100KHz（采样脉宽设置为 2，等效采样频率=12.5/4MHz，
+采样 8192 个采样点，为了实现想干采样，实际测试输入频率为 99.563598633KHz），高电平
+3V，低电平 0V，取 8192 个转换结果存入 DSP 内部存储里面再通过电脑导出结果数据（.csv 文件），将结果*3/65520 转化为 0~3V 的正常电压，然后设定一个时间轴（时间刻度不用很精
+确），导入 matlab，进行 fft，利用测试代码求出需要的 SNR、SNDR、THD、SFDR、ENOB。
+SFD
+THD
+ENOB
+SINAD
+
+=== PDF页 56 ===
+Q/J04JX 02-2022
+52
+表 1-29 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，
+AVSSREF，VSS =0V；
+备注：测试向量 McBSP_TEST
+极限值
+单位
+A 组
+最小 最大 分组
+McBSP 时序 ab McBSP 模块时钟(CLKG，
+CLKX，CLKR) 范围 c
+fc(MCBSP)
+1 — kHz
+A9
+A10
+A11
+— 20 MHz McBSP 模块周期时间(CLKG，
+CLKX，CLKR) 范围
+tc(MCBSP)
+50 — ns 1 ms CLKR/X 周期时间 tc(CKRX) CLKR/X 外部，见图 4-26、图 4-27 中的 M11 2P — ns 脉冲宽度，CLKR/X 高/低电平 tw(CKRX) CLKR/X 外部，见图 4-26、图 4-27 中的 M12 P-7 — ns CLKR/X 上升沿时间 tr(CKRX) CLKR/X 外部，见图 4-26、图 4-27 中的 M13 — 7 ns CLKR/X 下降沿时间 tf(CKRX) CLKR/X 外部，见图 4-26、图 4-27 中的 M14 — 7 ns 建立时间，在 CLKR 低电平之
+前，外部 FSR 为高电平的时间
+tsu(FRH-CKRL)
+CLKR 内部，见图 4-26 中的 M15 18 — ns CLKR 外部，见图 4-26 中的 M15 2 — ns 保持时间，在 CLKR 低电平之
+后，外部 FSR 为高电平的时间
+th(CKRL-FRH)
+CLKR 内部，见图 4-26 中的 M16 0 — ns CLKR 外部，见图 4-26 中的 M16 6 — ns 建立时间，在 CLKR 低电平之
+前，DR 有效的时间
+tsu(DRV-CKRL)
+CLKR 内部，见图 4-26 中的 M17 18 — ns CLKR 外部，见图 4-26 中的 M17 2 — ns 保持时间，在 CLKR 低电平之
+后，DR 有效的时间
+th(CKRL-DRV)
+CLKR 内部，见图 4-26 中的 M18 0 — ns CLKR 外部，见图 4-26 中的 M18 6 — ns 建立时间，在 CLKX 低电平之
+前，外部 FSX 为高电平的时间
+tsu(FXH-CKXL)
+CLKX 内部，见图 4-27 中的 M19 18 — ns CLKX 外部，见图 4-27 中的 M19 2 — ns 保持时间，在 CLKX 低电平之
+后，外部 FSX 为高电平的时间
+th(CKXL-FXH)
+CLKX 内部，见图 4-27 中的 M20 0 — ns CLKX 外部，见图 4-27 中的 M20 6 — ns 注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a 极性位 CLKRP=CLKXP=FSRP=FSXP=0。如果任一信号的极性被反转，那么那个信号的时序基准也被反转。
+b 2P=1/CLKG，单位为 ns。CLKG 是采样率发生器复用的输出。CLKG = CLKSRG / (1+CLKGDV) ，CLKSRG 可由 LSPCLK，
+CLKX，CLKR 供源。CLKSRG≤(SYSCLKOUT/2)。McBSP 的性能受到 I/O 缓冲器开关速度的限制。
+c 内部时钟预分频器必须被调整，这样的话，McBSP 时钟(CLKG，CLKX，CLKR) 速度不会大于 I/O 缓冲器速度限制
+(20MHz)。
+
+=== PDF页 57 ===
+Q/J04JX 02-2022
+53
+图 4-26 McBSP 接收时序
+表 1-30 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，
+AVSSREF，VSS =0V；
+备注：测试向量 McBSP_TEST
+极限值
+单
+位
+A组
+最小 最大 分组
+McBSP 开关时序 ab CLKR/X 周期时间 tc(CKRX) CLKR/X 内部，见图 4-26、图 4-27 中的 M1 2P — ns
+A9
+A10
+A11
+脉冲宽度，
+CLKR/X 高电平 c
+tw(CKRXH) CLKR/X 内部，见图 4-26、图 4-27 中的 M2 D-5 D+5 ns 脉冲宽度，
+CLKR/X 低电平 c
+tw(CKRXL) CLKR/X 内部，见图 4-26、图 4-27 中的 M3 C-5 C+5 ns 延迟时间，
+CLKR 高电平到
+FSR 有效的时间
+td(CKRH-FRV)
+CLKR 内部，见图 4-26 中的 M4 0 4 ns CLKR 外部，见图 4-26 中的 M4 3 27 ns 延迟时间，
+CLKX 高电平到
+FSX 有效的时间
+td(CKXH-FXV)
+CLKX 内部，见图 4-27 中的 M5 0 4 ns CLKX 外部，见图 4-27 中的 M5 3 27 ns 禁用时间，
+CLKX 高电平到
+DX 在最后一个
+数据后为
+高阻抗的时间
+tdis(CKXH-DXHZ
+)
+CLKX 内部，见图 4-27 中的 M6 — 8 ns CLKX 外部，见图 4-27 中的 M6 — 14 ns 延迟时间，
+CLKX 高电平到
+DX 有效的时间
+td(CKXH-DXV)
+这应用于除了第一个位之外的所有被发
+送的位，见图 4-27 中的 M7
+CLKX 内部 — 9 ns CLKX 外部 — 28 ns 当处于数据延迟 1 或者 2
+（XDATDLY=01b 或者 10b）
+模式时，只应用于发送的第
+一个位，见图 4-27 中的 M7
+DXENA=0
+CLKX 内部 — 8 ns CLKX 外部 — 14 ns DXENA=1
+CLKX 内部 — P+8 ns CLKX 外部 — P+14 ns 使能时间， 当处于数据延迟 1 或者 2 DXENA=0 CLKX 内部 0 — ns
+
+=== PDF页 58 ===
+Q/J04JX 02-2022
+54
+CLKX 高电平到
+DX 被驱动的时间
+ten(CKXH-DX) （XDATDLY=01b 或者 10b）
+模式时，只应用于发送的第
+一个位，见图 4-27 中的 M8
+CLKX 外部 6 — ns DXENA=1
+CLKX 内部 P — ns CLKX 外部 P+6 — ns 延迟时间，
+FSX 高电平到
+DX 有效的时间
+td(FXH-DXV)
+当处于数据延迟 0
+（XDATDLY=00b）模式时，
+只应用于发送的第一个位，
+见图 4-27 中的 M9
+DXENA=0
+FSX 内部 — 8 ns FSX 外部 — 14 ns DXENA=1
+FSX 内部 — P+8 ns FSX 外部 — P+14 ns 使能时间，
+FSX 高电平到
+DX 被驱动的时间
+ten(FXH-DX)
+当处于数据延迟 0
+（XDATDLY=00b）模式时，
+只应用于发送的第一个位，
+见图 4-27 中的 M10
+DXENA=0
+FSX 内部 0 — ns FSX 外部 6 — ns DXENA=1
+FSX 内部 P — ns FSX 外部 P+6 — ns 注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a 极性位 CLKRP=CLKXP=FSRP=FSXP=0。如果任一信号的极性被反转，那么那个信号的时序基准也被反转。
+b 2P=1/CLKG，单位为 ns。CLKG 是采样率发生器复用的输出。CLKG = CLKSRG / (1+CLKGDV) ，CLKSRG 可由 LSPCLK，
+CLKX，CLKR 供源。CLKSRG≤(SYSCLKOUT/2)。McBSP 的性能受到 I/O 缓冲器开关速度的限制
+c C=CLKRX 低脉冲宽度= P；D = CLKRX 高脉冲宽度= P。
+图 4-27 McBSP 发送时序
+
+=== PDF页 59 ===
+Q/J04JX 02-2022
+55
+表 1-31 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，
+AVSSREF，VSS =0V；
+备注：测试向量 McBSP_TEST
+极限值
+单
+位
+A 组
+最小 最大 分组
+McBSP 作为 SPI 主控或者受控时的时序：CLKSTP=10b，CLKXP=0
+ab 建立时间，在 CLKX 低电平之
+前，DR 的有效时间
+tsu(DRV-CKXL) 见图 4-28 中的 M30
+主控模式 30 — ns A9
+A10
+A11
+受控模式 8P-10 — ns 保持时间，在 CLKX 低电平之
+后，DR 的有效时间
+th(CKXL-DRV) 见图 4-28 中的 M31
+主控模式 1 — ns 受控模式 8P-10 — ns 建立时间，在 CLKX 高电平之
+前，FSX 为低电平的时间
+tsu(FXL-CKXH) 见图 4-28 中的 M32 受控模式 8P+10 — ns CLKX 周期时间 tc(CKX) 见图 4-28 中的 M33
+主控模式 2P — ns 受控模式 16P — ns 保持时间，在 CLKX 低电平之
+后，FSX 为低电平的时间
+th(CKXL-FXL) 见图 4-28 中的 M24 主控模式 2P — ns 延迟时间，FSX 为低电平到
+CLKX 变为高电平的时间
+td(FXL-CKXH) 见图 4-28 中的 M25 主控模式 P — ns 禁用时间，从 FSX 高电平到最后
+一个数据位后 DX 高阻抗的时间
+tdis(FXH-DXHZ) 见图 4-28 中的 M28
+主控模式 6 — ns 受控模式 6P+6 — ns 延迟时间，FSX 低电平到 DX
+有效时间
+td(FXL-DXV) 见图 4-28 中的 M29
+主控模式 6 — ns 受控模式 4P+6 — ns 注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a 2P=1/CLKG。
+b 对于所有 SPI 受控模式，CLKX 必须至少为 8 个 CLKG 周期。此外，通过设置 CLKSM=CLKGDV=1，CLKG 应该为
+LSPCLK/2。例如：在 LSPCLK 速度为 75MHz 的最大值时，CLKX 最大频率将达到 LSPCLK/16，即 4.6875MHz 且 P=13.3ns。
+图 4-28 McBSP 作为 SPI 主控或者受控时的时序：CLKSTP=10b，CLKXP=0
+
+=== PDF页 60 ===
+Q/J04JX 02-2022
+56
+表 1-32 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，
+AVSSREF，VSS =0V；
+备注：测试向量 McBSP_TEST
+极限值
+单位
+A 组
+最小 最大 分组
+McBSP 作为 SPI 主控或者受控时的时序：CLKSTP=11b，CLKXP=0
+ab 建立时间，在 CLKX 高电平之
+前，DR 的有效时间
+tsu(DRV-CKXH) 见图 4-29 中的 M39
+主控模式 30 — ns A9
+A10
+A11
+受控模式 8P-10 — ns 保持时间，在 CLKX 高电平之
+后，DR 的有效时间
+th(CKXH-DRV) 见图 4-29 中的 M40
+主控模式 1 — ns 受控模式 8P-10 — ns 建立时间，在 CLKX 高电平之
+前，FSX 为低电平的时间
+tsu(FXL-CKXH) 见图 4-29 中的 M41 受控模式 16P+10 — ns CLKX 周期时间 tc(CKX) 见图 4-29 中的 M42
+主控模式 2P — ns 受控模式 16P — ns 保持时间，在 CLKX 低电平之
+后，FSX 为低电平的时间
+th(CKXL-FXL) 见图 4-29 中的 M34 主控模式 P — ns 延迟时间，FSX 为低电平到
+CLKX 变为高电平的时间
+td(FXL-CKXH) 见图 4-29 中的 M35 主控模式 2P — ns 禁用时间，从 CLKX 低电平到最
+后一个数据位后 DX 高阻抗的时间
+tdis(CKXL-DXHZ) 见图 4-29 中的 M37
+主控模式 P+6 — ns 受控模式 7P+6 — ns 延迟时间，FSX 低电平到 DX
+有效时间
+td(FXL-DXV) 见图 4-29 中的 M38
+主控模式 6 — ns 受控模式 4P+6 — ns 注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a 2P=1/CLKG。
+b 对于所有 SPI 受控模式，CLKX 必须至少为 8 个 CLKG 周期。此外，通过设置 CLKSM=CLKGDV=1，CLKG 应该为
+LSPCLK/2。例如：在 LSPCLK 速度为 75MHz 的最大值时，CLKX 最大频率将达到 LSPCLK/16，即 4.6875MHz 且 P=13.3ns。
+图 4-29 McBSP 作为 SPI 主控或者受控时的时序：CLKSTP=11b，CLKXP=0
+
+=== PDF页 61 ===
+Q/J04JX 02-2022
+57
+表 1-33 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，
+AVSSREF，VSS =0V；
+备注：测试向量 McBSP_TEST
+极限值
+单位
+A 组
+最小 最大 分组
+McBSP 作为 SPI 主控或者受控时的时序：CLKSTP=10b，CLKXP=1
+ab 建立时间，在 CLKX 高电平之
+前，DR 的有效时间
+tsu(DRV-CKXH) 见图 4-30 中的 M49
+主控模式 30 — ns A9
+A10
+A11
+受控模式 8P-10 — ns 保持时间，在 CLKX 高电平之
+后，DR 的有效时间
+th(CKXH-DRV) 见图 4-30 中的 M50
+主控模式 1 — ns 受控模式 8P-10 — ns 建立时间，在 CLKX 低电平之
+前，FSX 为低电平的时间
+tsu(FXL-CKXL) 见图 4-30 中的 M51 受控模式 8P+10 — ns CLKX 周期时间 tc(CKX) 见图 4-30 中的 M52
+主控模式 2P — ns 受控模式 16P — ns 保持时间，在 CLKX 高电平之
+后，FSX 为低电平的时间
+th(CKXH-FXL) 见图 4-30 中的 M43 主控模式 2P — ns 延迟时间，FSX 为低电平到
+CLKX 变为低电平的时间
+td(FXL-CKXL) 见图 4-30 中的 M44 主控模式 P — ns 禁用时间，从 FSX 高电平到最
+后一个数据位后 DX 高阻抗的时间
+tdis(FXH-DXHZ) 见图 4-30 中的 M47
+主控模式 6 — ns 受控模式 6P+6 — ns 延迟时间，FSX 低电平到 DX
+有效时间
+td(FXL-DXV) 见图 4-30 中的 M48
+主控模式 6 — ns 受控模式 4P+6 — ns 注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a 2P=1/CLKG。
+b 对于所有 SPI 受控模式，CLKX 必须至少为 8 个 CLKG 周期。此外，通过设置 CLKSM=CLKGDV=1，CLKG 应该为
+LSPCLK/2。例如：在 LSPCLK 速度为 75MHz 的最大值时，CLKX 最大频率将达到 LSPCLK/16，即 4.6875MHz 且 P=13.3ns。
+图 4-30 McBSP 作为 SPI 主控或者受控时的时序：CLKSTP=10b，CLKXP=1
+
+=== PDF页 62 ===
+Q/J04JX 02-2022
+58
+表 1-34 电特性
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA1，VDDA2，VDDIO，VDDAIO，
+AVDDREF =3.3V；
+VDD1，VDD=1.9V；
+VSSA1，VSSA2，VSSAIO，VSS1，
+AVSSREF，VSS =0V；
+备注：测试向量 McBSP_TEST
+极限值
+单位
+A 组
+最小 最大 分组
+McBSP 作为 SPI 主控或者受控时的时序：CLKSTP=11b，CLKXP=1
+ab 建立时间，在 CLKX 低电平之
+前，DR 的有效时间
+tsu(DRV-CKXL) 见图 4-31 中的 M58
+主控模式 30 — ns
+A9
+A10
+A11
+受控模式 8P-10 — ns 保持时间，在 CLKX 低电平之
+后，DR 的有效时间
+th(CKXL-DRV) 见图 4-31 中的 M59
+主控模式 1 — ns 受控模式 8P-10 — ns 建立时间，在 CLKX 低电平之
+前，FSX 为低电平的时间
+tsu(FXL-CKXL) 见图 4-31 中的 M60 受控模式 16P+10 — ns CLKX 周期时间 tc(CKX) 见图 4-31 中的 M61
+主控模式 2P — ns 受控模式 16P — ns 保持时间，在 CLKX 高电平之
+后，FSX 为低电平的时间
+th(CKXH-FXL) 见图 4-31 中的 M53 主控模式 P — ns 延迟时间，FSX 为低电平到
+CLKX 变为低电平的时间
+td(FXL-CKXL) 见图 4-31 中的 M54 主控模式 2P — ns 延迟时间，CLKX 高电平到 DX
+有效时间
+td(CLKXH-DXV) 见图 4-31 中的 M55
+主控模式 -2 0 ns 受控模式 3P+6 5P+20 ns 禁用时间，从 CLKX 高电平到最
+后一个数据位后 DX 高阻抗的时间
+tdis(CKXH-DXHZ) 见图 4-31 中的 M56
+主控模式 P+6 — ns 受控模式 7P+6 — ns 延迟时间，FSX 低电平到 DX
+有效时间
+td(FXL-DXV) 见图 4-31 中的 M57
+主控模式 6 — ns 受控模式 4P+6 — ns 注 电压均以 VSS 为基准，VSS=0V。电流以流入器件引出端为正。
+a 2P=1/CLKG。
+b 对于所有 SPI 受控模式，CLKX 必须至少为 8 个 CLKG 周期。此外，通过设置 CLKSM=CLKGDV=1，CLKG 应该为
+LSPCLK/2。例如：在 LSPCLK 速度为 75MHz 的最大值时，CLKX 最大频率将达到 LSPCLK/16，即 4.6875MHz 且 P=13.3ns。 图 4-31 McBSP 作为 SPI 主控或者受控时的时序：CLKSTP=11b，CLKXP=1
+
+=== PDF页 63 ===
+Q/J04JX 02-2022
+59
+3.4 电试验要求
+电测试要求应为表 2 规定的分组。
+表 2 电试验要求
+测试条件
+分 组
+（按 GJB 548B-2005 方法 5005 表 1 A 组电测试）
+初始（老炼前）电测试（方法 5004） A1、A7
+中间（老炼后）电测试（方法 5004） A1
+a、A7
+a、表 7
+a b 极限
+最终电测试（方法 5005） A2、A3、A8A、A8B、A9、A10、A11
+A 组试验要求（方法 5005） A1、A2、A3、A4、A5、A6、A7、A8A、A8B、A9、A10、A11
+B 组试验要求（方法 5005） A1
+C 组终点电测试（方法 5005） A1、A7、表 7
+b 极限
+D 组终点电测试（方法 5005） A1、A7
+a 该分组要求 PDA 计算
+b 老炼和寿命试验要求变化量（）测试，变化量极限按 4.5.2 的规定。
+3.5 静电放电敏感度等级（ESDS）
+静电放电敏感度等级应符合 GJB 7400-2011 中 3.5.6.3 规定的 2 级(2000V)。仅在初始鉴
+定或重新设计时进行。
+3.6 器件标志
+器件标志应按 GJB 7400-2011 的 3.5.6，器件型号为 ADP32F2812A_150BG J。见图 5。
+（注：器件标识将根据客户的具体需要进行打标。）
+图 5 器件标识图
+
+=== PDF页 64 ===
+Q/J04JX 02-2022
+60
+4 质量保证规定
+4.1 抽样和检验
+除另有规定外，抽样和检验程序应按 GJB 7400-2011 和 GJB 548B-2005 的方法 5005。
+4.2 筛选
+在鉴定检验和质量一致性检验之前，全部器件应按 GJB 548B-2005 方法的 5004 和本规
+范表 3 中给出的要求进行筛选。初始（老炼前）电测试、中间（老炼后）电测试及最终电测
+试要求满足本规范表 1、表 2 的规定。老炼试验用线路见图 6。
+表 3 筛选
+项 目
+条件和要求（GJB 548B-2005）
+说 明
+方 法 条 件
+晶圆批验收 按附录 F 按附录 F 的规定进行
+内部目检（封盖前） 2010 试验条件 B
+温度循环 1010 试验条件 C，（50 次循环）
+初始（老炼前）电测试 本规范 A1、A7 分组
+测试并剔除 A1、A7 分组不合格品，并
+记录有△值要求的项目
+老炼 1015 试验条件 D，TA=125℃、160h 采用本规范图 6 线路
+中间（老炼后）电测试 本规范 A1、A7 分组
+允许的不合格品率（PDA）
+计算
+1%
+用老炼后 A1、A7 分组失效器件数除以
+提交老炼的合格器件数即为 PDA。不
+大于规定的 PDA 时，该批接收。
+最终电测试
+本规范 A2、A3、A8A、A8B、A9、A10、A11
+分组
+本筛选后，若引线涂覆改变或返工，则
+应再进行 A1 分组测试
+X 射线照相 2012
+要求顶视面检查,内引线及其他明显
+缺陷
+结果应显示芯片有效粘接面积≥75%
+超声检测 a 2030
+鉴定或质量一致性检验的
+试验样品选择
+5005 第 3.5 条
+外部目检 2009
+a 用于找出器件的芯片表面及引出端焊线键合区的严重缺陷，只要求做顶部检查，拒收判据：
+裂纹：塑料封装内与键合引线交叉的裂缝，从任一引线指至任一内部特征物（引脚、芯片、芯片粘接侧翼）的内部裂
+纹，其长度超过相应间距的 1/2，任何延伸至封装表面的裂纹。
+空洞：跨越键合丝的模塑料的任何空洞；芯片区内有任何模塑料内部的空洞，其他区域大于 0.25mm。
+分层：芯片与模塑料间任何可测量的分层；引出端引线键合区的任何分层；大于引脚内部长度 2/3 的分层。
+
+=== PDF页 65 ===
+Q/J04JX 02-2022
+61
+1k
+1k
+1k
+1k
+27
+27
+1k
+1k
+27
+27
+27
+27
+27
+2.2K
+2.2K
+2.2K
+2.2K
+2.2K
+2.2K
+27
+2.2K
+27
+27
+0R 0R 22pF
+30MHz
+22pF
+0R
+0R
+U2
+ADP32F2812BGA179
+VSSAIO
+A2
+INA0
+A3
+INA4
+A4
+VDDA2
+A5
+VDD1
+A6
+RXDA
+A7
+A[16]
+A8
+D[15]
+A9
+A[14]
+A10
+F14/PLLDIS
+A11
+TCK
+A12
+TSEL
+A13
+A[11]
+A14
+INB2
+B1
+VDDAIO
+B2
+LO
+B3
+INA3
+B4
+INA7
+B5
+READY
+B6
+A[17]
+B7
+VSS
+B8
+A[15]
+B9
+VDD
+B10
+D[14]
+B11
+TRS
+B12
+ZCS6
+B13
+VSS
+B14
+INB3 C1
+INB0 C2
+INB1 C3
+INA2 C4
+VSSA2 C5 VSS1 C6
+TXDA C7
+VDD
+C8
+MU1 C9
+A[12] C11
+A[10] C12
+TDI C13
+VDD
+C14
+INB6 D1 INB5 D2 INB4 D3
+INA1 D4
+INA6 D5
+RESET D6
+A[18] D7
+INT2 D8 INT1 D9
+VSS D10
+MU0 D11 TDO
+D12
+TE D13
+A[9] D14
+VREFP
+E2
+AVSSREF
+E3
+VREFM
+E4
+INA5
+E5
+BGIN
+E6
+HOLD
+E7
+NMI
+E8
+VDDIO
+E9
+A[13]
+E10
+IOA14
+E11
+A[8]
+E12
+IOA13
+E13
+VSS
+E14
+MC
+F1
+RESEXT
+F2
+VSSA1
+F3
+VDDA1
+F4
+INB7
+F5
+IOA15
+F10
+CLKOUT
+F11
+A[7]
+F12
+IOA12
+F13 IOA11
+F14
+F12 G1 F13 G2
+D[0] G3
+VSS G4
+A[0] G5
+IOD1 G10
+VDDIO
+G11
+VDD G12
+LDOCT_VSS G13 A[6] G14
+VDD
+H1
+F9 H2
+D[1] H3
+F10 H4
+D[2] H5
+IOA8 H10
+IOA9 H11
+IOA10 H12
+A[5] H13
+IOD0 H14
+F8
+J1
+F11
+J2
+D[3]
+J3
+VDDIO
+J4
+D[5]
+J5
+D[13]
+J10
+IOA6
+J11
+A[4]
+J12
+IOA7
+J13
+VSS
+J14
+VSS
+K1
+D[4]
+K3
+F2
+K2 F3
+K4
+IOB6
+K5
+VSS
+K6
+IOB15
+K7
+IOB12
+K8
+OSC
+K9 HOLDA
+K10
+W5
+K11
+VDD
+K12
+VSS
+K13
+W6
+K14
+VDD
+L1
+VSSF
+L2
+D[6]
+L3
+W11
+L4
+D[7]
+L5
+IOB14
+L6
+VDDIO
+L7
+IOB11
+L8
+D[10]
+L9
+VDDIO
+L10
+VSS
+L11
+W3
+L12
+W4
+L13
+D[12]
+L14
+F0 M1
+A[1] M2
+RD M3
+W12 M4
+IOB8 M5
+IOB9 M6
+VPP0_EP M7
+D[9] M8
+X0 M9 VSS_ALG M10
+A[3] M11
+W1 M12
+F5 M13
+W2 M14
+F1 N1
+W7 N2
+W9 N3 R/W
+N4
+IOB7 N5
+IOB13 N6
+VPP1_EN
+N7
+VDDIO/CANX_E N8
+D[11] N9
+A[2] N10
+WE N11
+F6 N12 F7 N13
+ZCS
+P1
+W8
+P2
+W10
+P3
+VSS
+P4
+VDD
+P5
+IOB10
+P6
+D[8]
+P7
+VSS
+P8
+VDD
+P9
+IOD5
+P10
+IOD6
+P11
+ZCS2
+P13
+F4
+P14
+VDD
+P12
+VDDIO
+N14
+VSS C10
+AVDDREF
+E1
+1K
+1K
+1K
+1K
+1K
+1K
+1K
+1K
+CAN_H
+1K
+1K
+1K
+1K
+1K
+1K
+1K
+1K
+0.1uF 0.1uF
+0.1uF 0.1uF
+2.2K
+2.2K
+2.2K
+2.2K
+2.2K
+2.2K
+2.2K
+2.2K
+2.2K
+2.2K
+2.2K
+2.2K
+2.2K
+2.2K
+2.2K
+2.2K
+27
+27
+27
+0.1uF 0.1uF
+0.1uF 0.1uF
+2.2K
+0.1uF 0.1uF
+0.1uF 0.1uF
+27
+27
+27
+27
+VDDIO
+27 27
+2.2K 2.2K
+27
+0.1uF
+2.2K
+2.2K
+2.2K
+2.2K
+2.2K
+2.2K
+2.2K
+2.2K
+2.2K
+2.2K
+27
+2.2K
+2.2K
+2.2K
+2.2K
+2.2K
+D0
+2.2K
+D3
+D2
+D1
+2.2K
+D6
+D5
+D4
+2.2K
+D7
+0.1uF
+0.1uF
+0.1uF
+0.1uF 0.1uF
+27
+27
+NC
+27
+2.2K
+27
+NC
+27
+2.2K
+27
+2.2K 2.2K
+27
+VDD FVDD RHEF050
+20K
++
+22uF
+FVDDIO RHEF050
+27
++
+22uF
+10K
+10K
+10K
+10K
+10K
+10K
+10K
+10K
+10K
+10K
+NC
+10K
+10K
+10K
+1k
+10K
+1k
+10K
+10K
+10K
+SW5 地址编码
+10K
+10K
+10K
+10K
+10K
+10K
+10K
+10K
+10K
+10K
+10K
+XCLKOUT
+10K
+27
+10K
+10K
+10K
+2.2K
+10K
+10K
+10K
+10K
+10K
+10K
+10K
+10K
+D2
+D1
+D0
+CAN_L
+D6
+D5
+D4
+D3
+D7
+10K
+10K
+27
+10K
+10K
+10K
++
+22uF
+2.2K 注：
+1) 图中标示 VDDIO=3.3×(1±5%)V，VDD=1.9×(1±5%)V。
+2) 保险丝 FVDD和 FVDDIO 选取熔断电流为 500×(1±10%)mA，型号为 RHEF050。
+3) 无源晶振 Y2=30MHz,工作温度范围-55~125℃。
+4) 老炼过程中观察电源电流，3.3V 电源小于 90mA，1.9V 电源小于 150mA。
+5) 使能片内 ECAN 驱动器，BUS_CAN_H,BUS_CAN_L 为输出监测端，外接信号板。 图 6 老炼试验和稳态寿命试验用电路图
+4.3 鉴定
+鉴定检验应按 GJB 7400-2011 的规定。所进行的检验按 GJB 548B-2005 方法 5005 和
+本规范的 A、B、C、D 组的规定。鉴定检验样品的母体数不得少于鉴定样品数的 2 倍。
+4.4 质量一致性检验
+4.4.1 概述
+质量一致性检验应按 GJB 7400-2011 的规定。所进行的检验应符合 GJB 548B-2005 的方
+法 5005 和本规范规定的 A 组、B 组、C 组和 D 组检验。
+4.4.2 A 组检验
+
+=== PDF页 66 ===
+Q/J04JX 02-2022
+62
+A 组检验应按表 4 和 GJB 548B-2005 方法 5005 的表 1 及如下规定。
+a）电试验和分组要求按表 2 的规定。
+b）A4 分组 CI仅对 GPIO、ADCINA0~ADCINA7、ADCINB0~ADCINB7、TRSTn、TCK、
+TMS、TDI、TDO、EMU0、EMU1、XCLKOUT、XCLKIN、RESET、XRDn 引脚进行测量。
+c）A 组各分组的测试可用一个样本并按任意顺序进行。当所要求的样本大小超过批的
+大小时，允许 100%检验（适用于质量一致性检验）。
+表 4 A 组检验
+试验 样品数(接收判定数)
+A1 分组 25C 下静态测试
+116(0)
+A2 分组 125C 下静态测试
+A3 分组 -55C 下静态测试
+A4 分组 a 25C 下动态测试
+A5 分组 125C 下动态测试
+A6 分组 -55C 下动态测试
+A7 分组 25C 下功能测试
+A8A 分组 125C 下功能测试
+A8B 分组 -55C 下功能测试
+A9 分组 25C 下开关测试
+A10 分组 125C 下开关测试
+A11 分组 -55C 下开关测试
+a A4 分组 CI 仅在初始鉴定或设计、工艺更改影响其特性时进行，样本大小（接收数）指器件引线数，器件样
+品数至少 3 个。
+4.4.3 B 组检验
+B 组检验应按 GJB 548B-2005 方法 5005 的表 3 及本规范表 5 的规定。
+B1～B5 分组可用同一检验批中电性能不合格的器件作为样本。
+表 5 B 组检验
+试 验
+GJB 548B-2005 样品大小
+（接收数）
+说 明 方 法 条 件
+B1 分组
+外形尺寸 2016 2（0）
+说明：如果同一检验批还要经受 D 组检
+验，B1 分组可不做。
+B2 分组
+耐溶剂性 2015 3（0）
+仅对用油墨或油漆作标记的器件作 B2
+分组
+B3 分组
+可焊性 /
+回流焊，回流曲线按本
+规范图 7 22（0）
+样本大小系对引线数而言，被试器件数
+应不少于 3 个。
+B4 分组
+内部目检和结构检查 2014 1（0）
+B5 分组
+键合强度
+楔形焊
+2011 试验条件 D 15（0）
+样品大小系对键合丝数而言，至少从 4
+只器件中抽取
+B6 分组
+芯片剪切强度 2019
+3（0）
+任意抽取筛选后的样品进行本分组试
+验。
+B7 分组
+X 射线照相
+超声检查
+2012
+2030
+判据：按
+GJB4027A-2006 工作
+项目 1103 种 2.3
+判据：按
+3（0）
+
+=== PDF页 67 ===
+Q/J04JX 02-2022
+63
+GJB4027A-2006 工作
+项目 1103 种 2.4
+B8 分组
+ESD
+电测试
+ESDS
+电测试
+3015
+A1 分组
+2000V
+A1 分组
+3（0）
+初始鉴定或重新设计时进行，任意抽取
+筛选后的样品进行本分组试验。
+4.4.4 C 组检验
+C 组检验应按 GJB 548B-2005 方法 5005 的表 4 及本规范表 6 的规定。
+表 6 C 组检验
+试 验
+GJB 548B-2005
+样品大小（接收数） 说 明
+方 法 条 件
+C1 分组
+稳态寿命试验
+终点电测试
+1005 试验条件 D，TA=125℃，1000h
+本规范 A1、A7 分组（见表 1、表 2）
+和表 8 的△极限
+45（0）（鉴定检验） 采用本规范图6线路
+a 质量一致性检验时批数量≤200 只时可采用 5（0）抽样方案。
+4.4.5 D 组试验
+D 组检验应按 GJB 548B-2005 方法 5005 中的表 5 和本规范的表 7 规定。
+D1、D2、D5、D6 和 D7 分组（不要求终点电测试的分组）可用同一检验批中电性能不
+合格的器件作为样本。
+表 7 D 组检验
+试 验
+GJB 548B-2005 样品大小
+（接收数）
+说 明
+方法 条 件
+D1 分组
+外形尺寸
+共面性
+2016
+GJB7677-2012
+5（0）
+D2 分组
+焊球剪切
+焊球拉脱
+GJB7677-2012 剪切力≥3.5N;
+拉脱力≥3.5N
+45（0）
+样本大小是引线数或引出
+端数，被试器件应不少于 3
+个
+D3a 分组
+高温贮存
+终点电测试
+GB/T4937 150℃，1000h，无偏置
+A1，A7 分组
+15（0）
+D3b 分组
+高压蒸煮
+终点电测试
+SJ/T 10745-1996 121℃，96h
+A1，A7 分组
+15（0）
+D4 分组
+超声检测 a 预处理（表贴器件）
+2030
+见表 7-1
+32（0）
+
+=== PDF页 68 ===
+Q/J04JX 02-2022
+64
+D4a 分组
+热冲击
+温度循环
+目检
+终点电测试
+超声检测 b
+1011
+1010
+2030
+试验条件 B，50 次循环
+试验条件 B，500 次循环
+按方法 1004、1010 的目检判据
+A1、A7 分组，判据按表 4
+22（0）
+D4b 分组
+强 加 速 稳 态 湿 热
+(HAST)
+目检
+终点电测试
+超声检测 b G/BT4937.4
+2030
+130℃/85%RH，96h，偏置
+按方法 1004、1010 的目检判据
+A1、A7 分组
+10（0）
+D5 分组
+盐雾 1009 A 15（0）
+a 检查并记录引线框架（正面和表面）与模塑料之间、芯片基座（正面和背面）模塑料之间的分层。
+b 检查器件时，呈现任何下列缺陷的器件应判不合格：与 4 组超声检测比较，引线框架和芯片基座分层面积变化超过 10%；
+芯片表面、引线端引线键合区出现分层；塑封料出现空洞或裂纹符合 GJB 4027A-2006 工作项目 1103 中 2.4.4 的规定。 表 7-1 预处理
+目检 光学显微镜检查。
+要求：30X~60X 光学显微镜下的器件外部无裂纹或其他损伤。
+烘焙 按 GJB548 B-2005 方法 1008 进行 125℃，24h
+要求：样品能正常进行试验，无明显损伤。
+湿浸 按详细规范要求进行
+将器件放置在干燥、清洁的浅腔容器中，使封装体不互相接触或交叠，40h，60℃、60%RH
+要求：样品能正常进行试验，无明显损伤。
+回流焊 按详细规范要求进行
+回流焊试验条件及温度曲线按图 7 的要求，循环 3 次。
+要求：样品能正常进行试验，无明显损伤。
+清洗 回流焊后将器件至少冷却 15min 后，保证器件冷却到常温后，采用清洗剂（酒精）清洗
+至少 10s，去除助焊剂。
+烘干 常温烘干 2h。
+要求：器件外观无损伤。
+最终电测试 同 A1、A7 分组的要求。
+图 7 回流焊温度曲线
+
+=== PDF页 69 ===
+Q/J04JX 02-2022
+65
+4.5 检验方法
+检验方法应按下列规定。
+4.5.1 电压和电流
+电压以器件引脚 VSS 端为参考点；电流以流入器件引出端为正。
+4.5.2 电参数变化量极限
+被试器件（DUT）在完成试验之后，应先冷却到（25±3）℃，去掉偏置电压，在规定
+时间内完成老炼后测试，然后再进行电参数终点电测试，老炼和寿命试验前后，应记录每只
+器件的必要参数和△变化量，变化量极限按表 8 规定。
+表 8 终点电测试变化量极限（△）
+参 数
+a 变化量极限
+极 限 值
+单 位
+最 大 最 小
+IDD（工作模式） 20 — 130 mA
+IDDIO（工作模式） 2 — 20 mA
+a 老炼和寿命试验后，应记录每个参数，以确定变化量（△）。
+4.6 用户监制
+用户监制按附录 A 的规定。
+4.7 用户验收
+用户验收按附录 B 的规定。
+4.8 用户破坏性物理分析（DPA）
+破坏性物理分析按附录 C 的规定。
+4.9 用户质量控制要求
+用户质量控制要求按附录 D 的规定。
+4.10 应用验证
+应用验证按附录 E 的规定。
+4.11 晶圆批验收
+晶圆批验收按附录 F 的规定。
+4.12 应用指南
+应用指南按附录 H 的规定。
+5 交货准备
+包装要求应按 GJB 7400-2011 第 5 条规定。
+6 说明事项
+
+=== PDF页 70 ===
+Q/J04JX 02-2022
+66
+6.1 预定用途
+符合本规范的器件预定用于军事装备。
+6.2 订购文件应明确的内容
+订购文件应按 GJB 7400-2011 中 6.2 条和如下规定：
+a) 对产品保证选择的要求；
+b）需要时，对器件制造厂提供与所交付器件相应的检验批质量一致性检验数据的要求；
+c) 需要时，对合格证书的要求；
+d) 对产品或工艺的更改通知采购单位的要求；
+e) 需要时，对失效分析（包括 GJB 548B-2005 方法 5003 要求的试验条件）、纠正措施
+和结果提供报告的要求；
+f) 需要时，对特殊载体、引线长度或引线形式的要求，这些要求应不影响器件编号；
+g) 对包装和包装箱的要求；
+h) 需要时的其他要求。
+6.3 替代性
+本规范规定的器件其功能可替代普通工业用器件。不允许用普通工业用器件替代军用器
+件。
+6.4 操作
+器件必须采取防静电措施进行操作。推荐下列操作措施：
+a) 器件应在防静电的工作台上操作；
+b) 试验设备和器具应接地；
+c) 不能触摸器件引线；
+d) 器件应存放在防静电材料制成的容器中；
+e) 生产、测试、使用及流转过程中、MOS 器件区域内应避免使用能引起静电的塑料、
+橡胶或丝织物；
+f) 相对湿度应尽可能保持在 70%以上。
+6.5 失效处理
+6.5.1 外壳及引线严重锈蚀，短、断路，接触不良，功能不正常视为严重失效。
+6.5.2 如出现严重失效或出现有关通用规范中定义的典型失效，应进行失效分析，并提供失
+效分析报告。若失效分析结果与批次有关，则该批不得交货。验收检验允许的严重失效数为
+0。
+6.5.3 对于筛选中出现的不合格品必须严格进行隔离；
+若在筛选过程中发现功能失效或参数严重超差的产品，则应进行失效分析并提交失效分
+析报告；如失效具有批次性，则该整批产品不得交货；
+
+=== PDF页 71 ===
+Q/J04JX 02-2022
+67
+对于老炼试验后参数轻微超差的产品，应提交试验数据供用户审查；批验收后，承制方
+应将不合格品保存 3 个月，供用户进行复测检查。
+6.5.4 归零要求：应按 GJB841-1990 规定，确立失效报告、失效分析和纠正措施系统；对于
+器件在验收检验及使用过程中出现的本质失效，承制方应按“定位准确、机理清楚、问题复
+现、措施有效、举一反三”的要求进行归零，并提供管理及技术归零报告。
+6.6 储存
+储存寿命为 10 年。
+6.7 检查水平
+本规范规定的器件的检查水平按照 GJB 7400-2011 中规定的 N 级(塑封器件)进行控制。
+
+=== PDF页 72 ===
+Q/J04JX 02-2022
+68
+附录 A
+（规范性附录）
+用户监制
+A.1 监制内容
+监制包括如下内容：
+a) 对元器件生产、试验全过程进行质量监控；
+b) 对关键工序质量控制情况进行监督、检查；
+c) 对质量问题归零措施监督、检查；
+d) 封帽前镜检。
+A.2 监制要求
+A.2.1 当需要监制时，监制要求由订货单位在合同中明确。承制方应在封帽前至少 2 周
+通知用户，用户在接到承制单位通知后 2 周内完成监制。
+A.2.2 封帽前镜检按 GJB 548B-2005 方法 2010.1 进行。封帽前镜检应在元器件承制单位
+检验合格的基础上进行，母体数大于 22 只时，可按 LTPD=10，Ac=0 进行抽样，出现不
+合格时监制人员应要求厂家重新检验后二次提交，二次监制采取 100%检验，不允许失效；
+母体数不大于 22 只时，应 100%检验，不允许失效；不符合上述要求时，本批产品应拒
+收。
+A.2.3 监制过程中发现由结构、工艺、材料等造成的批次性问题，产品应整批报废，当连
+续两批出现相同原因的批次拒收问题时，元器件承制单位应进行归零。发生过批次性质量
+问题的产品重新监制时，元器件承制单位应提供归零报告和评审结论，监制人员应对纠
+正措施的落实情况进行检查。
+A.2.4 近三年内发生过与工艺过程控制有关的质量问题并采取纠正措施后，应对连续三
+个供货批次实施监制，并对纠正措施的落实情况进行检查。
+A.3 监制结论
+监制结束后监制人员应填写监制报告，元器件承制单位应在监制报告中签字确认。
+
+=== PDF页 73 ===
+Q/J04JX 02-2022
+69
+附录 B
+（规范性附录）
+用户验收
+除另有协议外，用户验收按下列规定进行：
+用户或其委托单位到承制方按照规范要求进行试验（检验）、文件与数据审查等工作，
+并决定是否接收产品。验收时承制方提供的文件包括筛选报告、质量一致性检验报告、主要
+工序键合强度 CPK≥1.33 和剪切强度其最大值与最小值之比不大于 3 的报告、DPA 报告、失
+效元器件清单及分析报告（有时）、投入产出率不小于 70%、相关数据等。除另有规定，产
+品交货前的存放期为 0 到 18 个月。
+验收项目和要求按表 B.1。
+表 B.1 验收项目及要求
+序号 项 目 GJB 548B-2005 样品数量和接收判定数
+1 外部目检 方法 2009 全部产品，剔除不合格品
+2 电参数测试 按 A 组检验规定的项目和要求 全部产品进行电测试，不允许电参数失效。 当需要时，用户可“逐批进行质量一致性检验”验收产品。
+
+=== PDF页 74 ===
+Q/J04JX 02-2022
+70
+附录 C
+（规范性附录）
+用户破坏性物理分析（DPA）
+除另有协议外，破坏性物理分析按下列规定进行：
+破坏性物理分析（DPA）应在用户指定的机构进行，当在承制方进行时，应有指定
+机构的分析人员或其委托人进行现场监督或试验。根据应用需求，用户保留进一步追加
+DPA 项目和样品数的权利。
+DPA 试验项目和要求按表 C.1。
+表 C.1 DPA 试验项目和要求
+项目
+GJB 548B-2005
+样品数量
+方 法 条 件
+外部目检 2009
+2 只
+X 光检验或 2012
+内部目检 2010 和 2013
+键合强度 2011 条件 D，全部引线
+SEM 检查 2018 全部器件
+芯片剪切强度 2019 全部器件
+
+=== PDF页 75 ===
+Q/J04JX 02-2022
+71
+附录 D
+（规范性附录）
+用户质量控制要求
+当用户有要求时，应明确以下内容：
+D.1 状态控制：
+承制方应严格按照相关标准进行元器件状态控制。
+D.2 禁用与慎用清单控制：
+元器件生产应满足工艺、材料和结构要求；禁用与慎用清单控制应满足附录 G 的要求。
+D.3 结构分析：
+在方案阶段，元器件承制方应提供设计方案供用户质量保证部门审查，送审内容包括元
+器件工艺信息表（由用户质量保证部门提供）和设计方案报告。详细规范预审后（如有用户
+质量保证部门认可的结构相似样品）或者提交初样样品时，承制方应提供专门的样品由用户
+质量保证部门进行结构分析。结构分析结论作为详细规范定稿或者设计定型时的依据。
+D.4 生产线和产品状态控制：
+承制方应建立关于生产线和产品状态控制的技术或管理文件，如工序识别文件（PID）
+等。
+D.5 关键工序应按 GJB 3014-1997 规定进行 SPC 控制：
+元器件生产过程中的关键工序应实行 SPC。
+D.6 重要外协零部件和原材料的承制方评价与认定：
+元器件承制方应对重要外协原材料和零部件的承制方进行评价与认定，必要时与机构分
+析样品同期提交评价与认定资料供用户质量保证部门审查。
+D.7 可追溯性、信息交换和失效报警要求：
+承制方应与用户质量信息管理部门建立实质性沟通机制并遵循相关标准规定的可追溯
+性要求、信息交换和失效报警要求。
+D.8 投入产出率：以芯片装片开始，到筛选结束，应不小于 70%。
+
+=== PDF页 76 ===
+Q/J04JX 02-2022
+72
+附录 E
+（规范性附录）
+应用验证
+对于下列情况，元器件应进行应用验证：
+a）元器件首次在航天型号应用。
+b）元器件技术状态发生变更，影响使用中的接口关系和可靠性。
+c）元器件出现重大质量问题，需重新进行评价。
+d）元器件缺乏满足型号要求论据的其他情况。
+应用验证由航天型号总体院元器件可靠性中心组织实施，承制方有责任予以配合，包括
+但不限于提供验证样品、相关资料和试验数据等。
+应用验证工作可以包括生产评价、元器件评价以及地面整机和飞行验证等，具体的验证
+方案应按照航天型号总体院相关文件和具体情况制定。
+
+=== PDF页 77 ===
+Q/J04JX 02-2022
+73
+附录 F
+（规范性附录）
+晶圆批验收
+本规范附录由圆片代工厂 HHGrace 提供，如不符合以下规定，流片方可选择拒收并重
+新流片。
+F.1 晶圆缺陷检查规则
+F.1.1 检查方法：在强光灯下检查晶圆肉眼可见之缺陷。
+F.1.2 规格说明：存在有下列缺陷之晶圆将被拒收。
+F.1.2.1 晶圆刮伤：个别刮伤≥10cm；多重刮伤≥10% 。
+F.1.2.2 存在肉眼可见之裂痕。
+F.1.2.3 晶圆边缘缺角大于 3mm，或有可能造成破片的缺角。
+F.1.2.4 晶圆表面局部污染或变色面积大于晶圆表面积的 15% 。
+F.2 晶圆背面缺陷检查规则
+F.2.1 检查方法：在强光灯下检查晶圆背面肉眼可见之缺陷。
+F.2.2 规格说明：存在有下列缺陷之晶圆将被拒收（在日光灯下明显可见）。
+F.2.2.1 已研磨晶圆背面有粗磨痕迹。
+F.2.2.2 晶圆背面存在肉眼可见之裂痕。
+F.2.2.3 晶圆边缘缺角大于 3mm，或有可能造成破片的缺角。
+F.2.2.4 已研磨晶圆背面有污染或刮伤 。
+F.3 显微镜规则，有下列情形被认为有缺陷：
+F.3.1 金属层刮伤，造成下层金属等露出，剩余金属宽度不超过原宽度的 75% 。
+F.3.2 金属层破洞，造成下层金属等露出，剩余金属宽度不超过原宽度的 50% 。
+F.3.3 附着不良，有任何金属层的掀起，剥落或起泡现象。
+F.3.4 桥接，有任何金属层桥接造成视觉上不分离现象。
+
+=== PDF页 78 ===
+Q/J04JX 02-2022
+74
+附录 G
+（资料性附录）
+引出端符号别名
+
+=== PDF页 79 ===
+Q/J04JX 02-2022
+75
+附录 H
+（资料性附录）
+应用指南
+H.1 概述
+ADP32F2812器件是一款高性能32位数字信号处理器，采用的指令集为TI公司的C28x，
+它集中了数字信号处理的诸多优秀特性，具有精简指令集计算功能、微型控制器结构、固件
+及工具装置等。这是一款高效的支持 C/C++的芯片，不仅可以让用户利用高级语言完成控制
+程序的设计，而且可以实现复杂的数学算法。作为一种高效的不可多得的数字信号处理器，
+可以代替其它任何同级别的处理器，这种高效性避免了许多系统中需要第二台处理器的问
+题，器件的 32×32 位乘法运算能力，能够很好地处理高精度的数值问题。此外，快速中断
+响应能力可以高速处理异步事件。
+ADP32F2812 器件的片内存储器总线包括程序读总线、数据读总线和数据写总线。程序
+读总线由 22 位地址线和 16 位数据线构成。数据读和写总线由 32 位地址线和 16 位数据线
+构成，32 位的数据总线使 32 位的单周期操作成为可能，哈佛结构总线式的多总线结构使得
+器件在单周期实现取指令、读写数据。
+代码安全模块（CSM）是和 C28x 电路融为一体的一种安全特性。它禁止未授权的用户
+访问片内存储器，禁止私有代码的复制/逆向操作，用户知识产权得到有效的保护。
+ADP32F2812 器件的片内设有 4k×16 的引导 ROM，由工厂初始化码点数据。这些码点
+数据提供了软件引导系统的过程程序。通过上电复位的过程中特定端口的引脚电平，告诉引
+导程序进入何种引导模式。用户可以选择正常引导系统、或选择从外部连接加载新的软件程
+序、或选择片内 Flash 中的用户程序执行系统。引导 ROM 中还包含数学表，例如：正弦/
+余弦表
+H.2 线路设计指南
+H.2.1 外围电路：主要外围电路的连接方法
+H.2.1.1 晶振的连接方法
+外部石英晶振的典型技术规范如下：
+
+=== PDF页 80 ===
+Q/J04JX 02-2022
+76
+频率（MHz） 2~6 6~10 10~20 20~30
+CL（负载电容 pF） 20 16 12 8
+ESR（Ω） ≤1k ≤160 ≤90 ≤40
+H.2.1.2 JTAG 的连接方法
+JTAG 的外部参考源电路
+H.2.1.3 ADC 的连接方法
+要获得指定的 ADC 精度，正确的电路板布局非常关键。为尽可能达到最佳效果，引入
+ADCIN 引脚的走线不应太靠近数字信号通道。这是为了最大程度地减少数字线路上因 ADC
+输入耦合而产生的开关噪声。而且，适当的隔离技术必须被用来将数字电源从 ADC 模块电
+源引脚(VDDA1，VDDA2，VDDAIO，AVDDREFBG) 上隔离。
+a) 如果 ADC 未被使用
+ADC 连接建议保持针对模拟电源引脚的连接，即便在 ADC 未被使用时也是如此。下
+面总结了如果 ADC 未在应用中使用，应该如何连接 ADC 引脚：
+• VDD1 连接至 VDD
+• VDDA1，VDDA2，VDDAIO，AVDDREFBG 连接至 VDDIO
+• VSSA1，VSSA2，VSS1，VSSAIO，AVSSREFBG 连接至 VSS
+• ADCLO 连接至 VSS
+
+=== PDF页 81 ===
+Q/J04JX 02-2022
+77
+• ADCBGREFIN 悬空
+• ADCREFP/ADCREFM 连接一个 100nF 电容器至 VSS
+• ADCRESEXT 连接一个 20kΩ 电阻器（非常轻的负载）至 VSS。
+• ADCINAn，ADCINBn 连接至 VSS
+当 ADC 未被使用时，为了达到节能的目的，请确保到 ADC 模块的时钟未被打开。
+当在一个应用中使用 ADC 模块时，未使用的 ADC 输入引脚应被连接至模拟接地
+(VSS1AGND/VSS2AGND)
+b) ADC 使用内部基准偏置源
+c) ADC 使用外部基准偏置源
+
+=== PDF页 82 ===
+Q/J04JX 02-2022
+78
+H.2.1.4 CAN 的连接方法
+CAN 外部参考源电路
+H.2.1.5 SCI 的连接方法
+
+=== PDF页 83 ===
+Q/J04JX 02-2022
+79
+RS-232 外部参考源电路
+H.2.1.6 供电过程
+一般情况下对于不同电源引脚的加电/断电序列无特别要求，就可以确保针对所有模块
+的正确复位。然而，如果 I/O 引脚的电平移动输出缓冲器中的 3.3V 晶体管在 1.9V 晶体管
+之前加电，输出缓冲器有可能打开，这会在加电期间导致引脚上的毛刺脉冲。为了避免这一
+情况发生，给 VDD 引脚加电应早于或同步对 VDDIO 引脚供电，并确保 VDD 引脚在 VDDIO 引脚
+达到 0.7V 之前达到 0.7V。
+有一些对于 RESET 引脚的要求：
+1) 加电期间，RESET 引脚必须在输入时钟稳定之后的 tw(RSL1)时间内保持低电平。这使得
+整个器件从一个已知的确定条件启动运行。
+2) 断电期间，RESET 引脚必须至少在 VDD 下降到 1.5V 之前的 8μs 内被下拉至低电平。
+这样做提高了闪存 FLASH 可靠性。
+
+=== PDF页 84 ===
+Q/J04JX 02-2022
+80
+在为器件加电之前，不应将高于 VDDIO 电源二极管压降(0.7V) 的电压应用于任何数字
+引脚上（对于模拟引脚，这个值是比 VDDA 高 0.7V 的电压值）。此外，VDDIO 和 VDDA 之间
+电压差值应一直小于 0.3V。 应用于未加电器件的引脚上的电压会以一种无意的方式偏置内
+部 P-N 结，并产生无法预料的结果。
+H.2.2 布局布线：电路主要部分布局布线。
+建议晶振 PCB 图
+功能区域分布示意图
+
+=== PDF页 85 ===
+Q/J04JX 02-2022
+81
+数字和模拟地及公共部分
+PCB 布线转角示意图
+H.3 操作指南
+ VDD 引脚加电应早于或同步对 VDDIO 引脚供电，并确保 VDD 引脚在 VDDIO 引脚达到 0.7V
+之前达到 0.7V。
+ 对 RESET 引脚的要求如下：
+a) 加电期间，RESET 引脚必须在输入时钟稳定之后的 tw(RSL1)时间内保持低电平。这使
+得整个器件从一个已知的确定条件启动运行。
+b) 断电期间，RESET 引脚必须至少在 VDD 下降到 1.5V 之前的 8μs 内被下拉至低电平。
+这样做提高了闪存 FLASH 可靠性。
+
+=== PDF页 86 ===
+Q/J04JX 02-2022
+82
+ 在为器件加电之前，禁止将高于 VDDIO 电源二极管压降(0.7V) 的电压应用于任何数字
+引脚上（对于模拟引脚，这个值是比 VDDA 高 0.7V 的电压值）。此外，VDDIO 和 VDDA 之
+间电压差值应确保一直小于 0.3V。
+ 推荐在 22±6℃温度、45±5%RH 湿度的条件下存放，注意静电防护，避免手碰或接触含
+氯离子等包装材料，注意包装材料的静电防护寿命。
+ 电路在传递过程中，避免受到挤压、撞击，发生跌落等，防止陶瓷受损或碎裂、密封盖
+板凹陷、电路引脚变形等情况。
+ 电路使用过程中，应在防静电托架或金属托盘中放置，避免在无静电防护的情况下触摸
+电路，严禁任何静电及静电场施加在器件引脚上。
+ 对电路引脚进行褪金时，须将电路加热至 100～120℃并稳定 15 分钟后，方可将电路浸
+入熔融的焊锡中。
+ 严格按照推荐工作条件或降低工作条件使用，电路在极限状态或者任何推荐条件之外的
+情况下工作，都将对电路造成损伤害，影响器件的可靠性。
+ 电路工作时，输入引脚严禁悬空，应根据要求接 VDDIO 或 VSS；输入端电压必须限定在
+VDDIO 和 VSS 之间，并尽可能串接一个小于 100Ω的保护电阻，防止输入端口损坏。
+ 对于有特殊振动应力要求的设计，应考虑在对电路的壳体进行必要的加固，以满足特定
+的振动应力要求，本电路在不进行加固的情况下，随机振动应力为：0.2g
+2/Hz（18.7g）。
+H.4 Flash 时序
+通过 TI 的集成软件开发平台（CCS）对电路进行编程/擦除等软件算法验证，电路完全
+兼容 TI CCS 集成开发环境平台的 Flash 烧写编程软件。
+表 H.1 Flash/OTP 电参数
+特性 符号
+条 件
+除另有规定，-55℃≤TA≤125℃，
+VDDA2，VDDAIO，VDDIO，VDD3VFL=3.3V
+VDD1A18，VDD2A18，VDD=1.9V
+极限值
+单位
+最小 典型 最大
+编程时间
+16 位字 — 50 — µs 32K 扇区 — 1000 — ms 16K 扇区 — 500 — ms 擦除时间
+32K 扇区 — 2 — s 16K 扇区 — 2 — s 擦除/编程周期期间的 VDD电流 IDDP 所有外设关闭，
+VDDA2，VDDAIO，VDDIO ，VDD3VFL =3.47V；
+VDD1A18，VDD2A18，VDD=2V；
+VSSA2，VSSAIO，VSS1AGND，VSS2AGND，VSS =0V — — 395 mA
+擦除/编程周期期间的 VDDIO 电流 IDDIOP — — 90 mA
+
+=== PDF页 87 ===
+Q/J04JX 02-2022
+83
+页式 FLASH 访问时间 ta(fp) 37 — — ns 随机 FLASH 访问时间 ta(fr) 37 — — ns OTP 访问时间 ta(OTP) 60 — — ns 表 H.2 不同系统时钟频率下 Flash/OTP 最小等待时间配置
+fsysclkout（MHz） tc（sysclkout）（ns） 页等待状态 随机等待状态 OTP 等待状态
+150 6.67 5 5 8
+120 8.33 4 4 7
+100 10 3 3 5
+75 13.33 2 2 4
+50 20 1 1 2
+30 33.33 1 1 1
+25 40 1 1 1
+15 66.67 1 1 1
+4 250 1 1 1
+H.5 与国外样品电路差异化说明
+H.5.1 VDD3VFL供电设计
+原国外样品电路 datasheet 对 VDD3VFL引脚定义为“3.3V Flash 内核电源引脚，该引脚在
+任何时候都应当连接至 3.3V”，按照此定义，电路设计时将该引脚设计为直接与 VDDIO电源连
+通，该设计对电路用户的板级设计无任何影响；而内嵌 Flash 模块的供电则改由内核 VDD引
+脚供电。
+
+=== PDF页 88 ===
+Q/J04JX 02-2022
+84
+企业军标《半导体集成电路 ADP32F2812A_150BG J 型数字信号处理器》详细规范
+编 制 说 明
+1. 任务来源
+a） 该产品由湖南进芯电子科技有限公司自行研制；
+b） 该产品的主要用于武器装备的自动化控制系统，电能源管理和动力管理。
+2.编制原则和依据
+本规范编制的依据为功能和性能参数参考 TI 的 TMS320F2812 产品。
+本器件的电性能参数参考 TI 公司 TMS320F2812 数据手册（datasheet）（文档代号：
+TMS320F2812GHHA.pdf）制定，封装形式为 BGA179。
+ADP32F2812A_150BG J 型数字信号处理器采用 0.18µm 双多晶六铝 Flash 工艺制造而
+成，集成规模为 400 万门。
+本规范规定的各项技术指标的符合性见下表：
+主要技术指标符合性说明
+序
+号
+主要指标 TI 公司的 TMS320F2812 符合性说明
+1. 最大时钟频率 150MHz 本规范 3.2.3，符合指标
+2. IO 端口供电电压 3.3V 本规范 3.2.3，符合指标
+3. 内核电源电流 ≤200mA（1.9V）
+本规范表 1 IDD 工作模式电流，优
+于指标
+4. IO 端口电源电流 ≤92mA（3.3V）
+本规范表 1 IDDIO工作模式电流，
+优于指标
+5. 输入漏电流
+≤±5μA
+（除上拉电阻端口和下拉
+电阻端口）
+本规范表 1 IIL、IIH，符合指标
+6. 可选址片内存储器大小
+Flash 128k×16bit
+SRAM 18k×16bit
+OTP 1k×16bit
+ROM 4k×16bit
+本规范 3.2.6，符合指标
+7. 外部接口 XINTF 地址位数 19bit 本规范 3.2.6，符合指标
+8. 片内低速外设 I/O 总线宽度 16bit 本规范 3.2.6，符合指标
+9. 外部接口 XINTF 数据总线宽度 16bit 本规范 3.2.6，符合指标
+10. 指令集 C28X 本规范 3.2.7，符合指标
+11. 寄存器数量 参照 TMS320F2812 本规范 3.2.6，符合指标 a 12. 中断类型 可屏蔽中断，不可屏蔽中断 本规范 3.2.6，符合指标
+13. CAN 总线通道数 1 个 本规范 3.2.6，符合指标
+14. 执行标准 工业标准
+本规范 3.1
+GJB 7400-2011 N 级
+15. 质量等级 工业标准 本规范 6.3，GJB 7400-2011 N 级
+16. 工作温度范围 -55℃～+125℃ 本规范 3.2.3，优于指标
+17. 封装 BGA179（树脂封装） 本规范 3.2.4，符合指标
+a 该电路为仿制 TMS320F2812 电路，寄存器数量与 TMS320F2812 电路一致。
+
+=== PDF页 89 ===
+Q/J04JX 02-2022
+85
+3. 质量保证等级
+本规范的编制，是根据用户对器件的要求，依照标准 GJB 7400-2011《合格制造厂认证
+用半导体集成电路通用规范》和 GJB 548B-2005《微电子器件试验方法和程序》进行编制，
+所有内容符合 GJB 7400-2011、GJB 548B-2005 的规定，可靠性保证等级满足 GJB 7400-2011
+规定的 N 级要求。
+4. 主要技术说明
+ADP32F2812A_150BG J 型数字信号处理器是一款高性能 32 位数字信号处理器。该电
+路是湖南进芯电子科技有限公司参照国外样品电路自行设计、HHgrace 工艺流片的通用大规
+模集成电路，电路主要静态、开关和功能等性能和各项技术指标完全满足用户使用要求，具
+有大批量供货能力。该电路的主要技术指标与参数参考 TMS320F2812 数据手册（TI 文档
+代号：TMS320F2812GHHA.pdf）制定。

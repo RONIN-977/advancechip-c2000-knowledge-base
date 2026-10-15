@@ -1,0 +1,17 @@
+# FIXED
+
+depreciated/usblib/usbbuffer.obj: ../depreciated/usblib/usbbuffer.c
+depreciated/usblib/usbbuffer.obj: D:/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/include/stdbool.h
+depreciated/usblib/usbbuffer.obj: D:/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/include/stdint.h
+depreciated/usblib/usbbuffer.obj: D:/dsp/AVP32F069_Examples/Example_AVP32F069UsbDevKeyboard/depreciated/inc/hw_types.h
+depreciated/usblib/usbbuffer.obj: D:/dsp/AVP32F069_Examples/Example_AVP32F069UsbDevKeyboard/depreciated/driverlib/debug.h
+depreciated/usblib/usbbuffer.obj: D:/dsp/AVP32F069_Examples/Example_AVP32F069UsbDevKeyboard/depreciated/usblib/usblib.h
+depreciated/usblib/usbbuffer.obj: D:/dsp/AVP32F069_Examples/Example_AVP32F069UsbDevKeyboard/depreciated/usblib/usblibpriv.h
+
+../depreciated/usblib/usbbuffer.c: 
+D:/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/include/stdbool.h: 
+D:/ti/ccsv8/tools/compiler/ti-cgt-c2000_18.1.2.LTS/include/stdint.h: 
+D:/dsp/AVP32F069_Examples/Example_AVP32F069UsbDevKeyboard/depreciated/inc/hw_types.h: 
+D:/dsp/AVP32F069_Examples/Example_AVP32F069UsbDevKeyboard/depreciated/driverlib/debug.h: 
+D:/dsp/AVP32F069_Examples/Example_AVP32F069UsbDevKeyboard/depreciated/usblib/usblib.h: 
+D:/dsp/AVP32F069_Examples/Example_AVP32F069UsbDevKeyboard/depreciated/usblib/usblibpriv.h: 

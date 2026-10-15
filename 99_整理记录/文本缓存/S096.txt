@@ -1,0 +1,64 @@
+来源: AVP32F0013X 0015X/f28002x-f280015x/f28002x/docs/Example_Projects_Quickstart_Guide.pdf
+来源编号: S096
+
+=== PDF页 1 ===
+www.ti.com Revised May 2020
+1 Copyright © 2020, Texas Instruments Incorporated
+Guide to Importing Projects from C2000Ware into Code Composer Studio
+Importing using the local installation:
+The F28002x Driver Library examples are under the <C2000Ware Installation 
+Directory>\driverlib\f28002x\examples directory. In order to import an example project into Code 
+Composer Studio (CCS), the following steps need to be followed:
+1. On the CCS menu bar, select Project  Import CCS projects. The “Import CCS Eclipse Projects” window 
+will open, click on Browse next to the “Select search-directory” box.
+2. In the “Select Search Directory” window, navigate to the following folder: 
+C:\ti\c2000\C2000Ware_<version>\driverlib\f28002x\examples. Select Ok.
+3. The resulting window displays a list of discovered projects within the F28002x/examples folder. If a smaller set 
+of examples need to be viewed please navigate to the folders within F28002x/examples.
+4. From this window, select the project(s) of your choice. Remember the “Copy projects into workspace” box will 
+always be selected. Once completed, click the Finish button.
+If the “Copy projects into workspace” is checked, the project is copied into the CCS workspace folder. Many 
+projects are structured such that the include files reside in a common folder and several projects can 
+use/reference the same set of common include files When projects are imported and copied to workspace, the 
+include folders are not necessarily copied. CCS handles the import since the project may still need to reference 
+resources whose paths are set up relative to the original project location.
+Note: It is advisable to periodically clean CCS workspace as it could get corrupted over time. Before cleaning, if 
+there are workspace settings you’d like to preserve, you can save the current workspace settings so they can be 
+imported into the new workspace. Projects will have to be re-imported after cleaning the workspace
+5. The selected project(s) should now be viewable in the “CCS Project Explorer” window.
+6. You have now successfully imported an F28002x example project into CCS.
+Building:
+This section describes how to build an imported C2000 example project:
+A project can have multiple build configurations. F2807x example projects have the following configurations
+ CPU1_RAM -> Indicates that the code runs from RAM, this is the default configuration
+ CPU1_Flash -> Indicates that the code runs from Flash 
+1. To change the build configuration, select Project  Build Configuration  Manage. From this window, 
+select the configuration needed for the current build, or create a new one.
+2. Once the build settings are configured, select a project(s) to build by clicking on the project. The project is 
+recognized as selected if the name is bolded with the word ‘Active’ next to it.
+3. To build the project, select Project  Build Project. To build all the projects in the workspace, select 
+Project  Build All. 
+4. Notice the tools running in the console window. After the build is complete, a message will appear indicating the 
+build status for the selected project.
+5. If the build failed, check the “Problems” window for errors. Resolve the errors and repeat the build process.
+Verify that the project(s) has built successfully.
+6. If no errors exist in the “Problems” window, the project is built and ready to be loaded and run.
+Running:
+This section describes how to download the code to the target board and run the program:
+1. In the “CCS Edit” view, select Run  Debug. 
+
+=== PDF页 2 ===
+www.ti.com Revised May 2020
+2 Copyright © 2020, Texas Instruments Incorporated
+2. If loading a program on to a dual-core device for the C28x cores, a “Launching Debug Session” window will open. 
+Select only CPU1 to load the program on (i.e. uncheck CPU2), and then click Ok.
+When loading a program on to the connectivity manager Cortex M4 core, such a window will not open up.
+3. Notice the “CCS Debug” icon in the upper right-hand corner indicates that the perspective has changed to the 
+“CCS Debug” view. After the program is loaded, the console window will indicate that the Memory Map 
+Initialization is complete. At this point, the program ran through the C-environment initialization routine and 
+stopped at main().
+4. The source file containing main()will open with a blue arrow pointing to the first line of code to be executed. 
+The program has now been successfully loaded on to the target board and it is ready to run.
+5. To execute the program, select Run  Resume.
+For more information about Code Composer Studio visit: 
+http://software-dl.ti.com/ccs/esd/documents/users_guide/index.html

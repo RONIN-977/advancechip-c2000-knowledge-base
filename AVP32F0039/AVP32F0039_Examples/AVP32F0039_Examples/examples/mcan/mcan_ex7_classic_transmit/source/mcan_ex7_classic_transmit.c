@@ -1,0 +1,236 @@
+/******************************* Copyright(C) *********************************************
+*
+*                           湖南进芯电子科技有限公司
+*                         http://www.advancechip.com/
+*
+*                         FILE:   mcan_ex7_classic_transmit.c
+*                         TITLE:   MCAN Classic frames transmission using Tx Buffer
+*******************************************************************************************/
+//! This simple example shows external communication between the MCAN module
+//! and another CAN node. It shows how to transmit classic CAN frames.
+//! The GPIOs of MCAN should be connected to a CAN Transceiver.
+//! Bit Rate is 500 kbps. Extended Identifier 0x15A5A5A5 is transmitted with
+//! 8 data bytes.
+//!
+//! \b External \b Connections \n
+//!  Both nodes should communicate through CAN transceivers.
+//!
+//!  - MCAN is on DEVICE_GPIO_PIN_CANRXA (MCANRXA)
+//!  - and DEVICE_GPIO_PIN_CANTXA (MCANTXA)
+//!
+//! \b Watch \b Variables \n
+//!  - txMsg
+//!
+//
+//#############################################################################
+//
+// Include Files
+//
+#include "driverlib.h"
+#include "device.h"
+#include "inc/stw_types.h"
+#include "inc/stw_dataTypes.h"
+#include <string.h>
+
+//
+// Defines.
+//
+#define NUM_OF_MSG                      (1U)
+#define MCAN_STD_ID_FILTER_NUM          (0U)
+#define MCAN_EXT_ID_FILTER_NUM          (0U)
+#define MCAN_FIFO_0_NUM                 (0U)
+#define MCAN_FIFO_0_ELEM_SIZE           (MCAN_ELEM_SIZE_64BYTES)
+#define MCAN_FIFO_1_NUM                 (0U)
+#define MCAN_FIFO_1_ELEM_SIZE           (MCAN_ELEM_SIZE_64BYTES)
+#define MCAN_RX_BUFF_NUM                (0U)
+#define MCAN_RX_BUFF_ELEM_SIZE          (MCAN_ELEM_SIZE_64BYTES)
+#define MCAN_TX_BUFF_SIZE               (NUM_OF_MSG)
+#define MCAN_TX_FQ_SIZE                 (0U)
+#define MCAN_TX_BUFF_ELEM_SIZE          (MCAN_ELEM_SIZE_8BYTES)
+#define MCAN_TX_EVENT_SIZE              (0U)
+
+//
+//  Defining Starting Addresses for Message RAM Sections,
+//  (Calculated from Macros based on User defined configuration above)
+//
+#define MCAN_STD_ID_FILT_START_ADDR     (0x0U)
+#define MCAN_EXT_ID_FILT_START_ADDR     (MCAN_STD_ID_FILT_START_ADDR + ((MCAN_STD_ID_FILTER_NUM * MCANSS_STD_ID_FILTER_SIZE_WORDS * 4U)))
+#define MCAN_FIFO_0_START_ADDR          (MCAN_EXT_ID_FILT_START_ADDR + ((MCAN_EXT_ID_FILTER_NUM * MCANSS_EXT_ID_FILTER_SIZE_WORDS * 4U)))
+#define MCAN_FIFO_1_START_ADDR          (MCAN_FIFO_0_START_ADDR + (MCAN_getMsgObjSize(MCAN_FIFO_0_ELEM_SIZE) * 4U * MCAN_FIFO_0_NUM))
+#define MCAN_RX_BUFF_START_ADDR         (MCAN_FIFO_1_START_ADDR + (MCAN_getMsgObjSize(MCAN_FIFO_1_ELEM_SIZE) * 4U * MCAN_FIFO_1_NUM))
+#define MCAN_TX_BUFF_START_ADDR         (MCAN_RX_BUFF_START_ADDR + (MCAN_getMsgObjSize(MCAN_RX_BUFF_ELEM_SIZE) * 4U * MCAN_RX_BUFF_NUM))
+#define MCAN_TX_EVENT_START_ADDR        (MCAN_TX_BUFF_START_ADDR + (MCAN_getMsgObjSize(MCAN_TX_BUFF_ELEM_SIZE) * 4U * (MCAN_TX_BUFF_SIZE + MCAN_TX_FQ_SIZE)))
+
+
+//
+// Global Variables.
+//
+int32_t     error = 0;
+MCAN_TxBufElement txMsg[NUM_OF_MSG];
+int32_t loopCnt = 0U;
+
+//
+// Function Prototype.
+//
+static void MCANConfig(void);
+
+void main()
+{
+    int i = 0;
+    volatile uint32_t mode = 0U;
+    uint32_t dataBytes = 8;
+
+    //
+    // Initialize device clock and peripherals
+    //
+    Device_init();
+
+    //
+    // Initialize GPIO and configure GPIO pins for CANTX/CANRX
+    //
+    Device_initGPIO();
+
+    //
+    // Configure the divisor for the MCAN bit-clock
+    //
+    SysCtl_setMCANClk(SYSCTL_MCANCLK_DIV_3);
+
+    //
+    // Configuring the GPIOs for MCAN.
+    //
+    GPIO_setPinConfig(DEVICE_GPIO_CFG_MCANRXA);
+    GPIO_setPinConfig(DEVICE_GPIO_CFG_MCANTXA);
+
+    //
+    // Initialize message to transmit.
+    //
+    txMsg[loopCnt].id       = ((uint32_t)(0x15A5A5A5)) ;
+    txMsg[loopCnt].rtr      = 0U;
+    txMsg[loopCnt].xtd      = 1U;
+    txMsg[loopCnt].esi      = 0U;
+    txMsg[loopCnt].dlc      = 8U;
+    txMsg[loopCnt].brs      = 0U;
+    txMsg[loopCnt].fdf      = 0U;
+    txMsg[loopCnt].efc      = 1U;
+    txMsg[loopCnt].mm       = 0xAAU;
+    txMsg[loopCnt].data[i]  = 0x1;
+    for(i = 1; i < dataBytes; i++)
+    {
+        txMsg[loopCnt].data[i]  = txMsg[loopCnt].data[i-1] + 1;
+    }
+    i = 0;
+
+    //
+    // Configure the MCAN Module.
+    //
+    MCANConfig();
+
+    //
+    // Write message to Message RAM.
+    //
+    MCAN_writeMsgRam(MCANA_DRIVER_BASE, MCAN_MEM_TYPE_BUF, loopCnt,
+                     &txMsg[loopCnt]);
+
+    while(1)
+    {
+        //
+        // Add request for all transmission.
+        //
+        MCAN_txBufAddReq(MCANA_DRIVER_BASE, 0U);
+
+        //
+        // Wait till all the messages are transmitted.
+        //
+        while(MCAN_getTxBufReqPend(MCANA_DRIVER_BASE))
+        {
+        }
+    }
+
+    //
+    // Stop Application.
+    //
+    asm("   ESTOP0");
+}
+
+static void MCANConfig(void)
+{
+    MCAN_InitParams initParams;
+    MCAN_MsgRAMConfigParams    msgRAMConfigParams;
+    MCAN_BitTimingParams       bitTimes;
+
+    //
+    //  Initializing all structs to zero to prevent stray values
+    //
+    memset(&initParams, 0, sizeof(initParams));
+    memset(&msgRAMConfigParams, 0, sizeof(msgRAMConfigParams));
+    memset(&bitTimes, 0, sizeof(bitTimes));
+
+    //
+    // Initialize MCAN Init parameters.
+    //
+    initParams.fdMode            = 0x0U; // FD operation disabled.
+    initParams.brsEnable         = 0x0U; // Bit rate switching for
+                                         // transmissions disabled.
+
+    //
+    // Initialize Message RAM Sections Configuration Parameters
+    //
+    msgRAMConfigParams.txStartAddr          = MCAN_TX_BUFF_START_ADDR;
+    // Tx Buffers Start Address.
+    msgRAMConfigParams.txBufNum             = MCAN_TX_BUFF_SIZE;
+    // Number of Dedicated Transmit Buffers.
+    msgRAMConfigParams.txBufMode            = 0U;
+    msgRAMConfigParams.txBufElemSize        = MCAN_TX_BUFF_ELEM_SIZE;
+    // Tx Buffer Element Size.
+
+    //
+    // Initialize bit timings.
+    //
+    bitTimes.nomRatePrescalar   = 0x3U; // Nominal Baud Rate Pre-scaler
+    bitTimes.nomTimeSeg1        = 0x9U; // Nominal Time segment before SP
+    bitTimes.nomTimeSeg2        = 0x8U; // Nominal Time segment after SP
+    bitTimes.nomSynchJumpWidth  = 0x8U; // Nominal SJW
+
+    //
+    // Wait for memory initialization to happen.
+    //
+    while(FALSE == MCAN_isMemInitDone(MCANA_DRIVER_BASE))
+    {
+    }
+
+    //
+    // Put MCAN in SW initialization mode.
+    //
+    MCAN_setOpMode(MCANA_DRIVER_BASE, MCAN_OPERATION_MODE_SW_INIT);
+
+    //
+    // Wait till MCAN is not initialized.
+    //
+    while (MCAN_OPERATION_MODE_SW_INIT != MCAN_getOpMode(MCANA_DRIVER_BASE))
+    {}
+
+    //
+    // Initialize MCAN module.
+    //
+    MCAN_init(MCANA_DRIVER_BASE, &initParams);
+
+    //
+    // Configure Bit timings.
+    //
+    MCAN_setBitTime(MCANA_DRIVER_BASE, &bitTimes);
+
+    //
+    // Configure Message RAM Sections
+    //
+    MCAN_msgRAMConfig(MCANA_DRIVER_BASE, &msgRAMConfigParams);
+
+    //
+    // Take MCAN out of the SW initialization mode
+    //
+    MCAN_setOpMode(MCANA_DRIVER_BASE, MCAN_OPERATION_MODE_NORMAL);
+
+    while (MCAN_OPERATION_MODE_NORMAL != MCAN_getOpMode(MCANA_DRIVER_BASE))
+    {
+
+    }
+}

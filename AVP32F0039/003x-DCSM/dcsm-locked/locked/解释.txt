@@ -1,0 +1,7 @@
+该文件使用block4，对应的pointer改为3FF8
+（因为otp原因，使用block4后，前面的block123都无法使用了。后续要改密码只能从block5开始更改）
+密码为
+.long 0x12345678     ;Z1OTP_CSMPSWD0 (LSW of 128-bit password)
+.long 0xAF7FFFFF     ;Z1OTP_CSMPSWD1
+.long 0x12345678     ;Z1OTP_CSMPSWD2
+.long 0x12345678     ;Z1OTP_CSMPSWD3 (MSW of 128-bit password)

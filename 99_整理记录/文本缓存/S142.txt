@@ -1,0 +1,101 @@
+来源: AVP32F035/从ADP32F035移植到AVP32F035工程概要说明1.1.docx
+来源编号: S142
+
+段落1: 从ADP32F035移植到AVP32F035工程概要
+
+段落2: 版本 V1.0
+
+段落3: 应用指导
+
+段落4:                                2026年3月
+
+段落5: 杭州保威智能科技有限公司
+
+段落6: 概述
+
+段落7: 本文档将重点阐述ADP035与AVP035的差异性，以支持客户快速移植。行文将重点介绍两款芯片差异点，如用户对具体功能模块有进一步了解需要，可查阅相应产品规格书。
+
+段落8: 移植工程范围
+
+段落9: 器件资源差异性对比
+
+表10:
+
+行1: 项点 | ADP32F035 | AVP32F035
+
+行2: 芯片主频（MAX） | 60Mhz  | 120Mhz 
+
+行3: 存储 | 64KB*16bit | 128KB*16bit
+
+行4: RAM | 10KB*16bit | 50KB*16bit
+
+行5: eCAP | 1 | 3
+
+行6: SCI | 1 | 2
+
+行7: LIN | 1 | 0
+
+行8: HRCAP | 2 | 1
+
+段落11: 注：AVP035内核就是AVP069，所以没有LIN模块且只有一个HRCAP（HRCAP2），移植时需将LIN和HRCAP1相关的软件配置屏蔽删除；AVP035有更高主频，客户如果需要使用高主频，需对应修改主频的分倍频配置和FLASH等待时间配置。
+
+段落12: 2.硬件引脚资源差异
+
+段落13: AVP32F035 80pin引脚
+
+段落14: 注：ADP035和AVP035引脚信号描述差异已在引脚图上标红，如果客户未使用差异引脚复用功能，硬件上可直接PIN-to-PIN替换。
+
+段落15: 3.内存分配
+
+段落16: ①RAM部分AVP035比ADP035大40K（L4~L8），覆盖ADP035 RAM地址，用户无需更改RAM的CMD配置（如果客户需重新划分使用更大RAM区域，需参照AVP035的RAM扇区分布修改CMD配置）   
+
+段落17:  AVP035的RAM区域分布
+
+段落18: 
+②Flash部分AVP035 128KB比AD035大两倍（ADP035一个扇区是8K✖16，AVP035一个扇区是16K✖16），覆盖ADP035 FLASH地址，用户无需更改FLASH的CMD配置（如果客户需重新划分使用更大FLASH区域，需参照AVP035的FLASH扇区分布修改CMD配置）。
+
+段落19: AVP035的FLASH扇区分布
+
+段落20: ADP035的FLASH扇区分布
+
+段落21: ③BOOT ROM部分AVP035的起始地址较ADP035的起始地址有差异，用户在使用时需更改BOOT ROM的CMD配置
+
+段落22: ADP035的BOOT ROM的扇区分布
+
+段落23:                        AVP035的BOOT ROM的扇区分布
+
+段落24: 注：ADP035的IQmath Libraries是直接写在Boot ROM区域，AVP035的IQmath Librarie起始地址是0x3F8000，客户移植时需重新划分修改。
+
+段落25: 4.软件差异
+
+段落26: ① AVP035的比较器 2 和比较器 3 的使能内部连接错：
+
+段落27: 问题描述：下图是一个比较器的框图，其中比较器 2 的 CMPDACEN 控制位被连接到比较器3，来控制比较器3的使能；相反，比较器3的CMPDACEN控制比较器2的使能。
+
+段落28: 解决方案： 
+
+段落29: 初始化比较器时，没有以上 BUG 的情况下，应如下代码所示： 
+
+段落30: Comp1Regs.COMPCTL.bit.COMPDACEN = 1; // Power up Comparator 1 locally 
+
+段落31: Comp2Regs.COMPCTL.bit.COMPDACEN = 1; // Power up Comparator 2 locally 
+
+段落32: Comp3Regs.COMPCTL.bit.COMPDACEN = 1; // Power up Comparator 3 locally 
+
+段落33: 实际情况如下解释： 
+
+段落34: Comp1Regs.COMPCTL.bit.COMPDACEN = 1; // Power up Comparator 1 locally 
+
+段落35: Comp2Regs.COMPCTL.bit.COMPDACEN = 1; // Power up Comparator 3 locally 
+
+段落36: Comp3Regs.COMPCTL.bit.COMPDACEN = 1; // Power up Comparator 2 locally 
+
+段落37: Note：应特别注意比较器 2 和比较器 3 不同时使用的情况。
+
+段落38: ② 软件工程.c .h和.lib文件替换
+
+段落39: 因AVP035的内核是AVP069，所以在软件移植中需要将ADP035相关的.c（source文件）.h（include文件）和.lib文件替换为AVP069的.c .h和.lib文件
+
+段落40: ③ .lib文件替换方法：
+
+段落41:  在用户原本的ADP035应用程序中，如有程序代码对 Flash 操作，移植时需替换我司提供AVP069的.lib 文件

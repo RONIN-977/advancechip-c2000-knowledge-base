@@ -1,0 +1,18 @@
+  sends=1; interval-ms=
+PASS 335 handshake captures 0.5s BOOT window after power-on at 0ms
+  sends=2; interval-ms=52.6
+PASS 335 handshake captures 0.5s BOOT window after power-on at 23ms
+  sends=4; interval-ms=60.5,47.2,48.1
+PASS 335 handshake captures 0.5s BOOT window after power-on at 117ms
+  sends=11; interval-ms=62.6,47.2,46.4,47.1,48.0,62.9,47.1,47.6,47.1,48.1
+PASS 335 handshake captures 0.5s BOOT window after power-on at 485ms
+  sends=25; interval-ms=60.8,46.8,47.3,46.8,63.6,46.6,46.0,48.0,47.6,48.1,63.3,46.8,46.7,48.1,46.2,62.3,46.9,46.8,46.9,46.3,62.0,46.7,46.7,46.9
+PASS 335 handshake captures 0.5s BOOT window after power-on at 1200ms
+PASS 335 handshake APP replies do not trigger APP-to-BOOT command
+PASS 335 handshake wrong sequence, CRC and payload ignored
+PASS 335 handshake partial reply survives 50ms retransmission
+PASS 335 handshake cancellation stops polls and restores normal read timeout
+  timeout-ms=9009.9; sends=180
+PASS 335 handshake no response expires at 9 seconds without flash commands
+PASS 335 handshake successful handshake resumes normal update, ACK retry and APP startup
+All 11 customer335 handshake tests passed.

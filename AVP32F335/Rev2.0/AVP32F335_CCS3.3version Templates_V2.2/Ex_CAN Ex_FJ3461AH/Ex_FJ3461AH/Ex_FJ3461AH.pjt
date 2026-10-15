@@ -1,0 +1,276 @@
+; Code Composer Project File, Version 2.0 (do not modify or remove this line)
+
+[Project Settings]
+ProjectDir="C:\Users\lym\Desktop\Ex_FJ3461AH\"
+ProjectType=Executable
+CPUFamily=TMS320C28XX
+Tool="Compiler"
+Tool="CustomBuilder"
+Tool="DspBiosBuilder"
+Tool="Linker"
+Config="Debug"
+Config="Release"
+
+[Source Files]
+Source="include\AVP33x_Adc.h"
+Source="include\AVP33x_CpuTimers.h"
+Source="include\AVP33x_DefaultIsr.h"
+Source="include\AVP33x_DevEmu.h"
+Source="include\AVP33x_Device.h"
+Source="include\AVP33x_DMA.h"
+Source="include\AVP33x_Dma_defines.h"
+Source="include\AVP33x_ECan.h"
+Source="include\AVP33x_ECap.h"
+Source="include\AVP33x_EPwm.h"
+Source="include\AVP33x_EPwm_defines.h"
+Source="include\AVP33x_EQep.h"
+Source="include\AVP33x_Examples.h"
+Source="include\AVP33x_GlobalPrototypes.h"
+Source="include\AVP33x_Gpio.h"
+Source="include\AVP33x_I2c.h"
+Source="include\AVP33x_I2c_defines.h"
+Source="include\AVP33x_Mcbsp.h"
+Source="include\AVP33x_PieCtrl.h"
+Source="include\AVP33x_PieVect.h"
+Source="include\AVP33x_Project.h"
+Source="include\AVP33x_Sci.h"
+Source="include\AVP33x_Spi.h"
+Source="include\AVP33x_SWPrioritizedIsrLevels.h"
+Source="include\AVP33x_SysCtrl.h"
+Source="include\AVP33x_Xintf.h"
+Source="include\AVP33x_XIntrupt.h"
+Source="include\SFO.h"
+Source="include\SFO_V5.h"
+Source="lib\rts2800_fpu32.lib"
+Source="src\AIP650.c"
+Source="src\AIP650.h"
+Source="src\AVP33x_Adc.c"
+Source="src\AVP33x_ADC_cal.asm"
+Source="src\AVP33x_CodeStartBranch.asm"
+Source="src\AVP33x_CpuTimers.c"
+Source="src\AVP33x_DefaultIsr.c"
+Source="src\AVP33x_DMA.c"
+Source="src\AVP33x_ECan.c"
+Source="src\AVP33x_ECap.c"
+Source="src\AVP33x_EPwm.c"
+Source="src\AVP33x_EQep.c"
+Source="src\AVP33x_GlobalVariableDefs.c"
+Source="src\AVP33x_Gpio.c"
+Source="src\AVP33x_I2C.c"
+Source="src\AVP33x_Mcbsp.c"
+Source="src\AVP33x_MemCopy.c"
+Source="src\AVP33x_PieCtrl.c"
+Source="src\AVP33x_PieVect.c"
+Source="src\AVP33x_Sci.c"
+Source="src\AVP33x_Spi.c"
+Source="src\AVP33x_SysCtrl.c"
+Source="src\AVP33x_usDelay.asm"
+Source="src\AVP33x_Xintf.c"
+Source="src\Example_FJ3461AH.c"
+Source="cmd\AVP335.cmd"
+Source="cmd\AVP33x_Headers_nonBIOS.cmd"
+
+["Compiler" Settings: "Debug"]
+Options=-g -pdsw225 -fr"$(Proj_dir)\Debug" -i"C:\Users\lym\Desktop\Ex_FJ3461AH\include" -d"_DEBUG" -mt -v28 --float_support=fpu32
+
+["Compiler" Settings: "Release"]
+Options=-pdsw225 -o3 -fr"$(Proj_dir)\Release" -d"LARGE_MODEL" -ml -v28
+
+["Linker" Settings: "Debug"]
+Options=-c -m".\Debug\Ex_FJ3461AH.map" -o".\Debug\Ex_FJ3461AH.out" -stack0x400 -w -x -i"C:\Users\lym\Desktop\Ex_FJ3461AH\lib"
+
+["Linker" Settings: "Release"]
+Options=-c -m".\Release\Ex_FJ3461AH.map" -o".\Release\Ex_FJ3461AH.out" -w -x
+
+["include\AVP33x_Adc.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_Adc.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_CpuTimers.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_CpuTimers.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_DefaultIsr.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_DefaultIsr.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_DevEmu.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_DevEmu.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_Device.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_Device.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_DMA.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_DMA.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_Dma_defines.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_Dma_defines.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_ECan.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_ECan.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_ECap.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_ECap.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_EPwm.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_EPwm.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_EPwm_defines.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_EPwm_defines.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_EQep.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_EQep.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_Examples.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_Examples.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_GlobalPrototypes.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_GlobalPrototypes.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_Gpio.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_Gpio.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_I2c.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_I2c.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_I2c_defines.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_I2c_defines.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_Mcbsp.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_Mcbsp.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_PieCtrl.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_PieCtrl.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_PieVect.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_PieVect.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_Project.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_Project.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_Sci.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_Sci.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_Spi.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_Spi.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_SWPrioritizedIsrLevels.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_SWPrioritizedIsrLevels.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_SysCtrl.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_SysCtrl.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_Xintf.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_Xintf.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\AVP33x_XIntrupt.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\AVP33x_XIntrupt.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\SFO.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\SFO.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["include\SFO_V5.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["include\SFO_V5.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["src\AIP650.h" Settings: "Debug"]
+ExcludeFromBuild=true
+
+["src\AIP650.h" Settings: "Release"]
+ExcludeFromBuild=true
+
+["cmd\AVP335.cmd" Settings: "Debug"]
+LinkOrder=1
+
+["cmd\AVP335.cmd" Settings: "Release"]
+LinkOrder=1
+
+["cmd\AVP33x_Headers_nonBIOS.cmd" Settings: "Debug"]
+LinkOrder=1
+
+["cmd\AVP33x_Headers_nonBIOS.cmd" Settings: "Release"]
+LinkOrder=1
+

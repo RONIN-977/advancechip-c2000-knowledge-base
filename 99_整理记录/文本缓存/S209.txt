@@ -1,0 +1,42 @@
+来源: 文档/AVP335和TI28346资源差异.xlsx
+来源编号: S209
+
+=== 工作表 表格_20260305 ===
+
+B1=AVP32F335 | C1=TMS320C28346
+
+A2=主频 | B2= 150MHz | C2=300MHz
+
+A3=内核架构 | B3=32 位 C28x 内核  | C3=32 位 C28x 内核
+
+A4=片上存储器 | B4= 256K×16 位FLASH， 34K×16 位SARAM，8K×16位引导ROM | C4=258K×16位SARAM， 8K×16位引导ROM
+
+A5=模数转换（ADC） | B5=12 位 ADC，16个通道 | C5=无集成式 ADC，需外接ADC芯片实现模拟信号采集
+
+A6=PWM 通道 | B6=18个 ePWM 通道，6 个 HRPWM 通道 | C6=18个 ePWM 通道，9个 HRPWM 通道
+
+A7=通信接口 | B7= 3个SCI（兼容 UART），2个eCAN，1个I2C，2 个 McBSP（可配置为 SPI），1个SPI | C7=3个SCI（兼容UART），2个eCAN，1个I2C，2个 McBSP（可配置为SPI），2个SPI
+
+A8=其他控制外设 | B8=6个eCAP通道，2个eQEP通道，6 通道DMA，3个32 位CPU计时器 | C8=6个eCAP通道，3个eQEP通道，6 通道DMA，3个32 位CPU计时器
+
+A9=外部接口 | B9=16/32 位 XINTF 外部接口 | C9=16/32 位 XINTF 外部接口
+
+A10=GPIO 引脚 | B10=88 个可配置 GPIO 引脚 | C10=88 个可配置 GPIO 引脚
+
+A11=封装类型 | B11=AVP32F335QP176Q
+AVP32F335QP176S
+AVP32F335QP176S1
+AVP32F335BA176S
+AVP32F335BA176S1 | C11=TMS320C28346ZFE（BGA256）
+
+
+A12=电源规格 | B12=1.8v转1.5v内核电压,3.3vI/0设计 | C12=1.1V/1.2V 内核、3.3V I/O
+
+A13=温度范围 | B13=S：–40℃至125℃
+S1：-55℃至 125℃（筛选）
+Q：–40℃至125℃(ZFE)（通过 
+AEC-Q100认证）
+ | C13=T：–40℃至105℃（ZFE、ZHH）
+S：–40℃至125℃(ZFE)
+Q：–40℃至125℃(ZFE)（通过 
+AEC-Q100认证）

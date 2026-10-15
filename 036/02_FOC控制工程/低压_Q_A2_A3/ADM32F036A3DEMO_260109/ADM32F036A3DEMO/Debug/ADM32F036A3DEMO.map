@@ -1,0 +1,2243 @@
+******************************************************************************
+             TMS320C2000 Linker PC v18.1.3                     
+******************************************************************************
+>> Linked Wed Jun 10 15:28:42 2026
+
+OUTPUT FILE NAME:   <ADM32F036A3DEMO.out>
+ENTRY POINT SYMBOL: "code_start"  address: 003f0000
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+PAGE 0:
+  RAMPRG                00008000   00001000  00000cf2  0000030e  RWIX
+  OTP                   003d7800   00000400  00000000  00000400  RWIX
+  BEGIN                 003f0000   00000002  00000002  00000000  RWIX
+  FLASHB                003f0002   00005ffc  000040be  00001f3e  RWIX
+  BOOT_FLAG             003f5ffe   00000002  00000001  00000001  RWIX
+  FLASHA                003f6000   00001f80  00000000  00001f80  RWIX
+  CSM_RSVD              003f7f80   00000076  00000076  00000000  RWIX
+  CSM_PWL               003f7ff8   00000008  00000008  00000000  RWIX
+  IQTABLES              003fe000   00000b50  00000000  00000b50  RWIX
+  IQTABLES2             003feb50   0000008c  00000000  0000008c  RWIX
+  IQTABLES3             003febdc   000000aa  00000000  000000aa  RWIX
+  ROM                   003ff27c   00000d44  00000000  00000d44  RWIX
+  RESET                 003fffc0   00000002  00000000  00000002  RWIX
+  VECTORS               003fffc2   0000003e  00000000  0000003e  RWIX
+
+PAGE 1:
+  RAMM0                 00000100   00000300  00000000  00000300  RWIX
+  RAMM1                 00000400   00000400  00000300  00000100  RWIX
+  DEV_EMU               00000880   00000105  00000004  00000101  RWIX
+  SYS_PWR_CTL           00000985   00000003  00000000  00000003  RWIX
+  FLASH_REGS            00000a80   00000060  00000008  00000058  RWIX
+  CSM                   00000ae0   00000010  00000010  00000000  RWIX
+  ADC_RESULT            00000b00   00000020  00000020  00000000  RWIX
+  CPU_TIMER0            00000c00   00000008  00000008  00000000  RWIX
+  CPU_TIMER1            00000c08   00000008  00000008  00000000  RWIX
+  CPU_TIMER2            00000c10   00000008  00000008  00000000  RWIX
+  PIE_CTRL              00000ce0   00000020  0000001a  00000006  RWIX
+  PIE_VECT              00000d00   00000100  00000100  00000000  RWIX
+  CLA1                  00001400   00000080  00000000  00000080  RWIX
+  ECANA                 00006000   00000040  00000000  00000040  RWIX
+  ECANA_LAM             00006040   00000040  00000000  00000040  RWIX
+  ECANA_MOTS            00006080   00000040  00000000  00000040  RWIX
+  ECANA_MOTO            000060c0   00000040  00000000  00000040  RWIX
+  ECANA_MBOX            00006100   00000100  00000000  00000100  RWIX
+  COMP1                 00006400   00000020  00000014  0000000c  RWIX
+  COMP2                 00006420   00000020  00000014  0000000c  RWIX
+  COMP3                 00006440   00000020  00000000  00000020  RWIX
+  EPWM1                 00006800   00000040  00000040  00000000  RWIX
+  EPWM2                 00006840   00000040  00000040  00000000  RWIX
+  EPWM3                 00006880   00000040  00000040  00000000  RWIX
+  EPWM4                 000068c0   00000040  00000040  00000000  RWIX
+  EPWM5                 00006900   00000040  00000040  00000000  RWIX
+  EPWM6                 00006940   00000040  00000000  00000040  RWIX
+  EPWM7                 00006980   00000040  00000000  00000040  RWIX
+  ECAP1                 00006a00   00000020  00000020  00000000  RWIX
+  EQEP1                 00006b00   00000040  00000000  00000040  RWIX
+  LINA                  00006c00   00000080  0000004a  00000036  RWIX
+  GPIOCTRL              00006f80   00000040  00000040  00000000  RWIX
+  GPIODAT               00006fc0   00000020  00000020  00000000  RWIX
+  GPIOINT               00006fe0   00000020  0000000c  00000014  RWIX
+  SYSTEM                00007010   00000020  0000001a  00000006  RWIX
+  PGAOPA                00007030   00000001  00000001  00000000  RWIX
+  SPIA                  00007040   00000010  00000010  00000000  RWIX
+  SCIA                  00007050   00000010  00000010  00000000  RWIX
+  NMIINTRUPT            00007060   00000010  00000010  00000000  RWIX
+  XINTRUPT              00007070   00000010  00000010  00000000  RWIX
+  ADC                   00007100   00000080  00000050  00000030  RWIX
+  SPIB                  00007740   00000010  00000000  00000010  RWIX
+  I2CA                  00007900   00000040  00000022  0000001e  RWIX
+  RAML0                 00008a80   00001580  00000eac  000006d4  RWIX
+  RAMH0                 0000a000   00002000  00000000  00002000  RWIX
+  PARTID                003d7e80   00000001  00000001  00000000  RWIX
+  CSM_PWL               003f7ff8   00000008  00000008  00000000  RWIX
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+DevEmuRegsFile 
+*          1    00000880    00000004     UNINITIALIZED
+                  00000880    00000004     ADP32F03x_GlobalVariableDefs.obj (DevEmuRegsFile)
+
+PieVectTableFile 
+*          1    00000d00    00000100     UNINITIALIZED
+                  00000d00    00000100     ADP32F03x_GlobalVariableDefs.obj (PieVectTableFile)
+
+EmuKeyVar 
+*          1    00000d00    00000001     UNINITIALIZED
+                  00000d00    00000001     ADP32F03x_GlobalVariableDefs.obj (EmuKeyVar)
+
+EmuBModeVar 
+*          1    00000d01    00000001     UNINITIALIZED
+                  00000d01    00000001     ADP32F03x_GlobalVariableDefs.obj (EmuBModeVar)
+
+FlashCallbackVar 
+*          1    00000d02    00000002     UNINITIALIZED
+                  00000d02    00000002     ADP32F03x_GlobalVariableDefs.obj (FlashCallbackVar)
+
+FlashScalingVar 
+*          1    00000d04    00000002     UNINITIALIZED
+                  00000d04    00000002     ADP32F03x_GlobalVariableDefs.obj (FlashScalingVar)
+
+FlashRegsFile 
+*          1    00000a80    00000008     UNINITIALIZED
+                  00000a80    00000008     ADP32F03x_GlobalVariableDefs.obj (FlashRegsFile)
+
+CsmRegsFile 
+*          1    00000ae0    00000010     UNINITIALIZED
+                  00000ae0    00000010     ADP32F03x_GlobalVariableDefs.obj (CsmRegsFile)
+
+AdcResultFile 
+*          1    00000b00    00000020     UNINITIALIZED
+                  00000b00    00000020     ADP32F03x_GlobalVariableDefs.obj (AdcResultFile)
+
+CpuTimer0RegsFile 
+*          1    00000c00    00000008     UNINITIALIZED
+                  00000c00    00000008     ADP32F03x_GlobalVariableDefs.obj (CpuTimer0RegsFile)
+
+CpuTimer1RegsFile 
+*          1    00000c08    00000008     UNINITIALIZED
+                  00000c08    00000008     ADP32F03x_GlobalVariableDefs.obj (CpuTimer1RegsFile)
+
+CpuTimer2RegsFile 
+*          1    00000c10    00000008     UNINITIALIZED
+                  00000c10    00000008     ADP32F03x_GlobalVariableDefs.obj (CpuTimer2RegsFile)
+
+PieCtrlRegsFile 
+*          1    00000ce0    0000001a     UNINITIALIZED
+                  00000ce0    0000001a     ADP32F03x_GlobalVariableDefs.obj (PieCtrlRegsFile)
+
+codestart 
+*          0    003f0000    00000002     
+                  003f0000    00000002     ADP32F03x_CodeStartBranch.obj (codestart)
+
+ramfuncs   0    003f30b4    00000cf2     RUN ADDR = 00008000
+                  003f30b4    000007bf     SVC_v1.02_20251227.obj (ramfuncs)
+                  003f3873    000002e0     PWM.obj (ramfuncs)
+                  003f3b53    00000236     InfoCollect.obj (ramfuncs)
+                  003f3d89    00000019     HardwareSetup.obj (ramfuncs)
+                  003f3da2    00000004     ADP32F03x_usDelay.obj (ramfuncs)
+
+.cinit     0    003f3da6    0000024f     
+                  003f3da6    0000016b     Parameter_LuHua_FAN.obj (.cinit)
+                  003f3f11    00000057     PWM.obj (.cinit)
+                  003f3f68    0000002c     FunctionMain.obj (.cinit)
+                  003f3f94    00000017     MCMain.obj (.cinit)
+                  003f3fab    0000000e     rts2800_ml.lib : exit.c.obj (.cinit)
+                  003f3fb9    0000000a     Reference.obj (.cinit)
+                  003f3fc3    00000009     Command.obj (.cinit)
+                  003f3fcc    00000008     MCVar.obj (.cinit)
+                  003f3fd4    00000005     SubPrg.obj (.cinit)
+                  003f3fd9    00000005     rts2800_ml.lib : _lock.c.obj (.cinit:__lock)
+                  003f3fde    00000005                    : _lock.c.obj (.cinit:__unlock)
+                  003f3fe3    00000004     CommInterface.obj (.cinit)
+                  003f3fe7    00000004     IPD.obj (.cinit)
+                  003f3feb    00000004     InfoCollect.obj (.cinit)
+                  003f3fef    00000004     MCVF.obj (.cinit)
+                  003f3ff3    00000002     --HOLE-- [fill = 0]
+
+.econst    0    003f3ff6    00000092     
+                  003f3ff6    00000060     MCVar.obj (.econst:_gSendToMotorTable)
+                  003f4056    00000018     MCVar.obj (.econst:_gSendToFuncTable)
+                  003f406e    00000018     FunctionMain.obj (.econst:_pDataCore2Func)
+                  003f4086    00000002     FunctionMain.obj (.econst)
+
+.switch    0    003f4088    00000030     
+                  003f4088    00000030     InfoCollect.obj (.switch:_SVPWM_1ShuntGetPhaseCurrent)
+
+csm_rsvd   0    003f7f80    00000076     NOLOAD SECTION
+                  003f7f80    00000076     ADP32F03x_CSMPasswords.obj (csm_rsvd)
+
+Comp1RegsFile 
+*          1    00006400    00000014     UNINITIALIZED
+                  00006400    00000014     ADP32F03x_GlobalVariableDefs.obj (Comp1RegsFile)
+
+Comp2RegsFile 
+*          1    00006420    00000014     UNINITIALIZED
+                  00006420    00000014     ADP32F03x_GlobalVariableDefs.obj (Comp2RegsFile)
+
+ECap1RegsFile 
+*          1    00006a00    00000020     UNINITIALIZED
+                  00006a00    00000020     ADP32F03x_GlobalVariableDefs.obj (ECap1RegsFile)
+
+LinaRegsFile 
+*          1    00006c00    0000004a     UNINITIALIZED
+                  00006c00    0000004a     ADP32F03x_GlobalVariableDefs.obj (LinaRegsFile)
+
+GpioCtrlRegsFile 
+*          1    00006f80    00000040     UNINITIALIZED
+                  00006f80    00000040     ADP32F03x_GlobalVariableDefs.obj (GpioCtrlRegsFile)
+
+GpioDataRegsFile 
+*          1    00006fc0    00000020     UNINITIALIZED
+                  00006fc0    00000020     ADP32F03x_GlobalVariableDefs.obj (GpioDataRegsFile)
+
+GpioIntRegsFile 
+*          1    00006fe0    0000000c     UNINITIALIZED
+                  00006fe0    0000000c     ADP32F03x_GlobalVariableDefs.obj (GpioIntRegsFile)
+
+SysCtrlRegsFile 
+*          1    00007010    0000001a     UNINITIALIZED
+                  00007010    0000001a     ADP32F03x_GlobalVariableDefs.obj (SysCtrlRegsFile)
+
+SpiaRegsFile 
+*          1    00007040    00000010     UNINITIALIZED
+                  00007040    00000010     ADP32F03x_GlobalVariableDefs.obj (SpiaRegsFile)
+
+PgaOpaRegsFile 
+*          1    00007030    00000001     UNINITIALIZED
+                  00007030    00000001     ADP32F03x_GlobalVariableDefs.obj (PgaOpaRegsFile)
+
+SciaRegsFile 
+*          1    00007050    00000010     UNINITIALIZED
+                  00007050    00000010     ADP32F03x_GlobalVariableDefs.obj (SciaRegsFile)
+
+NmiIntruptRegsFile 
+*          1    00007060    00000010     UNINITIALIZED
+                  00007060    00000010     ADP32F03x_GlobalVariableDefs.obj (NmiIntruptRegsFile)
+
+XIntruptRegsFile 
+*          1    00007070    00000010     UNINITIALIZED
+                  00007070    00000010     ADP32F03x_GlobalVariableDefs.obj (XIntruptRegsFile)
+
+AdcRegsFile 
+*          1    00007100    00000050     UNINITIALIZED
+                  00007100    00000050     ADP32F03x_GlobalVariableDefs.obj (AdcRegsFile)
+
+I2caRegsFile 
+*          1    00007900    00000022     UNINITIALIZED
+                  00007900    00000022     ADP32F03x_GlobalVariableDefs.obj (I2caRegsFile)
+
+EPwm1RegsFile 
+*          1    00006800    00000040     UNINITIALIZED
+                  00006800    00000040     ADP32F03x_GlobalVariableDefs.obj (EPwm1RegsFile)
+
+EPwm2RegsFile 
+*          1    00006840    00000040     UNINITIALIZED
+                  00006840    00000040     ADP32F03x_GlobalVariableDefs.obj (EPwm2RegsFile)
+
+EPwm3RegsFile 
+*          1    00006880    00000040     UNINITIALIZED
+                  00006880    00000040     ADP32F03x_GlobalVariableDefs.obj (EPwm3RegsFile)
+
+EPwm4RegsFile 
+*          1    000068c0    00000040     UNINITIALIZED
+                  000068c0    00000040     ADP32F03x_GlobalVariableDefs.obj (EPwm4RegsFile)
+
+EPwm5RegsFile 
+*          1    00006900    00000040     UNINITIALIZED
+                  00006900    00000040     ADP32F03x_GlobalVariableDefs.obj (EPwm5RegsFile)
+
+PartIdRegsFile 
+*          1    003d7e80    00000001     UNINITIALIZED
+                  003d7e80    00000001     ADP32F03x_GlobalVariableDefs.obj (PartIdRegsFile)
+
+CsmPwlFile 
+*          1    003f7ff8    00000008     UNINITIALIZED
+                  003f7ff8    00000008     ADP32F03x_GlobalVariableDefs.obj (CsmPwlFile)
+
+.pinit     0    003f0002    00000000     UNINITIALIZED
+
+.text      0    003f0002    000030b1     
+                  003f0002    00000b94     MCMain.obj (.text)
+                  003f0b96    000004cc     SVC_v1.02_20251227.obj (.text)
+                  003f1062    0000044b     HardwareSetup.obj (.text)
+                  003f14ad    000003a3     Command.obj (.text)
+                  003f1850    00000308     FunctionMain.obj (.text)
+                  003f1b58    000002f1     PWM.obj (.text)
+                  003f1e49    00000286     PreDrive.obj (.text)
+                  003f20cf    000001c3     IPD.obj (.text)
+                  003f2292    000001a3     InvProtect.obj (.text)
+                  003f2435    0000014b     SubPrg.obj (.text)
+                  003f2580    00000140     MCExchange.obj (.text)
+                  003f26c0    00000107     rts2800_ml.lib : ll_div28.asm.obj (.text)
+                  003f27c7    000000dd     InfoCollect.obj (.text)
+                  003f28a4    000000dc     Record.obj (.text)
+                  003f2980    000000d6     CommInterface.obj (.text:retain)
+                  003f2a56    0000009b     Reference.obj (.text)
+                  003f2af1    00000092     LinLDF.obj (.text)
+                  003f2b83    00000091     ASMSubPrg.obj (.text)
+                  003f2c14    00000075     MCVF.obj (.text)
+                  003f2c89    00000068     MCCall.obj (.text)
+                  003f2cf1    00000067     MainSystem.obj (.text:retain)
+                  003f2d58    00000061     MainSystem.obj (.text)
+                  003f2db9    0000005e     CommInterface.obj (.text)
+                  003f2e17    0000005a     rts2800_ml.lib : fs_mpy28.asm.obj (.text)
+                  003f2e71    00000054                    : boot28.asm.obj (.text)
+                  003f2ec5    00000044     ADP32F03x_CpuTimers.obj (.text)
+                  003f2f09    00000038     PWMCommFunc.obj (.text:retain)
+                  003f2f41    00000033     PWMCommFunc.obj (.text)
+                  003f2f74    0000002a     rts2800_ml.lib : l_div28.asm.obj (.text)
+                  003f2f9e    00000029                    : exit.c.obj (.text)
+                  003f2fc7    00000029                    : fs_tol28.asm.obj (.text)
+                  003f2ff0    00000026     ADP32F03x_CodeStartBranch.obj (.text)
+                  003f3016    00000024     rts2800_ml.lib : cpy_tbl.c.obj (.text)
+                  003f303a    0000001e                    : ll_cmp28.asm.obj (.text)
+                  003f3058    0000001d                    : memcpy.c.obj (.text)
+                  003f3075    00000019                    : args_main.c.obj (.text)
+                  003f308e    00000011     Tune.obj (.text)
+                  003f309f    00000009     rts2800_ml.lib : _lock.c.obj (.text)
+                  003f30a8    00000008     HardwareSetup.obj (.text:retain)
+                  003f30b0    00000002     rts2800_ml.lib : pre_init.c.obj (.text)
+                  003f30b2    00000001                    : startup.c.obj (.text)
+
+.ovly      0    003f40b8    0000000a     
+                  003f40b8    0000000a     (.ovly:_prginRAM)
+
+csmpasswds 
+*          0    003f7ff8    00000008     NOLOAD SECTION
+                  003f7ff8    00000008     ADP32F03x_CSMPasswords.obj (csmpasswds)
+
+.stack     1    00000400    00000300     UNINITIALIZED
+                  00000400    00000300     --HOLE--
+
+.ebss      1    00008a80    00000eac     UNINITIALIZED
+                  00008a80    00000840     Record.obj (.ebss)
+                  000092c0    000001f0     MCVar.obj (.ebss)
+                  000094b0    00000010     ADP32F03x_CpuTimers.obj (.ebss)
+                  000094c0    0000013e     CommInterface.obj (.ebss)
+                  000095fe    00000002     IPD.obj (.ebss)
+                  00009600    0000009c     SVC_v1.02_20251227.obj (.ebss)
+                  0000969c    00000024     FunctionMain.obj (.ebss)
+                  000096c0    0000007c     MCMain.obj (.ebss)
+                  0000973c    00000004     Tune.obj (.ebss)
+                  00009740    00000064     PWM.obj (.ebss)
+                  000097a4    00000016     Reference.obj (.ebss)
+                  000097ba    00000006     rts2800_ml.lib : exit.c.obj (.ebss)
+                  000097c0    00000060     Parameter_LuHua_FAN.obj (.ebss)
+                  00009820    00000010     InfoCollect.obj (.ebss)
+                  00009830    00000010     SPIcomm.obj (.ebss)
+                  00009840    0000004e     Command.obj (.ebss)
+                  0000988e    00000030     InvProtect.obj (.ebss)
+                  000098be    00000002     SubPrg.obj (.ebss)
+                  000098c0    0000002e     LinLDF.obj (.ebss)
+                  000098ee    0000000b     PreDrive.obj (.ebss)
+                  000098f9    00000001     HardwareSetup.obj (.ebss)
+                  000098fa    00000002     rts2800_ml.lib : _lock.c.obj (.ebss:__lock)
+                  000098fc    00000002                    : _lock.c.obj (.ebss:__unlock)
+                  000098fe    00000001     MCVF.obj (.ebss)
+                  000098ff    00000001     --HOLE--
+                  00009900    0000002c     PWMCommFunc.obj (.ebss)
+
+BOOTFLAG   0    003f5ffe    00000001     
+                  003f5ffe    00000001     MainSystem.obj (BOOTFLAG)
+
+.reset     0    003fffc0    00000002     DSECT
+                  003fffc0    00000002     rts2800_ml.lib : boot28.asm.obj (.reset)
+
+vectors    0    003fffc2    00000000     DSECT
+
+MODULE SUMMARY
+
+       Module                             code    initialized data   uninitialized data
+       ------                             ----    ----------------   ------------------
+    ..\Motor\obj\
+       SVC_v1.02_20251227.obj             5194    0                  156               
+       PWM.obj                            2225    87                 100               
+       IPD.obj                            451     4                  2                 
+    +--+----------------------------------+-------+------------------+--------------------+
+       Total:                             7870    91                 258               
+                                                                                       
+    .\Function\
+       Command.obj                        931     9                  78                
+       FunctionMain.obj                   776     70                 36                
+       PreDrive.obj                       646     0                  11                
+       CommInterface.obj                  308     4                  318               
+       LinLDF.obj                         146     0                  46                
+       Reference.obj                      155     10                 22                
+       PWMCommFunc.obj                    107     0                  44                
+       SPIcomm.obj                        0       0                  16                
+    +--+----------------------------------+-------+------------------+--------------------+
+       Total:                             3069    93                 571               
+                                                                                       
+    .\Function\Parameters\
+       Parameter_LuHua_FAN.obj            0       363                96                
+    +--+----------------------------------+-------+------------------+--------------------+
+       Total:                             0       363                96                
+                                                                                       
+    .\Main\
+       ADP32F03x_GlobalVariableDefs.obj   0       0                  1160              
+       HardwareSetup.obj                  1157    0                  1                 
+       MainSystem.obj                     200     1                  0                 
+       ADP32F03x_CSMPasswords.obj         0       126                0                 
+       ADP32F03x_CpuTimers.obj            68      0                  16                
+       ADP32F03x_CodeStartBranch.obj      40      0                  0                 
+       ADP32F03x_usDelay.obj              8       0                  0                 
+    +--+----------------------------------+-------+------------------+--------------------+
+       Total:                             1473    127                1177              
+                                                                                       
+    .\Motor\src\
+       MCMain.obj                         2964    23                 124               
+       InfoCollect.obj                    1353    52                 16                
+       MCVar.obj                          0       128                496               
+       InvProtect.obj                     419     0                  48                
+       MCExchange.obj                     320     0                  0                 
+       MCVF.obj                           117     4                  1                 
+       MCCall.obj                         104     0                  0                 
+       Tune.obj                           17      0                  4                 
+    +--+----------------------------------+-------+------------------+--------------------+
+       Total:                             5294    207                689               
+                                                                                       
+    .\SubProgra\
+       Record.obj                         220     0                  2112              
+       SubPrg.obj                         331     5                  2                 
+       ASMSubPrg.obj                      145     0                  0                 
+    +--+----------------------------------+-------+------------------+--------------------+
+       Total:                             696     5                  2114              
+                                                                                       
+    C:\CCS8.2\ccsv8\tools\compiler\ti-cgt-c2000_18.1.3.LTS\lib\rts2800_ml.lib
+       ll_div28.asm.obj                   263     0                  0                 
+       fs_mpy28.asm.obj                   90      0                  0                 
+       boot28.asm.obj                     84      0                  0                 
+       exit.c.obj                         41      14                 6                 
+       l_div28.asm.obj                    42      0                  0                 
+       fs_tol28.asm.obj                   41      0                  0                 
+       cpy_tbl.c.obj                      36      0                  0                 
+       ll_cmp28.asm.obj                   30      0                  0                 
+       memcpy.c.obj                       29      0                  0                 
+       args_main.c.obj                    25      0                  0                 
+       _lock.c.obj                        9       10                 4                 
+       pre_init.c.obj                     2       0                  0                 
+       startup.c.obj                      1       0                  0                 
+    +--+----------------------------------+-------+------------------+--------------------+
+       Total:                             693     24                 10                
+                                                                                       
+       Stack:                             0       0                  768               
+       Linker Generated:                  0       10                 0                 
+    +--+----------------------------------+-------+------------------+--------------------+
+       Grand Total:                       19095   920                5683              
+
+
+LINKER GENERATED COPY TABLES
+
+_prginRAM @ 003f40b8 records: 1, size/record: 8, table size: 10
+	ramfuncs: copy 3314 bytes from load addr=003f30b4 at page=0 to run addr=00008000 at page=0
+
+
+GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
+
+address     data page           name
+--------    ----------------    ----
+00000400      10 (00000400)     __stack
+
+00000880      22 (00000880)     _DevEmuRegs
+
+00000a80      2a (00000a80)     _FlashRegs
+
+00000ae0      2b (00000ac0)     _CsmRegs
+
+00000b00      2c (00000b00)     _AdcResult
+
+00000c00      30 (00000c00)     _CpuTimer0Regs
+00000c08      30 (00000c00)     _CpuTimer1Regs
+00000c10      30 (00000c00)     _CpuTimer2Regs
+
+00000ce0      33 (00000cc0)     _PieCtrlRegs
+
+00000d00      34 (00000d00)     _EmuKey
+00000d00      34 (00000d00)     _PieVectTable
+00000d01      34 (00000d00)     _EmuBMode
+00000d02      34 (00000d00)     _Flash_CallbackPtr
+00000d04      34 (00000d00)     _Flash_CPUScaleFactor
+
+00006400     190 (00006400)     _Comp1Regs
+00006420     190 (00006400)     _Comp2Regs
+
+00006800     1a0 (00006800)     _EPwm1Regs
+
+00006840     1a1 (00006840)     _EPwm2Regs
+
+00006880     1a2 (00006880)     _EPwm3Regs
+
+000068c0     1a3 (000068c0)     _EPwm4Regs
+
+00006900     1a4 (00006900)     _EPwm5Regs
+
+00006a00     1a8 (00006a00)     _ECap1Regs
+
+00006c00     1b0 (00006c00)     _LinaRegs
+
+00006f80     1be (00006f80)     _GpioCtrlRegs
+
+00006fc0     1bf (00006fc0)     _GpioDataRegs
+00006fe0     1bf (00006fc0)     _GpioIntRegs
+
+00007010     1c0 (00007000)     _SysCtrlRegs
+00007030     1c0 (00007000)     _PagOpaRegs
+
+00007040     1c1 (00007040)     _SpiaRegs
+00007050     1c1 (00007040)     _SciaRegs
+00007060     1c1 (00007040)     _NmiIntruptRegs
+00007070     1c1 (00007040)     _XIntruptRegs
+
+00007100     1c4 (00007100)     _AdcRegs
+
+00007900     1e4 (00007900)     _I2caRegs
+
+00008a80     22a (00008a80)     _SampleRate
+00008a82     22a (00008a80)     _Sample
+00008a84     22a (00008a80)     _AllowRecordControl
+00008a86     22a (00008a80)     _Index
+00008a88     22a (00008a80)     _AllowRecord
+
+00008ac0     22b (00008ac0)     _Results
+
+000092c0     24b (000092c0)     _FieldWeakMode
+000092c1     24b (000092c0)     _FieldWeakCurScale
+000092c2     24b (000092c0)     _StartPresetCurrent
+000092c3     24b (000092c0)     _LowLimitFrequency
+000092c4     24b (000092c0)     _SpeedMeasureFactor2
+000092c5     24b (000092c0)     _IPDAutoDectEnable
+000092c6     24b (000092c0)     _IPDAutoDectScaling
+000092c7     24b (000092c0)     _FieldWeakRef
+000092c8     24b (000092c0)     _DataRsrd
+000092c9     24b (000092c0)     _OverspeedScaling
+000092ca     24b (000092c0)     _SpeedFeedbackFilter
+000092cb     24b (000092c0)     _DCBrakeCur
+000092cc     24b (000092c0)     _TorqueCurrentLimit
+000092cd     24b (000092c0)     _MotorPWMRandom
+000092ce     24b (000092c0)     _SpeedMeasureFactor1
+000092cf     24b (000092c0)     _FieldWeakScale
+000092d0     24b (000092c0)     _MinCurrentLowSpeed
+000092d1     24b (000092c0)     _SpecailFactor
+000092d2     24b (000092c0)     _PaseShiftEnable
+000092d3     24b (000092c0)     _LowNoseElmPWMMode
+000092d4     24b (000092c0)     _ReserdData
+000092d5     24b (000092c0)     _RsSecond
+000092d6     24b (000092c0)     _MotorPWMModeForNoise
+000092d7     24b (000092c0)     _ActualPower
+000092d8     24b (000092c0)     _gSoftVersion
+000092d9     24b (000092c0)     _InternalTemperatureDegree
+000092da     24b (000092c0)     _IbusActual
+000092db     24b (000092c0)     _AVREnableMode
+000092dc     24b (000092c0)     _MotorTestData1
+000092dd     24b (000092c0)     _IdMaxSet
+000092de     24b (000092c0)     _IqFWLimit
+000092df     24b (000092c0)     _SFLowSpeed
+000092e0     24b (000092c0)     _MotorTestData5
+000092e1     24b (000092c0)     _LastLowNoseElmPWMMode
+000092e2     24b (000092c0)     _NoNegativeOMG
+000092e3     24b (000092c0)     _MotorTestData4
+000092e4     24b (000092c0)     _gRatio
+000092e5     24b (000092c0)     _MotorTestData2
+000092e6     24b (000092c0)     _gFeisu
+000092e8     24b (000092c0)     _gSynPWM
+000092ea     24b (000092c0)     _gSpeedFlag
+000092ec     24b (000092c0)     _gIAlphBeta
+000092ee     24b (000092c0)     _gIMT
+000092f0     24b (000092c0)     _gIUVW
+000092f3     24b (000092c0)     _gFcCal
+000092f6     24b (000092c0)     _gLowPower
+000092f9     24b (000092c0)     _gIAmpTheta
+000092fc     24b (000092c0)     _gTemperature
+
+00009300     24c (00009300)     _gShortGnd
+00009304     24c (00009300)     _gOutVolt
+0000930a     24c (00009300)     _gADC
+00009310     24c (00009300)     _gUDC
+00009317     24c (00009300)     _gMotorInfo
+0000931f     24c (00009300)     _gMainStatus
+00009328     24c (00009300)     _gCurSamp
+00009330     24c (00009300)     _gBasePar
+00009338     24c (00009300)     _gDeadBand
+
+00009340     24d (00009340)     _gCBCProtect
+00009348     24d (00009340)     _gPhase
+00009352     24d (00009340)     _gPhaseLose
+0000935c     24d (00009340)     _gLineCur
+00009366     24d (00009340)     _gDCBrake
+00009372     24d (00009340)     _gPWM
+
+00009380     24e (00009380)     _gSendToFunctionDataBuff
+0000938c     24e (00009380)     _gInvInfo
+0000939e     24e (00009380)     _gMainCmd
+
+000093c0     24f (000093c0)     _gDSPActiveTime
+000093d4     24f (000093c0)     _gExcursionInfo
+000093ea     24f (000093c0)     _gBemf
+
+00009400     250 (00009400)     _gIPMInitPos
+
+00009440     251 (00009440)     _gFluxWeak
+
+00009480     252 (00009480)     _gSendToMotorDataBuff
+000094b0     252 (00009480)     _CpuTimer0
+000094b8     252 (00009480)     _CpuTimer1
+
+000094c0     253 (000094c0)     _LinRxFlag
+000094c2     253 (000094c0)     _FrameIncorrectCnt
+000094c4     253 (000094c0)     _LinL0IntVect
+000094c6     253 (000094c0)     _rdataA
+
+00009500     254 (00009500)     _RemoteModbus
+
+000095ff     257 (000095c0)     _PWMPeriodBasedONMotorANDVDC
+
+00009600     258 (00009600)     _pm_uq
+00009601     258 (00009600)     _pm_coef_angel
+00009602     258 (00009600)     _pm_curr_limitH
+00009603     258 (00009600)     _pm_ud
+00009604     258 (00009600)     _pm_min_curr
+00009605     258 (00009600)     _pm_min_curr2
+00009606     258 (00009600)     _pm_bem_kf
+00009607     258 (00009600)     _pm_init_phase1
+00009608     258 (00009600)     _pm_curr_limitL
+00009609     258 (00009600)     _pm_kp_speed
+0000960a     258 (00009600)     _pm_kp_speed_app
+0000960b     258 (00009600)     _pm_control_mode
+0000960c     258 (00009600)     _pm_ki_speed
+0000960d     258 (00009600)     _pm_speed_lpf_k1
+0000960e     258 (00009600)     _pm_speed_lpf_k2
+0000960f     258 (00009600)     _pm_ki_speed_app
+00009610     258 (00009600)     _pm_speed_lpf_k
+00009611     258 (00009600)     _pm_dq_angle
+00009612     258 (00009600)     _MIN_SAMPLE_TIME
+00009613     258 (00009600)     _TWO_MIN_SAMPLE_TIME
+00009614     258 (00009600)     _SampPoint1Time
+00009615     258 (00009600)     _SampPoint2Time
+00009616     258 (00009600)     _CURR_SAMPLE_DELAY
+00009617     258 (00009600)     _pm_iqmax
+00009618     258 (00009600)     _pm_iq_show
+00009619     258 (00009600)     _pm_omg_show
+0000961a     258 (00009600)     _pm_start_time
+0000961b     258 (00009600)     _pm_maxout_vol
+0000961c     258 (00009600)     _LdUinit
+0000961d     258 (00009600)     _RsUinit
+0000961e     258 (00009600)     _pm_forbid_revtorq
+0000961f     258 (00009600)     _cof_uwMaxThetaPerCntTcPu
+00009620     258 (00009600)     _pm_check_ip_flag
+00009622     258 (00009600)     _pm_est_lpf_omg1_1
+00009624     258 (00009600)     _pm_est_lpf_omg
+00009626     258 (00009600)     _pm_est_lpf_omg1
+00009628     258 (00009600)     _pm_est_omgm
+0000962a     258 (00009600)     _pm_coef_beta
+0000962c     258 (00009600)     _pm_coef_bem
+0000962e     258 (00009600)     _pm_coef_q2
+00009630     258 (00009600)     _pm_coef_alfa
+00009632     258 (00009600)     _pm_est_omg_1
+00009634     258 (00009600)     _pm_est_omgm1
+00009636     258 (00009600)     _pm_coef_ks
+00009638     258 (00009600)     _gInvMaxCurr
+0000963a     258 (00009600)     _tmp_swDeltaThetaPu
+0000963c     258 (00009600)     _uq
+
+00009640     259 (00009640)     _gImax
+00009642     259 (00009640)     _pm_init_phase
+00009644     259 (00009640)     _pm_min_speed
+00009646     259 (00009640)     _pm_est_omg
+00009648     259 (00009640)     _pm_bem
+0000964a     259 (00009640)     _ud
+0000964c     259 (00009640)     _pm_est_angel
+0000964e     259 (00009640)     _pm_ref_id
+00009650     259 (00009640)     _pm_r
+00009652     259 (00009640)     _pm_est_vq1
+00009654     259 (00009640)     _pm_est_vd
+00009656     259 (00009640)     _pm_ref_iq
+00009658     259 (00009640)     _pm_est_vd1
+0000965a     259 (00009640)     _pm_kp_d
+0000965c     259 (00009640)     _pm_error_iq
+0000965e     259 (00009640)     _pm_ki_q
+00009660     259 (00009640)     _pm_kp_q
+00009662     259 (00009640)     _pm_integral_q
+00009664     259 (00009640)     _pm_integral_d
+00009666     259 (00009640)     _pm_error_id
+00009668     259 (00009640)     _pm_integral_speed
+0000966a     259 (00009640)     _pm_ki_d
+0000966c     259 (00009640)     _pm_coef_d0
+0000966e     259 (00009640)     _pm_coef_d1
+00009670     259 (00009640)     _pm_est_bem1
+00009672     259 (00009640)     _pm_est_bem
+00009674     259 (00009640)     _pm_coef_q1
+00009676     259 (00009640)     _pm_ref_speed
+00009678     259 (00009640)     _pm_coef_d2
+0000967a     259 (00009640)     _pm_coef_q0
+0000967c     259 (00009640)     _pm_est_iq1
+0000967e     259 (00009640)     _pm_est_imd
+
+00009680     25a (00009680)     _pm_est_id1
+00009682     25a (00009680)     _pm_est_id
+00009684     25a (00009680)     _pm_est_iq
+00009686     25a (00009680)     _pm_est_vq
+00009688     25a (00009680)     _pm_est_imq
+0000968a     25a (00009680)     _pm_est_delt_id
+0000968c     25a (00009680)     _pm_est_delt_iq
+0000968e     25a (00009680)     _gPWM_CMP
+0000969c     25a (00009680)     _frq2Core
+0000969d     25a (00009680)     _frqCurAim2Core
+0000969e     25a (00009680)     _RrsDataFromMotor
+0000969f     25a (00009680)     _RefTempOffset
+000096a0     25a (00009680)     _NOTUSED
+000096a1     25a (00009680)     _errorCodeFromCore
+000096a2     25a (00009680)     _errAutoRstNum
+000096a3     25a (00009680)     _uvDealStatus
+000096a4     25a (00009680)     _bUv
+000096a5     25a (00009680)     _powerOnStatus
+000096ad     25a (00009680)     _Osc1FineTrimOffset
+000096ae     25a (00009680)     _Osc1CoarseTrim
+000096af     25a (00009680)     _Osc1FineTrimSlope
+000096b2     25a (00009680)     _error1
+000096b3     25a (00009680)     _testERnum
+000096b8     25a (00009680)     _errorSpaceTicker
+000096ba     25a (00009680)     _ObserverMotorSpeedINOnePointHZ
+000096bc     25a (00009680)     _errAutoRstClrWaitTicker
+
+000096c0     25b (000096c0)     _IDRef
+000096c2     25b (000096c0)     _IDFadeOverCnt
+000096c3     25b (000096c0)     _DCStart_flag
+000096c4     25b (000096c0)     _McSpdState
+000096c5     25b (000096c0)     _SHORT_GND_PERIOD
+000096c6     25b (000096c0)     _IDRef2
+000096c7     25b (000096c0)     _FrqTemp
+000096d0     25b (000096c0)     _POWERKI
+000096d2     25b (000096c0)     _IQLimit
+000096d4     25b (000096c0)     _LimitHGlobal
+000096d6     25b (000096c0)     _POWERKP
+000096d8     25b (000096c0)     _pm_fast_freq
+000096da     25b (000096c0)     _gDCBrake2
+000096e6     25b (000096c0)     _SoftErrorData
+
+00009700     25c (00009700)     _gUdcLimitIt
+00009714     25c (00009700)     _SpeedData
+0000973c     25c (00009700)     _l_ld
+0000973e     25c (00009700)     _l_lq
+
+00009740     25d (00009740)     _g_InitPos1
+00009741     25d (00009740)     _EPWMFlagU
+00009742     25d (00009740)     _EPWMFlagV
+00009743     25d (00009740)     _EPWMFlagW
+00009744     25d (00009740)     _g_InitPos
+00009745     25d (00009740)     _PWMsector
+00009747     25d (00009740)     _ReadSpeedBasedonFinished
+00009748     25d (00009740)     _VolOffset
+00009749     25d (00009740)     _g_InitPos2
+0000974a     25d (00009740)     _sector_candidate
+0000974b     25d (00009740)     _sector_confirm_count
+0000974c     25d (00009740)     _g_InitPos4
+0000974d     25d (00009740)     _gIRMSACCLimitIt
+0000974e     25d (00009740)     _TenmsChop
+0000974f     25d (00009740)     _RunBoostState
+00009750     25d (00009740)     _Target
+00009751     25d (00009740)     _EnableRecord2
+00009752     25d (00009740)     _LimitGatio
+00009753     25d (00009740)     _Factor
+00009756     25d (00009740)     _test_ia
+00009758     25d (00009740)     _pm_phase1
+0000975a     25d (00009740)     _test_ib
+0000975c     25d (00009740)     _curr_data
+00009762     25d (00009740)     _iTrig3_Dpwm
+0000976e     25d (00009740)     _iTrig1_Dpwm
+
+00009780     25e (00009780)     _iTrig2_Pwm
+0000978c     25e (00009780)     _iTrig3_Cpwm
+00009798     25e (00009780)     _iTrig1_Cpwm
+000097a4     25e (00009780)     _upperTorque
+000097a5     25e (00009780)     _lowerFrq
+000097a6     25e (00009780)     _maxFrq
+000097aa     25e (00009780)     _upperFrq
+000097ae     25e (00009780)     _frqTmp
+000097b0     25e (00009780)     _frq
+000097b2     25e (00009780)     _frqAim
+000097b4     25e (00009780)     _frqAimTmp0
+000097b6     25e (00009780)     _frqAimTmp
+000097b8     25e (00009780)     _frqCurAim
+000097ba     25e (00009780)     ___TI_enable_exit_profile_output
+000097bc     25e (00009780)     ___TI_cleanup_ptr
+000097be     25e (00009780)     ___TI_dtors_ptr
+
+000097c0     25f (000097c0)     _IPD_PERIOD_SCALING
+000097c1     25f (000097c0)     _IdMaxScaling
+000097c2     25f (000097c0)     _FIELD_WEAK_REF
+000097c3     25f (000097c0)     _FILED_WEEKING_CUR_SCAL
+000097c4     25f (000097c0)     _FILED_WEEKING_SCAL
+000097c5     25f (000097c0)     _SF_LOW_SPEED
+000097c6     25f (000097c0)     _MIN_CUR_LOW_SPEED
+000097c7     25f (000097c0)     _STALL_PR_TIME
+000097c8     25f (000097c0)     _IqMaxSet
+000097c9     25f (000097c0)     _SOFT_OC_POINT
+000097ca     25f (000097c0)     _FILED_WEEKING_MODE
+000097cb     25f (000097c0)     _MAX_LIMIT_FREQ
+000097cc     25f (000097c0)     _MOTOR_RATED_FRE
+000097cd     25f (000097c0)     _AVR_MODE
+000097ce     25f (000097c0)     _Q_CUR_KP
+000097cf     25f (000097c0)     _PWM_FREQUENCY
+000097d0     25f (000097c0)     _DC_BRAKE_CUR
+000097d1     25f (000097c0)     _TORQUE_CUR_LIMIT
+000097d2     25f (000097c0)     _DC_CONTROL_KI
+000097d3     25f (000097c0)     _COAST_STOP_FRQ
+000097d4     25f (000097c0)     _DC_CONTROL_KP
+000097d5     25f (000097c0)     _PMSM_RS_MIN
+000097d6     25f (000097c0)     _T_DELAY
+000097d7     25f (000097c0)     _LOW_SPEED_FILTER
+000097d8     25f (000097c0)     _INIT_POS_DECTION_CUR
+000097d9     25f (000097c0)     _INIT_POS_DECTION_TIME
+000097da     25f (000097c0)     _RatioForLowNoisePWM
+000097db     25f (000097c0)     _RatiotThresholdForLowNoisePWM
+000097dc     25f (000097c0)     _SecondSamplePointShift
+000097dd     25f (000097c0)     _T_SAMPLE
+000097de     25f (000097c0)     _FirstSamplePointShift
+000097df     25f (000097c0)     _INIT_POS_DECTION_MODE
+000097e0     25f (000097c0)     _SPEED_FEEDBACK_FILTER
+000097e1     25f (000097c0)     _FILED_WEEKING_OUTVOL_SC
+000097e2     25f (000097c0)     _AUTO_RESET_CNT
+000097e3     25f (000097c0)     _OVER_SPEED_SCALING
+000097e4     25f (000097c0)     _ThetaCoff
+000097e5     25f (000097c0)     _START_PRESET_CUR
+000097e6     25f (000097c0)     _LOW_LIMIT_FREQUENCY
+000097e7     25f (000097c0)     _SPEED_MEASURE_PAR_2
+000097e8     25f (000097c0)     _SPECIAL_FACTOR_1
+000097e9     25f (000097c0)     _SPEED_MEASURE_PAR_1
+000097ea     25f (000097c0)     _LOWER_LIMIT_FREQ
+000097eb     25f (000097c0)     _PMSM_LD
+000097ec     25f (000097c0)     _MOTOR_RATED_CUR
+000097ed     25f (000097c0)     _MOTOR_RATED_POWER
+000097ee     25f (000097c0)     _MOTOR_RATED_VOL
+000097ef     25f (000097c0)     _PMSM_KE
+000097f0     25f (000097c0)     _FRQ_OPEN_TO_CLOSE
+000097f1     25f (000097c0)     _PMS_L_R_UNIT
+000097f2     25f (000097c0)     _PMSM_LQ
+000097f3     25f (000097c0)     _PMSM_RS
+000097f4     25f (000097c0)     _OVER_DC_VOL_KP
+000097f5     25f (000097c0)     _MaxAllowUdcLimit
+000097f6     25f (000097c0)     _UNDER_DC_VOL_POINT
+000097f7     25f (000097c0)     _OVER_DC_VOL_POINT
+000097f8     25f (000097c0)     _OVER_DC_VOL_LIMIT
+000097f9     25f (000097c0)     _OverCurPointInternal
+000097fa     25f (000097c0)     _CBCCurPointInternal
+000097fb     25f (000097c0)     _DeadTimeCompInternal
+000097fc     25f (000097c0)     _MidAllowUdcLimit
+000097fd     25f (000097c0)     _DeadTimeInternal
+000097fe     25f (000097c0)     _LOW_SPEED_KI
+000097ff     25f (000097c0)     _LOW_SPEED_KP
+
+00009800     260 (00009800)     _F_CHANGING_POINT_2_PI
+00009801     260 (00009800)     _DCBrakeTime
+00009802     260 (00009800)     _F_CHANGING_POINT_1_PI
+00009803     260 (00009800)     _D_CUR_KP
+00009804     260 (00009800)     _Q_CUR_KI
+00009805     260 (00009800)     _D_CUR_KI
+00009806     260 (00009800)     _HIGH_SPEED_KI_GAIN
+00009807     260 (00009800)     _HIGH_SPEED_KP_GAIN
+00009808     260 (00009800)     _LowLimit
+00009809     260 (00009800)     _HighLimit
+0000980a     260 (00009800)     _OPEN_LOOP_TOR_START
+0000980b     260 (00009800)     _FRQ_PWM_SHIFT_EN
+0000980c     260 (00009800)     _MAX_DC_VOL_3_3V
+0000980d     260 (00009800)     _ACC2
+0000980e     260 (00009800)     _DEC
+0000980f     260 (00009800)     _ACC1
+00009810     260 (00009800)     _BemfOffset
+00009811     260 (00009800)     _RefSet
+00009812     260 (00009800)     _IdMaxInternal
+00009814     260 (00009800)     _LowFreqencyOFSF
+00009816     260 (00009800)     _HighFreqencyOFSF
+00009818     260 (00009800)     _IdMinInternal
+0000981a     260 (00009800)     _MAX_PEAK_CUR_3_3V_410
+0000981c     260 (00009800)     _MAX_PEAK_CUR_3_3V_2
+0000981e     260 (00009800)     _SpinControlInternal
+00009820     260 (00009800)     _EnableRecord
+00009822     260 (00009800)     _Adc_Temp_IDC2
+00009823     260 (00009800)     _SMOAngle
+00009824     260 (00009800)     _Adc_Temp_IDC1
+00009826     260 (00009800)     _m_Iv
+00009828     260 (00009800)     _m_Iu
+0000982c     260 (00009800)     _m_Iw
+00009830     260 (00009800)     _SPIDataTest
+00009835     260 (00009800)     _SpiSendData
+
+00009840     261 (00009840)     _dspStatus
+00009841     261 (00009840)     _runStatus
+00009842     261 (00009840)     _dspMainCmd
+00009843     261 (00009840)     _runCmd
+00009844     261 (00009840)     _runFlag
+00009847     261 (00009840)     _RunSignal
+00009848     261 (00009840)     _stopRunStatus
+00009849     261 (00009840)     _bFrqCurAimChg
+0000984a     261 (00009840)     _startRunStatus
+0000984c     261 (00009840)     _frq0
+0000984e     261 (00009840)     _runTimeTicker
+00009852     261 (00009840)     _decFrqTime
+00009854     261 (00009840)     _accFrqTime
+00009856     261 (00009840)     _decTimeOld
+00009858     261 (00009840)     _frqCurAimOld
+0000985a     261 (00009840)     _accTimeOld
+00009870     261 (00009840)     _frqLine
+
+00009880     262 (00009880)     _TimeAccumulator
+00009896     262 (00009880)     _MadddData
+
+000098c0     263 (000098c0)     _SenddDataA
+000098c2     263 (000098c0)     _SenddDataB
+000098c4     263 (000098c0)     _ReciveDataIDCorrect
+000098cc     263 (000098c0)     _ReciveDataIDInCorrect
+000098d4     263 (000098c0)     _Lin_Communication
+000098ee     263 (000098c0)     _PreDriverRegs
+000098f1     263 (000098c0)     _DataTest
+000098f9     263 (000098c0)     _gErrorIntCnt
+000098fa     263 (000098c0)     __lock
+000098fc     263 (000098c0)     __unlock
+000098fe     263 (000098c0)     _RecordEnable
+
+00009900     264 (00009900)     _pwm_capt_data
+0000990a     264 (00009900)     _gPWM_COMM
+
+003d7e80    f5fa (003d7e80)     _PartIdRegs
+
+003f3ff6    fcff (003f3fc0)     _gSendToMotorTable
+
+003f4056    fd01 (003f4040)     _gSendToFuncTable
+003f406e    fd01 (003f4040)     _pDataCore2Func
+
+003f5ffe    fd7f (003f5fc0)     _Bootflag
+
+003f7ff8    fdff (003f7fc0)     _CsmPwl
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+page  address   name                                   
+----  -------   ----                                   
+0     003f0002  .text                                  
+0     003f2f9e  C$$EXIT                                
+0     003f2e17  FS$$MPY                                
+0     003f2fc7  FS$$TOL                                
+0     003f2f74  L$$DIV                                 
+0     003f2f83  L$$MOD                                 
+0     003f303a  LL$$CMP                                
+0     003f26c0  LL$$DIV                                
+0     003f26fc  LL$$MOD                                
+0     003f2f91  UL$$DIV                                
+0     003f2f98  UL$$MOD                                
+0     003f304c  ULL$$CMP                               
+0     003f2736  ULL$$DIV                               
+0     003f2765  ULL$$MOD                               
+1     0000980f  _ACC1                                  
+1     0000980d  _ACC2                                  
+0     003f0b78  _ADCOverInterrupt                      
+0     003f2898  _ADCProcess                            
+0     00008cee  _ADP32F03x_usDelay                     
+1     000097e2  _AUTO_RESET_CNT                        
+1     000092db  _AVREnableMode                         
+1     000097cd  _AVR_MODE                              
+0     003f1518  _AccDecFrqCalc                         
+0     003f17f7  _AccDecTimeCalc                        
+1     000092d7  _ActualPower                           
+1     00007100  _AdcRegs                               
+1     00000b00  _AdcResult                             
+1     00009824  _Adc_Temp_IDC1                         
+1     00009822  _Adc_Temp_IDC2                         
+1     00008a88  _AllowRecord                           
+1     00008a84  _AllowRecordControl                    
+0     003f0b21  _AllowSelectBottomOnly                 
+0     003f2cbc  _AlphBetaToDQ                          
+0     003f1dd5  _AsynPWMAngleCal                       
+1     00009810  _BemfOffset                            
+0     003f5ffe  _Bootflag                              
+0     003f2567  _BurrFilter                            
+1     000097fa  _CBCCurPointInternal                   
+0     003f23e9  _CBCLimitCur                           
+1     000097d3  _COAST_STOP_FRQ                        
+1     00009616  _CURR_SAMPLE_DELAY                     
+0     003f0069  _CalCarrierWaveFreq                    
+0     00008a34  _CalDeadBandComp                       
+0     003f2c41  _CalOutVoltInDCBrakeStatus             
+0     003f2c1a  _CalOutVotInVFStatus                   
+0     003f1e35  _CalOutputPhase                        
+0     00008986  _CalRatioFromVot                       
+0     00008969  _CalStepAngle                          
+0     003f0624  _CalUdcLimitIT                         
+0     003f1d89  _ChangeCurrent                         
+0     003f0a03  _ChangeCurrent_2ms                     
+0     003f297c  _ChangeSampleRate                      
+0     003f2df1  _CommsProtocalLayerTask2ms             
+0     003f2df0  _CommsProtocalLayerTaskBG              
+1     00006400  _Comp1Regs                             
+1     00006420  _Comp2Regs                             
+0     003f2ee4  _ConfigCpuTimer                        
+0     003f296c  _ControlAllowRecord                    
+1     000094b0  _CpuTimer0                             
+1     00000c00  _CpuTimer0Regs                         
+1     000094b8  _CpuTimer1                             
+1     00000c08  _CpuTimer1Regs                         
+1     00000c10  _CpuTimer2Regs                         
+1     003f7ff8  _CsmPwl                                
+1     00000ae0  _CsmRegs                               
+0     00008740  _CurrentLoop                           
+1     000092cb  _DCBrakeCur                            
+1     00009801  _DCBrakeTime                           
+1     000096c3  _DCStart_flag                          
+1     000097d0  _DC_BRAKE_CUR                          
+1     000097d2  _DC_CONTROL_KI                         
+1     000097d4  _DC_CONTROL_KP                         
+1     0000980e  _DEC                                   
+0     003f2ca8  _DQToAmpTheta                          
+1     00009805  _D_CUR_KI                              
+1     00009803  _D_CUR_KP                              
+1     000092c8  _DataRsrd                              
+1     000098f1  _DataTest                              
+0     000088a1  _DeadBandComp                          
+1     000097fb  _DeadTimeCompInternal                  
+1     000097fd  _DeadTimeInternal                      
+1     00000880  _DevEmuRegs                            
+0     003f1153  _DisableDog                            
+0     003f20bc  _DriverClaerFault                      
+1     00006a00  _ECap1Regs                             
+1     00009741  _EPWMFlagU                             
+1     00009742  _EPWMFlagV                             
+1     00009743  _EPWMFlagW                             
+1     00006800  _EPwm1Regs                             
+1     00006840  _EPwm2Regs                             
+1     00006880  _EPwm3Regs                             
+1     000068c0  _EPwm4Regs                             
+1     00006900  _EPwm5Regs                             
+1     00000d01  _EmuBMode                              
+1     00000d00  _EmuKey                                
+0     003f14a5  _EnableDog                             
+1     00009820  _EnableRecord                          
+1     00009751  _EnableRecord2                         
+0     003f2d31  _EndOfADCISR                           
+0     003f1978  _ErrorDeal                             
+0     003f19b9  _ErrorReset                            
+1     000097c2  _FIELD_WEAK_REF                        
+1     000097c3  _FILED_WEEKING_CUR_SCAL                
+1     000097ca  _FILED_WEEKING_MODE                    
+1     000097e1  _FILED_WEEKING_OUTVOL_SC               
+1     000097c4  _FILED_WEEKING_SCAL                    
+1     000097f0  _FRQ_OPEN_TO_CLOSE                     
+1     0000980b  _FRQ_PWM_SHIFT_EN                      
+1     00009802  _F_CHANGING_POINT_1_PI                 
+1     00009800  _F_CHANGING_POINT_2_PI                 
+1     00009753  _Factor                                
+1     000092c1  _FieldWeakCurScale                     
+1     000092c0  _FieldWeakMode                         
+1     000092c7  _FieldWeakRef                          
+1     000092cf  _FieldWeakScale                        
+0     003f1bd2  _Filter                                
+1     000097de  _FirstSamplePointShift                 
+0     003f0fdb  _FixShiftPatternMode                   
+1     00000a80  _FlashRegs                             
+1     00000d04  _Flash_CPUScaleFactor                  
+1     00000d02  _Flash_CallbackPtr                     
+0     000085e7  _FluxPostionCalation                   
+1     000094c2  _FrameIncorrectCnt                     
+0     003f2ad3  _FrqSrcDeal                            
+1     000096c7  _FrqTemp                               
+0     003f1b4a  _FuncVariableInit                      
+0     003f288b  _GetAIInfo                             
+0     003f1c08  _GetBemf_DirSpeed                      
+0     003f0993  _GetCurrentExcursion                   
+0     003f2871  _GetCurrentIPD                         
+0     003f2843  _GetIDCInfo                            
+0     003f1b27  _GetOSCTrimConst                       
+0     003f209b  _GetPerDriverState                     
+0     003f295e  _GetResult                             
+0     003f27fe  _GetSMOAngle                           
+0     003f2b7f  _GetSetupFreComs                       
+0     003f2b7b  _GetStartCMDComs                       
+0     003f27e6  _GetTemperatureInfo                    
+0     003f27c7  _GetUDCInfo                            
+1     00006f80  _GpioCtrlRegs                          
+1     00006fc0  _GpioDataRegs                          
+1     00006fe0  _GpioIntRegs                           
+1     00009806  _HIGH_SPEED_KI_GAIN                    
+1     00009807  _HIGH_SPEED_KP_GAIN                    
+0     003f0ae5  _HardWareErrorDeal                     
+1     00009816  _HighFreqencyOFSF                      
+1     00009809  _HighLimit                             
+1     00007900  _I2caRegs                              
+1     000096c2  _IDFadeOverCnt                         
+1     000096c0  _IDRef                                 
+1     000096c6  _IDRef2                                
+1     000097d8  _INIT_POS_DECTION_CUR                  
+1     000097df  _INIT_POS_DECTION_MODE                 
+1     000097d9  _INIT_POS_DECTION_TIME                 
+1     000092c5  _IPDAutoDectEnable                     
+1     000092c6  _IPDAutoDectScaling                    
+1     000097c0  _IPD_PERIOD_SCALING                    
+1     000096d2  _IQLimit                               
+1     000092da  _IbusActual                            
+1     00009812  _IdMaxInternal                         
+1     000097c1  _IdMaxScaling                          
+1     000092dd  _IdMaxSet                              
+1     00009818  _IdMinInternal                         
+1     00008a86  _Index                                 
+0     003f2ec5  _InitCpuTimers                         
+0     00008cd5  _InitFlash                             
+0     003f1b4f  _InitForFunctionApp                    
+0     003f0aab  _InitForMotorApp                       
+0     003f1952  _InitFuncCode                          
+0     003f2081  _InitI2C                               
+0     003f2060  _InitI2CIO                             
+0     003f1482  _InitInterrupt                         
+0     003f1191  _InitPeripheralClocks                  
+0     003f1465  _InitPeripherals                       
+0     003f144a  _InitPieCtrl                           
+0     003f1433  _InitPieVectTable                      
+0     003f115b  _InitPll                               
+0     003f1355  _InitSetAdc                            
+0     003f12f0  _InitSetGpio                           
+0     003f11d8  _InitSetPWM                            
+0     003f11ca  _InitSysCtrl                           
+0     003f1a98  _InternalOSCTrim                       
+1     000092d9  _InternalTemperatureDegree             
+0     003f23df  _InvDeviceKontrol                      
+1     000092de  _IqFWLimit                             
+1     000097c8  _IqMaxSet                              
+0     003f0610  _IsInRegenState                        
+0     003f292b  _IsRecordThisSample                    
+0     003f1149  _KickDog                               
+0     003f1a1b  _LEDControl                            
+0     003f2980  _LINA_LEVEL_isr                        
+0     003f10bb  _LIN_Setup                             
+1     000097ea  _LOWER_LIMIT_FREQ                      
+1     000097e6  _LOW_LIMIT_FREQUENCY                   
+1     000097d7  _LOW_SPEED_FILTER                      
+1     000097fe  _LOW_SPEED_KI                          
+1     000097ff  _LOW_SPEED_KP                          
+1     000092e1  _LastLowNoseElmPWMMode                 
+1     0000961c  _LdUinit                               
+1     00009752  _LimitGatio                            
+1     000096d4  _LimitHGlobal                          
+0     003f2b74  _LinData_init                          
+1     000094c4  _LinL0IntVect                          
+1     000094c0  _LinRxFlag                             
+1     000098d4  _Lin_Communication                     
+1     00006c00  _LinaRegs                              
+0     003f14ec  _LineChangeCalc                        
+1     00009814  _LowFreqencyOFSF                       
+1     00009808  _LowLimit                              
+1     000092c3  _LowLimitFrequency                     
+1     000092d3  _LowNoseElmPWMMode                     
+0     003f2f5d  _LowerPowerSleep                       
+0     003f17f8  _LowerThanLowerFrqDeal                 
+1     0000980c  _MAX_DC_VOL_3_3V                       
+1     000097cb  _MAX_LIMIT_FREQ                        
+1     0000981c  _MAX_PEAK_CUR_3_3V_2                   
+1     0000981a  _MAX_PEAK_CUR_3_3V_410                 
+1     000097c6  _MIN_CUR_LOW_SPEED                     
+1     00009612  _MIN_SAMPLE_TIME                       
+1     000097ec  _MOTOR_RATED_CUR                       
+1     000097cc  _MOTOR_RATED_FRE                       
+1     000097ed  _MOTOR_RATED_POWER                     
+1     000097ee  _MOTOR_RATED_VOL                       
+1     00009896  _MadddData                             
+1     000097f5  _MaxAllowUdcLimit                      
+1     000096c4  _McSpdState                            
+1     000097fc  _MidAllowUdcLimit                      
+1     000092d0  _MinCurrentLowSpeed                    
+0     003f0a53  _MotorControlISR                       
+1     000092d6  _MotorPWMModeForNoise                  
+1     000092cd  _MotorPWMRandom                        
+1     000092dc  _MotorTestData1                        
+1     000092e5  _MotorTestData2                        
+1     000092e3  _MotorTestData4                        
+1     000092e0  _MotorTestData5                        
+0     003f3011  _MovePrgFrFlashToRam                   
+0     003f291a  _MoveToNextRow                         
+0     003f0fc5  _NOShifPWM                             
+1     000096a0  _NOTUSED                               
+1     00007060  _NmiIntruptRegs                        
+1     000092e2  _NoNegativeOMG                         
+0     003f17f9  _NormalRunCtrl                         
+1     0000980a  _OPEN_LOOP_TOR_START                   
+1     000097f4  _OVER_DC_VOL_KP                        
+1     000097f8  _OVER_DC_VOL_LIMIT                     
+1     000097f7  _OVER_DC_VOL_POINT                     
+1     000097e3  _OVER_SPEED_SCALING                    
+1     000096ba  _ObserverMotorSpeedINOnePointHZ        
+0     003f2d19  _OneShotTZOfEPWMISR                    
+0     003f025b  _OpenLoopAccRun                        
+1     000096ae  _Osc1CoarseTrim                        
+1     000096ad  _Osc1FineTrimOffset                    
+1     000096af  _Osc1FineTrimSlope                     
+0     000081d3  _OutPutPWMPhaseShiftForLowNoiseFullMode
+0     000088dd  _OutPutPWMVF                           
+0     003f23ba  _OutputLoseAdd                         
+0     003f2329  _OutputLoseReset                       
+0     003f2332  _OutputPhaseLoseDetect                 
+0     003f2292  _OutputPhaseLoseDetectNew              
+1     000097f9  _OverCurPointInternal                  
+1     000092c9  _OverspeedScaling                      
+0     003f2550  _PID                                   
+0     003f24f1  _PID2                                  
+0     003f0ed0  _PMCalcLineCurr                        
+0     003f0c59  _PMClacFluxWeakId                      
+0     003f0e22  _PMFluxWeakInit                        
+0     003f0cf2  _PMFluxWeaking                         
+0     003f1be6  _PMSMSVC_2ms                           
+1     000097ef  _PMSM_KE                               
+1     000097eb  _PMSM_LD                               
+1     000097f2  _PMSM_LQ                               
+1     000097f3  _PMSM_RS                               
+1     000097d5  _PMSM_RS_MIN                           
+1     000097f1  _PMS_L_R_UNIT                          
+0     003f2a8c  _POE_Limit                             
+1     000096d0  _POWERKI                               
+1     000096d6  _POWERKP                               
+0     003f2f41  _PWMCommInit                           
+1     000095ff  _PWMPeriodBasedONMotorANDVDC           
+1     000097cf  _PWM_FREQUENCY                         
+1     00009745  _PWMsector                             
+1     00007030  _PagOpaRegs                            
+0     003f258b  _ParGetFromFunction                    
+0     003f2580  _ParSendToFunction                     
+0     003f0002  _ParameterChange                       
+1     003d7e80  _PartIdRegs                            
+1     000092d2  _PaseShiftEnable                       
+1     00000ce0  _PieCtrlRegs                           
+1     00000d00  _PieVectTable                          
+0     003f2047  _PreDriverInit                         
+0     003f1f38  _PreDriverReadData                     
+1     000098ee  _PreDriverRegs                         
+0     003f2014  _PreDriverTest                         
+0     003f1e49  _PreDriverWriteData                    
+0     003f00e7  _PrepareParForRun                      
+1     00009804  _Q_CUR_KI                              
+1     000097ce  _Q_CUR_KP                              
+1     000097da  _RatioForLowNoisePWM                   
+1     000097db  _RatiotThresholdForLowNoisePWM         
+1     00009747  _ReadSpeedBasedonFinished              
+1     000098c4  _ReciveDataIDCorrect                   
+1     000098cc  _ReciveDataIDInCorrect                 
+1     000098fe  _RecordEnable                          
+1     00009811  _RefSet                                
+1     0000969f  _RefTempOffset                         
+1     00009500  _RemoteModbus                          
+1     000092d4  _ReserdData                            
+0     003f308e  _ResetADCAndPWM                        
+0     003f10b3  _ResetDSP                              
+0     003f2914  _ResetIndex                            
+0     003f24e5  _ResetTimeAccumulator                  
+1     00008ac0  _Results                               
+0     003f2dda  _ReveiveBufferFrame                    
+1     0000969e  _RrsDataFromMotor                      
+1     000092d5  _RsSecond                              
+1     0000961d  _RsUinit                               
+1     0000974f  _RunBoostState                         
+0     003f030e  _RunCaseBrakeLowBridge                 
+0     003f07ef  _RunCaseDeal                           
+0     003f0757  _RunCaseGetPar                         
+0     003f0758  _RunCaseLowPower                       
+0     003f05a9  _RunCaseRun                            
+0     003f03be  _RunCaseShortGnd                       
+0     003f0657  _RunCaseSpeedCheck                     
+0     003f01af  _RunCaseStop                           
+1     00009847  _RunSignal                             
+0     003f1811  _RunSrcDeal                            
+0     003f1087  _SCI_Setup                             
+0     003f15fb  _SCurveOridinaryCalc                   
+1     000092df  _SFLowSpeed                            
+1     000097c5  _SF_LOW_SPEED                          
+1     000096c5  _SHORT_GND_PERIOD                      
+1     00009823  _SMOAngle                              
+1     000097c9  _SOFT_OC_POINT                         
+1     000097e8  _SPECIAL_FACTOR_1                      
+1     000097e0  _SPEED_FEEDBACK_FILTER                 
+1     000097e9  _SPEED_MEASURE_PAR_1                   
+1     000097e7  _SPEED_MEASURE_PAR_2                   
+1     00009830  _SPIDataTest                           
+1     000097c7  _STALL_PR_TIME                         
+1     000097e5  _START_PRESET_CUR                      
+0     00008a9f  _SVPWM_1ShuntGetPhaseCurrent           
+1     00009614  _SampPoint1Time                        
+1     00009615  _SampPoint2Time                        
+1     00008a82  _Sample                                
+1     00008a80  _SampleRate                            
+1     00007050  _SciaRegs                              
+1     000097dc  _SecondSamplePointShift                
+0     003f2db9  _SendNormalFrame                       
+1     000098c0  _SenddDataA                            
+1     000098c2  _SenddDataB                            
+0     003f15ef  _SetAccTimes                           
+0     003f106d  _SetInterruptEnable                    
+0     003f15dc  _ShutDownRunCtrl                       
+1     000096e6  _SoftErrorData                         
+0     003f0a52  _SoftPWMProcess                        
+0     003f1b26  _SoftVersionDeal                       
+0     003f081b  _SoftWareErrorDeal                     
+1     000092d1  _SpecailFactor                         
+1     00009714  _SpeedData                             
+1     000092ca  _SpeedFeedbackFilter                   
+0     003f04a1  _SpeedLoop                             
+1     000092ce  _SpeedMeasureFactor1                   
+1     000092c4  _SpeedMeasureFactor2                   
+1     00009835  _SpiSendData                           
+1     00007040  _SpiaRegs                              
+1     0000981e  _SpinControlInternal                   
+1     000092c2  _StartPresetCurrent                    
+0     003f1594  _StartRunCtrl                          
+0     003f1577  _StopRunCtrl                           
+0     003f1b58  _SynInitPosDetCal                      
+0     003f20e3  _SynInitPosDetSetPwm                   
+0     003f2162  _SynInitPosDetect                      
+1     00007010  _SysCtrlRegs                           
+0     003f1b11  _SystemLeve05msFunction                
+0     003f0a4b  _SystemLeve05msMotor                   
+0     003f1ace  _SystemLeve0msFunction                 
+0     003f0a4a  _SystemLeve0msMotor                    
+0     003f1ab9  _SystemLeve2msFunction                 
+0     003f0a23  _SystemLeve2msMotor                    
+1     000097d1  _TORQUE_CUR_LIMIT                      
+1     00009613  _TWO_MIN_SAMPLE_TIME                   
+1     000097d6  _T_DELAY                               
+1     000097dd  _T_SAMPLE                              
+1     00009750  _Target                                
+1     0000974e  _TenmsChop                             
+1     000097e4  _ThetaCoff                             
+1     00009880  _TimeAccumulator                       
+0     003f2a84  _TorqueCalc                            
+1     000092cc  _TorqueCurrentLimit                    
+0     003f20cf  _TurnToStopStatus                      
+1     000097f6  _UNDER_DC_VOL_POINT                    
+0     003f2c89  _UVWToAlphBetaAxes                     
+0     000087bf  _UpdatPWMRegs                          
+0     003f1952  _UpdateDataCore2Func                   
+0     003f1850  _UpdateDataFunc2Core                   
+0     003f2a69  _UpdateFrqSetAim                       
+0     003f2a56  _UpdateLimitFrq                        
+0     003f2b50  _UpdateLinDataToSent                   
+0     003f2b04  _UpdateLinDataToVar                    
+0     003f2af1  _UpdateRecivedLinDataToVars            
+0     003f14ad  _UpdateRunCmd                          
+0     003f24a8  _UpdateTimeAccumulator                 
+0     003f2c14  _VFFreqCal                             
+0     0000817c  _VolAngleCalation                      
+1     00009748  _VolOffset                             
+0     0000813d  _VolVectCalation                       
+0     003f2906  _Write0                                
+0     003f28f8  _Write1                                
+0     003f28ea  _Write2                                
+0     003f28dc  _Write3                                
+0     003f28ce  _Write4                                
+0     003f28c0  _Write5                                
+0     003f28b2  _Write6                                
+0     003f28a4  _Write7                                
+1     00007070  _XIntruptRegs                          
+0     003f2f09  _Xint1_isr                             
+0     003f2cf1  _ZeroOfEPWMISR                         
+1     00000700  __STACK_END                            
+abs   00000300  __STACK_SIZE                           
+0     003f40b8  __TI_table__prginRAM                   
+1     000097bc  ___TI_cleanup_ptr                      
+1     000097be  ___TI_dtors_ptr                        
+1     000097ba  ___TI_enable_exit_profile_output       
+abs   ffffffff  ___TI_pprof_out_hndl                   
+abs   ffffffff  ___TI_prof_data_size                   
+abs   ffffffff  ___TI_prof_data_start                  
+abs   ffffffff  ___binit__                             
+abs   ffffffff  ___c_args__                            
+0     003f3da6  ___cinit__                             
+0     003f30b3  ___etext__                             
+abs   ffffffff  ___pinit__                             
+0     003f0002  ___text__                              
+0     003f3075  __args_main                            
+1     000098fa  __lock                                 
+0     003f30a7  __nop                                  
+0     003f30a3  __register_lock                        
+0     003f309f  __register_unlock                      
+1     00000400  __stack                                
+0     003f30b2  __system_post_cinit                    
+0     003f30b0  __system_pre_init                      
+1     000098fc  __unlock                               
+0     003f2f9e  _abort                                 
+0     003f2b83  _abs                                   
+0     003f2b87  _absl                                  
+1     00009854  _accFrqTime                            
+1     0000985a  _accTimeOld                            
+0     003f248b  _atan                                  
+1     00009849  _bFrqCurAimChg                         
+1     000096a4  _bUv                                   
+0     003f2e71  _c_int00                               
+0     003f0c58  _calc_bem_coef                         
+0     00008000  _calc_pm_coef                          
+1     0000961f  _cof_uwMaxThetaPerCntTcPu              
+0     003f3016  _copy_in                               
+0     003f1062  _copy_prg                              
+1     0000975c  _curr_data                             
+1     00009852  _decFrqTime                            
+1     00009856  _decTimeOld                            
+1     00009842  _dspMainCmd                            
+1     00009840  _dspStatus                             
+1     000096bc  _errAutoRstClrWaitTicker               
+1     000096a2  _errAutoRstNum                         
+1     000096b2  _error1                                
+1     000096a1  _errorCodeFromCore                     
+1     000096b8  _errorSpaceTicker                      
+0     003f2fa0  _exit                                  
+1     000097b0  _frq                                   
+1     0000984c  _frq0                                  
+1     0000969c  _frq2Core                              
+1     000097b2  _frqAim                                
+1     000097b6  _frqAimTmp                             
+1     000097b4  _frqAimTmp0                            
+1     000097b8  _frqCurAim                             
+1     0000969d  _frqCurAim2Core                        
+1     00009858  _frqCurAimOld                          
+1     00009870  _frqLine                               
+1     000097ae  _frqTmp                                
+1     0000930a  _gADC                                  
+1     00009330  _gBasePar                              
+1     000093ea  _gBemf                                 
+1     00009340  _gCBCProtect                           
+1     00009328  _gCurSamp                              
+1     00009366  _gDCBrake                              
+1     000096da  _gDCBrake2                             
+1     000093c0  _gDSPActiveTime                        
+1     00009338  _gDeadBand                             
+1     000098f9  _gErrorIntCnt                          
+1     000093d4  _gExcursionInfo                        
+1     000092f3  _gFcCal                                
+1     000092e6  _gFeisu                                
+1     00009440  _gFluxWeak                             
+1     000092ec  _gIAlphBeta                            
+1     000092f9  _gIAmpTheta                            
+1     000092ee  _gIMT                                  
+1     00009400  _gIPMInitPos                           
+1     0000974d  _gIRMSACCLimitIt                       
+1     000092f0  _gIUVW                                 
+1     00009640  _gImax                                 
+1     0000938c  _gInvInfo                              
+1     00009638  _gInvMaxCurr                           
+1     0000935c  _gLineCur                              
+1     000092f6  _gLowPower                             
+1     0000939e  _gMainCmd                              
+1     0000931f  _gMainStatus                           
+1     00009317  _gMotorInfo                            
+1     00009304  _gOutVolt                              
+1     00009372  _gPWM                                  
+1     0000968e  _gPWM_CMP                              
+1     0000990a  _gPWM_COMM                             
+1     00009348  _gPhase                                
+1     00009352  _gPhaseLose                            
+1     000092e4  _gRatio                                
+0     003f4056  _gSendToFuncTable                      
+1     00009380  _gSendToFunctionDataBuff               
+1     00009480  _gSendToMotorDataBuff                  
+0     003f3ff6  _gSendToMotorTable                     
+1     00009300  _gShortGnd                             
+1     000092d8  _gSoftVersion                          
+1     000092ea  _gSpeedFlag                            
+1     000092e8  _gSynPWM                               
+1     000092fc  _gTemperature                          
+1     00009310  _gUDC                                  
+1     00009700  _gUdcLimitIt                           
+1     00009744  _g_InitPos                             
+1     00009740  _g_InitPos1                            
+1     00009749  _g_InitPos2                            
+1     0000974c  _g_InitPos4                            
+1     00009798  _iTrig1_Cpwm                           
+1     0000976e  _iTrig1_Dpwm                           
+1     00009780  _iTrig2_Pwm                            
+1     0000978c  _iTrig3_Cpwm                           
+1     00009762  _iTrig3_Dpwm                           
+0     003f2483  _init_random_freq                      
+1     0000973c  _l_ld                                  
+1     0000973e  _l_lq                                  
+1     000097a5  _lowerFrq                              
+1     00009828  _m_Iu                                  
+1     00009826  _m_Iv                                  
+1     0000982c  _m_Iw                                  
+0     003f2d58  _main                                  
+1     000097a6  _maxFrq                                
+0     003f2477  _max_of_three                          
+0     003f3058  _memcpy                                
+0     003f246b  _min_of_three                          
+0     003f406e  _pDataCore2Func                        
+1     00009648  _pm_bem                                
+1     00009606  _pm_bem_kf                             
+1     00009620  _pm_check_ip_flag                      
+1     00009630  _pm_coef_alfa                          
+1     00009601  _pm_coef_angel                         
+1     0000962c  _pm_coef_bem                           
+1     0000962a  _pm_coef_beta                          
+1     0000966c  _pm_coef_d0                            
+1     0000966e  _pm_coef_d1                            
+1     00009678  _pm_coef_d2                            
+1     00009636  _pm_coef_ks                            
+1     0000967a  _pm_coef_q0                            
+1     00009674  _pm_coef_q1                            
+1     0000962e  _pm_coef_q2                            
+1     0000960b  _pm_control_mode                       
+1     00009602  _pm_curr_limitH                        
+1     00009608  _pm_curr_limitL                        
+1     00009611  _pm_dq_angle                           
+1     00009666  _pm_error_id                           
+1     0000965c  _pm_error_iq                           
+1     0000964c  _pm_est_angel                          
+1     00009672  _pm_est_bem                            
+1     00009670  _pm_est_bem1                           
+1     0000968a  _pm_est_delt_id                        
+1     0000968c  _pm_est_delt_iq                        
+1     00009682  _pm_est_id                             
+1     00009680  _pm_est_id1                            
+1     0000967e  _pm_est_imd                            
+1     00009688  _pm_est_imq                            
+1     00009684  _pm_est_iq                             
+1     0000967c  _pm_est_iq1                            
+1     00009624  _pm_est_lpf_omg                        
+1     00009626  _pm_est_lpf_omg1                       
+1     00009622  _pm_est_lpf_omg1_1                     
+1     00009646  _pm_est_omg                            
+1     00009632  _pm_est_omg_1                          
+1     00009628  _pm_est_omgm                           
+1     00009634  _pm_est_omgm1                          
+1     00009654  _pm_est_vd                             
+1     00009658  _pm_est_vd1                            
+1     00009686  _pm_est_vq                             
+1     00009652  _pm_est_vq1                            
+1     000096d8  _pm_fast_freq                          
+1     0000961e  _pm_forbid_revtorq                     
+1     00009642  _pm_init_phase                         
+1     00009607  _pm_init_phase1                        
+1     00009664  _pm_integral_d                         
+1     00009662  _pm_integral_q                         
+1     00009668  _pm_integral_speed                     
+1     00009618  _pm_iq_show                            
+1     00009617  _pm_iqmax                              
+1     0000966a  _pm_ki_d                               
+1     0000965e  _pm_ki_q                               
+1     0000960c  _pm_ki_speed                           
+1     0000960f  _pm_ki_speed_app                       
+1     0000965a  _pm_kp_d                               
+1     00009660  _pm_kp_q                               
+1     00009609  _pm_kp_speed                           
+1     0000960a  _pm_kp_speed_app                       
+1     0000961b  _pm_maxout_vol                         
+1     00009604  _pm_min_curr                           
+1     00009605  _pm_min_curr2                          
+1     00009644  _pm_min_speed                          
+1     00009619  _pm_omg_show                           
+1     00009758  _pm_phase1                             
+1     00009650  _pm_r                                  
+1     0000964e  _pm_ref_id                             
+1     00009656  _pm_ref_iq                             
+1     00009676  _pm_ref_speed                          
+1     00009610  _pm_speed_lpf_k                        
+1     0000960d  _pm_speed_lpf_k1                       
+1     0000960e  _pm_speed_lpf_k2                       
+1     0000961a  _pm_start_time                         
+1     00009603  _pm_ud                                 
+1     00009600  _pm_uq                                 
+0     003f0b96  _pmsvc_init                            
+1     000096a5  _powerOnStatus                         
+0     003f40b8  _prginRAM                              
+1     00009900  _pwm_capt_data                         
+0     003f2bae  _qatan                                 
+0     003f2b8b  _qsin                                  
+0     003f2be4  _qsqrt                                 
+0     003f2458  _random_frequency                      
+1     000094c6  _rdataA                                
+0     003f30a8  _rsvd_ISR                              
+1     00009843  _runCmd                                
+1     00009844  _runFlag                               
+1     00009841  _runStatus                             
+1     0000984e  _runTimeTicker                         
+1     0000974a  _sector_candidate                      
+1     0000974b  _sector_confirm_count                  
+0     003f2435  _sort_min_mid                          
+1     0000984a  _startRunStatus                        
+1     00009848  _stopRunStatus                         
+0     003f2b89  _swap                                  
+1     000096b3  _testERnum                             
+1     00009756  _test_ia                               
+1     0000975a  _test_ib                               
+1     0000963a  _tmp_swDeltaThetaPu                    
+1     0000964a  _ud                                    
+1     000097aa  _upperFrq                              
+1     000097a4  _upperTorque                           
+1     0000963c  _uq                                    
+1     000096a3  _uvDealStatus                          
+abs   ffffffff  binit                                  
+0     003f3da6  cinit                                  
+0     003f0000  code_start                             
+0     003f30b3  etext                                  
+abs   ffffffff  pinit                                  
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+page  address   name                                   
+----  -------   ----                                   
+0     00008000  _calc_pm_coef                          
+0     0000813d  _VolVectCalation                       
+0     0000817c  _VolAngleCalation                      
+0     000081d3  _OutPutPWMPhaseShiftForLowNoiseFullMode
+0     000085e7  _FluxPostionCalation                   
+0     00008740  _CurrentLoop                           
+0     000087bf  _UpdatPWMRegs                          
+0     000088a1  _DeadBandComp                          
+0     000088dd  _OutPutPWMVF                           
+0     00008969  _CalStepAngle                          
+0     00008986  _CalRatioFromVot                       
+0     00008a34  _CalDeadBandComp                       
+0     00008a9f  _SVPWM_1ShuntGetPhaseCurrent           
+0     00008cd5  _InitFlash                             
+0     00008cee  _ADP32F03x_usDelay                     
+0     003f0000  code_start                             
+0     003f0002  .text                                  
+0     003f0002  _ParameterChange                       
+0     003f0002  ___text__                              
+0     003f0069  _CalCarrierWaveFreq                    
+0     003f00e7  _PrepareParForRun                      
+0     003f01af  _RunCaseStop                           
+0     003f025b  _OpenLoopAccRun                        
+0     003f030e  _RunCaseBrakeLowBridge                 
+0     003f03be  _RunCaseShortGnd                       
+0     003f04a1  _SpeedLoop                             
+0     003f05a9  _RunCaseRun                            
+0     003f0610  _IsInRegenState                        
+0     003f0624  _CalUdcLimitIT                         
+0     003f0657  _RunCaseSpeedCheck                     
+0     003f0757  _RunCaseGetPar                         
+0     003f0758  _RunCaseLowPower                       
+0     003f07ef  _RunCaseDeal                           
+0     003f081b  _SoftWareErrorDeal                     
+0     003f0993  _GetCurrentExcursion                   
+0     003f0a03  _ChangeCurrent_2ms                     
+0     003f0a23  _SystemLeve2msMotor                    
+0     003f0a4a  _SystemLeve0msMotor                    
+0     003f0a4b  _SystemLeve05msMotor                   
+0     003f0a52  _SoftPWMProcess                        
+0     003f0a53  _MotorControlISR                       
+0     003f0aab  _InitForMotorApp                       
+0     003f0ae5  _HardWareErrorDeal                     
+0     003f0b21  _AllowSelectBottomOnly                 
+0     003f0b78  _ADCOverInterrupt                      
+0     003f0b96  _pmsvc_init                            
+0     003f0c58  _calc_bem_coef                         
+0     003f0c59  _PMClacFluxWeakId                      
+0     003f0cf2  _PMFluxWeaking                         
+0     003f0e22  _PMFluxWeakInit                        
+0     003f0ed0  _PMCalcLineCurr                        
+0     003f0fc5  _NOShifPWM                             
+0     003f0fdb  _FixShiftPatternMode                   
+0     003f1062  _copy_prg                              
+0     003f106d  _SetInterruptEnable                    
+0     003f1087  _SCI_Setup                             
+0     003f10b3  _ResetDSP                              
+0     003f10bb  _LIN_Setup                             
+0     003f1149  _KickDog                               
+0     003f1153  _DisableDog                            
+0     003f115b  _InitPll                               
+0     003f1191  _InitPeripheralClocks                  
+0     003f11ca  _InitSysCtrl                           
+0     003f11d8  _InitSetPWM                            
+0     003f12f0  _InitSetGpio                           
+0     003f1355  _InitSetAdc                            
+0     003f1433  _InitPieVectTable                      
+0     003f144a  _InitPieCtrl                           
+0     003f1465  _InitPeripherals                       
+0     003f1482  _InitInterrupt                         
+0     003f14a5  _EnableDog                             
+0     003f14ad  _UpdateRunCmd                          
+0     003f14ec  _LineChangeCalc                        
+0     003f1518  _AccDecFrqCalc                         
+0     003f1577  _StopRunCtrl                           
+0     003f1594  _StartRunCtrl                          
+0     003f15dc  _ShutDownRunCtrl                       
+0     003f15ef  _SetAccTimes                           
+0     003f15fb  _SCurveOridinaryCalc                   
+0     003f17f7  _AccDecTimeCalc                        
+0     003f17f8  _LowerThanLowerFrqDeal                 
+0     003f17f9  _NormalRunCtrl                         
+0     003f1811  _RunSrcDeal                            
+0     003f1850  _UpdateDataFunc2Core                   
+0     003f1952  _InitFuncCode                          
+0     003f1952  _UpdateDataCore2Func                   
+0     003f1978  _ErrorDeal                             
+0     003f19b9  _ErrorReset                            
+0     003f1a1b  _LEDControl                            
+0     003f1a98  _InternalOSCTrim                       
+0     003f1ab9  _SystemLeve2msFunction                 
+0     003f1ace  _SystemLeve0msFunction                 
+0     003f1b11  _SystemLeve05msFunction                
+0     003f1b26  _SoftVersionDeal                       
+0     003f1b27  _GetOSCTrimConst                       
+0     003f1b4a  _FuncVariableInit                      
+0     003f1b4f  _InitForFunctionApp                    
+0     003f1b58  _SynInitPosDetCal                      
+0     003f1bd2  _Filter                                
+0     003f1be6  _PMSMSVC_2ms                           
+0     003f1c08  _GetBemf_DirSpeed                      
+0     003f1d89  _ChangeCurrent                         
+0     003f1dd5  _AsynPWMAngleCal                       
+0     003f1e35  _CalOutputPhase                        
+0     003f1e49  _PreDriverWriteData                    
+0     003f1f38  _PreDriverReadData                     
+0     003f2014  _PreDriverTest                         
+0     003f2047  _PreDriverInit                         
+0     003f2060  _InitI2CIO                             
+0     003f2081  _InitI2C                               
+0     003f209b  _GetPerDriverState                     
+0     003f20bc  _DriverClaerFault                      
+0     003f20cf  _TurnToStopStatus                      
+0     003f20e3  _SynInitPosDetSetPwm                   
+0     003f2162  _SynInitPosDetect                      
+0     003f2292  _OutputPhaseLoseDetectNew              
+0     003f2329  _OutputLoseReset                       
+0     003f2332  _OutputPhaseLoseDetect                 
+0     003f23ba  _OutputLoseAdd                         
+0     003f23df  _InvDeviceKontrol                      
+0     003f23e9  _CBCLimitCur                           
+0     003f2435  _sort_min_mid                          
+0     003f2458  _random_frequency                      
+0     003f246b  _min_of_three                          
+0     003f2477  _max_of_three                          
+0     003f2483  _init_random_freq                      
+0     003f248b  _atan                                  
+0     003f24a8  _UpdateTimeAccumulator                 
+0     003f24e5  _ResetTimeAccumulator                  
+0     003f24f1  _PID2                                  
+0     003f2550  _PID                                   
+0     003f2567  _BurrFilter                            
+0     003f2580  _ParSendToFunction                     
+0     003f258b  _ParGetFromFunction                    
+0     003f26c0  LL$$DIV                                
+0     003f26fc  LL$$MOD                                
+0     003f2736  ULL$$DIV                               
+0     003f2765  ULL$$MOD                               
+0     003f27c7  _GetUDCInfo                            
+0     003f27e6  _GetTemperatureInfo                    
+0     003f27fe  _GetSMOAngle                           
+0     003f2843  _GetIDCInfo                            
+0     003f2871  _GetCurrentIPD                         
+0     003f288b  _GetAIInfo                             
+0     003f2898  _ADCProcess                            
+0     003f28a4  _Write7                                
+0     003f28b2  _Write6                                
+0     003f28c0  _Write5                                
+0     003f28ce  _Write4                                
+0     003f28dc  _Write3                                
+0     003f28ea  _Write2                                
+0     003f28f8  _Write1                                
+0     003f2906  _Write0                                
+0     003f2914  _ResetIndex                            
+0     003f291a  _MoveToNextRow                         
+0     003f292b  _IsRecordThisSample                    
+0     003f295e  _GetResult                             
+0     003f296c  _ControlAllowRecord                    
+0     003f297c  _ChangeSampleRate                      
+0     003f2980  _LINA_LEVEL_isr                        
+0     003f2a56  _UpdateLimitFrq                        
+0     003f2a69  _UpdateFrqSetAim                       
+0     003f2a84  _TorqueCalc                            
+0     003f2a8c  _POE_Limit                             
+0     003f2ad3  _FrqSrcDeal                            
+0     003f2af1  _UpdateRecivedLinDataToVars            
+0     003f2b04  _UpdateLinDataToVar                    
+0     003f2b50  _UpdateLinDataToSent                   
+0     003f2b74  _LinData_init                          
+0     003f2b7b  _GetStartCMDComs                       
+0     003f2b7f  _GetSetupFreComs                       
+0     003f2b83  _abs                                   
+0     003f2b87  _absl                                  
+0     003f2b89  _swap                                  
+0     003f2b8b  _qsin                                  
+0     003f2bae  _qatan                                 
+0     003f2be4  _qsqrt                                 
+0     003f2c14  _VFFreqCal                             
+0     003f2c1a  _CalOutVotInVFStatus                   
+0     003f2c41  _CalOutVoltInDCBrakeStatus             
+0     003f2c89  _UVWToAlphBetaAxes                     
+0     003f2ca8  _DQToAmpTheta                          
+0     003f2cbc  _AlphBetaToDQ                          
+0     003f2cf1  _ZeroOfEPWMISR                         
+0     003f2d19  _OneShotTZOfEPWMISR                    
+0     003f2d31  _EndOfADCISR                           
+0     003f2d58  _main                                  
+0     003f2db9  _SendNormalFrame                       
+0     003f2dda  _ReveiveBufferFrame                    
+0     003f2df0  _CommsProtocalLayerTaskBG              
+0     003f2df1  _CommsProtocalLayerTask2ms             
+0     003f2e17  FS$$MPY                                
+0     003f2e71  _c_int00                               
+0     003f2ec5  _InitCpuTimers                         
+0     003f2ee4  _ConfigCpuTimer                        
+0     003f2f09  _Xint1_isr                             
+0     003f2f41  _PWMCommInit                           
+0     003f2f5d  _LowerPowerSleep                       
+0     003f2f74  L$$DIV                                 
+0     003f2f83  L$$MOD                                 
+0     003f2f91  UL$$DIV                                
+0     003f2f98  UL$$MOD                                
+0     003f2f9e  C$$EXIT                                
+0     003f2f9e  _abort                                 
+0     003f2fa0  _exit                                  
+0     003f2fc7  FS$$TOL                                
+0     003f3011  _MovePrgFrFlashToRam                   
+0     003f3016  _copy_in                               
+0     003f303a  LL$$CMP                                
+0     003f304c  ULL$$CMP                               
+0     003f3058  _memcpy                                
+0     003f3075  __args_main                            
+0     003f308e  _ResetADCAndPWM                        
+0     003f309f  __register_unlock                      
+0     003f30a3  __register_lock                        
+0     003f30a7  __nop                                  
+0     003f30a8  _rsvd_ISR                              
+0     003f30b0  __system_pre_init                      
+0     003f30b2  __system_post_cinit                    
+0     003f30b3  ___etext__                             
+0     003f30b3  etext                                  
+0     003f3da6  ___cinit__                             
+0     003f3da6  cinit                                  
+0     003f3ff6  _gSendToMotorTable                     
+0     003f4056  _gSendToFuncTable                      
+0     003f406e  _pDataCore2Func                        
+0     003f40b8  __TI_table__prginRAM                   
+0     003f40b8  _prginRAM                              
+0     003f5ffe  _Bootflag                              
+1     00000400  __stack                                
+1     00000700  __STACK_END                            
+1     00000880  _DevEmuRegs                            
+1     00000a80  _FlashRegs                             
+1     00000ae0  _CsmRegs                               
+1     00000b00  _AdcResult                             
+1     00000c00  _CpuTimer0Regs                         
+1     00000c08  _CpuTimer1Regs                         
+1     00000c10  _CpuTimer2Regs                         
+1     00000ce0  _PieCtrlRegs                           
+1     00000d00  _EmuKey                                
+1     00000d00  _PieVectTable                          
+1     00000d01  _EmuBMode                              
+1     00000d02  _Flash_CallbackPtr                     
+1     00000d04  _Flash_CPUScaleFactor                  
+1     00006400  _Comp1Regs                             
+1     00006420  _Comp2Regs                             
+1     00006800  _EPwm1Regs                             
+1     00006840  _EPwm2Regs                             
+1     00006880  _EPwm3Regs                             
+1     000068c0  _EPwm4Regs                             
+1     00006900  _EPwm5Regs                             
+1     00006a00  _ECap1Regs                             
+1     00006c00  _LinaRegs                              
+1     00006f80  _GpioCtrlRegs                          
+1     00006fc0  _GpioDataRegs                          
+1     00006fe0  _GpioIntRegs                           
+1     00007010  _SysCtrlRegs                           
+1     00007030  _PagOpaRegs                            
+1     00007040  _SpiaRegs                              
+1     00007050  _SciaRegs                              
+1     00007060  _NmiIntruptRegs                        
+1     00007070  _XIntruptRegs                          
+1     00007100  _AdcRegs                               
+1     00007900  _I2caRegs                              
+1     00008a80  _SampleRate                            
+1     00008a82  _Sample                                
+1     00008a84  _AllowRecordControl                    
+1     00008a86  _Index                                 
+1     00008a88  _AllowRecord                           
+1     00008ac0  _Results                               
+1     000092c0  _FieldWeakMode                         
+1     000092c1  _FieldWeakCurScale                     
+1     000092c2  _StartPresetCurrent                    
+1     000092c3  _LowLimitFrequency                     
+1     000092c4  _SpeedMeasureFactor2                   
+1     000092c5  _IPDAutoDectEnable                     
+1     000092c6  _IPDAutoDectScaling                    
+1     000092c7  _FieldWeakRef                          
+1     000092c8  _DataRsrd                              
+1     000092c9  _OverspeedScaling                      
+1     000092ca  _SpeedFeedbackFilter                   
+1     000092cb  _DCBrakeCur                            
+1     000092cc  _TorqueCurrentLimit                    
+1     000092cd  _MotorPWMRandom                        
+1     000092ce  _SpeedMeasureFactor1                   
+1     000092cf  _FieldWeakScale                        
+1     000092d0  _MinCurrentLowSpeed                    
+1     000092d1  _SpecailFactor                         
+1     000092d2  _PaseShiftEnable                       
+1     000092d3  _LowNoseElmPWMMode                     
+1     000092d4  _ReserdData                            
+1     000092d5  _RsSecond                              
+1     000092d6  _MotorPWMModeForNoise                  
+1     000092d7  _ActualPower                           
+1     000092d8  _gSoftVersion                          
+1     000092d9  _InternalTemperatureDegree             
+1     000092da  _IbusActual                            
+1     000092db  _AVREnableMode                         
+1     000092dc  _MotorTestData1                        
+1     000092dd  _IdMaxSet                              
+1     000092de  _IqFWLimit                             
+1     000092df  _SFLowSpeed                            
+1     000092e0  _MotorTestData5                        
+1     000092e1  _LastLowNoseElmPWMMode                 
+1     000092e2  _NoNegativeOMG                         
+1     000092e3  _MotorTestData4                        
+1     000092e4  _gRatio                                
+1     000092e5  _MotorTestData2                        
+1     000092e6  _gFeisu                                
+1     000092e8  _gSynPWM                               
+1     000092ea  _gSpeedFlag                            
+1     000092ec  _gIAlphBeta                            
+1     000092ee  _gIMT                                  
+1     000092f0  _gIUVW                                 
+1     000092f3  _gFcCal                                
+1     000092f6  _gLowPower                             
+1     000092f9  _gIAmpTheta                            
+1     000092fc  _gTemperature                          
+1     00009300  _gShortGnd                             
+1     00009304  _gOutVolt                              
+1     0000930a  _gADC                                  
+1     00009310  _gUDC                                  
+1     00009317  _gMotorInfo                            
+1     0000931f  _gMainStatus                           
+1     00009328  _gCurSamp                              
+1     00009330  _gBasePar                              
+1     00009338  _gDeadBand                             
+1     00009340  _gCBCProtect                           
+1     00009348  _gPhase                                
+1     00009352  _gPhaseLose                            
+1     0000935c  _gLineCur                              
+1     00009366  _gDCBrake                              
+1     00009372  _gPWM                                  
+1     00009380  _gSendToFunctionDataBuff               
+1     0000938c  _gInvInfo                              
+1     0000939e  _gMainCmd                              
+1     000093c0  _gDSPActiveTime                        
+1     000093d4  _gExcursionInfo                        
+1     000093ea  _gBemf                                 
+1     00009400  _gIPMInitPos                           
+1     00009440  _gFluxWeak                             
+1     00009480  _gSendToMotorDataBuff                  
+1     000094b0  _CpuTimer0                             
+1     000094b8  _CpuTimer1                             
+1     000094c0  _LinRxFlag                             
+1     000094c2  _FrameIncorrectCnt                     
+1     000094c4  _LinL0IntVect                          
+1     000094c6  _rdataA                                
+1     00009500  _RemoteModbus                          
+1     000095ff  _PWMPeriodBasedONMotorANDVDC           
+1     00009600  _pm_uq                                 
+1     00009601  _pm_coef_angel                         
+1     00009602  _pm_curr_limitH                        
+1     00009603  _pm_ud                                 
+1     00009604  _pm_min_curr                           
+1     00009605  _pm_min_curr2                          
+1     00009606  _pm_bem_kf                             
+1     00009607  _pm_init_phase1                        
+1     00009608  _pm_curr_limitL                        
+1     00009609  _pm_kp_speed                           
+1     0000960a  _pm_kp_speed_app                       
+1     0000960b  _pm_control_mode                       
+1     0000960c  _pm_ki_speed                           
+1     0000960d  _pm_speed_lpf_k1                       
+1     0000960e  _pm_speed_lpf_k2                       
+1     0000960f  _pm_ki_speed_app                       
+1     00009610  _pm_speed_lpf_k                        
+1     00009611  _pm_dq_angle                           
+1     00009612  _MIN_SAMPLE_TIME                       
+1     00009613  _TWO_MIN_SAMPLE_TIME                   
+1     00009614  _SampPoint1Time                        
+1     00009615  _SampPoint2Time                        
+1     00009616  _CURR_SAMPLE_DELAY                     
+1     00009617  _pm_iqmax                              
+1     00009618  _pm_iq_show                            
+1     00009619  _pm_omg_show                           
+1     0000961a  _pm_start_time                         
+1     0000961b  _pm_maxout_vol                         
+1     0000961c  _LdUinit                               
+1     0000961d  _RsUinit                               
+1     0000961e  _pm_forbid_revtorq                     
+1     0000961f  _cof_uwMaxThetaPerCntTcPu              
+1     00009620  _pm_check_ip_flag                      
+1     00009622  _pm_est_lpf_omg1_1                     
+1     00009624  _pm_est_lpf_omg                        
+1     00009626  _pm_est_lpf_omg1                       
+1     00009628  _pm_est_omgm                           
+1     0000962a  _pm_coef_beta                          
+1     0000962c  _pm_coef_bem                           
+1     0000962e  _pm_coef_q2                            
+1     00009630  _pm_coef_alfa                          
+1     00009632  _pm_est_omg_1                          
+1     00009634  _pm_est_omgm1                          
+1     00009636  _pm_coef_ks                            
+1     00009638  _gInvMaxCurr                           
+1     0000963a  _tmp_swDeltaThetaPu                    
+1     0000963c  _uq                                    
+1     00009640  _gImax                                 
+1     00009642  _pm_init_phase                         
+1     00009644  _pm_min_speed                          
+1     00009646  _pm_est_omg                            
+1     00009648  _pm_bem                                
+1     0000964a  _ud                                    
+1     0000964c  _pm_est_angel                          
+1     0000964e  _pm_ref_id                             
+1     00009650  _pm_r                                  
+1     00009652  _pm_est_vq1                            
+1     00009654  _pm_est_vd                             
+1     00009656  _pm_ref_iq                             
+1     00009658  _pm_est_vd1                            
+1     0000965a  _pm_kp_d                               
+1     0000965c  _pm_error_iq                           
+1     0000965e  _pm_ki_q                               
+1     00009660  _pm_kp_q                               
+1     00009662  _pm_integral_q                         
+1     00009664  _pm_integral_d                         
+1     00009666  _pm_error_id                           
+1     00009668  _pm_integral_speed                     
+1     0000966a  _pm_ki_d                               
+1     0000966c  _pm_coef_d0                            
+1     0000966e  _pm_coef_d1                            
+1     00009670  _pm_est_bem1                           
+1     00009672  _pm_est_bem                            
+1     00009674  _pm_coef_q1                            
+1     00009676  _pm_ref_speed                          
+1     00009678  _pm_coef_d2                            
+1     0000967a  _pm_coef_q0                            
+1     0000967c  _pm_est_iq1                            
+1     0000967e  _pm_est_imd                            
+1     00009680  _pm_est_id1                            
+1     00009682  _pm_est_id                             
+1     00009684  _pm_est_iq                             
+1     00009686  _pm_est_vq                             
+1     00009688  _pm_est_imq                            
+1     0000968a  _pm_est_delt_id                        
+1     0000968c  _pm_est_delt_iq                        
+1     0000968e  _gPWM_CMP                              
+1     0000969c  _frq2Core                              
+1     0000969d  _frqCurAim2Core                        
+1     0000969e  _RrsDataFromMotor                      
+1     0000969f  _RefTempOffset                         
+1     000096a0  _NOTUSED                               
+1     000096a1  _errorCodeFromCore                     
+1     000096a2  _errAutoRstNum                         
+1     000096a3  _uvDealStatus                          
+1     000096a4  _bUv                                   
+1     000096a5  _powerOnStatus                         
+1     000096ad  _Osc1FineTrimOffset                    
+1     000096ae  _Osc1CoarseTrim                        
+1     000096af  _Osc1FineTrimSlope                     
+1     000096b2  _error1                                
+1     000096b3  _testERnum                             
+1     000096b8  _errorSpaceTicker                      
+1     000096ba  _ObserverMotorSpeedINOnePointHZ        
+1     000096bc  _errAutoRstClrWaitTicker               
+1     000096c0  _IDRef                                 
+1     000096c2  _IDFadeOverCnt                         
+1     000096c3  _DCStart_flag                          
+1     000096c4  _McSpdState                            
+1     000096c5  _SHORT_GND_PERIOD                      
+1     000096c6  _IDRef2                                
+1     000096c7  _FrqTemp                               
+1     000096d0  _POWERKI                               
+1     000096d2  _IQLimit                               
+1     000096d4  _LimitHGlobal                          
+1     000096d6  _POWERKP                               
+1     000096d8  _pm_fast_freq                          
+1     000096da  _gDCBrake2                             
+1     000096e6  _SoftErrorData                         
+1     00009700  _gUdcLimitIt                           
+1     00009714  _SpeedData                             
+1     0000973c  _l_ld                                  
+1     0000973e  _l_lq                                  
+1     00009740  _g_InitPos1                            
+1     00009741  _EPWMFlagU                             
+1     00009742  _EPWMFlagV                             
+1     00009743  _EPWMFlagW                             
+1     00009744  _g_InitPos                             
+1     00009745  _PWMsector                             
+1     00009747  _ReadSpeedBasedonFinished              
+1     00009748  _VolOffset                             
+1     00009749  _g_InitPos2                            
+1     0000974a  _sector_candidate                      
+1     0000974b  _sector_confirm_count                  
+1     0000974c  _g_InitPos4                            
+1     0000974d  _gIRMSACCLimitIt                       
+1     0000974e  _TenmsChop                             
+1     0000974f  _RunBoostState                         
+1     00009750  _Target                                
+1     00009751  _EnableRecord2                         
+1     00009752  _LimitGatio                            
+1     00009753  _Factor                                
+1     00009756  _test_ia                               
+1     00009758  _pm_phase1                             
+1     0000975a  _test_ib                               
+1     0000975c  _curr_data                             
+1     00009762  _iTrig3_Dpwm                           
+1     0000976e  _iTrig1_Dpwm                           
+1     00009780  _iTrig2_Pwm                            
+1     0000978c  _iTrig3_Cpwm                           
+1     00009798  _iTrig1_Cpwm                           
+1     000097a4  _upperTorque                           
+1     000097a5  _lowerFrq                              
+1     000097a6  _maxFrq                                
+1     000097aa  _upperFrq                              
+1     000097ae  _frqTmp                                
+1     000097b0  _frq                                   
+1     000097b2  _frqAim                                
+1     000097b4  _frqAimTmp0                            
+1     000097b6  _frqAimTmp                             
+1     000097b8  _frqCurAim                             
+1     000097ba  ___TI_enable_exit_profile_output       
+1     000097bc  ___TI_cleanup_ptr                      
+1     000097be  ___TI_dtors_ptr                        
+1     000097c0  _IPD_PERIOD_SCALING                    
+1     000097c1  _IdMaxScaling                          
+1     000097c2  _FIELD_WEAK_REF                        
+1     000097c3  _FILED_WEEKING_CUR_SCAL                
+1     000097c4  _FILED_WEEKING_SCAL                    
+1     000097c5  _SF_LOW_SPEED                          
+1     000097c6  _MIN_CUR_LOW_SPEED                     
+1     000097c7  _STALL_PR_TIME                         
+1     000097c8  _IqMaxSet                              
+1     000097c9  _SOFT_OC_POINT                         
+1     000097ca  _FILED_WEEKING_MODE                    
+1     000097cb  _MAX_LIMIT_FREQ                        
+1     000097cc  _MOTOR_RATED_FRE                       
+1     000097cd  _AVR_MODE                              
+1     000097ce  _Q_CUR_KP                              
+1     000097cf  _PWM_FREQUENCY                         
+1     000097d0  _DC_BRAKE_CUR                          
+1     000097d1  _TORQUE_CUR_LIMIT                      
+1     000097d2  _DC_CONTROL_KI                         
+1     000097d3  _COAST_STOP_FRQ                        
+1     000097d4  _DC_CONTROL_KP                         
+1     000097d5  _PMSM_RS_MIN                           
+1     000097d6  _T_DELAY                               
+1     000097d7  _LOW_SPEED_FILTER                      
+1     000097d8  _INIT_POS_DECTION_CUR                  
+1     000097d9  _INIT_POS_DECTION_TIME                 
+1     000097da  _RatioForLowNoisePWM                   
+1     000097db  _RatiotThresholdForLowNoisePWM         
+1     000097dc  _SecondSamplePointShift                
+1     000097dd  _T_SAMPLE                              
+1     000097de  _FirstSamplePointShift                 
+1     000097df  _INIT_POS_DECTION_MODE                 
+1     000097e0  _SPEED_FEEDBACK_FILTER                 
+1     000097e1  _FILED_WEEKING_OUTVOL_SC               
+1     000097e2  _AUTO_RESET_CNT                        
+1     000097e3  _OVER_SPEED_SCALING                    
+1     000097e4  _ThetaCoff                             
+1     000097e5  _START_PRESET_CUR                      
+1     000097e6  _LOW_LIMIT_FREQUENCY                   
+1     000097e7  _SPEED_MEASURE_PAR_2                   
+1     000097e8  _SPECIAL_FACTOR_1                      
+1     000097e9  _SPEED_MEASURE_PAR_1                   
+1     000097ea  _LOWER_LIMIT_FREQ                      
+1     000097eb  _PMSM_LD                               
+1     000097ec  _MOTOR_RATED_CUR                       
+1     000097ed  _MOTOR_RATED_POWER                     
+1     000097ee  _MOTOR_RATED_VOL                       
+1     000097ef  _PMSM_KE                               
+1     000097f0  _FRQ_OPEN_TO_CLOSE                     
+1     000097f1  _PMS_L_R_UNIT                          
+1     000097f2  _PMSM_LQ                               
+1     000097f3  _PMSM_RS                               
+1     000097f4  _OVER_DC_VOL_KP                        
+1     000097f5  _MaxAllowUdcLimit                      
+1     000097f6  _UNDER_DC_VOL_POINT                    
+1     000097f7  _OVER_DC_VOL_POINT                     
+1     000097f8  _OVER_DC_VOL_LIMIT                     
+1     000097f9  _OverCurPointInternal                  
+1     000097fa  _CBCCurPointInternal                   
+1     000097fb  _DeadTimeCompInternal                  
+1     000097fc  _MidAllowUdcLimit                      
+1     000097fd  _DeadTimeInternal                      
+1     000097fe  _LOW_SPEED_KI                          
+1     000097ff  _LOW_SPEED_KP                          
+1     00009800  _F_CHANGING_POINT_2_PI                 
+1     00009801  _DCBrakeTime                           
+1     00009802  _F_CHANGING_POINT_1_PI                 
+1     00009803  _D_CUR_KP                              
+1     00009804  _Q_CUR_KI                              
+1     00009805  _D_CUR_KI                              
+1     00009806  _HIGH_SPEED_KI_GAIN                    
+1     00009807  _HIGH_SPEED_KP_GAIN                    
+1     00009808  _LowLimit                              
+1     00009809  _HighLimit                             
+1     0000980a  _OPEN_LOOP_TOR_START                   
+1     0000980b  _FRQ_PWM_SHIFT_EN                      
+1     0000980c  _MAX_DC_VOL_3_3V                       
+1     0000980d  _ACC2                                  
+1     0000980e  _DEC                                   
+1     0000980f  _ACC1                                  
+1     00009810  _BemfOffset                            
+1     00009811  _RefSet                                
+1     00009812  _IdMaxInternal                         
+1     00009814  _LowFreqencyOFSF                       
+1     00009816  _HighFreqencyOFSF                      
+1     00009818  _IdMinInternal                         
+1     0000981a  _MAX_PEAK_CUR_3_3V_410                 
+1     0000981c  _MAX_PEAK_CUR_3_3V_2                   
+1     0000981e  _SpinControlInternal                   
+1     00009820  _EnableRecord                          
+1     00009822  _Adc_Temp_IDC2                         
+1     00009823  _SMOAngle                              
+1     00009824  _Adc_Temp_IDC1                         
+1     00009826  _m_Iv                                  
+1     00009828  _m_Iu                                  
+1     0000982c  _m_Iw                                  
+1     00009830  _SPIDataTest                           
+1     00009835  _SpiSendData                           
+1     00009840  _dspStatus                             
+1     00009841  _runStatus                             
+1     00009842  _dspMainCmd                            
+1     00009843  _runCmd                                
+1     00009844  _runFlag                               
+1     00009847  _RunSignal                             
+1     00009848  _stopRunStatus                         
+1     00009849  _bFrqCurAimChg                         
+1     0000984a  _startRunStatus                        
+1     0000984c  _frq0                                  
+1     0000984e  _runTimeTicker                         
+1     00009852  _decFrqTime                            
+1     00009854  _accFrqTime                            
+1     00009856  _decTimeOld                            
+1     00009858  _frqCurAimOld                          
+1     0000985a  _accTimeOld                            
+1     00009870  _frqLine                               
+1     00009880  _TimeAccumulator                       
+1     00009896  _MadddData                             
+1     000098c0  _SenddDataA                            
+1     000098c2  _SenddDataB                            
+1     000098c4  _ReciveDataIDCorrect                   
+1     000098cc  _ReciveDataIDInCorrect                 
+1     000098d4  _Lin_Communication                     
+1     000098ee  _PreDriverRegs                         
+1     000098f1  _DataTest                              
+1     000098f9  _gErrorIntCnt                          
+1     000098fa  __lock                                 
+1     000098fc  __unlock                               
+1     000098fe  _RecordEnable                          
+1     00009900  _pwm_capt_data                         
+1     0000990a  _gPWM_COMM                             
+1     003d7e80  _PartIdRegs                            
+1     003f7ff8  _CsmPwl                                
+abs   00000300  __STACK_SIZE                           
+abs   ffffffff  ___TI_pprof_out_hndl                   
+abs   ffffffff  ___TI_prof_data_size                   
+abs   ffffffff  ___TI_prof_data_start                  
+abs   ffffffff  ___binit__                             
+abs   ffffffff  ___c_args__                            
+abs   ffffffff  ___pinit__                             
+abs   ffffffff  binit                                  
+abs   ffffffff  pinit                                  
+
+[655 symbols]

@@ -1,0 +1,104 @@
+来源: AVP32F0049/AVP32F0049和TMS320F280049基础资源对比.docx
+来源编号: S134
+
+段落1: AVP32F0049和TMS320F280049基础资源对比
+
+段落2: 1. 核心架构
+
+表3:
+
+行1: 特性 | TMS320F280049 | AVP32F0049
+
+行2: 核心 | C2000 DSP + Control Law Accelerator (CLA) + CLB | C2000 DSP + Control Law Accelerator (CLA) + CLB
+
+行3: 主频 | 100 MHz | 120 MHz
+
+行4: 浮点单元 | 单精度 FPU | 单精度 FPU
+
+行5: 指令集 | C28x + CLA + CLB | C28x + CLA + CLB
+
+行6: 芯片功耗 | 320mW @ 100Mhz | 140mW @ 120Mhz
+
+行7: 片内LDO | 3.3/1.2 VREG | 3.3/1.1 VREG
+
+段落4: 2. 存储器资源
+
+表5:
+
+行1: 特性 | TMS320F280049 | AVP32F0049
+
+行2: Flash | 256 KB | 256 KB
+
+行3: SRAM | 100 KB | 100 KB
+
+行4: EEPROM | 无 | 无
+
+行5: Bootloader | 支持 | 支持
+
+行6: 外部存储器接口 | 无 | 无
+
+段落6: 区别点：
+
+段落7: 请勿在FLASH某一个BANK里运行FLASH擦除编程本BANK和另外一个BANK的代码，如有此类使用请将FLASH API搬移到RAM中运行，搬移只需改动CMD文件，具体改动如下：
+
+段落8: 3. 外设资源
+
+表9:
+
+行1: 特性 | TMS320F280049 | AVP32F0049
+
+行2: GPIO | 多达 55 个 | 多达 55 个
+
+行3: ADC | 12 位，3.45 MSPS，多达 21 通道 | 12 位，3.45 MSPS，多达 21 通道
+
+行4: DAC | 12 位，1 通道 | 12 位，1 通道
+
+行5: 定时器 | 16 位和 32 位定时器，多达 8 个 | 16 位和 32 位定时器，多达 8 个
+
+行6: PWM | HRPWM，支持 150 ps 高分辨率 | HRPWM，支持 150 ps 高分辨率
+
+行7: 通信接口 | SPI/I2C/SCI/CAN | SPI/I2C/SCI/CAN
+
+行8: 比较器 | 内置比较器 | 内置比较器
+
+段落10: 区别点：
+
+段落11: TZ触发输入有效至 PWM 高阻抗 (Hi-Z) 的时间td，TI为25nS，我司为35nS。
+
+段落12: 4. 高性能特性
+
+表13:
+
+行1: 特性 | TMS320F280049 | AVP32F0049
+
+行2: 高分辨率 PWM | HRTIM，支持 150 ps 分辨率 | HRPWM，支持 150 ps 分辨率
+
+行3: 数字滤波器 |  / Σ-Δ 滤波器模块 (SDFM) /  |  / Σ-Δ 滤波器模块 (SDFM) / 
+
+行4: 硬件加速器 | Control Law Accelerator (CLA) | Control Law Accelerator (CLA)
+
+行5: 数学加速器 | 三角函数加速器（TMU） | 三角函数加速器（TMU）
+
+段落14: 5. 电源管理
+
+表15:
+
+行1: 特性 | TMS320F280049 | AVP32F20049
+
+行2: 工作电压 | 3.3 V | 3.3 V
+
+行3: 低功耗模式 | 低功耗模式（IDLE、STANDBY） | 低功耗模式（IDLE、STANDBY）
+
+行4: 电源效率 | 较高 | 较高
+
+段落16: 6. 开发工具与生态系统
+
+表17:
+
+行1: 特性 | TMS320F280049 | AVP32F0049
+
+行2: 开发环境 | Code Composer Studio (CCS) | Code Composer Studio (CCS)
+
+行3: 调试接口 | JTAG | JTAG
+
+行4: 软件库 | C2000 DriverLib | C2000 DriverLib

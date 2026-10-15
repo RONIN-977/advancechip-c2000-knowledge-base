@@ -1,0 +1,111 @@
+来源: ADP32F035/从F2803X移植到ADP32F03x工程概要说明.pdf
+来源编号: S070
+
+=== PDF页 1 ===
+从 F2803x 移植到 ADP32F035 工程概要
+版本 V1.0
+应用指导
+湖南进芯电子科技有限公司
+撰写人：唐 佳
+2021 年 1 月 22 日
+
+=== PDF页 2 ===
+一、 概述
+本文档将重点阐述 F2803x 与 ADP32F035 的差异性，以支持客户快速移植。
+行文将重点介绍两款芯片在应用或测试中关键注意点，如用户对具体功能模块有
+进一步了解需要，可查阅相应产品规格书。 二、 移植工程范围
+1. 器件资源差异性对比
+项点 F28035 ADP32F035
+芯片主频（MAX） 60Mhz @ CORE1.8V 60Mhz @ CORE1.5V
+芯片功耗 460mW @ 60Mhz 280mW @ 60Mhz
+片内 LDO 3.3/1.8 VREG
+3.3/1.8 VREG
+1.8/1.5 LDO
+TEST2
+VSS
+芯片内部测试引脚
+建议悬空
+TEST2 为芯片内核 1.5V 供电
+的输出引脚，悬空即可
+2. Flash 及 Flash API
+ADP32F035 基于国内流片厂商主流的制程工艺设计，FLASH IP 与 F2803x 完
+全不同，但 FLASH 分区及寻址与 F28035 保持一致，地址段分配如下：
+地址范围 程序与数据空间
+0x3E 8000 to 0x3E 9FFF Sector H (8K × 16)
+0x3E A000 to 0x3E BFFF Sector G (8K × 16)
+0x3E C000 to 0x3E DFFF Sector F (8K × 16)
+0x3E E000 to 0x3E FFFF Sector E (8K × 16)
+0x3F 0000 to 0x3F 1FFF Sector D (8K × 16)
+0x3F 2000 to 0x3F 3FFF Sector C (8K × 16)
+0x3F 4000 to 0x3F 5FFF Sector B (8K × 16)
+0x3F 6000 to 0x3F 7F7F Sector A (8K × 16)
+0x3F 7F80 to 0x3F 7FF5 Program to 0x0000 when using the
+Code Security Module
+0x3F 7FF6 to 0x3F 7FF7 Boot-to-Flash Entry Point (program
+branch instruction here)
+0x3F 7FF8 to 0x3F 7FFF Security Password (128-Bit) (Do not
+program to all zeros)
+与 F2803x 类似，在对片上 FLASH 区域进行擦除、编程及校验操作时，工程
+中需要调用 FLASH API 接口文件。
+一般情况下，用户采用的是芯片内部 BOOT-ROM 区域的 FLASH API，即工程
+含有 2803x_FlashAPI_BootROMSymbols.lib 编译，ADP32F035 在 BOOT-ROM 相同
+的地址集成了对其片上 FLASH 进行操作的 FLASH API，用户不需要替换。
+
+=== PDF页 3 ===
+如 果 采 用 的 非 BOOT-ROM 区 域 的 FLASH API ， 即 工 程 中 含 有
+Flash2803x_API_V100.lib 编译，在移植工程时需要将此文件替换。
+如果用户采用的 F28031、F28032、F28033 等型号，这些型号 FLASH 一个扇
+区空间大小为 4K*16bit，而工程移植到 ADP32F035 上，需要按照 ADP32F035 扇
+区重新调整 CMD 文件及对 FLASH 操作的扇区地址范围。
+Uint16 Flash_Erase(Uint16 SectorMask, FLASH_ST *FEraseStat);
+3. 芯片供电及上、下电时序
+与 F28035 类似，ADP32F035 同样支持板级 3.3V 单电源供电方式。设计上为
+了做到供电方式兼容，ADP32F035 增加一级 1.8V 转 1.5V 的线性 LDO，该 LDO 系
+统内部默认配置输出电压，用户不需要对 LDO 进行程序配置。
+器件的上、下电时序由芯片内部匹配，与原 F2803x 产品设计保持兼容，用
+户不需要做其它调整。
+4. 晶振及运行主频
+ADP32F035 内部集成片上 OSC，分别为 OSC1、OSC2，逻辑上与 F2803x 一致；
+由于 OSC 电路的温度特性差异性，其补偿特性参数与 F2803x 存在差异性，
+ADP32F035 芯片暂不支持温度补偿，用户在程序中如果存在调用片上 OSC 温度补
+偿将导致芯片运行错误。
+片上 OSC 的常温 25 摄氏度下校准后精度控制在 1‰以内，运行环境温度超
+过 85℃片上 OSC 精度可能会衰减超过 2%或者 3%。
+5. ADC 模数转换器
+ADP32F035 丝印 CD2038 版次后的版本可支持片外 ADC 基准，配置方式与
+F2803x 一致。
+交叠模式下，某些窗口值可能会导致采样值不准。建议禁止采样和转换交叠
+模式。即设置 AdcRegs.ADCCTL2.bit.ADCNONOVERLAP = 1;
+交叠模式会导致采样时间增加，若不能满足时间要求而必须使用交叠模式，
+采样窗口 AdcRegs.ADCSOCXCTL.bit.ACQPS 在不同时钟频率段，交叠模式与非交
+叠模式的选用值见下表。
+6. HRPWM 微边沿定位步长参数
+ADP32F03X 的 HRPWM 微边沿定位步长参数 MEP 与 TMS32F28035 有些差别。
+TMS32F28035 MEP 的典型值和最大值分别为 150，310。ADP32F03X MEP 值见下表。
+
+=== PDF页 4 ===
+此外，ADP32F03X 不支持 MEP SFO 函数。
+7. I/O
+ADP32F035 集成 I/O 端口，输出控制电路上管 P 与下管 N 采用闭合时间错开
+设计，因此电平上升及下降时间与 F2803x 存在差异性，对于一般 I/O 驱动应用
+用户不需要对现有设计调整。
+8. 器件 ID 编码
+名称 地址范围 大小（x16） 赋值关系 受 EALLOW 保护
+部件 ID 寄存器 0x3D 7C04 1
+ADP32F035QP80S 0x00BF
+ADP32F035QP64S 0x00BF
+ADP32F035QN56S 0x00BF
+否
+类别 ID 寄存器 0x0882 1 ADP32F035 0x00BF 否
+9. 器件开发
+ADP32F035 开发支持 CCS 仿真代码工程环境，工程创建、调试可参照 F28035
+配置方式。
+1) 在线升级烧录频率只能 60MHz，不建议其他频率。
+2) 从 F28030,F28033,F28034 等器件移植到 ADP32F035 或 ADP32F034 时，不
+能用 CLASSID 做芯片型号判断，以确定 Flash、RAM 等资源有无。因为
+CLASSID 仅为 0x00BF；REVID 仅为 0x0001。
+3) 仿真，程序烧录，需选择 F28035，不建议选择其他器件。 三、 总结
+以上是针对目前大部分用户在从 F2803x 向 ADP32F035 移植过程中可能涉及
+的差异、产生调试问题的总结。用户在进入产品测试前，应在软件及硬件上重点
+关注芯片晶振型号输入、ADC 基准、Flash 烧写程序及在线程序部分代码与 FLASH
+API 关联性、FLASH 存储地址分配差异性，以便快速实现工程移植。

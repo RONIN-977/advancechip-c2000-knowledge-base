@@ -1,0 +1,9 @@
+PASS C firmware real InitFlashAPI accepts CSM success=1; locked CSM refuses erase
+PASS C firmware MD5 standard vectors and multi-block input
+PASS C firmware version 201, original CRC frames and BOOT hold
+PASS C firmware short final packet, duplicate begin/data/finish
+PASS C firmware 448 KB minus 4 boundary, fixed 128-byte stride, MD5 commit
+PASS C firmware erase/program/verify errors and 32-bit bounds
+PASS C firmware order/length checks, missing data, MD5 failure and restart
+PASS C firmware old valid marker invalidated before a failed erase
+All 8 firmware C tests passed.

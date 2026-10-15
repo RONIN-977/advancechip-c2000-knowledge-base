@@ -1,0 +1,1040 @@
+来源: AVP32F379D/2026进芯科技FAE培训(1).pptx
+来源编号: S180
+
+=== 幻灯片 1 ===
+2026
+年
+05
+月
+2026
+进芯科技
+FAE
+培训
+与时俱进
+  
+持续创芯
+
+=== 幻灯片 2 ===
+产品规划图
+/ ADVCHIP
+DSP
+SOC
+AVP32F08
+150MHz,256K*16bit Flash
+34K*16bit SARAM
+AVP32F335 
+150MHz,256K*16bit Flash
+34K*16bit SARAM
+AEC-Q100
+AEC-Q100
+AVP32F035
+90MHz,128K*16bit Flash
+50K*16bit SARAM
+AVP32F069
+90MHz,128K*16bit Flash
+50K*16bit SARAM
+AVP32F0049
+ 
+100MHz,128K*16bit Flash
+50K*16bit SARAM
+AEC-Q100
+AVP32F0025
+120MHz,64K*16bit Flash
+12K*16bit SARAM
+AVP32F0039
+120MHz,192K*16bit Flash
+34.5K*16bit SARAM
+AEC-Q100
+AEC-Q100
+AVP32F00157
+120MHz,128K*16bit Flash
+18K*16bit SARAM
+AVP32F379D
+200MHz,512K*16bit Flash
+102K*16bit SARAM
+AVP32F00137
+120MHz,128K*16bit Flash
+18K*16bit SARAM
+AEC-Q100
+AEC-Q100
+AVP32F28P65
+200MHz; lockstep 
+Flash:1.28MB RAM:248KB
+AEC-Q100
+ADP32F1X
+ 
+150MHz,128K*16bit Flash
+18K*16bit SARAM
+ADP32F08
+100MHz,64K*16bit Flash
+18K*16bit SARAM
+ADP32F03X
+ 
+60MHz,64K*16bit Flash
+10K*16bit SARAM
+ADP32F03XB
+100MHz,64K*16bit Flash
+18K*16bit SARAM
+ADP32F036
+ 
+100MHz,64K*16bit Flash
+18K*16bit SARAM
+AEC-Q100
+AEC-Q100
+ADP16F03
+ 
+150MHz,32K*16bit Flash
+2K*16bit SARAM
+AEC-Q100
+ADM16F03A
+LDO40V/12V,LD012V/5V
+3
+个半桥驱动
+/LIN
+收发器
+ADM16F03A1Q
+LDO40V/12V,LD012V/5V
+3
+个半桥驱动
+/LIN
+收发器
+ADM16F03A2Q
+LDO40V/12V,LD012V/5V
+3
+个半桥驱动
+/LIN
+收发器
+ADM32F036Q
+LDO60V/12V,LD012V/5V
+3
+个半桥驱动
+LIN_PHY/CAN_FD
+ADM32F036A2Q
+LDO40V/12V,LD012V/5V
+3
+个半桥驱动
+LIN_PHY/CAN_FD
+ADM32F036A3Q
+LDO60V/12V,LD012V/5V
+3
+个半桥驱动
+LIN_PHY/CAN_FD
+ADM735DQ
+2*AVP32F335
+2*AVP32F035
+ADM735EQ
+2*AVP32F335
+3*AVP32F035
+AEC-Q100
+AEC-Q100
+AEC-Q100
+AEC-Q100
+AEC-Q100
+AEC-Q100
+AEC-Q100
+32
+位浮点
+DSP
+32
+位定点
+DSP
+16
+位定点
+DSP
+单核
+SoC
+多核
+SoC
+AVP32F28P55
+150MHz; 
+lockstep
+Flash:1.0MB RAM:133KB
+AEC-Q100
+
+=== 幻灯片 3 ===
+型号
+AVP32F28P65X
+AVP32F28P55X
+AVP32F0049
+AVP32F0039
+AVP32F0025
+AVP32F00157
+AVP32F00137
+CPU(Mhz
+）
+200+200
+150
+100
+120
+100
+120
+120
+FPU32
+YES
+YES
+YES
+YES+FastDIV
+YES+FastDIV
+YES
+YES
+TMU32/DMA
+Type1/Type0
+Type1/Type0
+Type0/
+Type0
+Type1/
+Type0
+Type1/
+Type0
+Type1/-
+Type1/-
+CLA
+Type2
+Type2
+Type2
+Type2
+-
+-
+-
+CLB
+6-
+Type3
+2-Type3
+4-
+Type2
+4-Type3
+2-Type2
+-
+-
+RAM/Flash (8 bit)
+248Kb/1.28Mb
+133Kb/1Mb
+100.5Kb/256kb
+69Kb/384Kb
+24Kb/128Kb
+36Kb/256Kb
+36Kb/256Kb
+PWM/HRPWM
+36/36
+(Type5)
+24/12
+16/16
+(Type4)
+16/8
+14/8
+14/4
+14/2
+ECAP/HRCAP/EQEP
+7/2/6
+2/2/2
+7/2/2
+3/1/2
+3/1/2
+3/0/2
+2/0/1
+ADC MSPS/
+C
+hannels
+3.5MSPS/40
+3.9MSPS/39
+3.45MSPS/21
+4MSPS/23
+3.45MSPS/16
+4MSPS/21
+4MSPS/21
+PGA/CMPSS/DAC/EMIF
+0/11/2/1
+3/4/1/0
+7/7/2/0
+0/4/2/0
+0/4/0/0
+0/1/1/0
+0/1/1/0
+Spi
+/Sci/CAN/I2C/LIN/USB
+4/2+2/1/2/2/1
+2/3/2/2/1/1
+2/2/2/1/1/0
+2/2/1/2/2/0
+2/1/1/2/2/0
+1/3/1/2/
+1
+/0
+1/3/1/2/
+0
+/0
+FSI/CANFD/PMBUS/SDFM
+2/2/1/16
+1/2/1/0
+1/0/1/4
+1/1/1/8
+1/0/1/0
+0/
+1
+/
+1
+/0
+0/
+0
+/
+0
+/0
+HIC/LFU/AES/JTAG Lock
+0/1/1/1
+0/1/1/1
+0/1/0/0
+1/1/1/1
+1/0/0/0
+0/0/0/1
+0/0/0/1
+GPIO/AIO
+185/18
+65/17
+35/10
+51/23
+43/16
+52/10
+37/10
+供电
+3.3V
+3.3V
+3.3V
+3.3V
+3.3V
+3.3V
+3.3V
+封装
+BGA256/169
+LQFP176/100
+LQFP128/100/80/64/QFN56
+LQFP100/64/QFN56
+LQFP100/80/64/48
+LQFP80/64/48
+LQFP80/64/48/32
+LQFP64/48/32
+产品参数
+/ ADVCHIP
+
+=== 幻灯片 4 ===
+型号
+AVP32F379D/377D
+AVP32F379S/377S
+AVP32F374S
+AVP32F076/F075
+AVP32F335
+CPU(Mhz
+）
+200+200
+200
+200
+120
+150
+FPU32
+YES
+YES
+YES
+YES
+YES
+TMU32/DMA
+Type0/Type0
+Type0/Type0
+Type0/Type0
+Type0/
+Type0
+-/
+Type0
+CLA
+Type2-
+Type2
+Type2
+Type2
+Type2
+-
+CLB
+4-Type2/-
+4-Type2/-
+-
+4-
+Type2/-
+-
+RAM/Flash (8 bit)
+204Kb/1.0Mb
+164Kb/1.0Mb
+132Kb/512Kb
+100Kb/512kb
+68Kb/512kb
+PWM/HRPWM
+24/16(Type4)
+24/16(Type4)
+24/16(Type4)
+24/16
+(Type4)
+18/6
+12-ADC MSPS/
+C
+hannels
+3.5MSPS/24
+3.5MSPS/24
+3.5MSPS/24
+3.1MSPS/17
+12.5MSPS/16
+16-ADC MSPS/
+C
+hannels
+1.1MSPS/24
+1.1MSPS/24
+-/-
+-/-
+-/-
+ECAP/HRCAP/EQEP
+6/0/3
+6/0/3
+6/0/3
+6/0/3
+6/0/2
+PGA/CMPSS/DAC/EMIF
+0/8/3/1
+0/8/3/1
+0/8/3/1
+0/8/3/1
+0/0/0/0
+Spi
+/Sci/CAN/I2C/LIN/USB
+3/4/
+2
+/2/0/1
+3/4/
+2
+/2/0/1
+3/4/
+2
+/2/0/1
+3/4/
+2
+/2/0/1
+1/3/
+2
+/1/0/0
+MCBSP/CANFD/PMBUS/SDFM
+2/
+0
+/0/6
+2/
+0
+/0/8
+2/0/0/8
+2/0/0/8
+2/0/0/0
+uPP/LFU/AES/JTAG Lock
+1/0/0/1
+1/0/0/1
+1/0/0/1
+0/0/0/1
+0/0/0/0
+GPIO/AIO
+169/0
+169/0
+169/0
+97/0
+88/0
+供电
+3.3V/1.1V
+3.3V/1.1V
+3.3V/1.1V
+3.3V
+3.3V/1.65V
+封装
+BGA337/LQFP176/100
+BGA337/LQFP176/100
+BGA337/LQFP176/100
+LQFP176/100
+LQFP176/
+BGA179
+产品参数
+/ ADVCHIP
+
+=== 幻灯片 5 ===
+AVP32F379x - 
+资源差异对比
+项点
+F28379D
+AVP32F379D
+芯片主频
+（MAX）
+200
+Mhz @ CORE1.2V
+200
+Mhz @ CORE1.1V
+芯片功耗
+（
+VREG)
+840
+mW @ 
+20
+0
+Mhz
+？
+ @ 
+20
+0
+Mhz
+片内L
+DO
+无
+3.3/1.1 VREG
+FLASH
+随机等待配置
+N
+N+3
+
+=== 幻灯片 6 ===
+描述：
+GS12RAM-GS15RAM
+为
+379
+、
+379
+、
+377
+、
+375
+独有
+F076
+和
+F075
+的
+RAM
+没有
+GS8RAM~GS15RAM
+AVP32F37x - RAM
+分配
+F28076
+和
+F28075
+F28379
+
+=== 幻灯片 7 ===
+AVP32F37x - 
+单核和双核差异
+F2837xD
+F2837xS
+替换
+F37xD
+的场景主要考虑
+FLASH
+的执行效率。
+替换
+F37xS
+的场景考虑
+FLASH
+的空间。
+替换
+F075
+的场景主要是拿出单核来匹配。
+      
+
+=== 幻灯片 8 ===
+AVP32F37x - flash
+配置
+使能预取缓冲和数据缓冲提升代码效率
+单核系列的FLASH执行速度比双核快，我司在
+FRDCNTL[RWAIT]上面默认+3
+标准读取模式和复位后的默认读取模式，每次对闪存的读取访问将在
+RWAIT+1
+个时钟周期后返回
+Prefetch mode:
+  
+提升线性代码的执行效率
+  
+Data cache:
+ 
+提升数据空间读取性能
+当
+RWAIT
+为零时，预取和数据缓存均被绕过
+      
+FLASH
+预取
+模式
+
+=== 幻灯片 9 ===
+AVP32F37x - 
+内核电压差异
+内核电压差异，硬件需要更改
+VDD
+的供电电压
+F075
+集成了内部
+LDO
+，支持单电源供电，所以此差异可以忽略
+      
+
+=== 幻灯片 10 ===
+AVP32F37x - 
+芯片区分
+通过读取
+Unique ID 0x700E8
+地址的数据区分我司芯片和竞品芯片
+        TI
+为固定
+0xFFFFFFFF          ADVCHIP
+为非
+FFFFFFFF
+     
+
+=== 幻灯片 11 ===
+F335 to F37X - 
+引导模式
+F2837xD/S/07x 
+器件通过对
+ BOOTCTRL 
+寄存器进行编程，能够使用替代方案或减少引导模式选择引脚，具有极大的灵活性，而
+ F2833x/23x 
+引导模式引脚则采用硬编码，提供预定的引导选项，丝毫不灵活。
+在
+ F2833x/23x 
+器件上，闪存入口点为
+ 0x33FFF6
+。在
+ F2837xD/S/07x 
+器件上，入口点为
+ 0x00080000
+。
+      
+
+=== 幻灯片 12 ===
+F335 to F37X - 
+上电时序
+在为
+ F2837xD/S/07x 
+器件供电之前，不能对任何数字引脚施加比
+ VDDIO 
+高
+ 0.3V 
+以上的电压，也不能对任何模拟引脚（包括
+ VREFHI
+）施加比
+ VDDA 
+高
+ 0.3V 
+以上的电压。
+3.3V 
+电源
+ VDDIO 
+和
+ VDDA 
+应一起上电，在正常工作期间彼此之间的差值应保持在
+ 0.3V 
+以内。
+VDD 
+时序要求由器件负责处理。
+F2833x/23x 
+器件没有特定电源时序要求，但要求避免干扰
+ GPIO 
+引脚。
+      
+
+=== 幻灯片 13 ===
+F335 to F37X - 
+原理图未使用的引脚
+ F2837xD/S/07x 
+器件不支持
+VREG
+，进芯的芯片支持
+VREG      
+F2837X
+
+=== 幻灯片 14 ===
+F335 to F37X - CAN
+模块差异
+以下是
+F2837xD/S/07x DCAN 
+具备但
+ F2833x/23x eCAN 
+不具备的特性：
+         --  
+所有
+ RAM 
+模块的奇偶校验机制
+ 
+        --  
+可以禁用自动重发（仲裁失败时）
+         --  
+静默模式（节点被动侦听）
+         --  
+邮箱
+ RAM 
+可以组合形成
+ FIFO 
+缓冲器
+         --  
+可以在自检模式下在
+ CANTX 
+引脚上监测数据
+以下
+是 F2833x/23x eCAN 
+具备但 F2837xD/S/07x DCAN 不具备的特性：
+         --  
+消息时间戳
+ 
+        --  
+传输优先级配置（
+TPL
+）
+         --  
+数据字节顺序配置（
+DBO
+）
+
+=== 幻灯片 15 ===
+eCAN
+、
+D
+CAN
+和
+M
+CAN
+差异
+均符合
+CAN
+协议标准，但彼此之间
+软件不兼容
+采用完全不同的架构，寄存器和位也不相同，在迁移的过程中需要不同的编程方法
+      
+功能
+ECAN
+DCAN
+MCAN
+芯片型号
+F280X/F281X/F03X/F335/F06X
+F004X/F003X/F37X/F0013X/F0015X
+F38X/F0039/F00157
+比特率
+整个帧使用固定比特率
+整个帧使用固定比特率
+可使用两种比特率：用于标称段的较慢比特率和用于数据段的较快比特率
+发送速度
+上限为
+1Mbps
+上限为
+1Mbps
+最高
+1Mbps(
+标称段
+)
+、最高
+5Mbps(
+数据段
+)
+每帧发送的字节数（有效负载能力
+可以发送
+0-8
+的任意数量的字节
+可以发送
+0-8
+的任意数量的字节
+除
+0-8
+字节外，还可以发送
+12/16/20/24/32/48/64
+数据字节
+数据存储元素的命名规则
+数据存储在消息对象中，邮箱
+数据存储在消息对象中，邮箱
+数据存储在与过滤器元素相关的缓冲器中
+数据存储元素的数量
+固定
+32
+固定
+32
+缓冲器的数量是灵活的（具体取决于元素的配置）
+CRC
+字段长度
+15
+位
+15
+位
+15
+、
+17
+或
+21
+位
+CRC
+时间戳支持
+有
+否
+有
+发送器延迟补偿（
+TDC
+）
+不需要
+不需要
+在数据段实现更快的比特率的需要
+
+=== 幻灯片 16 ===
+AVP32F003x - 
+资源差异对比
+项点
+F280039
+AVP32F0039
+芯片主频
+（MAX）
+120
+Mhz @ CORE1.2V
+120
+Mhz @ CORE1.1V
+芯片功耗
+（
+VREG)
+274
+mW @ 
+120
+Mhz
+236
+mW @ 
+120
+Mhz
+片内L
+DO
+3.3/1.2 VREG
+3.3/1.1 VREG
+开机自检差异
+MPOST
+支持
+MPOST
+模式
+1
+不可用
+GPIO
+端口负压差异
+大于
+-1.8V
+芯片复位
+大于
+-0.9V
+芯片复位
+ADC
+时钟频率
+120MHZ
+性能无下降
+120MHZ
+出现部分采样点偏差大
+
+=== 幻灯片 17 ===
+AVP32F003x - 
+开机自检差异项
+描述：客户启动
+ MPOST 
+可以通过配置
+ DCSM OTP 
+位置
+ Z1-OTP-BOOT-GPREG2 
+或
+ Z2-OTP-BOOT GPREG2 
+寄存器的相应值，
+MPOST
+模式
+1
+不可用。
+说明：规避此模式的配置，详情参考我司提供的《
+AVP32F003x 
+的
+ MPOST 
+应用说明》
+  
+
+=== 幻灯片 18 ===
+AVP32F003x - GPIO
+端口负压
+描述：当
+GPIO
+端口有高于
+-0.9V
+的负压注入的时候，我司芯片复位，竞品不会。
+说明：手册最大负压是
+-0.3V
+，超出手册范围的极限阈值差异。
+  
+
+=== 幻灯片 19 ===
+AVP32F003x - 
+引导模式
+描述：硬件
+GPIO32
+引脚未强制上拉，温度升高后芯片进入
+CAN
+引导模式。
+说明：
+ GPIO24
+和
+GPIO32
+芯片内部引脚都未加上拉。可参考《
+AVP32F0039
+零引脚
+BOOT
+配置应用笔记》
+
+=== 幻灯片 20 ===
+AVP32F003x - 
+复位源
+芯片级复位：
+XRS
+、
+POR
+、
+BOR
+、
+WDRS
+、
+SIMRESET.XRS
+、
+NMIWDRS
+，复位全部
+系统级复位：
+SYSRS
+、
+SIMRESET.CPU1RS
+、
+SCCRESET
+特殊复位（
+HWBISTRS
+和
+TRSTS
+）：使能器件的特定功能
+
+=== 幻灯片 21 ===
+AVP32F003x - FLASH
+闪存参数
+描述：
+FLASH
+的擦除和编程存在差异，我司比竞品偏慢。
+说明：
+ 
+关注客户程序编程超时的机制，建议采用最大的时间。
+手册闪存参数
+实测数据对比
+
+=== 幻灯片 22 ===
+AVP32F003x - 
+芯片区分
+通过读取
+0x700E8
+地址的数据区分我司芯片和竞品芯片
+        TI
+为
+0xFFFFFFFF          ADVCHIP
+为非全
+FF
+     
+
+=== 幻灯片 23 ===
+AVP32F004x - 
+资源差异对比
+项点
+TMS320F280049
+AVP32F0049
+芯片主频
+（MAX）
+100
+Mhz @ CORE1.2V
+100
+Mhz @ CORE1.1V
+芯片功耗
+（
+VREG)
+298
+mW @ 
+100
+Mhz
+249
+mW @ 
+100
+Mhz
+片内L
+DO
+3.3/1.2 VREG
+3.3/1.1 VREG
+TZ
+关断时间
+25ns
+35ns
+ADC
+时钟频率
+100MHZ
+性能无下降
+100MHZ
+出现部分采样点偏差大
+无源晶体起振时间
+AVP32F004X器件相较于F28004x无源晶振起振时间稍长，幅值偏低
+FLASH API
+操作
+支持
+bank0
+直接操作
+bank1
+不能直接操作，需要搬到
+RAM
+
+=== 幻灯片 24 ===
+描述：
+AVP32F004X器件相较于F28004x无源晶振起振时间稍长，幅值偏低
+。
+说明：
+如有异常请加大无源晶振切换的等待时间
+。
+  
+AVP32F004x - 
+无源晶体起振时间差异
+
+=== 幻灯片 25 ===
+描述：
+请勿在FLASH某一个BANK里运行FLASH擦除编程本BANK和另外一个BANK的代码
+。
+说明：
+如有此类使用请将FLASH API搬移到RAM中运行，搬移只需改动CMD文件
+。
+ 
+ GSACD2602
+批次后优化此问题
+AVP32F004x - FLASH
+编程
+
+=== 幻灯片 26 ===
+电邮
+/
+网址
+ 
+Email
+：
+sales@advancechip.com
+WEB
+：
+www.advancechip.com
+公司地址
+长沙市
+湘江新
+区东方红街道
+北斗产业园·黄金园A5栋  
+联系电话
+0731-88731027
+（长沙总部）
+025-66051670
+（南京销售中心）
+联系我们
+COMPANY PROFILE
+感谢观看
+
+=== 幻灯片 27 ===
+AVP32F004x - 
+芯片区分
+通过读取
+Unique ID 0x703CC
+地址的数据区分我司芯片和竞品芯片
+        TI
+每一颗不一样
+          ADVCHIP
+为
+固定
+0xC53C0E65
+     

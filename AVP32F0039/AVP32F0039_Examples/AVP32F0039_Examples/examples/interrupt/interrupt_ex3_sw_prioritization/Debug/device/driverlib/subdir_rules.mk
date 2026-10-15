@@ -1,0 +1,260 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+SHELL = cmd.exe
+
+# Each subdirectory must supply rules for building sources it contributes
+device/driverlib/adc.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/adc.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/aes.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/aes.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/asysctl.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/asysctl.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/bgcrc.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/bgcrc.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/can.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/can.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/cla.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/cla.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/clb.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/clb.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/cmpss.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/cmpss.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/cputimer.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/cputimer.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/dac.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/dac.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/dcc.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/dcc.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/dcsm.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/dcsm.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/dma.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/dma.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/ecap.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/ecap.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/epg.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/epg.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/epwm.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/epwm.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/eqep.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/eqep.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/erad.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/erad.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/flash.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/flash.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/fsi.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/fsi.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/gpio.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/gpio.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/hic.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/hic.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/hrcap.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/hrcap.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/hrpwm.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/hrpwm.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/i2c.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/i2c.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/interrupt.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/interrupt.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/lin.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/lin.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/mcan.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/mcan.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/memcfg.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/memcfg.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/pmbus.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/pmbus.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/sci.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/sci.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/sdfm.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/sdfm.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/spi.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/spi.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/sysctl.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/sysctl.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/version.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/version.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+device/driverlib/xbar.obj: C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/xbar.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/device" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/examples/interrupt/interrupt_ex3_sw_prioritization/include" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib" --include_path="C:/Users/Administrator/Desktop/AVP32F0039_Examples/driverlib/inc" --include_path="C:/TI/ccs12.0/ccs/tools/compiler/ti-cgt-c2000_22.6.0.LTS/include" -g --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=coffabi --preproc_with_compile --preproc_dependency="device/driverlib/$(basename $(<F)).d_raw" --obj_directory="device/driverlib" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+

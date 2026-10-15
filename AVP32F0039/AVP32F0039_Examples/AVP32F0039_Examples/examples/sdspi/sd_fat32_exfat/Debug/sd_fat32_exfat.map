@@ -1,0 +1,636 @@
+******************************************************************************
+             TMS320C2000 Linker PC v22.6.0                     
+******************************************************************************
+>> Linked Thu Apr 24 12:47:50 2025
+
+OUTPUT FILE NAME:   <sd_fat32_exfat.out>
+ENTRY POINT SYMBOL: "_c_int00"  address: 00009d5f
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+  BEGIN                 00000000   00000002  00000002  00000000  RWIX
+  BOOT_RSVD             00000002   00000126  00000000  00000126  RWIX
+  RAMM0                 00000128   000002d8  0000002c  000002ac  RWIX
+  RAMM1                 00000400   000003f8  00000200  000001f8  RWIX
+  RAMLS0                00008000   00000800  00000800  00000000  RWIX
+  RAMLS1                00008800   00000800  00000800  00000000  RWIX
+  RAMLS2                00009000   00000800  00000800  00000000  RWIX
+  RAMLS3                00009800   00000800  00000800  00000000  RWIX
+  RAMLS4                0000a000   00000800  00000280  00000580  RWIX
+  RAMLS5                0000a800   00000800  00000730  000000d0  RWIX
+  RAMLS6_7              0000b000   00001000  00000000  00001000  RWIX
+  RAMGS0                0000c000   00001000  00000000  00001000  RWIX
+  RAMGS1                0000d000   00001000  00000000  00001000  RWIX
+  RAMGS2                0000e000   00001000  00000000  00001000  RWIX
+  RAMGS3                0000f000   00000ff8  00000000  00000ff8  RWIX
+  FLASH_BANK0_SEC0      00080002   00000ffe  00000000  00000ffe  RWIX
+  FLASH_BANK0_SEC1      00081000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC2      00082000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC3      00083000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC4      00084000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC5      00085000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC6      00086000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC7      00087000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC8      00088000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC9      00089000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC10     0008a000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC11     0008b000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC12     0008c000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC13     0008d000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC14     0008e000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC15     0008f000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC0      00090000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC1      00091000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC2      00092000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC3      00093000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC4      00094000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC5      00095000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC6      00096000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC7      00097000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC8      00098000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC9      00099000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC10     0009a000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC11     0009b000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC12     0009c000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC13     0009d000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC14     0009e000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC15     0009f000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC0      000a0000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC1      000a1000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC2      000a2000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC3      000a3000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC4      000a4000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC5      000a5000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC6      000a6000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC7      000a7000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC8      000a8000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC9      000a9000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC10     000aa000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC11     000ab000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC12     000ac000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC13     000ad000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC14     000ae000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC15     000af000   00000ff0  00000000  00000ff0  RWIX
+  SECURE_ROM            003f2000   00006000  00000000  00006000  RWIX
+  BOOTROM               003f8000   00007fc0  00000000  00007fc0  RWIX
+  RESET                 003fffc0   00000002  00000000  00000002  RWIX
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+codestart 
+*          0    00000000    00000002     
+                  00000000    00000002     f28003x_codestartbranch.obj (codestart)
+
+.TI.ramfunc 
+*          0    00000128    00000004     
+                  00000128    00000004     sysctl.obj (.TI.ramfunc)
+
+.cinit     0    0000012c    00000028     
+                  0000012c    00000015     (.cinit..data.load) [load image, compression = lzss]
+                  00000141    00000001     --HOLE-- [fill = 0]
+                  00000142    00000006     (__TI_handler_table)
+                  00000148    00000004     (.cinit..bss.load) [load image, compression = zero_init]
+                  0000014c    00000008     (__TI_cinit_table)
+
+.reset     0    003fffc0    00000000     DSECT
+
+.stack     0    00000400    00000200     UNINITIALIZED
+                  00000400    00000200     --HOLE--
+
+.bss       0    0000a800    000006f1     UNINITIALIZED
+                  0000a800    000006e0     sd_fat32_exfat.obj (.bss)
+                  0000aee0    00000008     ff.obj (.bss:FatFs)
+                  0000aee8    00000008     SDFatFS.obj (.bss:sdFatFSHandles)
+                  0000aef0    00000001     ff.obj (.bss)
+
+.init_array 
+*          0    00000128    00000000     UNINITIALIZED
+
+.const     0    0000a058    00000228     
+                  0000a058    000001aa     SDFatFS.obj (.const:.string)
+                  0000a202    0000004e     ff.obj (.const:.string)
+                  0000a250    0000000d     sd_fat32_exfat.obj (.const:.string:outputfile)
+                  0000a25d    0000000a     sdspi.obj (.const:$P$T0$1)
+                  0000a267    0000000a     ff.obj (.const:.string:DbcTbl)
+                  0000a271    00000009     sd_fat32_exfat.obj (.const:.string:textarray)
+                  0000a27a    00000002     sdspi.obj (.const:$P$T1$2)
+                  0000a27c    00000002     sdspi.obj (.const:$P$T2$3)
+                  0000a27e    00000002     sd_fat32_exfat.obj (.const:.string)
+
+.data      0    0000aef2    0000003f     UNINITIALIZED
+                  0000aef2    00000028     diskio.obj (.data:drive_fxn_table)
+                  0000af1a    0000000a     sd_fat32_exfat.obj (.data)
+                  0000af24    00000006     rts2800_fpu32_eabi.lib : exit.c.obj (.data)
+                  0000af2a    00000002     sd_fat32_exfat.obj (.data:SDFatFS_config)
+                  0000af2c    00000002     rts2800_fpu32_eabi.lib : _lock.c.obj (.data:_lock)
+                  0000af2e    00000002                            : _lock.c.obj (.data:_unlock)
+                  0000af30    00000001     SDFatFS.obj (.data)
+
+.text.1    0    00008000    00000800     
+                  00008000    00000226     ff.obj (.text:find_volume)
+                  00008226    00000176     ff.obj (.text:f_write)
+                  0000839c    00000146     ff.obj (.text:f_open)
+                  000084e2    00000126     sdspi.obj (.text:SDSPI_initialize)
+                  00008608    000000fc     sysctl.obj (.text:SysCtl_setClock)
+                  00008704    000000f2     sysctl.obj (.text:SysCtl_isPLLValid)
+                  000087f6    0000000a     interrupt.obj (.text:Interrupt_illegalOperationHandler)
+
+.text.2    0    00008800    00000800     
+                  00008800    000000d0     ff.obj (.text:create_chain)
+                  000088d0    000000ce     device.obj (.text:Device_enableAllPeripherals)
+                  0000899e    000000bd     ff.obj (.text:put_fat)
+                  00008a5b    000000af     sdspi.obj (.text:SPI_pollingFIFOTransactionWithNullSupport)
+                  00008b0a    000000a1     ff.obj (.text:dir_next)
+                  00008bab    000000a0     ff.obj (.text:f_getfree)
+                  00008c4b    00000095     ff.obj (.text:get_fat)
+                  00008ce0    00000094     SDFatFS.obj (.text:SDFatFS_open)
+                  00008d74    00000093     ff.obj (.text:create_name)
+                  00008e07    00000088     rts2800_fpu32_eabi.lib : fs_div28.asm.obj (.text)
+                  00008e8f    00000086     sdspi.obj (.text:SDSPI_write)
+                  00008f15    00000086     ff.obj (.text:dir_sdi)
+                  00008f9b    00000061     sdspi.obj (.text:sendCmd)
+                  00008ffc    00000004     device.obj (.text:SysCtl_deviceCal)
+
+.text.3    0    00009000    00000800     
+                  00009000    00000082     sd_fat32_exfat.obj (.text:main)
+                  00009082    00000071     sdspi.obj (.text:SDSPI_read)
+                  000090f3    0000006c     ff.obj (.text:f_sync)
+                  0000915f    0000006b     ff.obj (.text:sync_fs)
+                  000091ca    00000059     ff.obj (.text:follow_path)
+                  00009223    00000058     SDFatFS.obj (.text:SDFatFS_diskIOctrl)
+                  0000927b    00000058     ff.obj (.text:remove_chain)
+                  000092d3    00000056     sdspi.obj (.text:transmitDataBlock)
+                  00009329    0000004f     ff.obj (.text:check_fs)
+                  00009378    0000004d     sdspi.obj (.text:SDSPI_getNumSectors)
+                  000093c5    0000004a     sdspi.obj (.text:SDSPI_open)
+                  0000940f    00000049     gpio.obj (.text:GPIO_setAnalogMode)
+                  00009458    00000048     gpio.obj (.text:GPIO_setPadConfig)
+                  000094a0    00000046     sysctl.obj (.text:SysCtl_selectXTAL)
+                  000094e6    00000046     ff.obj (.text:dir_find)
+                  0000952c    00000045     sysctl.obj (.text:SysCtl_pollX1Counter)
+                  00009571    00000045     sdspi.obj (.text:recvDataBlock)
+                  000095b6    00000042     ff.obj (.text:sync_window)
+                  000095f8    0000003f     ff.obj (.text:dir_clear)
+                  00009637    0000003d     interrupt.obj (.text:Interrupt_initModule)
+                  00009674    0000003b     SDFatFS.obj (.text:SDFatFS_close)
+                  000096af    0000003a     ff.obj (.text:dir_alloc)
+                  000096e9    00000039     ff.obj (.text:f_mount)
+                  00009722    00000037     gpio.obj (.text:GPIO_setPinConfig)
+                  00009759    00000035     ff.obj (.text:get_ldnumber)
+                  0000978e    00000032     sysctl.obj (.text:SysCtl_selectOscSource)
+                  000097c0    00000030     diskio.obj (.text:disk_register)
+                  000097f0    00000010     device.obj (.text:Device_initGPIO)
+
+.text.4    0    00009800    00000800     
+                  00009800    0000002f     sysctl.obj (.text:DCC_setCounterSeeds)
+                  0000982f    0000002e     rts2800_fpu32_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss)
+                  0000985d    0000002d     SDFatFS.obj (.text:SDFatFS_init)
+                  0000988a    0000002c     gpio.obj (.text:GPIO_setControllerCore)
+                  000098b6    0000002c     gpio.obj (.text:GPIO_setQualificationMode)
+                  000098e2    0000002c     SDFatFS.obj (.text:SDFatFS_diskRead)
+                  0000990e    0000002c     ff.obj (.text:dir_register)
+                  0000993a    0000002b     rts2800_fpu32_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit)
+                  00009965    0000002b     ff.obj (.text:move_window)
+                  00009990    0000002b     board.obj (.text:mySDCardSPI_init)
+                  000099bb    0000002a     diskio.obj (.text:disk_unregister)
+                  000099e5    0000002a     ff.obj (.text:st_dword)
+                  00009a0f    00000029     SDFatFS.obj (.text:SDFatFS_diskWrite)
+                  00009a38    00000029     spi.obj (.text:SPI_setConfig)
+                  00009a61    00000029     ff.obj (.text:dbc_2nd)
+                  00009a8a    00000029     rts2800_fpu32_eabi.lib : exit.c.obj (.text)
+                  00009ab3    00000029     sdspi.obj (.text:waitUntilReady)
+                  00009adc    00000027     gpio.obj (.text:GPIO_setDirectionMode)
+                  00009b03    00000026     ff.obj (.text:validate)
+                  00009b29    00000025     sysctl.obj (.text:SysCtl_selectXTALSingleEnded)
+                  00009b4e    0000001e     interrupt.obj (.text:Interrupt_initVectorTable)
+                  00009b6c    0000001e     SDFatFS.obj (.text:SDFatFS_diskInitialize)
+                  00009b8a    0000001d     ff.obj (.text:dbc_1st)
+                  00009ba7    0000001d     diskio.obj (.text:disk_read)
+                  00009bc4    0000001d     diskio.obj (.text:disk_write)
+                  00009be1    0000001d     rts2800_fpu32_eabi.lib : memcpy.c.obj (.text)
+                  00009bfe    0000001c     board.obj (.text:GPIO_writePin)
+                  00009c1a    0000001c     sdspi.obj (.text:GPIO_writePin)
+                  00009c36    0000001b     diskio.obj (.text:disk_ioctl)
+                  00009c51    0000001a     sysctl.obj (.text:DCC_enableSingleShotMode)
+                  00009c6b    0000001a     device.obj (.text:Device_init)
+                  00009c85    0000001a     ff.obj (.text:clst2sect)
+                  00009c9f    0000001a     ff.obj (.text:ld_clust)
+                  00009cb9    00000019     sysctl.obj (.text:SysCtl_setPLLSysClk)
+                  00009cd2    00000019     board.obj (.text:mySDCardCS_init)
+                  00009ceb    00000018     ff.obj (.text:mem_cmp)
+                  00009d03    00000017     device.obj (.text:SysCtl_enablePeripheral)
+                  00009d1a    00000017     sysctl.obj (.text:SysCtl_enablePeripheral)
+                  00009d31    00000017     diskio.obj (.text:disk_initialize)
+                  00009d48    00000017     diskio.obj (.text:disk_status)
+                  00009d5f    00000017     rts2800_fpu32_eabi.lib : boot28.asm.obj (.text)
+                  00009d76    00000016     interrupt.obj (.text:Interrupt_defaultHandler)
+                  00009d8c    00000016     ff.obj (.text:f_close)
+                  00009da2    00000016     ff.obj (.text:mem_cpy)
+                  00009db8    00000016     ff.obj (.text:st_clust)
+                  00009dce    00000015     device.obj (.text:GPIO_unlockPortConfig)
+                  00009de3    00000014     sysctl.obj (.text:DCC_setCounter0ClkSource)
+                  00009df7    00000014     sysctl.obj (.text:DCC_setCounter1ClkSource)
+                  00009e0b    00000013     ff.obj (.text:st_word)
+                  00009e1e    00000011     sdspi.obj (.text:SPI_setcharLength)
+                  00009e2f    00000011     sdspi.obj (.text:spiTransfer)
+                  00009e40    00000010     sdspi.obj (.text:SDSPI_close)
+                  00009e50    00000010     board.obj (.text:SPI_setEmulationMode)
+                  00009e60    00000010     sdspi.obj (.text:SPI_setEmulationMode)
+                  00009e70    00000010     board.obj (.text:SPI_setPTESignalPolarity)
+                  00009e80    00000010     ff.obj (.text:chk_chr)
+                  00009e90    00000010     ff.obj (.text:mem_set)
+                  00009ea0    0000000f     sdspi.obj (.text:SPI_writeDataBlockingFIFO)
+                  00009eaf    0000000f     ff.obj (.text:ld_dword)
+                  00009ebe    0000000e     sdspi.obj (.text:SPI_disableFIFO)
+                  00009ecc    0000000e     board.obj (.text:SPI_enableFIFO)
+                  00009eda    0000000e     sdspi.obj (.text:SPI_enableFIFO)
+                  00009ee8    0000000d     interrupt.obj (.text:Interrupt_disableGlobal)
+                  00009ef5    0000000d     SDFatFS.obj (.text:SDFatFS_diskStatus)
+                  00009f02    0000000d     device.obj (.text:SysCtl_setLowSpeedClock)
+                  00009f0f    0000000c     sysctl.obj (.text:DCC_disableDoneSignal)
+                  00009f1b    0000000c     rts2800_fpu32_eabi.lib : args_main.c.obj (.text)
+                  00009f27    0000000b     sysctl.obj (.text:DCC_clearDoneFlag)
+                  00009f32    0000000b     sysctl.obj (.text:DCC_clearErrorFlag)
+                  00009f3d    0000000b     sysctl.obj (.text:DCC_disableErrorSignal)
+                  00009f48    0000000b     sysctl.obj (.text:DCC_disableModule)
+                  00009f53    0000000b     sysctl.obj (.text:DCC_enableModule)
+                  00009f5e    0000000b     sdspi.obj (.text:SPI_readDataBlockingFIFO)
+                  00009f69    0000000b     device.obj (.text:SysCtl_disableWatchdog)
+                  00009f74    0000000b     sysctl.obj (.text:SysCtl_isMCDClockFailureDetected)
+                  00009f7f    0000000a     interrupt.obj (.text:Interrupt_nmiHandler)
+                  00009f89    0000000a     sdspi.obj (.text:SPI_getRxFIFOStatus)
+                  00009f93    0000000a     sdspi.obj (.text:SPI_getTxFIFOStatus)
+                  00009f9d    0000000a     sdspi.obj (.text:SPI_setTxFifoTransmitDelay)
+                  00009fa7    0000000a     ff.obj (.text:ld_word)
+                  00009fb1    00000009     board.obj (.text:Board_init)
+                  00009fba    00000009     sdspi.obj (.text:assertCS)
+                  00009fc3    00000009     sdspi.obj (.text:deassertCS)
+                  00009fcc    00000009     rts2800_fpu32_eabi.lib : _lock.c.obj (.text)
+                  00009fd5    00000008     sdspi.obj (.text:SDSPI_init)
+                  00009fdd    00000008     rts2800_fpu32_eabi.lib : copy_decompress_none.c.obj (.text:decompress:none)
+                  00009fe5    00000008     f28003x_codestartbranch.obj (.text)
+                  00009fed    00000007     device.obj (.text:ASysCtl_lockVREG)
+                  00009ff4    00000007     sdspi.obj (.text:SDSPI_getSectorSize)
+                  00009ffb    00000005     SDFatFS.obj (.text:uart_log1)
+
+.text.5    0    0000a000    00000058     
+                  0000a000    00000007     board.obj (.text:SPI_disableLoopback)
+                  0000a007    00000007     sdspi.obj (.text:SPI_disableLoopback)
+                  0000a00e    00000007     board.obj (.text:SPI_disableModule)
+                  0000a015    00000007     sdspi.obj (.text:SPI_disableModule)
+                  0000a01c    00000007     board.obj (.text:SPI_enableModule)
+                  0000a023    00000007     sdspi.obj (.text:SPI_enableModule)
+                  0000a02a    00000007     sysctl.obj (.text:SysCtl_resetMCD)
+                  0000a031    00000007     rts2800_fpu32_eabi.lib : memset.c.obj (.text)
+                  0000a038    00000006     board.obj (.text:PinMux_init)
+                  0000a03e    00000006     rts2800_fpu32_eabi.lib : copy_zero_init.c.obj (.text:decompress:ZI)
+                  0000a044    00000004     sd_fat32_exfat.obj (.text:fatfs_getFatTime)
+                  0000a048    00000004     SDFatFS.obj (.text:uart_log0)
+                  0000a04c    00000003     board.obj (.text:GPIO_init)
+                  0000a04f    00000003     board.obj (.text:SPI_init)
+                  0000a052    00000003     diskio.obj (.text:get_fattime)
+                  0000a055    00000002     rts2800_fpu32_eabi.lib : pre_init.c.obj (.text)
+                  0000a057    00000001                            : startup.c.obj (.text)
+
+MODULE SUMMARY
+
+       Module                        code   ro data   rw data
+       ------                        ----   -------   -------
+    .\device\
+       device.obj                    327    0         0      
+       f28003x_codestartbranch.obj   10     0         0      
+    +--+-----------------------------+------+---------+---------+
+       Total:                        337    0         0      
+                                                             
+    .\device\driverlib\
+       sysctl.obj                    970    0         0      
+       gpio.obj                      327    0         0      
+       interrupt.obj                 146    0         0      
+       spi.obj                       41     0         0      
+    +--+-----------------------------+------+---------+---------+
+       Total:                        1484   0         0      
+                                                             
+    .\source\
+       ff.obj                        3691   88        9      
+       sd_fat32_exfat.obj            134    24        1772   
+       sdspi.obj                     1392   14        0      
+       SDFatFS.obj                   477    426       9      
+       diskio.obj                    224    0         40     
+       board.obj                     184    0         0      
+    +--+-----------------------------+------+---------+---------+
+       Total:                        6102   552       1830   
+                                                             
+    C:\TI\ccs12.0\ccs\tools\compiler\ti-cgt-c2000_22.6.0.LTS\lib\rts2800_fpu32_eabi.lib
+       fs_div28.asm.obj              136    0         0      
+       exit.c.obj                    41     0         6      
+       copy_decompress_lzss.c.obj    46     0         0      
+       autoinit.c.obj                43     0         0      
+       memcpy.c.obj                  29     0         0      
+       boot28.asm.obj                23     0         0      
+       _lock.c.obj                   9      0         4      
+       args_main.c.obj               12     0         0      
+       copy_decompress_none.c.obj    8      0         0      
+       memset.c.obj                  7      0         0      
+       copy_zero_init.c.obj          6      0         0      
+       pre_init.c.obj                2      0         0      
+       startup.c.obj                 1      0         0      
+    +--+-----------------------------+------+---------+---------+
+       Total:                        363    0         10     
+                                                             
+       Stack:                        0      0         512    
+       Linker Generated:             0      39        0      
+    +--+-----------------------------+------+---------+---------+
+       Grand Total:                  8286   591       2352   
+
+
+LINKER GENERATED COPY TABLES
+
+__TI_cinit_table @ 0000014c records: 2, size/record: 4, table size: 8
+	.data: load addr=0000012c, load size=00000015 bytes, run addr=0000aef2, run size=0000003f bytes, compression=lzss
+	.bss: load addr=00000148, load size=00000004 bytes, run addr=0000a800, run size=000006f1 bytes, compression=zero_init
+
+
+LINKER GENERATED HANDLER TABLE
+
+__TI_handler_table @ 00000142 records: 3, size/record: 2, table size: 6
+	index: 0, handler: __TI_zero_init
+	index: 1, handler: __TI_decompress_lzss
+	index: 2, handler: __TI_decompress_none
+
+
+GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
+
+address     data page           name
+--------    ----------------    ----
+00000400      10 (00000400)     __stack
+
+0000a250     289 (0000a240)     outputfile
+0000a271     289 (0000a240)     textarray
+
+0000a800     2a0 (0000a800)     filesize
+0000a801     2a0 (0000a800)     fresult
+0000a802     2a0 (0000a800)     freeClusterCount
+0000a804     2a0 (0000a800)     totalSectorCount
+0000a806     2a0 (0000a800)     freeSectorCount
+
+0000a840     2a1 (0000a840)     src
+
+0000aa80     2aa (0000aa80)     dst
+
+0000acc0     2b3 (0000acc0)     sdfatfsObject
+
+0000af1a     2bc (0000af00)     SDFatFS_config_count
+0000af1b     2bc (0000af00)     bytesWritten
+0000af1c     2bc (0000af00)     sdspiHandle
+0000af1e     2bc (0000af00)     sdspiObject
+0000af24     2bc (0000af00)     __TI_enable_exit_profile_output
+0000af26     2bc (0000af00)     __TI_cleanup_ptr
+0000af28     2bc (0000af00)     __TI_dtors_ptr
+0000af2a     2bc (0000af00)     SDFatFS_config
+0000af2c     2bc (0000af00)     _lock
+0000af2e     2bc (0000af00)     _unlock
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+page  address   name                                     
+----  -------   ----                                     
+0     00009fb1  Board_init                               
+0     00009a8a  C$$EXIT                                  
+0     000088d0  Device_enableAllPeripherals              
+0     00009c6b  Device_init                              
+0     000097f0  Device_initGPIO                          
+0     0000a04c  GPIO_init                                
+0     0000940f  GPIO_setAnalogMode                       
+0     0000988a  GPIO_setControllerCore                   
+0     00009adc  GPIO_setDirectionMode                    
+0     00009458  GPIO_setPadConfig                        
+0     00009722  GPIO_setPinConfig                        
+0     000098b6  GPIO_setQualificationMode                
+0     00009d76  Interrupt_defaultHandler                 
+0     000087f6  Interrupt_illegalOperationHandler        
+0     00009637  Interrupt_initModule                     
+0     00009b4e  Interrupt_initVectorTable                
+0     00009f7f  Interrupt_nmiHandler                     
+0     0000a038  PinMux_init                              
+0     00009674  SDFatFS_close                            
+0     0000af2a  SDFatFS_config                           
+0     0000af1a  SDFatFS_config_count                     
+0     00009223  SDFatFS_diskIOctrl                       
+0     00009b6c  SDFatFS_diskInitialize                   
+0     000098e2  SDFatFS_diskRead                         
+0     00009ef5  SDFatFS_diskStatus                       
+0     00009a0f  SDFatFS_diskWrite                        
+0     0000985d  SDFatFS_init                             
+0     00008ce0  SDFatFS_open                             
+0     00009e40  SDSPI_close                              
+0     00009378  SDSPI_getNumSectors                      
+0     00009ff4  SDSPI_getSectorSize                      
+0     00009fd5  SDSPI_init                               
+0     000084e2  SDSPI_initialize                         
+0     000093c5  SDSPI_open                               
+0     00009082  SDSPI_read                               
+0     00008e8f  SDSPI_write                              
+0     0000a04f  SPI_init                                 
+0     00008a5b  SPI_pollingFIFOTransactionWithNullSupport
+0     00009a38  SPI_setConfig                            
+0     00000128  SysCtl_delay                             
+0     00008704  SysCtl_isPLLValid                        
+0     0000978e  SysCtl_selectOscSource                   
+0     000094a0  SysCtl_selectXTAL                        
+0     00009b29  SysCtl_selectXTALSingleEnded             
+0     00008608  SysCtl_setClock                          
+0     0000014c  __TI_CINIT_Base                          
+0     00000154  __TI_CINIT_Limit                         
+0     00000154  __TI_CINIT_Warm                          
+0     00000142  __TI_Handler_Table_Base                  
+0     00000148  __TI_Handler_Table_Limit                 
+0     00000600  __TI_STACK_END                           
+abs   00000200  __TI_STACK_SIZE                          
+0     0000993a  __TI_auto_init_nobinit_nopinit           
+0     0000af26  __TI_cleanup_ptr                         
+0     0000982f  __TI_decompress_lzss                     
+0     00009fdd  __TI_decompress_none                     
+0     0000af28  __TI_dtors_ptr                           
+0     0000af24  __TI_enable_exit_profile_output          
+abs   ffffffff  __TI_pprof_out_hndl                      
+abs   ffffffff  __TI_prof_data_size                      
+abs   ffffffff  __TI_prof_data_start                     
+0     0000a03e  __TI_zero_init                           
+0     00008e07  __c28xabi_divf                           
+n/a   UNDEFED   __c_args__                               
+0     00000400  __stack                                  
+0     00009f1b  _args_main                               
+0     00009d5f  _c_int00                                 
+0     0000af2c  _lock                                    
+0     00009fd4  _nop                                     
+0     00009fd0  _register_lock                           
+0     00009fcc  _register_unlock                         
+0     0000a057  _system_post_cinit                       
+0     0000a055  _system_pre_init                         
+0     0000af2e  _unlock                                  
+0     00009a8a  abort                                    
+0     0000af1b  bytesWritten                             
+0     00000000  code_start                               
+0     00009d31  disk_initialize                          
+0     00009c36  disk_ioctl                               
+0     00009ba7  disk_read                                
+0     000097c0  disk_register                            
+0     00009d48  disk_status                              
+0     000099bb  disk_unregister                          
+0     00009bc4  disk_write                               
+0     0000aa80  dst                                      
+0     00009a8c  exit                                     
+0     00009d8c  f_close                                  
+0     00008bab  f_getfree                                
+0     000096e9  f_mount                                  
+0     0000839c  f_open                                   
+0     000090f3  f_sync                                   
+0     00008226  f_write                                  
+0     0000a044  fatfs_getFatTime                         
+0     0000a800  filesize                                 
+0     0000a802  freeClusterCount                         
+0     0000a806  freeSectorCount                          
+0     0000a801  fresult                                  
+0     0000a052  get_fattime                              
+0     00009000  main                                     
+0     00009be1  memcpy                                   
+0     0000a031  memset                                   
+0     00009cd2  mySDCardCS_init                          
+0     00009990  mySDCardSPI_init                         
+0     0000a250  outputfile                               
+0     0000acc0  sdfatfsObject                            
+0     0000af1c  sdspiHandle                              
+0     0000af1e  sdspiObject                              
+0     0000a840  src                                      
+0     0000a271  textarray                                
+0     0000a804  totalSectorCount                         
+0     0000a048  uart_log0                                
+0     00009ffb  uart_log1                                
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+page  address   name                                     
+----  -------   ----                                     
+0     00000000  code_start                               
+0     00000128  SysCtl_delay                             
+0     00000142  __TI_Handler_Table_Base                  
+0     00000148  __TI_Handler_Table_Limit                 
+0     0000014c  __TI_CINIT_Base                          
+0     00000154  __TI_CINIT_Limit                         
+0     00000154  __TI_CINIT_Warm                          
+0     00000400  __stack                                  
+0     00000600  __TI_STACK_END                           
+0     00008226  f_write                                  
+0     0000839c  f_open                                   
+0     000084e2  SDSPI_initialize                         
+0     00008608  SysCtl_setClock                          
+0     00008704  SysCtl_isPLLValid                        
+0     000087f6  Interrupt_illegalOperationHandler        
+0     000088d0  Device_enableAllPeripherals              
+0     00008a5b  SPI_pollingFIFOTransactionWithNullSupport
+0     00008bab  f_getfree                                
+0     00008ce0  SDFatFS_open                             
+0     00008e07  __c28xabi_divf                           
+0     00008e8f  SDSPI_write                              
+0     00009000  main                                     
+0     00009082  SDSPI_read                               
+0     000090f3  f_sync                                   
+0     00009223  SDFatFS_diskIOctrl                       
+0     00009378  SDSPI_getNumSectors                      
+0     000093c5  SDSPI_open                               
+0     0000940f  GPIO_setAnalogMode                       
+0     00009458  GPIO_setPadConfig                        
+0     000094a0  SysCtl_selectXTAL                        
+0     00009637  Interrupt_initModule                     
+0     00009674  SDFatFS_close                            
+0     000096e9  f_mount                                  
+0     00009722  GPIO_setPinConfig                        
+0     0000978e  SysCtl_selectOscSource                   
+0     000097c0  disk_register                            
+0     000097f0  Device_initGPIO                          
+0     0000982f  __TI_decompress_lzss                     
+0     0000985d  SDFatFS_init                             
+0     0000988a  GPIO_setControllerCore                   
+0     000098b6  GPIO_setQualificationMode                
+0     000098e2  SDFatFS_diskRead                         
+0     0000993a  __TI_auto_init_nobinit_nopinit           
+0     00009990  mySDCardSPI_init                         
+0     000099bb  disk_unregister                          
+0     00009a0f  SDFatFS_diskWrite                        
+0     00009a38  SPI_setConfig                            
+0     00009a8a  C$$EXIT                                  
+0     00009a8a  abort                                    
+0     00009a8c  exit                                     
+0     00009adc  GPIO_setDirectionMode                    
+0     00009b29  SysCtl_selectXTALSingleEnded             
+0     00009b4e  Interrupt_initVectorTable                
+0     00009b6c  SDFatFS_diskInitialize                   
+0     00009ba7  disk_read                                
+0     00009bc4  disk_write                               
+0     00009be1  memcpy                                   
+0     00009c36  disk_ioctl                               
+0     00009c6b  Device_init                              
+0     00009cd2  mySDCardCS_init                          
+0     00009d31  disk_initialize                          
+0     00009d48  disk_status                              
+0     00009d5f  _c_int00                                 
+0     00009d76  Interrupt_defaultHandler                 
+0     00009d8c  f_close                                  
+0     00009e40  SDSPI_close                              
+0     00009ef5  SDFatFS_diskStatus                       
+0     00009f1b  _args_main                               
+0     00009f7f  Interrupt_nmiHandler                     
+0     00009fb1  Board_init                               
+0     00009fcc  _register_unlock                         
+0     00009fd0  _register_lock                           
+0     00009fd4  _nop                                     
+0     00009fd5  SDSPI_init                               
+0     00009fdd  __TI_decompress_none                     
+0     00009ff4  SDSPI_getSectorSize                      
+0     00009ffb  uart_log1                                
+0     0000a031  memset                                   
+0     0000a038  PinMux_init                              
+0     0000a03e  __TI_zero_init                           
+0     0000a044  fatfs_getFatTime                         
+0     0000a048  uart_log0                                
+0     0000a04c  GPIO_init                                
+0     0000a04f  SPI_init                                 
+0     0000a052  get_fattime                              
+0     0000a055  _system_pre_init                         
+0     0000a057  _system_post_cinit                       
+0     0000a250  outputfile                               
+0     0000a271  textarray                                
+0     0000a800  filesize                                 
+0     0000a801  fresult                                  
+0     0000a802  freeClusterCount                         
+0     0000a804  totalSectorCount                         
+0     0000a806  freeSectorCount                          
+0     0000a840  src                                      
+0     0000aa80  dst                                      
+0     0000acc0  sdfatfsObject                            
+0     0000af1a  SDFatFS_config_count                     
+0     0000af1b  bytesWritten                             
+0     0000af1c  sdspiHandle                              
+0     0000af1e  sdspiObject                              
+0     0000af24  __TI_enable_exit_profile_output          
+0     0000af26  __TI_cleanup_ptr                         
+0     0000af28  __TI_dtors_ptr                           
+0     0000af2a  SDFatFS_config                           
+0     0000af2c  _lock                                    
+0     0000af2e  _unlock                                  
+abs   00000200  __TI_STACK_SIZE                          
+abs   ffffffff  __TI_pprof_out_hndl                      
+abs   ffffffff  __TI_prof_data_size                      
+abs   ffffffff  __TI_prof_data_start                     
+n/a   UNDEFED   __c_args__                               
+
+[112 symbols]

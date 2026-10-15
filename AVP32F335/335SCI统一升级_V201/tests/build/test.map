@@ -1,0 +1,275 @@
+******************************************************************************
+            TI ARM Clang Linker PC v3.2.2                      
+******************************************************************************
+>> Linked Tue Sep 29 15:24:10 2026
+
+OUTPUT FILE NAME:   <build/test.out>
+ENTRY POINT SYMBOL: "UpgradeHandleFrame"  address: 00010001
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+  CODE                  00010000   00020000  00000c7c  0001f384  RWIX
+  DATA                  20000000   00400000  0007038e  0038fc72  RWIX
+
+
+SEGMENT ALLOCATION MAP
+
+run origin  load origin   length   init length attrs members
+----------  ----------- ---------- ----------- ----- -------
+00010000    00010000    00000c7c   00000c7c    r-x
+  00010000    00010000    00000b5c   00000b5c    r-x .text
+  00010b5c    00010b5c    00000120   00000120    r-- .rodata
+20000000    20000000    0007038c   00000000    rw-
+  20000000    20000000    0007038c   00000000    rw- .bss
+2007038c    2007038c    00000002   00000002    rw-
+  2007038c    2007038c    00000002   00000002    rw- .data
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+.text      0    00010000    00000b5c     
+                  00010000    000002d2     SciUpgrade-637ac0.o (.text.UpgradeHandleFrame)
+                  000102d2    00000002     FlashInit-241f23.o (.text.MemCopy)
+                  000102d4    00000142     UpgradeMd5-094564.o (.text.UpgradeMd5Byte)
+                  00010416    00000002     SciUpgrade-637ac0.o (.text.UpgradeWatchdog)
+                  00010418    000000fe     SciUpgrade-637ac0.o (.text.writePacket)
+                  00010516    00000002     --HOLE-- [fill = 0]
+                  00010518    000000ec     SciUpgrade-637ac0.o (.text.finishUpdate)
+                  00010604    000000ea     SciUpgrade-637ac0.o (.text.reply)
+                  000106ee    000000e2     SciUpgrade-637ac0.o (.text.beginUpdate)
+                  000107d0    00000082     FlashStub-1d27bc.o (.text.Flash_Program)
+                  00010852    00000002     --HOLE-- [fill = 0]
+                  00010854    0000007e     FlashStub-1d27bc.o (.text.Flash_Erase)
+                  000108d2    00000002     --HOLE-- [fill = 0]
+                  000108d4    0000006c     UpgradeMd5-094564.o (.text.UpgradeMd5Finish)
+                  00010940    00000058     FlashStub-1d27bc.o (.text.Flash_Verify)
+                  00010998    00000044     SciUpgrade-637ac0.o (.text.program)
+                  000109dc    00000040     FlashInit-241f23.o (.text.InitFlashAPI)
+                  00010a1c    00000034     UpgradeMd5-094564.o (.text.UpgradeMd5Init)
+                  00010a50    00000032     SciUpgrade-637ac0.o (.text.RemoteModbus_Initialize)
+                  00010a82    00000002     --HOLE-- [fill = 0]
+                  00010a84    00000032     FlashStub-1d27bc.o (.text.TestDigest)
+                  00010ab6    00000012     libc.a : memcpy_t2.S.obj (.text:TI_memcpy_small)
+                  00010ac8    00000010     FlashStub-1d27bc.o (.text.TestReady)
+                  00010ad8    0000000e     FlashStub-1d27bc.o (.text.TestAction)
+                  00010ae6    0000000e     FlashInit-241f23.o (.text.TestApiReady)
+                  00010af4    0000000e     FlashStub-1d27bc.o (.text.TestHold)
+                  00010b02    0000000e     FlashStub-1d27bc.o (.text.TestReply)
+                  00010b10    0000000e     FlashStub-1d27bc.o (.text.TestReplyLength)
+                  00010b1e    0000000e     libc.a : memset_t2.S.obj (.text:TI_memset_small)
+                  00010b2c    0000000c     FlashInit-241f23.o (.text.CsmUnlock)
+                  00010b38    0000000c     FlashStub-1d27bc.o (.text.TestReceive)
+                  00010b44    0000000a     libclang_rt.builtins.a : aeabi_memset.S.obj (.text.__aeabi_memset)
+                  00010b4e    00000002     --HOLE-- [fill = 0]
+                  00010b50    00000008                            : aeabi_memset.S.obj (.text.__aeabi_memclr)
+                  00010b58    00000004                            : aeabi_memcpy.S.obj (.text.__aeabi_memcpy)
+
+.rodata    0    00010b5c    00000120     
+                  00010b5c    00000100     UpgradeMd5-094564.o (.rodata.constants)
+                  00010c5c    00000020     UpgradeMd5-094564.o (.rodata.cst32)
+
+.bss       0    20000000    0007038c     UNINITIALIZED
+                  20000000    00070000     (.common:fakeFlash)
+                  20070000    000001bc     (.common:RemoteModbus)
+                  200701bc    00000140     SciUpgrade-637ac0.o (.bss.cachedRequest)
+                  200702fc    00000060     SciUpgrade-637ac0.o (.bss.cachedReply)
+                  2007035c    00000004     (.common:FlashStatus)
+                  20070360    00000004     (.common:Flash_CPUScaleFactor)
+                  20070364    00000004     (.common:Flash_CallbackPtr)
+                  20070368    00000004     (.common:commitCount)
+                  2007036c    00000004     (.common:eraseCount)
+                  20070370    00000004     (.common:firstErase)
+                  20070374    00000004     (.common:programCount)
+                  20070378    00000004     (.common:verifyCount)
+                  2007037c    00000002     SciUpgrade-637ac0.o (.bss.cachedLength)
+                  2007037e    00000002     SciUpgrade-637ac0.o (.bss.cachedReplyLength)
+                  20070380    00000002     SciUpgrade-637ac0.o (.bss.command)
+                  20070382    00000002     SciUpgrade-637ac0.o (.bss.requestLength)
+                  20070384    00000002     SciUpgrade-637ac0.o (.bss.sequence)
+                  20070386    00000002     (.common:failErase)
+                  20070388    00000002     (.common:failProgram)
+                  2007038a    00000002     (.common:failVerify)
+
+.data      0    2007038c    00000002     
+                  2007038c    00000002     FlashInit-241f23.o (.data.TestCsmResult)
+
+__llvm_prf_cnts 
+*          0    20000000    00000000     UNINITIALIZED
+
+__llvm_prf_bits 
+*          0    20000000    00000000     UNINITIALIZED
+
+MODULE SUMMARY
+
+       Module                code   ro data   rw data
+       ------                ----   -------   -------
+    C:\Users\17879\AppData\Local\Temp\
+       FlashStub-1d27bc.o    478    0         458778 
+       SciUpgrade-637ac0.o   1792   0         874    
+       UpgradeMd5-094564.o   482    288       0      
+       FlashInit-241f23.o    92     0         10     
+    +--+---------------------+------+---------+---------+
+       Total:                2844   288       459662 
+                                                     
+    C:\ti\ccs1271\ccs\tools\compiler\ti-cgt-armllvm_3.2.2.LTS\lib\armv7m-ti-none-eabi/c/libc.a
+       memcpy_t2.S.obj       18     0         0      
+       memset_t2.S.obj       14     0         0      
+    +--+---------------------+------+---------+---------+
+       Total:                32     0         0      
+                                                     
+    C:\ti\ccs1271\ccs\tools\compiler\ti-cgt-armllvm_3.2.2.LTS\lib\clang/15.0.7/lib/armv7m-ti-none-eabi/libclang_rt.builtins.a
+       aeabi_memset.S.obj    18     0         0      
+       aeabi_memcpy.S.obj    4      0         0      
+    +--+---------------------+------+---------+---------+
+       Total:                22     0         0      
+                                                     
+    +--+---------------------+------+---------+---------+
+       Grand Total:          2898   288       459662 
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+address   name                    
+-------   ----                    
+00010b2d  CsmUnlock               
+2007035c  FlashStatus             
+20070360  Flash_CPUScaleFactor    
+20070364  Flash_CallbackPtr       
+00010855  Flash_Erase             
+000107d1  Flash_Program           
+00010941  Flash_Verify            
+000109dd  InitFlashAPI            
+000102d3  MemCopy                 
+20070000  RemoteModbus            
+00010a51  RemoteModbus_Initialize 
+00010ab7  TI_memcpy_small         
+00010b1f  TI_memset_small         
+00010ad9  TestAction              
+00010ae7  TestApiReady            
+2007038c  TestCsmResult           
+00010a85  TestDigest              
+00010af5  TestHold                
+00010ac9  TestReady               
+00010b39  TestReceive             
+00010b03  TestReply               
+00010b11  TestReplyLength         
+00010001  UpgradeHandleFrame      
+000102d5  UpgradeMd5Byte          
+000108d5  UpgradeMd5Finish        
+00010a1d  UpgradeMd5Init          
+00010417  UpgradeWatchdog         
+00000000  __TI_ATRegion0_region_sz
+00000000  __TI_ATRegion0_src_addr 
+00000000  __TI_ATRegion0_trg_addr 
+00000000  __TI_ATRegion1_region_sz
+00000000  __TI_ATRegion1_src_addr 
+00000000  __TI_ATRegion1_trg_addr 
+00000000  __TI_ATRegion2_region_sz
+00000000  __TI_ATRegion2_src_addr 
+00000000  __TI_ATRegion2_trg_addr 
+ffffffff  __TI_pprof_out_hndl     
+ffffffff  __TI_prof_data_size     
+ffffffff  __TI_prof_data_start    
+00010000  __TI_static_base__      
+00010b51  __aeabi_memclr          
+00010b51  __aeabi_memclr4         
+00010b51  __aeabi_memclr8         
+00010b59  __aeabi_memcpy          
+00010b59  __aeabi_memcpy4         
+00010b59  __aeabi_memcpy8         
+00010b45  __aeabi_memset          
+00010b45  __aeabi_memset4         
+00010b45  __aeabi_memset8         
+ffffffff  __binit__               
+20000000  __start___llvm_prf_bits 
+20000000  __start___llvm_prf_cnts 
+20000000  __stop___llvm_prf_bits  
+20000000  __stop___llvm_prf_cnts  
+ffffffff  binit                   
+20070368  commitCount             
+2007036c  eraseCount              
+20070386  failErase               
+20070388  failProgram             
+2007038a  failVerify              
+20000000  fakeFlash               
+20070370  firstErase              
+20070374  programCount            
+20070378  verifyCount             
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+address   name                    
+-------   ----                    
+00000000  __TI_ATRegion0_region_sz
+00000000  __TI_ATRegion0_src_addr 
+00000000  __TI_ATRegion0_trg_addr 
+00000000  __TI_ATRegion1_region_sz
+00000000  __TI_ATRegion1_src_addr 
+00000000  __TI_ATRegion1_trg_addr 
+00000000  __TI_ATRegion2_region_sz
+00000000  __TI_ATRegion2_src_addr 
+00000000  __TI_ATRegion2_trg_addr 
+00010000  __TI_static_base__      
+00010001  UpgradeHandleFrame      
+000102d3  MemCopy                 
+000102d5  UpgradeMd5Byte          
+00010417  UpgradeWatchdog         
+000107d1  Flash_Program           
+00010855  Flash_Erase             
+000108d5  UpgradeMd5Finish        
+00010941  Flash_Verify            
+000109dd  InitFlashAPI            
+00010a1d  UpgradeMd5Init          
+00010a51  RemoteModbus_Initialize 
+00010a85  TestDigest              
+00010ab7  TI_memcpy_small         
+00010ac9  TestReady               
+00010ad9  TestAction              
+00010ae7  TestApiReady            
+00010af5  TestHold                
+00010b03  TestReply               
+00010b11  TestReplyLength         
+00010b1f  TI_memset_small         
+00010b2d  CsmUnlock               
+00010b39  TestReceive             
+00010b45  __aeabi_memset          
+00010b45  __aeabi_memset4         
+00010b45  __aeabi_memset8         
+00010b51  __aeabi_memclr          
+00010b51  __aeabi_memclr4         
+00010b51  __aeabi_memclr8         
+00010b59  __aeabi_memcpy          
+00010b59  __aeabi_memcpy4         
+00010b59  __aeabi_memcpy8         
+20000000  __start___llvm_prf_bits 
+20000000  __start___llvm_prf_cnts 
+20000000  __stop___llvm_prf_bits  
+20000000  __stop___llvm_prf_cnts  
+20000000  fakeFlash               
+20070000  RemoteModbus            
+2007035c  FlashStatus             
+20070360  Flash_CPUScaleFactor    
+20070364  Flash_CallbackPtr       
+20070368  commitCount             
+2007036c  eraseCount              
+20070370  firstErase              
+20070374  programCount            
+20070378  verifyCount             
+20070386  failErase               
+20070388  failProgram             
+2007038a  failVerify              
+2007038c  TestCsmResult           
+ffffffff  __TI_pprof_out_hndl     
+ffffffff  __TI_prof_data_size     
+ffffffff  __TI_prof_data_start    
+ffffffff  __binit__               
+ffffffff  binit                   
+
+[64 symbols]

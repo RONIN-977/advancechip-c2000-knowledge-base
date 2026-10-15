@@ -1,0 +1,346 @@
+来源: AVP32F335/从F2833x移植到AVP32F335工程概要说明V1.2 20220428.pdf
+来源编号: S179
+
+=== PDF页 1 ===
+AVP32F335 数字信号处理器
+从 F2833x 移植到 AVP32F335 工程概要
+应用指导
+湖南进芯电子科技有限公司
+2022 年 04 月
+V1.2
+
+=== PDF页 2 ===
+从 F2833x 移植到 AVP32F335 工程概要 应用指导 V1.2
+1
+湖南进芯电子科技有限公司
+历史版本记录
+版本号 时间
+起草/
+修改人
+内容描述 审核人 批准人
+V1.1 2022-04-13 首次发布
+V1.2 2022-04-28 修改 ADC 初始
+化程序
+InitAdc()
+
+=== PDF页 3 ===
+从 F2833x 移植到 AVP32F335 工程概要 应用指导 V1.2
+2
+湖南进芯电子科技有限公司
+1. 概述
+本文档将重点阐述湖南进芯电子的 AVP32F335 的使用，方便客户了解芯片的特性和使用
+方法。如用户对具体功能模块有进一步了解需要，可查阅相应产品规格书。
+2. 芯片使用建议
+2.1 竞品差异性对比
+项点 F28335 AVP32F335
+芯片主频（MAX） 150Mhz @ CORE1.9V 150Mhz @ CORE1.65V
+芯片功耗 850mW @ 150Mhz 380mW @ 150Mhz
+片内 LDO N/A 1.8V/1.65V LDO
+ADCREFP[PIN56]
+ADCREFM[PIN55] 外部挂 2.2uF 下拉电容 外部挂 10uF 下拉电容
+TEST1
+TEST2
+芯片内部测试引脚
+建议悬空
+TEST1 为芯片内核 1.65V 供电的
+输出引脚
+TEST2 为内核供电地
+TEST1 与 TEST2 之间建议接 1uF
+电容
+2.2 Flash 使用说明
+2.2.1 Flash 使用概述
+Flash 中存取单元如图 1 结构，存取单元中的数据与 Floating gate 的电荷量有关的，没有
+电荷时读出值为 1，有适量的电荷量读出值为 0。
+Floating gate 在存取单元的初始状态时，没有电荷（Erase 之后的状态）。Program 时，Control
+gate 和 Drain 都施加较高电压，将电荷注入 Floating gate；Erase 时，Substrate 加高电压，Control
+gate 施加负电压，释放 Floating gate 中电荷。为保证注入适量电荷和释放所有电荷都需要足够
+的时间。
+
+=== PDF页 4 ===
+从 F2833x 移植到 AVP32F335 工程概要 应用指导 V1.2
+3
+湖南进芯电子科技有限公司
+图 1 Flash 存取单元
+AVP32F335 所使用的 Flash 为宏力提供，该 Flash 的 Program 和 Erase 注入和释放电荷的
+时间是通过系统时钟计数来保证。计数值是按照系统时钟 50MHz 为基准。
+每次 Program 和 Erase 都会有回读校验，如果 Program 和 Erase 不通过，会重复 Program 和
+Erase。频率过高时，一次 Program 和 Erase 不成功（冲放电荷时间不够），会导致多次 Program
+和 Erase，可能会刚好落入中间状态，读出值不稳定（如图 2）。如果频率过低，每次 Program
+和 Erase 时间太长，可能会导致过 Erase 和过 Program 状态。
+图 2 Program 或 Erase 所需要的脉冲宽度
+图 2 说明：如果每次 Program 或 Erase 需要 6-7.5us，频率在正常范围时一个脉冲就能够满
+足；当频率过高时，可能需要多个脉冲，但是当执行两个脉冲后（冲放电荷时间累计 5us），
+Flash 的存取单元处在一个边沿状态（有一定的电荷但是电荷量不够，或者释放了部分电荷但
+是没有完全释放），读出的数据可能是正确的，但是并不稳定，导致其不会进行第三次 Program
+或 Erase。
+
+=== PDF页 5 ===
+从 F2833x 移植到 AVP32F335 工程概要 应用指导 V1.2
+4
+湖南进芯电子科技有限公司
+2.2.2 API 替换
+AVP32F335 在进行 FLASH 擦除、编程时，需将 CCS 中 TI 提供的 API 文件替换为我司
+提供的 API 文件。
+.out 文件替换方法：
+CCS8.3 版本替换路径：将路径 C:\ti\ccsv8\ccs_base\c2000\flashAlgorithms(根据实际安装路
+径选择)中的文件“FlashAPIInterface28335V2_10”备份后，再将我司提供的.out 文件移入该路径
+下并命名为“FlashAPIInterface28335V2_10”，即可进行 FLASH 擦除、编程。
+CCS3.3 版 本 替 换 路 径 ： 将 路 径
+C:\CCStudio_v3.3PLA\plugins\Flash28xx\Algorithms\28335 ( 根据实际安装路径选择)中的文件
+“FlashAPIInterface28335V2_10”备份后，再将我司提供的.out 文件移入该路径下并命名为
+“FlashAPIInterface28335V2_10”，即可进行 FLASH 擦除、编程。
+其他版本的 CCS 做类似修改。
+
+=== PDF页 6 ===
+从 F2833x 移植到 AVP32F335 工程概要 应用指导 V1.2
+5
+湖南进芯电子科技有限公司
+.lib 文件替换方法：
+在用户的应用程序中，替换我司提供的.lib 文件，并且保持文件名与 TI 的一致。芯片丝印
+号与 API 对应如下表 1。
+表 1 芯片丝印号与 API 对应
+芯片丝印信息 .out 文件 .lib 文件
+AVP32F335BA176S
+GSAAM2012
+FlashAPIInterfaceAVP32F335_A1
+.out
+AVP32F33X_API_V210.l
+ib
+AVP32F335BA176S
+GSACD2012
+AVP32F335QP176S
+GSACD2008
+AVP32F335BA176S
+GSACD1943
+FlashAPIInterfaceAVP32F335_A. out
+AVP32F335QP176S
+GSACD1943
+AVP32F335BA176S
+GSACD1925
+AVP32F335QP176S
+GSACD1925
+说明：
+1.为了满足宏力 Flash 的时序要求，修改了.out 文件与.lib 文件中的延时信息。
+2.在.out 文件中对 LDO 进行了修调， FlashAPIInterfaceAVP32F335_A1.out 与
+FlashAPIInterfaceAVP32F335_A.out 分别对应改版后与改版前的芯片。
+
+=== PDF页 7 ===
+从 F2833x 移植到 AVP32F335 工程概要 应用指导 V1.2
+6
+湖南进芯电子科技有限公司
+2.2.3 工作频率（必须在此频率下工作）
+Flash program 和 Erase 之前，Fsys<=150MHz
+Flash program 和 Erase 时，45MHz<=Fsys <=60MHz Flash
+唤醒时，Fsys<=50MHz
+Fsys 为系统时钟频率
+2.3 芯片供电及上、下电时序
+与 F28335 类似，AVP32F335 在芯片封装定义上同样支持双电源供电，即 3.3V 与 1.8 或
+1.9V。与 F28335 不同，AVP32F335 内部增加一级 LDO，将外部输入 1.8V 或 1.9V 转换 1.65V
+供给到内核（其中寄存器地址 0x7016 控制数字内核供电，0x7100 控制模拟内核供电），用户
+不需要在工程中做补充配置。
+器件的上、下电时序在原 F28335 产品的基础上，需考虑增加一级 1.8V 或 1.9V 转换 1.65V
+LDO 的影响。上电阶段，使 XRS 信号在 1.65V 电压达到至少 1.35V 后再被上拉至高电平。下
+电阶段，使 XRS 信号在 1.65V 电压达到 1.35V 前 8us 变为低电平。
+2.4 晶振及运行主频
+AVP32F335 的时钟倍频模块电路与 F2833x 保持兼容，可保留原配置方式。
+为保证 PLL 倍频系数成功写入，建议关闭 MCKOFF 检测，相应软件调整示例如下：
+void InitPll(Uint16 val, Uint16 divsel)
+{
+// Make sure the PLL is not running in limp mode
+if (SysCtrlRegs.PLLSTS.bit.MCLKSTS != 0)
+{
+// Missing external clock has been detected
+// Replace this line with a call to an appropriate
+// SystemShutdown(); function. asm(" ESTOP0");
+}
+if (SysCtrlRegs.PLLSTS.bit.DIVSEL != 0)
+{
+//增加此处代码
+EALLOW;
+SysCtrlRegs.PLLSTS.all |=0x0050;
+EDIS;
+
+=== PDF页 8 ===
+从 F2833x 移植到 AVP32F335 工程概要 应用指导 V1.2
+7
+湖南进芯电子科技有限公司
+EALLOW;
+SysCtrlRegs.PLLSTS.bit.DIVSEL = 0;
+EDIS;
+}
+// Change the PLLCR
+if (SysCtrlRegs.PLLCR.bit.DIV != val)
+{
+EALLOW;
+// Before setting PLLCR turn off missing clock detect logic
+SysCtrlRegs.PLLSTS.bit.MCLKOFF = 1;
+SysCtrlRegs.PLLCR.bit.DIV = val;
+EDIS;
+DisableDog();
+while(SysCtrlRegs.PLLSTS.bit.PLLLOCKS != 1)
+{
+// Uncomment to service the watchdog
+// ServiceDog();
+}
+}
+// If switching to 1/2
+if((divsel == 1)||(divsel == 2))
+{
+EALLOW;
+SysCtrlRegs.PLLSTS.bit.DIVSEL = divsel;
+EDIS;
+}
+if(divsel == 3)
+{
+EALLOW;
+SysCtrlRegs.PLLSTS.bit.DIVSEL = 2;
+DELAY_US(50L);
+SysCtrlRegs.PLLSTS.bit.DIVSEL = 3;
+EDIS;
+}
+}
+//备注：屏蔽此处代码
+// EALLOW;
+// SysCtrlRegs.PLLSTS.bit.MCLKOFF = 0;
+// EDIS;
+
+=== PDF页 9 ===
+从 F2833x 移植到 AVP32F335 工程概要 应用指导 V1.2
+8
+湖南进芯电子科技有限公司
+2.5 ADC 模数转换器
+与 F28335 不同，AVP32F335 的 ADC 模块需要独立配置内核供电使能，参考配置语句及
+添加位置示例如下：
+void InitAdc(void)
+{
+extern void DSP28x_usDelay(Uint32 Count);
+EALLOW；
+SysCtrlRegs.PCLKCR0.bit.ADCENCLK = 1;
+ADC_cal();
+EDIS;
+AdcRegs.ADCTRL1.bit.rsvd1=0x0008; // 模拟LDO上电 ADCTRL1[3:0]=0x0008
+DELAY_US(ADC_ldoDELAY); // 延时3ms等待模拟LDO建立稳定
+//
+// To powerup the ADC the ADCENCLK bit should be set first to enable
+// clocks, followed by powering up the bandgap, reference circuitry, and
+// ADC core. Before the first conversion is performed a 5ms delay must be
+// observed after power up to give all analog circuits time to power up
+// and settle
+//
+// Please note that for the delay function below to operate correctly the
+// CPU_RATE define statement in the DSP2833x_Examples.h file must
+// contain the correct CPU clock period in nanoseconds. //
+AdcRegs.ADCTRL3.all = 0x00E0; // Power up bandgap/reference/ADC circuits
+DELAY_US(ADC_usDELAY); // Delay before converting ADC
+}
+注意：
+a）如果程序执行后对 ADC 寄存器复位（AdcRegs.ADCTRL1.bit.RESET = 1;），需要在再
+次采样执行前，应重新对 ADC 供电使能。
+b）关于 ADC 配置，ADC 采样率宜不高于 3.75Msps，为保证采样值稳定可靠，采样开窗
+应预留一定的宽度，即 ACQ_PS 设置值不宜过小，一般用户配置为 6-15。
+c）应用 AVP32F335 片上 ADC 开发时，ADC 结果寄存器 AdcRegs.Adcresultn 及镜像结果
+寄存器 AdcMirror.ADCRESULTn 均为左对齐，即高 12 位代表采样结果；而对应 F28335 而言，
+其镜像结果寄存器为右对齐，即低 12 位代表采样结果。
+d）使用片上 ADC 进行应用开发，如采用片内基准，推荐的 Adcrefp 及 Adcrefm 引脚下拉
+电容值为 10uF，AdcResext 偏置电阻值 22kΩ（18kΩ）。
+具体差异参考 2.5.1 节至 2.5.7 节的描述。
+
+=== PDF页 10 ===
+从 F2833x 移植到 AVP32F335 工程概要 应用指导 V1.2
+9
+湖南进芯电子科技有限公司
+差异简介
+1、 2.5.1 ADC控制寄存器 1（ADCTRL1）的 bit[3:0]位定义差异 10
+2、 2.5.2 ADC 速度差异 11
+3、 2.5.3 ADCREFP 和 ADCREFM 引脚外接电容容值差异 11
+4、 2.5.4 ADCREFP 和 ADCREFM 基准电压上电时间差异 12
+5、 2.5.5 外设帧 0（PF0）和 2（PF2）的 ADC 结果位置差异 12
+6、 2.5.6 ADC 的 INL 和 DNL 差异 13
+7、 2.5.7 ADC 的动态参数差异 14
+
+=== PDF页 11 ===
+从 F2833x 移植到 AVP32F335 工程概要 应用指导 V1.2
+10
+湖南进芯电子科技有限公司
+2.5.1 ADC控制寄存器 1（ADCTRL1）的 bit[3:0]位定义差异
+F28335 ADCTRL1 的 bit[3:0]描述如图 3 所示，此 4 位皆为保留位。
+图 3 F28335 ADC 控制寄存器 1 (ADCTRL1)（地址 0x7100h）的位定义
+AVP32F335 ADCTRL1 的 bit[3:0]描述如图 4、图 5 所示，ADCTRL1 的 bit3 为 ADC 模块内置
+LDO 的使能位，ADCTRL1 的 bit[2:0]为 ADC 模块内置 LDO 的输出电压配置位。
+图 4 AVP32F335 ADC 控制寄存器 1 (ADCTRL1)（地址 0x7100h）的位定义
+图 5 AVP32F335 ADC 控制寄存器 1 (ADCTRL1)（地址 0x7100h）的位描述
+
+=== PDF页 12 ===
+从 F2833x 移植到 AVP32F335 工程概要 应用指导 V1.2
+11
+湖南进芯电子科技有限公司
+2.5.2 ADC 速度差异
+F28335 ADC 的速度如图 6 所示，F28335 主频 25MHz，采样率 12.5MSPS。
+图 6 F28335 ADC 速度
+AVP32F335 ADC 的速度如图 7 所示，AVP32F335 主频 7.5MHz，采样率 3.75MSPS。
+图 7 AVP32F335 ADC 速度
+2.5.3 ADCREFP 和 ADCREFM 引脚外接电容容值差异
+F28335 ADCREFP 和 ADCREFM 引脚的外接电容如图 8 所示，容值为 2.2µf。
+图 8 F28335 ADCREFP 和 ADCREFM 引脚的外接电容
+AVP32F335 ADCREFP 和 ADCREFM 引脚的外接电容如图 9 所示，容值为 10µf。
+图 9 AVP32F335 ADCREFP 和 ADCREFM 引脚的外接电容
+
+=== PDF页 13 ===
+从 F2833x 移植到 AVP32F335 工程概要 应用指导 V1.2
+12
+湖南进芯电子科技有限公司
+2.5.4 ADCREFP 和 ADCREFM 基准电压上电时间差异
+如图 10 所示，ADCREFP 和 ADCREFM 引脚外接 2.2µf 电容时，F28335 ADC 的(𝐵)时间 MAX
+为 5ms。
+图 10 F28335 ADC 加电延迟时间
+如图 11 所示，ADCREFP 和 ADCREFM 引脚外接 10µf 电容时，AVP32F335 ADC 的(𝐵)时间
+MAX 为 10ms。
+图 11 AVP32F335 ADC 加电延迟时间
+2.5.5 外设帧 0（PF0）和 2（PF2）的 ADC 结果位置差异
+如图 12 所示，F28335 Peripheral Frame 2 (0x7108-0x7117)为左对齐，低四位（bit[3:0]）为 0
+值，Peripheral Frame 0 (0x0B00-0x0B0F)为右对齐，高四位（bit[15:12]）为 0 值。
+
+=== PDF页 14 ===
+从 F2833x 移植到 AVP32F335 工程概要 应用指导 V1.2
+13
+湖南进芯电子科技有限公司
+图 12 F28335 ADCRESULT_0 to ADCRESULT_15 Register 位描述
+如图 13 所示，AVP32F335 Peripheral Frame 2 (0x7108-0x7117)和 Frame 0 (0x0B00-0x0B0F)
+都是左对齐，并且两个外设帧地址里面的结果寄存器的低 4 位（bit[3:0]）都是变化的值，进行运算时
+取高 12 位（bit[15:4]）结果即可。
+图 13 AVP32F335 ADCRESULT_0 to ADCRESULT_15 Register 位描述
+2.5.6 ADC 的 INL 和 DNL 差异
+F28335 ADC 的 INL 和 DNL 的电气参数如图 14 所示。
+
+=== PDF页 15 ===
+从 F2833x 移植到 AVP32F335 工程概要 应用指导 V1.2
+14
+湖南进芯电子科技有限公司
+图 14 F28335 ADC 的 INL 和 DNL
+AVP32F335 ADC 的 INL 和 DNL 的电气参数如图 15 所示，都比 F28335 的参数差。
+图 15 AVP32F335 ADC 的 INL 和 DNL
+2.5.7 ADC 的动态参数差异
+F28335 ADC 动态参数（SINAD、SNR、THD、ENOB、SEDR）的电气参数如图 16 所示。
+图 16 F28335 ADC 动态参数
+AVP32F335 ADC 动态参数（SINAD、SNR、THD、ENOB、SEDR）的电气参数如图 17 所示，
+都比 F28335 的参数差。
+图 17 AVP32F335 ADC 动态参数
+2
+
+=== PDF页 16 ===
+从 F2833x 移植到 AVP32F335 工程概要 应用指导 V1.2
+15
+湖南进芯电子科技有限公司
+2.6 I/O
+AVP32F335 集成 I/O 端口，输出驱动上管 PMOS 与下管 NMOS 采用输出驱动自适应设计，
+如图 18 所示，输出控制电路使输出驱动 PMOS 在输出电压上升至约 2.4V 后关闭 MP1，输出
+驱动 NMOS 在输出电压下降至约 0.4V 后关闭 MN1，因此电平上升及下降时间与 F2833x 存在
+差异性，对于一般 I/O 驱动应用用户不需要对现有设计调整。
+图 18 输出驱动电路
+2.7 器件开发
+AVP32F335 开发支持 CCS 仿真代码工程环境，工程创建、调试可参照 F28335 配置方式。
+3. 总结
+以上是针对目前大部分用户在从 F28335 向 AVP32F335 移植过程中可能涉及的差异、产生
+调试问题的总结。用户在进入产品测试前，应在软件及硬件上重点关注芯片晶振型号输入、
+ADC 基准、Flash 烧写程序及在线程序部分代码与 FLASH API 关联性、FLASH 存储地址分配
+差异性，以便快速实现工程移植。

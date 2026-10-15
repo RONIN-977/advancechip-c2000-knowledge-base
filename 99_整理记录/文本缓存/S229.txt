@@ -1,0 +1,42 @@
+来源: 文档/芯片对比.xlsx
+来源编号: S229
+
+=== 工作表 Sheet1 ===
+
+A1=参数类别 | B1=进口德州仪器(TI) 
+TMS320F28034 | C1=国产湖南进芯 
+ADP32F034 | D1=进口德州仪器(TI)
+ TMS320F280025 | E1=国产纳芯微 
+NS800RT3025 | F1=进口德州仪器(TI) 
+TMS320F280157 | G1=国产湖南进芯 
+AVP32F0036
+
+A2=内核架构 | B2=32 位 C28x+CLA 协处理器 | C2=兼容 C28x 指令集（ADP32Fx） | D2=32 位 C28x | E2=Cortex-M7 + 自研 eMath 加速核 | F2=32 位 C28x | G2=32 位 C28x
+
+A3=主频 | B3=60MHz | C3=60MHz | D3=100MHz | E3=200MHz | F3=120MHz | G3=120MHz
+
+A4=浮点单元 | B4=CLA 32 位浮点 | C4=无（定点运算） | D4=单精度 FPU32 | E4=硬件 FPU+eMath 加速 | F4=单精度 FPU32 | G4=IEEE 754 浮点单元
+
+A5=Flash | B5=128KB | C5=64KB | D5=128KB | E5=256KB | F5=256KB | G5=384KB
+
+A6=RAM | B6=20KB | C6=10KB SRAM+8KB Boot RAM | D6=24KB | E6=256KB TCM+32KB Cache | F6=36KB | G6=69KB
+
+A7=ADC | B7=12 位 SAR×1，16 路，
+4.6MSPS | C7=12 位 SAR，16 路，4.6MSPS | D7=12 位 SAR×2，14/16 路，3.45MSPS | E7=12 位 SAR×2，16 路，3.6MSPS | F7=12 位 SAR×2，11/17/21 路，3.45MSPS | G7=12 位 SAR，18路，4MSPS
+
+A8=PWM | B8=ePWM 8~14 路，
+HRPWM（150ps） | C8=ePWM×14，HRPWM×7 | D8=ePWM×14，支持 HRPWM | E8=ePWM 32 路，
+HRPWM 16 路（100ps） | F8=ePWM×14，
+支持 HRPWM | G8=ePWM×16，HRPWM×8
+
+A9=通信接口 | B9=CAN×1、SCI×1、
+SPI×1~2、I²C×1 | C9=eCAN×1、SCI×1、SPI×1、
+I²C×1 | D9=CAN×1、SCI×3、SPI×2、
+I²C×2 | E9=CAN FD/CAN2.0、
+多 UART/SPI/I²C | F9=CAN FD×2、SCI×4、
+SPI×1、I²C×2 | G9=eCAN×1、SCI×2、SPI×2、
+I²C×2、LIN×2
+
+A10=车规等级 | B10=工业级（-40~125℃） | C10=AEC-Q100 | D10=工业级（-40~125℃） | E10=AEC-Q100 Grade1 | F10=工业级（-40~125℃） | G10=AEC-Q100
+
+A11=封装 | B11=LQFP64/80 | C11=LQFP48/64/80 | D11=LQFP48/64/80 | E11=LQFP64/80 | F11=LQFP48/64/80 | G11=LQFP48/64/80

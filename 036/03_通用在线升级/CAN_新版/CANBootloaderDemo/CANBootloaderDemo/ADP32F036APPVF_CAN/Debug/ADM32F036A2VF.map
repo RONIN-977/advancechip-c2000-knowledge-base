@@ -1,0 +1,948 @@
+******************************************************************************
+             TMS320C2000 Linker PC v18.1.4                     
+******************************************************************************
+>> Linked Mon Apr 27 15:29:39 2026
+
+OUTPUT FILE NAME:   <ADM32F036A2VF.out>
+ENTRY POINT SYMBOL: "code_start"  address: 003f5ff6
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+PAGE 0:
+  RAMPRG                00008000   00000a80  0000014b  00000935  RWIX
+  OTP                   003d7800   00000400  00000000  00000400  RWIX
+  FLASHC                003e8000   0000df70  00000e41  0000d12f  RWIX
+  FLASHB                003f5f70   00000008  00000008  00000000  RWIX
+  FLASHD                003f5f78   00000008  00000000  00000008  RWIX
+  CSM_RSVD              003f5f80   00000076  00000076  00000000  RWIX
+  BEGIN                 003f5ff6   00000002  00000002  00000000  RWIX
+  CSM_PWL               003f5ff8   00000008  00000008  00000000  RWIX
+  IQTABLES              003fe000   00000b50  00000000  00000b50  RWIX
+  IQTABLES2             003feb50   0000008c  00000000  0000008c  RWIX
+  IQTABLES3             003febdc   000000aa  00000000  000000aa  RWIX
+  ROM                   003ff27c   00000d44  00000000  00000d44  RWIX
+  RESET                 003fffc0   00000002  00000000  00000002  RWIX
+  VECTORS               003fffc2   0000003e  00000000  0000003e  RWIX
+
+PAGE 1:
+  RAMM0                 00000100   00000300  00000000  00000300  RWIX
+  RAMM1                 00000400   00000400  00000300  00000100  RWIX
+  DEV_EMU               00000880   00000105  00000004  00000101  RWIX
+  SYS_PWR_CTL           00000985   00000003  00000000  00000003  RWIX
+  FLASH_REGS            00000a80   00000060  00000008  00000058  RWIX
+  CSM                   00000ae0   00000010  00000010  00000000  RWIX
+  ADC_RESULT            00000b00   00000020  00000020  00000000  RWIX
+  CPU_TIMER0            00000c00   00000008  00000008  00000000  RWIX
+  CPU_TIMER1            00000c08   00000008  00000008  00000000  RWIX
+  CPU_TIMER2            00000c10   00000008  00000008  00000000  RWIX
+  PIE_CTRL              00000ce0   00000020  0000001a  00000006  RWIX
+  PIE_VECT              00000d00   00000100  00000100  00000000  RWIX
+  CLA1                  00001400   00000080  00000000  00000080  RWIX
+  ECANA                 00006000   00000040  00000034  0000000c  RWIX
+  ECANA_LAM             00006040   00000040  00000000  00000040  RWIX
+  ECANA_MOTS            00006080   00000040  00000040  00000000  RWIX
+  ECANA_MOTO            000060c0   00000040  00000040  00000000  RWIX
+  ECANA_MBOX            00006100   00000100  00000100  00000000  RWIX
+  COMP1                 00006400   00000020  00000014  0000000c  RWIX
+  COMP2                 00006420   00000020  00000014  0000000c  RWIX
+  COMP3                 00006440   00000020  00000000  00000020  RWIX
+  EPWM1                 00006800   00000040  00000040  00000000  RWIX
+  EPWM2                 00006840   00000040  00000040  00000000  RWIX
+  EPWM3                 00006880   00000040  00000040  00000000  RWIX
+  EPWM4                 000068c0   00000040  00000040  00000000  RWIX
+  EPWM5                 00006900   00000040  00000040  00000000  RWIX
+  EPWM6                 00006940   00000040  00000000  00000040  RWIX
+  EPWM7                 00006980   00000040  00000000  00000040  RWIX
+  ECAP1                 00006a00   00000020  00000020  00000000  RWIX
+  EQEP1                 00006b00   00000040  00000000  00000040  RWIX
+  LINA                  00006c00   00000080  0000004a  00000036  RWIX
+  GPIOCTRL              00006f80   00000040  00000040  00000000  RWIX
+  GPIODAT               00006fc0   00000020  00000020  00000000  RWIX
+  GPIOINT               00006fe0   00000020  0000000c  00000014  RWIX
+  SYSTEM                00007010   00000020  0000001a  00000006  RWIX
+  PGAOPA                00007030   00000001  00000001  00000000  RWIX
+  SPIA                  00007040   00000010  00000010  00000000  RWIX
+  SCIA                  00007050   00000010  00000010  00000000  RWIX
+  NMIINTRUPT            00007060   00000010  00000010  00000000  RWIX
+  XINTRUPT              00007070   00000010  00000010  00000000  RWIX
+  ADC                   00007100   00000080  00000050  00000030  RWIX
+  SPIB                  00007740   00000010  00000000  00000010  RWIX
+  I2CA                  00007900   00000040  00000022  0000001e  RWIX
+  RAML0                 00008a80   00001580  00000167  00001419  RWIX
+  PARTID                003d7e80   00000001  00000001  00000000  RWIX
+  CSM_PWL               003f7ff8   00000008  00000008  00000000  RWIX
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+DevEmuRegsFile 
+*          1    00000880    00000004     UNINITIALIZED
+                  00000880    00000004     ADP32F03x_GlobalVariableDefs.obj (DevEmuRegsFile)
+
+PieVectTableFile 
+*          1    00000d00    00000100     UNINITIALIZED
+                  00000d00    00000100     ADP32F03x_GlobalVariableDefs.obj (PieVectTableFile)
+
+EmuKeyVar 
+*          1    00000d00    00000001     UNINITIALIZED
+                  00000d00    00000001     ADP32F03x_GlobalVariableDefs.obj (EmuKeyVar)
+
+EmuBModeVar 
+*          1    00000d01    00000001     UNINITIALIZED
+                  00000d01    00000001     ADP32F03x_GlobalVariableDefs.obj (EmuBModeVar)
+
+FlashCallbackVar 
+*          1    00000d02    00000002     UNINITIALIZED
+                  00000d02    00000002     ADP32F03x_GlobalVariableDefs.obj (FlashCallbackVar)
+
+FlashScalingVar 
+*          1    00000d04    00000002     UNINITIALIZED
+                  00000d04    00000002     ADP32F03x_GlobalVariableDefs.obj (FlashScalingVar)
+
+FlashRegsFile 
+*          1    00000a80    00000008     UNINITIALIZED
+                  00000a80    00000008     ADP32F03x_GlobalVariableDefs.obj (FlashRegsFile)
+
+CsmRegsFile 
+*          1    00000ae0    00000010     UNINITIALIZED
+                  00000ae0    00000010     ADP32F03x_GlobalVariableDefs.obj (CsmRegsFile)
+
+AdcResultFile 
+*          1    00000b00    00000020     UNINITIALIZED
+                  00000b00    00000020     ADP32F03x_GlobalVariableDefs.obj (AdcResultFile)
+
+CpuTimer0RegsFile 
+*          1    00000c00    00000008     UNINITIALIZED
+                  00000c00    00000008     ADP32F03x_GlobalVariableDefs.obj (CpuTimer0RegsFile)
+
+CpuTimer1RegsFile 
+*          1    00000c08    00000008     UNINITIALIZED
+                  00000c08    00000008     ADP32F03x_GlobalVariableDefs.obj (CpuTimer1RegsFile)
+
+CpuTimer2RegsFile 
+*          1    00000c10    00000008     UNINITIALIZED
+                  00000c10    00000008     ADP32F03x_GlobalVariableDefs.obj (CpuTimer2RegsFile)
+
+PieCtrlRegsFile 
+*          1    00000ce0    0000001a     UNINITIALIZED
+                  00000ce0    0000001a     ADP32F03x_GlobalVariableDefs.obj (PieCtrlRegsFile)
+
+ECanaRegsFile 
+*          1    00006000    00000034     UNINITIALIZED
+                  00006000    00000034     ADP32F03x_GlobalVariableDefs.obj (ECanaRegsFile)
+
+ramfuncs   0    003e8c5c    0000014b     RUN ADDR = 00008000
+                  003e8c5c    00000130     MotorControl.obj (ramfuncs)
+                  003e8d8c    00000017     HardwareSetup.obj (ramfuncs)
+                  003e8da3    00000004     ADP32F03x_usDelay.obj (ramfuncs)
+
+.cinit     0    003e8da7    0000007d     
+                  003e8da7    00000059     Parameter.obj (.cinit)
+                  003e8e00    0000000e     rts2800_ml.lib : exit.c.obj (.cinit)
+                  003e8e0e    00000005     CANcomm.obj (.cinit)
+                  003e8e13    00000005     FunctionMain.obj (.cinit)
+                  003e8e18    00000005     rts2800_ml.lib : _lock.c.obj (.cinit:__lock)
+                  003e8e1d    00000005                    : _lock.c.obj (.cinit:__unlock)
+                  003e8e22    00000002     --HOLE-- [fill = 0]
+
+UserAppFlag 
+*          0    003f5f70    00000008     
+                  003f5f70    00000008     ADP32F03x_CodeStartBranch.obj (UserAppFlag)
+
+csm_rsvd   0    003f5f80    00000076     
+                  003f5f80    00000076     ADP32F03x_CSMPasswords.obj (csm_rsvd)
+
+ECanaMOTSRegsFile 
+*          1    00006080    00000040     UNINITIALIZED
+                  00006080    00000040     ADP32F03x_GlobalVariableDefs.obj (ECanaMOTSRegsFile)
+
+ECanaMOTORegsFile 
+*          1    000060c0    00000040     UNINITIALIZED
+                  000060c0    00000040     ADP32F03x_GlobalVariableDefs.obj (ECanaMOTORegsFile)
+
+ECanaMboxesFile 
+*          1    00006100    00000100     UNINITIALIZED
+                  00006100    00000100     ADP32F03x_GlobalVariableDefs.obj (ECanaMboxesFile)
+
+Comp1RegsFile 
+*          1    00006400    00000014     UNINITIALIZED
+                  00006400    00000014     ADP32F03x_GlobalVariableDefs.obj (Comp1RegsFile)
+
+Comp2RegsFile 
+*          1    00006420    00000014     UNINITIALIZED
+                  00006420    00000014     ADP32F03x_GlobalVariableDefs.obj (Comp2RegsFile)
+
+ECap1RegsFile 
+*          1    00006a00    00000020     UNINITIALIZED
+                  00006a00    00000020     ADP32F03x_GlobalVariableDefs.obj (ECap1RegsFile)
+
+LinaRegsFile 
+*          1    00006c00    0000004a     UNINITIALIZED
+                  00006c00    0000004a     ADP32F03x_GlobalVariableDefs.obj (LinaRegsFile)
+
+GpioCtrlRegsFile 
+*          1    00006f80    00000040     UNINITIALIZED
+                  00006f80    00000040     ADP32F03x_GlobalVariableDefs.obj (GpioCtrlRegsFile)
+
+GpioDataRegsFile 
+*          1    00006fc0    00000020     UNINITIALIZED
+                  00006fc0    00000020     ADP32F03x_GlobalVariableDefs.obj (GpioDataRegsFile)
+
+GpioIntRegsFile 
+*          1    00006fe0    0000000c     UNINITIALIZED
+                  00006fe0    0000000c     ADP32F03x_GlobalVariableDefs.obj (GpioIntRegsFile)
+
+SysCtrlRegsFile 
+*          1    00007010    0000001a     UNINITIALIZED
+                  00007010    0000001a     ADP32F03x_GlobalVariableDefs.obj (SysCtrlRegsFile)
+
+SpiaRegsFile 
+*          1    00007040    00000010     UNINITIALIZED
+                  00007040    00000010     ADP32F03x_GlobalVariableDefs.obj (SpiaRegsFile)
+
+PgaOpaRegsFile 
+*          1    00007030    00000001     UNINITIALIZED
+                  00007030    00000001     ADP32F03x_GlobalVariableDefs.obj (PgaOpaRegsFile)
+
+SciaRegsFile 
+*          1    00007050    00000010     UNINITIALIZED
+                  00007050    00000010     ADP32F03x_GlobalVariableDefs.obj (SciaRegsFile)
+
+NmiIntruptRegsFile 
+*          1    00007060    00000010     UNINITIALIZED
+                  00007060    00000010     ADP32F03x_GlobalVariableDefs.obj (NmiIntruptRegsFile)
+
+XIntruptRegsFile 
+*          1    00007070    00000010     UNINITIALIZED
+                  00007070    00000010     ADP32F03x_GlobalVariableDefs.obj (XIntruptRegsFile)
+
+AdcRegsFile 
+*          1    00007100    00000050     UNINITIALIZED
+                  00007100    00000050     ADP32F03x_GlobalVariableDefs.obj (AdcRegsFile)
+
+I2caRegsFile 
+*          1    00007900    00000022     UNINITIALIZED
+                  00007900    00000022     ADP32F03x_GlobalVariableDefs.obj (I2caRegsFile)
+
+EPwm1RegsFile 
+*          1    00006800    00000040     UNINITIALIZED
+                  00006800    00000040     ADP32F03x_GlobalVariableDefs.obj (EPwm1RegsFile)
+
+EPwm2RegsFile 
+*          1    00006840    00000040     UNINITIALIZED
+                  00006840    00000040     ADP32F03x_GlobalVariableDefs.obj (EPwm2RegsFile)
+
+EPwm3RegsFile 
+*          1    00006880    00000040     UNINITIALIZED
+                  00006880    00000040     ADP32F03x_GlobalVariableDefs.obj (EPwm3RegsFile)
+
+EPwm4RegsFile 
+*          1    000068c0    00000040     UNINITIALIZED
+                  000068c0    00000040     ADP32F03x_GlobalVariableDefs.obj (EPwm4RegsFile)
+
+EPwm5RegsFile 
+*          1    00006900    00000040     UNINITIALIZED
+                  00006900    00000040     ADP32F03x_GlobalVariableDefs.obj (EPwm5RegsFile)
+
+PartIdRegsFile 
+*          1    003d7e80    00000001     UNINITIALIZED
+                  003d7e80    00000001     ADP32F03x_GlobalVariableDefs.obj (PartIdRegsFile)
+
+CsmPwlFile 
+*          1    003f7ff8    00000008     UNINITIALIZED
+                  003f7ff8    00000008     ADP32F03x_GlobalVariableDefs.obj (CsmPwlFile)
+
+.pinit     0    003e8000    00000000     UNINITIALIZED
+
+.text      0    003e8000    00000c5b     
+                  003e8000    000002f2     HardwareSetup.obj (.text)
+                  003e82f2    00000266     MotorControl.obj (.text)
+                  003e8558    00000256     CANcomm.obj (.text)
+                  003e87ae    0000011f     FunctionMain.obj (.text)
+                  003e88cd    00000091     ASMFun.obj (.text)
+                  003e895e    00000069     CANcomm.obj (.text:retain)
+                  003e89c7    0000005a     rts2800_ml.lib : fs_mpy28.asm.obj (.text)
+                  003e8a21    00000054                    : boot28.asm.obj (.text)
+                  003e8a75    00000050     ADP32F03x_CpuTimers.obj (.text)
+                  003e8ac5    0000004d     MainSystem.obj (.text:retain)
+                  003e8b12    00000039     MainSystem.obj (.text)
+                  003e8b4b    0000002a     rts2800_ml.lib : l_div28.asm.obj (.text)
+                  003e8b75    00000029                    : exit.c.obj (.text)
+                  003e8b9e    00000029                    : fs_tol28.asm.obj (.text)
+                  003e8bc7    00000026     ADP32F03x_CodeStartBranch.obj (.text)
+                  003e8bed    00000024     rts2800_ml.lib : cpy_tbl.c.obj (.text)
+                  003e8c11    0000001d                    : memcpy.c.obj (.text)
+                  003e8c2e    00000019                    : args_main.c.obj (.text)
+                  003e8c47    00000009                    : _lock.c.obj (.text)
+                  003e8c50    00000008     HardwareSetup.obj (.text:retain)
+                  003e8c58    00000002     rts2800_ml.lib : pre_init.c.obj (.text)
+                  003e8c5a    00000001                    : startup.c.obj (.text)
+
+.ovly      0    003e8e38    0000000a     
+                  003e8e38    0000000a     (.ovly:_prginRAM)
+
+codestart 
+*          0    003f5ff6    00000002     
+                  003f5ff6    00000002     ADP32F03x_CodeStartBranch.obj (codestart)
+
+csmpasswds 
+*          0    003f5ff8    00000008     
+                  003f5ff8    00000008     ADP32F03x_CSMPasswords.obj (csmpasswds)
+
+.stack     1    00000400    00000300     UNINITIALIZED
+                  00000400    00000300     --HOLE--
+
+.ebss      1    00008a80    00000167     UNINITIALIZED
+                  00008a80    00000084     CANcomm.obj (.ebss)
+                  00008b04    0000002f     Parameter.obj (.ebss)
+                  00008b33    0000000b     PreDrive.obj (.ebss)
+                  00008b3e    00000002     rts2800_ml.lib : _lock.c.obj (.ebss:__lock)
+                  00008b40    0000006a     MotorControl.obj (.ebss)
+                  00008baa    00000010     ADP32F03x_CpuTimers.obj (.ebss)
+                  00008bba    00000006     rts2800_ml.lib : exit.c.obj (.ebss)
+                  00008bc0    00000024     FunctionMain.obj (.ebss)
+                  00008be4    00000002     rts2800_ml.lib : _lock.c.obj (.ebss:__unlock)
+                  00008be6    00000001     HardwareSetup.obj (.ebss)
+
+.econst    0    003e8e24    00000014     
+                  003e8e24    00000014     MotorControl.obj (.econst:_gSendToMotorTable)
+
+.reset     0    003fffc0    00000002     DSECT
+                  003fffc0    00000002     rts2800_ml.lib : boot28.asm.obj (.reset)
+
+vectors    0    003fffc2    00000000     DSECT
+
+MODULE SUMMARY
+
+       Module                             code   initialized data   uninitialized data
+       ------                             ----   ----------------   ------------------
+    .\Function\
+       CANcomm.obj                        703    5                  132               
+       FunctionMain.obj                   287    5                  36                
+       Parameter.obj                      0      89                 47                
+       PreDrive.obj                       0      0                  11                
+    +--+----------------------------------+------+------------------+--------------------+
+       Total:                             990    99                 226               
+                                                                                      
+    .\Main\
+       ADP32F03x_GlobalVariableDefs.obj   0      0                  1596              
+       HardwareSetup.obj                  808    0                  1                 
+       MainSystem.obj                     134    0                  0                 
+       ADP32F03x_CSMPasswords.obj         0      126                0                 
+       ADP32F03x_CpuTimers.obj            80     0                  16                
+       ADP32F03x_CodeStartBranch.obj      40     8                  0                 
+       ADP32F03x_usDelay.obj              8      0                  0                 
+    +--+----------------------------------+------+------------------+--------------------+
+       Total:                             1070   134                1613              
+                                                                                      
+    .\Motor\src\
+       MotorControl.obj                   1222   20                 106               
+    +--+----------------------------------+------+------------------+--------------------+
+       Total:                             1222   20                 106               
+                                                                                      
+    .\SubProgra\
+       ASMFun.obj                         145    0                  0                 
+    +--+----------------------------------+------+------------------+--------------------+
+       Total:                             145    0                  0                 
+                                                                                      
+    C:\ti\ccsv8\tools\compiler\ti-cgt-c2000_18.1.4.LTS\lib\rts2800_ml.lib
+       fs_mpy28.asm.obj                   90     0                  0                 
+       boot28.asm.obj                     84     0                  0                 
+       exit.c.obj                         41     14                 6                 
+       l_div28.asm.obj                    42     0                  0                 
+       fs_tol28.asm.obj                   41     0                  0                 
+       cpy_tbl.c.obj                      36     0                  0                 
+       memcpy.c.obj                       29     0                  0                 
+       args_main.c.obj                    25     0                  0                 
+       _lock.c.obj                        9      10                 4                 
+       pre_init.c.obj                     2      0                  0                 
+       startup.c.obj                      1      0                  0                 
+    +--+----------------------------------+------+------------------+--------------------+
+       Total:                             400    24                 10                
+                                                                                      
+       Stack:                             0      0                  768               
+       Linker Generated:                  0      10                 0                 
+    +--+----------------------------------+------+------------------+--------------------+
+       Grand Total:                       3827   287                2723              
+
+
+LINKER GENERATED COPY TABLES
+
+_prginRAM @ 003e8e38 records: 1, size/record: 8, table size: 10
+	ramfuncs: copy 331 bytes from load addr=003e8c5c at page=0 to run addr=00008000 at page=0
+
+
+GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
+
+address     data page           name
+--------    ----------------    ----
+00000400      10 (00000400)     __stack
+
+00000880      22 (00000880)     _DevEmuRegs
+
+00000a80      2a (00000a80)     _FlashRegs
+
+00000ae0      2b (00000ac0)     _CsmRegs
+
+00000b00      2c (00000b00)     _AdcResult
+
+00000c00      30 (00000c00)     _CpuTimer0Regs
+00000c08      30 (00000c00)     _CpuTimer1Regs
+00000c10      30 (00000c00)     _CpuTimer2Regs
+
+00000ce0      33 (00000cc0)     _PieCtrlRegs
+
+00000d00      34 (00000d00)     _EmuKey
+00000d00      34 (00000d00)     _PieVectTable
+00000d01      34 (00000d00)     _EmuBMode
+00000d02      34 (00000d00)     _Flash_CallbackPtr
+00000d04      34 (00000d00)     _Flash_CPUScaleFactor
+
+00006000     180 (00006000)     _ECanaRegs
+
+00006080     182 (00006080)     _ECanaMOTSRegs
+
+000060c0     183 (000060c0)     _ECanaMOTORegs
+
+00006100     184 (00006100)     _ECanaMboxes
+
+00006400     190 (00006400)     _Comp1Regs
+00006420     190 (00006400)     _Comp2Regs
+
+00006800     1a0 (00006800)     _EPwm1Regs
+
+00006840     1a1 (00006840)     _EPwm2Regs
+
+00006880     1a2 (00006880)     _EPwm3Regs
+
+000068c0     1a3 (000068c0)     _EPwm4Regs
+
+00006900     1a4 (00006900)     _EPwm5Regs
+
+00006a00     1a8 (00006a00)     _ECap1Regs
+
+00006c00     1b0 (00006c00)     _LinaRegs
+
+00006f80     1be (00006f80)     _GpioCtrlRegs
+
+00006fc0     1bf (00006fc0)     _GpioDataRegs
+00006fe0     1bf (00006fc0)     _GpioIntRegs
+
+00007010     1c0 (00007000)     _SysCtrlRegs
+00007030     1c0 (00007000)     _PagOpaRegs
+
+00007040     1c1 (00007040)     _SpiaRegs
+00007050     1c1 (00007040)     _SciaRegs
+00007060     1c1 (00007040)     _NmiIntruptRegs
+00007070     1c1 (00007040)     _XIntruptRegs
+
+00007100     1c4 (00007100)     _AdcRegs
+
+00007900     1e4 (00007900)     _I2caRegs
+
+00008a80     22a (00008a80)     _CanMailBoxReadyFlag
+00008a82     22a (00008a80)     _CanMailBox_MsgData
+00008a86     22a (00008a80)     _VarAddr
+
+00008ac0     22b (00008ac0)     _CanRecv_MsgData_Buffer
+
+00008b04     22c (00008b00)     _ACC1
+00008b05     22c (00008b00)     _RefSet
+00008b06     22c (00008b00)     _ACC2
+00008b07     22c (00008b00)     _MAX_LIMIT_FREQ
+00008b08     22c (00008b00)     _PWM_FREQUENCY
+00008b09     22c (00008b00)     _DeadTimeInternal
+00008b0a     22c (00008b00)     _MAX_DC_VOL_3_3V
+00008b0b     22c (00008b00)     _OverCurPointInternal
+00008b0c     22c (00008b00)     _MOTOR_RATED_CUR
+00008b0d     22c (00008b00)     _CBCCurPointInternal
+00008b0e     22c (00008b00)     _MOTOR_RATED_FRE
+00008b0f     22c (00008b00)     _PWMArrayData1
+00008b1b     22c (00008b00)     _PWMArrayData0
+00008b27     22c (00008b00)     _PWMArrayData2
+00008b33     22c (00008b00)     _PreDriverRegs
+00008b36     22c (00008b00)     _DataTest
+00008b3e     22c (00008b00)     __lock
+
+00008b40     22d (00008b40)     _gRatio
+00008b41     22d (00008b40)     _RsdData
+00008b42     22d (00008b40)     _gSynPWM
+00008b44     22d (00008b40)     _OutVolt
+00008b49     22d (00008b40)     _gMainStatus
+00008b4f     22d (00008b40)     _UDC
+00008b56     22d (00008b40)     _gMotorInfo
+00008b5e     22d (00008b40)     _gBasePar
+00008b66     22d (00008b40)     _gPhase
+00008b70     22d (00008b40)     _gPWM
+
+00008b80     22e (00008b80)     _FunToMotorData
+00008b8a     22e (00008b80)     _gPWM_CMP
+00008b98     22e (00008b80)     _gMainCmd
+00008baa     22e (00008b80)     _CpuTimer0
+00008bb2     22e (00008b80)     _CpuTimer1
+00008bba     22e (00008b80)     ___TI_enable_exit_profile_output
+00008bbc     22e (00008b80)     ___TI_cleanup_ptr
+00008bbe     22e (00008b80)     ___TI_dtors_ptr
+
+00008bc0     22f (00008bc0)     _FrqencyCurAimToMotor
+00008bc1     22f (00008bc0)     _FrequncyToMotor
+00008bc2     22f (00008bc0)     _RunMode
+00008bc3     22f (00008bc0)     _MotorMainCmd
+00008bc4     22f (00008bc0)     _ForwardCmd
+00008bc6     22f (00008bc0)     _FrqencyAimTemp
+00008bc8     22f (00008bc0)     _FrqencyAim
+00008bca     22f (00008bc0)     _MaxFrequency
+00008bcc     22f (00008bc0)     _FrqencyCurAim
+00008bd0     22f (00008bc0)     _DecelerationTime
+00008bd2     22f (00008bc0)     _AccelerationTime
+00008bd4     22f (00008bc0)     _FrqencyCurrent
+00008bd6     22f (00008bc0)     _FrequencyTemp
+00008bd8     22f (00008bc0)     _FrequencyLineRamp
+00008be4     22f (00008bc0)     __unlock
+00008be6     22f (00008bc0)     _gErrorIntCnt
+
+003d7e80    f5fa (003d7e80)     _PartIdRegs
+
+003e8e24    fa38 (003e8e00)     _gSendToMotorTable
+
+003f7ff8    fdff (003f7fc0)     _CsmPwl
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+page  address   name                            
+----  -------   ----                            
+0     003e8000  .text                           
+0     003e8b75  C$$EXIT                         
+0     003e89c7  FS$$MPY                         
+0     003e8b9e  FS$$TOL                         
+0     003e8b4b  L$$DIV                          
+0     003e8b5a  L$$MOD                          
+0     003e8b68  UL$$DIV                         
+0     003e8b6f  UL$$MOD                         
+1     00008b04  _ACC1                           
+1     00008b06  _ACC2                           
+0     00008147  _ADP32F03x_usDelay              
+0     003e883b  _AccAndDecFrqCalc               
+0     003e882e  _AccDecTimeCalc                 
+1     00008bd2  _AccelerationTime               
+1     00007100  _AdcRegs                        
+1     00000b00  _AdcResult                      
+0     003e860b  _CANInit                        
+0     003e85df  _CAN_Init_Interrupt             
+1     00008b0d  _CBCCurPointInternal            
+0     003e852d  _CalOutputPhase                 
+1     00008a80  _CanMailBoxReadyFlag            
+0     003e895e  _CanMailBox_IsrSrv              
+1     00008a82  _CanMailBox_MsgData             
+0     003e86e9  _CanMsgData_Pop                 
+0     003e86b5  _CanMsgData_Push                
+1     00008ac0  _CanRecv_MsgData_Buffer         
+0     003e8766  _CanRemoteAckDataFill           
+0     003e8700  _CanTransmit2ms                 
+1     00006400  _Comp1Regs                      
+1     00006420  _Comp2Regs                      
+0     003e8a94  _ConfigCpuTimer                 
+0     003e8825  _CostStopMode                   
+1     00008baa  _CpuTimer0                      
+1     00000c00  _CpuTimer0Regs                  
+1     00008bb2  _CpuTimer1                      
+1     00000c08  _CpuTimer1Regs                  
+1     00000c10  _CpuTimer2Regs                  
+1     003f7ff8  _CsmPwl                         
+1     00000ae0  _CsmRegs                        
+1     00008b36  _DataTest                       
+0     000080ed  _DeadTimeCompensation           
+1     00008b09  _DeadTimeInternal               
+1     00008bd0  _DecelerationTime               
+1     00000880  _DevEmuRegs                     
+0     003e8065  _DisableDog                     
+1     000060c0  _ECanaMOTORegs                  
+1     00006080  _ECanaMOTSRegs                  
+1     00006100  _ECanaMboxes                    
+1     00006000  _ECanaRegs                      
+1     00006a00  _ECap1Regs                      
+1     00006800  _EPwm1Regs                      
+1     00006840  _EPwm2Regs                      
+1     00006880  _EPwm3Regs                      
+1     000068c0  _EPwm4Regs                      
+1     00006900  _EPwm5Regs                      
+1     00000d01  _EmuBMode                       
+1     00000d00  _EmuKey                         
+0     003e806d  _EnableDog                      
+0     003e8ac5  _EndOfADCISR                    
+1     00000a80  _FlashRegs                      
+1     00000d04  _Flash_CPUScaleFactor           
+1     00000d02  _Flash_CallbackPtr              
+1     00008bc4  _ForwardCmd                     
+1     00008bd8  _FrequencyLineRamp              
+1     00008bd6  _FrequencyTemp                  
+1     00008bc1  _FrequncyToMotor                
+1     00008bc8  _FrqencyAim                     
+1     00008bc6  _FrqencyAimTemp                 
+1     00008bcc  _FrqencyCurAim                  
+1     00008bc0  _FrqencyCurAimToMotor           
+1     00008bd4  _FrqencyCurrent                 
+1     00008b80  _FunToMotorData                 
+0     0000811b  _GetDCLinkVol                   
+0     0000810e  _GetRatioFromVot                
+0     00008000  _GetStepAngleINSF               
+0     003e8537  _GetVoltageFromFrqencyInVFMode  
+1     00006f80  _GpioCtrlRegs                   
+1     00006fc0  _GpioDataRegs                   
+1     00006fe0  _GpioIntRegs                    
+0     003e84b7  _HardWareErrorDeal              
+1     00007900  _I2caRegs                       
+0     003e8a75  _InitCpuTimers                  
+0     003e8558  _InitECanaGpio                  
+0     003e856e  _InitECana_1                    
+0     00008130  _InitFlash                      
+0     003e87b5  _InitForFunctionApp             
+0     003e82f2  _InitForMotorApp                
+0     003e800e  _InitInterrupt                  
+0     003e80ae  _InitPeripheralClocks           
+0     003e8032  _InitPeripherals                
+0     003e80c4  _InitPieCtrl                    
+0     003e80e5  _InitPieVectTable               
+0     003e8075  _InitPll                        
+0     003e821e  _InitSetAdc                     
+0     003e8101  _InitSetGpio                    
+0     003e813c  _InitSetPWM                     
+0     003e8000  _InitSysCtrl                    
+0     003e86af  _Init_CanMsgData                
+0     003e8053  _KickDog                        
+1     00006c00  _LinaRegs                       
+0     003e8874  _LineRampCalc                   
+1     00008b0a  _MAX_DC_VOL_3_3V                
+1     00008b07  _MAX_LIMIT_FREQ                 
+1     00008b0c  _MOTOR_RATED_CUR                
+1     00008b0e  _MOTOR_RATED_FRE                
+1     00008bca  _MaxFrequency                   
+0     003e84a8  _MotorControlMainISR            
+1     00008bc3  _MotorMainCmd                   
+0     003e8be8  _MovePrgFrFlashToRam            
+0     003e84d7  _NOShifPWM                      
+1     00007060  _NmiIntruptRegs                 
+0     003e8afa  _OneShotTZOfEPWMISR             
+1     00008b44  _OutVolt                        
+1     00008b0b  _OverCurPointInternal           
+1     00008b1b  _PWMArrayData0                  
+1     00008b0f  _PWMArrayData1                  
+1     00008b27  _PWMArrayData2                  
+1     00008b08  _PWM_FREQUENCY                  
+1     00007030  _PagOpaRegs                     
+0     003e8315  _ParGetFromFunction             
+0     003e833c  _ParameterChange                
+1     003d7e80  _PartIdRegs                     
+1     00000ce0  _PieCtrlRegs                    
+1     00000d00  _PieVectTable                   
+1     00008b33  _PreDriverRegs                  
+0     003e8439  _PrepareParForRun               
+1     00008b05  _RefSet                         
+0     003e88ba  _ReferenceSet                   
+0     003e805d  _ResetDSP                       
+1     00008b41  _RsdData                        
+0     003e8392  _RunCaseDeal                    
+0     003e83cb  _RunCaseRun                     
+0     003e83f2  _RunCaseStop                    
+0     003e87de  _RunLogicDeal                   
+1     00008bc2  _RunMode                        
+0     003e8815  _RunningLogicMode               
+0     00008066  _SVPWM                          
+0     00008011  _SVPWMPWMAngleCal               
+0     0000812f  _SVPWM_1ShuntGetPhaseCurrent    
+1     00007050  _SciaRegs                       
+0     003e8025  _SetInterruptEnable             
+1     00007040  _SpiaRegs                       
+0     003e8809  _StartLogicMode                 
+0     003e83a5  _StateModeUnderVol              
+0     003e8372  _SwitchFrqUpdate                
+1     00007010  _SysCtrlRegs                    
+0     003e87ae  _SystemLeve2msFunction          
+0     003e832f  _SystemLeve2msMotor             
+1     00008b4f  _UDC                            
+0     003e84ed  _UpdatPWMRegs                   
+0     003e87b8  _UpdateDataFunc2Core            
+0     003e88c8  _UpdateFrqSetAim                
+1     00008a86  _VarAddr                        
+1     00007070  _XIntruptRegs                   
+0     003e8adb  _ZeroOfEPWMISR                  
+1     00000700  __STACK_END                     
+abs   00000300  __STACK_SIZE                    
+0     003e8e38  __TI_table__prginRAM            
+1     00008bbc  ___TI_cleanup_ptr               
+1     00008bbe  ___TI_dtors_ptr                 
+1     00008bba  ___TI_enable_exit_profile_output
+abs   ffffffff  ___TI_pprof_out_hndl            
+abs   ffffffff  ___TI_prof_data_size            
+abs   ffffffff  ___TI_prof_data_start           
+abs   ffffffff  ___binit__                      
+abs   ffffffff  ___c_args__                     
+0     003e8da7  ___cinit__                      
+0     003e8c5b  ___etext__                      
+abs   ffffffff  ___pinit__                      
+0     003e8000  ___text__                       
+0     003e8c2e  __args_main                     
+1     00008b3e  __lock                          
+0     003e8c4f  __nop                           
+0     003e8c4b  __register_lock                 
+0     003e8c47  __register_unlock               
+1     00000400  __stack                         
+0     003e8c5a  __system_post_cinit             
+0     003e8c58  __system_pre_init               
+1     00008be4  __unlock                        
+0     003e8b75  _abort                          
+0     003e88cd  _abs                            
+0     003e88d1  _absl                           
+0     003e8a21  _c_int00                        
+0     003e8bed  _copy_in                        
+0     003e8041  _copy_prg                       
+0     003e8b77  _exit                           
+1     00008b5e  _gBasePar                       
+1     00008be6  _gErrorIntCnt                   
+1     00008b98  _gMainCmd                       
+1     00008b49  _gMainStatus                    
+1     00008b56  _gMotorInfo                     
+1     00008b70  _gPWM                           
+1     00008b8a  _gPWM_CMP                       
+1     00008b66  _gPhase                         
+1     00008b40  _gRatio                         
+0     003e8e24  _gSendToMotorTable              
+1     00008b42  _gSynPWM                        
+0     003e8b12  _main                           
+0     003e8c11  _memcpy                         
+0     003e8e38  _prginRAM                       
+0     003e88f8  _qatan                          
+0     003e88d5  _qsin                           
+0     003e892e  _qsqrt                          
+0     003e8c50  _rsvd_ISR                       
+0     003e88d3  _swap                           
+abs   ffffffff  binit                           
+0     003e8da7  cinit                           
+0     003f5ff6  code_start                      
+0     003e8c5b  etext                           
+abs   ffffffff  pinit                           
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+page  address   name                            
+----  -------   ----                            
+0     00008000  _GetStepAngleINSF               
+0     00008011  _SVPWMPWMAngleCal               
+0     00008066  _SVPWM                          
+0     000080ed  _DeadTimeCompensation           
+0     0000810e  _GetRatioFromVot                
+0     0000811b  _GetDCLinkVol                   
+0     0000812f  _SVPWM_1ShuntGetPhaseCurrent    
+0     00008130  _InitFlash                      
+0     00008147  _ADP32F03x_usDelay              
+0     003e8000  .text                           
+0     003e8000  _InitSysCtrl                    
+0     003e8000  ___text__                       
+0     003e800e  _InitInterrupt                  
+0     003e8025  _SetInterruptEnable             
+0     003e8032  _InitPeripherals                
+0     003e8041  _copy_prg                       
+0     003e8053  _KickDog                        
+0     003e805d  _ResetDSP                       
+0     003e8065  _DisableDog                     
+0     003e806d  _EnableDog                      
+0     003e8075  _InitPll                        
+0     003e80ae  _InitPeripheralClocks           
+0     003e80c4  _InitPieCtrl                    
+0     003e80e5  _InitPieVectTable               
+0     003e8101  _InitSetGpio                    
+0     003e813c  _InitSetPWM                     
+0     003e821e  _InitSetAdc                     
+0     003e82f2  _InitForMotorApp                
+0     003e8315  _ParGetFromFunction             
+0     003e832f  _SystemLeve2msMotor             
+0     003e833c  _ParameterChange                
+0     003e8372  _SwitchFrqUpdate                
+0     003e8392  _RunCaseDeal                    
+0     003e83a5  _StateModeUnderVol              
+0     003e83cb  _RunCaseRun                     
+0     003e83f2  _RunCaseStop                    
+0     003e8439  _PrepareParForRun               
+0     003e84a8  _MotorControlMainISR            
+0     003e84b7  _HardWareErrorDeal              
+0     003e84d7  _NOShifPWM                      
+0     003e84ed  _UpdatPWMRegs                   
+0     003e852d  _CalOutputPhase                 
+0     003e8537  _GetVoltageFromFrqencyInVFMode  
+0     003e8558  _InitECanaGpio                  
+0     003e856e  _InitECana_1                    
+0     003e85df  _CAN_Init_Interrupt             
+0     003e860b  _CANInit                        
+0     003e86af  _Init_CanMsgData                
+0     003e86b5  _CanMsgData_Push                
+0     003e86e9  _CanMsgData_Pop                 
+0     003e8700  _CanTransmit2ms                 
+0     003e8766  _CanRemoteAckDataFill           
+0     003e87ae  _SystemLeve2msFunction          
+0     003e87b5  _InitForFunctionApp             
+0     003e87b8  _UpdateDataFunc2Core            
+0     003e87de  _RunLogicDeal                   
+0     003e8809  _StartLogicMode                 
+0     003e8815  _RunningLogicMode               
+0     003e8825  _CostStopMode                   
+0     003e882e  _AccDecTimeCalc                 
+0     003e883b  _AccAndDecFrqCalc               
+0     003e8874  _LineRampCalc                   
+0     003e88ba  _ReferenceSet                   
+0     003e88c8  _UpdateFrqSetAim                
+0     003e88cd  _abs                            
+0     003e88d1  _absl                           
+0     003e88d3  _swap                           
+0     003e88d5  _qsin                           
+0     003e88f8  _qatan                          
+0     003e892e  _qsqrt                          
+0     003e895e  _CanMailBox_IsrSrv              
+0     003e89c7  FS$$MPY                         
+0     003e8a21  _c_int00                        
+0     003e8a75  _InitCpuTimers                  
+0     003e8a94  _ConfigCpuTimer                 
+0     003e8ac5  _EndOfADCISR                    
+0     003e8adb  _ZeroOfEPWMISR                  
+0     003e8afa  _OneShotTZOfEPWMISR             
+0     003e8b12  _main                           
+0     003e8b4b  L$$DIV                          
+0     003e8b5a  L$$MOD                          
+0     003e8b68  UL$$DIV                         
+0     003e8b6f  UL$$MOD                         
+0     003e8b75  C$$EXIT                         
+0     003e8b75  _abort                          
+0     003e8b77  _exit                           
+0     003e8b9e  FS$$TOL                         
+0     003e8be8  _MovePrgFrFlashToRam            
+0     003e8bed  _copy_in                        
+0     003e8c11  _memcpy                         
+0     003e8c2e  __args_main                     
+0     003e8c47  __register_unlock               
+0     003e8c4b  __register_lock                 
+0     003e8c4f  __nop                           
+0     003e8c50  _rsvd_ISR                       
+0     003e8c58  __system_pre_init               
+0     003e8c5a  __system_post_cinit             
+0     003e8c5b  ___etext__                      
+0     003e8c5b  etext                           
+0     003e8da7  ___cinit__                      
+0     003e8da7  cinit                           
+0     003e8e24  _gSendToMotorTable              
+0     003e8e38  __TI_table__prginRAM            
+0     003e8e38  _prginRAM                       
+0     003f5ff6  code_start                      
+1     00000400  __stack                         
+1     00000700  __STACK_END                     
+1     00000880  _DevEmuRegs                     
+1     00000a80  _FlashRegs                      
+1     00000ae0  _CsmRegs                        
+1     00000b00  _AdcResult                      
+1     00000c00  _CpuTimer0Regs                  
+1     00000c08  _CpuTimer1Regs                  
+1     00000c10  _CpuTimer2Regs                  
+1     00000ce0  _PieCtrlRegs                    
+1     00000d00  _EmuKey                         
+1     00000d00  _PieVectTable                   
+1     00000d01  _EmuBMode                       
+1     00000d02  _Flash_CallbackPtr              
+1     00000d04  _Flash_CPUScaleFactor           
+1     00006000  _ECanaRegs                      
+1     00006080  _ECanaMOTSRegs                  
+1     000060c0  _ECanaMOTORegs                  
+1     00006100  _ECanaMboxes                    
+1     00006400  _Comp1Regs                      
+1     00006420  _Comp2Regs                      
+1     00006800  _EPwm1Regs                      
+1     00006840  _EPwm2Regs                      
+1     00006880  _EPwm3Regs                      
+1     000068c0  _EPwm4Regs                      
+1     00006900  _EPwm5Regs                      
+1     00006a00  _ECap1Regs                      
+1     00006c00  _LinaRegs                       
+1     00006f80  _GpioCtrlRegs                   
+1     00006fc0  _GpioDataRegs                   
+1     00006fe0  _GpioIntRegs                    
+1     00007010  _SysCtrlRegs                    
+1     00007030  _PagOpaRegs                     
+1     00007040  _SpiaRegs                       
+1     00007050  _SciaRegs                       
+1     00007060  _NmiIntruptRegs                 
+1     00007070  _XIntruptRegs                   
+1     00007100  _AdcRegs                        
+1     00007900  _I2caRegs                       
+1     00008a80  _CanMailBoxReadyFlag            
+1     00008a82  _CanMailBox_MsgData             
+1     00008a86  _VarAddr                        
+1     00008ac0  _CanRecv_MsgData_Buffer         
+1     00008b04  _ACC1                           
+1     00008b05  _RefSet                         
+1     00008b06  _ACC2                           
+1     00008b07  _MAX_LIMIT_FREQ                 
+1     00008b08  _PWM_FREQUENCY                  
+1     00008b09  _DeadTimeInternal               
+1     00008b0a  _MAX_DC_VOL_3_3V                
+1     00008b0b  _OverCurPointInternal           
+1     00008b0c  _MOTOR_RATED_CUR                
+1     00008b0d  _CBCCurPointInternal            
+1     00008b0e  _MOTOR_RATED_FRE                
+1     00008b0f  _PWMArrayData1                  
+1     00008b1b  _PWMArrayData0                  
+1     00008b27  _PWMArrayData2                  
+1     00008b33  _PreDriverRegs                  
+1     00008b36  _DataTest                       
+1     00008b3e  __lock                          
+1     00008b40  _gRatio                         
+1     00008b41  _RsdData                        
+1     00008b42  _gSynPWM                        
+1     00008b44  _OutVolt                        
+1     00008b49  _gMainStatus                    
+1     00008b4f  _UDC                            
+1     00008b56  _gMotorInfo                     
+1     00008b5e  _gBasePar                       
+1     00008b66  _gPhase                         
+1     00008b70  _gPWM                           
+1     00008b80  _FunToMotorData                 
+1     00008b8a  _gPWM_CMP                       
+1     00008b98  _gMainCmd                       
+1     00008baa  _CpuTimer0                      
+1     00008bb2  _CpuTimer1                      
+1     00008bba  ___TI_enable_exit_profile_output
+1     00008bbc  ___TI_cleanup_ptr               
+1     00008bbe  ___TI_dtors_ptr                 
+1     00008bc0  _FrqencyCurAimToMotor           
+1     00008bc1  _FrequncyToMotor                
+1     00008bc2  _RunMode                        
+1     00008bc3  _MotorMainCmd                   
+1     00008bc4  _ForwardCmd                     
+1     00008bc6  _FrqencyAimTemp                 
+1     00008bc8  _FrqencyAim                     
+1     00008bca  _MaxFrequency                   
+1     00008bcc  _FrqencyCurAim                  
+1     00008bd0  _DecelerationTime               
+1     00008bd2  _AccelerationTime               
+1     00008bd4  _FrqencyCurrent                 
+1     00008bd6  _FrequencyTemp                  
+1     00008bd8  _FrequencyLineRamp              
+1     00008be4  __unlock                        
+1     00008be6  _gErrorIntCnt                   
+1     003d7e80  _PartIdRegs                     
+1     003f7ff8  _CsmPwl                         
+abs   00000300  __STACK_SIZE                    
+abs   ffffffff  ___TI_pprof_out_hndl            
+abs   ffffffff  ___TI_prof_data_size            
+abs   ffffffff  ___TI_prof_data_start           
+abs   ffffffff  ___binit__                      
+abs   ffffffff  ___c_args__                     
+abs   ffffffff  ___pinit__                      
+abs   ffffffff  binit                           
+abs   ffffffff  pinit                           
+
+[210 symbols]

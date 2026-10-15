@@ -1,0 +1,437 @@
+******************************************************************************
+             TMS320C2000 Linker PC v22.6.0                     
+******************************************************************************
+>> Linked Fri Apr 11 17:26:15 2025
+
+OUTPUT FILE NAME:   <hic_ex2_config_8bit_adc.out>
+ENTRY POINT SYMBOL: "_c_int00"  address: 000084f8
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+  BEGIN                 00000000   00000002  00000002  00000000  RWIX
+  BOOT_RSVD             00000002   00000126  00000000  00000126  RWIX
+  RAMM0                 00000128   000002d8  0000002a  000002ae  RWIX
+  RAMM1                 00000400   000003f8  00000200  000001f8  RWIX
+  RAMLS0                00008000   00000800  00000800  00000000  RWIX
+  RAMLS1                00008800   00000800  000004f4  0000030c  RWIX
+  RAMLS2                00009000   00000800  00000000  00000800  RWIX
+  RAMLS3                00009800   00000800  00000000  00000800  RWIX
+  RAMLS4                0000a000   00000800  00000000  00000800  RWIX
+  RAMLS5                0000a800   00000800  0000000e  000007f2  RWIX
+  RAMLS6_7              0000b000   00001000  00000000  00001000  RWIX
+  RAMGS0                0000c000   00001000  00000000  00001000  RWIX
+  RAMGS1                0000d000   00001000  00000000  00001000  RWIX
+  RAMGS2                0000e000   00001000  00000000  00001000  RWIX
+  RAMGS3                0000f000   00000ff8  00000000  00000ff8  RWIX
+  FLASH_BANK0_SEC0      00080002   00000ffe  00000000  00000ffe  RWIX
+  FLASH_BANK0_SEC1      00081000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC2      00082000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC3      00083000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC4      00084000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC5      00085000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC6      00086000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC7      00087000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC8      00088000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC9      00089000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC10     0008a000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC11     0008b000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC12     0008c000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC13     0008d000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC14     0008e000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC15     0008f000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC0      00090000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC1      00091000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC2      00092000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC3      00093000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC4      00094000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC5      00095000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC6      00096000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC7      00097000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC8      00098000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC9      00099000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC10     0009a000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC11     0009b000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC12     0009c000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC13     0009d000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC14     0009e000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC15     0009f000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC0      000a0000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC1      000a1000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC2      000a2000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC3      000a3000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC4      000a4000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC5      000a5000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC6      000a6000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC7      000a7000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC8      000a8000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC9      000a9000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC10     000aa000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC11     000ab000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC12     000ac000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC13     000ad000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC14     000ae000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC15     000af000   00000ff0  00000000  00000ff0  RWIX
+  SECURE_ROM            003f2000   00006000  00000000  00006000  RWIX
+  BOOTROM               003f8000   00007fc0  00000000  00007fc0  RWIX
+  RESET                 003fffc0   00000002  00000000  00000002  RWIX
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+codestart 
+*          0    00000000    00000002     
+                  00000000    00000002     f28003x_codestartbranch.obj (codestart)
+
+.cinit     0    00000128    00000026     
+                  00000128    0000000e     rts2800_fpu32.lib : exit.c.obj (.cinit)
+                  00000136    0000000c     hic_ex2_config_8bit_adc.obj (.cinit)
+                  00000142    00000005     rts2800_fpu32.lib : _lock.c.obj (.cinit:__lock)
+                  00000147    00000005                       : _lock.c.obj (.cinit:__unlock)
+                  0000014c    00000002     --HOLE-- [fill = 0]
+
+.TI.ramfunc 
+*          0    0000014e    00000004     
+                  0000014e    00000004     sysctl.obj (.TI.ramfunc)
+
+.reset     0    003fffc0    00000002     DSECT
+                  003fffc0    00000002     rts2800_fpu32.lib : boot28.asm.obj (.reset)
+
+.stack     0    00000400    00000200     UNINITIALIZED
+                  00000400    00000200     --HOLE--
+
+.pinit     0    00000128    00000000     UNINITIALIZED
+
+.ebss      0    0000a800    0000000e     UNINITIALIZED
+                  0000a800    00000006     rts2800_fpu32.lib : exit.c.obj (.ebss)
+                  0000a806    00000003     hic_ex2_config_8bit_adc.obj (.ebss)
+                  0000a809    00000001     --HOLE--
+                  0000a80a    00000002     rts2800_fpu32.lib : _lock.c.obj (.ebss:__lock)
+                  0000a80c    00000002                       : _lock.c.obj (.ebss:__unlock)
+
+.text.1    0    00008000    00000800     
+                  00008000    000000f8     sysctl.obj (.text:_SysCtl_setClock)
+                  000080f8    000000f2     sysctl.obj (.text:_SysCtl_isPLLValid)
+                  000081ea    000000ce     device.obj (.text:_Device_enableAllPeripherals)
+                  000082b8    000000ce     hic_ex2_config_8bit_adc.obj (.text:_initGPIOHIC)
+                  00008386    00000094     dma.obj (.text:_DMA_configMode)
+                  0000841a    00000088     rts2800_fpu32.lib : fs_div28.asm.obj (.text)
+                  000084a2    00000056     hic_ex2_config_8bit_adc.obj (.text:_main)
+                  000084f8    00000056     rts2800_fpu32.lib : boot28.asm.obj (.text)
+                  0000854e    00000049     gpio.obj (.text:_GPIO_setAnalogMode)
+                  00008597    00000045     sysctl.obj (.text:_SysCtl_pollX1Counter)
+                  000085dc    00000044     hic_ex2_config_8bit_adc.obj (.text:_dmaCh6ISR)
+                  00008620    00000043     hic_ex2_config_8bit_adc.obj (.text:_hicISR)
+                  00008663    0000003d     interrupt.obj (.text:_Interrupt_initModule)
+                  000086a0    0000003d     sysctl.obj (.text:_SysCtl_selectXTAL)
+                  000086dd    00000038     hic_ex2_config_8bit_adc.obj (.text:_initDMA)
+                  00008715    00000037     gpio.obj (.text:_GPIO_setPinConfig)
+                  0000874c    00000037     interrupt.obj (.text:_Interrupt_enable)
+                  00008783    00000037     hic_ex2_config_8bit_adc.obj (.text:_configCPUTimer)
+                  000087ba    00000032     sysctl.obj (.text:_SysCtl_selectOscSource)
+                  000087ec    00000014     sysctl.obj (.text:_DCC_setCounter0ClkSource)
+
+.text.2    0    00008800    000004f4     
+                  00008800    0000002f     sysctl.obj (.text:_DCC_setCounterSeeds)
+                  0000882f    0000002c     gpio.obj (.text:_GPIO_setQualificationMode)
+                  0000885b    0000002a     hic_ex2_config_8bit_adc.obj (.text:_initADCSOC)
+                  00008885    00000029     rts2800_fpu32.lib : exit.c.obj (.text)
+                  000088ae    00000028     adc.obj (.text:_ADC_setOffsetTrimAll)
+                  000088d6    00000024     rts2800_fpu32.lib : cpy_tbl.c.obj (.text)
+                  000088fa    00000020     hic_ex2_config_8bit_adc.obj (.text:_ADC_setupSOC)
+                  0000891a    00000020     sysctl.obj (.text:_SysCtl_selectXTALSingleEnded)
+                  0000893a    0000001e     adc.obj (.text:_ADC_setVREF)
+                  00008958    0000001e     interrupt.obj (.text:_Interrupt_initVectorTable)
+                  00008976    0000001e     rts2800_fpu32.lib : ll_cmp28.asm.obj (.text)
+                  00008994    0000001d                       : memcpy.c.obj (.text)
+                  000089b1    0000001c     hic_ex2_config_8bit_adc.obj (.text:_ADC_setInterruptSource)
+                  000089cd    0000001c     dma.obj (.text:_DMA_configAddresses)
+                  000089e9    0000001a     sysctl.obj (.text:_DCC_enableSingleShotMode)
+                  00008a03    0000001a     device.obj (.text:_Device_init)
+                  00008a1d    00000019     hic_ex2_config_8bit_adc.obj (.text:_initADC)
+                  00008a36    00000017     device.obj (.text:_SysCtl_enablePeripheral)
+                  00008a4d    00000017     sysctl.obj (.text:_SysCtl_enablePeripheral)
+                  00008a64    00000016     hic_ex2_config_8bit_adc.obj (.text:_ADC_enableContinuousMode)
+                  00008a7a    00000016     hic_ex2_config_8bit_adc.obj (.text:_ADC_enableInterrupt)
+                  00008a90    00000016     dma.obj (.text:_DMA_configTransfer)
+                  00008aa6    00000016     interrupt.obj (.text:_Interrupt_defaultHandler)
+                  00008abc    00000015     device.obj (.text:_GPIO_unlockPortConfig)
+                  00008ad1    00000014     sysctl.obj (.text:_DCC_setCounter1ClkSource)
+                  00008ae5    00000014     sysctl.obj (.text:_SysCtl_setPLLSysClk)
+                  00008af9    00000012     dma.obj (.text:_DMA_configBurst)
+                  00008b0b    00000012     rts2800_fpu32.lib : args_main.c.obj (.text)
+                  00008b1d    00000011     hic_ex2_config_8bit_adc.obj (.text:_DMA_setInterruptMode)
+                  00008b2e    00000010     hic_ex2_config_8bit_adc.obj (.text:_CPUTimer_startTimer)
+                  00008b3e    00000010     device.obj (.text:_Device_initGPIO)
+                  00008b4e    0000000f     hic_ex2_config_8bit_adc.obj (.text:_Interrupt_register)
+                  00008b5d    0000000d     hic_ex2_config_8bit_adc.obj (.text:_CPUTimer_setPreScaler)
+                  00008b6a    0000000d     interrupt.obj (.text:_Interrupt_disableGlobal)
+                  00008b77    0000000d     interrupt.obj (.text:_Interrupt_enableGlobal)
+                  00008b84    0000000d     device.obj (.text:_SysCtl_setLowSpeedClock)
+                  00008b91    0000000c     hic_ex2_config_8bit_adc.obj (.text:_ADC_setInterruptPulseMode)
+                  00008b9d    0000000c     hic_ex2_config_8bit_adc.obj (.text:_ADC_setPrescaler)
+                  00008ba9    0000000c     hic_ex2_config_8bit_adc.obj (.text:_CPUTimer_enableInterrupt)
+                  00008bb5    0000000c     sysctl.obj (.text:_DCC_disableDoneSignal)
+                  00008bc1    0000000b     hic_ex2_config_8bit_adc.obj (.text:_CPUTimer_reloadTimerCounter)
+                  00008bcc    0000000b     hic_ex2_config_8bit_adc.obj (.text:_CPUTimer_stopTimer)
+                  00008bd7    0000000b     sysctl.obj (.text:_DCC_clearDoneFlag)
+                  00008be2    0000000b     sysctl.obj (.text:_DCC_clearErrorFlag)
+                  00008bed    0000000b     sysctl.obj (.text:_DCC_disableErrorSignal)
+                  00008bf8    0000000b     sysctl.obj (.text:_DCC_disableModule)
+                  00008c03    0000000b     sysctl.obj (.text:_DCC_enableModule)
+                  00008c0e    0000000b     hic_ex2_config_8bit_adc.obj (.text:_DMA_startChannel)
+                  00008c19    0000000b     hic_ex2_config_8bit_adc.obj (.text:_DMA_stopChannel)
+                  00008c24    0000000b     sysctl.obj (.text:_SysCtl_isMCDClockFailureDetected)
+                  00008c2f    0000000a     hic_ex2_config_8bit_adc.obj (.text:_ADC_clearInterruptStatus)
+                  00008c39    0000000a     cputimer.obj (.text:_CPUTimer_setEmulationMode)
+                  00008c43    0000000a     hic_ex2_config_8bit_adc.obj (.text:_DMA_initController)
+                  00008c4d    0000000a     hic_ex2_config_8bit_adc.obj (.text:_HIC_enableD2HInterrupt)
+                  00008c57    0000000a     hic_ex2_config_8bit_adc.obj (.text:_HIC_enableH2DInterrupt)
+                  00008c61    0000000a     interrupt.obj (.text:_Interrupt_illegalOperationHandler)
+                  00008c6b    0000000a     interrupt.obj (.text:_Interrupt_nmiHandler)
+                  00008c75    00000009     hic_ex2_config_8bit_adc.obj (.text:_ADC_enableConverter)
+                  00008c7e    00000009     hic_ex2_config_8bit_adc.obj (.text:_DMA_disableOverrunInterrupt)
+                  00008c87    00000009     hic_ex2_config_8bit_adc.obj (.text:_DMA_enableInterrupt)
+                  00008c90    00000009     hic_ex2_config_8bit_adc.obj (.text:_DMA_enableTrigger)
+                  00008c99    00000009     rts2800_fpu32.lib : _lock.c.obj (.text)
+                  00008ca2    00000008     hic_ex2_config_8bit_adc.obj (.text:_HIC_setConfig)
+                  00008caa    00000008     device.obj (.text:_SysCtl_disableWatchdog)
+                  00008cb2    00000008     f28003x_codestartbranch.obj (.text)
+                  00008cba    00000007     device.obj (.text:_ASysCtl_lockVREG)
+                  00008cc1    00000007     hic_ex2_config_8bit_adc.obj (.text:_CPUTimer_setPeriod)
+                  00008cc8    00000007     sysctl.obj (.text:_SysCtl_resetMCD)
+                  00008ccf    00000006     hic_ex2_config_8bit_adc.obj (.text:_HIC_clearH2DInterrupt)
+                  00008cd5    00000006     hic_ex2_config_8bit_adc.obj (.text:_HIC_enableHostInterface)
+                  00008cdb    00000006     hic_ex2_config_8bit_adc.obj (.text:_HIC_setD2HToken)
+                  00008ce1    00000006     hic_ex2_config_8bit_adc.obj (.text:_Interrupt_clearACKGroup)
+                  00008ce7    00000004     device.obj (.text:_SysCtl_deviceCal)
+                  00008ceb    00000003     hic_ex2_config_8bit_adc.obj (.text:_HIC_getH2DInterruptStatus)
+                  00008cee    00000003     hic_ex2_config_8bit_adc.obj (.text:_HIC_getH2DToken)
+                  00008cf1    00000002     rts2800_fpu32.lib : pre_init.c.obj (.text)
+                  00008cf3    00000001                       : startup.c.obj (.text)
+
+MODULE SUMMARY
+
+       Module                        code   initialized data   uninitialized data
+       ------                        ----   ----------------   ------------------
+    .\device\
+       device.obj                    324    0                  0                 
+       f28003x_codestartbranch.obj   10     0                  0                 
+    +--+-----------------------------+------+------------------+--------------------+
+       Total:                        334    0                  0                 
+                                                                                 
+    .\device\driverlib\
+       sysctl.obj                    947    0                  0                 
+       dma.obj                       216    0                  0                 
+       interrupt.obj                 214    0                  0                 
+       gpio.obj                      172    0                  0                 
+       adc.obj                       70     0                  0                 
+       cputimer.obj                  10     0                  0                 
+    +--+-----------------------------+------+------------------+--------------------+
+       Total:                        1629   0                  0                 
+                                                                                 
+    .\source\
+       hic_ex2_config_8bit_adc.obj   971    12                 3                 
+    +--+-----------------------------+------+------------------+--------------------+
+       Total:                        971    12                 3                 
+                                                                                 
+    C:\ti\ccs1220\ccs\tools\compiler\ti-cgt-c2000_22.6.0.LTS\lib\rts2800_fpu32.lib
+       fs_div28.asm.obj              136    0                  0                 
+       boot28.asm.obj                86     0                  0                 
+       exit.c.obj                    41     14                 6                 
+       cpy_tbl.c.obj                 36     0                  0                 
+       ll_cmp28.asm.obj              30     0                  0                 
+       memcpy.c.obj                  29     0                  0                 
+       _lock.c.obj                   9      10                 4                 
+       args_main.c.obj               18     0                  0                 
+       pre_init.c.obj                2      0                  0                 
+       startup.c.obj                 1      0                  0                 
+    +--+-----------------------------+------+------------------+--------------------+
+       Total:                        388    24                 10                
+                                                                                 
+       Stack:                        0      0                  512               
+    +--+-----------------------------+------+------------------+--------------------+
+       Grand Total:                  3322   36                 525               
+
+
+GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
+
+address     data page           name
+--------    ----------------    ----
+00000400      10 (00000400)     __stack
+
+0000a800     2a0 (0000a800)     ___TI_enable_exit_profile_output
+0000a802     2a0 (0000a800)     ___TI_cleanup_ptr
+0000a804     2a0 (0000a800)     ___TI_dtors_ptr
+0000a806     2a0 (0000a800)     _hicISRCount
+0000a807     2a0 (0000a800)     _startReceived
+0000a808     2a0 (0000a800)     _numDMAInterrupts
+0000a80a     2a0 (0000a800)     __lock
+0000a80c     2a0 (0000a800)     __unlock
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+page  address   name                              
+----  -------   ----                              
+abs   ffffffff  .text                             
+0     00008885  C$$EXIT                           
+0     0000841a  FS$$DIV                           
+0     00008976  LL$$CMP                           
+0     00008988  ULL$$CMP                          
+0     000088ae  _ADC_setOffsetTrimAll             
+0     0000893a  _ADC_setVREF                      
+0     00008c39  _CPUTimer_setEmulationMode        
+0     000089cd  _DMA_configAddresses              
+0     00008af9  _DMA_configBurst                  
+0     00008386  _DMA_configMode                   
+0     00008a90  _DMA_configTransfer               
+0     000081ea  _Device_enableAllPeripherals      
+0     00008a03  _Device_init                      
+0     00008b3e  _Device_initGPIO                  
+0     0000854e  _GPIO_setAnalogMode               
+0     00008715  _GPIO_setPinConfig                
+0     0000882f  _GPIO_setQualificationMode        
+0     00008aa6  _Interrupt_defaultHandler         
+0     0000874c  _Interrupt_enable                 
+0     00008c61  _Interrupt_illegalOperationHandler
+0     00008663  _Interrupt_initModule             
+0     00008958  _Interrupt_initVectorTable        
+0     00008c6b  _Interrupt_nmiHandler             
+0     0000014e  _SysCtl_delay                     
+0     000080f8  _SysCtl_isPLLValid                
+0     000087ba  _SysCtl_selectOscSource           
+0     000086a0  _SysCtl_selectXTAL                
+0     0000891a  _SysCtl_selectXTALSingleEnded     
+0     00008000  _SysCtl_setClock                  
+0     00000600  __STACK_END                       
+abs   00000200  __STACK_SIZE                      
+0     0000a802  ___TI_cleanup_ptr                 
+0     0000a804  ___TI_dtors_ptr                   
+0     0000a800  ___TI_enable_exit_profile_output  
+abs   ffffffff  ___TI_pprof_out_hndl              
+abs   ffffffff  ___TI_prof_data_size              
+abs   ffffffff  ___TI_prof_data_start             
+abs   ffffffff  ___binit__                        
+abs   ffffffff  ___c_args__                       
+0     00000128  ___cinit__                        
+abs   ffffffff  ___etext__                        
+abs   ffffffff  ___pinit__                        
+abs   ffffffff  ___text__                         
+0     00008b0b  __args_main                       
+0     0000a80a  __lock                            
+0     00008ca1  __nop                             
+0     00008c9d  __register_lock                   
+0     00008c99  __register_unlock                 
+0     00000400  __stack                           
+0     00008cf3  __system_post_cinit               
+0     00008cf1  __system_pre_init                 
+0     0000a80c  __unlock                          
+0     00008885  _abort                            
+0     000084f8  _c_int00                          
+0     00008783  _configCPUTimer                   
+0     000088d6  _copy_in                          
+0     000085dc  _dmaCh6ISR                        
+0     00008887  _exit                             
+0     00008620  _hicISR                           
+0     0000a806  _hicISRCount                      
+0     00008a1d  _initADC                          
+0     0000885b  _initADCSOC                       
+0     000086dd  _initDMA                          
+0     000082b8  _initGPIOHIC                      
+0     000084a2  _main                             
+0     00008994  _memcpy                           
+0     0000a808  _numDMAInterrupts                 
+0     0000a807  _startReceived                    
+abs   ffffffff  binit                             
+0     00000128  cinit                             
+0     00000000  code_start                        
+abs   ffffffff  etext                             
+abs   ffffffff  pinit                             
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+page  address   name                              
+----  -------   ----                              
+0     00000000  code_start                        
+0     00000128  ___cinit__                        
+0     00000128  cinit                             
+0     0000014e  _SysCtl_delay                     
+0     00000400  __stack                           
+0     00000600  __STACK_END                       
+0     00008000  _SysCtl_setClock                  
+0     000080f8  _SysCtl_isPLLValid                
+0     000081ea  _Device_enableAllPeripherals      
+0     000082b8  _initGPIOHIC                      
+0     00008386  _DMA_configMode                   
+0     0000841a  FS$$DIV                           
+0     000084a2  _main                             
+0     000084f8  _c_int00                          
+0     0000854e  _GPIO_setAnalogMode               
+0     000085dc  _dmaCh6ISR                        
+0     00008620  _hicISR                           
+0     00008663  _Interrupt_initModule             
+0     000086a0  _SysCtl_selectXTAL                
+0     000086dd  _initDMA                          
+0     00008715  _GPIO_setPinConfig                
+0     0000874c  _Interrupt_enable                 
+0     00008783  _configCPUTimer                   
+0     000087ba  _SysCtl_selectOscSource           
+0     0000882f  _GPIO_setQualificationMode        
+0     0000885b  _initADCSOC                       
+0     00008885  C$$EXIT                           
+0     00008885  _abort                            
+0     00008887  _exit                             
+0     000088ae  _ADC_setOffsetTrimAll             
+0     000088d6  _copy_in                          
+0     0000891a  _SysCtl_selectXTALSingleEnded     
+0     0000893a  _ADC_setVREF                      
+0     00008958  _Interrupt_initVectorTable        
+0     00008976  LL$$CMP                           
+0     00008988  ULL$$CMP                          
+0     00008994  _memcpy                           
+0     000089cd  _DMA_configAddresses              
+0     00008a03  _Device_init                      
+0     00008a1d  _initADC                          
+0     00008a90  _DMA_configTransfer               
+0     00008aa6  _Interrupt_defaultHandler         
+0     00008af9  _DMA_configBurst                  
+0     00008b0b  __args_main                       
+0     00008b3e  _Device_initGPIO                  
+0     00008c39  _CPUTimer_setEmulationMode        
+0     00008c61  _Interrupt_illegalOperationHandler
+0     00008c6b  _Interrupt_nmiHandler             
+0     00008c99  __register_unlock                 
+0     00008c9d  __register_lock                   
+0     00008ca1  __nop                             
+0     00008cf1  __system_pre_init                 
+0     00008cf3  __system_post_cinit               
+0     0000a800  ___TI_enable_exit_profile_output  
+0     0000a802  ___TI_cleanup_ptr                 
+0     0000a804  ___TI_dtors_ptr                   
+0     0000a806  _hicISRCount                      
+0     0000a807  _startReceived                    
+0     0000a808  _numDMAInterrupts                 
+0     0000a80a  __lock                            
+0     0000a80c  __unlock                          
+abs   00000200  __STACK_SIZE                      
+abs   ffffffff  .text                             
+abs   ffffffff  ___TI_pprof_out_hndl              
+abs   ffffffff  ___TI_prof_data_size              
+abs   ffffffff  ___TI_prof_data_start             
+abs   ffffffff  ___binit__                        
+abs   ffffffff  ___c_args__                       
+abs   ffffffff  ___etext__                        
+abs   ffffffff  ___pinit__                        
+abs   ffffffff  ___text__                         
+abs   ffffffff  binit                             
+abs   ffffffff  etext                             
+abs   ffffffff  pinit                             
+
+[74 symbols]

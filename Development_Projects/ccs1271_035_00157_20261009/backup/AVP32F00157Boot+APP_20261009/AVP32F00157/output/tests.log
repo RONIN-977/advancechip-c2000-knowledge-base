@@ -1,0 +1,60 @@
+PASS APP SCI/CAN: invalid request rejected, ACK before BOOT handoff, TX retry, BOOT INFO and repeated upgrade entry
+
+欢迎使用 .NET 10.0!
+---------------------
+SDK 版本: 10.0.300
+
+遥测
+---------
+.NET 工具会收集用法数据，帮助我们改善你的体验。它由 Microsoft 收集并与社区共享。你可通过使用喜欢的 shell 将 DOTNET_CLI_TELEMETRY_OPTOUT 环境变量设置为 "1" 或 "true" 来选择退出遥测。
+
+阅读有关 .NET CLI 工具遥测的更多信息: https://aka.ms/dotnet-cli-telemetry
+
+----------------
+已安装 ASP.NET Core HTTPS 开发证书。
+若要信任该证书，请运行 "dotnet dev-certs https --trust"
+了解 HTTPS: https://aka.ms/dotnet-https
+
+----------------
+编写第一个应用: https://aka.ms/dotnet-hello-world
+了解新增功能: https://aka.ms/dotnet-whats-new
+浏览文档: https://aka.ms/dotnet-docs
+报告问题并在 GitHub 上查找来源: https://github.com/dotnet/core
+使用 "dotnet --help" 查看可用命令或访问: https://aka.ms/dotnet-cli
+--------------------------------------------------------------------------------------
+验证工作负载时遇到问题。有关详细信息，请运行 "dotnet workload update"。
+  正在确定要还原的项目…
+  已还原 C:\ADVCHIP\UDS_OriCode\UI优化版（源码+交付）_20261008\UI优化版（源码+交付）_20261008\源码\tests\Updater.Tests\Updater.Tests.csproj (用时 110 毫秒)。
+  已还原 C:\ADVCHIP\UDS_OriCode\UI优化版（源码+交付）_20261008\UI优化版（源码+交付）_20261008\源码\host\Updater.Core\Updater.Core.csproj (用时 102 毫秒)。
+  Updater.Core -> C:\ADVCHIP\UDS_OriCode\UI优化版（源码+交付）_20261008\UI优化版（源码+交付）_20261008\源码\host\Updater.Core\bin\Release\net10.0\Updater.Core.dll
+  Updater.Tests -> C:\ADVCHIP\UDS_OriCode\UI优化版（源码+交付）_20261008\UI优化版（源码+交付）_20261008\源码\tests\Updater.Tests\bin\Release\net10.0\Updater.Tests.dll
+
+已成功生成。
+    0 个警告
+    0 个错误
+
+已用时间 00:00:04.04
+PASS 280157 192 KB minus 32 bytes partition and manifest identity
+PASS 280157 selected model and legacy model cannot be mixed
+PASS 280157 bootloader, RAM, entry and alignment rejected
+PASS 280157 SCI full image, lost ACK, reset
+PASS 280157 SCI wrong device refused before erase
+PASS 280157 CAN full image, lost ACK, reset
+PASS 280157 CAN wrong device refused before erase
+PASS 280157 wrong board, CPU and overlarge BEGIN cannot erase
+PASS 280157 program failure cannot commit
+PASS 280157 CRC failure cannot commit
+PASS 280157 actual linked OUT equals TI export; model and RAM load address
+PASS 280157 actual bootloader OUT rejected
+PASS 280157 JSON retains model and enforces selected target
+PASS native 280157 SCI actual TI OUT, lost BEGIN/DATA/FINISH ACK, no repeated Flash operation
+PASS native 280157 SCI 192 KB minus 32 bytes boundary, lost BEGIN/DATA/FINISH ACK, no repeated Flash operation
+PASS native 280157 CAN actual TI OUT, lost BEGIN/DATA/FINISH ACK, no repeated Flash operation
+PASS native 280157 CAN 192 KB minus 32 bytes boundary, lost BEGIN/DATA/FINISH ACK, no repeated Flash operation
+PASS native 280157 injected Flash fault 1 leaves invalid application
+PASS native 280157 injected Flash fault 2 leaves invalid application
+PASS native 280157 injected Flash fault 3 leaves invalid application
+PASS native 280157 injected Flash fault 4 leaves invalid application
+PASS native 280157 cancellation, ABORT, fresh session recovery
+PASS native 280157 mismatched model/manifest and corrupt CRC rejected before erase
+All 23 F2800157 tests passed.

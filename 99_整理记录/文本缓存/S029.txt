@@ -1,0 +1,823 @@
+来源: 036/ADP32F036/2026_09_02_空调压缩机方案-336V/2026_09_02_空调压缩机方案-336V/空调压缩机方案-336V/汽车电空调控制器-336V-ADP32F036QP48Q.pdf
+来源编号: S029
+
+=== PDF页 1 ===
+1
+1
+2
+2
+3
+3
+4
+4
+5
+5
+6
+6
+A A
+B B
+C C
+D 汽车电空调控制器 D
+-336V-ADP32F036QP48Q
+5
+2024-11-05 汽车空调控制器 2024-03-12 -336V-ADP32F036QP48Q
+1
+POWER
+审阅
+绘制
+版本
+创建日期
+物料编码
+页 共
+原理图 更新日期
+尺寸
+图页
+BP 1
+FB 2
+D
+4
+S
+5
+S
+6
+S
+7
+S
+8
+U1
+LNK306DG
+E1
+4.7uF 500V
+C1
+100nF
+R1
+15kΩ
+C3
+10nF 1KV
+C6
+NC
+L1
+1mH
+E2
+220uF
+C4
+100nF
+D5
+ZMM18
+C5
+100nF
+D3
+SS14
+R5
+6.8kΩ
+BUS+ 15V +12V
+SwitchCollector 1
+SwitchEmitter 2
+TimingCapacitor 3
+GND 4
+ComparatorInvertingInput 5
+VCC 6
+Ipk Sense 7
+DriverCollector 8
+U2
+NCV33063AVDR2G
+15V
+E4
+220uF
+D6
+SS14
+R62 3kΩ
+R63
+1kΩ
+R7
+100Ω
+C8
+220pF
+E3
+220uF
+C7
+100nF
+C11
+100pF
+GND 1
+VOUT 2
+VIN 3
+VOUT 4
+IC1
+AMS1117-3.3
+C12
+100nF
+3V3
+CANH
+CANL
+FB2
+PBY201209T-151Y-N
+FB3
+PBY201209T-151Y-N
+FB4
+PBY201209T-151Y-N
+C19
+10uF
+D7
+SA33CA/B
+C18
+22uF
+FB1
+PBY201209T-151Y-N
+C17
+22uF
+VIN
+1
+GND
+2
+0V
+4
++Vo
+6
+U10
+B1212S-2WR3
+12V￾E5
+220uF
++12V_BUS
+C15
+1uF
++12V
+V5G
+12V￾Vs12V
+R4
+NC
+R59 1Ω
+R60 1Ω
+R61 1Ω
+L2
+330uH
+OUT
+1 GND
+2 IN
+3
+U3
+UA78L05AIPK
+C2
+22uF
+1
+1
+15V
+1
+1
+PAD1
+C9
+1uF
+C10
+1uF
+R3
+NC
+（U1:Thermal Shutdown 
+Temperature：142℃）
+（U10:-40℃ to +105℃）
+1
+4 3
+2
+L3
+ACM7060-701-2PL-TL01
+D4
+US1G
+D2
+US1G
+D1
+US1G
+1
+1
+12V
+1
+1
+5V
+1
+1
+12V￾1
+1
+GND
+1
+1
+2
+2
+IC14
+PZ254V-11-02P
+1
+1
+2
+2
+3
+3
+4
+4
+5
+5
+J2
+PH-5AW
+R2
+1.6kΩ
+C13
+22uF
+1
+1
+3V3
+R6 2kΩ
+
+=== PDF页 2 ===
+1
+1
+2
+2
+3
+3
+4
+4
+5
+5
+6
+6
+A A
+B B
+C C
+D 汽车电空调控制器 D
+-336V-ADP32F036QP48Q
+5
+2024-11-05 汽车空调控制器 2024-03-13 -336V-ADP32F036QP48Q
+2
+IPM-DRIVER
+审阅
+绘制
+版本
+创建日期
+物料编码
+页 共
+原理图 更新日期
+尺寸
+图页
+VDDL 1
+COM 2
+INUL 3
+INVL 4
+INWL 5
+VFO 6
+VTS 7
+CSC 8
+INUH 9
+VDDH 10 VBU 11 VSU 12 INVH 13 VDDH 14 VBV 15 VSV 16 INWH 17 VDDH 18 VBW 19 VSW 20
+NU 21
+NV 22
+NW 23
+U
+24
+V
+25
+W
+26
+P
+27
+U9
+C57 FNB35060T
+100nF
+C58
+100nF
+C59
+100nF
+D8 US1G
+D9 US1G
+D10 US1G
+RA1
+RA2 10Ω
+RA3 10Ω
+RA4 10Ω
+RA5 10Ω
+RA6 10Ω
+10Ω
+V_H
+V_L
+C61 100pF
+C62 100pF
+C63 100pF
+C64 100pF
+C65 100pF
+C66 100pF
+15V
+R76
+4.7kΩ
+CSC IPM_GK
+R77 10Ω
+C67
+100nF
+TMP
+CE1 56uF 450V
+CE2 56uF 450V
+CE3 56uF 450V
+CE4 56uF 450V
+R64 20mΩ
+R65 20mΩ
+R66 20mΩ
+U+
+V+
+W+
+U
+V
+W
+BUS+
+8
+1
+4
+3
+2
+IC4.1
+TSV912IDT
+6
+5
+7
+IC4.2
+TSV912IDT
+6
+5
+7
+IC5.2
+TSV912IDT
+R13
+4.7kΩ
+C33
+10nF
+C32
+100nF
+1.5V
+3V3
+R8
+4.7kΩ
+R9
+2kΩ
+R11
+2kΩ W+ R12
+4.7kΩ
+R10
+4.7kΩ
+W_I
+GATE_W+
+3V3
+C49
+100pF
+R15
+4.7kΩ
+R17
+2kΩ
+R21
+2kΩ V+ R23
+4.7kΩ
+R18
+4.7kΩ
+V_I
+GATE_V+
+C50
+100pF
+8
+1
+4
+3
+2
+IC5.1
+TSV912IDT R16
+4.7kΩ
+R19
+2kΩ
+R22
+2kΩ U+
+R24 4.7kΩ
+R20
+4.7kΩ
+U_I
+GATE_U+
+3V3
+C51
+100pF
+R43
+270kΩ
+R44
+270kΩ
+R45
+270kΩ
+C55
+100nF
+V_BUS
+D12
+1N4148W
+3V3
+TVS1
+SMF18CA
+TVS2
+SMF18CA
+TVS3
+SMF18CA
+C22
+10uF
+C88
+10uF
+C21
+10uF
+C89
+10uF
+C20
+10uF
+C90
+10uF
+U_H
+W_H
+W_L
+U_L
+TVS4
+SMF18CA
+C81
+10uF
+C82
+10uF
+C83
+10uF
+C84
+10uF
+C23 NC
+C24 NC
+C25 NC
+C26 NC
+RV1 10K511
+NC
+C31
+C35 NC
+NC
+C28
+C29 NC
+NC
+C30
+C34 NC
+1
+1
+U4
+1
+1
+V1
+1
+1
+W1
+C60
+100nF
+1
+1
+BUS+1
+1
+1
+BUS-1
+（AEC：NFVA35065L32）
+(437V:3V)
+(31.9A:3V)
+R81
+10Ω
+R14
+3.9kΩ
+1.5V 1.5V
+1.5V
+R46
+5.6kΩ
+C91
+100nF
+C92
+100nF
+
+=== PDF页 3 ===
+1
+1
+2
+2
+3
+3
+4
+4
+5
+5
+6
+6
+A A
+B B
+C C
+D 汽车电空调控制器 D
+-336V-ADP32F036QP48Q
+5
+2024-11-05 汽车空调控制器 2024-03-15 -336V-ADP32F036QP48Q
+3
+CAN
+审阅
+绘制
+版本
+创建日期
+物料编码
+页 共
+原理图 更新日期
+尺寸
+图页
+TXD 1
+GND 2
+VCC 3
+RXD 4 VREF 5
+CANL 6
+CANH 7
+S
+8
+U5
+TJA1050T/CM,118
+TJTX
+TJRX
+V5G
+12V￾C70
+100nF
+12V￾C73
+4.7nF
+R70 NC
+R71 NC
+C72 100pF
+C71 100pF
+12V￾CANH
+CANL
+R72
+330Ω
+R75
+330Ω
+3V3
+TXD
+NC 1
+ANODE 2
+CATHODE 3
+NC 4 GND 5
+VOUT 6
+VE 7
+VCC 8
+U6
+EL0600(TA)
+NC 1
+ANODE 2
+CATHODE 3
+NC 4 GND 5
+VOUT 6
+VE 7
+VCC 8
+U7
+EL0600(TA)
+TXD
+TJRX
+V5G
+R73
+2kΩ
+TJTX
+C74
+100nF
+12V￾R74
+2kΩ
+C75
+100nF
+RXD
+1
+2 3
+4
+L4
+ACT45B-510-2P-TL003
+V5G
+3V3
+D11
+PESD1CAN
+（U6\U7:-40℃ to +100℃）
+
+=== PDF页 4 ===
+1
+1
+2
+2
+3
+3
+4
+4
+5
+5
+6
+6
+A A
+B B
+C C
+D 汽车电空调控制器 D
+-336V-ADP32F036QP48Q
+5
+2024-11-05 汽车空调控制器 2024-03-15 -336V-ADP32F036QP48Q
+4
+DSP
+审阅
+绘制
+版本
+创建日期
+物料编码
+页 共
+原理图 更新日期
+尺寸
+图页
+OP1N 1
+B1/OP1OUT 2
+B2/COMP1B/AI10 3
+B3 4
+B4/COMP2B/AI12 5
+B6/COMP3B/AI14 6
+B5 7
+GPIO34/COMP2OUT/COMP3OUT 8
+GPIO35/TDI 9
+GPIO36/TMS 10
+GPIO37/TDO 11
+GPIO38/TCK/XCLKIN 12
+GPIO18/SPICLKA/LINTXA/XCLKOUT 13
+GPIO19/XCLKIN/SPISTEA/LINRXA/ECAP1/HRCAP1 14
+GPIO17/SPISOMIA/TZ3 15
+GPIO16/SPISIMOA/TZ2 16
+GPIO1/EPWM1B/COMP1OUT 17
+GPIO0/EPWM1A/CANRX/CANFDRX 18
+GPIO32/SDAA/EPWMSYNCI/ADCSOCAO/CANTX/CANFDTX 19
+VDD 20
+X2 21
+X1 22
+VSS 23
+VDDIO 24 GPIO3/EPWM2B/SPISOMIA/COMP2OUT 25 GPIO5/EPWM3B/SPISIMOA/ECAP1 26 GPIO7/EPWM4B/SCIRXDA 27 GPIO9/EPWM5B/LINTXA/HRCAP1 28 GPIO2/EPWM2A 29 GPIO4/EPWM3A 30 GPIO6/EPWM4A/EPWMSYNCI/EPWMSYNCO 31 GPIO8/EPWM5A/ADCSOCAO 32 GPIO28/CANFDRX/SCIRXDA/SDAA/TZ2 33 GPIO29/CANFDTX/SCITXDA/SCLA/TZ3 34 TRST 35 XRS 36 A6/COMP3A/AI6 37 A4/COMP2A/AI4 38 A7/PGA1P 39 A5/PGA1N 40 A3/PGA2P 41 A1/PGA2N 42 A2/COMP1A/AI2 43 A0/PGA3P 44 B0/PGA3N 45 VDDA 46 VSSA/VREFLO 47 OP1P 48
+ADP32F036QP48Q
+IC9
+C44 2.2uF
+R40
+10kΩ
+C46
+100nF
+XRS
+3V3
+TRST
+V_BUS
+W_I
+V_I
+U_I
+C52
+TMP 1uF
+Vs12V
+C53 100pF
+TXD
+RXD
+C54
+2.2uF
+3V3
+R42 1kΩ
+DD2
+NCD0603R1
+GATE_KILL
+C47
+12pF
+C48
+12pF
+1
+3 4
+2
+IC10
+20MHz
+TDI
+TDO
+TMS
+TCK
+R33
+10kΩ
+3V3
+1
+1
+2
+2
+3
+3
+4
+4
+5
+5
+6
+6
+7
+7
+J1
+PZ254V-11-07P
+R41
+4.7kΩ
+TRST
+3V3
+TDI
+TMS
+TDO
+TCK
+C43
+100nF
+W_L
+W_H
+V_L
+V_H
+U_L
+U_H
+R32 10kΩ
+3V3
+C42
+100nF
+
+=== PDF页 5 ===
+1
+1
+2
+2
+3
+3
+4
+4
+5
+5
+6
+6
+A A
+B B
+C C
+D 汽车电空调控制器 D
+-336V-ADP32F036QP48Q
+5
+2024-11-05 汽车空调控制器 2024-03-15 -336V-ADP32F036QP48Q
+5
+Fault Protection
+审阅
+绘制
+版本
+创建日期
+物料编码
+页 共
+原理图 更新日期
+尺寸
+图页
+3
+2
+1
+8 4
+IC12.1
+LM2903DR2G
+R50
+1kΩ
+3V3
+C56
+100nF
+R48 1kΩ
+R49 1kΩ
+GATE_U+
+C76
+1nF
+3V3
+R53 1kΩ
+R55 1kΩ
+GATE_V+
+C77
+1nF
+R57 1kΩ
+R58 1kΩ
+GATE_W+
+C80
+1nF
+3V3
+5
+6
+7
+IC12.2
+LM2903DR2G
+5
+6
+7
+IC13.2
+LM2903DR2G
+R52
+1kΩ
+3V3
+R54
+22Ω
+C85
+1nF
+IPM_GK
+GATE_KILL 3
+2
+1
+8 4
+IC13.1
+LM2903DR2G
+R78
+1kΩ
+R80
+1kΩ
+3V3
+R79
+22Ω
+C87
+1nF
+CSC
+C86
+10nF
+（AEC-Q100：NCV2903DR2G）
+R47
+10kΩ
+(28.7A:0.3V)

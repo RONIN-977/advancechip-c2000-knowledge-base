@@ -1,0 +1,17 @@
+"./flash_port.obj"
+"./main.obj"
+"./Common/boot_core.obj"
+"./Common/boot_io.obj"
+"./Common/sci_port.obj"
+"./Common/update_service.obj"
+"./Device/source/DSP2803x_CodeStartBranch.obj"
+"./Device/source/DSP2803x_DefaultIsr.obj"
+"./Device/source/DSP2803x_GlobalVariableDefs.obj"
+"./Device/source/DSP2803x_PieCtrl.obj"
+"./Device/source/DSP2803x_PieVect.obj"
+"./Device/source/DSP2803x_SysCtrl.obj"
+"./Device/source/DSP2803x_usDelay.obj"
+"../bootloader.cmd"
+"../Device/DSP2803x_Headers_nonBIOS.cmd"
+-llibc.a
+-l2803x_FlashAPI_BootROMSymbols.lib

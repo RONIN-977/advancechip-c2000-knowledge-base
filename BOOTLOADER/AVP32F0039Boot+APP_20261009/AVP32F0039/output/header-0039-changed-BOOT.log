@@ -1,0 +1,50 @@
+
+# --------------------------------------------------------------------------------
+# Importing project from 'C:/ADVCHIP/UDS_OriCode/.test-tools/header-validation/0039/changed/BOOT'...
+
+
+Done
+
+**** Build of configuration 'Debug' for project 'F280039C_Bootloader' ****
+
+"C:\\ti\\ccs2100\\ccs\\utils\\bin\\gmake" -k -j 12 all -r -O 
+ 
+C2000 Compiler - building file: "../src/f28003x_codestartbranch.asm"
+"C:/ti/ccs2100/ccs/tools/compiler/ti-cgt-c2000_25.11.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 -O2 --include_path=".." --include_path="../include" --include_path="../vendor/device" --include_path="../vendor/device/driverlib" --include_path="../vendor/FlashAPI" --include_path="C:/ti/ccs2100/ccs/tools/compiler/ti-cgt-c2000_25.11.1.LTS/include" --include_path="C:/ADVCHIP/UDS_OriCode/.test-tools/header-validation/0039/changed/Common" --define=CPU1 --define=_FLASH -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="src/f28003x_codestartbranch.d_raw" --obj_directory="src"  "../src/f28003x_codestartbranch.asm"
+Finished building: "../src/f28003x_codestartbranch.asm"
+ 
+C2000 Compiler - building file: "../src/device.c"
+"C:/ti/ccs2100/ccs/tools/compiler/ti-cgt-c2000_25.11.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 -O2 --include_path=".." --include_path="../include" --include_path="../vendor/device" --include_path="../vendor/device/driverlib" --include_path="../vendor/FlashAPI" --include_path="C:/ti/ccs2100/ccs/tools/compiler/ti-cgt-c2000_25.11.1.LTS/include" --include_path="C:/ADVCHIP/UDS_OriCode/.test-tools/header-validation/0039/changed/Common" --define=CPU1 --define=_FLASH -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="src/device.d_raw" --obj_directory="src"  "../src/device.c"
+Finished building: "../src/device.c"
+ 
+C2000 Compiler - building file: "../src/boot_io.c"
+"C:/ti/ccs2100/ccs/tools/compiler/ti-cgt-c2000_25.11.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 -O2 --include_path=".." --include_path="../include" --include_path="../vendor/device" --include_path="../vendor/device/driverlib" --include_path="../vendor/FlashAPI" --include_path="C:/ti/ccs2100/ccs/tools/compiler/ti-cgt-c2000_25.11.1.LTS/include" --include_path="C:/ADVCHIP/UDS_OriCode/.test-tools/header-validation/0039/changed/Common" --define=CPU1 --define=_FLASH -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="src/boot_io.d_raw" --obj_directory="src"  "../src/boot_io.c"
+Finished building: "../src/boot_io.c"
+ 
+C2000 Compiler - building file: "../src/main.c"
+"C:/ti/ccs2100/ccs/tools/compiler/ti-cgt-c2000_25.11.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 -O2 --include_path=".." --include_path="../include" --include_path="../vendor/device" --include_path="../vendor/device/driverlib" --include_path="../vendor/FlashAPI" --include_path="C:/ti/ccs2100/ccs/tools/compiler/ti-cgt-c2000_25.11.1.LTS/include" --include_path="C:/ADVCHIP/UDS_OriCode/.test-tools/header-validation/0039/changed/Common" --define=CPU1 --define=_FLASH -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="src/main.d_raw" --obj_directory="src"  "../src/main.c"
+Finished building: "../src/main.c"
+ 
+C2000 Compiler - building file: "../src/boot_core.c"
+"C:/ti/ccs2100/ccs/tools/compiler/ti-cgt-c2000_25.11.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 -O2 --include_path=".." --include_path="../include" --include_path="../vendor/device" --include_path="../vendor/device/driverlib" --include_path="../vendor/FlashAPI" --include_path="C:/ti/ccs2100/ccs/tools/compiler/ti-cgt-c2000_25.11.1.LTS/include" --include_path="C:/ADVCHIP/UDS_OriCode/.test-tools/header-validation/0039/changed/Common" --define=CPU1 --define=_FLASH -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="src/boot_core.d_raw" --obj_directory="src"  "../src/boot_core.c"
+Finished building: "../src/boot_core.c"
+ 
+C2000 Compiler - building file: "../src/flash_port.c"
+"C:/ti/ccs2100/ccs/tools/compiler/ti-cgt-c2000_25.11.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 -O2 --include_path=".." --include_path="../include" --include_path="../vendor/device" --include_path="../vendor/device/driverlib" --include_path="../vendor/FlashAPI" --include_path="C:/ti/ccs2100/ccs/tools/compiler/ti-cgt-c2000_25.11.1.LTS/include" --include_path="C:/ADVCHIP/UDS_OriCode/.test-tools/header-validation/0039/changed/Common" --define=CPU1 --define=_FLASH -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="src/flash_port.d_raw" --obj_directory="src"  "../src/flash_port.c"
+Finished building: "../src/flash_port.c"
+ 
+C2000 Linker - building target: "F280039C_Bootloader.out"
+"C:/ti/ccs2100/ccs/tools/compiler/ti-cgt-c2000_25.11.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 -O2 --define=CPU1 --define=_FLASH -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi -z -m"F280039C_Bootloader.map" --stack_size=0x300 --warn_sections -i"C:/ti/ccs2100/ccs/tools/compiler/ti-cgt-c2000_25.11.1.LTS/lib" -i"../lib" -i"C:/ti/ccs2100/ccs/tools/compiler/ti-cgt-c2000_25.11.1.LTS/include" -i"C:/ADVCHIP/UDS_OriCode/.test-tools/header-validation/0039/changed/Common" --reread_libs --diag_wrap=off --display_error_number --xml_link_info="F280039C_Bootloader_linkInfo.xml" --entry_point=code_start --rom_model -o "F280039C_Bootloader.out" "./src/boot_core.obj" "./src/boot_io.obj" "./src/device.obj" "./src/f28003x_codestartbranch.obj" "./src/flash_port.obj" "./src/main.obj" "../bootloader.cmd" "../lib/FAPI_F28003x_EABI_v1.58.10.lib" "../lib/driverlib.lib"  -l"../lib/driverlib.lib" -llibc.a 
+<Linking>
+warning #10063-D: entry-point symbol other than "_c_int00" specified:  "code_start"
+Finished building target: "F280039C_Bootloader.out"
+ 
+
+**** Build finished ****
+
+Project details:
+    Name: F280039C_Bootloader
+    Target: TMS320F280039C
+    Location: C:/ADVCHIP/UDS_OriCode/.test-tools/header-validation/0039/changed/BOOT
+    Target configuration: none
+

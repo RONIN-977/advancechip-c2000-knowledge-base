@@ -1,0 +1,30 @@
+menuitem "DSP281x McBSP SPI FFDLB"
+
+hotmenu Load_and_Build_Project()
+{
+   GEL_ProjectLoad("Example_281xMcBSP_SPI_FFDLB.pjt");
+   GEL_ProjectBuild("Example_281xMcBSP_SPI_FFDLB.pjt");
+   Setup_WatchWindow();
+}
+
+
+
+hotmenu Load_Code()
+{
+   GEL_Load(".\\debug\\Example_281xMcBSP_SPI_FFDLB.out");
+   Setup_WatchWindow();
+}
+
+Setup_WatchWindow()
+{
+   GEL_WatchReset();
+   GEL_WatchAdd("sdata1,x");
+   GEL_WatchAdd("rdata1,x");
+   GEL_WatchAdd("rdata1_point,x");
+   GEL_WatchAdd("sdata2,x");   
+   GEL_WatchAdd("rdata2,x"); 
+   GEL_WatchAdd("rdata2_point,x");
+}
+
+
+

@@ -1,0 +1,566 @@
+******************************************************************************
+             TMS320C2000 Linker PC v22.6.0                     
+******************************************************************************
+>> Linked Tue Apr 15 17:00:49 2025
+
+OUTPUT FILE NAME:   <fsi_ex16_daisy_handshake_lead.out>
+ENTRY POINT SYMBOL: "_c_int00"  address: 00008c22
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+  BEGIN                 00000000   00000002  00000002  00000000  RWIX
+  BOOT_RSVD             00000002   00000126  00000000  00000126  RWIX
+  RAMM0                 00000128   000002d8  00000024  000002b4  RWIX
+  RAMM1                 00000400   000003f8  00000200  000001f8  RWIX
+  RAMLS0                00008000   00000800  00000800  00000000  RWIX
+  RAMLS1                00008800   00000800  00000746  000000ba  RWIX
+  RAMLS2                00009000   00000800  00000000  00000800  RWIX
+  RAMLS3                00009800   00000800  00000000  00000800  RWIX
+  RAMLS4                0000a000   00000800  00000000  00000800  RWIX
+  RAMLS5                0000a800   00000800  00000050  000007b0  RWIX
+  RAMLS6_7              0000b000   00001000  00000000  00001000  RWIX
+  RAMGS0                0000c000   00001000  00000000  00001000  RWIX
+  RAMGS1                0000d000   00001000  00000000  00001000  RWIX
+  RAMGS2                0000e000   00001000  00000000  00001000  RWIX
+  RAMGS3                0000f000   00000ff8  00000000  00000ff8  RWIX
+  FLASH_BANK0_SEC0      00080002   00000ffe  00000000  00000ffe  RWIX
+  FLASH_BANK0_SEC1      00081000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC2      00082000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC3      00083000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC4      00084000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC5      00085000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC6      00086000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC7      00087000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC8      00088000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC9      00089000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC10     0008a000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC11     0008b000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC12     0008c000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC13     0008d000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC14     0008e000   00001000  00000000  00001000  RWIX
+  FLASH_BANK0_SEC15     0008f000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC0      00090000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC1      00091000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC2      00092000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC3      00093000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC4      00094000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC5      00095000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC6      00096000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC7      00097000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC8      00098000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC9      00099000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC10     0009a000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC11     0009b000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC12     0009c000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC13     0009d000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC14     0009e000   00001000  00000000  00001000  RWIX
+  FLASH_BANK1_SEC15     0009f000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC0      000a0000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC1      000a1000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC2      000a2000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC3      000a3000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC4      000a4000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC5      000a5000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC6      000a6000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC7      000a7000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC8      000a8000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC9      000a9000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC10     000aa000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC11     000ab000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC12     000ac000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC13     000ad000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC14     000ae000   00001000  00000000  00001000  RWIX
+  FLASH_BANK2_SEC15     000af000   00000ff0  00000000  00000ff0  RWIX
+  SECURE_ROM            003f2000   00006000  00000000  00006000  RWIX
+  BOOTROM               003f8000   00007fc0  00000000  00007fc0  RWIX
+  RESET                 003fffc0   00000002  00000000  00000002  RWIX
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+codestart 
+*          0    00000000    00000002     
+                  00000000    00000002     f28003x_codestartbranch.obj (codestart)
+
+.TI.ramfunc 
+*          0    00000128    00000004     
+                  00000128    00000004     sysctl.obj (.TI.ramfunc)
+
+.cinit     0    0000012c    00000020     
+                  0000012c    00000018     (.cinit..data.load) [load image, compression = lzss]
+                  00000144    00000004     (__TI_handler_table)
+                  00000148    00000004     (__TI_cinit_table)
+
+.reset     0    003fffc0    00000000     DSECT
+
+.stack     0    00000400    00000200     UNINITIALIZED
+                  00000400    00000200     --HOLE--
+
+.init_array 
+*          0    00000128    00000000     UNINITIALIZED
+
+.data      0    0000a800    00000050     UNINITIALIZED
+                  0000a800    00000036     fsi_ex16_daisy_handshake_lead.obj (.data)
+                  0000a836    00000010     fsi_ex16_daisy_handshake_lead.obj (.data:txBufData)
+                  0000a846    00000006     rts2800_fpu32_eabi.lib : exit.c.obj (.data)
+                  0000a84c    00000002                            : _lock.c.obj (.data:_lock)
+                  0000a84e    00000002                            : _lock.c.obj (.data:_unlock)
+
+.text.1    0    00008000    00000800     
+                  00008000    000000f8     sysctl.obj (.text:SysCtl_setClock)
+                  000080f8    000000f2     sysctl.obj (.text:SysCtl_isPLLValid)
+                  000081ea    000000cf     fsi_ex16_daisy_handshake_lead.obj (.text:main)
+                  000082b9    000000ce     device.obj (.text:Device_enableAllPeripherals)
+                  00008387    00000088     rts2800_fpu32_eabi.lib : fs_div28.asm.obj (.text)
+                  0000840f    0000007a     fsi_ex16_daisy_handshake_lead.obj (.text:fsiRxInt1ISR)
+                  00008489    00000074     fsi_ex16_daisy_handshake_lead.obj (.text:handshake_lead)
+                  000084fd    00000070     fsi_ex16_daisy_handshake_lead.obj (.text:fsirxdma_isr)
+                  0000856d    0000004e     fsi_ex16_daisy_handshake_lead.obj (.text:initFSI)
+                  000085bb    00000049     gpio.obj (.text:GPIO_setAnalogMode)
+                  00008604    00000045     sysctl.obj (.text:SysCtl_pollX1Counter)
+                  00008649    00000040     fsi_ex16_daisy_handshake_lead.obj (.text:fsiRxInt2ISR)
+                  00008689    00000040     fsi_ex16_daisy_handshake_lead.obj (.text:fsiTxInt2ISR)
+                  000086c9    0000003d     interrupt.obj (.text:Interrupt_initModule)
+                  00008706    0000003d     sysctl.obj (.text:SysCtl_selectXTAL)
+                  00008743    0000003c     fsi_ex16_daisy_handshake_lead.obj (.text:fsiTxInt1ISR)
+                  0000877f    0000003b     fsi_ex16_daisy_handshake_lead.obj (.text:fsitxdma_isr)
+                  000087ba    00000037     gpio.obj (.text:GPIO_setPinConfig)
+                  000087f1    0000000f     fsi.obj (.text:FSI_executeTxFlushSequence)
+
+.text.2    0    00008800    00000746     
+                  00008800    00000037     interrupt.obj (.text:Interrupt_enable)
+                  00008837    00000032     sysctl.obj (.text:SysCtl_selectOscSource)
+                  00008869    0000002f     sysctl.obj (.text:DCC_setCounterSeeds)
+                  00008898    0000002e     rts2800_fpu32_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss)
+                  000088c6    0000002d     fsi.obj (.text:FSI_performTxInitialization)
+                  000088f3    0000002c     gpio.obj (.text:GPIO_setQualificationMode)
+                  0000891f    0000002b     rts2800_fpu32_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit)
+                  0000894a    00000029     fsi_ex16_daisy_handshake_lead.obj (.text:compareBufData)
+                  00008973    00000029     rts2800_fpu32_eabi.lib : exit.c.obj (.text)
+                  0000899c    00000027     gpio.obj (.text:GPIO_setDirectionMode)
+                  000089c3    00000026     fsi_ex16_daisy_handshake_lead.obj (.text:disableAllFSIInterrupts)
+                  000089e9    00000025     fsi.obj (.text:FSI_readRxBuffer)
+                  00008a0e    00000025     fsi.obj (.text:FSI_writeTxBuffer)
+                  00008a33    00000021     fsi.obj (.text:FSI_clearRxModuleReset)
+                  00008a54    00000021     fsi.obj (.text:FSI_clearTxModuleReset)
+                  00008a75    00000020     sysctl.obj (.text:SysCtl_selectXTALSingleEnded)
+                  00008a95    0000001e     fsi.obj (.text:FSI_resetRxModule)
+                  00008ab3    0000001e     fsi.obj (.text:FSI_resetTxModule)
+                  00008ad1    0000001e     interrupt.obj (.text:Interrupt_initVectorTable)
+                  00008aef    0000001d     fsi_ex16_daisy_handshake_lead.obj (.text:checkReceivedFrameTypeTag)
+                  00008b0c    0000001d     rts2800_fpu32_eabi.lib : memcpy.c.obj (.text)
+                  00008b29    0000001c     fsi_ex16_daisy_handshake_lead.obj (.text:GPIO_writePin)
+                  00008b45    0000001b     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_disableTxInterrupt)
+                  00008b60    0000001a     sysctl.obj (.text:DCC_enableSingleShotMode)
+                  00008b7a    0000001a     device.obj (.text:Device_init)
+                  00008b94    00000019     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_disableRxInterrupt)
+                  00008bad    00000018     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_enableTxInterrupt)
+                  00008bc5    00000018     fsi_ex16_daisy_handshake_lead.obj (.text:prepareTxBufData)
+                  00008bdd    00000017     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_enableRxInterrupt)
+                  00008bf4    00000017     device.obj (.text:SysCtl_enablePeripheral)
+                  00008c0b    00000017     sysctl.obj (.text:SysCtl_enablePeripheral)
+                  00008c22    00000017     rts2800_fpu32_eabi.lib : boot28.asm.obj (.text)
+                  00008c39    00000016     interrupt.obj (.text:Interrupt_defaultHandler)
+                  00008c4f    00000015     device.obj (.text:GPIO_unlockPortConfig)
+                  00008c64    00000015     fsi_ex16_daisy_handshake_lead.obj (.text:UpdateTxframeData)
+                  00008c79    00000015     fsi_ex16_daisy_handshake_lead.obj (.text:testGPIO)
+                  00008c8e    00000014     sysctl.obj (.text:DCC_setCounter0ClkSource)
+                  00008ca2    00000014     sysctl.obj (.text:DCC_setCounter1ClkSource)
+                  00008cb6    00000014     fsi.obj (.text:FSI_configPrescalar)
+                  00008cca    00000014     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_configPrescalar)
+                  00008cde    00000014     sysctl.obj (.text:SysCtl_setPLLSysClk)
+                  00008cf2    00000013     fsi.obj (.text:FSI_performRxInitialization)
+                  00008d05    00000011     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_setRxSoftwareFrameSize)
+                  00008d16    00000010     device.obj (.text:Device_initGPIO)
+                  00008d26    0000000f     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_setTxSoftwareFrameSize)
+                  00008d35    0000000f     fsi_ex16_daisy_handshake_lead.obj (.text:Interrupt_register)
+                  00008d44    0000000e     fsi_ex16_daisy_handshake_lead.obj (.text:compare16)
+                  00008d52    0000000d     fsi.obj (.text:FSI_clearRxEvents)
+                  00008d5f    0000000d     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_clearRxEvents)
+                  00008d6c    0000000d     fsi.obj (.text:FSI_clearTxEvents)
+                  00008d79    0000000d     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_clearTxEvents)
+                  00008d86    0000000d     interrupt.obj (.text:Interrupt_disableGlobal)
+                  00008d93    0000000d     interrupt.obj (.text:Interrupt_enableGlobal)
+                  00008da0    0000000d     device.obj (.text:SysCtl_setLowSpeedClock)
+                  00008dad    0000000c     sysctl.obj (.text:DCC_disableDoneSignal)
+                  00008db9    0000000c     fsi.obj (.text:FSI_delayWait)
+                  00008dc5    0000000c     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_disableRxInternalLoopback)
+                  00008dd1    0000000c     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_setRxBufferPtr)
+                  00008ddd    0000000c     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_setRxDataWidth)
+                  00008de9    0000000c     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_setTxBufferPtr)
+                  00008df5    0000000c     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_setTxDataWidth)
+                  00008e01    0000000c     fsi.obj (.text:FSI_stopTxFlush)
+                  00008e0d    0000000c     rts2800_fpu32_eabi.lib : args_main.c.obj (.text)
+                  00008e19    0000000b     sysctl.obj (.text:DCC_clearDoneFlag)
+                  00008e24    0000000b     sysctl.obj (.text:DCC_clearErrorFlag)
+                  00008e2f    0000000b     sysctl.obj (.text:DCC_disableErrorSignal)
+                  00008e3a    0000000b     sysctl.obj (.text:DCC_disableModule)
+                  00008e45    0000000b     sysctl.obj (.text:DCC_enableModule)
+                  00008e50    0000000b     fsi_ex16_daisy_handshake_lead.obj (.text:DMA_forceTrigger)
+                  00008e5b    0000000b     fsi.obj (.text:FSI_enableTxClock)
+                  00008e66    0000000b     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_enableTxClock)
+                  00008e71    0000000b     fsi.obj (.text:FSI_selectTxPLLClock)
+                  00008e7c    0000000b     sysctl.obj (.text:SysCtl_isMCDClockFailureDetected)
+                  00008e87    0000000a     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_getRxPingTag)
+                  00008e91    0000000a     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_setTxFrameTag)
+                  00008e9b    0000000a     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_setTxFrameType)
+                  00008ea5    0000000a     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_setTxUserDefinedData)
+                  00008eaf    0000000a     interrupt.obj (.text:Interrupt_illegalOperationHandler)
+                  00008eb9    0000000a     interrupt.obj (.text:Interrupt_nmiHandler)
+                  00008ec3    00000009     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_getRxEventStatus)
+                  00008ecc    00000009     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_getTxEventStatus)
+                  00008ed5    00000009     fsi.obj (.text:FSI_sendTxFlush)
+                  00008ede    00000009     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_startTxTransmit)
+                  00008ee7    00000009     rts2800_fpu32_eabi.lib : _lock.c.obj (.text)
+                  00008ef0    00000008     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_getRxFrameTag)
+                  00008ef8    00000008     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_getRxUserDefinedData)
+                  00008f00    00000008     device.obj (.text:SysCtl_disableWatchdog)
+                  00008f08    00000008     rts2800_fpu32_eabi.lib : copy_decompress_none.c.obj (.text:decompress:none)
+                  00008f10    00000008     f28003x_codestartbranch.obj (.text)
+                  00008f18    00000007     device.obj (.text:ASysCtl_lockVREG)
+                  00008f1f    00000007     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_getRxFrameType)
+                  00008f26    00000007     sysctl.obj (.text:SysCtl_resetMCD)
+                  00008f2d    00000006     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_getRxBufferAddress)
+                  00008f33    00000006     fsi_ex16_daisy_handshake_lead.obj (.text:FSI_getTxBufferAddress)
+                  00008f39    00000006     fsi_ex16_daisy_handshake_lead.obj (.text:Interrupt_clearACKGroup)
+                  00008f3f    00000004     device.obj (.text:SysCtl_deviceCal)
+                  00008f43    00000002     rts2800_fpu32_eabi.lib : pre_init.c.obj (.text)
+                  00008f45    00000001                            : startup.c.obj (.text)
+
+MODULE SUMMARY
+
+       Module                              code   ro data   rw data
+       ------                              ----   -------   -------
+    .\device\
+       device.obj                          324    0         0      
+       f28003x_codestartbranch.obj         10     0         0      
+    +--+-----------------------------------+------+---------+---------+
+       Total:                              334    0         0      
+                                                                   
+    .\device\driverlib\
+       sysctl.obj                          947    0         0      
+       fsi.obj                             380    0         0      
+       interrupt.obj                       214    0         0      
+       gpio.obj                            211    0         0      
+    +--+-----------------------------------+------+---------+---------+
+       Total:                              1752   0         0      
+                                                                   
+    .\source\
+       fsi_ex16_daisy_handshake_lead.obj   1480   0         70     
+    +--+-----------------------------------+------+---------+---------+
+       Total:                              1480   0         70     
+                                                                   
+    C:\ti\ccs1220\ccs\tools\compiler\ti-cgt-c2000_22.6.0.LTS\lib\rts2800_fpu32_eabi.lib
+       fs_div28.asm.obj                    136    0         0      
+       exit.c.obj                          41     0         6      
+       copy_decompress_lzss.c.obj          46     0         0      
+       autoinit.c.obj                      43     0         0      
+       memcpy.c.obj                        29     0         0      
+       boot28.asm.obj                      23     0         0      
+       _lock.c.obj                         9      0         4      
+       args_main.c.obj                     12     0         0      
+       copy_decompress_none.c.obj          8      0         0      
+       pre_init.c.obj                      2      0         0      
+       startup.c.obj                       1      0         0      
+    +--+-----------------------------------+------+---------+---------+
+       Total:                              350    0         10     
+                                                                   
+       Stack:                              0      0         512    
+       Linker Generated:                   0      32        0      
+    +--+-----------------------------------+------+---------+---------+
+       Grand Total:                        3916   32        592    
+
+
+LINKER GENERATED COPY TABLES
+
+__TI_cinit_table @ 00000148 records: 1, size/record: 4, table size: 4
+	.data: load addr=0000012c, load size=00000018 bytes, run addr=0000a800, run size=00000050 bytes, compression=lzss
+
+
+LINKER GENERATED HANDLER TABLE
+
+__TI_handler_table @ 00000144 records: 2, size/record: 2, table size: 4
+	index: 0, handler: __TI_decompress_lzss
+	index: 1, handler: __TI_decompress_none
+
+
+GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
+
+address     data page           name
+--------    ----------------    ----
+00000400      10 (00000400)     __stack
+
+0000a800     2a0 (0000a800)     nWords
+0000a801     2a0 (0000a800)     nLanes
+0000a802     2a0 (0000a800)     txDataFrameTag
+0000a803     2a0 (0000a800)     txPingFrameTag
+0000a804     2a0 (0000a800)     txUserData
+0000a805     2a0 (0000a800)     isRxFrameWdEnable
+0000a806     2a0 (0000a800)     txEventSts
+0000a807     2a0 (0000a800)     rxEventSts
+0000a808     2a0 (0000a800)     i
+0000a80a     2a0 (0000a800)     txPingTimeRefCntr
+0000a80c     2a0 (0000a800)     rxWdTimeoutRefCntr
+0000a80e     2a0 (0000a800)     rxFrameWdRefCntr
+0000a810     2a0 (0000a800)     txBufAddr
+0000a812     2a0 (0000a800)     rxBufAddr
+0000a814     2a0 (0000a800)     fsiTxInt1Received
+0000a816     2a0 (0000a800)     fsiTxInt2Received
+0000a818     2a0 (0000a800)     fsiRxInt1Received
+0000a81a     2a0 (0000a800)     fsiRxInt2Received
+0000a81c     2a0 (0000a800)     txTimeOutCntr
+0000a81e     2a0 (0000a800)     rxTimeOutCntr
+0000a820     2a0 (0000a800)     dataFrameCntr
+0000a822     2a0 (0000a800)     dataFrameCntr_ui32
+0000a824     2a0 (0000a800)     pingFrameCntr
+0000a826     2a0 (0000a800)     pingFrameCntr_ui32
+0000a828     2a0 (0000a800)     dmaIntr1
+0000a82a     2a0 (0000a800)     dmaIntr2
+0000a82c     2a0 (0000a800)     txTempData16
+0000a82e     2a0 (0000a800)     rxTempData16
+0000a830     2a0 (0000a800)     dmaTxIntCnt
+0000a832     2a0 (0000a800)     dmaRxIntCnt
+0000a834     2a0 (0000a800)     error
+0000a836     2a0 (0000a800)     txBufData
+
+0000a846     2a1 (0000a840)     __TI_enable_exit_profile_output
+0000a848     2a1 (0000a840)     __TI_cleanup_ptr
+0000a84a     2a1 (0000a840)     __TI_dtors_ptr
+0000a84c     2a1 (0000a840)     _lock
+0000a84e     2a1 (0000a840)     _unlock
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+page  address   name                             
+----  -------   ----                             
+0     00008973  C$$EXIT                          
+0     000082b9  Device_enableAllPeripherals      
+0     00008b7a  Device_init                      
+0     00008d16  Device_initGPIO                  
+0     00008a33  FSI_clearRxModuleReset           
+0     00008a54  FSI_clearTxModuleReset           
+0     000087f1  FSI_executeTxFlushSequence       
+0     00008cf2  FSI_performRxInitialization      
+0     000088c6  FSI_performTxInitialization      
+0     000089e9  FSI_readRxBuffer                 
+0     00008a95  FSI_resetRxModule                
+0     00008ab3  FSI_resetTxModule                
+0     00008a0e  FSI_writeTxBuffer                
+0     000085bb  GPIO_setAnalogMode               
+0     0000899c  GPIO_setDirectionMode            
+0     000087ba  GPIO_setPinConfig                
+0     000088f3  GPIO_setQualificationMode        
+0     00008c39  Interrupt_defaultHandler         
+0     00008800  Interrupt_enable                 
+0     00008eaf  Interrupt_illegalOperationHandler
+0     000086c9  Interrupt_initModule             
+0     00008ad1  Interrupt_initVectorTable        
+0     00008eb9  Interrupt_nmiHandler             
+0     00000128  SysCtl_delay                     
+0     000080f8  SysCtl_isPLLValid                
+0     00008837  SysCtl_selectOscSource           
+0     00008706  SysCtl_selectXTAL                
+0     00008a75  SysCtl_selectXTALSingleEnded     
+0     00008000  SysCtl_setClock                  
+0     00008c64  UpdateTxframeData                
+0     00000148  __TI_CINIT_Base                  
+0     0000014c  __TI_CINIT_Limit                 
+0     0000014c  __TI_CINIT_Warm                  
+0     00000144  __TI_Handler_Table_Base          
+0     00000148  __TI_Handler_Table_Limit         
+0     00000600  __TI_STACK_END                   
+abs   00000200  __TI_STACK_SIZE                  
+0     0000891f  __TI_auto_init_nobinit_nopinit   
+0     0000a848  __TI_cleanup_ptr                 
+0     00008898  __TI_decompress_lzss             
+0     00008f08  __TI_decompress_none             
+0     0000a84a  __TI_dtors_ptr                   
+0     0000a846  __TI_enable_exit_profile_output  
+abs   ffffffff  __TI_pprof_out_hndl              
+abs   ffffffff  __TI_prof_data_size              
+abs   ffffffff  __TI_prof_data_start             
+0     00008387  __c28xabi_divf                   
+n/a   UNDEFED   __c_args__                       
+0     00000400  __stack                          
+0     00008e0d  _args_main                       
+0     00008c22  _c_int00                         
+0     0000a84c  _lock                            
+0     00008eef  _nop                             
+0     00008eeb  _register_lock                   
+0     00008ee7  _register_unlock                 
+0     00008f45  _system_post_cinit               
+0     00008f43  _system_pre_init                 
+0     0000a84e  _unlock                          
+0     00008973  abort                            
+0     00008aef  checkReceivedFrameTypeTag        
+0     00000000  code_start                       
+0     0000894a  compareBufData                   
+0     0000a820  dataFrameCntr                    
+0     0000a822  dataFrameCntr_ui32               
+0     000089c3  disableAllFSIInterrupts          
+0     0000a828  dmaIntr1                         
+0     0000a82a  dmaIntr2                         
+0     0000a832  dmaRxIntCnt                      
+0     0000a830  dmaTxIntCnt                      
+0     0000a834  error                            
+0     00008975  exit                             
+0     0000840f  fsiRxInt1ISR                     
+0     0000a818  fsiRxInt1Received                
+0     00008649  fsiRxInt2ISR                     
+0     0000a81a  fsiRxInt2Received                
+0     00008743  fsiTxInt1ISR                     
+0     0000a814  fsiTxInt1Received                
+0     00008689  fsiTxInt2ISR                     
+0     0000a816  fsiTxInt2Received                
+0     000084fd  fsirxdma_isr                     
+0     0000877f  fsitxdma_isr                     
+0     00008489  handshake_lead                   
+0     0000a808  i                                
+0     0000856d  initFSI                          
+0     0000a805  isRxFrameWdEnable                
+0     000081ea  main                             
+0     00008b0c  memcpy                           
+0     0000a801  nLanes                           
+0     0000a800  nWords                           
+0     0000a824  pingFrameCntr                    
+0     0000a826  pingFrameCntr_ui32               
+0     00008bc5  prepareTxBufData                 
+0     0000a812  rxBufAddr                        
+0     0000a807  rxEventSts                       
+0     0000a80e  rxFrameWdRefCntr                 
+0     0000a82e  rxTempData16                     
+0     0000a81e  rxTimeOutCntr                    
+0     0000a80c  rxWdTimeoutRefCntr               
+0     00008c79  testGPIO                         
+0     0000a810  txBufAddr                        
+0     0000a836  txBufData                        
+0     0000a802  txDataFrameTag                   
+0     0000a806  txEventSts                       
+0     0000a803  txPingFrameTag                   
+0     0000a80a  txPingTimeRefCntr                
+0     0000a82c  txTempData16                     
+0     0000a81c  txTimeOutCntr                    
+0     0000a804  txUserData                       
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+page  address   name                             
+----  -------   ----                             
+0     00000000  code_start                       
+0     00000128  SysCtl_delay                     
+0     00000144  __TI_Handler_Table_Base          
+0     00000148  __TI_CINIT_Base                  
+0     00000148  __TI_Handler_Table_Limit         
+0     0000014c  __TI_CINIT_Limit                 
+0     0000014c  __TI_CINIT_Warm                  
+0     00000400  __stack                          
+0     00000600  __TI_STACK_END                   
+0     00008000  SysCtl_setClock                  
+0     000080f8  SysCtl_isPLLValid                
+0     000081ea  main                             
+0     000082b9  Device_enableAllPeripherals      
+0     00008387  __c28xabi_divf                   
+0     0000840f  fsiRxInt1ISR                     
+0     00008489  handshake_lead                   
+0     000084fd  fsirxdma_isr                     
+0     0000856d  initFSI                          
+0     000085bb  GPIO_setAnalogMode               
+0     00008649  fsiRxInt2ISR                     
+0     00008689  fsiTxInt2ISR                     
+0     000086c9  Interrupt_initModule             
+0     00008706  SysCtl_selectXTAL                
+0     00008743  fsiTxInt1ISR                     
+0     0000877f  fsitxdma_isr                     
+0     000087ba  GPIO_setPinConfig                
+0     000087f1  FSI_executeTxFlushSequence       
+0     00008800  Interrupt_enable                 
+0     00008837  SysCtl_selectOscSource           
+0     00008898  __TI_decompress_lzss             
+0     000088c6  FSI_performTxInitialization      
+0     000088f3  GPIO_setQualificationMode        
+0     0000891f  __TI_auto_init_nobinit_nopinit   
+0     0000894a  compareBufData                   
+0     00008973  C$$EXIT                          
+0     00008973  abort                            
+0     00008975  exit                             
+0     0000899c  GPIO_setDirectionMode            
+0     000089c3  disableAllFSIInterrupts          
+0     000089e9  FSI_readRxBuffer                 
+0     00008a0e  FSI_writeTxBuffer                
+0     00008a33  FSI_clearRxModuleReset           
+0     00008a54  FSI_clearTxModuleReset           
+0     00008a75  SysCtl_selectXTALSingleEnded     
+0     00008a95  FSI_resetRxModule                
+0     00008ab3  FSI_resetTxModule                
+0     00008ad1  Interrupt_initVectorTable        
+0     00008aef  checkReceivedFrameTypeTag        
+0     00008b0c  memcpy                           
+0     00008b7a  Device_init                      
+0     00008bc5  prepareTxBufData                 
+0     00008c22  _c_int00                         
+0     00008c39  Interrupt_defaultHandler         
+0     00008c64  UpdateTxframeData                
+0     00008c79  testGPIO                         
+0     00008cf2  FSI_performRxInitialization      
+0     00008d16  Device_initGPIO                  
+0     00008e0d  _args_main                       
+0     00008eaf  Interrupt_illegalOperationHandler
+0     00008eb9  Interrupt_nmiHandler             
+0     00008ee7  _register_unlock                 
+0     00008eeb  _register_lock                   
+0     00008eef  _nop                             
+0     00008f08  __TI_decompress_none             
+0     00008f43  _system_pre_init                 
+0     00008f45  _system_post_cinit               
+0     0000a800  nWords                           
+0     0000a801  nLanes                           
+0     0000a802  txDataFrameTag                   
+0     0000a803  txPingFrameTag                   
+0     0000a804  txUserData                       
+0     0000a805  isRxFrameWdEnable                
+0     0000a806  txEventSts                       
+0     0000a807  rxEventSts                       
+0     0000a808  i                                
+0     0000a80a  txPingTimeRefCntr                
+0     0000a80c  rxWdTimeoutRefCntr               
+0     0000a80e  rxFrameWdRefCntr                 
+0     0000a810  txBufAddr                        
+0     0000a812  rxBufAddr                        
+0     0000a814  fsiTxInt1Received                
+0     0000a816  fsiTxInt2Received                
+0     0000a818  fsiRxInt1Received                
+0     0000a81a  fsiRxInt2Received                
+0     0000a81c  txTimeOutCntr                    
+0     0000a81e  rxTimeOutCntr                    
+0     0000a820  dataFrameCntr                    
+0     0000a822  dataFrameCntr_ui32               
+0     0000a824  pingFrameCntr                    
+0     0000a826  pingFrameCntr_ui32               
+0     0000a828  dmaIntr1                         
+0     0000a82a  dmaIntr2                         
+0     0000a82c  txTempData16                     
+0     0000a82e  rxTempData16                     
+0     0000a830  dmaTxIntCnt                      
+0     0000a832  dmaRxIntCnt                      
+0     0000a834  error                            
+0     0000a836  txBufData                        
+0     0000a846  __TI_enable_exit_profile_output  
+0     0000a848  __TI_cleanup_ptr                 
+0     0000a84a  __TI_dtors_ptr                   
+0     0000a84c  _lock                            
+0     0000a84e  _unlock                          
+abs   00000200  __TI_STACK_SIZE                  
+abs   ffffffff  __TI_pprof_out_hndl              
+abs   ffffffff  __TI_prof_data_size              
+abs   ffffffff  __TI_prof_data_start             
+n/a   UNDEFED   __c_args__                       
+
+[108 symbols]

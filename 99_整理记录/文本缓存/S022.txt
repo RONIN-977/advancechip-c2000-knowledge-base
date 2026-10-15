@@ -1,0 +1,60 @@
+来源: 036/ADM32F036Flash模拟EEPROM说明V0.1.pdf
+来源编号: S022
+
+=== PDF页 1 ===
+ADM32F036Flash 模拟 EEPROM 
+一、 移植说明 
+1. 移植工程文件 Flash_EEPROM.c 以及 Flash_EEPROM.h 文件到对应工程。
+2. 移植 API 库函数和对应的.h 文件
+3. 移植 CMD 文件，重新分配扇区
+4. 工程属性中添加 Lib 库的对应路径
+
+=== PDF页 2 ===
+二、 Flash 模拟 EEPROM 函数说明 
+1) void Flash_EEPROM_Init(void)
+初始化函数，暂时未使用，无需调用。
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+2) Uint16 Flash_EEPROM_ReadWord(Uint16 *FlashAddr)
+读取 EEPROM 中固定地址的数据（执行时间：355ns@100MHz）
+例如：读取 EEPROM 中第 0 位的数据，（第 n 位则加 n）
+ 
+3) Uint16 Flash_EEPROM_Erase_OneWord(Uint16 *Addr)
+擦除 EEPROM 中固定一位的数据（核心），并返回状态，0 成功，1 失败。
+（6.2ms@100MHz）
+例如：擦除 EEPROM 中第 0 位的数据 （第 n 位则加 n）
+
+=== PDF页 3 ===
+4) Uint16 Flash_EEPROM_WriteWord(Uint16 *FlashAddr, Uint16
+*DataBuf, Uint32 Length)
+写 EEPROM 数据，并返回状态，0 成功，1 失败。
+（0ne Word 120us@100MHz ; 128Word 940us@100MHz）
+例如：从 EEPROM 第 0 位开始写入数据，长度 128 个字；数据来源于数组
+Flash_EEPROM_Data[0] - Flash_EEPROM_Data[127]
+5) Uint16 Flash_EEPROM_EraseAll(Uint16 SectorMask)
+擦除 EEPROM 里面所有数据
+(1KWord 5.2ms@100MHz) 
+例如：
+三、 扇区分配说明 
+/*ADP32F036_027_Flash_API_ZONE.lib 对扇区重新定义
+* 扇区 地址 长度 备注
+* 扇区 H (8K x 16) 0x3E8000 - 0x3E9FFF 0x2000 
+* 扇区 G (8K x 16) 0x3EA000 - 0x3EBFFF 0x2000 
+* 扇区 F (8K x 16) 0x3EC000 - 0x3EDFFF 0x2000 
+* 扇区 E (8K x 16) 0x3EE000 - 0x3EFFFF 0x2000 
+* 扇区 D (8K x 16) 0x3F0000 - 0x3F1FFF 0x2000 App 
+* 扇区 C (15K x 16) 0x3F2000 - 0x3F5C00 0x3C00 
+* 扇区 B (1K x 16) 0x3F5C00 - 0x3F5FFF 0x0400 EERPOM 
+* 扇区 A (8K x 16) 0x3F6000 - 0x3F7FFF 0x2000 BOOT 
+*/ 
+
+=== PDF页 4 ===
+四、 参数说明（Flash_EEPROM.h） 
+1) EEPROM 大小，例如（0x0080（Hex）= 128（DEC））表示 128 个 16 位的字。
+ 

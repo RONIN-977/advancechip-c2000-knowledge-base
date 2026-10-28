@@ -1,0 +1,110 @@
+using System.Windows;
+using System.Windows.Controls;
+using Fae.Core;
+
+namespace Fae.Desktop;
+public partial class MainWindow
+{
+    private UIElement CanPage()
+    {
+        var page = Page(1); var inputCard = Card(page, "时钟与目标参数"); var row = Row(inputCard); var chip = ChipChoice(row, "can");
+        var crystal = Input(row, "晶振 / MHz", "10", 145); var sys = Input(row, "系统主频 / MHz", "150", 145);
+        var instance = Choice(row, "CAN 实例", ["CANA", "CANB"], 0, 140);
+        row = Row(inputCard);
+        var source = Choice(row, "CAN 时钟来源", ["SYSCLK / 2"], 0, 210); var canClock = Input(row, "实际 CAN 时钟 / MHz", "75", 180); canClock.IsReadOnly = true;
+        var target = Input(row, "目标波特率 / kbit/s", "500", 180); var sample = Input(row, "目标采样点 / %", "80", 170); var sjw = Choice(row, "SJW / TQ", ["1", "2", "3", "4"], 0, 115);
+        var clockNote = Note(inputCard, "");
+        var buttons = Row(inputCard); var driver = new CheckBox { Content = "DriverLib 代码（有支持的型号可选）" }; buttons.Children.Add(driver);
+        var results = Card(page, "候选时序 · 点击一行生成配置代码");
+        var summary = Note(results, "输入参数后计算，按波特率误差和采样点偏差排序。");
+        var list = new DataGrid { Height = 190 }; Column(list, "分频", "Prescaler", 70); Column(list, "TSEG1", "Tseg1", 75); Column(list, "TSEG2", "Tseg2", 75); Column(list, "SJW", "Sjw", 65); Column(list, "总 TQ", "TotalTq", 75);
+        list.Columns.Add(new DataGridTextColumn { Header = "实际 kbit/s", Binding = new System.Windows.Data.Binding("ActualKbps") { StringFormat = "F6" }, Width = 150 });
+        list.Columns.Add(new DataGridTextColumn { Header = "误差 %", Binding = new System.Windows.Data.Binding("ErrorPercent") { StringFormat = "F6" }, Width = 130 });
+        list.Columns.Add(new DataGridTextColumn { Header = "采样点 %", Binding = new System.Windows.Data.Binding("SamplePointPercent") { StringFormat = "F3" }, Width = 120 }); results.Children.Add(list);
+        var codeCard = Card(page, "波特率配置片段"); var code = Code(codeCard); CanInput? last = null;
+        void Render()
+        {
+            if (last == null || list.SelectedItem is not CanTiming timing) return;
+            Guard(() =>
+            {
+                string text = CanCalculator.GenerateCode(last, timing, driver.IsChecked == true);
+                if (instance.SelectedItem?.ToString() == "CANB") text = text.Replace("ECanaRegs", "ECanbRegs").Replace("CanaRegs", "CanbRegs").Replace("CANA_BASE", "CANB_BASE");
+                code.Text = text;
+                summary.Text = $"实际 {timing.ActualKbps:F6} kbit/s  ·  误差 {timing.ErrorPercent:F6}%  ·  采样点 {timing.SamplePointPercent:F3}%  ·  {timing.TotalTq} TQ";
+                _status.Text = "时序计算完成。代码仅配置位时序；外设时钟来源须与上方一致。";
+            });
+        }
+        void Invalidate() { last = null; list.ItemsSource = null; code.Text = ""; summary.Text = "参数已修改，请重新计算。"; }
+        void UpdateClock()
+        {
+            double.TryParse(sys.Text, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var sysMhz);
+            double.TryParse(crystal.Text, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var xtal);
+            bool ecan = SelectedChip(chip).CanKind == "eCAN"; canClock.Text = (ecan ? sysMhz / 2 : source.SelectedIndex == 1 ? xtal : sysMhz).ToString("G", System.Globalization.CultureInfo.InvariantCulture);
+            Invalidate();
+        }
+        void ConfigureChip()
+        {
+            var c = SelectedChip(chip); driver.IsEnabled = c.DriverLib; if (!c.DriverLib) driver.IsChecked = false;
+            source.ItemsSource = c.CanKind == "eCAN" ? new[] { "SYSCLK / 2" } : new[] { "SYSCLK", "外部晶振" }; source.SelectedIndex = 0;
+            instance.ItemsSource = c.Id is "335" or "0049" ? new[] { "CANA", "CANB" } : new[] { "CANA" }; instance.SelectedIndex = 0;
+            sys.Text = c.Id switch { "335" => "150", "035" => "60", "0039" => "120", _ => "100" };
+            crystal.Text = c.Id switch { "335" => "30", "0049" => "20", _ => "10" };
+            clockNote.Text = $"{c.Name} · {c.TiModel} 基线 · {c.CanKind}。" + (c.CanKind == "eCAN" ? "CAN 内核时钟 = SYSCLK / 2。" : "选择的是已配置的时钟来源；此片段不切换系统时钟 MUX。") + (!c.DriverLib ? " 该型号暂无受支持的官方 DriverLib 模板。" : ""); UpdateClock();
+        }
+        void Calculate() => Guard(() => { last = new CanInput(SelectedChip(chip).Id, Number(crystal), Number(sys), Number(canClock), Number(target), Number(sample), int.Parse(sjw.SelectedItem?.ToString() ?? "1")); var timings = CanCalculator.Calculate(last); list.ItemsSource = timings; if (timings.Count > 0) list.SelectedIndex = 0; else { code.Text = ""; summary.Text = "没有合法时序，请修改时钟或目标波特率。"; } });
+        ActionButton(buttons, "计算并生成代码", Calculate, true);
+        list.SelectionChanged += (_, _) => Render(); driver.Checked += (_, _) => Render(); driver.Unchecked += (_, _) => Render(); instance.SelectionChanged += (_, _) => Render(); chip.SelectionChanged += (_, _) => ConfigureChip(); source.SelectionChanged += (_, _) => UpdateClock(); sys.TextChanged += (_, _) => UpdateClock(); crystal.TextChanged += (_, _) => UpdateClock(); target.TextChanged += (_, _) => Invalidate(); sample.TextChanged += (_, _) => Invalidate(); sjw.SelectionChanged += (_, _) => Invalidate();
+        Note(codeCard, "配置前提、字段编码和来源见代码注释。输入晶振不等于自动配置 PLL；不能将软件计算视为总线实测。", "#915B14");
+        ConfigureChip(); Calculate(); _smokeChecks.Add(() =>
+        {
+            int original = chip.SelectedIndex;
+            for (int i = 0; i < Chips.All.Length; i++)
+            {
+                chip.SelectedIndex = i; Calculate(); if (string.IsNullOrEmpty(code.Text)) throw new InvalidOperationException("CAN位域代码自检失败。");
+                if (Chips.All[i].DriverLib) { driver.IsChecked = true; if (!code.Text.Contains("CAN_setBitTiming")) throw new InvalidOperationException("CAN DriverLib代码自检失败。"); driver.IsChecked = false; }
+            }
+            chip.SelectedIndex = original; Calculate();
+        }); return Scroll(page);
+    }
+
+    private UIElement PwmPage()
+    {
+        var page = Page(2); var input = Card(page, "时基与计数模式"); var row = Row(input); var chip = ChipChoice(row, "pwm"); var sys = Input(row, "系统主频 / MHz", "150", 160); var instance = Choice(row, "PWM 实例", Enumerable.Range(1, 6).Select(i => "ePWM" + i), 0, 150); var mode = Choice(row, "计数模式", ["向上计数", "向下计数", "上下计数"], 2, 175);
+        row = Row(input); var peripheral = Choice(row, "SYSCLK ÷ EPWMCLK", ["1", "2"], 0, 180); var high = Choice(row, "HSPCLKDIV 实际分频", ["1", "2", "4", "6", "8", "10", "12", "14"], 0, 190); var divider = Choice(row, "CLKDIV 实际分频", ["1", "2", "4", "8", "16", "32", "64", "128"], 0, 190);
+        row = Row(input); var direction = Choice(row, "计算方向", ["目标频率 → 周期值", "周期值 → 实际频率"], 0, 230); var target = Input(row, "目标频率 / Hz", "20000", 190); var period = Input(row, "周期寄存器 TBPRD", "3750", 190);
+        var clockNote = Note(input, ""); var actions = Row(input); var driver = new CheckBox { Content = "DriverLib 代码（有支持的型号可选）" }; actions.Children.Add(driver);
+        var output = Card(page, "计算结果"); var resultText = Note(output, ""); var code = Code(Card(page, "PWM 周期与分频配置片段")); PwmInput? last = null; PwmResult? result = null;
+        void Render()
+        {
+            if (last == null || result == null) return;
+            Guard(() => { string text = PwmCalculator.GenerateCode(last, result, driver.IsChecked == true); int n = instance.SelectedIndex + 1; code.Text = text.Replace("EPwm1Regs", $"EPwm{n}Regs").Replace("EPWM1_BASE", $"EPWM{n}_BASE"); });
+        }
+        void Invalidate() { last = null; result = null; code.Text = ""; resultText.Text = "参数已修改，请重新计算。"; }
+        void Configure()
+        {
+            var c = SelectedChip(chip); driver.IsEnabled = c.DriverLib; if (!c.DriverLib) driver.IsChecked = false;
+            sys.Text = c.Id switch { "335" => "150", "035" => "60", "0039" => "120", _ => "100" };
+            peripheral.ItemsSource = c.Id is "035" or "335" ? new[] { "1" } : new[] { "1", "2" }; peripheral.SelectedIndex = 0; if (c.Id == "0039") peripheral.SelectedIndex = 1;
+            instance.ItemsSource = Enumerable.Range(1, c.Id == "335" ? 6 : c.Id == "035" ? 7 : 8).Select(n => "ePWM" + n).ToArray(); instance.SelectedIndex = 0;
+            clockNote.Text = "TBCLK = SYSCLK ÷ EPWMCLK分频 ÷ HSPCLKDIV ÷ CLKDIV。向上/向下：f = TBCLK/(TBPRD+1)；上下：f = TBCLK/(2×TBPRD)。外设时钟分频须与现有工程一致。"; Invalidate();
+        }
+        void Calculate() => Guard(() =>
+        {
+            last = new PwmInput(SelectedChip(chip).Id, Number(sys), int.Parse(peripheral.SelectedItem?.ToString() ?? "1"), int.Parse(high.SelectedItem?.ToString() ?? "1"), int.Parse(divider.SelectedItem?.ToString() ?? "1"), mode.SelectedIndex switch { 0 => "up", 1 => "down", _ => "updown" }, direction.SelectedIndex == 0 ? Number(target) : 0, direction.SelectedIndex == 1 ? Integer(period) : null);
+            result = PwmCalculator.Calculate(last); resultText.Text = $"TBCLK：{result.TbClockHz:N0} Hz    TBPRD：{result.Period}\n实际频率：{result.ActualHz:F6} Hz    目标误差：{result.ErrorPercent:F6}%"; Render(); _status.Text = "PWM 计算完成；代码不配置引脚、输出动作或死区。";
+        });
+        ActionButton(actions, "计算并生成代码", Calculate, true);
+        chip.SelectionChanged += (_, _) => Configure(); foreach (var c in new[] { mode, peripheral, high, divider, direction }) c.SelectionChanged += (_, _) => { target.IsEnabled = direction.SelectedIndex == 0; period.IsEnabled = direction.SelectedIndex == 1; Invalidate(); };
+        foreach (var t in new[] { sys, target, period }) t.TextChanged += (_, _) => Invalidate(); driver.Checked += (_, _) => Render(); driver.Unchecked += (_, _) => Render(); instance.SelectionChanged += (_, _) => Render();
+        period.IsEnabled = false; Configure(); Calculate(); _smokeChecks.Add(() =>
+        {
+            int original = chip.SelectedIndex;
+            for (int i = 0; i < Chips.All.Length; i++)
+            {
+                chip.SelectedIndex = i; Calculate(); if (string.IsNullOrEmpty(code.Text)) throw new InvalidOperationException("PWM位域代码自检失败。");
+                if (Chips.All[i].DriverLib) { driver.IsChecked = true; if (!code.Text.Contains("EPWM_")) throw new InvalidOperationException("PWM DriverLib代码自检失败。"); driver.IsChecked = false; }
+            }
+            chip.SelectedIndex = original; Calculate();
+        }); return Scroll(page);
+    }
+}

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>WinExe</OutputType><TargetFramework>net10.0-windows</TargetFramework><UseWPF>true</UseWPF></PropertyGroup>
+  <PropertyGroup>
+    <Customer335Only Condition="'$(Customer335Only)' == ''">false</Customer335Only>
+    <DefineConstants Condition="'$(Customer335Only)' == 'true'">$(DefineConstants);CUSTOMER335_ONLY</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup><ProjectReference Include="../Updater.Core/Updater.Core.csproj" /></ItemGroup>
+  <ItemGroup><Compile Include="../CanBridge32/CanDiscovery.cs" Link="CanDiscovery.cs" /></ItemGroup>
+  <Target Name="BuildCanBridge32" AfterTargets="Build">
+    <Exec Command="&quot;$(SystemRoot)\Microsoft.NET\Framework\v4.0.30319\csc.exe&quot; /nologo /target:exe /platform:x86 /optimize+ /out:&quot;$(TargetDir)CanBridge32.exe&quot; &quot;$(MSBuildProjectDirectory)\..\CanBridge32\Program.cs&quot; &quot;$(MSBuildProjectDirectory)\..\CanBridge32\CanDiscovery.cs&quot;" />
+  </Target>
+</Project>

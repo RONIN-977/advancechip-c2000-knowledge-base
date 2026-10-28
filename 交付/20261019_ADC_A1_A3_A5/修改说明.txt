@@ -1,0 +1,6 @@
+修改：仅 Ex_ADC/src/Ex_ADC.c，A2替换为A1/A3/A5，连续顺序采样。
+结果：SampleTableA1、SampleTableA3、SampleTableA5，各1000点，12位原始码。
+三个数组合计3000个16位字，原CMD的RAML4为4096字；最终占用以重新链接MAP为准。
+未修改时钟、校准和其他初始化。已核对ZIP内仅此源码变化。
+原包中的Debug/Release等历史产物未重新生成，不能用于验证本次修改。
+请在CCS中Clean/Rebuild后使用新生成的固件。尚未编译、烧录或实板测试。

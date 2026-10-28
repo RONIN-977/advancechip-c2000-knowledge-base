@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../host/Updater.Desktop/DeviceDiscovery.cs" Link="DeviceDiscovery.cs" />
+    <Compile Include="../../host/Updater.Desktop/CanDriver.cs" Link="CanDriver.cs" />
+    <Compile Include="../../host/CanBridge32/CanDiscovery.cs" Link="CanDiscovery.cs" />
+  </ItemGroup>
+</Project>

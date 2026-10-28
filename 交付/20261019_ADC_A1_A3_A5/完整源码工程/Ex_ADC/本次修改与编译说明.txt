@@ -1,0 +1,7 @@
+本工程按原Ex_ADC目录结构保留完整源码、include、lib、cmd及Ex_ADC.pjt。
+修改源码：src/Ex_ADC.c，采集ADCINA1/A3/A5，移除A2，各通道数组1000点。
+工程配置：Ex_ADC.pjt的Debug栈由-stack800修正为-stack400，与RAMM1容量及本次成功构建一致。
+Debug/Ex_ADC.out、Release/Ex_ADC.out和对应MAP是本次TI CGT 20.2.0.LTS重新构建结果。
+工程内其余旧OBJ、历史日志、嵌套目录等按原包保留；自行构建务必Rebuild All，不要复用旧OBJ。
+本次为命令行编译链接通过，未在CCS3.3 IDE中重建，未烧录或实板验证。
+观察变量：SampleTableA1、SampleTableA3、SampleTableA5。

@@ -1,0 +1,148 @@
+{
+  "out_sha256": "0912a91708b644639bba90d9ed128443fc093ac4d2619499dd38d4110f2fd9ba",
+  "sections": [
+    {
+      "name": ".cinit",
+      "load": "0x31f024",
+      "run": "0x31f024",
+      "words": 14088,
+      "end": "0x32272b"
+    },
+    {
+      "name": ".text",
+      "load": "0x300000",
+      "run": "0x300000",
+      "words": 127012,
+      "end": "0x31f023"
+    },
+    {
+      "name": "codestart",
+      "load": "0x33fff6",
+      "run": "0x33fff6",
+      "words": 2,
+      "end": "0x33fff7"
+    },
+    {
+      "name": "ramfuncs",
+      "load": "0x32272c",
+      "run": "0x8000",
+      "words": 31,
+      "end": "0x32274a"
+    },
+    {
+      "name": ".econst",
+      "load": "0x338000",
+      "run": "0x338000",
+      "words": 5499,
+      "end": "0x33957a"
+    },
+    {
+      "name": ".switch",
+      "load": "0x33957c",
+      "run": "0x33957c",
+      "words": 108,
+      "end": "0x3395e7"
+    },
+    {
+      "name": "IQmath",
+      "load": "0x330000",
+      "run": "0x330000",
+      "words": 167,
+      "end": "0x3300a6"
+    }
+  ],
+  "results": {
+    "ram1.dat": {
+      "compared": 141298,
+      "different": 0,
+      "unspecified": 88078,
+      "by_section": {
+        ".text": {
+          "compared": 127012,
+          "different": 0
+        },
+        ".cinit": {
+          "compared": 14088,
+          "different": 0
+        },
+        "ramfuncs": {
+          "compared": 31,
+          "different": 0
+        },
+        "IQmath": {
+          "compared": 167,
+          "different": 0
+        }
+      }
+    },
+    "ram3.dat": {
+      "compared": 141298,
+      "different": 0,
+      "unspecified": 88078,
+      "by_section": {
+        ".text": {
+          "compared": 127012,
+          "different": 0
+        },
+        ".cinit": {
+          "compared": 14088,
+          "different": 0
+        },
+        "ramfuncs": {
+          "compared": 31,
+          "different": 0
+        },
+        "IQmath": {
+          "compared": 167,
+          "different": 0
+        }
+      }
+    },
+    "ram.dat": {
+      "compared": 141298,
+      "different": 45,
+      "unspecified": 88078,
+      "by_section": {
+        ".text": {
+          "compared": 127012,
+          "different": 0
+        },
+        ".cinit": {
+          "compared": 14088,
+          "different": 45
+        },
+        "ramfuncs": {
+          "compared": 31,
+          "different": 0
+        },
+        "IQmath": {
+          "compared": 167,
+          "different": 0
+        }
+      }
+    },
+    "ram2.dat": {
+      "compared": 141298,
+      "different": 451,
+      "unspecified": 88078,
+      "by_section": {
+        ".text": {
+          "compared": 127012,
+          "different": 315
+        },
+        ".cinit": {
+          "compared": 14088,
+          "different": 136
+        },
+        "ramfuncs": {
+          "compared": 31,
+          "different": 0
+        },
+        "IQmath": {
+          "compared": 167,
+          "different": 0
+        }
+      }
+    }
+  }
+}

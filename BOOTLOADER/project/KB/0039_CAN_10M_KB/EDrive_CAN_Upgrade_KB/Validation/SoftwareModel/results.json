@@ -1,0 +1,99 @@
+{
+  "passed": 15,
+  "total": 15,
+  "delivery_shutdown_body_empty": true,
+  "adapter_has_no_hardcoded_pwm_shutdown": true,
+  "callback_checks": "exactly once after final TX completion, before reset INTM disable and cookie writes; never on ignored/error/timeout paths",
+  "cases": [
+    {
+      "case": "enter",
+      "pass": true,
+      "returncode": 0,
+      "output": "PASS enter\r\n"
+    },
+    {
+      "case": "irq_disabled",
+      "pass": true,
+      "returncode": 0,
+      "output": "PASS irq_disabled\r\n"
+    },
+    {
+      "case": "info",
+      "pass": true,
+      "returncode": 0,
+      "output": "PASS info\r\n"
+    },
+    {
+      "case": "data",
+      "pass": true,
+      "returncode": 0,
+      "output": "PASS data\r\n"
+    },
+    {
+      "case": "bad_crc",
+      "pass": true,
+      "returncode": 0,
+      "output": "PASS bad_crc\r\n"
+    },
+    {
+      "case": "out_of_order",
+      "pass": true,
+      "returncode": 0,
+      "output": "PASS out_of_order\r\n"
+    },
+    {
+      "case": "partial_timeout",
+      "pass": true,
+      "returncode": 0,
+      "output": "PASS partial_timeout\r\n"
+    },
+    {
+      "case": "partial_200_boundary",
+      "pass": true,
+      "returncode": 0,
+      "output": "PASS partial_200_boundary\r\n"
+    },
+    {
+      "case": "tx_timeout_recovery",
+      "pass": true,
+      "returncode": 0,
+      "output": "PASS tx_timeout_recovery\r\n"
+    },
+    {
+      "case": "occupied_rx",
+      "pass": true,
+      "returncode": 0,
+      "output": "PASS occupied_rx\r\n"
+    },
+    {
+      "case": "occupied_tx",
+      "pass": true,
+      "returncode": 0,
+      "output": "PASS occupied_tx\r\n"
+    },
+    {
+      "case": "timer_wrap",
+      "pass": true,
+      "returncode": 0,
+      "output": "PASS timer_wrap\r\n"
+    },
+    {
+      "case": "wrong_id",
+      "pass": true,
+      "returncode": 0,
+      "output": "PASS wrong_id\r\n"
+    },
+    {
+      "case": "extended_frame",
+      "pass": true,
+      "returncode": 0,
+      "output": "PASS extended_frame\r\n"
+    },
+    {
+      "case": "bad_dlc",
+      "pass": true,
+      "returncode": 0,
+      "output": "PASS bad_dlc\r\n"
+    }
+  ]
+}

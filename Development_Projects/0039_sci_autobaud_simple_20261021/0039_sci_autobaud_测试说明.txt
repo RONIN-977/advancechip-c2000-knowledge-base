@@ -1,0 +1,21 @@
+0039_sci_autobaud 简单测试说明
+
+1. 硬件：外部20MHz晶振，CPU 120MHz。GPIO28为RX，GPIO29为TX。
+   USB转串口TX接GPIO28，RX接GPIO29，GND共地；使用3.3V TTL电平。
+2. CCS导入0039_sci_autobaud工程，使用CPU1_FLASH配置编译。
+   下载文件：CPU1_FLASH\0039_sci_autobaud.out。
+   开发工具：CCS12.7.1、C2000编译器22.6.1.LTS；无需SysConfig。
+3. 上位机串口设置：9600波特率、8位数据、无校验、1位停止位、无流控。
+4. 程序开始运行后，使用文本/ASCII模式发送小写a或大写A。
+   若使用HEX模式，发送61或41。程序锁定后持续输出hello。
+5. 正常收发约5秒后hello暂停，此时再发送a/A。
+   重新锁定后恢复hello；之后每正常收发约5秒重复一次。
+6. 正常发送hello期间，上位机可发送测试数据。
+   CCS观察rxBuffer接收数组、rxWriteIndex写入位置、rxByteCount累计字节数。
+   数组长度128，写满后循环覆盖；普通收发阶段的a也只作为数据保存。
+7. 校准期间一直等待a/A，不超时，暂停业务接收和hello发送。
+   请看到hello恢复后再发业务数据，避免业务数据被同步清理过程丢弃。
+8. 如需改变上位机波特率，请在hello暂停的校准窗口切换，再发送a/A。
+   源码为GBK编码，CCS已设置对应编码。
+
+已通过Flash编译及换路径编译；尚未进行实板烧录、串口和高低温验证。

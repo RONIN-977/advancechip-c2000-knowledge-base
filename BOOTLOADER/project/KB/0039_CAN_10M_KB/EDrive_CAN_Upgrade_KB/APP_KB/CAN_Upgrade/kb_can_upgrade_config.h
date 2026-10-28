@@ -1,0 +1,19 @@
+#ifndef KB_CAN_UPGRADE_CONFIG_H
+#define KB_CAN_UPGRADE_CONFIG_H
+#define KB_APP_SYSCLK_HZ 100000000UL
+#if DEVICE_SYSCLK_FREQ != KB_APP_SYSCLK_HZ
+#error APP clock and upgrade Timer2 conversion disagree
+#endif
+/* 客户现有 TX1..9 / RX10..16 均保留；31/32 专供升级。 */
+#define KB_UPGRADE_RX_OBJ 31U
+#define KB_UPGRADE_TX_OBJ 32U
+#define KB_UPGRADE_NODE_ID 1U
+#define KB_UPGRADE_RX_ID (0x600U + KB_UPGRADE_NODE_ID)
+#define KB_UPGRADE_TX_ID (0x580U + KB_UPGRADE_NODE_ID)
+#define KB_UPGRADE_REQUEST_ADDR 0x0003F8UL
+#define KB_UPGRADE_PARTIAL_MS 200UL
+#define KB_UPGRADE_TX_TIMEOUT_MS 500UL
+#if KB_UPGRADE_RX_OBJ < 1 || KB_UPGRADE_RX_OBJ > 32 || KB_UPGRADE_TX_OBJ < 1 || KB_UPGRADE_TX_OBJ > 32 || KB_UPGRADE_RX_OBJ == KB_UPGRADE_TX_OBJ
+#error Invalid upgrade CAN object allocation
+#endif
+#endif

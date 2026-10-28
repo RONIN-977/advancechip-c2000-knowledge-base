@@ -1,0 +1,22 @@
+通讯诊断摘要 V2026.10.25
+{"operation":"upgrade","metadata":{"version":"V2026.10.25","action":"upgrade","chip":"AVP32F0039","simulation":false,"transport":"CAN","baud":500000,"port":null,"brand":"创芯科技","deviceType":4,"deviceIndex":0,"serial":"31F0001F0BC","channel":0,"node":"1","driver":"C:\\Users\\17879\\Desktop\\CHIP\\BOOTLOADER\\上位机\\统一升级上位机_CAN提速版_20261025\\便携版\\drivers\\chuangxin\\x64\\ControlCAN.dll","imagePath":"C:\\Users\\17879\\Desktop\\CHIP\\BOOTLOADER\\AVP32F0039Boot+APP_CAN_10M_KB\\EDrive_CAN_Upgrade_KB\\APP_KB\\Debug\\EDrive_CAN_Application_KB.out","imageBytes":17696,"appStart":"0x087000","processBits":64},"preferredDirectory":"C:\\Users\\17879\\Desktop\\CHIP\\BOOTLOADER\\上位机\\统一升级上位机_CAN提速版_20261025\\便携版\\Logs","fallbackReason":null}
+结果：{"action":"upgrade","status":"升级完成，启动请求已确认","percent":100,"committed":true}
+操作总耗时（开始创建日志至结果记录）：9237.276 ms
+命令 EnterBoot：成功 1 次，累计 12.433 ms（含该命令此前重试）
+命令 Info：成功 2 次，累计 93.683 ms（含该命令此前重试）
+命令 Begin：成功 1 次，累计 214.844 ms（含该命令此前重试）
+命令 Data：成功 148 次，累计 7928.128 ms（含该命令此前重试）
+命令 Finish：成功 1 次，累计 107.765 ms（含该命令此前重试）
+命令 Reset：成功 1 次，累计 46.300 ms（含该命令此前重试）
+重试 0 次；命令超时 0 次。
+CAN交换 154 次，发送 3565 帧，收到 622 帧。
+CAN交换累计：8347.496 ms
+其中发送DLL/桥接调用：1301.020 ms
+其中帧间等待：5078.455 ms
+请求帧间等待累计：3613.000 ms
+等待模式 legacy-control：24 帧
+等待模式 high-resolution-timer：3541 帧
+其中接收DLL/桥接调用：367.815 ms
+其中空读后等待：1570.042 ms
+平均每帧等待：1.425 ms
+说明：命令耗时与CAN交换耗时互相包含，不能相加。DLL返回发送成功不等于目标已确认；接收等待含USB、设备处理、总线等时间，不能单独认定为Flash耗时。x86桥接调用还含进程通信。335 SCI仅记录操作/UI日志，不含上述CAN指标。

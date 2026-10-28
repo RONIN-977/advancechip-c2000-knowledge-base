@@ -1,0 +1,36 @@
+{
+  "Passed": 22,
+  "Checks": [
+    "two vendors with identical index and serial remain separate",
+    "each device remains bound to its detected driver",
+    "device list labels identify driver vendor",
+    "single Chuangxin device auto-selection candidate",
+    "single ZLG device auto-selection candidate",
+    "FileNotFoundException from ZLG does not hide Chuangxin",
+    "FileNotFoundException from Chuangxin does not hide ZLG",
+    "TimeoutException from ZLG does not hide Chuangxin",
+    "TimeoutException from Chuangxin does not hide ZLG",
+    "BadImageFormatException from ZLG does not hide Chuangxin",
+    "BadImageFormatException from Chuangxin does not hide ZLG",
+    "per-vendor failures recorded",
+    "no device produces an empty list",
+    "explicit cancellation propagates",
+    "cancellation during scan propagates",
+    "Chuangxin SDK only accepts documented device type 4",
+    "empty serial uses index and removes exact duplicates",
+    "manual duplicate driver path is not probed twice",
+    "manual extra driver preserves both bundled candidates",
+    "Chuangxin bundled path is relative to deployed application directory",
+    "existing discovery wire format retained",
+    "malformed channel count rejected"
+  ],
+  "FailureLogs": [
+    "\u5468\u7ACB\u529F \u68C0\u6D4B\uFF1Amissing DLL",
+    "\u521B\u82AF\u79D1\u6280 \u68C0\u6D4B\uFF1Amissing DLL",
+    "\u5468\u7ACB\u529F \u68C0\u6D4B\uFF1Aprobe timeout",
+    "\u521B\u82AF\u79D1\u6280 \u68C0\u6D4B\uFF1Aprobe timeout",
+    "\u5468\u7ACB\u529F \u68C0\u6D4B\uFF1Abad DLL",
+    "\u521B\u82AF\u79D1\u6280 \u68C0\u6D4B\uFF1Abad DLL"
+  ],
+  "Boundary": "Real scanner orchestration, injected enumeration results; no physical CAN transmit or driver installation."
+}

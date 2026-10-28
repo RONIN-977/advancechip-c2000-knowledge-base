@@ -1,0 +1,8 @@
+验证日期：2026-10-21
+CCS12.7.1 / TI C2000 22.6.1.LTS / SysConfig1.23.1。
+桌面独立工程CPU1_RAM、CPU1_FLASH、CPU1_LAUNCHXL_RAM、CPU1_LAUNCHXL_FLASH均全量生成、编译、链接通过（0错误）。
+SysConfig实际生成SCI-A / GPIO28 RX / GPIO29 TX / 9600 / 8N1 / FIFO，并由主代码Board_init调用。
+源码与库/SysConfig产品数据均本地化；仍需要安装CCS、编译器与SysConfig。
+独立静态审查核对了触发上升沿、TXEMPTY排空、成功/超时恢复、错误标志清除、FIFO溢出、循环接收和持续hello逻辑。
+原中文仓库路径构建发生TI编译器头文件查找失败，交付及验证使用英文路径。客户建议同样解压到英文短路径。
+未烧录、未实板串口、未验证Flash冷启动，未做±10%/高低温/波形验收。

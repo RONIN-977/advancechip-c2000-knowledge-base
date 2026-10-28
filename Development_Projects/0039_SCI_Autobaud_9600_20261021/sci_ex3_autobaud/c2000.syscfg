@@ -1,0 +1,17 @@
+/**
+ * @cliArgs --device "TMS320F280039C" --package "100PZ" --context "system"
+ * @versions {"tool":"1.23.1"}
+ */
+const sci = scripting.addModule("/driverlib/sci.js", {}, false);
+const sci1 = sci.addInstance();
+sci1.$name = "mySCI0";
+sci1.baudRates = 9600;
+sci1.wordLenght = "8";
+sci1.stop = "ONE";
+sci1.parity = "SCI_CONFIG_PAR_NONE";
+sci1.loopback = false;
+sci1.useFifo = true;
+sci1.useInterrupts = false;
+sci1.sci.$assign = "SCIA";
+sci1.sci.sci_rxPin.$assign = "GPIO28";
+sci1.sci.sci_txPin.$assign = "GPIO29";

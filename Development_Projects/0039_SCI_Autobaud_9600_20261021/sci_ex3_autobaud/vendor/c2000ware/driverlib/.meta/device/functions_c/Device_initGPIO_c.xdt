@@ -1,0 +1,39 @@
+%let Common   = system.getScript("/driverlib/Common.js");
+//*****************************************************************************
+//
+// Function to disable pin locks and enable pullups on GPIOs.
+//
+//*****************************************************************************
+void Device_initGPIO(void)
+{
+    //
+    // Disable pin locks.
+    //
+%if (["F2838x", "F2837xD", "F2837xS", "F2807x"].includes(Common.getDeviceName())){
+    GPIO_unlockPortConfig(GPIO_PORT_A, 0xFFFFFFFF);
+    GPIO_unlockPortConfig(GPIO_PORT_B, 0xFFFFFFFF);
+    GPIO_unlockPortConfig(GPIO_PORT_C, 0xFFFFFFFF);
+    GPIO_unlockPortConfig(GPIO_PORT_D, 0xFFFFFFFF);
+    GPIO_unlockPortConfig(GPIO_PORT_E, 0xFFFFFFFF);
+    GPIO_unlockPortConfig(GPIO_PORT_F, 0xFFFFFFFF);
+
+    //
+    // Enable GPIO Pullups
+    //
+    Device_enableUnbondedGPIOPullups();
+%}
+%if (["F28002x", "F28003x", "F28004x", "F280013x", "F280015x"].includes(Common.getDeviceName())){
+    GPIO_unlockPortConfig(GPIO_PORT_A, 0xFFFFFFFF);
+    GPIO_unlockPortConfig(GPIO_PORT_B, 0xFFFFFFFF);
+    GPIO_unlockPortConfig(GPIO_PORT_H, 0xFFFFFFFF);
+%}
+%if (["F28P65x"].includes(Common.getDeviceName())){
+    GPIO_unlockPortConfig(GPIO_PORT_A, 0xFFFFFFFF);
+    GPIO_unlockPortConfig(GPIO_PORT_B, 0xFFFFFFFF);
+    GPIO_unlockPortConfig(GPIO_PORT_C, 0xFFFFFFFF);
+    GPIO_unlockPortConfig(GPIO_PORT_D, 0xFFFFFFFF);
+    GPIO_unlockPortConfig(GPIO_PORT_E, 0xFFFFFFFF);
+    GPIO_unlockPortConfig(GPIO_PORT_F, 0xFFFFFFFF);
+    GPIO_unlockPortConfig(GPIO_PORT_H, 0xFFFFFFFF);
+%}
+}

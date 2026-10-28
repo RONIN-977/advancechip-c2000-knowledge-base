@@ -1,0 +1,575 @@
+{
+  "cmd_regions": [
+    {
+      "name": "ZONE0",
+      "page": 0,
+      "start": 16384,
+      "end": 20480,
+      "size": 4096
+    },
+    {
+      "name": "RAML0",
+      "page": 0,
+      "start": 32768,
+      "end": 40960,
+      "size": 8192
+    },
+    {
+      "name": "ZONE6",
+      "page": 0,
+      "start": 1048576,
+      "end": 2097152,
+      "size": 1048576
+    },
+    {
+      "name": "ZONE7A",
+      "page": 0,
+      "start": 2097152,
+      "end": 2161664,
+      "size": 64512
+    },
+    {
+      "name": "FLASHH",
+      "page": 0,
+      "start": 3145728,
+      "end": 3342336,
+      "size": 196608
+    },
+    {
+      "name": "FLASHC",
+      "page": 0,
+      "start": 3342336,
+      "end": 3375104,
+      "size": 32768
+    },
+    {
+      "name": "FLASHA",
+      "page": 0,
+      "start": 3375104,
+      "end": 3407744,
+      "size": 32640
+    },
+    {
+      "name": "CSM_RSVD",
+      "page": 0,
+      "start": 3407744,
+      "end": 3407862,
+      "size": 118
+    },
+    {
+      "name": "BEGIN",
+      "page": 0,
+      "start": 3407862,
+      "end": 3407864,
+      "size": 2
+    },
+    {
+      "name": "CSM_PWL",
+      "page": 0,
+      "start": 3407864,
+      "end": 3407872,
+      "size": 8
+    },
+    {
+      "name": "OTP",
+      "page": 0,
+      "start": 3671040,
+      "end": 3672064,
+      "size": 1024
+    },
+    {
+      "name": "ADC_CAL",
+      "page": 0,
+      "start": 3670144,
+      "end": 3670153,
+      "size": 9
+    },
+    {
+      "name": "IQTABLES",
+      "page": 0,
+      "start": 4186112,
+      "end": 4189008,
+      "size": 2896
+    },
+    {
+      "name": "IQTABLES2",
+      "page": 0,
+      "start": 4189008,
+      "end": 4189148,
+      "size": 140
+    },
+    {
+      "name": "FPUTABLES",
+      "page": 0,
+      "start": 4189148,
+      "end": 4190844,
+      "size": 1696
+    },
+    {
+      "name": "ROM",
+      "page": 0,
+      "start": 4190844,
+      "end": 4194240,
+      "size": 3396
+    },
+    {
+      "name": "RESET",
+      "page": 0,
+      "start": 4194240,
+      "end": 4194242,
+      "size": 2
+    },
+    {
+      "name": "VECTORS",
+      "page": 0,
+      "start": 4194242,
+      "end": 4194304,
+      "size": 62
+    },
+    {
+      "name": "BOOT_RSVD",
+      "page": 1,
+      "start": 0,
+      "end": 80,
+      "size": 80
+    },
+    {
+      "name": "RAMM0",
+      "page": 1,
+      "start": 80,
+      "end": 1024,
+      "size": 944
+    },
+    {
+      "name": "RAMM1",
+      "page": 1,
+      "start": 1024,
+      "end": 2048,
+      "size": 1024
+    },
+    {
+      "name": "RAML2",
+      "page": 1,
+      "start": 40960,
+      "end": 45568,
+      "size": 4608
+    },
+    {
+      "name": "RAML3",
+      "page": 1,
+      "start": 45568,
+      "end": 61440,
+      "size": 15872
+    },
+    {
+      "name": "RAML5",
+      "page": 1,
+      "start": 61440,
+      "end": 62720,
+      "size": 1280
+    },
+    {
+      "name": "RAML7",
+      "page": 1,
+      "start": 62720,
+      "end": 64000,
+      "size": 1280
+    },
+    {
+      "name": "ZONE7B",
+      "page": 1,
+      "start": 2161664,
+      "end": 2162688,
+      "size": 1024
+    }
+  ],
+  "cmd_physical_overlap": [],
+  "map_sections_count": 66,
+  "section_comparison": [
+    {
+      "section": "PieVectTableFile",
+      "load": "0xD00",
+      "words": 256,
+      "matches_map": true
+    },
+    {
+      "section": "DevEmuRegsFile",
+      "load": "0x880",
+      "words": 208,
+      "matches_map": true
+    },
+    {
+      "section": "FlashRegsFile",
+      "load": "0xA80",
+      "words": 8,
+      "matches_map": true
+    },
+    {
+      "section": "CsmRegsFile",
+      "load": "0xAE0",
+      "words": 16,
+      "matches_map": true
+    },
+    {
+      "section": "AdcMirrorFile",
+      "load": "0xB00",
+      "words": 16,
+      "matches_map": true
+    },
+    {
+      "section": "XintfRegsFile",
+      "load": "0xB20",
+      "words": 30,
+      "matches_map": true
+    },
+    {
+      "section": "CpuTimer0RegsFile",
+      "load": "0xC00",
+      "words": 8,
+      "matches_map": true
+    },
+    {
+      "section": "CpuTimer1RegsFile",
+      "load": "0xC08",
+      "words": 8,
+      "matches_map": true
+    },
+    {
+      "section": "CpuTimer2RegsFile",
+      "load": "0xC10",
+      "words": 8,
+      "matches_map": true
+    },
+    {
+      "section": "PieCtrlRegsFile",
+      "load": "0xCE0",
+      "words": 26,
+      "matches_map": true
+    },
+    {
+      "section": "DmaRegsFile",
+      "load": "0x1000",
+      "words": 224,
+      "matches_map": true
+    },
+    {
+      "section": "McbspaRegsFile",
+      "load": "0x5000",
+      "words": 37,
+      "matches_map": true
+    },
+    {
+      "section": "McbspbRegsFile",
+      "load": "0x5040",
+      "words": 37,
+      "matches_map": true
+    },
+    {
+      "section": "ECanaRegsFile",
+      "load": "0x6000",
+      "words": 52,
+      "matches_map": true
+    },
+    {
+      "section": "ECanaLAMRegsFile",
+      "load": "0x6040",
+      "words": 64,
+      "matches_map": true
+    },
+    {
+      "section": "ECanaMboxesFile",
+      "load": "0x6100",
+      "words": 256,
+      "matches_map": true
+    },
+    {
+      "section": "ECanaMOTSRegsFile",
+      "load": "0x6080",
+      "words": 64,
+      "matches_map": true
+    },
+    {
+      "section": "ECanaMOTORegsFile",
+      "load": "0x60C0",
+      "words": 64,
+      "matches_map": true
+    },
+    {
+      "section": "ECanbRegsFile",
+      "load": "0x6200",
+      "words": 52,
+      "matches_map": true
+    },
+    {
+      "section": "ECanbLAMRegsFile",
+      "load": "0x6240",
+      "words": 64,
+      "matches_map": true
+    },
+    {
+      "section": "ECanbMboxesFile",
+      "load": "0x6300",
+      "words": 256,
+      "matches_map": true
+    },
+    {
+      "section": "ECanbMOTSRegsFile",
+      "load": "0x6280",
+      "words": 64,
+      "matches_map": true
+    },
+    {
+      "section": "ECanbMOTORegsFile",
+      "load": "0x62C0",
+      "words": 64,
+      "matches_map": true
+    },
+    {
+      "section": "EPwm1RegsFile",
+      "load": "0x6800",
+      "words": 34,
+      "matches_map": true
+    },
+    {
+      "section": "EPwm2RegsFile",
+      "load": "0x6840",
+      "words": 34,
+      "matches_map": true
+    },
+    {
+      "section": "EPwm3RegsFile",
+      "load": "0x6880",
+      "words": 34,
+      "matches_map": true
+    },
+    {
+      "section": "EPwm4RegsFile",
+      "load": "0x68C0",
+      "words": 34,
+      "matches_map": true
+    },
+    {
+      "section": "EPwm5RegsFile",
+      "load": "0x6900",
+      "words": 34,
+      "matches_map": true
+    },
+    {
+      "section": "EPwm6RegsFile",
+      "load": "0x6940",
+      "words": 34,
+      "matches_map": true
+    },
+    {
+      "section": "ECap1RegsFile",
+      "load": "0x6A00",
+      "words": 32,
+      "matches_map": true
+    },
+    {
+      "section": "ECap2RegsFile",
+      "load": "0x6A20",
+      "words": 32,
+      "matches_map": true
+    },
+    {
+      "section": "ECap3RegsFile",
+      "load": "0x6A40",
+      "words": 32,
+      "matches_map": true
+    },
+    {
+      "section": "ECap4RegsFile",
+      "load": "0x6A60",
+      "words": 32,
+      "matches_map": true
+    },
+    {
+      "section": "ECap5RegsFile",
+      "load": "0x6A80",
+      "words": 32,
+      "matches_map": true
+    },
+    {
+      "section": "ECap6RegsFile",
+      "load": "0x6AA0",
+      "words": 32,
+      "matches_map": true
+    },
+    {
+      "section": "EQep1RegsFile",
+      "load": "0x6B00",
+      "words": 64,
+      "matches_map": true
+    },
+    {
+      "section": "EQep2RegsFile",
+      "load": "0x6B40",
+      "words": 64,
+      "matches_map": true
+    },
+    {
+      "section": "GpioCtrlRegsFile",
+      "load": "0x6F80",
+      "words": 46,
+      "matches_map": true
+    },
+    {
+      "section": "GpioDataRegsFile",
+      "load": "0x6FC0",
+      "words": 32,
+      "matches_map": true
+    },
+    {
+      "section": "GpioIntRegsFile",
+      "load": "0x6FE0",
+      "words": 10,
+      "matches_map": true
+    },
+    {
+      "section": "SysCtrlRegsFile",
+      "load": "0x7010",
+      "words": 32,
+      "matches_map": true
+    },
+    {
+      "section": "SpiaRegsFile",
+      "load": "0x7040",
+      "words": 16,
+      "matches_map": true
+    },
+    {
+      "section": "SciaRegsFile",
+      "load": "0x7050",
+      "words": 16,
+      "matches_map": true
+    },
+    {
+      "section": "XIntruptRegsFile",
+      "load": "0x7070",
+      "words": 16,
+      "matches_map": true
+    },
+    {
+      "section": "AdcRegsFile",
+      "load": "0x7100",
+      "words": 30,
+      "matches_map": true
+    },
+    {
+      "section": "ScibRegsFile",
+      "load": "0x7750",
+      "words": 16,
+      "matches_map": true
+    },
+    {
+      "section": "ScicRegsFile",
+      "load": "0x7770",
+      "words": 16,
+      "matches_map": true
+    },
+    {
+      "section": "I2caRegsFile",
+      "load": "0x7900",
+      "words": 34,
+      "matches_map": true
+    },
+    {
+      "section": "CsmPwlFile",
+      "load": "0x33FFF8",
+      "words": 8,
+      "matches_map": true
+    },
+    {
+      "section": ".cinit",
+      "load": "0x31F024",
+      "words": 14088,
+      "matches_map": true
+    },
+    {
+      "section": ".text",
+      "load": "0x300000",
+      "words": 127012,
+      "matches_map": true
+    },
+    {
+      "section": "codestart",
+      "load": "0x33FFF6",
+      "words": 2,
+      "matches_map": true
+    },
+    {
+      "section": "ramfuncs",
+      "load": "0x32272C",
+      "words": 31,
+      "matches_map": true
+    },
+    {
+      "section": ".stack",
+      "load": "0x400",
+      "words": 768,
+      "matches_map": true
+    },
+    {
+      "section": ".sysmem",
+      "load": "0xAA28",
+      "words": 1536,
+      "matches_map": true
+    },
+    {
+      "section": ".ebss",
+      "load": "0xA000",
+      "words": 2599,
+      "matches_map": true
+    },
+    {
+      "section": ".pardata",
+      "load": "0xB200",
+      "words": 14612,
+      "matches_map": true
+    },
+    {
+      "section": ".PMSMdata",
+      "load": "0xF000",
+      "words": 738,
+      "matches_map": true
+    },
+    {
+      "section": ".econst",
+      "load": "0x338000",
+      "words": 5499,
+      "matches_map": true
+    },
+    {
+      "section": ".switch",
+      "load": "0x33957C",
+      "words": 108,
+      "matches_map": true
+    },
+    {
+      "section": "IQmath",
+      "load": "0x330000",
+      "words": 167,
+      "matches_map": true
+    },
+    {
+      "section": "IQmathTables",
+      "load": "0x3FE000",
+      "words": 2896,
+      "matches_map": true
+    },
+    {
+      "section": ".reset",
+      "load": "0x3FFFC0",
+      "words": 2,
+      "matches_map": true
+    },
+    {
+      "section": ".adc_cal",
+      "load": "0x380080",
+      "words": 7,
+      "matches_map": true
+    }
+  ],
+  "actual_load_overlaps": []
+}

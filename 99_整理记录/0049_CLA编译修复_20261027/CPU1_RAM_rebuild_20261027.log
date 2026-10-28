@@ -1,0 +1,114 @@
+'Building file: "../cla_ex1_asin.syscfg"'
+'Invoking: SysConfig'
+"C:/ti/sysconfig_1.23.1/sysconfig_cli.bat" --script "C:/Users/17879/Desktop/V12/cla_ex1_asin/cla_ex1_asin.syscfg" -o "syscfg" -s "C:/ti/c2000/C2000Ware_5_04_00_00/.metadata/sdk.json" -d "F28004x" --package F28004x_100PZ --part F28004x_100PZ --compiler ccs
+Warning: SysConfig has been updated to use standard TI part numbers. The device TMS320F280041C has been automatically selected. If this is not the desired please open SysConfig to change it.
+Running script...
+Validating...
+Generating Code (cla_ex1_asin.syscfg)...
+Unchanged C:\Users\17879\Desktop\V12\cla_ex1_asin\CPU1_RAM\syscfg\board.c...
+Unchanged C:\Users\17879\Desktop\V12\cla_ex1_asin\CPU1_RAM\syscfg\board.h...
+Unchanged C:\Users\17879\Desktop\V12\cla_ex1_asin\CPU1_RAM\syscfg\board.cmd.genlibs...
+Unchanged C:\Users\17879\Desktop\V12\cla_ex1_asin\CPU1_RAM\syscfg\board.opt...
+Unchanged C:\Users\17879\Desktop\V12\cla_ex1_asin\CPU1_RAM\syscfg\board.json...
+Unchanged C:\Users\17879\Desktop\V12\cla_ex1_asin\CPU1_RAM\syscfg\pinmux.csv...
+Unchanged C:\Users\17879\Desktop\V12\cla_ex1_asin\CPU1_RAM\syscfg\c2000ware_libraries.cmd.genlibs...
+Unchanged C:\Users\17879\Desktop\V12\cla_ex1_asin\CPU1_RAM\syscfg\c2000ware_libraries.opt...
+Unchanged C:\Users\17879\Desktop\V12\cla_ex1_asin\CPU1_RAM\syscfg\c2000ware_libraries.c...
+Unchanged C:\Users\17879\Desktop\V12\cla_ex1_asin\CPU1_RAM\syscfg\c2000ware_libraries.h...
+Unchanged C:\Users\17879\Desktop\V12\cla_ex1_asin\CPU1_RAM\syscfg\clocktree.h...
+'Finished building: "../cla_ex1_asin.syscfg"'
+' '
+'Building file: "../asin.cla"'
+'Building file: "../cla_ex1_asin.c"'
+'Invoking: C2000 Compiler'
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu0 -Ooff --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/device" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00/driverlib/f28004x/driverlib" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --cla_background_task=off --cla_signed_compare_workaround=on --preproc_with_compile --preproc_dependency="asin.d_raw" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/CPU1_RAM/syscfg" --cmd_file="syscfg/board.opt" --cmd_file="syscfg/c2000ware_libraries.opt"  "../asin.cla"
+'Invoking: C2000 Compiler'
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu0 -Ooff --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/device" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00/driverlib/f28004x/driverlib" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --cla_background_task=off --cla_signed_compare_workaround=on --preproc_with_compile --preproc_dependency="cla_ex1_asin.d_raw" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/CPU1_RAM/syscfg" --cmd_file="syscfg/board.opt" --cmd_file="syscfg/c2000ware_libraries.opt"  "../cla_ex1_asin.c"
+'Building file: "syscfg/board.c"'
+'Building file: "syscfg/c2000ware_libraries.c"'
+'Invoking: C2000 Compiler'
+'Finished building: "../asin.cla"'
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu0 -Ooff --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/device" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00/driverlib/f28004x/driverlib" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --cla_background_task=off --cla_signed_compare_workaround=on --preproc_with_compile --preproc_dependency="syscfg/board.d_raw" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/CPU1_RAM/syscfg" --obj_directory="syscfg" --cmd_file="syscfg/board.opt" --cmd_file="syscfg/c2000ware_libraries.opt"  "syscfg/board.c"
+'Invoking: C2000 Compiler'
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu0 -Ooff --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/device" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00/driverlib/f28004x/driverlib" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --cla_background_task=off --cla_signed_compare_workaround=on --preproc_with_compile --preproc_dependency="syscfg/c2000ware_libraries.d_raw" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/CPU1_RAM/syscfg" --obj_directory="syscfg" --cmd_file="syscfg/board.opt" --cmd_file="syscfg/c2000ware_libraries.opt"  "syscfg/c2000ware_libraries.c"
+' '
+'Building file: "../device/device.c"'
+"../cla_ex1_asin.c", line 296 (col. 39): advice #2614-D: (Performance) Use --fp_mode=relaxed to enable TMU hardware support for FP division.
+'Invoking: C2000 Compiler'
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu0 -Ooff --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/device" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00/driverlib/f28004x/driverlib" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --cla_background_task=off --cla_signed_compare_workaround=on --preproc_with_compile --preproc_dependency="device/device.d_raw" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/CPU1_RAM/syscfg" --obj_directory="device" --cmd_file="syscfg/board.opt" --cmd_file="syscfg/c2000ware_libraries.opt"  "../device/device.c"
+'Finished building: "../cla_ex1_asin.c"'
+'Finished building: "syscfg/board.c"'
+'Finished building: "syscfg/c2000ware_libraries.c"'
+' '
+' '
+' '
+'Building file: "../device/f28004x_codestartbranch.asm"'
+'Finished building: "../device/device.c"'
+'Invoking: C2000 Compiler'
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu0 -Ooff --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/device" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00/driverlib/f28004x/driverlib" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --cla_background_task=off --cla_signed_compare_workaround=on --preproc_with_compile --preproc_dependency="device/f28004x_codestartbranch.d_raw" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/CPU1_RAM/syscfg" --obj_directory="device" --cmd_file="syscfg/board.opt" --cmd_file="syscfg/c2000ware_libraries.opt"  "../device/f28004x_codestartbranch.asm"
+' '
+'Finished building: "../device/f28004x_codestartbranch.asm"'
+' '
+'Building file: "../cla_ex1_asin.syscfg"'
+'Invoking: SysConfig'
+"C:/ti/sysconfig_1.23.1/sysconfig_cli.bat" --script "C:/Users/17879/Desktop/V12/cla_ex1_asin/cla_ex1_asin.syscfg" -o "syscfg" -s "C:/ti/c2000/C2000Ware_5_04_00_00/.metadata/sdk.json" -d "F28004x" --package F28004x_100PZ --part F28004x_100PZ --compiler ccs
+Warning: SysConfig has been updated to use standard TI part numbers. The device TMS320F280041C has been automatically selected. If this is not the desired please open SysConfig to change it.
+Running script...
+Validating...
+Generating Code (cla_ex1_asin.syscfg)...
+Unchanged C:\Users\17879\Desktop\V12\cla_ex1_asin\CPU1_RAM\syscfg\board.c...
+Unchanged C:\Users\17879\Desktop\V12\cla_ex1_asin\CPU1_RAM\syscfg\board.h...
+Unchanged C:\Users\17879\Desktop\V12\cla_ex1_asin\CPU1_RAM\syscfg\board.cmd.genlibs...
+Unchanged C:\Users\17879\Desktop\V12\cla_ex1_asin\CPU1_RAM\syscfg\board.opt...
+Unchanged C:\Users\17879\Desktop\V12\cla_ex1_asin\CPU1_RAM\syscfg\board.json...
+Unchanged C:\Users\17879\Desktop\V12\cla_ex1_asin\CPU1_RAM\syscfg\pinmux.csv...
+Unchanged C:\Users\17879\Desktop\V12\cla_ex1_asin\CPU1_RAM\syscfg\c2000ware_libraries.cmd.genlibs...
+Unchanged C:\Users\17879\Desktop\V12\cla_ex1_asin\CPU1_RAM\syscfg\c2000ware_libraries.opt...
+Unchanged C:\Users\17879\Desktop\V12\cla_ex1_asin\CPU1_RAM\syscfg\c2000ware_libraries.c...
+Unchanged C:\Users\17879\Desktop\V12\cla_ex1_asin\CPU1_RAM\syscfg\c2000ware_libraries.h...
+Unchanged C:\Users\17879\Desktop\V12\cla_ex1_asin\CPU1_RAM\syscfg\clocktree.h...
+'Finished building: "../cla_ex1_asin.syscfg"'
+' '
+'Building file: "../asin.cla"'
+'Building file: "../cla_ex1_asin.c"'
+'Invoking: C2000 Compiler'
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu0 -Ooff --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/device" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00/driverlib/f28004x/driverlib" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --cla_background_task=off --cla_signed_compare_workaround=on --preproc_with_compile --preproc_dependency="asin.d_raw" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/CPU1_RAM/syscfg" --cmd_file="syscfg/board.opt" --cmd_file="syscfg/c2000ware_libraries.opt"  "../asin.cla"
+'Invoking: C2000 Compiler'
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu0 -Ooff --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/device" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00/driverlib/f28004x/driverlib" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --cla_background_task=off --cla_signed_compare_workaround=on --preproc_with_compile --preproc_dependency="cla_ex1_asin.d_raw" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/CPU1_RAM/syscfg" --cmd_file="syscfg/board.opt" --cmd_file="syscfg/c2000ware_libraries.opt"  "../cla_ex1_asin.c"
+'Building file: "syscfg/board.c"'
+'Building file: "syscfg/c2000ware_libraries.c"'
+'Invoking: C2000 Compiler'
+'Invoking: C2000 Compiler'
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu0 -Ooff --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/device" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00/driverlib/f28004x/driverlib" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --cla_background_task=off --cla_signed_compare_workaround=on --preproc_with_compile --preproc_dependency="syscfg/board.d_raw" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/CPU1_RAM/syscfg" --obj_directory="syscfg" --cmd_file="syscfg/board.opt" --cmd_file="syscfg/c2000ware_libraries.opt"  "syscfg/board.c"
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu0 -Ooff --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/device" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00/driverlib/f28004x/driverlib" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --cla_background_task=off --cla_signed_compare_workaround=on --preproc_with_compile --preproc_dependency="syscfg/c2000ware_libraries.d_raw" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/CPU1_RAM/syscfg" --obj_directory="syscfg" --cmd_file="syscfg/board.opt" --cmd_file="syscfg/c2000ware_libraries.opt"  "syscfg/c2000ware_libraries.c"
+'Finished building: "../asin.cla"'
+"../cla_ex1_asin.c", line 296 (col. 39): advice #2614-D: (Performance) Use --fp_mode=relaxed to enable TMU hardware support for FP division.
+' '
+'Building file: "../device/device.c"'
+'Invoking: C2000 Compiler'
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu0 -Ooff --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/device" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00/driverlib/f28004x/driverlib" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --cla_background_task=off --cla_signed_compare_workaround=on --preproc_with_compile --preproc_dependency="device/device.d_raw" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/CPU1_RAM/syscfg" --obj_directory="device" --cmd_file="syscfg/board.opt" --cmd_file="syscfg/c2000ware_libraries.opt"  "../device/device.c"
+'Finished building: "../cla_ex1_asin.c"'
+'Finished building: "syscfg/c2000ware_libraries.c"'
+' '
+' '
+'Building file: "../device/f28004x_codestartbranch.asm"'
+'Finished building: "syscfg/board.c"'
+'Invoking: C2000 Compiler'
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu0 -Ooff --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/device" --include_path="C:/ti/c2000/C2000Ware_5_04_00_00/driverlib/f28004x/driverlib" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --cla_background_task=off --cla_signed_compare_workaround=on --preproc_with_compile --preproc_dependency="device/f28004x_codestartbranch.d_raw" --include_path="C:/Users/17879/Desktop/V12/cla_ex1_asin/CPU1_RAM/syscfg" --obj_directory="device" --cmd_file="syscfg/board.opt" --cmd_file="syscfg/c2000ware_libraries.opt"  "../device/f28004x_codestartbranch.asm"
+' '
+'Finished building: "../device/f28004x_codestartbranch.asm"'
+'Finished building: "../device/device.c"'
+' '
+' '
+'Building target: "cla_ex1_asin.out"'
+'Invoking: C2000 Linker'
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcu0 -Ooff --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --cla_background_task=off --cla_signed_compare_workaround=on -z -m"cla_ex1_asin.map" --heap_size=0x200 --stack_size=0x3F8 --warn_sections -i"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/lib" -i"C:/ti/c2000/C2000Ware_5_04_00_00" -i"C:/Users/17879/Desktop/V12/cla_ex1_asin/CPU1_RAM/syscfg" -i"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --reread_libs --diag_wrap=off --display_error_number --xml_link_info="cla_ex1_asin_linkInfo.xml" --entry_point=code_start --rom_model -o "cla_ex1_asin.out" "./asin.obj" "./cla_ex1_asin.obj" "./syscfg/board.obj" "./syscfg/c2000ware_libraries.obj" "./device/device.obj" "./device/f28004x_codestartbranch.obj" "../28004x_cla_ram_lnk.cmd" "C:/ti/c2000/C2000Ware_5_04_00_00/driverlib/f28004x/driverlib/ccs/Debug/driverlib.lib"  -lc2000ware_libraries.cmd.genlibs -llibc.a 
+<Linking>
+'Finished building target: "cla_ex1_asin.out"'
+' '
+echo "========= Build of the CLB simulation has moved to the CLB Tool. Click the '?' icon by the _Generate CLB Simulation File_ enable for more details (located in the Global Parameters of the Tile Design SysConfig module) ============="
+"========= Build of the CLB simulation has moved to the CLB Tool. Click the '?' icon by the _Generate CLB Simulation File_ enable for more details (located in the Global Parameters of the Tile Design SysConfig module) ============="
+if 0 == 1  C:/ti/ccs1271/ccs/tools/node/node.exe "C:/ti/c2000/C2000Ware_5_04_00_00/utilities/clb_tool/clb_syscfg/dot_file_libraries/clbDotUtility.js"  "C:/ti/c2000/C2000Ware_5_04_00_00/utilities/clb_tool/clb_syscfg/" "C:/Users/17879/Desktop/V12/cla_ex1_asin/CPU1_RAM/syscfg" "C:/Users/17879/Desktop/V12/cla_ex1_asin/CPU1_RAM/syscfg/clb.dot"
+if 0 == 1  mkdir "C:/Users/17879/Desktop/V12/cla_ex1_asin/CPU1_RAM/diagrams"
+if 0 == 1  C:/ti/ccs1271/ccs/tools/node/node.exe "C:/ti/c2000/C2000Ware_5_04_00_00/driverlib/.meta/generate_diagrams.js" "C:/ti/c2000/C2000Ware_5_04_00_00" "C:/Users/17879/Desktop/V12/cla_ex1_asin/CPU1_RAM/diagrams" "C:/Users/17879/Desktop/V12/cla_ex1_asin/CPU1_RAM/syscfg"
+' '

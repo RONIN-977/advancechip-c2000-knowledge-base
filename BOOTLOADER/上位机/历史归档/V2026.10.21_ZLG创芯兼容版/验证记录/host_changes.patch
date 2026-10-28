@@ -1,0 +1,184 @@
+--- original/host\Updater.Desktop\CanDriver.cs
+
++++ new/host\Updater.Desktop\CanDriver.cs
+
+@@ -6,6 +6,17 @@
+
+ 
+ internal static class CanDriver
+ {
++    internal sealed record Driver(string Brand, string Path);
++    public static Driver[] Candidates(string? manual = null)
++    {
++        var drivers = new List<Driver> {
++            new("周立功", DefaultPath),
++            new("创芯科技", Path.Combine(AppContext.BaseDirectory, "drivers", "chuangxin",
++                Environment.Is64BitProcess ? "x64" : "x86", "ControlCAN.dll"))
++        };
++        if (!string.IsNullOrWhiteSpace(manual)) drivers.Insert(0, new("手动驱动", Path.GetFullPath(manual)));
++        return drivers.DistinctBy(driver => Path.GetFullPath(driver.Path), StringComparer.OrdinalIgnoreCase).ToArray();
++    }
+     public const string CanProDriver = @"C:\ZLGCANPRO\ZCANPRO\kerneldlls\usbcan.dll";
+     public static string DefaultPath
+     {
+--- original/host\Updater.Desktop\DeviceDiscovery.cs
+
++++ new/host\Updater.Desktop\DeviceDiscovery.cs
+
+@@ -5,14 +5,38 @@
+
+ 
+ namespace Updater.Desktop;
+ 
+-internal sealed record DetectedCanDevice(uint Type, uint Index, byte Channels, string Serial)
++internal sealed record DetectedCanDevice(uint Type, uint Index, byte Channels, string Serial, string Brand = "", string DriverPath = "")
+ {
+     public string Model => Type == 3 ? "USBCAN-I" : "USBCAN-II";
+-    public override string ToString() => $"{Model} · 设备 {Index}" + (Serial.Length == 0 ? "" : $" · {Serial}");
++    public override string ToString() => $"{(Brand.Length == 0 ? "" : Brand + " · ")}{Model} · 设备 {Index}" + (Serial.Length == 0 ? "" : $" · {Serial}");
+ }
+ 
+ internal static class DeviceDiscovery
+ {
++    public static Task<DetectedCanDevice[]> AllCanDevicesAsync(string? manual, CancellationToken cancellation, Action<string> log) =>
++        ScanDriversAsync(CanDriver.Candidates(manual), CanDevicesAsync, cancellation, log);
++
++    // Each native SDK is probed in its own process. A failed vendor cannot hide the other vendor.
++    internal static async Task<DetectedCanDevice[]> ScanDriversAsync(IEnumerable<CanDriver.Driver> drivers,
++        Func<string, CancellationToken, Task<DetectedCanDevice[]>> scan, CancellationToken cancellation, Action<string> log)
++    {
++        var results = await Task.WhenAll(drivers.Select(async driver =>
++        {
++            try
++            {
++                var devices = await scan(driver.Path, cancellation);
++                cancellation.ThrowIfCancellationRequested();
++                return devices.Where(device => driver.Brand != "创芯科技" || device.Type == 4)
++                    .Select(device => device with { Brand = driver.Brand, DriverPath = driver.Path }).ToArray();
++            }
++            catch (OperationCanceledException) when (cancellation.IsCancellationRequested) { throw; }
++            catch (Exception ex) { log(driver.Brand + " 检测：" + ex.Message); return Array.Empty<DetectedCanDevice>(); }
++        }));
++        cancellation.ThrowIfCancellationRequested();
++        return results.SelectMany(devices => devices).DistinctBy(device =>
++            (device.DriverPath.ToUpperInvariant(), device.Type, device.Serial.Length == 0 ? "#" + device.Index : device.Serial)).ToArray();
++    }
++
+     public static string[] SerialPorts()
+     {
+         using var key = Registry.LocalMachine.OpenSubKey(@"HARDWARE\DEVICEMAP\SERIALCOMM");
+--- original/host\Updater.Desktop\MainWindow.xaml
+
++++ new/host\Updater.Desktop\MainWindow.xaml
+
+@@ -17,7 +17,7 @@
+
+       <TextBlock Text="芯片型号" Margin="0,0,0,3"/>
+       <ComboBox x:Name="ChipModel" SelectedIndex="0" SelectionChanged="Chip_Changed"><ComboBoxItem Content="AVP32F0039"/><ComboBoxItem Content="AVP32F335"/><ComboBoxItem Content="AVP32F0049"/><ComboBoxItem Content="ADP32F035"/><ComboBoxItem Content="AVP32F00157"/></ComboBox>
+       <TextBlock Text="通信方式" Margin="0,7,0,3"/>
+-      <ComboBox x:Name="TransportMode" SelectedIndex="0" SelectionChanged="Mode_Changed"><ComboBoxItem Content="串口（SCI）"/><ComboBoxItem Content="CAN（周立功 USB-CAN）"/></ComboBox>
++      <ComboBox x:Name="TransportMode" SelectedIndex="0" SelectionChanged="Mode_Changed"><ComboBoxItem Content="串口（SCI）"/><ComboBoxItem Content="CAN"/></ComboBox>
+       <TextBlock x:Name="BaudLabel" Text="串口波特率" Margin="0,7,0,3"/>
+       <ComboBox x:Name="BaudRate" ToolTip="通信速率必须与设备内的 BOOT 程序一致；这里的选择不会修改设备设置。"/>
+       <TextBlock Text="APP 起始地址（十六进制字地址）" Margin="0,7,0,3"/>
+@@ -32,7 +32,7 @@
+
+      <StackPanel Grid.Column="4" x:Name="CanOptions">
+       <TextBlock Text="CAN 节点地址" Margin="0,0,0,3"/><TextBox x:Name="NodeId" Text="1" ToolTip="必须与目标设备的节点地址一致，默认 1。"/>
+       <TextBlock Text="CAN 驱动文件" Margin="0,7,0,3"/>
+-      <DockPanel><Button x:Name="BrowseDriverButton" DockPanel.Dock="Right" Content="浏览" Click="Dll_Click" Padding="8,4" Margin="5,0,0,0"/><TextBox x:Name="DllPath" IsReadOnly="True" ToolTip="优先使用随包驱动；也可点击浏览选择 usbcan.dll 或 ControlCAN.dll。自动兼容 32 / 64 位。"/></DockPanel>
++      <DockPanel><Button x:Name="BrowseDriverButton" DockPanel.Dock="Right" Content="浏览" Click="Dll_Click" Padding="8,4" Margin="5,0,0,0"/><TextBox x:Name="DllPath" IsReadOnly="True" ToolTip="自动检测随包周立功及创芯驱动，随选中设备自动切换；也可浏览补充驱动。"/></DockPanel>
+      </StackPanel>
+     </Grid>
+     <Border Background="#172236" CornerRadius="6" Padding="10,8" Margin="0,0,0,9">
+--- original/host\Updater.Desktop\MainWindow.xaml.cs
+
++++ new/host\Updater.Desktop\MainWindow.xaml.cs
+
+@@ -78,6 +78,7 @@
+
+     private string operation = "";
+     private string? loadedPath;
+     private CancellationTokenSource? discoveryCancellation;
++    private string? manualCanDriverPath;
+     private bool IsCan => TransportMode.SelectedIndex == 1;
+     private string ChipName => ((ComboBoxItem)ChipModel.SelectedItem).Content.ToString()!;
+     public MainWindow(bool discoverDevices = true)
+@@ -102,7 +103,7 @@
+
+         DllPath.Text = CanDriver.DefaultPath;
+         RestoreAddress(); ready = true; UpdateMode();
+         Write($"程序为 {IntPtr.Size * 8} 位；首次安装 BOOT 程序需使用 CCS/JTAG。");
+-        if (!Customer335Edition && File.Exists(DllPath.Text)) Write($"已自动关联 CAN 驱动：{DllPath.Text}");
++        if (!Customer335Edition && File.Exists(DllPath.Text)) Write($"默认 CAN 驱动（刷新时自动检测周立功及创芯）：{DllPath.Text}");
+         Write(Customer335Edition ? "请提前连接并选好串口、加载 APP 文件；点击开始升级后，在 9 秒等待期间给板子上电或复位。" :
+             "请选择芯片、通信设备及配套应用文件；设备复位后的升级窗口由 BOOT 程序决定。");
+         if (discoverDevices) Loaded += async (_, _) => await RefreshDevicesAsync();
+@@ -173,6 +174,8 @@
+
+     private void CanDevice_Changed(object sender, SelectionChangedEventArgs e)
+     {
+         if (!ready) return;
++        if (CanModel.SelectedItem is DetectedCanDevice selected && selected.DriverPath.Length > 0)
++            DllPath.Text = selected.DriverPath;
+         int previous = CanChannel.SelectedIndex;
+         byte count = (CanModel.SelectedItem as DetectedCanDevice)?.Channels ?? 0;
+         CanChannel.ItemsSource = Enumerable.Range(0, count).ToArray();
+@@ -199,9 +202,9 @@
+
+             if (IsCan)
+             {
+                 var previous = CanModel.SelectedItem as DetectedCanDevice;
+-                var devices = await DeviceDiscovery.CanDevicesAsync(DllPath.Text, cancellation.Token);
++                var devices = await DeviceDiscovery.AllCanDevicesAsync(manualCanDriverPath, cancellation.Token, Write);
+                 CanModel.ItemsSource = devices;
+-                CanModel.SelectedItem = devices.FirstOrDefault(device => previous is not null && device.Type == previous.Type &&
++                CanModel.SelectedItem = devices.FirstOrDefault(device => previous is not null && device.Type == previous.Type && device.DriverPath == previous.DriverPath &&
+                     (previous.Serial.Length > 0 ? device.Serial == previous.Serial : device.Index == previous.Index)) ?? devices.FirstOrDefault();
+             }
+             else
+@@ -324,7 +327,7 @@
+
+     private async void Dll_Click(object sender, RoutedEventArgs e)
+     {
+         var dialog = new OpenFileDialog { Filter = "CAN 驱动库|ControlCAN.dll;usbcan.dll|动态链接库|*.dll" };
+-        if (dialog.ShowDialog() == true) { DllPath.Text = dialog.FileName; await RefreshDevicesAsync(); }
++        if (dialog.ShowDialog() == true) { manualCanDriverPath = dialog.FileName; DllPath.Text = dialog.FileName; await RefreshDevicesAsync(); }
+     }
+     private async Task<ITransport> OpenTransport()
+     {
+@@ -337,7 +340,7 @@
+
+         }
+         var device = CanModel.SelectedItem as DetectedCanDevice ?? throw new InvalidOperationException("请连接 CAN 盒并点击刷新设备，再选择盒子。");
+         if (CanChannel.SelectedItem is not int selectedChannel) throw new InvalidOperationException("请选择 CAN 通道。");
+-        string dll = DllPath.Text;
++        string dll = device.DriverPath.Length > 0 ? device.DriverPath : DllPath.Text;
+         uint node = uint.Parse(NodeId.Text);
+         return await Task.Run<ITransport>(() => new ControlCanTransport(dll, device.Type, device.Index, (uint)selectedChannel, baud, node));
+     }
+--- original/host\Updater.Desktop\UiSelfCheck.cs
+
++++ new/host\Updater.Desktop\UiSelfCheck.cs
+
+@@ -100,6 +100,19 @@
+
+         window.StartButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+         window.CancelButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); await Idle(window);
+         Assert(window.StatusLabel.Text.Contains("升级已停止") && window.Progress.Value < 100, "stop update cancellation status");
++        var vendors = new MainWindow(false);
++        vendors.TransportMode.SelectedIndex = 1;
++        var zlg = new DetectedCanDevice(4, 0, 2, "SAME", "周立功", @"C:\local drivers\zlg\usbcan.dll");
++        var cx = new DetectedCanDevice(4, 0, 2, "SAME", "创芯科技", @"C:\local drivers\创芯\ControlCAN.dll");
++        vendors.CanModel.ItemsSource = new[] { zlg, cx };
++        vendors.CanModel.SelectedItem = zlg;
++        Assert(vendors.DllPath.Text == zlg.DriverPath && vendors.CanChannel.Items.Count == 2,
++            "ZLG selection binds its local DLL and channels");
++        vendors.CanModel.SelectedItem = cx;
++        Assert(vendors.DllPath.Text == cx.DriverPath && vendors.CanChannel.SelectedIndex == 0,
++            "Chuangxin selection switches local DLL automatically");
++        Assert(((ComboBoxItem)vendors.TransportMode.Items[1]).Content.ToString() == "CAN",
++            "CAN requires no manual vendor selection");
+         var real = new MainWindow(false);
+         real.ProbeButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent)); await Idle(real);
+         Assert(real.StatusLabel.Text == "操作失败，请查看日志" && real.Log.Text.Contains("请连接串口"), "missing serial selection never opens transport");

@@ -1,0 +1,21 @@
+通讯诊断摘要 V2026.10.25
+{"operation":"upgrade","metadata":{"version":"V2026.10.25","action":"upgrade","chip":"AVP32F0049","simulation":true,"transport":"CAN","baud":500000,"port":null,"brand":null,"deviceType":null,"deviceIndex":null,"serial":null,"channel":null,"node":"1","driver":"C:\\Users\\17879\\Documents\\ChatGPT\\进芯替代TI C2000系列芯片信息\\BOOTLOADER\\上位机\\统一升级上位机_CAN提速版_20261025\\便携版\\drivers\\zlg\\x86\\usbcan.dll","imagePath":null,"imageBytes":8192,"appStart":"0x090000","processBits":64},"preferredDirectory":"C:\\Users\\17879\\Documents\\ChatGPT\\进芯替代TI C2000系列芯片信息\\BOOTLOADER\\上位机\\统一升级上位机_CAN提速版_20261025\\便携版\\Logs","fallbackReason":null}
+结果：{"action":"upgrade","status":"升级完成，启动请求已确认","percent":100,"committed":true}
+操作总耗时（开始创建日志至结果记录）：810.050 ms
+命令 EnterBoot：成功 1 次，累计 0.016 ms（含该命令此前重试）
+命令 Info：成功 2 次，累计 0.030 ms（含该命令此前重试）
+命令 Begin：成功 1 次，累计 0.014 ms（含该命令此前重试）
+命令 Data：成功 69 次，累计 0.996 ms（含该命令此前重试）
+命令 Finish：成功 1 次，累计 0.244 ms（含该命令此前重试）
+命令 Reset：成功 1 次，累计 0.005 ms（含该命令此前重试）
+重试 1 次；命令超时 1 次。
+CAN交换 0 次，发送 0 帧，收到 0 帧。
+CAN交换累计：0.000 ms
+其中发送DLL/桥接调用：0.000 ms
+其中帧间等待：0.000 ms
+请求帧间等待累计：0.000 ms
+其中接收DLL/桥接调用：0.000 ms
+其中空读后等待：0.000 ms
+说明：命令耗时与CAN交换耗时互相包含，不能相加。DLL返回发送成功不等于目标已确认；接收等待含USB、设备处理、总线等时间，不能单独认定为Flash耗时。x86桥接调用还含进程通信。335 SCI仅记录操作/UI日志，不含上述CAN指标。
+异常详情：
+{"command":3,"Session":3578381827,"Sequence":2,"elapsed_ms":0.0505,"errorType":"TimeoutException","error":"模拟已写入但 ACK 丢失。"}

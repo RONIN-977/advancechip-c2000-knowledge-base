@@ -1,0 +1,18 @@
+﻿0039 BOOT / APP 两个完整独立 CCS 工程
+
+BOOT：F280039C_Bootloader，入口 0x080000。
+APP：F280039C_Application，入口 0x090000。
+每个文件夹均自带 .project、.cproject、.ccsproject、源码、头文件、链接脚本及所需库。
+两工程互不依赖，也不依赖原始目录；解压后可以分别复制、导入。
+
+CCS：Project → Import CCS Projects，选择本目录可发现两个工程，也可分别选择 BOOT 或 APP。
+编译器：TI C2000 22.6.1.LTS，EABI / FPU32；不需要额外安装 C2000Ware 或 SysConfig。
+Debug：本次 CCS 12.7.1 完整编译的 OUT/MAP，两个工程均为 0 错误。
+原版固件：本次指定源目录 firmware-output 中的原始 OUT/MAP，APP 另含 TXT。
+新编译与原始 OUT 使用的编译器及构建配置可能不同，未声称字节一致。
+
+首次通过 CCS/JTAG 烧入 BOOT，此后使用配套上位机升级 APP。
+外部晶振 20 MHz，CPU 120 MHz；CAN-A RX GPIO30、TX GPIO31，500 kbit/s，默认节点 1。
+源码来自用户指定的 Desktop/CHIP/BOOTLOADER/F280039C-Updater/F280039C-Updater。
+本次仅拆分工程、调整可移动的依赖路径，全部 MCU 源码、头文件、链接文件和库与源目录逐文件一致。
+验证记录包含 CCS 导入和编译日志。未重新进行实板烧录或在线升级。

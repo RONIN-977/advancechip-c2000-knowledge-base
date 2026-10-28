@@ -1,0 +1,15 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+SHELL = cmd.exe
+
+# Each subdirectory must supply rules for building sources it contributes
+00_sys28003x/driverlib/src/%.obj: ../00_sys28003x/driverlib/src/%.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: C2000 Compiler'
+	"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 --idiv_support=idiv0 --tmu_support=tmu0 -O3 --fp_mode=relaxed --include_path="C:/Users/17879/Desktop/CHIP/BOOTLOADER/project/KB/0039_CAN_10M_KB/EDrive_CAN_Upgrade_KB/APP_KB/00_sys28003x/common/include" --include_path="C:/Users/17879/Desktop/CHIP/BOOTLOADER/project/KB/0039_CAN_10M_KB/EDrive_CAN_Upgrade_KB/APP_KB/FlashApi" --include_path="C:/Users/17879/Desktop/CHIP/BOOTLOADER/project/KB/0039_CAN_10M_KB/EDrive_CAN_Upgrade_KB/APP_KB/FlashApi/include" --include_path="C:/Users/17879/Desktop/CHIP/BOOTLOADER/project/KB/0039_CAN_10M_KB/EDrive_CAN_Upgrade_KB/APP_KB/FlashApi/include/FlashAPI" --include_path="C:/Users/17879/Desktop/CHIP/BOOTLOADER/project/KB/0039_CAN_10M_KB/EDrive_CAN_Upgrade_KB/APP_KB/FlashApi/include/FlashAPI/Constants" --include_path="C:/Users/17879/Desktop/CHIP/BOOTLOADER/project/KB/0039_CAN_10M_KB/EDrive_CAN_Upgrade_KB/APP_KB/01_main/02_can" --include_path="C:/Users/17879/Desktop/CHIP/BOOTLOADER/project/KB/0039_CAN_10M_KB/EDrive_CAN_Upgrade_KB/APP_KB/00_sys28003x/math_Lib" --include_path="C:/Users/17879/Desktop/CHIP/BOOTLOADER/project/KB/0039_CAN_10M_KB/EDrive_CAN_Upgrade_KB/APP_KB/CAN_Upgrade" --include_path="C:/Users/17879/Desktop/CHIP/BOOTLOADER/project/KB/0039_CAN_10M_KB/EDrive_CAN_Upgrade_KB/APP_KB/01_main" --include_path="C:/Users/17879/Desktop/CHIP/BOOTLOADER/project/KB/0039_CAN_10M_KB/EDrive_CAN_Upgrade_KB/APP_KB/01_main/01_sysInit" --include_path="C:/Users/17879/Desktop/CHIP/BOOTLOADER/project/KB/0039_CAN_10M_KB/EDrive_CAN_Upgrade_KB/APP_KB/00_sys28003x/driverlib" --include_path="C:/Users/17879/Desktop/CHIP/BOOTLOADER/project/KB/0039_CAN_10M_KB/EDrive_CAN_Upgrade_KB/APP_KB/00_sys28003x/driverlib/inc" --include_path="C:/Users/17879/Desktop/CHIP/BOOTLOADER/project/KB/0039_CAN_10M_KB/EDrive_CAN_Upgrade_KB/APP_KB/00_sys28003x/user_define" --include_path="C:/Users/17879/Desktop/CHIP/BOOTLOADER/project/KB/0039_CAN_10M_KB/EDrive_CAN_Upgrade_KB/APP_KB/CAN_Upgrade" --include_path="C:/Users/17879/Desktop/CHIP/BOOTLOADER/project/KB/0039_CAN_10M_KB/EDrive_CAN_Upgrade_KB/APP_KB" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --advice:performance=all --define=DEBUG --define=_FLASH --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="00_sys28003x/driverlib/src/$(basename $(<F)).d_raw" --obj_directory="00_sys28003x/driverlib/src" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+

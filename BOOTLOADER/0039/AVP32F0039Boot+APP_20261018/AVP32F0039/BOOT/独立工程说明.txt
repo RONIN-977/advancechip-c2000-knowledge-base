@@ -1,0 +1,7 @@
+﻿BOOT 完整独立 CCS 工程
+源码、头文件、启动文件、链接文件和库均在本工程目录内，不依赖另一个工程或 Common。
+分区修改入口：include/app_partition.h。两工程各自保存一份，不共用文件。
+APP_START_ADDRESS 默认 0x090000，APP_END_ADDRESS 默认 0x0AF000，地址单位为16位WORD。
+改分区时手动保持 BOOT 与 APP 两份头文件参数一致，然后重新编译两工程、下载配套 BOOT。
+只复制本文件夹即可导入 CCS；保留 include、src、vendor、lib 和三个 CCS 元数据文件。
+本次只拆分文件依赖，升级协议、通信配置、Flash 实现和运行逻辑均未改变。

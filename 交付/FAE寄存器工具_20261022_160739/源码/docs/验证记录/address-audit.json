@@ -1,0 +1,2276 @@
+{
+  "GeneratedOn": "2026-10-22T07:50:43.186574+00:00",
+  "DataVersion": "1.0.0",
+  "DataSha256": "c2fabc79a7bd82809d1373e30df665db100a54fb8e5fb52da01288488d9da463",
+  "ComparedChips": [
+    "0039",
+    "0049"
+  ],
+  "Matched": 2412,
+  "Errors": 0,
+  "Unmatched": 216,
+  "Summary": {
+    "0039/ADC": {
+      "Matched": 261
+    },
+    "0039/CAN": {
+      "Matched": 40
+    },
+    "0039/时钟": {
+      "Matched": 80,
+      "Unmatched": 65
+    },
+    "0039/定时器": {
+      "Matched": 15
+    },
+    "0039/PWM": {
+      "Matched": 648,
+      "Unmatched": 32
+    },
+    "0039/GPIO": {
+      "Matched": 63
+    },
+    "0039/I2C": {
+      "Matched": 30
+    },
+    "0039/中断": {
+      "Unmatched": 20,
+      "Matched": 26
+    },
+    "0039/SCI": {
+      "Matched": 26
+    },
+    "0039/SPI": {
+      "Matched": 24
+    },
+    "0039/看门狗": {
+      "Unmatched": 5
+    },
+    "0049/ADC": {
+      "Matched": 264
+    },
+    "0049/CAN": {
+      "Matched": 80
+    },
+    "0049/时钟": {
+      "Matched": 65,
+      "Unmatched": 58
+    },
+    "0049/定时器": {
+      "Matched": 15
+    },
+    "0049/PWM": {
+      "Matched": 632,
+      "Unmatched": 16
+    },
+    "0049/GPIO": {
+      "Matched": 52
+    },
+    "0049/I2C": {
+      "Matched": 15
+    },
+    "0049/中断": {
+      "Unmatched": 15,
+      "Matched": 26
+    },
+    "0049/SCI": {
+      "Matched": 26
+    },
+    "0049/SPI": {
+      "Matched": 24
+    },
+    "0049/看门狗": {
+      "Unmatched": 5
+    }
+  },
+  "ErrorDetails": [],
+  "UnmatchedDetails": [
+    {
+      "ChipId": "0039",
+      "Name": "DmaClaSrcSelRegs.CLA1TASKSRCSELLOCK",
+      "Actual": "0x007980",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CLA1TASKSRCSELLOCK"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "DmaClaSrcSelRegs.DMACHSRCSELLOCK",
+      "Actual": "0x007984",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_DMACHSRCSELLOCK"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "DmaClaSrcSelRegs.CLA1TASKSRCSEL1",
+      "Actual": "0x007986",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CLA1TASKSRCSEL1"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "DmaClaSrcSelRegs.CLA1TASKSRCSEL2",
+      "Actual": "0x007988",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CLA1TASKSRCSEL2"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "DmaClaSrcSelRegs.DMACHSRCSEL1",
+      "Actual": "0x007996",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_DMACHSRCSEL1"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "DmaClaSrcSelRegs.DMACHSRCSEL2",
+      "Actual": "0x007998",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_DMACHSRCSEL2"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm1Regs.EPWMSYNCINSEL",
+      "Actual": "0x004003",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM1_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMSYNCINSEL"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm1Regs.EPWMSYNCOUTEN",
+      "Actual": "0x004006",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM1_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMSYNCOUTEN"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm1Regs.EPWMXLINK",
+      "Actual": "0x004038",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM1_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMXLINK"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm1Regs.EPWMLOCK",
+      "Actual": "0x0040FA",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM1_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMLOCK"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm2Regs.EPWMSYNCINSEL",
+      "Actual": "0x004103",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM2_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMSYNCINSEL"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm2Regs.EPWMSYNCOUTEN",
+      "Actual": "0x004106",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM2_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMSYNCOUTEN"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm2Regs.EPWMXLINK",
+      "Actual": "0x004138",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM2_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMXLINK"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm2Regs.EPWMLOCK",
+      "Actual": "0x0041FA",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM2_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMLOCK"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm3Regs.EPWMSYNCINSEL",
+      "Actual": "0x004203",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM3_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMSYNCINSEL"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm3Regs.EPWMSYNCOUTEN",
+      "Actual": "0x004206",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM3_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMSYNCOUTEN"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm3Regs.EPWMXLINK",
+      "Actual": "0x004238",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM3_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMXLINK"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm3Regs.EPWMLOCK",
+      "Actual": "0x0042FA",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM3_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMLOCK"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm4Regs.EPWMSYNCINSEL",
+      "Actual": "0x004303",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM4_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMSYNCINSEL"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm4Regs.EPWMSYNCOUTEN",
+      "Actual": "0x004306",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM4_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMSYNCOUTEN"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm4Regs.EPWMXLINK",
+      "Actual": "0x004338",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM4_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMXLINK"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm4Regs.EPWMLOCK",
+      "Actual": "0x0043FA",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM4_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMLOCK"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm5Regs.EPWMSYNCINSEL",
+      "Actual": "0x004403",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM5_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMSYNCINSEL"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm5Regs.EPWMSYNCOUTEN",
+      "Actual": "0x004406",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM5_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMSYNCOUTEN"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm5Regs.EPWMXLINK",
+      "Actual": "0x004438",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM5_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMXLINK"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm5Regs.EPWMLOCK",
+      "Actual": "0x0044FA",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM5_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMLOCK"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm6Regs.EPWMSYNCINSEL",
+      "Actual": "0x004503",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM6_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMSYNCINSEL"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm6Regs.EPWMSYNCOUTEN",
+      "Actual": "0x004506",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM6_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMSYNCOUTEN"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm6Regs.EPWMXLINK",
+      "Actual": "0x004538",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM6_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMXLINK"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm6Regs.EPWMLOCK",
+      "Actual": "0x0045FA",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM6_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMLOCK"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm7Regs.EPWMSYNCINSEL",
+      "Actual": "0x004603",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM7_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMSYNCINSEL"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm7Regs.EPWMSYNCOUTEN",
+      "Actual": "0x004606",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM7_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMSYNCOUTEN"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm7Regs.EPWMXLINK",
+      "Actual": "0x004638",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM7_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMXLINK"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm7Regs.EPWMLOCK",
+      "Actual": "0x0046FA",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM7_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMLOCK"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm8Regs.EPWMSYNCINSEL",
+      "Actual": "0x004703",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM8_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMSYNCINSEL"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm8Regs.EPWMSYNCOUTEN",
+      "Actual": "0x004706",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM8_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMSYNCOUTEN"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm8Regs.EPWMXLINK",
+      "Actual": "0x004738",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM8_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMXLINK"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "EPwm8Regs.EPWMLOCK",
+      "Actual": "0x0047FA",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM8_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMLOCK"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "LfuRegs.LFUConfig",
+      "Actual": "0x007FE0",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_LFUConfig"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "LfuRegs.LFUStatus",
+      "Actual": "0x007FE2",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_LFUStatus"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "LfuRegs.SWConfig1_SYSRSn",
+      "Actual": "0x007FF0",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_SWConfig1_SYSRSn"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "LfuRegs.SWConfig2_SYSRSn",
+      "Actual": "0x007FF2",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_SWConfig2_SYSRSn"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "LfuRegs.SWConfig1_XRSn",
+      "Actual": "0x007FF4",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_SWConfig1_XRSn"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "LfuRegs.SWConfig2_XRSn",
+      "Actual": "0x007FF6",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_SWConfig2_XRSn"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "LfuRegs.SWConfig1_PORESETn",
+      "Actual": "0x007FF8",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_SWConfig1_PORESETn"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "LfuRegs.SWConfig2_PORESETn",
+      "Actual": "0x007FFA",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_SWConfig2_PORESETn"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "LfuRegs.LFU_LOCK",
+      "Actual": "0x007FFC",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_LFU_LOCK"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "LfuRegs.LFU_COMMIT",
+      "Actual": "0x007FFE",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_LFU_COMMIT"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "NmiIntruptRegs.NMICFG",
+      "Actual": "0x007060",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "NMI_BASE",
+      "OffsetCandidates": [
+        "PIE_O_NMICFG"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "NmiIntruptRegs.NMIFLG",
+      "Actual": "0x007061",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "NMI_BASE",
+      "OffsetCandidates": [
+        "PIE_O_NMIFLG"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "NmiIntruptRegs.NMIFLGCLR",
+      "Actual": "0x007062",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "NMI_BASE",
+      "OffsetCandidates": [
+        "PIE_O_NMIFLGCLR"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "NmiIntruptRegs.NMIFLGFRC",
+      "Actual": "0x007063",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "NMI_BASE",
+      "OffsetCandidates": [
+        "PIE_O_NMIFLGFRC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "NmiIntruptRegs.NMIWDCNT",
+      "Actual": "0x007064",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "NMI_BASE",
+      "OffsetCandidates": [
+        "PIE_O_NMIWDCNT"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "NmiIntruptRegs.NMIWDPRD",
+      "Actual": "0x007065",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "NMI_BASE",
+      "OffsetCandidates": [
+        "PIE_O_NMIWDPRD"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "NmiIntruptRegs.NMISHDFLG",
+      "Actual": "0x007066",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "NMI_BASE",
+      "OffsetCandidates": [
+        "PIE_O_NMISHDFLG"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "NmiIntruptRegs.ERRORSTS",
+      "Actual": "0x007067",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "NMI_BASE",
+      "OffsetCandidates": [
+        "PIE_O_ERRORSTS"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "NmiIntruptRegs.ERRORSTSCLR",
+      "Actual": "0x007068",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "NMI_BASE",
+      "OffsetCandidates": [
+        "PIE_O_ERRORSTSCLR"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "NmiIntruptRegs.ERRORSTSFRC",
+      "Actual": "0x007069",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "NMI_BASE",
+      "OffsetCandidates": [
+        "PIE_O_ERRORSTSFRC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "NmiIntruptRegs.ERRORCTL",
+      "Actual": "0x00706A",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "NMI_BASE",
+      "OffsetCandidates": [
+        "PIE_O_ERRORCTL"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "NmiIntruptRegs.ERRORLOCK",
+      "Actual": "0x00706B",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "NMI_BASE",
+      "OffsetCandidates": [
+        "PIE_O_ERRORLOCK"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.ADCA_AC",
+      "Actual": "0x05D500",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_ADCA_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.ADCB_AC",
+      "Actual": "0x05D502",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_ADCB_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.ADCC_AC",
+      "Actual": "0x05D504",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_ADCC_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.CMPSS1_AC",
+      "Actual": "0x05D510",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CMPSS1_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.CMPSS2_AC",
+      "Actual": "0x05D512",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CMPSS2_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.CMPSS3_AC",
+      "Actual": "0x05D514",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CMPSS3_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.CMPSS4_AC",
+      "Actual": "0x05D516",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CMPSS4_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.DACA_AC",
+      "Actual": "0x05D528",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_DACA_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.DACB_AC",
+      "Actual": "0x05D52A",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_DACB_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.EPWM1_AC",
+      "Actual": "0x05D548",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_EPWM1_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.EPWM2_AC",
+      "Actual": "0x05D54A",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_EPWM2_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.EPWM3_AC",
+      "Actual": "0x05D54C",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_EPWM3_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.EPWM4_AC",
+      "Actual": "0x05D54E",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_EPWM4_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.EPWM5_AC",
+      "Actual": "0x05D550",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_EPWM5_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.EPWM6_AC",
+      "Actual": "0x05D552",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_EPWM6_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.EPWM7_AC",
+      "Actual": "0x05D554",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_EPWM7_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.EPWM8_AC",
+      "Actual": "0x05D556",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_EPWM8_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.EQEP1_AC",
+      "Actual": "0x05D570",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_EQEP1_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.EQEP2_AC",
+      "Actual": "0x05D572",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_EQEP2_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.ECAP1_AC",
+      "Actual": "0x05D580",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_ECAP1_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.ECAP2_AC",
+      "Actual": "0x05D582",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_ECAP2_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.ECAP3_AC",
+      "Actual": "0x05D584",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_ECAP3_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.SDFM1_AC",
+      "Actual": "0x05D5A8",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_SDFM1_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.SDFM2_AC",
+      "Actual": "0x05D5AA",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_SDFM2_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.CLB1_AC",
+      "Actual": "0x05D5B0",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CLB1_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.CLB2_AC",
+      "Actual": "0x05D5B2",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CLB2_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.CLB3_AC",
+      "Actual": "0x05D5B4",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CLB3_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.CLB4_AC",
+      "Actual": "0x05D5B6",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CLB4_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.SCIA_AC",
+      "Actual": "0x05D600",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_SCIA_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.SCIB_AC",
+      "Actual": "0x05D602",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_SCIB_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.SPIA_AC",
+      "Actual": "0x05D610",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_SPIA_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.SPIB_AC",
+      "Actual": "0x05D612",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_SPIB_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.I2CA_AC",
+      "Actual": "0x05D620",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_I2CA_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.I2CB_AC",
+      "Actual": "0x05D622",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_I2CB_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.PMBUS_A_AC",
+      "Actual": "0x05D630",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_PMBUS_A_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.LIN_A_AC",
+      "Actual": "0x05D638",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_LIN_A_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.LIN_B_AC",
+      "Actual": "0x05D63A",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_LIN_B_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.DCANA_AC",
+      "Actual": "0x05D640",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_DCANA_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.MCANA_AC",
+      "Actual": "0x05D648",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_MCANA_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.FSIATX_AC",
+      "Actual": "0x05D658",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_FSIATX_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.FSIARX_AC",
+      "Actual": "0x05D65A",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_FSIARX_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.HRPWM_A_AC",
+      "Actual": "0x05D6AA",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_HRPWM_A_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.HIC_A_AC",
+      "Actual": "0x05D6AC",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_HIC_A_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.AESA_AC",
+      "Actual": "0x05D6AE",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_AESA_AC"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "PeriphAcRegs.PERIPH_AC_LOCK",
+      "Actual": "0x05D6FE",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_PERIPH_AC_LOCK"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "SysStatusRegs.SYS_ERR_INT_FLG",
+      "Actual": "0x05D410",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_SYS_ERR_INT_FLG"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "SysStatusRegs.SYS_ERR_INT_CLR",
+      "Actual": "0x05D412",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_SYS_ERR_INT_CLR"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "SysStatusRegs.SYS_ERR_INT_SET",
+      "Actual": "0x05D414",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_SYS_ERR_INT_SET"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "SysStatusRegs.SYS_ERR_MASK",
+      "Actual": "0x05D416",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_SYS_ERR_MASK"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "WdRegs.SCSR",
+      "Actual": "0x007022",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "WD_BASE",
+      "OffsetCandidates": [
+        "WWD_O_SCSR"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "WdRegs.WDCNTR",
+      "Actual": "0x007023",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "WD_BASE",
+      "OffsetCandidates": [
+        "WWD_O_WDCNTR"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "WdRegs.WDKEY",
+      "Actual": "0x007025",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "WD_BASE",
+      "OffsetCandidates": [
+        "WWD_O_WDKEY"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "WdRegs.WDCR",
+      "Actual": "0x007029",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "WD_BASE",
+      "OffsetCandidates": [
+        "WWD_O_WDCR"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "WdRegs.WDWCR",
+      "Actual": "0x00702A",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "WD_BASE",
+      "OffsetCandidates": [
+        "WWD_O_WDWCR"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "XintRegs.XINT1CR",
+      "Actual": "0x007070",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "XINT_BASE",
+      "OffsetCandidates": [
+        "PIE_O_XINT1CR"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "XintRegs.XINT2CR",
+      "Actual": "0x007071",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "XINT_BASE",
+      "OffsetCandidates": [
+        "PIE_O_XINT2CR"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "XintRegs.XINT3CR",
+      "Actual": "0x007072",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "XINT_BASE",
+      "OffsetCandidates": [
+        "PIE_O_XINT3CR"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "XintRegs.XINT4CR",
+      "Actual": "0x007073",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "XINT_BASE",
+      "OffsetCandidates": [
+        "PIE_O_XINT4CR"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "XintRegs.XINT5CR",
+      "Actual": "0x007074",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "XINT_BASE",
+      "OffsetCandidates": [
+        "PIE_O_XINT5CR"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "XintRegs.XINT1CTR",
+      "Actual": "0x007078",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "XINT_BASE",
+      "OffsetCandidates": [
+        "PIE_O_XINT1CTR"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "XintRegs.XINT2CTR",
+      "Actual": "0x007079",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "XINT_BASE",
+      "OffsetCandidates": [
+        "PIE_O_XINT2CTR"
+      ]
+    },
+    {
+      "ChipId": "0039",
+      "Name": "XintRegs.XINT3CTR",
+      "Actual": "0x00707A",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "XINT_BASE",
+      "OffsetCandidates": [
+        "PIE_O_XINT3CTR"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "DmaClaSrcSelRegs.CLA1TASKSRCSELLOCK",
+      "Actual": "0x007980",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CLA1TASKSRCSELLOCK"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "DmaClaSrcSelRegs.DMACHSRCSELLOCK",
+      "Actual": "0x007984",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_DMACHSRCSELLOCK"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "DmaClaSrcSelRegs.CLA1TASKSRCSEL1",
+      "Actual": "0x007986",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CLA1TASKSRCSEL1"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "DmaClaSrcSelRegs.CLA1TASKSRCSEL2",
+      "Actual": "0x007988",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CLA1TASKSRCSEL2"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "DmaClaSrcSelRegs.DMACHSRCSEL1",
+      "Actual": "0x007996",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_DMACHSRCSEL1"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "DmaClaSrcSelRegs.DMACHSRCSEL2",
+      "Actual": "0x007998",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_DMACHSRCSEL2"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "EPwm1Regs.EPWMXLINK",
+      "Actual": "0x004038",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM1_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMXLINK"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "EPwm1Regs.EPWMLOCK",
+      "Actual": "0x0040FA",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM1_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMLOCK"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "EPwm2Regs.EPWMXLINK",
+      "Actual": "0x004138",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM2_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMXLINK"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "EPwm2Regs.EPWMLOCK",
+      "Actual": "0x0041FA",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM2_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMLOCK"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "EPwm3Regs.EPWMXLINK",
+      "Actual": "0x004238",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM3_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMXLINK"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "EPwm3Regs.EPWMLOCK",
+      "Actual": "0x0042FA",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM3_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMLOCK"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "EPwm4Regs.EPWMXLINK",
+      "Actual": "0x004338",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM4_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMXLINK"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "EPwm4Regs.EPWMLOCK",
+      "Actual": "0x0043FA",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM4_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMLOCK"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "EPwm5Regs.EPWMXLINK",
+      "Actual": "0x004438",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM5_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMXLINK"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "EPwm5Regs.EPWMLOCK",
+      "Actual": "0x0044FA",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM5_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMLOCK"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "EPwm6Regs.EPWMXLINK",
+      "Actual": "0x004538",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM6_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMXLINK"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "EPwm6Regs.EPWMLOCK",
+      "Actual": "0x0045FA",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM6_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMLOCK"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "EPwm7Regs.EPWMXLINK",
+      "Actual": "0x004638",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM7_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMXLINK"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "EPwm7Regs.EPWMLOCK",
+      "Actual": "0x0046FA",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM7_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMLOCK"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "EPwm8Regs.EPWMXLINK",
+      "Actual": "0x004738",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM8_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMXLINK"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "EPwm8Regs.EPWMLOCK",
+      "Actual": "0x0047FA",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "EPWM8_BASE",
+      "OffsetCandidates": [
+        "EPWM_O_EPWMLOCK"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "NmiIntruptRegs.NMICFG",
+      "Actual": "0x007060",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "NMI_BASE",
+      "OffsetCandidates": [
+        "PIE_O_NMICFG"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "NmiIntruptRegs.NMIFLG",
+      "Actual": "0x007061",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "NMI_BASE",
+      "OffsetCandidates": [
+        "PIE_O_NMIFLG"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "NmiIntruptRegs.NMIFLGCLR",
+      "Actual": "0x007062",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "NMI_BASE",
+      "OffsetCandidates": [
+        "PIE_O_NMIFLGCLR"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "NmiIntruptRegs.NMIFLGFRC",
+      "Actual": "0x007063",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "NMI_BASE",
+      "OffsetCandidates": [
+        "PIE_O_NMIFLGFRC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "NmiIntruptRegs.NMIWDCNT",
+      "Actual": "0x007064",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "NMI_BASE",
+      "OffsetCandidates": [
+        "PIE_O_NMIWDCNT"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "NmiIntruptRegs.NMIWDPRD",
+      "Actual": "0x007065",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "NMI_BASE",
+      "OffsetCandidates": [
+        "PIE_O_NMIWDPRD"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "NmiIntruptRegs.NMISHDFLG",
+      "Actual": "0x007066",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "NMI_BASE",
+      "OffsetCandidates": [
+        "PIE_O_NMISHDFLG"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.ADCA_AC",
+      "Actual": "0x05D500",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_ADCA_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.ADCB_AC",
+      "Actual": "0x05D502",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_ADCB_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.ADCC_AC",
+      "Actual": "0x05D504",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_ADCC_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.CMPSS1_AC",
+      "Actual": "0x05D510",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CMPSS1_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.CMPSS2_AC",
+      "Actual": "0x05D512",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CMPSS2_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.CMPSS3_AC",
+      "Actual": "0x05D514",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CMPSS3_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.CMPSS4_AC",
+      "Actual": "0x05D516",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CMPSS4_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.CMPSS5_AC",
+      "Actual": "0x05D518",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CMPSS5_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.CMPSS6_AC",
+      "Actual": "0x05D51A",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CMPSS6_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.CMPSS7_AC",
+      "Actual": "0x05D51C",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CMPSS7_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.DACA_AC",
+      "Actual": "0x05D528",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_DACA_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.DACB_AC",
+      "Actual": "0x05D52A",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_DACB_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.PGA1_AC",
+      "Actual": "0x05D538",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_PGA1_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.PGA2_AC",
+      "Actual": "0x05D53A",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_PGA2_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.PGA3_AC",
+      "Actual": "0x05D53C",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_PGA3_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.PGA4_AC",
+      "Actual": "0x05D53E",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_PGA4_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.PGA5_AC",
+      "Actual": "0x05D540",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_PGA5_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.PGA6_AC",
+      "Actual": "0x05D542",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_PGA6_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.PGA7_AC",
+      "Actual": "0x05D544",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_PGA7_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.EPWM1_AC",
+      "Actual": "0x05D548",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_EPWM1_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.EPWM2_AC",
+      "Actual": "0x05D54A",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_EPWM2_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.EPWM3_AC",
+      "Actual": "0x05D54C",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_EPWM3_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.EPWM4_AC",
+      "Actual": "0x05D54E",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_EPWM4_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.EPWM5_AC",
+      "Actual": "0x05D550",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_EPWM5_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.EPWM6_AC",
+      "Actual": "0x05D552",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_EPWM6_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.EPWM7_AC",
+      "Actual": "0x05D554",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_EPWM7_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.EPWM8_AC",
+      "Actual": "0x05D556",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_EPWM8_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.EQEP1_AC",
+      "Actual": "0x05D570",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_EQEP1_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.EQEP2_AC",
+      "Actual": "0x05D572",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_EQEP2_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.ECAP1_AC",
+      "Actual": "0x05D580",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_ECAP1_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.ECAP2_AC",
+      "Actual": "0x05D582",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_ECAP2_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.ECAP3_AC",
+      "Actual": "0x05D584",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_ECAP3_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.ECAP4_AC",
+      "Actual": "0x05D586",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_ECAP4_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.ECAP5_AC",
+      "Actual": "0x05D588",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_ECAP5_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.ECAP6_AC",
+      "Actual": "0x05D58A",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_ECAP6_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.ECAP7_AC",
+      "Actual": "0x05D58C",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_ECAP7_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.SDFM1_AC",
+      "Actual": "0x05D5A8",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_SDFM1_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.CLB1_AC",
+      "Actual": "0x05D5B0",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CLB1_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.CLB2_AC",
+      "Actual": "0x05D5B2",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CLB2_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.CLB3_AC",
+      "Actual": "0x05D5B4",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CLB3_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.CLB4_AC",
+      "Actual": "0x05D5B6",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CLB4_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.CLA1PROMCRC_AC",
+      "Actual": "0x05D5C0",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_CLA1PROMCRC_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.SPIA_AC",
+      "Actual": "0x05D610",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_SPIA_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.SPIB_AC",
+      "Actual": "0x05D612",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_SPIB_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.PMBUS_A_AC",
+      "Actual": "0x05D630",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_PMBUS_A_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.LIN_A_AC",
+      "Actual": "0x05D638",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_LIN_A_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.DCANA_AC",
+      "Actual": "0x05D640",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_DCANA_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.DCANB_AC",
+      "Actual": "0x05D642",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_DCANB_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.FSIATX_AC",
+      "Actual": "0x05D658",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_FSIATX_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.FSIARX_AC",
+      "Actual": "0x05D65A",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_FSIARX_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.HRPWM_A_AC",
+      "Actual": "0x05D6AA",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_HRPWM_A_AC"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "SysPeriphAcRegs.PERIPH_AC_LOCK",
+      "Actual": "0x05D6FE",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": null,
+      "OffsetCandidates": [
+        "SYSCTL_O_PERIPH_AC_LOCK"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "WdRegs.SCSR",
+      "Actual": "0x007022",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "WD_BASE",
+      "OffsetCandidates": [
+        "WWD_O_SCSR"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "WdRegs.WDCNTR",
+      "Actual": "0x007023",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "WD_BASE",
+      "OffsetCandidates": [
+        "WWD_O_WDCNTR"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "WdRegs.WDKEY",
+      "Actual": "0x007025",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "WD_BASE",
+      "OffsetCandidates": [
+        "WWD_O_WDKEY"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "WdRegs.WDCR",
+      "Actual": "0x007029",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "WD_BASE",
+      "OffsetCandidates": [
+        "WWD_O_WDCR"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "WdRegs.WDWCR",
+      "Actual": "0x00702A",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "WD_BASE",
+      "OffsetCandidates": [
+        "WWD_O_WDWCR"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "XintRegs.XINT1CR",
+      "Actual": "0x007070",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "XINT_BASE",
+      "OffsetCandidates": [
+        "PIE_O_XINT1CR"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "XintRegs.XINT2CR",
+      "Actual": "0x007071",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "XINT_BASE",
+      "OffsetCandidates": [
+        "PIE_O_XINT2CR"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "XintRegs.XINT3CR",
+      "Actual": "0x007072",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "XINT_BASE",
+      "OffsetCandidates": [
+        "PIE_O_XINT3CR"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "XintRegs.XINT4CR",
+      "Actual": "0x007073",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "XINT_BASE",
+      "OffsetCandidates": [
+        "PIE_O_XINT4CR"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "XintRegs.XINT5CR",
+      "Actual": "0x007074",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "XINT_BASE",
+      "OffsetCandidates": [
+        "PIE_O_XINT5CR"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "XintRegs.XINT1CTR",
+      "Actual": "0x007078",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "XINT_BASE",
+      "OffsetCandidates": [
+        "PIE_O_XINT1CTR"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "XintRegs.XINT2CTR",
+      "Actual": "0x007079",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "XINT_BASE",
+      "OffsetCandidates": [
+        "PIE_O_XINT2CTR"
+      ]
+    },
+    {
+      "ChipId": "0049",
+      "Name": "XintRegs.XINT3CTR",
+      "Actual": "0x00707A",
+      "Reason": "Base or exact register offset missing; no guessed offset",
+      "BaseDefine": "XINT_BASE",
+      "OffsetCandidates": [
+        "PIE_O_XINT3CTR"
+      ]
+    }
+  ],
+  "SourcesSha256": {
+    "C:\\ti\\c2000\\C2000Ware_6_00_01_00\\driverlib\\f28003x\\driverlib\\inc\\hw_memmap.h": "f6200222cf6ca3dc40ecbf7ead54528fab497d068f72c46e4b1cb442a38b7522",
+    "C:\\ti\\c2000\\C2000Ware_6_00_01_00\\driverlib\\f28003x\\driverlib\\inc\\hw_adc.h": "d03a20c33ff0c36ca1560660200770ecbacd9e33b25fd9d10201d42747fb04c8",
+    "C:\\Users\\17879\\Documents\\ChatGPT\\进芯替代TI C2000系列芯片信息\\Development_Projects\\FAE寄存器工具\\docs\\sources\\f28003x\\hw_can.h": "2bb79bf9d14c37cc11b5ebd6191f53359d2fb8eaa4c6f8196d39dc1ffe355c1e",
+    "C:\\ti\\c2000\\C2000Ware_6_00_01_00\\driverlib\\f28003x\\driverlib\\inc\\hw_sysctl.h": "c91a8f63cffc98d25318d7c8795c30af05ca01b56ef9d6104fc41ad2aed9b8b0",
+    "C:\\ti\\c2000\\C2000Ware_6_00_01_00\\driverlib\\f28003x\\driverlib\\inc\\hw_cputimer.h": "aa6135b78b16e3c76708759fcf56846c1bfbe8a8d38d1775b93b654eacc4780c",
+    "C:\\ti\\c2000\\C2000Ware_6_00_01_00\\driverlib\\f28003x\\driverlib\\inc\\hw_epwm.h": "35c6da305cb011a9b28350bc03fddf3d7aac1f5c06bf3af29e0d2dfac7a59a2b",
+    "C:\\ti\\c2000\\C2000Ware_6_00_01_00\\driverlib\\f28003x\\driverlib\\inc\\hw_gpio.h": "49f4023ebf3047ce23c6db4170e616292bc44b02356e5f62f6a177c98ef2da16",
+    "C:\\ti\\c2000\\C2000Ware_6_00_01_00\\driverlib\\f28003x\\driverlib\\inc\\hw_i2c.h": "f152f149bf210aecd76c3681fdd9063612e568fac34cc3ee4a70949777be556f",
+    "C:\\ti\\c2000\\C2000Ware_6_00_01_00\\driverlib\\f28003x\\driverlib\\inc\\hw_pie.h": "5843095a438ee2a394d0c41ffd4ad844facdd7fec0bda808560cf57c552aebfd",
+    "C:\\ti\\c2000\\C2000Ware_6_00_01_00\\driverlib\\f28003x\\driverlib\\inc\\hw_sci.h": "f5e3eba6689b74b7fbc2692679dd159f5dd0d6f2141fcdfdeab5710294cb41b8",
+    "C:\\ti\\c2000\\C2000Ware_6_00_01_00\\driverlib\\f28003x\\driverlib\\inc\\hw_spi.h": "1ff13ac0a72766f337b892a76a63b4dac20a4ff36d0126990230a7ce9a49ed5a",
+    "C:\\ti\\c2000\\C2000Ware_6_00_01_00\\driverlib\\f28003x\\driverlib\\inc\\hw_wwd.h": "468a28b11a9bb2a9fb9bfe3ad4e735ca70eb1a11357ab0ac11f91369d117dea4",
+    "C:\\ti\\c2000\\C2000Ware_6_00_01_00\\driverlib\\f28004x\\driverlib\\inc\\hw_memmap.h": "93590bbe58e6f15de2918e9a8aad545a246ba3b62a5c699b1afbca1588eba809",
+    "C:\\ti\\c2000\\C2000Ware_6_00_01_00\\driverlib\\f28004x\\driverlib\\inc\\hw_adc.h": "d1c15e88a490257276f6498c98ef9684db810da805f2a8d3ea8e542a1752a943",
+    "C:\\Users\\17879\\Documents\\ChatGPT\\进芯替代TI C2000系列芯片信息\\Development_Projects\\FAE寄存器工具\\docs\\sources\\f28004x\\hw_can.h": "2bb79bf9d14c37cc11b5ebd6191f53359d2fb8eaa4c6f8196d39dc1ffe355c1e",
+    "C:\\ti\\c2000\\C2000Ware_6_00_01_00\\driverlib\\f28004x\\driverlib\\inc\\hw_sysctl.h": "4bdc3ba20485d8fa880f0834ab1741120ff75208a2203b8593eb42d98e887fc1",
+    "C:\\ti\\c2000\\C2000Ware_6_00_01_00\\driverlib\\f28004x\\driverlib\\inc\\hw_cputimer.h": "aa6135b78b16e3c76708759fcf56846c1bfbe8a8d38d1775b93b654eacc4780c",
+    "C:\\ti\\c2000\\C2000Ware_6_00_01_00\\driverlib\\f28004x\\driverlib\\inc\\hw_epwm.h": "2ad1d12a15e5f14644585e3e92377952aa580275df98a17668fbace36a91f0fa",
+    "C:\\ti\\c2000\\C2000Ware_6_00_01_00\\driverlib\\f28004x\\driverlib\\inc\\hw_gpio.h": "dff7bc3d9771df1602fadffeb2f5528247af7c19656fe2af267cfef0a2b37ce4",
+    "C:\\ti\\c2000\\C2000Ware_6_00_01_00\\driverlib\\f28004x\\driverlib\\inc\\hw_i2c.h": "f152f149bf210aecd76c3681fdd9063612e568fac34cc3ee4a70949777be556f",
+    "C:\\ti\\c2000\\C2000Ware_6_00_01_00\\driverlib\\f28004x\\driverlib\\inc\\hw_pie.h": "5843095a438ee2a394d0c41ffd4ad844facdd7fec0bda808560cf57c552aebfd",
+    "C:\\ti\\c2000\\C2000Ware_6_00_01_00\\driverlib\\f28004x\\driverlib\\inc\\hw_sci.h": "f5e3eba6689b74b7fbc2692679dd159f5dd0d6f2141fcdfdeab5710294cb41b8",
+    "C:\\ti\\c2000\\C2000Ware_6_00_01_00\\driverlib\\f28004x\\driverlib\\inc\\hw_spi.h": "1ff13ac0a72766f337b892a76a63b4dac20a4ff36d0126990230a7ce9a49ed5a"
+  },
+  "Method": "Exact instance base plus exact DriverLib _O_ constant. No inferred matches. C28x hardware address space; byte_peripheral CAN offsets are used verbatim.",
+  "Limitations": "035/335 have no matching DriverLib hardware map here and are excluded. Unmatched entries are not verified by this audit. Address correctness alone does not verify access/reset/field semantics."
+}

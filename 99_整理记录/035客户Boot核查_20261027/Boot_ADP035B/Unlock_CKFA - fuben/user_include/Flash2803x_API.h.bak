@@ -1,0 +1,20 @@
+
+#ifndef USER_INCLUDE_FLASH2803X_API_H_
+#define USER_INCLUDE_FLASH2803X_API_H_
+
+#define ERASE_SUCCESS     1
+#define NO_ERASE          2
+#define ERASE_FAIL        3
+#define ERASE_SUCCESSED_PROGRAMING 4
+
+#define PROGRAM_SUCCESS   1
+#define PROGRAM_FAIL      2
+#define PROGRAM_FAIL1     3
+#define PROGRAM_FAIL2     4
+extern int f_erase_status;
+extern int f_program_status;
+
+extern void FlashEraseApi(void);
+extern void FlashProgramApi(void);
+
+#endif /* USER_INCLUDE_FLASH2803X_API_H_ */

@@ -1,0 +1,158 @@
+--- user123/01_main/main.c
++++ APP_KB/01_main/main.c
+@@ -7,6 +7,7 @@
+ 
+ #include "main.h"
+ #include "NVM.h"
++#include "kb_can_upgrade.h"
+ //#include <05_Input/eeprom.h>  //123
+ 
+ u8 HwFo_trigger = 0;
+@@ -36,6 +37,7 @@
+     TaskCycle = 0;
+     Tick_Realtime = SysTick();
+     while(1){
++        KB_CAN_UpgradeTask(); /* KB_UPGRADE: only added background call */
+         Tick_Interval = Tick_Realtime - SysTick();
+         if (Tick_Interval > SYS_TICK_05MS){
+             TaskCycle++;
+--- user123/01_main/main.h
++++ APP_KB/01_main/main.h
+@@ -10,7 +10,7 @@
+ 
+ //#include <02_control/01_resolver/Resolver.h>//123
+ //#include <02_control/02_FVC/TaskScheduler.h>  //123
+-#include <sysInit_28002x.h>
++#include <sysInit_28003x.h>
+ #include "user_math.h"
+ #include "uC_hal.h"
+ //#include "LogicMethods.h"  //123
+--- user123/01_main/01_sysInit/can_Init.c
++++ APP_KB/01_main/01_sysInit/can_Init.c
+@@ -4,7 +4,8 @@
+  *  Created on: 2022年2月20日
+  *      Author: 86176
+  */
+-#include "sysInit_28002x.h"
++#include "sysInit_28003x.h"
++#include "kb_can_board.h"
+ 
+ void init_eCAN_A ( u16 bitRatePrescaler, u16 timeSeg1, u16
+                   timeSeg2, u16 sbg, u16 sjw, u16 sam)
+@@ -13,12 +14,12 @@
+   u16 ui16CANCTL;
+   EALLOW;
+   CpuSysRegs.PCLKCR10.bit.CAN_A = 1;
+-  GpioCtrlRegs.GPAPUD.bit.GPIO13 = 0;  /* Enable pull-up on GPIO13 */
+-  GpioCtrlRegs.GPAGMUX1.bit.GPIO13 = 3;
+-  GpioCtrlRegs.GPAMUX1.bit.GPIO13 = 1;
+-  GpioCtrlRegs.GPAPUD.bit.GPIO12 = 0;  /* Enable pull-up on GPIO12 */
+-  GpioCtrlRegs.GPAGMUX1.bit.GPIO12 = 3;
+-  GpioCtrlRegs.GPAMUX1.bit.GPIO12 = 1;
++  /* KB_UPGRADE: only pin mux is selected here; customer CAN timing stays intact. */
++  GPIO_setPinConfig(KB_CAN_RX_CONFIG);
++  GPIO_setPinConfig(KB_CAN_TX_CONFIG);
++  GPIO_setPadConfig(KB_CAN_RX_GPIO, GPIO_PIN_TYPE_PULLUP);
++  GPIO_setPadConfig(KB_CAN_TX_GPIO, GPIO_PIN_TYPE_PULLUP);
++  GPIO_setQualificationMode(KB_CAN_RX_GPIO, GPIO_QUAL_ASYNC);
+   EDIS;
+   ui32RegValue = (((u32)((bitRatePrescaler-1) & 0x03C0))<<10)|((timeSeg2-1)<<
+     12)|((timeSeg1-1)<<8)|((sjw-1)<<6)|((bitRatePrescaler-1) & 0x3F);
+--- user123/01_main/01_sysInit/sysInit_28002x.c
++++ APP_KB/01_main/01_sysInit/sysInit_28003x.c
+@@ -5,7 +5,7 @@
+  *      Author: rand C
+  */
+ 
+-#include "sysInit_28002x.h"
++#include "sysInit_28003x.h"
+ 
+ extern const u16 EXC_Carrier_Prd;
+ extern const u16 Exc_half_Duty;
+@@ -35,14 +35,14 @@
+ //    PieVectTable.ADCA1_INT = &ResAdcEndIsr;//123
+ //    PieVectTable.ADCC1_INT = &ResAdcFOCIsr;//123
+     IER |= M_INT1;
+-    PieCtrlRegs.PIEIER1.bit.INTx1 = 1;
+-    PieCtrlRegs.PIEIER1.bit.INTx3 = 1;
++    PieCtrlRegs.PIEIER1.bit.INTx1 = 0; /* KB_UPGRADE_TEST_IRQ: restore to 1 with original ISR */
++    PieCtrlRegs.PIEIER1.bit.INTx3 = 0; /* KB_UPGRADE_TEST_IRQ: restore to 1 with original ISR */
+ //    PieVectTable.EPWM4_INT = &ResPwmIsr;
+ //    IER |= M_INT3;
+ //    PieCtrlRegs.PIEIER3.bit.INTx4 = 1;
+ //    PieVectTable.EPWM1_TZ_INT = &EPWMTZ_IsrTask;//123
+     IER |= (M_INT2);                            //  Enable interrupts:
+-    PieCtrlRegs.PIEIER2.bit.INTx1 = 1;
++    PieCtrlRegs.PIEIER2.bit.INTx1 = 0; /* KB_UPGRADE_TEST_IRQ: restore to 1 with original ISR */
+     EDIS;
+ }
+ 
+--- user123/01_main/01_sysInit/sysInit_28002x.h
++++ APP_KB/01_main/01_sysInit/sysInit_28003x.h
+@@ -5,8 +5,8 @@
+  *      Author: rand C
+  */
+ 
+-#ifndef SYSINIT_28002X_H_
+-#define SYSINIT_28002X_H_
++#ifndef SYSINIT_28003X_H_
++#define SYSINIT_28003X_H_
+ 
+ #include "uC_Inc.h"
+ 
+@@ -19,4 +19,4 @@
+ extern __interrupt void ResAdcFOCIsr(void);
+ extern __interrupt void EPWMTZ_IsrTask(void);
+ 
+-#endif /* 01_SYSINIT_SYSINIT_28002X_H_ */
++#endif /* 01_SYSINIT_SYSINIT_28003X_H_ */
+--- user123/00_sys280025/user_define/uC_Inc.h
++++ APP_KB/00_sys28003x/user_define/uC_Inc.h
+@@ -9,8 +9,8 @@
+ #define UC_PRJINC_H_
+ 
+ 
+-#include <f28002x_examples.h>   // Examples Include File
+-#include <f28002x_device.h>     // Headerfile Include File
++#include <f28003x_device.h>
++#include <f28003x_examples.h>
+ 
+ #include "device.h"
+ #include "driverlib.h"
+--- user123/FlashApi/NVM.h
++++ APP_KB/FlashApi/NVM.h
+@@ -5,8 +5,8 @@
+ #ifndef NVM_H_
+ #define NVM_H_
+ #include "uC_hal.h"
+-#include "F021_F28002x_C28x.h"
+-#include "flash_programming_f28002x.h"
++#include "F021_F28003x_C28x.h"
++#include "flash_programming_f28003x.h"
+ 
+ typedef struct app_configuration_data_t
+ {
+--- user123/FlashApi/flash_hal.h
++++ APP_KB/FlashApi/flash_hal.h
+@@ -5,8 +5,8 @@
+ #ifndef FLASH_HAL_H_
+ #define FLASH_HAL_H_
+ #include "uC_hal.h"
+-#include "F021_F28002x_C28x.h"
+-#include "flash_programming_f28002x.h"
++#include "F021_F28003x_C28x.h"
++#include "flash_programming_f28003x.h"
+ uint8 flash_hal_init(void);
+ uint8 flash_hal_erase(uint32 startAddr,uint32 len);
+ void flash_hal_read(uint32 startAddr,uint32 Len,uint8 *Data);
+--- user123/FlashApi/flash_hal.c
++++ APP_KB/FlashApi/flash_hal.c
+@@ -13,7 +13,7 @@
+ uint8 flash_hal_init(void)
+ {
+ 	Fapi_StatusType  oReturnCheck;
+-	Flash_initModule(FLASH0CTRL_BASE, FLASH0ECC_BASE, 4);
++	Flash_initModule(FLASH0CTRL_BASE, FLASH0ECC_BASE, 5);
+ 	oReturnCheck = Fapi_initializeAPI(F021_CPU0_BASE_ADDRESS,
+                                       DEVICE_SYSCLK_FREQ/1000000U);
+ 

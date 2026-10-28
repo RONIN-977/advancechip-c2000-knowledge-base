@@ -1,0 +1,13 @@
+数据存储空间起始地址：0x86000U 长度：0x1000（4K）
+
+数据定义在"NVM.h"文件如下结构体：
+typedef struct bootloader_configuration_data_t
+{
+    u16 pad1[128];
+} APP_Cfg_S;
+
+"NVM.c"文件中
+读取配置函数 void read_cfg(void)；
+写配置函数    void save_cfg(void)；
+
+数据读取完成后从APPCfg结构体中取数据。

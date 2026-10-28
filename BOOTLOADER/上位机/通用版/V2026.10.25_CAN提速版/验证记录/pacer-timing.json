@@ -1,0 +1,51 @@
+{
+  "utc": "2026-10-25T03:20:15.1929664Z",
+  "os": "Microsoft Windows NT 10.0.26200.0",
+  "checksPassed": 111,
+  "timerMode": "high-resolution-timer",
+  "measurements": [
+    {
+      "name": "high-resolution-relative-1ms",
+      "count": 1000,
+      "minimumMs": 1.01,
+      "averageMs": 1.526321199999999,
+      "p50Ms": 1.529,
+      "p90Ms": 1.6166,
+      "p95Ms": 1.6757,
+      "p99Ms": 2.0566,
+      "maximumMs": 2.8468,
+      "wallMs": 1526.8494,
+      "cpuMs": 46.875,
+      "cpuPercentOfOneCore": 3.0700473799184125
+    },
+    {
+      "name": "legacy-WaitOne-3ms",
+      "count": 200,
+      "minimumMs": 13.8493,
+      "averageMs": 15.487831999999996,
+      "p50Ms": 15.461,
+      "p90Ms": 16.0136,
+      "p95Ms": 16.097,
+      "p99Ms": 16.5695,
+      "maximumMs": 17.2419,
+      "wallMs": 3097.9048,
+      "cpuMs": 46.875,
+      "cpuPercentOfOneCore": 1.513119447698974
+    },
+    {
+      "name": "forced-fallback-WaitOne-1ms",
+      "count": 200,
+      "minimumMs": 14.2691,
+      "averageMs": 15.465419499999994,
+      "p50Ms": 15.4523,
+      "p90Ms": 15.9799,
+      "p95Ms": 16.1203,
+      "p99Ms": 16.3674,
+      "maximumMs": 16.6532,
+      "wallMs": 3093.4944,
+      "cpuMs": 0,
+      "cpuPercentOfOneCore": 0
+    }
+  ],
+  "limitation": "Software timing and cancellation only. No CAN device opened; actual bus spacing and firmware upgrade require hardware regression."
+}

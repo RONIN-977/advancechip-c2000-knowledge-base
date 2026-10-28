@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-21",
+  "ccs": "12.7.1",
+  "compiler": "22.6.1.LTS",
+  "sysconfig": "1.23.1",
+  "source": "Desktop/V12/sci_ex3_echoback",
+  "project": "sci_ex3_autobaud",
+  "builds": [
+    {
+      "log": "desktop_RAM.log",
+      "passed": true,
+      "compilerDiagnostics": 0
+    },
+    {
+      "log": "desktop_CPU1_FLASH.log",
+      "passed": true,
+      "compilerDiagnostics": 0
+    },
+    {
+      "log": "desktop_CPU1_LAUNCHXL_RAM.log",
+      "passed": true,
+      "compilerDiagnostics": 0
+    },
+    {
+      "log": "desktop_CPU1_LAUNCHXL_FLASH.log",
+      "passed": true,
+      "compilerDiagnostics": 0
+    },
+    {
+      "log": "relocated_CPU1_RAM.log",
+      "passed": true,
+      "compilerDiagnostics": 0
+    },
+    {
+      "log": "relocated_CPU1_FLASH.log",
+      "passed": true,
+      "compilerDiagnostics": 0
+    }
+  ],
+  "hardwareValidated": false,
+  "temperatureValidated": false,
+  "notes": "Original Chinese repository-path build failed to resolve TI compiler includes; all six successful builds use ASCII paths. Localized SysConfig SDK data and driverlib included."
+}

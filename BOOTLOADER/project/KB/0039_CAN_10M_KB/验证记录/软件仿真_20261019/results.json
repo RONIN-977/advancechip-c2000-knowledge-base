@@ -1,0 +1,81 @@
+{
+  "status": "PASS",
+  "tests": 17,
+  "cases": [
+    {
+      "name": "Actual latest APP OUT parses and matches 0039 partition",
+      "status": "PASS"
+    },
+    {
+      "name": "Real APP receive/dispatch acknowledges ENTER_BOOT then resets into BOOT",
+      "status": "PASS"
+    },
+    {
+      "name": "Real OUT full CAN upload with exact WORD readback CRC commit and reset into APP",
+      "status": "PASS"
+    },
+    {
+      "name": "Lost BEGIN DATA FINISH ACK retries do not repeat erase program or commit",
+      "status": "PASS"
+    },
+    {
+      "name": "Maximum 248KiB APP partition with short final packet and full readback",
+      "status": "PASS"
+    },
+    {
+      "name": "Cancellation leaves invalid image and a fresh session recovers",
+      "status": "PASS"
+    },
+    {
+      "name": "Flash model fault 1 rejects upgrade and never commits",
+      "status": "PASS"
+    },
+    {
+      "name": "Flash model fault 2 rejects upgrade and never commits",
+      "status": "PASS"
+    },
+    {
+      "name": "Flash model fault 3 rejects upgrade and never commits",
+      "status": "PASS"
+    },
+    {
+      "name": "Flash model fault 4 rejects upgrade and never commits",
+      "status": "PASS"
+    },
+    {
+      "name": "Corrupt CRC rejected by actual C before erase",
+      "status": "PASS"
+    },
+    {
+      "name": "Wrong image start entry and length rejected before Flash erase",
+      "status": "PASS"
+    },
+    {
+      "name": "Wrong device ID rejected before Flash erase",
+      "status": "PASS"
+    },
+    {
+      "name": "Foreign session and out of order DATA rejected without programming",
+      "status": "PASS"
+    },
+    {
+      "name": "CAN fragment fault 6 no erase and next complete request recovers",
+      "status": "PASS"
+    },
+    {
+      "name": "CAN fragment fault 7 no erase and next complete request recovers",
+      "status": "PASS"
+    },
+    {
+      "name": "APP does not reset when CAN ENTER_BOOT ACK cannot finish",
+      "status": "PASS"
+    }
+  ],
+  "firmware": "C:\\Users\\17879\\Desktop\\CHIP\\BOOTLOADER\\AVP32F0039Boot\u002BAPP_CAN_10M_KB\\APP_KB\\Debug\\F280039C_Application_KB.out",
+  "imageWords": 3696,
+  "imageStart": "0x090000",
+  "imageCrc32": "0x0C8BDD78",
+  "execution": "Current Updater.Core C# source \u002B actual KB C protocol/app entry/CAN send; Flash/register/reset adapters",
+  "hardwareTest": "NOT RUN",
+  "cpuInstructionSimulation": false
+}

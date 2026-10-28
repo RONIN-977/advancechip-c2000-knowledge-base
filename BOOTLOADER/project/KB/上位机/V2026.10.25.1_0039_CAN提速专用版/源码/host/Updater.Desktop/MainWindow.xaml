@@ -1,0 +1,61 @@
+<Window x:Class="Updater.Desktop.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ Title="进芯 MCU 固件升级工具" Width="800" Height="620" MinWidth="640" MinHeight="480" ResizeMode="CanResizeWithGrip" Background="#101827" Foreground="#DCE5F3" FontFamily="Microsoft YaHei UI" FontSize="13" WindowStartupLocation="CenterScreen" SizeChanged="Window_SizeChanged">
+ <Window.Resources>
+  <Style TargetType="Button"><Setter Property="Padding" Value="10,6"/><Setter Property="Margin" Value="0,0,6,0"/><Setter Property="Cursor" Value="Hand"/><Setter Property="Foreground" Value="#15263E"/></Style>
+  <Style TargetType="ComboBox"><Setter Property="Padding" Value="5"/><Setter Property="Foreground" Value="#15263E"/><Setter Property="IsEditable" Value="False"/></Style>
+  <Style TargetType="TextBox"><Setter Property="Padding" Value="5"/><Setter Property="Foreground" Value="#15263E"/></Style>
+ </Window.Resources>
+ <Grid Margin="12" Background="#101827">
+  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+  <ScrollViewer x:Name="TopArea" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+   <StackPanel>
+    <TextBlock x:Name="WindowHeading" Text="进芯 MCU 固件升级工具" FontSize="21" FontWeight="SemiBold" Margin="0,0,0,8"/>
+    <Border Background="#233448" CornerRadius="6" Padding="9,6" Margin="0,0,0,9"><TextBlock x:Name="ModeNotice" TextWrapping="Wrap" Foreground="#98DAD6" FontSize="12"/></Border>
+    <Grid x:Name="SettingsPanel" Margin="0,0,0,9">
+     <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="12"/><ColumnDefinition Width="*"/><ColumnDefinition Width="12"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+     <StackPanel>
+      <TextBlock Text="芯片型号" Margin="0,0,0,3"/>
+      <ComboBox x:Name="ChipModel" SelectedIndex="0" SelectionChanged="Chip_Changed"><ComboBoxItem Content="AVP32F0039"/><ComboBoxItem Content="AVP32F335"/><ComboBoxItem Content="AVP32F0049"/><ComboBoxItem Content="ADP32F035"/><ComboBoxItem Content="AVP32F00157"/></ComboBox>
+      <TextBlock Text="通信方式" Margin="0,7,0,3"/>
+      <ComboBox x:Name="TransportMode" SelectedIndex="0" SelectionChanged="Mode_Changed"><ComboBoxItem Content="串口（SCI）"/><ComboBoxItem Content="CAN"/></ComboBox>
+      <TextBlock x:Name="BaudLabel" Text="串口波特率" Margin="0,7,0,3"/>
+      <ComboBox x:Name="BaudRate" ToolTip="通信速率必须与设备内的 BOOT 程序一致；这里的选择不会修改设备设置。"/>
+      <TextBlock Text="APP 起始地址（十六进制字地址）" Margin="0,7,0,3"/>
+      <DockPanel><Button x:Name="DefaultAddressButton" DockPanel.Dock="Right" Content="恢复默认" Click="DefaultAddress_Click" Margin="5,0,0,0" Padding="5,4"/><TextBox x:Name="AppStartAddress" TextChanged="AppStart_Changed" ToolTip="可输入 0x088000 或 088000；单位为 16 位字，须与 BOOT 分区及 APP 链接入口一致。修改后需重新选择固件。"/></DockPanel>
+     </StackPanel>
+     <StackPanel Grid.Column="2">
+      <TextBlock x:Name="DeviceLabel" Text="串口" Margin="0,0,0,3"/>
+      <Grid><ComboBox x:Name="ComPort" SelectionChanged="Device_Changed"/><ComboBox x:Name="CanModel" Visibility="Collapsed" SelectionChanged="CanDevice_Changed"/></Grid>
+      <DockPanel Margin="0,7,0,3"><Button x:Name="RefreshButton" DockPanel.Dock="Right" Content="刷新设备" Click="Refresh_Click" Padding="8,4" Margin="4,0,0,0" ToolTip="重新查找已连接的串口或 CAN 盒，不会发送升级命令。"/><TextBlock x:Name="DeviceHint" Text="正在查找设备…" Foreground="#93A6BD" FontSize="12" VerticalAlignment="Center"/></DockPanel>
+      <StackPanel x:Name="CanChannelPanel"><TextBlock Text="CAN 通道（从 0 开始）" Margin="0,4,0,3"/><ComboBox x:Name="CanChannel" SelectionChanged="Device_Changed"/></StackPanel>
+     </StackPanel>
+     <StackPanel Grid.Column="4" x:Name="CanOptions">
+      <TextBlock Text="CAN 节点地址" Margin="0,0,0,3"/><TextBox x:Name="NodeId" Text="1" ToolTip="必须与目标设备的节点地址一致，默认 1。"/>
+      <TextBlock Text="CAN 驱动文件" Margin="0,7,0,3"/>
+      <DockPanel><Button x:Name="BrowseDriverButton" DockPanel.Dock="Right" Content="浏览" Click="Dll_Click" Padding="8,4" Margin="5,0,0,0"/><TextBox x:Name="DllPath" IsReadOnly="True" ToolTip="自动检测随包周立功及创芯驱动，随选中设备自动切换；也可浏览补充驱动。"/></DockPanel>
+     </StackPanel>
+    </Grid>
+    <Border Background="#172236" CornerRadius="6" Padding="10,8" Margin="0,0,0,9">
+     <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <StackPanel Margin="0,0,10,0"><TextBlock Text="升级文件" FontWeight="SemiBold"/><DockPanel Margin="0,4,0,0"><TextBlock x:Name="ImageSummaryLabel" DockPanel.Dock="Right" Foreground="#93A6BD" Margin="8,0,0,0"/><TextBlock x:Name="ImageLabel" Text="尚未选择升级文件" Foreground="#93A6BD" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/></DockPanel></StackPanel>
+      <Button x:Name="LoadButton" Grid.Column="1" Content="选择升级文件" Click="Load_Click" Margin="0" VerticalAlignment="Center" ToolTip="选择当前芯片配套的应用程序 .out 文件；只加载并检查文件，不开始升级。"/>
+     </Grid>
+    </Border>
+    <WrapPanel>
+     <Button x:Name="ProbeButton" Content="读取设备信息" Click="Probe_Click" ToolTip="测试与设备程序的通讯并读取设备信息；收到有效应答后才显示通讯正常。"/>
+     <Button x:Name="StartButton" Content="开始升级" Click="Start_Click" Background="#57CEC4" Foreground="#0C2927" FontWeight="SemiBold" ToolTip="自动进入升级模式并下载已选择的文件，过程会擦写应用分区。"/>
+     <Button x:Name="CancelButton" Content="停止升级" Click="Cancel_Click" IsEnabled="False" ToolTip="请求停止传输；设备正在执行的 Flash 操作可能仍需完成。请等待后重新升级。"/>
+     <Button x:Name="ResetButton" Content="重启设备" Click="Reset_Click"/>
+    </WrapPanel>
+    <Grid Margin="0,8,0,4"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="44"/></Grid.ColumnDefinitions><ProgressBar x:Name="Progress" Height="7" Maximum="100" Foreground="#57CEC4" VerticalAlignment="Center"/><TextBlock x:Name="PercentLabel" Grid.Column="1" Text="0%" HorizontalAlignment="Right"/></Grid>
+    <TextBlock x:Name="StatusLabel" Text="请选择设备和升级文件" Margin="0,0,0,5" TextWrapping="Wrap"/>
+   </StackPanel>
+  </ScrollViewer>
+  <Grid Grid.Row="1" Margin="0,4,0,0">
+   <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+   <DockPanel Margin="0,0,0,5"><StackPanel DockPanel.Dock="Right" Orientation="Horizontal"><Button Content="清除日志" Click="ClearLog_Click" Padding="8,3" ToolTip="只清空当前日志显示，不会停止任务或重置进度。"/><Button Content="保存日志" Click="SaveLog_Click" Padding="8,3" Margin="0"/></StackPanel><TextBlock Text="运行日志" Foreground="#93A6BD" VerticalAlignment="Center"/></DockPanel>
+   <TextBox Grid.Row="1" x:Name="Log" IsReadOnly="True" Background="#0B1220" Foreground="#A6B7CD" BorderThickness="0" Padding="9" FontFamily="Consolas,Microsoft YaHei UI" FontSize="12" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+  </Grid>
+  <TextBlock Grid.Row="2" x:Name="PartitionLabel" Foreground="#8193AA" FontSize="11" TextWrapping="Wrap" Margin="0,7,0,0"/>
+ </Grid>
+</Window>

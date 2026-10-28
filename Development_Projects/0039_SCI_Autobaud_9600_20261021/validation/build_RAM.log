@@ -1,0 +1,52 @@
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+CCS headless build starting... [Wed Oct 21 14:20:35 CST 2026] 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+================================================================================
+Pre processing...
+
+
+================================================================================
+Building...
+
+
+**** Build of configuration CPU1_RAM for project sci_ex3_autobaud ****
+
+"C:\\ti\\ccs1271\\ccs\\utils\\bin\\gmake" -k -j 12 all -O 
+ 
+Building file: "../sci_ex3_echoback.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc -Ooff --include_path="C:/Users/17879/Documents/ChatGPT/进芯替代TI C2000系列芯片信息/Development_Projects/0039_SCI_Autobaud_9600_20261021/sci_ex3_autobaud" --include_path="C:/Users/17879/Documents/ChatGPT/进芯替代TI C2000系列芯片信息/Development_Projects/0039_SCI_Autobaud_9600_20261021/sci_ex3_autobaud/vendor/c2000ware" --include_path="C:/Users/17879/Documents/ChatGPT/进芯替代TI C2000系列芯片信息/Development_Projects/0039_SCI_Autobaud_9600_20261021/sci_ex3_autobaud/device" --include_path="C:/Users/17879/Documents/ChatGPT/进芯替代TI C2000系列芯片信息/Development_Projects/0039_SCI_Autobaud_9600_20261021/sci_ex3_autobaud/device/driverlib" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --include_path="C:/Users/17879/Documents/ChatGPT/进芯替代TI C2000系列芯片信息/Development_Projects/0039_SCI_Autobaud_9600_20261021/sci_ex3_autobaud/CPU1_RAM/syscfg" --define=DEBUG --define=RAM --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="sci_ex3_echoback.d_raw" --include_path="C:/Users/17879/Documents/ChatGPT/进芯替代TI C2000系列芯片信息/Development_Projects/0039_SCI_Autobaud_9600_20261021/sci_ex3_autobaud/CPU1_RAM/syscfg"  "../sci_ex3_echoback.c"
+ 
+>> Compilation failure
+subdir_rules.mk:16: recipe for target 'sci_ex3_echoback.obj' failed
+"../sci_ex3_echoback.c", line 42: fatal error #1965: cannot open source file "driverlib.h"
+1 catastrophic error detected in the compilation of "../sci_ex3_echoback.c".
+Compilation terminated.
+gmake: *** [sci_ex3_echoback.obj] Error 1
+Building file: "../device/device.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc -Ooff --include_path="C:/Users/17879/Documents/ChatGPT/进芯替代TI C2000系列芯片信息/Development_Projects/0039_SCI_Autobaud_9600_20261021/sci_ex3_autobaud" --include_path="C:/Users/17879/Documents/ChatGPT/进芯替代TI C2000系列芯片信息/Development_Projects/0039_SCI_Autobaud_9600_20261021/sci_ex3_autobaud/vendor/c2000ware" --include_path="C:/Users/17879/Documents/ChatGPT/进芯替代TI C2000系列芯片信息/Development_Projects/0039_SCI_Autobaud_9600_20261021/sci_ex3_autobaud/device" --include_path="C:/Users/17879/Documents/ChatGPT/进芯替代TI C2000系列芯片信息/Development_Projects/0039_SCI_Autobaud_9600_20261021/sci_ex3_autobaud/device/driverlib" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --include_path="C:/Users/17879/Documents/ChatGPT/进芯替代TI C2000系列芯片信息/Development_Projects/0039_SCI_Autobaud_9600_20261021/sci_ex3_autobaud/CPU1_RAM/syscfg" --define=DEBUG --define=RAM --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="device/device.d_raw" --include_path="C:/Users/17879/Documents/ChatGPT/进芯替代TI C2000系列芯片信息/Development_Projects/0039_SCI_Autobaud_9600_20261021/sci_ex3_autobaud/CPU1_RAM/syscfg" --obj_directory="device"  "../device/device.c"
+ 
+>> Compilation failure
+device/subdir_rules.mk:9: recipe for target 'device/device.obj' failed
+"..\device\driverlib.h", line 46: fatal error #1965: cannot open source file "inc/hw_memmap.h"
+1 catastrophic error detected in the compilation of "../device/device.c".
+Compilation terminated.
+gmake: *** [device/device.obj] Error 1
+Building file: "../device/f28003x_codestartbranch.asm"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc -Ooff --include_path="C:/Users/17879/Documents/ChatGPT/进芯替代TI C2000系列芯片信息/Development_Projects/0039_SCI_Autobaud_9600_20261021/sci_ex3_autobaud" --include_path="C:/Users/17879/Documents/ChatGPT/进芯替代TI C2000系列芯片信息/Development_Projects/0039_SCI_Autobaud_9600_20261021/sci_ex3_autobaud/vendor/c2000ware" --include_path="C:/Users/17879/Documents/ChatGPT/进芯替代TI C2000系列芯片信息/Development_Projects/0039_SCI_Autobaud_9600_20261021/sci_ex3_autobaud/device" --include_path="C:/Users/17879/Documents/ChatGPT/进芯替代TI C2000系列芯片信息/Development_Projects/0039_SCI_Autobaud_9600_20261021/sci_ex3_autobaud/device/driverlib" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --include_path="C:/Users/17879/Documents/ChatGPT/进芯替代TI C2000系列芯片信息/Development_Projects/0039_SCI_Autobaud_9600_20261021/sci_ex3_autobaud/CPU1_RAM/syscfg" --define=DEBUG --define=RAM --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="device/f28003x_codestartbranch.d_raw" --include_path="C:/Users/17879/Documents/ChatGPT/进芯替代TI C2000系列芯片信息/Development_Projects/0039_SCI_Autobaud_9600_20261021/sci_ex3_autobaud/CPU1_RAM/syscfg" --obj_directory="device"  "../device/f28003x_codestartbranch.asm"
+Finished building: "../device/f28003x_codestartbranch.asm"
+ 
+gmake: Target 'all' not remade because of errors.
+
+**** Build Finished ****
+
+
+================================================================================
+CCS headless build complete! 1 out of 1 projects have errors.

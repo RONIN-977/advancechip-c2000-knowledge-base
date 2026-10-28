@@ -1,0 +1,76 @@
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+CCS headless build starting... [Wed Oct 21 14:30:05 CST 2026] 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+================================================================================
+Pre processing...
+
+
+================================================================================
+Building...
+
+
+**** Build of configuration CPU1_RAM for project sci_ex3_autobaud ****
+
+"C:\\ti\\ccs1271\\ccs\\utils\\bin\\gmake" -k -j 12 all -O 
+ 
+Building file: "../c2000.syscfg"
+Invoking: SysConfig
+"C:/ti/sysconfig_1.23.1/sysconfig_cli.bat" --script "C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/c2000.syscfg" -o "syscfg" -s "C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/vendor/c2000ware/.metadata/sdk.json" -d "TMS320F280039C" --package 100PZ --compiler ccs
+Running script...
+Validating...
+Generating Code (c2000.syscfg)...
+Writing C:\Users\17879\AppData\Local\Temp\0039_autobaud_relocated_20261021\sci_ex3_autobaud_9600\CPU1_RAM\syscfg\board.c...
+Writing C:\Users\17879\AppData\Local\Temp\0039_autobaud_relocated_20261021\sci_ex3_autobaud_9600\CPU1_RAM\syscfg\board.h...
+Writing C:\Users\17879\AppData\Local\Temp\0039_autobaud_relocated_20261021\sci_ex3_autobaud_9600\CPU1_RAM\syscfg\board.cmd.genlibs...
+Writing C:\Users\17879\AppData\Local\Temp\0039_autobaud_relocated_20261021\sci_ex3_autobaud_9600\CPU1_RAM\syscfg\board.opt...
+Writing C:\Users\17879\AppData\Local\Temp\0039_autobaud_relocated_20261021\sci_ex3_autobaud_9600\CPU1_RAM\syscfg\board.json...
+Writing C:\Users\17879\AppData\Local\Temp\0039_autobaud_relocated_20261021\sci_ex3_autobaud_9600\CPU1_RAM\syscfg\pinmux.csv...
+Writing C:\Users\17879\AppData\Local\Temp\0039_autobaud_relocated_20261021\sci_ex3_autobaud_9600\CPU1_RAM\syscfg\c2000ware_libraries.cmd.genlibs...
+Writing C:\Users\17879\AppData\Local\Temp\0039_autobaud_relocated_20261021\sci_ex3_autobaud_9600\CPU1_RAM\syscfg\c2000ware_libraries.opt...
+Writing C:\Users\17879\AppData\Local\Temp\0039_autobaud_relocated_20261021\sci_ex3_autobaud_9600\CPU1_RAM\syscfg\c2000ware_libraries.c...
+Writing C:\Users\17879\AppData\Local\Temp\0039_autobaud_relocated_20261021\sci_ex3_autobaud_9600\CPU1_RAM\syscfg\c2000ware_libraries.h...
+Writing C:\Users\17879\AppData\Local\Temp\0039_autobaud_relocated_20261021\sci_ex3_autobaud_9600\CPU1_RAM\syscfg\clocktree.h...
+Finished building: "../c2000.syscfg"
+ 
+Building file: "../device/f28003x_codestartbranch.asm"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc -Ooff --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/vendor/c2000ware" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/device" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/device/driverlib" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/CPU1_RAM/syscfg" --define=DEBUG --define=RAM --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="device/f28003x_codestartbranch.d_raw" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/CPU1_RAM/syscfg" --obj_directory="device" --cmd_file="syscfg/board.opt" --cmd_file="syscfg/c2000ware_libraries.opt"  "../device/f28003x_codestartbranch.asm"
+Finished building: "../device/f28003x_codestartbranch.asm"
+ 
+Building file: "syscfg/c2000ware_libraries.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc -Ooff --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/vendor/c2000ware" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/device" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/device/driverlib" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/CPU1_RAM/syscfg" --define=DEBUG --define=RAM --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="syscfg/c2000ware_libraries.d_raw" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/CPU1_RAM/syscfg" --obj_directory="syscfg" --cmd_file="syscfg/board.opt" --cmd_file="syscfg/c2000ware_libraries.opt"  "syscfg/c2000ware_libraries.c"
+Finished building: "syscfg/c2000ware_libraries.c"
+ 
+Building file: "syscfg/board.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc -Ooff --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/vendor/c2000ware" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/device" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/device/driverlib" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/CPU1_RAM/syscfg" --define=DEBUG --define=RAM --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="syscfg/board.d_raw" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/CPU1_RAM/syscfg" --obj_directory="syscfg" --cmd_file="syscfg/board.opt" --cmd_file="syscfg/c2000ware_libraries.opt"  "syscfg/board.c"
+Finished building: "syscfg/board.c"
+ 
+Building file: "../device/device.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc -Ooff --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/vendor/c2000ware" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/device" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/device/driverlib" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/CPU1_RAM/syscfg" --define=DEBUG --define=RAM --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="device/device.d_raw" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/CPU1_RAM/syscfg" --obj_directory="device" --cmd_file="syscfg/board.opt" --cmd_file="syscfg/c2000ware_libraries.opt"  "../device/device.c"
+Finished building: "../device/device.c"
+ 
+Building file: "../sci_ex3_echoback.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc -Ooff --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/vendor/c2000ware" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/device" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/device/driverlib" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/CPU1_RAM/syscfg" --define=DEBUG --define=RAM --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="sci_ex3_echoback.d_raw" --include_path="C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/CPU1_RAM/syscfg" --cmd_file="syscfg/board.opt" --cmd_file="syscfg/c2000ware_libraries.opt"  "../sci_ex3_echoback.c"
+Finished building: "../sci_ex3_echoback.c"
+ 
+Building target: "sci_ex3_autobaud.out"
+Invoking: C2000 Linker
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --cla_support=cla2 --float_support=fpu32 --tmu_support=tmu0 --vcu_support=vcrc -Ooff --define=DEBUG --define=RAM --diag_suppress=10063 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi -z -m"sci_ex3_autobaud.map" --heap_size=0x100 --stack_size=0x200 --warn_sections -i"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/lib" -i"C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/vendor/c2000ware" -i"C:/Users/17879/AppData/Local/Temp/0039_autobaud_relocated_20261021/sci_ex3_autobaud_9600/CPU1_RAM/syscfg" -i"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --reread_libs --define=RAM --diag_wrap=off --display_error_number --xml_link_info="sci_ex3_autobaud_linkInfo.xml" --entry_point=code_start --rom_model -o "sci_ex3_autobaud.out" "./syscfg/board.obj" "./syscfg/c2000ware_libraries.obj" "./sci_ex3_echoback.obj" "./device/device.obj" "./device/f28003x_codestartbranch.obj" "../28003x_generic_ram_lnk.cmd" "../device/driverlib/ccs/Debug/driverlib.lib"  -lc2000ware_libraries.cmd.genlibs -llibc.a 
+<Linking>
+Finished building target: "sci_ex3_autobaud.out"
+ 
+
+**** Build Finished ****
+
+
+================================================================================
+CCS headless build complete! 0 out of 1 projects have errors.

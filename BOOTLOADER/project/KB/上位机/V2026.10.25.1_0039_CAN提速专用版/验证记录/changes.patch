@@ -1,0 +1,183 @@
+--- general/assets\更新日志.txt
+
++++ 0039-only/assets\更新日志.txt
+
+@@ -1,5 +1,14 @@
+
+ 上位机更新日志
+ 说明：版本号为交付版本标识；最新记录放在最上面。
++
++日期：2026-10-25
++版本：V2026.10.25.1（0039 CAN专用提速版）
++更新内容：
++1. 界面仅显示0039和CAN，其他型号及SCI仅隐藏，代码保留。
++2. APP默认起始地址改为0x087000，“恢复默认”也恢复此地址；仍可手动修改。
++3. 隐藏读取设备信息及重启设备按钮，内部自动查询和升级后复位流程保留。
++4. ZLG、创芯、1ms DATA提速及后台日志保持原实现。
++验证情况：专用界面软件检查及模拟升级通过；此界面专用版尚未实盒复测。
+ 
+ 日期：2026-10-25
+ 版本：V2026.10.25（CAN提速版）
+--- general/docs\后台通讯日志说明.md
+
++++ 0039-only/docs\后台通讯日志说明.md
+
+@@ -1,4 +1,6 @@
+
+-# 后台通讯日志说明（V2026.10.25）
++# 后台通讯日志说明（V2026.10.25.1）
++
++本交付为0039 CAN专用界面，默认APP起始地址0x087000；读取设备信息和重启设备按钮隐藏，升级内部自动查询和复位仍执行。其他型号/SCI源码保留。
+ 
+ 正常使用上位机即可。点击开始升级、读取设备信息或重启设备时自动创建一份日志，不需要另开监控工具，也不需要手动点保存日志。刷新设备沿用原检测流程，不额外发报文。
+ 
+@@ -20,6 +22,6 @@
+
+ 
+ 统计之间存在包含关系：命令耗时包含CAN交换，不能重复相加。DLL发送成功只说明接口返回成功，不证明目标CAN确认；收到匹配的有效协议应答才说明本次往返完成。后台异步写盘，每包只入队事件，不逐帧打印。仍有少量测时/记录开销，实盒测速要使用同一版本比较。
+ 
+-ZLG和创芯共用诊断逻辑；0039、0049、035、00157的CAN均覆盖。普通SCI记录协议交换及命令耗时；335 SCI维持原实现，只记操作/UI日志，不含逐命令和CAN明细。
++ZLG和创芯共用诊断逻辑；本交付只显示0039 CAN，其他型号CAN路径代码保留。普通SCI记录协议交换及命令耗时；335 SCI维持原实现，只记操作/UI日志，不含逐命令和CAN明细。
+ 
+ 本版DATA帧改为1ms相对高精度等待。若高精度定时器不可用自动降级为普通1ms等待（可能实际仍约15ms），日志pacing_mode显示legacy-wait-fallback。控制命令原WaitOne(3)、接收空读2ms、50ms接收参数、800ms入BOOT等待、重试次数和超时设置保持原值。BOOT、APP、分区及升级协议未修改。本机未自动启动升级，也未安装驱动。实测后看重试和超时是否为零；有重试或失败时先回退20261023日志版，保留两次日志对比。主机调用间隔不代表USB/CAN物理线上严格等间隔。
+--- general/host\Updater.Desktop\App.xaml.cs
+
++++ 0039-only/host\Updater.Desktop\App.xaml.cs
+
+@@ -12,10 +12,16 @@
+
+         {
+             Shutdown(Updater.Discovery.CanDiscovery.Run(e.Args[1])); return;
+         }
+-        bool selfCheck = e.Args.Length >= 2 && (e.Args[0] is "--self-check" or "--self-check-280049" or "--self-check-2800157" or "--self-check-ui" or "--self-check-sci335");
++        bool selfCheck = e.Args.Length >= 2 && (e.Args[0] is "--self-check-0039-can" or "--self-check" or "--self-check-280049" or "--self-check-2800157" or "--self-check-ui" or "--self-check-sci335");
+         bool automation = selfCheck || (e.Args.Length > 0 && e.Args[0] == "--snapshot");
+         var window = new MainWindow(!automation);
+         if (selfCheck) window.EnableSimulation();
++        if (e.Args.Length >= 2 && e.Args[0] == "--self-check-0039-can")
++        {
++            try { await Can0039UiSelfCheck.Run(window, e.Args[1]); Shutdown(0); }
++            catch (Exception ex) { File.WriteAllText(e.Args[1], ex.ToString()); Shutdown(1); }
++            return;
++        }
+         if (e.Args.Length >= 2 && e.Args[0] == "--self-check-sci335")
+         {
+             try { await Sci335UiSelfCheck.Run(window, e.Args[1]); Shutdown(0); }
+--- general/host\Updater.Desktop\CommunicationDiagnostics.cs
+
++++ 0039-only/host\Updater.Desktop\CommunicationDiagnostics.cs
+
+@@ -15,7 +15,7 @@
+
+         var device = CanModel.SelectedItem as DetectedCanDevice;
+         communicationTrace = CommunicationTrace.Create(Path.Combine(AppContext.BaseDirectory, "Logs"), action, new
+         {
+-            version = "V2026.10.25", action, chip = ChipName, simulation,
++            version = "V2026.10.25.1", action, chip = ChipName, simulation,
+             transport = IsCan ? "CAN" : "SCI", baud = BaudRate.SelectedItem,
+             port = IsCan ? null : ComPort.SelectedItem,
+             brand = device?.Brand, deviceType = device?.Type, deviceIndex = device?.Index,
+--- general/host\Updater.Desktop\CommunicationReport.cs
+
++++ 0039-only/host\Updater.Desktop\CommunicationReport.cs
+
+@@ -16,7 +16,7 @@
+
+         var modes = new Dictionary<string, int>();
+         double requestedPacing = 0;
+         var errors = new List<string>();
+-        var text = new StringBuilder("通讯诊断摘要 V2026.10.25\n");
++        var text = new StringBuilder("通讯诊断摘要 V2026.10.25.1\n");
+         foreach (string line in File.ReadLines(path))
+         {
+             using var json = JsonDocument.Parse(line);
+--- general/host\Updater.Desktop\MainWindow.xaml.cs
+
++++ 0039-only/host\Updater.Desktop\MainWindow.xaml.cs
+
+@@ -15,6 +15,13 @@
+
+ #else
+         false;
+ #endif
++    internal static bool Customer0039CanEdition =>
++#if CUSTOMER0039_CAN_ONLY
++        true;
++#else
++        false;
++#endif
++    private uint DefaultAppStart => Customer0039CanEdition ? 0x087000U : Is335 ? Avp335Profile.AppStart : DefaultProfile.AppStart;
+     private FirmwareImage? image;
+     private Avp335FirmwareImage? avpImage;
+     private bool Is335 => ChipModel.SelectedIndex == 1;
+@@ -45,11 +52,11 @@
+
+     {
+         changingAddress = true;
+         AppStartAddress.Text = appAddresses.GetValueOrDefault(ChipModel.SelectedIndex,
+-            $"0x{(Is335 ? Avp335Profile.AppStart : DefaultProfile.AppStart):X6}");
++            $"0x{DefaultAppStart:X6}");
+         changingAddress = false;
+     }
+     private void DefaultAddress_Click(object sender, RoutedEventArgs e) =>
+-        AppStartAddress.Text = $"0x{(Is335 ? Avp335Profile.AppStart : DefaultProfile.AppStart):X6}";
++        AppStartAddress.Text = $"0x{DefaultAppStart:X6}";
+     private void AppStart_Changed(object sender, TextChangedEventArgs e)
+     {
+         if (!ready || changingAddress) return;
+@@ -98,11 +105,21 @@
+
+             SettingsPanel.ColumnDefinitions[3].Width = SettingsPanel.ColumnDefinitions[4].Width = new GridLength(0);
+             StartButton.ToolTip = "点击后等待 BOOT 9 秒，请在等待期间给板子上电或复位；握手成功后自动升级并请求启动 APP。";
+         }
++        if (Customer0039CanEdition)
++        {
++            Title = WindowHeading.Text = "0039 CAN 固件升级工具";
++            ChipModel.SelectedIndex = 0; ChipModel.IsEnabled = false;
++            for (int i = 0; i < ChipModel.Items.Count; i++)
++                if (i != 0) ((ComboBoxItem)ChipModel.Items[i]).Visibility = Visibility.Collapsed;
++            TransportMode.SelectedIndex = 1; TransportMode.IsEnabled = false;
++            ((ComboBoxItem)TransportMode.Items[0]).Visibility = Visibility.Collapsed;
++            ProbeButton.Visibility = ResetButton.Visibility = Visibility.Collapsed;
++        }
+         Width = Math.Min(Width, SystemParameters.WorkArea.Width);
+         Height = Math.Min(Height, SystemParameters.WorkArea.Height);
+         DllPath.Text = CanDriver.DefaultPath;
+         RestoreAddress(); ready = true; UpdateMode();
+-        Write("上位机版本 V2026.10.25（CAN提速版，DATA帧间隔1ms，控制报文保留原节拍）。");
++        Write("上位机版本 V2026.10.25.1（0039 CAN专用提速版，DATA帧间隔1ms，控制报文保留原节拍）。");
+         Write($"程序为 {IntPtr.Size * 8} 位；首次安装 BOOT 程序需使用 CCS/JTAG。");
+         if (!Customer335Edition && File.Exists(DllPath.Text)) Write($"默认 CAN 驱动（刷新时自动检测周立功及创芯）：{DllPath.Text}");
+         Write(Customer335Edition ? "请提前连接并选好串口、加载 APP 文件；点击开始升级后，在 9 秒等待期间给板子上电或复位。" :
+@@ -123,6 +140,7 @@
+
+     private async void Mode_Changed(object sender, SelectionChangedEventArgs e)
+     {
+         if (!ready) return;
++        if (Customer0039CanEdition && TransportMode.SelectedIndex != 1) { TransportMode.SelectedIndex = 1; return; }
+         if (Customer335Edition && TransportMode.SelectedIndex != 0) { TransportMode.SelectedIndex = 0; return; }
+         known335InBoot = null; UpdateMode();
+         if (automaticDiscovery && !simulation) await RefreshDevicesAsync();
+@@ -130,6 +148,7 @@
+
+     private void Chip_Changed(object sender, SelectionChangedEventArgs e)
+     {
+         if (!ready) return;
++        if (Customer0039CanEdition && ChipModel.SelectedIndex != 0) { ChipModel.SelectedIndex = 0; return; }
+         if (Customer335Edition && ChipModel.SelectedIndex != 1) { ChipModel.SelectedIndex = 1; return; }
+         image = null; avpImage = null; loadedPath = null; known335InBoot = null;
+         RestoreAddress();
+--- general/host\Updater.Desktop\Updater.Desktop.csproj
+
++++ 0039-only/host\Updater.Desktop\Updater.Desktop.csproj
+
+@@ -2,6 +2,8 @@
+
+   <PropertyGroup><OutputType>WinExe</OutputType><TargetFramework>net10.0-windows</TargetFramework><UseWPF>true</UseWPF></PropertyGroup>
+   <PropertyGroup>
+     <Customer335Only Condition="'$(Customer335Only)' == ''">false</Customer335Only>
++    <Customer0039CanOnly Condition="'$(Customer0039CanOnly)' == '' and '$(Customer335Only)' != 'true'">true</Customer0039CanOnly>
++    <DefineConstants Condition="'$(Customer0039CanOnly)' == 'true'">$(DefineConstants);CUSTOMER0039_CAN_ONLY</DefineConstants>
+     <DefineConstants Condition="'$(Customer335Only)' == 'true'">$(DefineConstants);CUSTOMER335_ONLY</DefineConstants>
+   </PropertyGroup>
+   <ItemGroup><ProjectReference Include="../Updater.Core/Updater.Core.csproj" /></ItemGroup>

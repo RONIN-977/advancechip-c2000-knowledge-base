@@ -1,0 +1,540 @@
+
+#include "DSP2803x_Device.h"     // DSP2803x Headerfile Include File
+#include "DSP2803x_Examples.h"   // DSP2803x Examples Include File
+#include "IQmathLib.h"
+#include "user_declaration.h"
+
+void UserGpioInit(void)
+{
+    EALLOW;
+    #ifdef CKFA_Master
+    //以下为PWM
+    GpioCtrlRegs.GPAPUD.bit.GPIO0 = 0;   // 使能上拉电阻
+    GpioCtrlRegs.GPAMUX1.bit.GPIO0 = 0;  // 配置成普通IO口
+    GpioCtrlRegs.GPADIR.bit.GPIO0 = 1;   // 配置成输出IO
+    GpioDataRegs.GPACLEAR.bit.GPIO0 = 1; // EPWM1A-AC
+
+    GpioCtrlRegs.GPAPUD.bit.GPIO1 = 0;   // 使能上拉电阻
+    GpioCtrlRegs.GPAMUX1.bit.GPIO1 = 0;  // 配置成普通IO口
+    GpioCtrlRegs.GPADIR.bit.GPIO1 = 1;   // 配置成输出IO
+    GpioDataRegs.GPACLEAR.bit.GPIO1 = 1; // EPWM1B-AC
+
+    GpioCtrlRegs.GPAPUD.bit.GPIO2 = 0;   // 使能上拉电阻
+    GpioCtrlRegs.GPAMUX1.bit.GPIO2 = 0;  // 配置成普通IO口
+    GpioCtrlRegs.GPADIR.bit.GPIO2 = 1;   // 配置成输出IO
+    GpioDataRegs.GPACLEAR.bit.GPIO2 = 1; // EPWM2A-AC
+
+    GpioCtrlRegs.GPAPUD.bit.GPIO3 = 0;   // 使能上拉电阻
+    GpioCtrlRegs.GPAMUX1.bit.GPIO3 = 0;  // 配置成普通IO口
+    GpioCtrlRegs.GPADIR.bit.GPIO3 = 1;   // 配置成输出IO
+    GpioDataRegs.GPACLEAR.bit.GPIO3 = 1; // EPWM2B-AC
+
+    GpioCtrlRegs.GPAPUD.bit.GPIO4 = 0;   // 使能上拉电阻
+    GpioCtrlRegs.GPAMUX1.bit.GPIO4 = 0;  // 配置成普通IO口
+    GpioCtrlRegs.GPADIR.bit.GPIO4 = 1;   // 配置成输出IO
+    GpioDataRegs.GPACLEAR.bit.GPIO4 = 1; // EPWM3A-M-OCP-PWM
+
+    //GpioDataRegs.GPACLEAR.bit.GPIO6 = 1; // EPWM4A-PWM-SYNC
+
+    GpioCtrlRegs.GPAPUD.bit.GPIO8 = 0;   // 使能上拉电阻
+    GpioCtrlRegs.GPAMUX1.bit.GPIO8 = 0;  // 配置成普通IO口
+    GpioCtrlRegs.GPADIR.bit.GPIO8 = 1;   // 配置成输出IO
+    GpioDataRegs.GPACLEAR.bit.GPIO8 = 1; // EPWM5A-BOOST2
+
+    GpioCtrlRegs.GPAPUD.bit.GPIO10 = 0;   // 使能上拉电阻
+    GpioCtrlRegs.GPAMUX1.bit.GPIO10 = 0;  // 配置成普通IO口
+    GpioCtrlRegs.GPADIR.bit.GPIO10 = 1;   // 配置成输出IO
+    GpioDataRegs.GPACLEAR.bit.GPIO10 = 1; // EPWM6A-BOOST1
+    //以上为PWM
+
+    //PWM交流过流保护    //原为LED  20201111
+      //      GpioCtrlRegs.GPAPUD.bit.GPIO4 = 0;   // 使能上拉电阻
+      //      GpioCtrlRegs.GPAMUX1.bit.GPIO4 = 0;  // 配置成普通IO口
+      //      GpioCtrlRegs.GPADIR.bit.GPIO4 = 1;   // 配置成输出IO
+
+          //电网电压过零比较输入信号    //原为PWM交流过流保护
+              GpioCtrlRegs.GPAPUD.bit.GPIO5 = 0;   // // 使能上拉电阻
+              GpioCtrlRegs.GPAMUX1.bit.GPIO5 = 0;  // 配置成普通IO口
+              GpioCtrlRegs.GPADIR.bit.GPIO5 = 0;   // 配置成输入IO
+
+            //离网继电器控制信号20190312
+             //GpioCtrlRegs.GPAPUD.bit.GPIO5 = 0;   // 使能上拉电阻
+            // GpioCtrlRegs.GPAMUX1.bit.GPIO5 = 0;  //配置成普通IO口
+            // GpioCtrlRegs.GPADIR.bit.GPIO5 = 1;   // 配置成输出IO
+            // GpioDataRegs.GPACLEAR.bit.GPIO5 = 1;   // 初始化为低电平
+            //母线开关电源控制信号20190312-更改为SYNC
+            GpioCtrlRegs.GPAPUD.bit.GPIO6 = 0;   // 使能上拉电阻
+            GpioCtrlRegs.GPAMUX1.bit.GPIO6 = 3;  //配置成SYNC_OUT
+            GpioCtrlRegs.GPADIR.bit.GPIO6 = 1;   // 配置成输出IO
+
+         //测试
+             //GpioCtrlRegs.GPAPUD.bit.GPIO8 = 0;   // 使能上拉电阻
+             //GpioCtrlRegs.GPAMUX1.bit.GPIO8 = 0;  // 配置成普通IO口
+             //GpioCtrlRegs.GPADIR.bit.GPIO8 = 1;   // 配置成输出IO
+             //GpioDataRegs.GPACLEAR.bit.GPIO8=1;   // 初始化为低电平
+            //交流驱动使能  低电平封锁  高电平使能
+             GpioCtrlRegs.GPAPUD.bit.GPIO9 = 0;   // 使能上拉电阻
+             GpioCtrlRegs.GPAMUX1.bit.GPIO9 = 0;  // 配置成普通IO口
+             GpioCtrlRegs.GPADIR.bit.GPIO9 = 1;   // 配置成输出IO
+             GpioDataRegs.GPACLEAR.bit.GPIO9=1;   // 初始化为低电平
+             //并网继电器LN1  预留
+             GpioCtrlRegs.GPAPUD.bit.GPIO11 = 0;   // 使能上拉电阻
+             GpioCtrlRegs.GPAMUX1.bit.GPIO11 = 0;  // 配置成普通IO口
+             GpioCtrlRegs.GPADIR.bit.GPIO11 = 1;   // 配置成输出IO
+             GpioDataRegs.GPACLEAR.bit.GPIO11=1;   // 初始化为低电平
+            //TZ1功能，用于交流过流封驱动
+             GpioCtrlRegs.GPAPUD.bit.GPIO12 = 0;   // // 使能上拉电阻
+             GpioCtrlRegs.GPAMUX1.bit.GPIO12 = 1;  //
+             //GpioCtrlRegs.GPADIR.bit.GPIO12 = 1;   // 配置成输入IO
+
+             //TZ2功能，用于直流过流封驱动
+             GpioCtrlRegs.GPAPUD.bit.GPIO13 = 0;   // 使能上拉电阻
+             GpioCtrlRegs.GPAMUX1.bit.GPIO13 = 1;
+
+             //离网并网切换
+             //GpioCtrlRegs.GPAPUD.bit.GPIO14 = 0;   // // 使能上拉电阻
+             //GpioCtrlRegs.GPAMUX1.bit.GPIO14 = 0;  // 配置成普通IO口
+             //GpioCtrlRegs.GPADIR.bit.GPIO14 = 0;   // 配置成输入IO
+         //电池板过流保护输入
+          //   GpioCtrlRegs.GPAPUD.bit.GPIO20 = 0;   // 使能上拉电阻
+         //    GpioCtrlRegs.GPAMUX2.bit.GPIO20 = 0;  // 配置成普通IO口
+          //   GpioCtrlRegs.GPADIR.bit.GPIO20 = 0;   // 配置成输入IO
+
+         //逆变器电压过零点比较
+             GpioCtrlRegs.GPAPUD.bit.GPIO21 = 0;   // // 使能上拉电阻
+             GpioCtrlRegs.GPAMUX2.bit.GPIO21 = 0;  // 配置成普通IO口
+             GpioCtrlRegs.GPADIR.bit.GPIO21 = 0;   // 配置成输入IO
+
+         //LED运行指示   //原为电网电压过零比较输入信号
+             GpioCtrlRegs.GPAPUD.bit.GPIO22 = 0;   // // 使能上拉电阻
+             GpioCtrlRegs.GPAMUX2.bit.GPIO22 = 0;  // 配置成普通IO口
+             GpioCtrlRegs.GPADIR.bit.GPIO22 = 1;   // 配置成输出IO
+
+         //交流电流过流保护输入
+             GpioCtrlRegs.GPAPUD.bit.GPIO23 = 0;   // // 使能上拉电阻
+             GpioCtrlRegs.GPAMUX2.bit.GPIO23 = 0;  // 配置成普通IO口
+             GpioCtrlRegs.GPADIR.bit.GPIO23 = 0;   // 配置成输入IO
+             //GpioDataRegs.GPASET.bit.GPIO23=1;
+         //电网电压过零点比较信号
+           //  GpioCtrlRegs.GPAPUD.bit.GPIO24 = 0;   // 使能上拉电阻
+           //  GpioCtrlRegs.GPAMUX2.bit.GPIO24 = 0;  // 配置成普通IO口
+           //  GpioCtrlRegs.GPADIR.bit.GPIO24 = 0;   // 配置成输入IO
+         //LED运行指示灯20190312
+             //离网继电器控制
+             //GpioCtrlRegs.GPAPUD.bit.GPIO25 = 0;   // 使能上拉电阻
+             //GpioCtrlRegs.GPAMUX2.bit.GPIO25 = 0;  // 配置成普通IO口
+             //GpioCtrlRegs.GPADIR.bit.GPIO25 = 1;   // 配置成输出IO
+             //GpioDataRegs.GPACLEAR.bit.GPIO25=1;
+             //电源电压监控复位信号
+             GpioCtrlRegs.GPAPUD.bit.GPIO26 = 0;   // // 使能上拉电阻
+             GpioCtrlRegs.GPAMUX2.bit.GPIO26 = 0;  // 配置成普通IO口
+             GpioCtrlRegs.GPADIR.bit.GPIO26 = 1;   // 配置成输输出IO
+             GpioDataRegs.GPACLEAR.bit.GPIO26=1;
+         //并网继电器控制-LN1
+             GpioCtrlRegs.GPAPUD.bit.GPIO27 = 0;   // // 使能上拉电阻
+             GpioCtrlRegs.GPAMUX2.bit.GPIO27 = 0;  // 配置成普通IO口
+             GpioCtrlRegs.GPADIR.bit.GPIO27 = 1;   // 配置成输出IO
+             GpioDataRegs.GPACLEAR.bit.GPIO27=1;   //低电平
+         //漏电流自检控制
+             GpioCtrlRegs.GPAPUD.bit.GPIO28 = 0;   // // 使能上拉电阻
+             GpioCtrlRegs.GPAMUX2.bit.GPIO28 = 0;  // 配置成普通IO口
+             GpioCtrlRegs.GPADIR.bit.GPIO28 = 1;   // 配置成输出IO
+             GpioDataRegs.GPACLEAR.bit.GPIO28=1;
+
+         //    GpioCtrlRegs.GPAPUD.bit.GPIO29 = 0;   // // 使能上拉电阻
+          //   GpioCtrlRegs.GPAMUX2.bit.GPIO29 = 0;  // 配置成普通IO口
+           //  GpioCtrlRegs.GPADIR.bit.GPIO29 = 1;   // 配置成输出IO
+           //  GpioDataRegs.GPACLEAR.bit.GPIO29 = 1;   // 初始化为低电平
+        //
+             //离网继电器控制信号20210206
+        /*     GpioCtrlRegs.GPAPUD.bit.GPIO30 = 0;   // 使能上拉电阻
+             GpioCtrlRegs.GPAMUX2.bit.GPIO30 = 0;  // 配置成普通IO口
+             GpioCtrlRegs.GPADIR.bit.GPIO30 = 1;   // 配置成输出IO
+             GpioDataRegs.GPACLEAR.bit.GPIO30 = 1;   // 初始化为低电平
+             //LED
+             GpioCtrlRegs.GPAPUD.bit.GPIO31 = 0;   // 使能上拉电阻
+             GpioCtrlRegs.GPAMUX2.bit.GPIO31 = 0;  // 配置成普通IO口
+             GpioCtrlRegs.GPADIR.bit.GPIO31 = 1;   // 配置成输出IO
+             GpioDataRegs.GPACLEAR.bit.GPIO31 = 1;   // 初始化为低电平
+      */
+         //IIC SDA
+              GpioCtrlRegs.GPBPUD.bit.GPIO32 = 0;   // 使能上拉电阻
+              GpioCtrlRegs.GPBMUX1.bit.GPIO32 = 0;  // 配置成普通IO口
+              GpioCtrlRegs.GPBDIR.bit.GPIO32 = 1;   // 配置成输出IO
+          //IIC SCL
+              GpioCtrlRegs.GPBPUD.bit.GPIO33 = 0;   // 使能上拉电阻
+              GpioCtrlRegs.GPBMUX1.bit.GPIO33 = 0;  // 配置成普通IO口
+              GpioCtrlRegs.GPBDIR.bit.GPIO33 = 1;   // 配置成输出IO
+         //与另一28034IO通讯 接收高低电平
+              GpioCtrlRegs.GPBPUD.bit.GPIO34 = 0;   // 使能上拉电阻
+               GpioCtrlRegs.GPBMUX1.bit.GPIO34 = 0;  // 配置成普通IO口
+               GpioCtrlRegs.GPBDIR.bit.GPIO34 = 0;   // 配置成输入IO
+         //
+                GpioCtrlRegs.GPBPUD.bit.GPIO39 = 0;   // 使能上拉电阻
+               GpioCtrlRegs.GPBMUX1.bit.GPIO39 = 0;  // 配置成普通IO口
+                GpioCtrlRegs.GPBDIR.bit.GPIO39 = 1;   // 配置成输出IO
+                GpioDataRegs.GPBCLEAR.bit.GPIO39 = 1;   // 初始化为低电平
+         //
+                //离网继电器控制L2
+                GpioCtrlRegs.GPBPUD.bit.GPIO40 = 0;   // 使能上拉电阻
+                GpioCtrlRegs.GPBMUX1.bit.GPIO40 = 0;  // 配置成普通IO口
+                GpioCtrlRegs.GPBDIR.bit.GPIO40 = 1;   // 配置成输出IO
+                GpioDataRegs.GPBCLEAR.bit.GPIO40 = 1; //低电平
+
+         //并网继电器控制信号20190312-LN2
+              GpioCtrlRegs.GPBPUD.bit.GPIO41 = 0;   // 使能上拉电阻
+              GpioCtrlRegs.GPBMUX1.bit.GPIO41 = 0;  // 配置成普通IO口
+              GpioCtrlRegs.GPBDIR.bit.GPIO41 = 1;   // 配置成输出IO
+              GpioDataRegs.GPBCLEAR.bit.GPIO41=1;   //低电平
+         //与另一28034IO通讯
+                GpioCtrlRegs.GPBPUD.bit.GPIO42 = 0;   // 使能上拉电阻
+               GpioCtrlRegs.GPBMUX1.bit.GPIO42 = 0;  // 配置成普通IO口
+               GpioCtrlRegs.GPBDIR.bit.GPIO42 = 0;   // 配置成输入IO
+         //输出  去复位显示屏控制芯片
+                 GpioCtrlRegs.GPBPUD.bit.GPIO43 = 0;   // 使能上拉电阻
+                 GpioCtrlRegs.GPBMUX1.bit.GPIO43 = 0;  // 配置成普通IO口
+                 GpioCtrlRegs.GPBDIR.bit.GPIO43 = 1;   // 配置成输出IO
+                 GpioDataRegs.GPBCLEAR.bit.GPIO43=1;
+         //接地故障继电器20190312
+                 GpioCtrlRegs.GPBPUD.bit.GPIO44 = 0;   // 使能上拉电阻
+                 GpioCtrlRegs.GPBMUX1.bit.GPIO44 = 0;  // 配置成普通IO口
+                 GpioCtrlRegs.GPBDIR.bit.GPIO44 = 1;   // 配置成输出IO
+                 GpioDataRegs.GPBCLEAR.bit.GPIO44=1;   //低电平
+
+      #else
+          //GpioCtrlRegs.GPAPUD.bit.GPIO4 = 0;   //使能上拉电阻
+          //GpioCtrlRegs.GPAMUX1.bit.GPIO4 = 0;  //配置成普通IO口
+          //GpioCtrlRegs.GPADIR.bit.GPIO4 = 0;
+
+         //测试管脚
+         //GpioCtrlRegs.GPAPUD.bit.GPIO5 = 0;   //使能上拉电阻
+         //GpioCtrlRegs.GPAMUX1.bit.GPIO5 = 0;  //配置成普通IO口
+         //GpioCtrlRegs.GPADIR.bit.GPIO5 = 1;   //配置成输出IO--0:Configures the GPIO pin as an input. (default);1:Configures the GPIO pin as an output
+         //GpioDataRegs.GPACLEAR.bit.GPIO5 = 1;   //初始化为低电平
+         //以下为PWM
+         GpioCtrlRegs.GPAPUD.bit.GPIO0 = 0;   // 使能上拉电阻
+         GpioCtrlRegs.GPAMUX1.bit.GPIO0 = 0;  // 配置成普通IO口
+         GpioCtrlRegs.GPADIR.bit.GPIO0 = 1;   // 配置成输出IO
+         GpioDataRegs.GPACLEAR.bit.GPIO0 = 1; // EPWM1A-LLC-L
+
+         GpioCtrlRegs.GPAPUD.bit.GPIO1 = 0;   // 使能上拉电阻
+         GpioCtrlRegs.GPAMUX1.bit.GPIO1 = 0;  // 配置成普通IO口
+         GpioCtrlRegs.GPADIR.bit.GPIO1 = 1;   // 配置成输出IO
+         GpioDataRegs.GPACLEAR.bit.GPIO1 = 1; // EPWM1B-LLC-L
+
+         GpioCtrlRegs.GPAPUD.bit.GPIO2 = 0;   // 使能上拉电阻
+         GpioCtrlRegs.GPAMUX1.bit.GPIO2 = 0;  // 配置成普通IO口
+         GpioCtrlRegs.GPADIR.bit.GPIO2 = 1;   // 配置成输出IO
+         GpioDataRegs.GPACLEAR.bit.GPIO2 = 1; // EPWM2A-LLC-H
+
+         GpioCtrlRegs.GPAPUD.bit.GPIO3 = 0;   // 使能上拉电阻
+         GpioCtrlRegs.GPAMUX1.bit.GPIO3 = 0;  // 配置成普通IO口
+         GpioCtrlRegs.GPADIR.bit.GPIO3 = 1;   // 配置成输出IO
+         GpioDataRegs.GPACLEAR.bit.GPIO3 = 1; // EPWM2B-LLC-H
+
+         GpioCtrlRegs.GPAPUD.bit.GPIO4 = 0;   // 使能上拉电阻
+         GpioCtrlRegs.GPAMUX1.bit.GPIO4 = 0;  // 配置成普通IO口
+         GpioCtrlRegs.GPADIR.bit.GPIO4 = 1;   // 配置成输出IO
+         GpioDataRegs.GPACLEAR.bit.GPIO4 = 1; // EPWM3A-Grid Relay
+
+         GpioCtrlRegs.GPAPUD.bit.GPIO5 = 0;   // 使能上拉电阻
+         GpioCtrlRegs.GPAMUX1.bit.GPIO5 = 0;  // 配置成普通IO口
+         GpioCtrlRegs.GPADIR.bit.GPIO5 = 1;   // 配置成输出IO
+         GpioDataRegs.GPACLEAR.bit.GPIO5 = 1; // EPWM3B-Gen/Load Relay
+
+         //GpioDataRegs.GPACLEAR.bit.GPIO10 = 1; // EPWM6A-BUCKBOOST
+
+         //GpioDataRegs.GPBCLEAR.bit.GPIO40 = 1; // EPWM7A-FAN
+         //以上为PWM
+
+         //===============同步信号输出===========//
+         GpioCtrlRegs.GPAPUD.bit.GPIO6 = 0;
+         GpioCtrlRegs.GPAMUX1.bit.GPIO6 = 3;  //配置SYNC_OUT
+         GpioCtrlRegs.GPADIR.bit.GPIO6 = 1;
+
+         GpioCtrlRegs.GPAPUD.bit.GPIO8 = 0;   //使能上拉电阻
+         GpioCtrlRegs.GPAMUX1.bit.GPIO8 = 0;  //配置成普通IO口
+         GpioCtrlRegs.GPADIR.bit.GPIO8 = 1;   //配置成输出IO--0:Configures the GPIO pin as an input. (default);1:Configures the GPIO pin as an output
+         GpioDataRegs.GPASET.bit.GPIO8 = 1;   //初始化为高电平
+       //AC供电继电器控制
+         GpioCtrlRegs.GPAPUD.bit.GPIO11 = 0;   //使能上拉电阻
+         GpioCtrlRegs.GPAMUX1.bit.GPIO11 = 0;  //配置成普通IO口
+         GpioCtrlRegs.GPADIR.bit.GPIO11 = 1;   //配置成输出IO--0:Configures the GPIO pin as an input. (default);1:Configures the GPIO pin as an output
+         GpioDataRegs.GPACLEAR.bit.GPIO11 = 1;   //初始化为高电平
+       //测试IO
+       /*  GpioCtrlRegs.GPAPUD.bit.GPIO12 = 0;   //使能上拉电阻
+         GpioCtrlRegs.GPAMUX1.bit.GPIO12 = 0;  //配置成普通IO口
+         GpioCtrlRegs.GPADIR.bit.GPIO12 = 1;   //配置成输出IO--0:Configures the GPIO pin as an input. (default);1:Configures the GPIO pin as an output
+         GpioDataRegs.GPASET.bit.GPIO12 = 1;   //初始化为高电平*/
+         //指示灯
+         GpioCtrlRegs.GPAPUD.bit.GPIO20 = 0;   // 使能上拉电阻
+         GpioCtrlRegs.GPAMUX2.bit.GPIO20 = 0;  //配置成普通IO口
+         GpioCtrlRegs.GPADIR.bit.GPIO20 = 1;   // 配置成输出IO--0:Configures the GPIO pin as an input. (default);1:Configures the GPIO pin as an output
+         GpioDataRegs.GPASET.bit.GPIO20 = 1;   // 初始化为高电平
+         //===================LLC 封锁LLC驱动信号===============//
+          GpioCtrlRegs.GPAPUD.bit.GPIO22 = 0;   // 使能上拉电阻
+          GpioCtrlRegs.GPAMUX2.bit.GPIO22 = 0;  //配置成普通IO口
+          GpioCtrlRegs.GPADIR.bit.GPIO22 = 1;   // 配置成输出IO--0:Configures the GPIO pin as an input. (default);1:Configures the GPIO pin as an output
+          GpioDataRegs.GPACLEAR.bit.GPIO22 = 1;   // 初始化为低电平，不使能输出LLC驱动
+
+          //541输出使能，低电平使能，控制风机、BOOST驱动等
+          GpioCtrlRegs.GPAPUD.bit.GPIO23 = 0;   // 使能上拉电阻
+          GpioCtrlRegs.GPAMUX2.bit.GPIO23 = 0;  //配置成普通IO口
+          GpioCtrlRegs.GPADIR.bit.GPIO23 = 1;   // 配置成输ruIO--0:Configures the GPIO pin as an input. (default);1:Configures the GPIO pin as an output
+          GpioDataRegs.GPACLEAR.bit.GPIO23 = 1; //低电平使能
+
+         //电网电压过零比较输入
+          GpioCtrlRegs.GPAPUD.bit.GPIO24 = 0;   // 使能上拉电阻
+          GpioCtrlRegs.GPAMUX2.bit.GPIO24 = 0;  //配置成普通IO口
+          GpioCtrlRegs.GPADIR.bit.GPIO24 = 0;   // 配置成输ruIO--0:Configures the GPIO pin as an input. (default);1:Configures the GPIO pin as an output
+         //并网继电器控制（下）
+         //GpioCtrlRegs.GPAPUD.bit.GPIO21 = 0;   // 使能上拉电阻
+         //GpioCtrlRegs.GPAMUX2.bit.GPIO21 = 0;  //配置成普通IO口
+         //GpioCtrlRegs.GPADIR.bit.GPIO21 = 1;   // 配置成输出IO--0:Configures the GPIO pin as an input. (default);1:Configures the GPIO pin as an output
+         //GpioDataRegs.GPACLEAR.bit.GPIO21 = 1;   // 初始化为低电平
+
+          //对外输出预留
+          GpioCtrlRegs.GPAPUD.bit.GPIO25 = 0;   // 使能上拉电阻
+          GpioCtrlRegs.GPAMUX2.bit.GPIO25 = 0;  //配置成普通IO口
+          GpioCtrlRegs.GPADIR.bit.GPIO25 = 1;   // 配置成输出IO--0:Configures the GPIO pin as an input. (default);1:Configures the GPIO pin as an output
+          GpioDataRegs.GPACLEAR.bit.GPIO25 = 1; // 初始化为低电平
+
+          //LLC过流输入信号
+          GpioCtrlRegs.GPAPUD.bit.GPIO26 = 0;   //原为GPIO27 // 使能上拉电阻
+          GpioCtrlRegs.GPAMUX2.bit.GPIO26 = 0;  // 配置成普通IO口
+          GpioCtrlRegs.GPADIR.bit.GPIO26 = 0;   // 配置成输入IO
+
+         //逆变继电器控制（下）
+         //GpioCtrlRegs.GPAPUD.bit.GPIO28 = 0;   // 使能上拉电阻
+         //GpioCtrlRegs.GPAMUX2.bit.GPIO28 = 0;  //配置成普通IO口
+         //GpioCtrlRegs.GPADIR.bit.GPIO28 = 1;   // 配置成输出IO--0:Configures the GPIO pin as an input. (default);1:Configures the GPIO pin as an output
+         //GpioDataRegs.GPACLEAR.bit.GPIO28 = 1;   // 初始化为低电平
+         //ceshi
+         //GpioCtrlRegs.GPAPUD.bit.GPIO29 = 0;   // 使能上拉电阻
+         //GpioCtrlRegs.GPAMUX2.bit.GPIO29 = 0;  //配置成普通IO口
+         //GpioCtrlRegs.GPADIR.bit.GPIO29 = 1;   // 配置成输出IO--0:Configures the GPIO pin as an input. (default);1:Configures the GPIO pin as an output
+         //GpioDataRegs.GPACLEAR.bit.GPIO29 = 1;   // 初始化为低电平
+
+         //上位机发出并网继电器控制信号（上）
+         GpioCtrlRegs.GPAPUD.bit.GPIO30 = 0;   // 使能上拉电阻
+         GpioCtrlRegs.GPAMUX2.bit.GPIO30 = 0;  //配置成普通IO口
+         GpioCtrlRegs.GPADIR.bit.GPIO30 = 0;   // 配置成输入IO--0:Configures the GPIO pin as an input. (default);1:Configures the GPIO pin as an output
+       //  GpioDataRegs.GPACLEAR.bit.GPIO30 = 1;   // 初始化为低电平
+        //GpioDataRegs.GPADAT.bit.GPIO30 = 0;
+         //并网继电器控制（总）
+         //GpioCtrlRegs.GPAPUD.bit.GPIO31 = 0;   // 使能上拉电阻
+         //GpioCtrlRegs.GPAMUX2.bit.GPIO31 = 0;  //配置成普通IO口
+         //GpioCtrlRegs.GPADIR.bit.GPIO31 = 1;   // 配置成输出IO--0:Configures the GPIO pin as an input. (default);1:Configures the GPIO pin as an output
+         //GpioDataRegs.GPACLEAR.bit.GPIO31 = 1;   // 初始化为低电平
+         // EEPROM  读、时钟口 SDA
+          EALLOW;
+          GpioCtrlRegs.GPBPUD.bit.GPIO32 = 0;   // 使能上拉电阻
+          GpioCtrlRegs.GPBMUX1.bit.GPIO32 = 0;
+          GpioCtrlRegs.GPBDIR.bit.GPIO32 = 1;
+          EDIS;
+
+          GpioDataRegs.GPBDAT.bit.GPIO32 = 0;
+      //SCL
+          EALLOW;
+          GpioCtrlRegs.GPBPUD.bit.GPIO33 = 0;   // 使能上拉电阻
+          GpioCtrlRegs.GPBMUX1.bit.GPIO33 = 0;
+          GpioCtrlRegs.GPBDIR.bit.GPIO33 = 1;
+          EDIS;
+
+          GpioDataRegs.GPBDAT.bit.GPIO33 = 0;
+          EALLOW;
+         //KEY_BOOST
+         GpioCtrlRegs.GPBPUD.bit.GPIO34 = 0;   // 使能上拉电阻
+         GpioCtrlRegs.GPBMUX1.bit.GPIO34 = 0;  //配置成普通IO口
+         GpioCtrlRegs.GPBDIR.bit.GPIO34 = 1;   // 配置成输出IO--0:Configures the GPIO pin as an input. (default);1:Configures the GPIO pin as an output
+         GpioDataRegs.GPBSET.bit.GPIO34 = 1;   // 初始化为高电平
+
+         //对外输出-预留1
+         GpioCtrlRegs.GPBPUD.bit.GPIO39 = 0;   // 使能上拉电阻
+         GpioCtrlRegs.GPBMUX1.bit.GPIO39 = 0;  // 配置成普通IO口
+         GpioCtrlRegs.GPBDIR.bit.GPIO39 = 1;   // 配置成输出IO
+         GpioDataRegs.GPBCLEAR.bit.GPIO39 = 1;   // 初始化为低电平
+
+         //风机控制
+         GpioCtrlRegs.GPBPUD.bit.GPIO40 = 0;   // 使能上拉电阻
+         GpioCtrlRegs.GPBMUX1.bit.GPIO40 = 0;  //配置成普通IO口
+         GpioCtrlRegs.GPBDIR.bit.GPIO40 = 1;   // 配置成输出IO--0:Configures the GPIO pin as an input. (default);1:Configures the GPIO pin as an output
+         GpioDataRegs.GPBCLEAR.bit.GPIO40 = 1;   // 初始化为高电平
+
+         //对外输出-预留2
+         GpioCtrlRegs.GPBPUD.bit.GPIO41 = 0;   // 使能上拉电阻
+         GpioCtrlRegs.GPBMUX1.bit.GPIO41 = 0;  // 配置成普通IO口
+         GpioCtrlRegs.GPBDIR.bit.GPIO41 = 1;   // 配置成输出IO
+         GpioDataRegs.GPBCLEAR.bit.GPIO41 = 1;   // 初始化为低电平
+
+         //KEY_AC
+         GpioCtrlRegs.GPBPUD.bit.GPIO42 = 0;   // 使能上拉电阻
+         GpioCtrlRegs.GPBMUX1.bit.GPIO42 = 0;  //配置成普通IO口
+         GpioCtrlRegs.GPBDIR.bit.GPIO42 = 1;   // 配置成输出IO--0:Configures the GPIO pin as an input. (default);1:Configures the GPIO pin as an output
+         GpioDataRegs.GPBCLEAR.bit.GPIO42 = 1;   // 初始化为低电平
+
+         //=============12V欠压输入信号=============//
+         GpioCtrlRegs.GPBPUD.bit.GPIO43 = 0;   // 使能上拉电阻
+         GpioCtrlRegs.GPBMUX1.bit.GPIO43 = 0;  //配置成普通IO口
+         GpioCtrlRegs.GPBDIR.bit.GPIO43 = 0;   // 配置成输出IO--0:Configures the GPIO pin as an input. (default);1:Configures the GPIO pin as an output
+
+         //TEST44
+         GpioCtrlRegs.GPBPUD.bit.GPIO44 = 0;   //使能上拉电阻
+         GpioCtrlRegs.GPBMUX1.bit.GPIO44 = 0;  //配置成普通IO口
+         GpioCtrlRegs.GPBDIR.bit.GPIO44 = 0;   // 配置成输出IO--0:Configures the GPIO pin as an input. (default);1:Configures the GPIO pin as an output
+         //GpioDataRegs.GPBSET.bit.GPIO44 = 1;   // 初始化为高电平
+
+      #endif
+
+
+    /*                        [MUX]  [DIR]  [DAT]  [PUD]  [说明]
+    31:30  0=GPIO31           [00]    [0]    [X]    [X]   [PA1,2812输入]
+    29:28  0=GPIO30           [00]    [0]    [X]    [X]   [AckBoost2812]
+    27:26  0=GPIO29           [00]    [1]    [1]    [X]   [U1SCL]
+    25:24  0=GPIO28           [00]    [1]    [1]    [X]   [U1SDA]
+
+    23:22  0=GPIO27           [00]    [0]    [X]    [X]   [Unused,外部上拉,内部上拉]
+    21:20  0=GPIO26           [00]    [1]    [1]    [X]   [AcEn2812,低电平使能]
+    19:18  0=GPIO25           [00]    [0]    [X]    [X]   [Unused,外部悬空,内部上拉]
+    17:16  0=GPIO24           [00]    [0]    [X]    [X]   [OcpA]
+
+    15:14  0=GPIO23           [00]    [1]    [X]    [1]   [LED_AC,外部下拉,内部不需上拉]
+    13:12  0=GPIO22           [00]    [1]    [X]    [X]   [LedWork]
+    11:10  0=GPIO21           [00]    [1]    [0]    [X]   [RELAY4]
+    9:8    0=GPIO20           [00]    [0]    [X]    [X]   [OcpB]
+
+    7:6    0=GPIO19           [10]    [0]    [X]    [X]   [LINRXA]
+    5:4    0=GPIO18           [10]    [1]    [X]    [X]   [LINTXA]
+    3:2    0=GPIO17           [00]    [1]    [1]    [X]   [RS485En]
+    1:0    0=GPIO16           [00]    [0]    [X]    [X]   [Unused,外部悬空,内部上拉]
+    */
+
+    /*                        [MUX]  [DIR]  [DAT]  [PUD]  [说明]
+    31:30  0=GPIO15           [00]    [1]    [X]    [X]   [PA1,温度选择输出]
+    29:28  0=GPIO14           [00]    [1]    [X]    [X]   [LED_DC]
+    27:26  0=GPIO13           [00]    [0]    [X]    [X]   [OcpC,需要上拉]
+    25:24  0=GPIO12           [10]    [1]    [X]    [X]   [SCITXDA]
+
+    23:22  0=GPIO11           [00]    [1]    [0]    [X]   [BoostEnCpld]
+    21:20  0=GPIO10           [01]    [1]    [X]    [X]   [FAN_tiaosu]
+    19:18  0=GPIO9            [00]    [1]    [1]    [0]   [BoostEn2812,低电平使能,需要上拉]
+    17:16  0=GPIO8            [00]    [0]    [X]    [0]   [Unused,外部悬空,需要上拉]
+
+    15:14  0=GPIO7            [10]    [0]    [X]    [X]   [SCIRXDA]
+    13:12  0=GPIO6            [00]    [0]    [X]    [0]   [Unused,外部悬空,需要上拉]
+    11:10  0=GPIO5            [00]    [1]    [0]    [X]   [AcEnCpld]
+    9:8    0=GPIO4            [01]    [1]    [X]    [X]   [AcRelayPwm]
+
+    7:6    0=GPIO3            [00]    [1]    [0]    [X]   [AcRelay]
+    5:4    0=GPIO2            [00]    [0]    [X]    [X]   [OvpBus,外部下拉,不需要上拉]
+    3:2    0=GPIO1            [00]    [0]    [X]    [X]   [Unused,外部下拉,不需要上拉]
+    1:0    0=GPIO0            [00]    [0]    [X]    [X]   [OcpBst,外部下拉,不需要上拉]
+    */
+
+/*    GpioCtrlRegs.GPBMUX1.all = 0x00000000;
+    GpioCtrlRegs.GPBDIR.all = 0x00000106;
+    GpioCtrlRegs.GPBCTRL.all = 0x0;
+
+    GpioCtrlRegs.GPBPUD.bit.GPIO43 = 1;
+    GpioCtrlRegs.GPBPUD.bit.GPIO42 = 1;
+    GpioCtrlRegs.GPBPUD.bit.GPIO39 = 1;
+    GpioCtrlRegs.GPBPUD.bit.GPIO33 = 1;*/
+    /*                        [MUX]  [DIR]  [DAT]  [PUD]  [说明]
+    31:30  reserved           [00]    [0]    [X]    [X]   [reserved]
+    29:28  reserved           [00]    [0]    [X]    [X]   [reserved]
+    27:26  reserved           [00]    [0]    [X]    [X]   [reserved]
+    25:24  0=GPIO44           [00]    [0]    [X]    [X]   [Unused,外部悬空,内部上拉]
+
+    23:22  0=GPIO43           [00]    [0]    [X]    [1]   [对外接口,外部下拉,内部不需上拉]
+    21:20  0=GPIO42           [00]    [0]    [X]    [1]   [对外接口,外部下拉,内部不需上拉]
+    19:18  0=GPIO41           [00]    [0]    [X]    [X]   [Unused,外部悬空,内部上拉]
+    17:16  0=GPIO40           [00]    [1]    [0]    [X]   [FanCtrl]
+
+    15:14  0=GPIO39           [00]    [0]    [X]    [1]   [Unused,该引脚不能设置为输出!外部下拉,内部不需上拉]
+    13:12  0=GPIO38           [00]    [0]    [X]    [X]   [TCK]
+    11:10  0=GPIO37           [00]    [0]    [X]    [X]   [TDO]
+    9:8    0=GPIO36           [00]    [0]    [X]    [X]   [TMS]
+
+    7:6    0=GPIO35           [00]    [0]    [X]    [X]   [TDI]
+    5:4    0=GPIO34           [00]    [1]    [1]    [X]   [Unlock,外部上拉,内部上拉,低电平解锁]
+    3:2    0=GPIO33           [00]    [1]    [X]    [1]   [LED_COM,外部下拉,内部不需上拉]
+    1:0    0=GPIO32           [00]    [0]    [X]    [X]   [Unused,外部悬空,内部上拉]
+    */
+
+    EDIS;
+}
+
+void UserVariableInit(void)
+{
+    int i = 0;
+    // 初始化故障位与故障计数
+    Error2812.all = 0;
+    State2812.all = 0;
+    for(i=0;i<16;i++)
+    {
+        State2812Cnt[i] = 0;
+        Error2812Cnt[i] = 0;
+        Err0ShadowCnt[i] = 0;
+        Err1ShadowCnt[i] = 0;
+        Err2ShadowCnt[i] = 0;
+        Err3ShadowCnt[i] = 0;
+    }
+    Error0.all = 0;
+    Error1.all = 0;
+    Error2.all = 0;
+    Error3.all = 0;
+    Error0.bit.Mcpu_reset_error = 1;       // 28034复位
+    Error0.bit.Reset_2812_error = 1;       // 2812复位
+
+    // 初始化AD采样
+    for(i=0;i<16;i++)
+    {
+        ADResult[i] = 0;
+    }
+
+    // 初始化风机检测
+    f_cmp_fan_start = 0;
+
+    // 初始化远程升级状态
+    ckfa_switch_2812 = 0;
+    f_ckfa_in = 0;
+    Error1.bit.Ckfa_in_error = 0;
+
+    // 初始化运行参数
+    for(i=0;i<70;i++)
+    {
+        parm_set_temp[i] = 0;
+        parm_set_val[i] = 0;
+    }
+    parm_set_val[46] = 1;            // 并网模式
+    f_en_gudao = 1;                  // 并网模式
+
+    // 初始化上电检测是否调试模式
+    timer_pwrup_15s = 0;
+    f_mode_sel_ok = 0;
+    f_start_mode = STOP_MODE;       // 不是自启动模式,也不是
+
+    // 初始化2812要参数相关变量
+    f_parm2812_ok = 0;
+    f_first_addr = 0;
+    f_first_rmt = 0;
+    f_first_err = 0;
+    f_first_mtype = 0;
+    f_first_pvtype = 0;
+
+    // 初始化首次发送启动/停止命令标志
+    timer_start_20s = 0;
+    f_first_start = 1;    // 首次发送启动命令
+    f_first_stop = 0;
+
+    // 初始化接地故障检测相关状态
+    gnd_test_step = 10;      // 此时主循环中不执行接地故障检测
+
+    // 初始化SCIL状态
+    scil_status = IDLE_L;
+    scil_wtimer = 0;
+    //RS485RxEn();
+
+    // 启动一次ADC检测
+    AdcRegs.ADCSOCFRC1.all=0x1FFF;
+}

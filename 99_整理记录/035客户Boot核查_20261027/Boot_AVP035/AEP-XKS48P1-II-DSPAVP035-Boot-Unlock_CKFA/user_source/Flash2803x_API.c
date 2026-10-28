@@ -1,0 +1,270 @@
+
+#include "F2806x_Device.h"     // DSP2803x Headerfile Include File
+#include "F2806x_Examples.h"   // DSP2803x Examples Include File
+#include "IQmathLib.h"
+#include "user_declaration.h"
+#include <stdio.h>                              
+
+Uint32 MyCallbackCounter = 0; // Just increment a counter in the callback function
+                              
+/*--- Global variables used to interface to the flash routines */
+FLASH_ST FlashStatus;
+FLASH_ST EraseStatus;
+FLASH_ST ProgStatus;
+FLASH_ST VerifyStatus;
+/*---------------------------------------------------------------------------
+  Data/Program Buffer used for testing the flash API functions
+---------------------------------------------------------------------------*/
+#define  WORDS_IN_FLASH_BUFFER 0x100               // Programming data buffer, Words
+Uint16  Buffer[WORDS_IN_FLASH_BUFFER];
+
+/*---------------------------------------------------------------------------
+  Sector address info
+---------------------------------------------------------------------------*/
+typedef struct {
+     Uint16 *StartAddr;
+     Uint16 *EndAddr;
+} SECTOR;
+
+#define OTP_START_ADDR  0x3D7800
+#define OTP_END_ADDR    0x3D7BFF
+
+
+#define FLASH_END_ADDR    0x3F7FFF
+
+#if (FLASH_F28035 || FLASH_F28034)
+#define FLASH_START_ADDR  0x3E8000
+SECTOR Sector[8]= {
+         (Uint16 *) 0x3E8000,(Uint16 *) 0x3E9FFF,
+         (Uint16 *) 0x3EA000,(Uint16 *) 0x3EBFFF,
+         (Uint16 *) 0x3EC000,(Uint16 *) 0x3EDFFF,
+         (Uint16 *) 0x3EE000,(Uint16 *) 0x3EFFFF,
+         (Uint16 *) 0x3F0000,(Uint16 *) 0x3F1FFF,
+         (Uint16 *) 0x3F2000,(Uint16 *) 0x3F3FFF,
+         (Uint16 *) 0x3F4000,(Uint16 *) 0x3F5FFF,
+         (Uint16 *) 0x3F6000,(Uint16 *) 0x3F7FFF,
+};
+#endif
+
+int f_erase_status = 0;
+int f_program_status = 0;
+extern Uint16 PRG_key0;        //   CSM Key values
+extern Uint16 PRG_key1;
+extern Uint16 PRG_key2;
+extern Uint16 PRG_key3;
+extern Uint16 PRG_key4;
+extern Uint16 PRG_key5;
+extern Uint16 PRG_key6;
+extern Uint16 PRG_key7;
+#pragma CODE_SECTION(FlashEraseApi,"ramfuncs");
+void FlashEraseApi(void)
+{
+    Uint16 Status;
+    DELAY_US(200L);
+    //²Á³ýFLASH_H
+    AD_Deal_Ubus();
+    if(Ubus_avr_adc>UB_MIN_ADC)
+    {
+        f_start_update = 1;
+        Status = Flash_Erase((SECTORH),&EraseStatus);
+        if(Status != STATUS_SUCCESS)
+        {
+            f_erase_status = ERASE_FAIL;
+            return;
+        }
+    }
+    else
+    {
+        f_erase_status = NO_ERASE;
+        return;
+    }
+
+
+    //²Á³ýFLASH_G
+    AD_Deal_Ubus();
+    if(Ubus_avr_adc>UB_MIN_ADC)
+    {
+        f_start_update = 1;
+        Status = Flash_Erase((SECTORG),&EraseStatus);
+        if(Status != STATUS_SUCCESS)
+        {
+            f_erase_status = ERASE_FAIL;
+            return;
+        }
+    }
+    else
+    {
+        f_erase_status = ERASE_FAIL;
+        return;
+    }
+
+    //²Á³ýFLASH_F
+    AD_Deal_Ubus();
+    if(Ubus_avr_adc>UB_MIN_ADC)
+    {
+        f_start_update = 1;
+        Status = Flash_Erase((SECTORF),&EraseStatus);
+        if(Status != STATUS_SUCCESS)
+        {
+            f_erase_status = ERASE_FAIL;
+            return;
+        }
+    }
+    else
+    {
+        f_erase_status = ERASE_FAIL;
+        return;
+    }
+
+    //²Á³ýFLASH_E
+    AD_Deal_Ubus();
+    if(Ubus_avr_adc>UB_MIN_ADC)
+    {
+        f_start_update = 1;
+        Status = Flash_Erase((SECTORE),&EraseStatus);
+        if(Status != STATUS_SUCCESS)
+        {
+            f_erase_status = ERASE_FAIL;
+            return;
+        }
+    }
+    else
+    {
+        f_erase_status = ERASE_FAIL;
+        return;
+    }
+
+    //²Á³ýFLASH_D
+    AD_Deal_Ubus();
+    if(Ubus_avr_adc>UB_MIN_ADC)
+    {
+        f_start_update = 1;
+        Status = Flash_Erase((SECTORD),&EraseStatus);
+        if(Status != STATUS_SUCCESS)
+        {
+            f_erase_status = ERASE_FAIL;
+            return;
+        }
+        else
+        {
+            f_erase_status = ERASE_SUCCESS;
+            return;
+        }
+    }
+    else
+    {
+        f_erase_status = ERASE_FAIL;
+        return;
+    }
+}
+Uint16 Flashtest = 0;
+int FLASH_ERR_cnt=0;
+//Uint16 FlashData_temp[1100] = {0};
+#pragma CODE_SECTION(FlashProgramApi,"ramfuncs");
+void FlashProgramApi(void)
+{
+    Uint16 Status;
+    Uint16 *Flash_ptr;     // Pointer to a location in flash
+    int i=0;
+    Flash_ptr = (Uint16 *)AddressAbs;
+
+    Status = Flash_Program(Flash_ptr,FlashData,recv_word_len,&ProgStatus);
+ //   test = Status;
+ //   test = Status;
+    if(Status != STATUS_SUCCESS)
+    {
+        f_program_status = PROGRAM_FAIL;
+        return;
+    }
+    Status = Flash_Verify(Flash_ptr,FlashData,recv_word_len,&VerifyStatus);
+    for(i=0;i<recv_word_len;i++)
+    {
+        Flashtest=*(Uint16 *)(AddressAbs+i);
+      if(Flashtest!=FlashData[i])
+      {
+          f_program_status = PROGRAM_FAIL1;
+          return;
+      }
+      if(Flashtest==0xffff)
+      {
+          FLASH_ERR_cnt++;
+          if(FLASH_ERR_cnt>5)
+          {
+              f_program_status = PROGRAM_FAIL2;
+              return;
+          }
+      }
+      else
+      {
+          FLASH_ERR_cnt=0;
+      }
+    }
+    if(Status != STATUS_SUCCESS)
+    {
+        f_program_status = PROGRAM_FAIL;
+        return;
+    }
+    else
+    {
+        f_program_status = PROGRAM_SUCCESS;
+    }
+}
+
+/*------------------------------------------------------------------
+  Callback function - must be executed from outside flash/OTP
+-----------------------------------------------------------------*/
+#pragma CODE_SECTION(MyCallbackFunction,"ramfuncs");
+void MyCallbackFunction(void)
+{       
+    // Toggle pin, service external watchdog etc
+    MyCallbackCounter++;
+    asm("    NOP");
+}
+
+Uint16 Example_CsmUnlock()
+{
+    volatile Uint16 temp;
+
+    //
+    // Load the key registers with the current password
+    // These are defined in Example_Flash2803x_CsmKeys.asm
+    //
+    EALLOW;
+    CsmRegs.KEY0 = PRG_key0;
+    CsmRegs.KEY1 = PRG_key1;
+    CsmRegs.KEY2 = PRG_key2;
+    CsmRegs.KEY3 = PRG_key3;
+    CsmRegs.KEY4 = PRG_key4;
+    CsmRegs.KEY5 = PRG_key5;
+    CsmRegs.KEY6 = PRG_key6;
+    CsmRegs.KEY7 = PRG_key7;
+    EDIS;
+
+    //
+    // Perform a dummy read of the password locations
+    // if they match the key values, the CSM will unlock
+    //
+    temp = CsmPwl.PSWD0;
+    temp = CsmPwl.PSWD1;
+    temp = CsmPwl.PSWD2;
+    temp = CsmPwl.PSWD3;
+    temp = CsmPwl.PSWD4;
+    temp = CsmPwl.PSWD5;
+    temp = CsmPwl.PSWD6;
+    temp = CsmPwl.PSWD7;
+
+    //
+    // If the CSM unlocked, return success, otherwise return
+    // failure.
+    //
+    if ( (CsmRegs.CSMSCR.all & 0x0001) == 0)
+    {
+        return STATUS_SUCCESS;
+    }
+    else
+    {
+        return STATUS_FAIL_CSM_LOCKED;
+    }
+}
+
+

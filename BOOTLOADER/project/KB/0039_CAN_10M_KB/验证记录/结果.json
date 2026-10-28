@@ -1,0 +1,58 @@
+{
+  "source": "C:\\Users\\17879\\Desktop\\CHIP\\BOOTLOADER\\AVP32F0039Boot+APP_20261009",
+  "destination": "C:\\Users\\17879\\Desktop\\CHIP\\BOOTLOADER\\AVP32F0039Boot+APP_CAN_10M_KB",
+  "original_all_file_hashes_unchanged": true,
+  "clock": "10MHz XTAL -> 120MHz SYSCLK",
+  "can_protocol_and_reassembly_unchanged": true,
+  "led": "retained under #if 0",
+  "modified": {
+    "BOOT_KB": [
+      ".project",
+      ".cproject",
+      "include/board_config.h",
+      "include/boot_core.h",
+      "src/boot_core.c",
+      "src/boot_io.c",
+      "src/device.c",
+      "vendor/device/device.h",
+      "src/main.c"
+    ],
+    "APP_KB": [
+      ".project",
+      ".cproject",
+      "include/board_config.h",
+      "include/boot_core.h",
+      "src/boot_core.c",
+      "src/boot_io.c",
+      "src/device.c",
+      "vendor/device/device.h",
+      "src/upgrade_entry.c",
+      "include/upgrade_entry.h",
+      "src/main.c"
+    ]
+  },
+  "projects": {
+    "BOOT_KB": {
+      "ccs_import": "PASS",
+      "debug_full_build": "PASS",
+      "entry": "00080000",
+      "SCI_linked_symbols": 0
+    },
+    "APP_KB": {
+      "ccs_import": "PASS",
+      "debug_full_build": "PASS",
+      "entry": "00090000",
+      "SCI_linked_symbols": 0
+    }
+  },
+  "hardware_test": "NOT RUN",
+  "archive_created": false,
+  "clock_macro_compile_check": "PASS for both projects",
+  "software_simulation": {
+    "status": "PASS",
+    "cases": 17,
+    "report": "软件仿真_20261019/测试报告.md",
+    "hardware_test": "NOT RUN",
+    "cpu_instruction_emulation": false
+  }
+}

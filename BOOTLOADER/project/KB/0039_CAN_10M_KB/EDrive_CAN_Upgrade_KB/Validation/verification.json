@@ -1,0 +1,63 @@
+{
+  "original_sources": {
+    "C:\\Users\\17879\\Desktop\\CHIP\\BOOTLOADER\\AVP32F0039Boot+APP_CAN_10M_KB\\10-EDrive_28003x v10_CanWr_0.5KW_BDZero-2026.8.12\\10-EDrive_28003x v10_CanWr_0.5KW_BDZero-2026.8.12": {
+      "files": 747,
+      "unchanged": true
+    },
+    "C:\\Users\\17879\\Desktop\\CHIP\\BOOTLOADER\\AVP32F0039Boot+APP_CAN_10M_KB\\APP_KB": {
+      "files": 140,
+      "unchanged": true
+    },
+    "C:\\Users\\17879\\Desktop\\CHIP\\BOOTLOADER\\AVP32F0039Boot+APP_CAN_10M_KB\\BOOT_KB": {
+      "files": 150,
+      "unchanged": true
+    }
+  },
+  "main_only_one_include_and_one_call": true,
+  "customer_can_configuration_sha256_unchanged": true,
+  "protocol_core_unchanged": true,
+  "pin_options_both_projects": [
+    "12/13 PASS",
+    "30/31 PASS"
+  ],
+  "delivery_default": "12/13",
+  "app_clock": "10MHz x40 /1 /4 =100MHz",
+  "boot_clock": "10MHz x48 /1 /4 =120MHz unchanged",
+  "timer": "APP dedicated Timer2 1MHz, prescaler99, interrupt disabled",
+  "app_entry": "0x087000",
+  "boot_metadata": "0x084000",
+  "customer_config": "0x085000",
+  "customer_NVM": "0x086000",
+  "cookie": "0x0003F8..0x0003FB unallocated by linker",
+  "warnings": {
+    "APP": 21,
+    "BOOT": 1
+  },
+  "software_model": {
+    "passed": 15,
+    "total": 15
+  },
+  "board_validation": false,
+  "shutdown_callback": {
+    "name": "Customer_ShutdownForUpgrade",
+    "file": "APP_KB/CAN_Upgrade/kb_customer_shutdown.c",
+    "implementation": "empty, customer supplied",
+    "call_order": "after final ACK TX completion, before reset interrupt disable and RAM cookie",
+    "hardcoded_pwm_shutdown": false
+  },
+  "host_app_start_setting": "0x087000 before loading OUT",
+  "host_software_integration": {
+    "passed": 9,
+    "total": 9,
+    "firmware_words": 8792,
+    "firmware_bytes": 17584,
+    "crc32": "0x0140DCA0",
+    "out_sha256": "5d2e27ac93eb95f44be781d87afc30a2428bea74272c93058a158fca4b7c69d4",
+    "host_source": "current desktop Updater.Core, 11 files hash-verified",
+    "flow": "ENTER_BOOT -> INFO -> BEGIN -> DATA -> FINISH -> RESET",
+    "flash_readback": "every WORD matches",
+    "physical_board_test": false,
+    "GUI_and_USB_CAN_driver_test": false,
+    "BOOT_main_and_real_flash_port_executed": false
+  }
+}

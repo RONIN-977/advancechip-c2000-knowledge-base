@@ -1,0 +1,19 @@
+Real KB APP image: 3696 WORDs, start=0x090000, CRC32=0x0C8BDD78
+PASS Actual latest APP OUT parses and matches 0039 partition
+PASS Real APP receive/dispatch acknowledges ENTER_BOOT then resets into BOOT
+PASS Real OUT full CAN upload with exact WORD readback CRC commit and reset into APP
+PASS Lost BEGIN DATA FINISH ACK retries do not repeat erase program or commit
+PASS Maximum 248KiB APP partition with short final packet and full readback
+PASS Cancellation leaves invalid image and a fresh session recovers
+PASS Flash model fault 1 rejects upgrade and never commits
+PASS Flash model fault 2 rejects upgrade and never commits
+PASS Flash model fault 3 rejects upgrade and never commits
+PASS Flash model fault 4 rejects upgrade and never commits
+PASS Corrupt CRC rejected by actual C before erase
+PASS Wrong image start entry and length rejected before Flash erase
+PASS Wrong device ID rejected before Flash erase
+PASS Foreign session and out of order DATA rejected without programming
+PASS CAN fragment fault 6 no erase and next complete request recovers
+PASS CAN fragment fault 7 no erase and next complete request recovers
+PASS APP does not reset when CAN ENTER_BOOT ACK cannot finish
+All 17 current KB CAN simulation cases passed.

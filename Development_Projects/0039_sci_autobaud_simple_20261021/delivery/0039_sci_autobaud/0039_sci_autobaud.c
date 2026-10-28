@@ -1,0 +1,163 @@
+//#############################################################################
+// FILE: 0039_sci_autobaud.c
+// 功能：0039串口接收、持续发送hello，以及每5秒自动波特率校准（Flash工程）。
+
+//
+//
+// 头文件：DriverLib驱动和芯片初始化配置
+//
+#include "driverlib.h"
+#include "device.h"
+
+//
+// 参数：接收数组长度、两次校准之间的正常收发时间
+//
+#define RX_BUFFER_SIZE       128U
+#define CALIBRATION_TICKS    (DEVICE_SYSCLK_FREQ * 5UL)
+
+//
+// 全局变量，可在CCS的Expressions窗口观察
+// 数组每个uint16_t元素保存一个有效8位串口字节；rxWriteIndex为下一写入位置。
+//
+volatile uint16_t rxBuffer[RX_BUFFER_SIZE];
+volatile uint16_t rxWriteIndex = 0U;
+volatile uint32_t rxByteCount = 0UL;
+static uint32_t calibrationStart;
+
+void SCI_receiveData(void);
+void SCI_sendHello(void);
+void SCI_checkAutobaud(void);
+
+//
+// 主函数：初始化完成后，循环执行接收、发送和校准检查。
+//
+void main(void)
+{
+
+    // 系统初始化：外部20MHz晶振，CPU 120MHz，低速外设时钟30MHz。
+    Device_init();
+    Device_initGPIO();
+    Interrupt_initModule();
+    Interrupt_initVectorTable();
+
+    //
+    // SCI-A引脚初始化：GPIO28接收，GPIO29发送，使用异步输入方式。
+    //
+    GPIO_setPinConfig(GPIO_28_SCIA_RX);
+    GPIO_setDirectionMode(28U, GPIO_DIR_MODE_IN);
+    GPIO_setPadConfig(28U, GPIO_PIN_TYPE_STD);
+    GPIO_setQualificationMode(28U, GPIO_QUAL_ASYNC);
+    GPIO_setPinConfig(GPIO_29_SCIA_TX);
+    GPIO_setDirectionMode(29U, GPIO_DIR_MODE_OUT);
+    GPIO_setPadConfig(29U, GPIO_PIN_TYPE_STD);
+    GPIO_setQualificationMode(29U, GPIO_QUAL_ASYNC);
+
+    //
+    // 串口初始化：初始9600波特率、8位数据、无校验、1位停止位，使用FIFO。
+    //
+    SCI_performSoftwareReset(SCIA_BASE);
+    SCI_setConfig(SCIA_BASE, DEVICE_LSPCLK_FREQ, 9600U,
+                  SCI_CONFIG_WLEN_8 | SCI_CONFIG_STOP_ONE | SCI_CONFIG_PAR_NONE);
+    // 复位收发通道和FIFO，清除原有中断、溢出标志。
+    SCI_resetChannels(SCIA_BASE);
+    SCI_resetRxFIFO(SCIA_BASE);
+    SCI_resetTxFIFO(SCIA_BASE);
+    SCI_clearInterruptStatus(SCIA_BASE, SCI_INT_TXFF | SCI_INT_RXFF);
+    SCI_clearOverflowStatus(SCIA_BASE);
+    // 使能FIFO和SCI模块；本例通过主循环轮询，不启用接收中断。
+    SCI_enableFIFO(SCIA_BASE);
+    SCI_enableModule(SCIA_BASE);
+    SCI_performSoftwareReset(SCIA_BASE);
+
+    //
+    // 启动时先校准一次：上位机发送ASCII字符A（0x41）或a（0x61）。
+    // TI函数会一直等待，锁定成功后才继续运行；没有超时退出。
+    //
+    SCI_lockAutobaud(SCIA_BASE);
+    SCI_resetRxFIFO(SCIA_BASE);
+
+    //
+    // Timer2初始化：以CPU时钟递减计数，用于轮询判断5秒间隔，不启用中断。
+    //
+    CPUTimer_stopTimer(CPUTIMER2_BASE);
+    CPUTimer_selectClockSource(CPUTIMER2_BASE, CPUTIMER_CLOCK_SOURCE_SYS,
+                              CPUTIMER_CLOCK_PRESCALER_1);
+    // 不分频，计数周期为32位最大值；5秒对应120MHz乘以5个时钟计数。
+    CPUTimer_setPreScaler(CPUTIMER2_BASE, 0U);
+    CPUTimer_setPeriod(CPUTIMER2_BASE, 0xFFFFFFFFUL);
+    CPUTimer_disableInterrupt(CPUTIMER2_BASE);
+    CPUTimer_setEmulationMode(CPUTIMER2_BASE,
+                             CPUTIMER_EMULATIONMODE_STOPAFTERNEXTDECREMENT);
+    CPUTimer_reloadTimerCounter(CPUTIMER2_BASE);
+    CPUTimer_startTimer(CPUTIMER2_BASE);
+    calibrationStart = CPUTimer_getTimerCount(CPUTIMER2_BASE);
+
+    for(;;)
+    {
+        SCI_receiveData();       // 接收数据并保存到数组
+        SCI_sendHello();         // 持续向上位机发送hello
+        SCI_checkAutobaud();     // 检查是否到达5秒校准时间
+    }
+}
+
+//
+// 接收子函数：取出FIFO中的已有数据，循环存入接收数组，不等待新数据。
+//
+void SCI_receiveData(void)
+{
+    while(SCI_getRxFIFOStatus(SCIA_BASE) != SCI_FIFO_RX0)
+    {
+        // 只保留有效的低8位数据；此时收到A/a也只是普通接收数据。
+        rxBuffer[rxWriteIndex] = SCI_readCharNonBlocking(SCIA_BASE) & 0xFFU;
+        rxWriteIndex++;
+        if(rxWriteIndex >= RX_BUFFER_SIZE)
+        {
+            // 数组写满后从下标0继续写，覆盖最早收到的数据。
+            rxWriteIndex = 0U;
+        }
+        rxByteCount++;           // 累计接收到的业务字节数
+    }
+}
+
+//
+// 发送子函数：每次发送5个字符hello，主循环不断调用形成连续输出。
+//
+void SCI_sendHello(void)
+{
+    const uint16_t hello[5] = {'h', 'e', 'l', 'l', 'o'};
+
+    // 发送长度固定为5，不发送换行符和字符串结束符。
+    // FIFO空间不足时，此DriverLib函数会等待可写后继续发送。
+    SCI_writeCharArray(SCIA_BASE, hello, 5U);
+}
+
+//
+// 校准子函数：正常收发约5秒后暂停，等待上位机发送A/a重新锁定波特率。
+//
+void SCI_checkAutobaud(void)
+{
+    // Timer2向下计数，起始值减去当前值就是已运行的时钟数。
+    if((calibrationStart - CPUTimer_getTimerCount(CPUTIMER2_BASE)) >=
+       CALIBRATION_TICKS)
+    {
+        // 必须等发送FIFO和移位寄存器均为空，避免中途改变波特率。
+        while((SCI_getTxFIFOStatus(SCIA_BASE) != SCI_FIFO_TX0) ||
+              ((HWREGH(SCIA_BASE + SCI_O_CTL2) & SCI_CTL2_TXEMPTY) == 0U))
+        {
+        }
+
+        // 清除旧接收状态、数据和溢出标志，再进入自动检测。
+        SCI_performSoftwareReset(SCIA_BASE);
+        SCI_resetRxFIFO(SCIA_BASE);
+        SCI_clearOverflowStatus(SCIA_BASE);
+        // 进入此函数后hello暂停；上位机需在此时发送A/a，函数才返回。
+        SCI_lockAutobaud(SCIA_BASE);
+        // 丢弃同步字符；对方看到hello恢复后再发送业务数据。
+        SCI_resetRxFIFO(SCIA_BASE);
+        calibrationStart = CPUTimer_getTimerCount(CPUTIMER2_BASE);
+    }
+}
+
+//
+// 文件结束
+//

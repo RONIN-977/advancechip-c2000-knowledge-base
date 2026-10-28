@@ -1,0 +1,16 @@
+通讯诊断摘要 V2026.10.25
+{"operation":"upgrade","metadata":{"version":"V2026.10.25","action":"upgrade","chip":"AVP32F00157","simulation":true,"transport":"SCI","baud":115200,"port":null,"brand":null,"deviceType":null,"deviceIndex":null,"serial":null,"channel":null,"node":"1","driver":null,"imagePath":null,"imageBytes":8192,"appStart":"0x088000","processBits":64},"preferredDirectory":"C:\\Users\\17879\\Documents\\ChatGPT\\进芯替代TI C2000系列芯片信息\\BOOTLOADER\\上位机\\统一升级上位机_CAN提速版_20261025\\便携版\\Logs","fallbackReason":null}
+结果：{"action":"upgrade","status":"升级已停止，请等待设备当前操作完成后重新升级","percent":0,"committed":false}
+操作总耗时（开始创建日志至结果记录）：0.285 ms
+重试 0 次；命令超时 0 次。
+CAN交换 0 次，发送 0 帧，收到 0 帧。
+CAN交换累计：0.000 ms
+其中发送DLL/桥接调用：0.000 ms
+其中帧间等待：0.000 ms
+请求帧间等待累计：0.000 ms
+其中接收DLL/桥接调用：0.000 ms
+其中空读后等待：0.000 ms
+说明：命令耗时与CAN交换耗时互相包含，不能相加。DLL返回发送成功不等于目标已确认；接收等待含USB、设备处理、总线等时间，不能单独认定为Flash耗时。x86桥接调用还含进程通信。335 SCI仅记录操作/UI日志，不含上述CAN指标。
+异常详情：
+{"command":7,"Session":0,"Sequence":0,"elapsed_ms":0.1319,"errorType":"TaskCanceledException","error":"A task was canceled."}
+{"command":"EnterBoot","Session":0,"Sequence":0,"attempt":1,"elapsed_ms":0.1582,"error":"TaskCanceledException","Message":"A task was canceled."}

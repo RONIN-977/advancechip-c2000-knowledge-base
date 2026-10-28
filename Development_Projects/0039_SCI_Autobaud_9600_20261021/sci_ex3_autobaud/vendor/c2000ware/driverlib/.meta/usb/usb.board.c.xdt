@@ -1,0 +1,28 @@
+% var module = system.modules['/driverlib/usb.js'];
+% let Common   = system.getScript("/driverlib/Common.js");
+% var nameOfModule = "usb";
+% var nameOfPeripheral = module.peripheralName;
+//*****************************************************************************
+//
+// USB Configurations
+//
+//*****************************************************************************
+void `nameOfPeripheral`_init(){
+%if (module != null)
+%{
+%   if (module.$instances[0].initClk) {
+% 	     if((["F28P65x", "F2838x"].includes(Common.getDeviceName()))){
+    //
+    // Set the clocking to run from the PLL at 60MHz
+    //
+    SysCtl_setAuxClock(DEVICE_AUXSETCLOCK_CFG_USB);
+%       }
+% 	    if((["F28P55x"].includes(Common.getDeviceName()))){
+    //
+    // Set the clocking to run from the PLL at 60MHz
+    //
+    SysCtl_setUSBClockDivider(SYSCTL_USBCLK_DIV_5);
+%       }
+%   }
+%}
+}

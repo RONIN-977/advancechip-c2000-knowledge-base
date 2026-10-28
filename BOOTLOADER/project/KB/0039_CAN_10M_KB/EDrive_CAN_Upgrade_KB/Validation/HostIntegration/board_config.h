@@ -1,0 +1,34 @@
+#ifndef BOARD_CONFIG_H
+#define BOARD_CONFIG_H
+#include "app_partition.h"
+#include "driverlib.h"
+#include "kb_can_board.h"
+/* Project pin selection; TI mux constants are in vendor/device/driverlib/pin_map.h.
+ * CCS ProjectSpec copies this file to include/board_config.h in BOTH projects.
+ * boot_ports_init() uses BOOT_* macros, not vendor/device/device.h board defaults.
+ */
+#define BOOT_CAN_BASE CANA_BASE
+#define BOOT_CAN_RX_GPIO KB_CAN_RX_GPIO
+#define BOOT_CAN_TX_GPIO KB_CAN_TX_GPIO
+#define BOOT_CAN_RX_CONFIG KB_CAN_RX_CONFIG
+#define BOOT_CAN_TX_CONFIG KB_CAN_TX_CONFIG
+/* Application LED: one transition every 500 ms; one full cycle per second.
+ * Initialized only by the application, not by the bootloader.
+ */
+#define APP_LED_GPIO 17U
+#define APP_LED_CONFIG GPIO_17_GPIO17
+#define APP_LED_TOGGLE_MS 500UL
+#ifndef BOOT_CAN_BAUD
+#define BOOT_CAN_BAUD 500000UL
+#endif
+#define BOOT_NODE_ID 1U
+#define BOOT_CAN_RX_ID (0x600U + BOOT_NODE_ID)
+#define BOOT_CAN_TX_ID (0x580U + BOOT_NODE_ID)
+#define BOOT_LISTEN_MS 5000UL
+#define BOOT_SESSION_MS 30000UL
+#define BOOT_PARTIAL_MS 200UL
+#define BOOT_METADATA BOOT_METADATA_ADDRESS
+/* Optional board-level force-boot input disabled until a pin is allocated. */
+#define BOOT_FORCE_GPIO 0xFFFFU
+/* Clock source is configured in vendor/device/device.h: 10 MHz XTAL, 120 MHz SYSCLK. */
+#endif

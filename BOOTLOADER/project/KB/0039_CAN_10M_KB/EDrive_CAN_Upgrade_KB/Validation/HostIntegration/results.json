@@ -1,0 +1,292 @@
+{
+  "passed": 9,
+  "total": 9,
+  "cases": [
+    {
+      "case": "full_update",
+      "pass": true,
+      "exit": 0,
+      "result": {
+        "status": "PASS",
+        "scenario": "full_update",
+        "firmware": "C:\\Users\\17879\\Desktop\\CHIP\\BOOTLOADER\\AVP32F0039Boot+APP_CAN_10M_KB\\EDrive_CAN_Upgrade_KB\\APP_KB\\Debug\\EDrive_CAN_Application_KB.out",
+        "start": "0x087000",
+        "words": 8792,
+        "crc32": "0x0140DCA0",
+        "erase": 1,
+        "program": 147,
+        "commit": 1,
+        "reset": 2,
+        "shutdownHook": 1,
+        "canRx": 3543,
+        "canTx": 618,
+        "firstCommands": [
+          "EnterBoot",
+          "Info",
+          "Info",
+          "Begin"
+        ],
+        "lastCommands": [
+          "Data",
+          "Finish",
+          "Reset"
+        ],
+        "hardware": "NOT RUN"
+      }
+    },
+    {
+      "case": "lost_ack",
+      "pass": true,
+      "exit": 0,
+      "result": {
+        "status": "PASS",
+        "scenario": "lost_ack",
+        "firmware": "C:\\Users\\17879\\Desktop\\CHIP\\BOOTLOADER\\AVP32F0039Boot+APP_CAN_10M_KB\\EDrive_CAN_Upgrade_KB\\APP_KB\\Debug\\EDrive_CAN_Application_KB.out",
+        "start": "0x087000",
+        "words": 8792,
+        "crc32": "0x0140DCA0",
+        "erase": 1,
+        "program": 147,
+        "commit": 1,
+        "reset": 2,
+        "shutdownHook": 1,
+        "canRx": 3579,
+        "canTx": 630,
+        "firstCommands": [
+          "EnterBoot",
+          "Info",
+          "Info",
+          "Begin"
+        ],
+        "lastCommands": [
+          "Finish",
+          "Finish",
+          "Reset"
+        ],
+        "hardware": "NOT RUN"
+      }
+    },
+    {
+      "case": "cancel_recover",
+      "pass": true,
+      "exit": 0,
+      "result": {
+        "status": "PASS",
+        "scenario": "cancel_recover",
+        "firmware": "C:\\Users\\17879\\Desktop\\CHIP\\BOOTLOADER\\AVP32F0039Boot+APP_CAN_10M_KB\\EDrive_CAN_Upgrade_KB\\APP_KB\\Debug\\EDrive_CAN_Application_KB.out",
+        "start": "0x087000",
+        "words": 8792,
+        "crc32": "0x0140DCA0",
+        "erase": 2,
+        "program": 149,
+        "commit": 1,
+        "reset": 2,
+        "shutdownHook": 1,
+        "canRx": 3606,
+        "canTx": 641,
+        "firstCommands": [
+          "EnterBoot",
+          "Info",
+          "Info",
+          "Begin"
+        ],
+        "lastCommands": [
+          "Data",
+          "Finish",
+          "Reset"
+        ],
+        "hardware": "NOT RUN"
+      }
+    },
+    {
+      "case": "wrong_partition",
+      "pass": true,
+      "exit": 0,
+      "result": {
+        "status": "PASS",
+        "scenario": "wrong_partition",
+        "firmware": "C:\\Users\\17879\\Desktop\\CHIP\\BOOTLOADER\\AVP32F0039Boot+APP_CAN_10M_KB\\EDrive_CAN_Upgrade_KB\\APP_KB\\Debug\\EDrive_CAN_Application_KB.out",
+        "start": "0x087000",
+        "words": 8792,
+        "crc32": "0x0140DCA0",
+        "erase": 0,
+        "program": 0,
+        "commit": 0,
+        "reset": 1,
+        "shutdownHook": 1,
+        "canRx": 9,
+        "canTx": 18,
+        "firstCommands": [
+          "EnterBoot",
+          "Info",
+          "Info"
+        ],
+        "lastCommands": [
+          "EnterBoot",
+          "Info",
+          "Info"
+        ],
+        "hardware": "NOT RUN"
+      }
+    },
+    {
+      "case": "app_ack_timeout",
+      "pass": true,
+      "exit": 0,
+      "result": {
+        "status": "PASS",
+        "scenario": "app_ack_timeout",
+        "firmware": "C:\\Users\\17879\\Desktop\\CHIP\\BOOTLOADER\\AVP32F0039Boot+APP_CAN_10M_KB\\EDrive_CAN_Upgrade_KB\\APP_KB\\Debug\\EDrive_CAN_Application_KB.out",
+        "start": "0x087000",
+        "words": 8792,
+        "crc32": "0x0140DCA0",
+        "erase": 0,
+        "program": 0,
+        "commit": 0,
+        "reset": 0,
+        "shutdownHook": 0,
+        "canRx": 9,
+        "canTx": 0,
+        "firstCommands": [
+          "EnterBoot",
+          "EnterBoot",
+          "EnterBoot"
+        ],
+        "lastCommands": [
+          "EnterBoot",
+          "EnterBoot",
+          "EnterBoot"
+        ],
+        "hardware": "NOT RUN"
+      }
+    },
+    {
+      "case": "flash_fault_1",
+      "pass": true,
+      "exit": 0,
+      "result": {
+        "status": "PASS",
+        "scenario": "flash_fault_1",
+        "firmware": "C:\\Users\\17879\\Desktop\\CHIP\\BOOTLOADER\\AVP32F0039Boot+APP_CAN_10M_KB\\EDrive_CAN_Upgrade_KB\\APP_KB\\Debug\\EDrive_CAN_Application_KB.out",
+        "start": "0x087000",
+        "words": 8792,
+        "crc32": "0x0140DCA0",
+        "erase": 0,
+        "program": 0,
+        "commit": 0,
+        "reset": 1,
+        "shutdownHook": 1,
+        "canRx": 21,
+        "canTx": 26,
+        "firstCommands": [
+          "EnterBoot",
+          "Info",
+          "Info",
+          "Begin"
+        ],
+        "lastCommands": [
+          "Info",
+          "Begin",
+          "Abort"
+        ],
+        "hardware": "NOT RUN"
+      }
+    },
+    {
+      "case": "flash_fault_2",
+      "pass": true,
+      "exit": 0,
+      "result": {
+        "status": "PASS",
+        "scenario": "flash_fault_2",
+        "firmware": "C:\\Users\\17879\\Desktop\\CHIP\\BOOTLOADER\\AVP32F0039Boot+APP_CAN_10M_KB\\EDrive_CAN_Upgrade_KB\\APP_KB\\Debug\\EDrive_CAN_Application_KB.out",
+        "start": "0x087000",
+        "words": 8792,
+        "crc32": "0x0140DCA0",
+        "erase": 1,
+        "program": 0,
+        "commit": 0,
+        "reset": 1,
+        "shutdownHook": 1,
+        "canRx": 45,
+        "canTx": 30,
+        "firstCommands": [
+          "EnterBoot",
+          "Info",
+          "Info",
+          "Begin"
+        ],
+        "lastCommands": [
+          "Begin",
+          "Data",
+          "Abort"
+        ],
+        "hardware": "NOT RUN"
+      }
+    },
+    {
+      "case": "flash_fault_3",
+      "pass": true,
+      "exit": 0,
+      "result": {
+        "status": "PASS",
+        "scenario": "flash_fault_3",
+        "firmware": "C:\\Users\\17879\\Desktop\\CHIP\\BOOTLOADER\\AVP32F0039Boot+APP_CAN_10M_KB\\EDrive_CAN_Upgrade_KB\\APP_KB\\Debug\\EDrive_CAN_Application_KB.out",
+        "start": "0x087000",
+        "words": 8792,
+        "crc32": "0x0140DCA0",
+        "erase": 1,
+        "program": 147,
+        "commit": 0,
+        "reset": 1,
+        "shutdownHook": 1,
+        "canRx": 3543,
+        "canTx": 618,
+        "firstCommands": [
+          "EnterBoot",
+          "Info",
+          "Info",
+          "Begin"
+        ],
+        "lastCommands": [
+          "Data",
+          "Finish",
+          "Abort"
+        ],
+        "hardware": "NOT RUN"
+      }
+    },
+    {
+      "case": "flash_fault_4",
+      "pass": true,
+      "exit": 0,
+      "result": {
+        "status": "PASS",
+        "scenario": "flash_fault_4",
+        "firmware": "C:\\Users\\17879\\Desktop\\CHIP\\BOOTLOADER\\AVP32F0039Boot+APP_CAN_10M_KB\\EDrive_CAN_Upgrade_KB\\APP_KB\\Debug\\EDrive_CAN_Application_KB.out",
+        "start": "0x087000",
+        "words": 8792,
+        "crc32": "0x0140DCA0",
+        "erase": 1,
+        "program": 147,
+        "commit": 0,
+        "reset": 1,
+        "shutdownHook": 1,
+        "canRx": 3543,
+        "canTx": 618,
+        "firstCommands": [
+          "EnterBoot",
+          "Info",
+          "Info",
+          "Begin"
+        ],
+        "lastCommands": [
+          "Data",
+          "Finish",
+          "Abort"
+        ],
+        "hardware": "NOT RUN"
+      }
+    }
+  ]
+}

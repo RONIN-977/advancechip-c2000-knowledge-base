@@ -1,0 +1,78 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+CCS headless build starting... [Mon Oct 19 09:37:43 CST 2026] 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+================================================================================
+Pre processing...
+
+
+================================================================================
+Building...
+
+
+**** Build of configuration Debug for project F280039C_Bootloader_KB ****
+
+"C:\\ti\\ccs1271\\ccs\\utils\\bin\\gmake" -k -j 12 all -O 
+ 
+Building file: "../src/f28003x_codestartbranch.asm"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 -O2 --include_path=".." --include_path="../include" --include_path="../vendor/device" --include_path="../vendor/device/driverlib" --include_path="../vendor/FlashAPI" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --include_path="C:/Users/17879/Desktop/CHIP/BOOTLOADER/AVP32F0039Boot+APP_CAN_10M_KB/BOOT_KB/include" --define=CPU1 --define=_FLASH -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="src/f28003x_codestartbranch.d_raw" --obj_directory="src"  "../src/f28003x_codestartbranch.asm"
+Finished building: "../src/f28003x_codestartbranch.asm"
+ 
+Building file: "../src/boot_core.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 -O2 --include_path=".." --include_path="../include" --include_path="../vendor/device" --include_path="../vendor/device/driverlib" --include_path="../vendor/FlashAPI" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --include_path="C:/Users/17879/Desktop/CHIP/BOOTLOADER/AVP32F0039Boot+APP_CAN_10M_KB/BOOT_KB/include" --define=CPU1 --define=_FLASH -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="src/boot_core.d_raw" --obj_directory="src"  "../src/boot_core.c"
+Finished building: "../src/boot_core.c"
+ 
+Building file: "../src/main.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 -O2 --include_path=".." --include_path="../include" --include_path="../vendor/device" --include_path="../vendor/device/driverlib" --include_path="../vendor/FlashAPI" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --include_path="C:/Users/17879/Desktop/CHIP/BOOTLOADER/AVP32F0039Boot+APP_CAN_10M_KB/BOOT_KB/include" --define=CPU1 --define=_FLASH -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="src/main.d_raw" --obj_directory="src"  "../src/main.c"
+Finished building: "../src/main.c"
+ 
+Building file: "../src/boot_io.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 -O2 --include_path=".." --include_path="../include" --include_path="../vendor/device" --include_path="../vendor/device/driverlib" --include_path="../vendor/FlashAPI" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --include_path="C:/Users/17879/Desktop/CHIP/BOOTLOADER/AVP32F0039Boot+APP_CAN_10M_KB/BOOT_KB/include" --define=CPU1 --define=_FLASH -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="src/boot_io.d_raw" --obj_directory="src"  "../src/boot_io.c"
+Finished building: "../src/boot_io.c"
+ 
+Building file: "../src/device.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 -O2 --include_path=".." --include_path="../include" --include_path="../vendor/device" --include_path="../vendor/device/driverlib" --include_path="../vendor/FlashAPI" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --include_path="C:/Users/17879/Desktop/CHIP/BOOTLOADER/AVP32F0039Boot+APP_CAN_10M_KB/BOOT_KB/include" --define=CPU1 --define=_FLASH -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="src/device.d_raw" --obj_directory="src"  "../src/device.c"
+Finished building: "../src/device.c"
+ 
+Building file: "../src/flash_port.c"
+Invoking: C2000 Compiler
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 -O2 --include_path=".." --include_path="../include" --include_path="../vendor/device" --include_path="../vendor/device/driverlib" --include_path="../vendor/FlashAPI" --include_path="C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" --include_path="C:/Users/17879/Desktop/CHIP/BOOTLOADER/AVP32F0039Boot+APP_CAN_10M_KB/BOOT_KB/include" --define=CPU1 --define=_FLASH -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi --preproc_with_compile --preproc_dependency="src/flash_port.d_raw" --obj_directory="src"  "../src/flash_port.c"
+Finished building: "../src/flash_port.c"
+ 
+Building target: "F280039C_Bootloader_KB.out"
+Invoking: C2000 Linker
+"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 -O2 --define=CPU1 --define=_FLASH -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --gen_func_subsections=on --abi=eabi -z -m"F280039C_Bootloader_KB.map" --stack_size=0x300 --warn_sections -i"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/lib" -i"../lib" -i"C:/ti/ccs1271/ccs/tools/compiler/ti-cgt-c2000_22.6.1.LTS/include" -i"C:/Users/17879/Desktop/CHIP/BOOTLOADER/AVP32F0039Boot+APP_CAN_10M_KB/BOOT_KB/include" --reread_libs --diag_wrap=off --display_error_number --xml_link_info="F280039C_Bootloader_KB_linkInfo.xml" --entry_point=code_start --rom_model -o "F280039C_Bootloader_KB.out" "./src/boot_core.obj" "./src/boot_io.obj" "./src/device.obj" "./src/f28003x_codestartbranch.obj" "./src/flash_port.obj" "./src/main.obj" "../bootloader.cmd" "../lib/FAPI_F28003x_EABI_v1.58.10.lib" "../lib/driverlib.lib"  -l"../lib/driverlib.lib" -llibc.a 
+<Linking>
+warning #10063-D: entry-point symbol other than "_c_int00" specified:  "code_start"
+Finished building target: "F280039C_Bootloader_KB.out"
+ 
+
+**** Build Finished ****
+
+================================================================================
+
+--------------------------------------------------------------------------------
+Errors for project 'F280039C_Bootloader_KB' (0):
+
+
+
+================================================================================
+
+--------------------------------------------------------------------------------
+Warnings for project 'F280039C_Bootloader_KB' (1):
+
+	#10063-D entry-point symbol other than "_c_int00" specified:  "code_start"
+
+
+
+================================================================================
+CCS headless build complete! 0 out of 1 projects have errors.
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.

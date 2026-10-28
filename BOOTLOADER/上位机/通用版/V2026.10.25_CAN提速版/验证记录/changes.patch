@@ -1,0 +1,187 @@
+--- 20261023/assets\更新日志.txt
+
++++ 20261025/assets\更新日志.txt
+
+@@ -1,5 +1,13 @@
+
+ 上位机更新日志
+ 说明：版本号为交付版本标识；最新记录放在最上面。
++
++日期：2026-10-25
++版本：V2026.10.25（CAN提速版）
++更新内容：
++1. CAN升级DATA数据帧等待从3ms改为1ms，使用高精度定时器，减少系统调度造成的额外等待。
++2. 进入BOOT等控制报文保留原节拍；ZLG、创芯均适用，后台日志新增等待模式和目标间隔记录。
++3. BOOT/APP、协议、分区、SCI及重试校验逻辑不变，旧版保留。
++验证情况：软件回归与本机等待计时通过；提速版待创芯和ZLG分别实盒复测，不承诺实际总时长。
+ 
+ 日期：2026-10-23
+ 版本：V2026.10.23（后台通讯日志版）
+--- 20261023/docs\后台通讯日志说明.md
+
++++ 20261025/docs\后台通讯日志说明.md
+
+@@ -1,4 +1,4 @@
+
+-# 后台通讯日志说明（V2026.10.23）
++# 后台通讯日志说明（V2026.10.25）
+ 
+ 正常使用上位机即可。点击开始升级、读取设备信息或重启设备时自动创建一份日志，不需要另开监控工具，也不需要手动点保存日志。刷新设备沿用原检测流程，不额外发报文。
+ 
+@@ -12,7 +12,7 @@
+
+ 
+ CAN详细指标：
+ - tx_dll_ms：VCI_Transmit调用累计时间；32位桥接时包含进程通信。
+-- pacing_ms：每帧WaitOne(3)实际等待累计时间，requested_pacing_ms是原有3ms乘发送帧数。
++- pacing_ms：每帧实际等待累计时间，requested_pacing_ms为该命令目标间隔乘帧数。DATA目标1ms，控制命令仍为原WaitOne(3)。
+ - rx_dll_ms：接收DLL调用累计时间；包含等待及USB等开销，不能单独等同Flash擦写时间。
+ - rx_idle_ms：空读后原有2ms等待累计时间。
+ - txFrames/rxFrames/matchedFrames/decodedPackets：发送、收到、符合目标ID与帧格式、解出协议包数量。
+@@ -22,4 +22,4 @@
+
+ 
+ ZLG和创芯共用诊断逻辑；0039、0049、035、00157的CAN均覆盖。普通SCI记录协议交换及命令耗时；335 SCI维持原实现，只记操作/UI日志，不含逐命令和CAN明细。
+ 
+-本版目的仅采集证据，不提速。所有原有3ms/2ms等待、50ms接收参数、800ms入BOOT等待、重试次数和超时设置保持原值。BOOT、APP、分区及升级协议未修改。本机未自动启动升级，也未安装驱动。
++本版DATA帧改为1ms相对高精度等待。若高精度定时器不可用自动降级为普通1ms等待（可能实际仍约15ms），日志pacing_mode显示legacy-wait-fallback。控制命令原WaitOne(3)、接收空读2ms、50ms接收参数、800ms入BOOT等待、重试次数和超时设置保持原值。BOOT、APP、分区及升级协议未修改。本机未自动启动升级，也未安装驱动。实测后看重试和超时是否为零；有重试或失败时先回退20261023日志版，保留两次日志对比。主机调用间隔不代表USB/CAN物理线上严格等间隔。
+--- 20261023/host\Updater.Desktop\CommunicationDiagnostics.cs
+
++++ 20261025/host\Updater.Desktop\CommunicationDiagnostics.cs
+
+@@ -15,7 +15,7 @@
+
+         var device = CanModel.SelectedItem as DetectedCanDevice;
+         communicationTrace = CommunicationTrace.Create(Path.Combine(AppContext.BaseDirectory, "Logs"), action, new
+         {
+-            version = "V2026.10.23", action, chip = ChipName, simulation,
++            version = "V2026.10.25", action, chip = ChipName, simulation,
+             transport = IsCan ? "CAN" : "SCI", baud = BaudRate.SelectedItem,
+             port = IsCan ? null : ComPort.SelectedItem,
+             brand = device?.Brand, deviceType = device?.Type, deviceIndex = device?.Index,
+--- 20261023/host\Updater.Desktop\CommunicationReport.cs
+
++++ 20261025/host\Updater.Desktop\CommunicationReport.cs
+
+@@ -13,8 +13,10 @@
+
+         var commands = new Dictionary<string, (int Count, double Milliseconds)>();
+         double total = 0, pacing = 0, tx = 0, rx = 0, idle = 0, exchange = 0;
+         int retries = 0, timeouts = 0, txFrames = 0, rxFrames = 0, exchanges = 0;
++        var modes = new Dictionary<string, int>();
++        double requestedPacing = 0;
+         var errors = new List<string>();
+-        var text = new StringBuilder("通讯诊断摘要 V2026.10.23\n");
++        var text = new StringBuilder("通讯诊断摘要 V2026.10.25\n");
+         foreach (string line in File.ReadLines(path))
+         {
+             using var json = JsonDocument.Parse(line);
+@@ -38,6 +40,12 @@
+
+                 ++exchanges; exchange += Number("total_ms"); pacing += Number("pacing_ms");
+                 tx += Number("tx_dll_ms"); rx += Number("rx_dll_ms"); idle += Number("rx_idle_ms");
+                 txFrames += (int)Number("txFrames"); rxFrames += (int)Number("rxFrames");
++                requestedPacing += Number("requested_pacing_ms");
++                if (d.TryGetProperty("pacing_mode", out var mode))
++                {
++                    string key = mode.GetString() ?? "unknown";
++                    modes[key] = modes.GetValueOrDefault(key) + (int)Number("txFrames");
++                }
+             }
+         }
+         string Milliseconds(double n) => n.ToString("F3", CultureInfo.InvariantCulture) + " ms";
+@@ -48,6 +56,8 @@
+
+         text.AppendLine("CAN交换累计：" + Milliseconds(exchange));
+         text.AppendLine("其中发送DLL/桥接调用：" + Milliseconds(tx));
+         text.AppendLine("其中帧间等待：" + Milliseconds(pacing));
++        text.AppendLine("请求帧间等待累计：" + Milliseconds(requestedPacing));
++        foreach (var mode in modes) text.AppendLine($"等待模式 {mode.Key}：{mode.Value} 帧");
+         text.AppendLine("其中接收DLL/桥接调用：" + Milliseconds(rx));
+         text.AppendLine("其中空读后等待：" + Milliseconds(idle));
+         if (txFrames > 0) text.AppendLine("平均每帧等待：" + Milliseconds(pacing / txFrames));
+--- 20261023/host\Updater.Desktop\HardwareTransports.cs
+
++++ 20261025/host\Updater.Desktop\HardwareTransports.cs
+
+@@ -183,6 +183,10 @@
+
+     {
+         ObjectDisposedException.ThrowIf(disposed, this);
+         const int frameSize = 24;
++        // APP may poll ENTER_BOOT less often than BOOT polls DATA: keep control pacing.
++        bool fastData = request.Command == (byte)Command.Data;
++        using var pacer = fastData ? new CanFramePacer() : null;
++        int requestedDelay = fastData ? CanFramePacer.DelayMilliseconds : 3;
+         long txTicks = 0, pacingTicks = 0, rxTicks = 0, idleTicks = 0;
+         int txFrames = 0, rxCalls = 0, rxFrames = 0, matchedFrames = 0, decodedPackets = 0;
+         uint? lastRxId = null;
+@@ -203,9 +207,12 @@
+
+                 Check(sent, "发送 CAN 帧"); ++txFrames;
+                 // A single receive mailbox on the target: pace frames to avoid overwrite.
+                 stamp = Stopwatch.GetTimestamp();
+-                bool canceled = cancellation.WaitHandle.WaitOne(3);
+-                pacingTicks += Stopwatch.GetTimestamp() - stamp;
+-                if (canceled) cancellation.ThrowIfCancellationRequested();
++                try
++                {
++                    if (pacer is not null) pacer.Wait(cancellation);
++                    else if (cancellation.WaitHandle.WaitOne(3)) cancellation.ThrowIfCancellationRequested();
++                }
++                finally { pacingTicks += Stopwatch.GetTimestamp() - stamp; }
+             }
+             var decoder = new CanReassembler(); var watch = Stopwatch.StartNew(); var lastFrame = watch.Elapsed;
+             while (watch.Elapsed < timeout)
+@@ -245,7 +252,8 @@
+
+             trace?.Record("can_exchange", new {
+                 command = (Command)request.Command, request.Session, request.Sequence, result,
+                 total_ms = exchangeWatch.Elapsed.TotalMilliseconds, txFrames, tx_dll_ms = txTicks * 1000.0 / Stopwatch.Frequency,
+-                pacing_ms = pacingTicks * 1000.0 / Stopwatch.Frequency, requested_pacing_ms = txFrames * 3,
++                pacing_ms = pacingTicks * 1000.0 / Stopwatch.Frequency, requested_pacing_ms = txFrames * requestedDelay,
++                pacing_mode = pacer?.Mode ?? "legacy-control", requested_frame_gap_ms = requestedDelay,
+                 rxCalls, rxFrames, matchedFrames, decodedPackets, lastRxId, lastTransfer, lastFragment,
+                 rx_dll_ms = rxTicks * 1000.0 / Stopwatch.Frequency, rx_idle_ms = idleTicks * 1000.0 / Stopwatch.Frequency,
+                 bridge = bridge is not null
+--- 20261023/host\Updater.Desktop\MainWindow.xaml.cs
+
++++ 20261025/host\Updater.Desktop\MainWindow.xaml.cs
+
+@@ -102,7 +102,7 @@
+
+         Height = Math.Min(Height, SystemParameters.WorkArea.Height);
+         DllPath.Text = CanDriver.DefaultPath;
+         RestoreAddress(); ready = true; UpdateMode();
+-        Write("上位机版本 V2026.10.23（后台通讯日志版，发送节拍保持不变）。");
++        Write("上位机版本 V2026.10.25（CAN提速版，DATA帧间隔1ms，控制报文保留原节拍）。");
+         Write($"程序为 {IntPtr.Size * 8} 位；首次安装 BOOT 程序需使用 CCS/JTAG。");
+         if (!Customer335Edition && File.Exists(DllPath.Text)) Write($"默认 CAN 驱动（刷新时自动检测周立功及创芯）：{DllPath.Text}");
+         Write(Customer335Edition ? "请提前连接并选好串口、加载 APP 文件；点击开始升级后，在 9 秒等待期间给板子上电或复位。" :
+--- 20261023/tests\CommunicationReport.Tests\Program.cs
+
++++ 20261025/tests\CommunicationReport.Tests\Program.cs
+
+@@ -25,8 +25,8 @@
+
+     Row("stage_end", new { stage = "enter_boot" }),
+     Row("command_end", new { command = "Data", elapsed_ms = 100 }),
+     Row("command_end", new { command = "Data", elapsed_ms = 200 }),
+-    Row("can_exchange", new { total_ms = 100, pacing_ms = 60, tx_dll_ms = 5, rx_dll_ms = 25, rx_idle_ms = 10, txFrames = 4, rxFrames = 1 }),
+-    Row("can_exchange", new { total_ms = 200, pacing_ms = 90, tx_dll_ms = 10, rx_dll_ms = 80, rx_idle_ms = 20, txFrames = 6, rxFrames = 3 }),
++    Row("can_exchange", new { total_ms = 100, pacing_ms = 60, tx_dll_ms = 5, rx_dll_ms = 25, rx_idle_ms = 10, txFrames = 4, rxFrames = 1, requested_pacing_ms = 4, pacing_mode = "high-resolution-timer" }),
++    Row("can_exchange", new { total_ms = 200, pacing_ms = 90, tx_dll_ms = 10, rx_dll_ms = 80, rx_idle_ms = 20, txFrames = 6, rxFrames = 3, requested_pacing_ms = 18, pacing_mode = "legacy-control" }),
+     Row("operation_result", new { status = "升级成功" }, 1200));
+ Contains(success, "创芯");
+ Contains(success, "升级成功");
+@@ -41,6 +41,9 @@
+
+ Contains(success, "其中接收DLL/桥接调用：105.000 ms");
+ Contains(success, "其中空读后等待：30.000 ms");
+ Contains(success, "平均每帧等待：15.000 ms");
++Contains(success, "请求帧间等待累计：22.000 ms");
++Contains(success, "等待模式 high-resolution-timer：4 帧");
++Contains(success, "等待模式 legacy-control：6 帧");
+ Console.WriteLine("PASS successful command aggregation and CAN timing totals");
+ 
+ string retry = Report("retries",

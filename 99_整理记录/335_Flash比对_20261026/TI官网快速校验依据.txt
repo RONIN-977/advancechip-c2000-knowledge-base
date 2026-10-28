@@ -1,0 +1,13 @@
+﻿Fetched 2026-10-26
+https://software-dl.ti.com/ccs/esd/documents/users_guide/ccs_debug-main.html
+equires setting a breakpoint):</strong> (TI Compiler) When enabled, allows having Console I/O output in the Console View by using a breakpoint. For code in Flash, enabling this option would require the use of a hardware breakpoint resource.</p></li>
+</ul>
+<p><strong>Verification Options:</strong> After the code/data is loaded to the device, sets the level of verification performed on it. This is done by reading back the code/data from the device's memory and comparing it to the executable on the host. The choices are:</p>
+<ul class="simple">
+<li><p><strong>Full verification:</strong> Reads back the entire program loaded to the device.</p></li>
+<li><p><strong>Fast verification:</strong> Reads back only the first and last 20 words loaded to the device. This is the default option for most devices.</p></li>
+<li><p><strong>No verification:</strong> No verification is performed.</p></li>
+</ul>
+<p><strong>Connection Options:</strong> These settings control actions performed immediately after the Debug Probe connects to the target device. The choices are:</p>
+<ul class="simple">
+<l
